@@ -25,12 +25,11 @@ You also need internet connectivity when running connect tests as connectors are
 #### 🔽 Clone the repository
 
 ```bash
-git clone --recursive --depth 1 https://github.com/vdesabou/kafka-docker-playground.git
+git clone --depth 1 https://github.com/vdesabou/kafka-docker-playground.git
 ```
 
 > [!TIP]
 > Specifying `--depth 1` only get the latest version of the playground, which reduces a lot the size of the download.
-> Specifying `--recursive` get the private submodule `reproduction-models` (only relevant for Confluent employees)
 
 ### 🪄 Gitpod.io
 

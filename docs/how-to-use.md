@@ -155,6 +155,26 @@ export CONNECTOR_TAG=10.2.3
 16:19:02 ℹ️ 👷 Building Docker image vdesabou/kafka-docker-playground-connect:kafka-connect-jdbc-cp-6.2.1-10.2.3
 ```
 
+If you have multiple connectors, you can provide a comma-separated list:
+
+Example:
+
+```
+CONNECT_PLUGIN_PATH: /usr/share/confluent-hub-components/confluentinc-kafka-connect-s3-source,/usr/share/confluent-hub-components/confluentinc-kafka-connect-s3
+```
+
+```bash
+export CONNECTOR_TAG="2.2.0,10.0.8"
+```
+
+`2.2.0` is used for S3 source and `10.0.8` will be used for S3 sink.
+
+```bash
+export CONNECTOR_TAG="2.2.0"
+```
+
+`2.2.0` is used for S3 source and `latest` will be used for S3 sink.
+
 2. Specify a connector ZIP file
 
 ```bash

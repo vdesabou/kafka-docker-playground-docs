@@ -329,6 +329,22 @@ $ ../../scripts/get-jmx-metrics.sh connect "kafka.connect kafka.consumer kafka.p
 > [!WARNING]
 > Local install of Java `JDK` (at least 1.8) is required to run `scripts/get-jmx-metrics.sh`
 
+## 🟢 Enabling kcat
+
+By default, [edenhill/kcat](https://github.com/edenhill/kcat) is not started for every test. You can enable this by setting environment variable `ENABLE_KCAT`:
+
+*Example:*
+
+```bash
+export ENABLE_KCAT=true
+```
+
+Then you can use it with:
+
+```bash
+docker exec kcat kcat -b broker:9092 -L
+```
+
 ## 📝 See properties file
 
 Because the playground use **[Docker override](/how-it-works?id=🐳-docker-override)**, not all configuration parameters are in same `docker-compose.yml` file.

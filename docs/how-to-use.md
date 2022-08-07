@@ -267,7 +267,7 @@ export ENABLE_CONNECT_NODES=true
 > [!WARNING]
 > It only works when [PLAINTEXT](https://github.com/vdesabou/kafka-docker-playground/tree/master/environment/plaintext) environment is used.
 
-## 🟢 Enabling JMX Grafana
+## 📊 Enabling JMX Grafana
 
 By default, Grafana dashboard using JMX metrics is not started for every test. You can enable this by setting environment variable `ENABLE_JMX_GRAFANA`:
 
@@ -329,7 +329,7 @@ $ ../../scripts/get-jmx-metrics.sh connect "kafka.connect kafka.consumer kafka.p
 > [!WARNING]
 > Local install of Java `JDK` (at least 1.8) is required to run `scripts/get-jmx-metrics.sh`
 
-## 🟢 Enabling kcat
+## 🐈‍⬛ Enabling kcat
 
 By default, [edenhill/kcat](https://github.com/edenhill/kcat) is not started for every test. You can enable this by setting environment variable `ENABLE_KCAT`:
 

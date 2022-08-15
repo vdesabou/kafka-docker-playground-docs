@@ -54,6 +54,123 @@ Then follow instructions in one of [♨️ AVRO Java producer](/reusables?id=♨
 
 ## 👉 Producing data
 
+### Java producers
+
+<!-- tabs:start -->
+
+#### **Avro**
+
+If you want to send a complex AVRO message, the easiest way is to use an Avro JAVA producer which creates a Specific Record using Maven plugin and populate it using [j-easy/easy-random](https://github.com/j-easy/easy-random).
+
+> [!TIP]
+> A complete example is available [here](https://github.com/vdesabou/kafka-docker-playground/blob/master/other/schema-format-avro).
+
+Here are the steps to follow:
+
+1. Bootstrap your reproduction model by following [🛠 Bootstrap reproduction model](/reusables?id=🛠-bootstrap-reproduction-model) and use `avro` as third parameter.
+
+2. Update `producer-repro-12345/src/main/resources/avro/customer.avsc` with your AVRO schema but be careful, you need to keep `Customer` for the name and `com.github.vdesabou` for the namespace:
+
+```json
+    "name": "Customer",
+    "namespace": "com.github.vdesabou",
+```
+
+3. In the generated reproduction model file, you will see this:
+
+```bash
+# 🚨🚨🚨 FIXTHIS: move it to the correct place 🚨🚨🚨
+log "✨ Run the avro java producer which produces to topic customer_avro"
+docker exec producer-repro-12345 bash -c "java -jar producer-1.0.0-jar-with-dependencies.jar"
+# 🚨🚨🚨 FIXTHIS: move it to the correct place 🚨🚨🚨
+```
+
+Make sure to move it in your script to the right place.
+
+#### **Protobuf**
+
+
+If you want to send a complex Protobuf message, the easiest way is to use an Protobuf JAVA producer which creates a Protobuf Record using Maven [plugin](https://github.com/os72/protoc-jar-maven-plugin) and populate it using [j-easy/easy-random](https://github.com/j-easy/easy-random).
+
+> [!TIP]
+> A complete example is available [here](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/schema-format-protobuf).
+
+Here are the steps to follow:
+
+1. Bootstrap your reproduction model by following [🛠 Bootstrap reproduction model](/reusables?id=🛠-bootstrap-reproduction-model) and use `protobuf` as third parameter.
+
+2. Update `producer-repro-12345/src/main/resources/Customer.proto` with your Protobuf schema but be careful, you need to keep `Customer` for the name and `com.github.vdesabou` for the package and `CustomerImpl` for the `java_outer_classname`:
+
+```
+package com.github.vdesabou;
+option java_outer_classname = "CustomerImpl";
+```
+
+3. In the generated reproduction model file, you will see this:
+
+```bash
+# 🚨🚨🚨 FIXTHIS: move it to the correct place 🚨🚨🚨
+log "✨ Run the protobuf java producer which produces to topic customer_protobuf"
+docker exec producer-repro-12345 bash -c "java -jar producer-1.0.0-jar-with-dependencies.jar"
+# 🚨🚨🚨 FIXTHIS: move it to the correct place 🚨🚨🚨
+```
+
+#### **JSON Schema**
+
+If you want to send a complex JSON Schema message, the easiest way is to use an JSON Schema JAVA producer which creates a JSON Schema Record using Maven [plugin](https://github.com/joelittlejohn/jsonschema2pojo) and populate it using [j-easy/easy-random](https://github.com/j-easy/easy-random).
+
+> [!TIP]
+> A complete example is available [here](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/schema-format-json-schema).
+
+Here are the steps to follow:
+
+1. Bootstrap your reproduction model by following [🛠 Bootstrap reproduction model](/reusables?id=🛠-bootstrap-reproduction-model) and use `json-schema` as third parameter.
+
+2. Update `producer-repro-12345/src/main/resources/schema/Customer.json` with your JSON Schema schema but be careful, you need to keep `Customer` for the title:
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "additionalProperties": false,
+  "$id": "http://lh.test/Customer.schema.json",
+  "title": "Customer",
+  "description": "Customer description",
+  "type": "object",
+  "properties": {
+    "name": {
+      "description": "Customer name",
+      "type": "string",
+      "maxLength": 25
+    },
+    "surname": {
+      "description": "Customer surname",
+      "type": "string",
+      "minLength": 2
+    },
+    "email": {
+      "description": "Email",
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$"
+    }
+  },
+  "required": [
+    "name",
+    "surname"
+  ]
+}
+```
+
+3. In the generated reproduction model file, you will see this:
+
+```bash
+# 🚨🚨🚨 FIXTHIS: move it to the correct place 🚨🚨🚨
+log "✨ Run the json-schema java producer which produces to topic customer_json_schema"
+docker exec producer-repro-12345 bash -c "java -jar producer-1.0.0-jar-with-dependencies.jar"
+# 🚨🚨🚨 FIXTHIS: move it to the correct place 🚨🚨🚨
+```
+
+<!-- tabs:end -->
+
 ### 🔤 [kafka-console-producer](https://docs.confluent.io/platform/current/tutorials/examples/clients/docs/kafka-commands.html#produce-records)
 
 * 1️⃣ Using `seq`
@@ -186,116 +303,6 @@ EOF
 
 ```bash
 docker exec broker kafka-producer-perf-test --topic a-topic --num-records 200000 --record-size 1000 --throughput 100000 --producer-props bootstrap.servers=broker:9092
-```
-
-### ♨️ Avro Java producer
-
-If you want to send a complex AVRO message, the easiest way is to use an Avro JAVA producer which creates a Specific Record using Maven plugin and populate it using [j-easy/easy-random](https://github.com/j-easy/easy-random).
-
-> [!TIP]
-> A complete example is available [here](https://github.com/vdesabou/kafka-docker-playground/blob/master/other/schema-format-avro).
-
-Here are the steps to follow:
-
-1. Bootstrap your reproduction model by following [🛠 Bootstrap reproduction model](/reusables?id=🛠-bootstrap-reproduction-model) and use `avro` as third parameter.
-
-2. Update `producer-repro-12345/src/main/resources/avro/customer.avsc` with your AVRO schema but be careful, you need to keep `Customer` for the name and `com.github.vdesabou` for the namespace:
-
-```json
-    "name": "Customer",
-    "namespace": "com.github.vdesabou",
-```
-
-3. In the generated reproduction model file, you will see this:
-
-```bash
-# 🚨🚨🚨 FIXTHIS: move it to the correct place 🚨🚨🚨
-log "✨ Run the avro java producer which produces to topic customer_avro"
-docker exec producer-repro-12345 bash -c "java -jar producer-1.0.0-jar-with-dependencies.jar"
-# 🚨🚨🚨 FIXTHIS: move it to the correct place 🚨🚨🚨
-```
-
-Make sure to move it in your script to the right place.
-
-### ♨️ Protobuf Java producer
-
-If you want to send a complex Protobuf message, the easiest way is to use an Protobuf JAVA producer which creates a Protobuf Record using Maven [plugin](https://github.com/os72/protoc-jar-maven-plugin) and populate it using [j-easy/easy-random](https://github.com/j-easy/easy-random).
-
-> [!TIP]
-> A complete example is available [here](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/schema-format-protobuf).
-
-Here are the steps to follow:
-
-1. Bootstrap your reproduction model by following [🛠 Bootstrap reproduction model](/reusables?id=🛠-bootstrap-reproduction-model) and use `protobuf` as third parameter.
-
-2. Update `producer-repro-12345/src/main/resources/Customer.proto` with your Protobuf schema but be careful, you need to keep `Customer` for the name and `com.github.vdesabou` for the package and `CustomerImpl` for the `java_outer_classname`:
-
-```
-package com.github.vdesabou;
-option java_outer_classname = "CustomerImpl";
-```
-
-3. In the generated reproduction model file, you will see this:
-
-```bash
-# 🚨🚨🚨 FIXTHIS: move it to the correct place 🚨🚨🚨
-log "✨ Run the protobuf java producer which produces to topic customer_protobuf"
-docker exec producer-repro-12345 bash -c "java -jar producer-1.0.0-jar-with-dependencies.jar"
-# 🚨🚨🚨 FIXTHIS: move it to the correct place 🚨🚨🚨
-```
-
-### ♨️ JSON Schema Java producer
-
-If you want to send a complex JSON Schema message, the easiest way is to use an JSON Schema JAVA producer which creates a JSON Schema Record using Maven [plugin](https://github.com/joelittlejohn/jsonschema2pojo) and populate it using [j-easy/easy-random](https://github.com/j-easy/easy-random).
-
-> [!TIP]
-> A complete example is available [here](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/schema-format-json-schema).
-
-Here are the steps to follow:
-
-1. Bootstrap your reproduction model by following [🛠 Bootstrap reproduction model](/reusables?id=🛠-bootstrap-reproduction-model) and use `json-schema` as third parameter.
-
-2. Update `producer-repro-12345/src/main/resources/schema/Customer.json` with your JSON Schema schema but be careful, you need to keep `Customer` for the title:
-
-```json
-{
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "additionalProperties": false,
-  "$id": "http://lh.test/Customer.schema.json",
-  "title": "Customer",
-  "description": "Customer description",
-  "type": "object",
-  "properties": {
-    "name": {
-      "description": "Customer name",
-      "type": "string",
-      "maxLength": 25
-    },
-    "surname": {
-      "description": "Customer surname",
-      "type": "string",
-      "minLength": 2
-    },
-    "email": {
-      "description": "Email",
-      "type": "string",
-      "pattern": "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$"
-    }
-  },
-  "required": [
-    "name",
-    "surname"
-  ]
-}
-```
-
-3. In the generated reproduction model file, you will see this:
-
-```bash
-# 🚨🚨🚨 FIXTHIS: move it to the correct place 🚨🚨🚨
-log "✨ Run the json-schema java producer which produces to topic customer_json_schema"
-docker exec producer-repro-12345 bash -c "java -jar producer-1.0.0-jar-with-dependencies.jar"
-# 🚨🚨🚨 FIXTHIS: move it to the correct place 🚨🚨🚨
 ```
 
 ## 👈 Consuming data

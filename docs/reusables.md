@@ -234,6 +234,7 @@ docker exec -i connect kafka-protobuf-console-producer --broker-list broker:9092
 {"ID": 222}|{"f1":"value2"}
 {"ID": 333}|{"f1":"value3"}
 EOF
+```
 
 > [!TIP]
 > If Protobuf schema is very complex, it is better to use [♨️ Protobuf Java producer](/reusables?id=♨%EF%B8%8F-protobuf-java-producer) below.

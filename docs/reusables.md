@@ -50,11 +50,11 @@ This will create the following files:
 
 ![file structure](./images/bootstrap_reproduction_model.jpg)
 
-Then follow instructions in one of [♨️ AVRO Java producer](/reusables?id=♨%EF%B8%8F-avro-java-producer), [♨️ Protobuf Java producer](/reusables?id=♨%EF%B8%8F-protobuf-java-producer) or [♨️ JSON Schema Java producer](/reusables?id=♨%EF%B8%8F-json-schema-java-producer) below.
+Then follow instructions in one of [♨️ Java producer](/reusables?id=♨%EF%B8%8F-java-producers) below.
 
 ## 👉 Producing data
 
-### Java producers
+### ♨️ Java producers
 
 <!-- tabs:start -->
 
@@ -237,7 +237,7 @@ EOF
 ```
 
 > [!TIP]
-> If Protobuf schema is very complex, it is better to use [♨️ Protobuf Java producer](/reusables?id=♨%EF%B8%8F-protobuf-java-producer) below.
+> If Protobuf schema is very complex, it is better to use [♨️ Java producer](/reusables?id=♨%EF%B8%8F-java-producers) above.
 
 
 ### 🔣 [kafka-json-schema-console-producer](https://docs.confluent.io/platform/current/schema-registry/serdes-develop/serdes-json.html)
@@ -259,7 +259,7 @@ EOF
 ```
 
 > [!TIP]
-> If JSON Schema schema is very complex, it is better to use [♨️ JSON Schema Java producer](/reusables?id=♨%EF%B8%8F-json-schema-java-producer) below.
+> If JSON Schema schema is very complex, it is better to use [♨️ Java producer](/reusables?id=♨%EF%B8%8F-java-producers) above.
 
 ### 🔣 [kafka-avro-console-producer](https://docs.confluent.io/platform/current/tutorials/examples/clients/docs/kafka-commands.html#produce-avro-records)
 
@@ -299,6 +299,9 @@ docker exec -i connect kafka-avro-console-producer --broker-list broker:9092 --p
 222|{"ID": 222,"product": "bar", "quantity": 100, "price": 50}
 EOF
 ```
+
+> [!TIP]
+> If AVRO schema is very complex, it is better to use [♨️ Java producer](/reusables?id=♨%EF%B8%8F-java-producers) above.
 
 ### 🌪 kafka-producer-perf-test
 

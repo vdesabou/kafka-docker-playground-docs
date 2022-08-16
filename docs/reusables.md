@@ -173,13 +173,15 @@ docker exec producer-repro-12345 bash -c "java -jar producer-1.0.0-jar-with-depe
 
 ### 🔤 [kafka-console-producer](https://docs.confluent.io/platform/current/tutorials/examples/clients/docs/kafka-commands.html#produce-records)
 
-* 1️⃣ Using `seq`
+<!-- tabs:start -->
+
+#### **seq**
 
 ```bash
 seq -f "This is a message %g" 10 | docker exec -i broker kafka-console-producer --broker-list broker:9092 --topic a-topic
 ```
 
-* 2️⃣ Using [`Heredoc`](https://www.google.fr/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwjHrNGg8tPzAhVIOBoKHVsLA3wQFnoECAMQAw&url=https%3A%2F%2Flinuxize.com%2Fpost%2Fbash-heredoc%2F&usg=AOvVaw2Fsus1FqR5phtsBikk2-B6)
+#### **Heredoc**
 
 ```bash
 docker exec -i broker kafka-console-producer --broker-list broker:9092 --topic a-topic << EOF
@@ -188,7 +190,7 @@ This is my message 2
 EOF
 ```
 
-* 3️⃣ Using a key:
+#### **Key**
 
 ```bash
 docker exec -i broker kafka-console-producer --broker-list broker:9092 --topic a-topic --property parse.key=true --property key.separator=, << EOF
@@ -198,7 +200,7 @@ key2,value1
 EOF
 ```
 
-* 4️⃣ Using JSON with schema (and key):
+#### **JSON with schema (and key)**
 
 ```bash
 docker exec -i broker kafka-console-producer --broker-list broker:9092 --topic a-topic --property parse.key=true --property key.separator=, << EOF
@@ -208,68 +210,19 @@ docker exec -i broker kafka-console-producer --broker-list broker:9092 --topic a
 EOF
 ```
 
-### 🔣 [kafka-protobuf-console-producer](https://docs.confluent.io/platform/current/schema-registry/serdes-develop/serdes-protobuf.html)
-
-* 1️⃣ Using `seq`
-
-```
-seq -f "{\"f1\": \"value%g\"}" 10 | docker exec -i connect kafka-protobuf-console-producer --broker-list broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --property value.schema='syntax = "proto3"; message MyRecord { string f1 = 1; }'
-```
-
-* 2️⃣ Using [`Heredoc`](https://www.google.fr/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwjHrNGg8tPzAhVIOBoKHVsLA3wQFnoECAMQAw&url=https%3A%2F%2Flinuxize.com%2Fpost%2Fbash-heredoc%2F&usg=AOvVaw2Fsus1FqR5phtsBikk2-B6)
-
-```bash
-docker exec -i connect kafka-protobuf-console-producer --broker-list broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --property value.schema='syntax = "proto3"; message MyRecord { string f1 = 1; }' << EOF
-{"f1":"value1"}
-{"f1":"value2"}
-{"f1":"value3"}
-EOF
-```
-
-* 3️⃣ Using a key:
-
-```bash
-docker exec -i connect kafka-protobuf-console-producer --broker-list broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --property key.schema='syntax = "proto3"; message MyRecord { string ID = 1; }' --property value.schema='syntax = "proto3"; message MyRecord { string f1 = 1; }'  --property parse.key=true --property key.separator="|" << EOF
-{"ID": 111}|{"f1":"value1"}
-{"ID": 222}|{"f1":"value2"}
-{"ID": 333}|{"f1":"value3"}
-EOF
-```
-
-> [!TIP]
-> If Protobuf schema is very complex, it is better to use [♨️ Java producer](/reusables?id=♨%EF%B8%8F-java-producers) above.
-
-
-### 🔣 [kafka-json-schema-console-producer](https://docs.confluent.io/platform/current/schema-registry/serdes-develop/serdes-json.html)
-
-* 1️⃣ Using `seq`
-
-```
-seq -f "{\"f1\": \"value%g\"}" 10 | docker exec -i connect kafka-json-schema-console-producer --broker-list broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --property value.schema='{"type":"object","properties":{"f1":{"type":"string"}}}'
-```
-
-* 2️⃣ Using [`Heredoc`](https://www.google.fr/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwjHrNGg8tPzAhVIOBoKHVsLA3wQFnoECAMQAw&url=https%3A%2F%2Flinuxize.com%2Fpost%2Fbash-heredoc%2F&usg=AOvVaw2Fsus1FqR5phtsBikk2-B6)
-
-```bash
-docker exec -i connect kafka-json-schema-console-producer --broker-list broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --property value.schema='{"type":"object","properties":{"f1":{"type":"string"}}}' << EOF
-{"f1":"value1"}
-{"f1":"value2"}
-{"f1":"value3"}
-EOF
-```
-
-> [!TIP]
-> If JSON Schema schema is very complex, it is better to use [♨️ Java producer](/reusables?id=♨%EF%B8%8F-java-producers) above.
+<!-- tabs:end -->
 
 ### 🔣 [kafka-avro-console-producer](https://docs.confluent.io/platform/current/tutorials/examples/clients/docs/kafka-commands.html#produce-avro-records)
 
-* 1️⃣ Using `seq`
+<!-- tabs:start -->
+
+#### **seq**
 
 ```
 seq -f "{\"f1\": \"value%g\"}" 10 | docker exec -i connect kafka-avro-console-producer --broker-list broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --property value.schema='{"type":"record","name":"myrecord","fields":[{"name":"f1","type":"string"}]}'
 ```
 
-* 2️⃣ Using [`Heredoc`](https://www.google.fr/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwjHrNGg8tPzAhVIOBoKHVsLA3wQFnoECAMQAw&url=https%3A%2F%2Flinuxize.com%2Fpost%2Fbash-heredoc%2F&usg=AOvVaw2Fsus1FqR5phtsBikk2-B6)
+#### **Heredoc**
 
 ```bash
 docker exec -i connect kafka-avro-console-producer --broker-list broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --property value.schema='{"type":"record","name":"myrecord","fields":[{"name":"u_name","type":"string"},
@@ -280,7 +233,7 @@ docker exec -i connect kafka-avro-console-producer --broker-list broker:9092 --p
 EOF
 ```
 
-* 3️⃣ Using a key:
+#### **Key**
 
 ```bash
 docker exec -i connect kafka-avro-console-producer --broker-list broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --property key.schema='{"type":"record","namespace": "io.confluent.connect.avro","name":"myrecordkey","fields":[{"name":"ID","type":"long"}]}' --property value.schema='{"type":"record","name":"myrecordvalue","fields":[{"name":"ID","type":"long"},{"name":"product", "type": "string"}, {"name":"quantity", "type": "int"}, {"name":"price",
@@ -289,6 +242,8 @@ docker exec -i connect kafka-avro-console-producer --broker-list broker:9092 --p
 {"ID": 222}|{"ID": 222,"product": "bar", "quantity": 100, "price": 50}
 EOF
 ```
+
+#### **String Key**
 
 If the key needs to be a string, you can use `key.serializer` to specify it:
 
@@ -300,8 +255,72 @@ docker exec -i connect kafka-avro-console-producer --broker-list broker:9092 --p
 EOF
 ```
 
+
 > [!TIP]
 > If AVRO schema is very complex, it is better to use [♨️ Java producer](/reusables?id=♨%EF%B8%8F-java-producers) above.
+
+<!-- tabs:end -->
+
+### 🔣 [kafka-protobuf-console-producer](https://docs.confluent.io/platform/current/schema-registry/serdes-develop/serdes-protobuf.html)
+
+<!-- tabs:start -->
+
+#### **seq**
+
+```
+seq -f "{\"f1\": \"value%g\"}" 10 | docker exec -i connect kafka-protobuf-console-producer --broker-list broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --property value.schema='syntax = "proto3"; message MyRecord { string f1 = 1; }'
+```
+
+#### **Heredoc**
+
+```bash
+docker exec -i connect kafka-protobuf-console-producer --broker-list broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --property value.schema='syntax = "proto3"; message MyRecord { string f1 = 1; }' << EOF
+{"f1":"value1"}
+{"f1":"value2"}
+{"f1":"value3"}
+EOF
+```
+
+#### **Key**
+
+```bash
+docker exec -i connect kafka-protobuf-console-producer --broker-list broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --property key.schema='syntax = "proto3"; message MyRecord { string ID = 1; }' --property value.schema='syntax = "proto3"; message MyRecord { string f1 = 1; }'  --property parse.key=true --property key.separator="|" << EOF
+{"ID": 111}|{"f1":"value1"}
+{"ID": 222}|{"f1":"value2"}
+{"ID": 333}|{"f1":"value3"}
+EOF
+```
+
+<!-- tabs:end -->
+
+> [!TIP]
+> If Protobuf schema is very complex, it is better to use [♨️ Java producer](/reusables?id=♨%EF%B8%8F-java-producers) above.
+
+
+### 🔣 [kafka-json-schema-console-producer](https://docs.confluent.io/platform/current/schema-registry/serdes-develop/serdes-json.html)
+
+<!-- tabs:start -->
+
+#### **seq**
+
+```
+seq -f "{\"f1\": \"value%g\"}" 10 | docker exec -i connect kafka-json-schema-console-producer --broker-list broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --property value.schema='{"type":"object","properties":{"f1":{"type":"string"}}}'
+```
+
+#### **Heredoc**
+
+```bash
+docker exec -i connect kafka-json-schema-console-producer --broker-list broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --property value.schema='{"type":"object","properties":{"f1":{"type":"string"}}}' << EOF
+{"f1":"value1"}
+{"f1":"value2"}
+{"f1":"value3"}
+EOF
+```
+
+<!-- tabs:end -->
+
+> [!TIP]
+> If JSON Schema schema is very complex, it is better to use [♨️ Java producer](/reusables?id=♨%EF%B8%8F-java-producers) above.
 
 ### 🌪 kafka-producer-perf-test
 
@@ -313,63 +332,84 @@ docker exec broker kafka-producer-perf-test --topic a-topic --num-records 200000
 
 ### 🔤 [kafka-console-consumer](https://docs.confluent.io/platform/current/tutorials/examples/clients/docs/kafka-commands.html#consume-records)
 
-* 1️⃣ Simplest
+<!-- tabs:start -->
+
+#### **Simplest**
 
 ```
 timeout 60 docker exec broker kafka-console-consumer --bootstrap-server broker:9092 --topic a-topic --from-beginning --max-messages 1
 ```
 
-> [!TIP]
-> Using `timeout` command prevents the command to run forever.
-> It is [ignored](https://github.com/vdesabou/kafka-docker-playground/blob/c65704df7b66a2c47321d04fb75f43a8bbb4fef1/scripts/utils.sh#L650-L658) if not present on your machine.
-
-* 2️⃣ Displaying key:
+#### **Display Key**
 
 ```bash
 timeout 60 docker exec broker kafka-console-consumer --bootstrap-server broker:9092 --topic a-topic --property print.key=true --property key.separator=, --from-beginning --max-messages 1
 ```
 
+
+<!-- tabs:end -->
+
+
+> [!TIP]
+> Using `timeout` command prevents the command to run forever.
+> It is [ignored](https://github.com/vdesabou/kafka-docker-playground/blob/c65704df7b66a2c47321d04fb75f43a8bbb4fef1/scripts/utils.sh#L650-L658) if not present on your machine.
+
+
 ### 🔣 [kafka-avro-console-consumer](https://docs.confluent.io/platform/current/tutorials/examples/clients/docs/kafka-commands.html#consume-avro-records)
 
-* 1️⃣ Simplest
-  
+<!-- tabs:start -->
+
+#### **Simplest**
+
 ```
 docker exec connect kafka-avro-console-consumer -bootstrap-server broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --from-beginning --max-messages 1
 ```
 
-* 2️⃣ Displaying key:
-  
+#### **Display Key**
+
 ```
 docker exec connect kafka-avro-console-consumer -bootstrap-server broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --property print.key=true --property key.separator=, --from-beginning --max-messages 1
 ```
 
+<!-- tabs:end -->
 ### 🔣 [kafka-protobuf-console-consumer](https://docs.confluent.io/platform/current/schema-registry/serdes-develop/serdes-protobuf.html)
 
-* 1️⃣ Simplest
-  
+<!-- tabs:start -->
+
+#### **Simplest**
+
 ```
 docker exec connect kafka-protobuf-console-consumer -bootstrap-server broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --from-beginning --max-messages 1
 ```
 
-* 2️⃣ Displaying key:
-  
+#### **Display Key**
+
 ```
 docker exec connect kafka-protobuf-console-consumer -bootstrap-server broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --property print.key=true --property key.separator=, --from-beginning --max-messages 1
 ```
 
+<!-- tabs:end -->
+
+
+
 ### 🔣 [kafka-json-schema-console-consumer](https://docs.confluent.io/platform/current/schema-registry/serdes-develop/serdes-json.html)
 
-* 1️⃣ Simplest
-  
+
+<!-- tabs:start -->
+
+#### **Simplest**
+
 ```
 docker exec connect kafka-json-schema-console-consumer -bootstrap-server broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --from-beginning --max-messages 1
 ```
 
-* 2️⃣ Displaying key:
-  
+#### **Display Key**
+
 ```
 docker exec connect kafka-json-schema-console-consumer -bootstrap-server broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --property print.key=true --property key.separator=, --from-beginning --max-messages 1
 ```
+
+<!-- tabs:end -->
 
 ## ✨ Remote debugging
 

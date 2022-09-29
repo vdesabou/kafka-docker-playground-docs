@@ -802,6 +802,22 @@ For other UBI8 images, you can install tcpdump like this:
 docker exec --privileged --user root control-center bash -c "curl http://mirror.centos.org/centos/8-stream/AppStream/x86_64/os/Packages/tcpdump-4.9.3-1.el8.x86_64.rpm -o tcpdump-4.9.3-1.el8.x86_64.rpm && rpm -Uvh tcpdump-4.9.3-1.el8.x86_64.rpm"
 ```
 
+## 👻 Heap Dump
+
+It is sometime necessary to get a [heap dump](https://www.baeldung.com/java-heap-dump-capture).
+
+*Example:*
+
+```bash
+docker exec connect jmap -dump:live,format=b,file=/tmp/dump.hprof 1
+```
+
+Once you test is over, you can get the `dump.hprof` file (that you can open with [VisualVM](https://visualvm.github.io/index.html) for example) using:
+
+```bash
+docker cp connect:/tmp/dump.hprof .
+```
+
 ## 🌐 Using HTTPS proxy
 
 There are several connector examples which include HTTPS proxy (check for `also with 🌐 proxy` in the **[Content](/content.md)** section).

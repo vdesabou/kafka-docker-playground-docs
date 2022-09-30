@@ -241,6 +241,18 @@ By default, [`control-center`](https://github.com/vdesabou/kafka-docker-playgrou
 export DISABLE_CONTROL_CENTER=true
 ```
 
+## 🐺 Enabling Conduktor Platform
+
+By default, [`Conduktor Platform`](https://www.conduktor.io) container is not started for every test. You can enable this by setting environment variable `ENABLE_CONDUKTOR`:
+
+*Example:*
+
+```bash
+export ENABLE_CONDUKTOR=true
+```
+
+🐺 If set, Grafana is reachable at [http://127.0.0.1:8080/console](http://127.0.0.1:8080/console) (`admin`/`admin`).
+
 ## 3️⃣ Enabling multiple brokers
 
 By default, there is only one kafka node enabled. To enable a three node count, we simply need to add an environment variable. You can enable this by setting environment variable `ENABLE_KAFKA_NODES`:

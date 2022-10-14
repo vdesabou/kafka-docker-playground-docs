@@ -818,6 +818,18 @@ Once you test is over, you can get the `dump.hprof` file (that you can open with
 docker cp connect:/tmp/dump.hprof .
 ```
 
+## 🎯 Thread Dump
+
+It is sometime necessary to get a [Java thread dump](https://www.baeldung.com/java-thread-dump).
+
+*Example:*
+
+```bash
+docker exec connect jstack 1 > threaddump.txt
+```
+
+You can use [Thread Dump Analyzer](http://the-babel-tower.github.io/tda.html) for example to analyze results.
+
 ## 🌐 Using HTTPS proxy
 
 There are several connector examples which include HTTPS proxy (check for `also with 🌐 proxy` in the **[Content](/content.md)** section).

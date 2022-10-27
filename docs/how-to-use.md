@@ -17,10 +17,14 @@ You also need internet connectivity when running connect tests as connectors are
 > The goal is to have a consistent behaviour and only depends on Docker.
 
 > [!WARNING]
-> The playground is only tested on macOS and Linux (not Windows).
+> The playground is only tested on macOS (but not with M1 chip) and Linux (Ubuntu and Amazon Linux) . It is not tested on Windows.
 
 > [!ATTENTION]
 > On MacOS, the [Docker memory](https://docs.docker.com/desktop/mac/#resources) should be set to at least 8Gb.
+
+> [!ATTENTION]
+> With M1 chip Macs, you need `export DOCKER_DEFAULT_PLATFORM=linux/amd64` before running any example.
+
 
 #### 🔽 Clone the repository
 

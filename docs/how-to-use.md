@@ -58,19 +58,27 @@ Or select `Remote Explorer` on the left sidebar and then click on the `Open Brow
 
 You can set your own environment variables in gitpod, see this [link](https://www.gitpod.io/docs/environment-variables#user-specific-environment-variables).
 
-### ☁️ AWS CloudFormation
+### ☁️ AWS EC2 instance (using Cloud Formation)
 
-If you want to run the playground on an EC2 instance, you can use the AWS CloudFormation template provided [here]([cloudformation/README.md](https://github.com/vdesabou/kafka-docker-playground/blob/master/cloudformation/kafka-docker-playground.json)).
+If you want to run the playground on an EC2 instance, you can use the AWS Cloud Formation [template](https://github.com/vdesabou/kafka-docker-playground/blob/master/cloudformation/kafka-docker-playground.json).
 
-For example, this is how I start it using aws CLI:
+More details [here](https://github.com/vdesabou/kafka-docker-playground/tree/master/cloudformation).
 
-```bash
-$ cp kafka-docker-playground/cloudformation/kafka-docker-playground.json tmp.json
-$ aws cloudformation create-stack  --stack-name kafka-docker-playground-$USER \
-    --template-body file://tmp.json --region eu-west-3 \ 
-    --parameters ParameterKey=KeyName,ParameterValue=$KEY_NAME \
-    ParameterKey=InstanceName,ParameterValue=kafka-docker-playground-$USER
-```
+### 🎩 AWS EC2 Alfred workflow
+
+* ✨ Create and manage AWS EC2 instances to run kafka-docker-playground
+
+* 🪄 Open EC2 instances directly in Visual Studio code using [Remote Development](https://code.visualstudio.com/docs/remote/ssh) (over SSH)
+
+![Example](./images/alfred_example.png)
+
+❗ You need [Alfred](https://www.alfredapp.com) [Powerpack](https://www.alfredapp.com/shop/) to be able to use that workflow.
+
+#### 🎯 Commands available
+
+![Example](./images/alfred_commands.png)
+
+👉 [Download workflow](https://github.com/vdesabou/kafka-docker-playground/raw/master/cloudformation/aws-ec2-kafka-docker-playground.alfred5workflow)
 
 ## 🏎️ Start an example
 

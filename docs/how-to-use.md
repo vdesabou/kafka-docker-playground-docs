@@ -263,7 +263,7 @@ By default, [`Conduktor Platform`](https://www.conduktor.io) container is not st
 export ENABLE_CONDUKTOR=true
 ```
 
-🐺 If set, Grafana is reachable at [http://127.0.0.1:8080/console](http://127.0.0.1:8080/console) (`admin`/`admin`).
+🐺 If set, Conduktor is reachable at [http://127.0.0.1:8080/console](http://127.0.0.1:8080/console) (`admin`/`admin`).
 
 ## 3️⃣ Enabling multiple brokers
 

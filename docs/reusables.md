@@ -435,18 +435,20 @@ docker exec connect kafka-json-schema-console-consumer -bootstrap-server broker:
 
 <!-- tabs:end -->
 
-## ✨ Remote debugging
+## 🐛 Debugging tools
+
+### ✨ Remote debugging
 
 Java Remote debugging is the perfect tool for troubleshooting Kafka connectors for example.
 
 > [!TIP]
 > Following are instructions for [Visual Studio Code ](https://code.visualstudio.com/docs/java/java-debugging), but it is exactly the same principle for [IntelliJ IDEA](https://www.jetbrains.com/help/idea/tutorial-remote-debug.html#436b3b68).
 
-### ☑️ Prerequisites
+#### ☑️ Prerequisites
 
 Make sure you have already the required Visual Studio code extensions by following [this](https://code.visualstudio.com/docs/java/java-debugging#_install).
 
-### 💫 Full example
+#### 💫 Full example
 
 Here is a full example using [HDFS 2 sink](https://github.com/vdesabou/kafka-docker-playground/tree/master/connect/connect-hdfs2-sink) connector and [Visual Studio Code ](https://code.visualstudio.com/docs/java/java-debugging):
 
@@ -571,8 +573,6 @@ Note (*for Confluent employees because control center code is proprietary*): for
       CONTROL_CENTER_OPTS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=0.0.0.0:5006"
 ```
 
-## 🐛 Enable DEBUG
-
 ### 🔗 Connectors
 
 In order to enable `TRACE`(or `DEBUG`) logs for connectors, use the `admin/loggers` endpoint (see docs [here](https://docs.confluent.io/platform/current/connect/logging.html#change-the-log-level-for-a-specific-logger)):
@@ -641,6 +641,62 @@ In logs, you'll see:
 [Loaded org.reflections.util.FilterBuilder from file:/usr/share/java/kafka/reflections-0.9.12.jar]
 [Loaded org.reflections.util.FilterBuilder$Matcher from file:/usr/share/java/kafka/reflections-0.9.12.jar]
 ```
+
+### 🕵 TCP Dump
+
+It is sometime necessary to sniff the network in order to better understand what's going on.
+
+The [connect image](/how-it-works?id=🔗-connect-image-used) used by the playground contains [`tcpdump`](https://www.tcpdump.org) tool for that purpose.
+
+*Example:*
+
+Sniff all traffic on port `8888`:
+
+```bash
+docker exec -d --privileged --user root connect bash -c 'tcpdump -w /tmp/tcpdump.pcap -i eth0 -s 0 port 8888'
+```
+
+The TCP dump will run in background (`-d` option is used).
+
+Once you test is over, you can get the `tcpdump.pcap` file (that you can open with [Wireshark](https://www.wireshark.org) for example) using:
+
+```bash
+docker cp connect:/tmp/tcpdump.pcap .
+```
+
+For other UBI8 images, you can install tcpdump like this:
+
+```bash
+docker exec --privileged --user root control-center bash -c "curl http://mirror.centos.org/centos/8-stream/AppStream/x86_64/os/Packages/tcpdump-4.9.3-1.el8.x86_64.rpm -o tcpdump-4.9.3-1.el8.x86_64.rpm && rpm -Uvh tcpdump-4.9.3-1.el8.x86_64.rpm"
+```
+
+### 👻 Heap Dump
+
+It is sometime necessary to get a [heap dump](https://www.baeldung.com/java-heap-dump-capture).
+
+*Example:*
+
+```bash
+docker exec connect jmap -dump:live,format=b,file=/tmp/dump.hprof 1
+```
+
+Once you test is over, you can get the `dump.hprof` file (that you can open with [VisualVM](https://visualvm.github.io/index.html) for example) using:
+
+```bash
+docker cp connect:/tmp/dump.hprof .
+```
+
+### 🎯 Thread Dump
+
+It is sometime necessary to get a [Java thread dump](https://www.baeldung.com/java-thread-dump).
+
+*Example:*
+
+```bash
+docker exec connect jstack 1 > threaddump.txt
+```
+
+You can use [Thread Dump Analyzer](http://the-babel-tower.github.io/tda.html) for example to analyze results.
 
 ## 🚫 Blocking traffic
 
@@ -797,63 +853,6 @@ curl -X PUT \
 
 4. zazkia UI is available on [http://localhost:9191](http://localhost:9191)
 
-
-## 🕵 TCP Dump
-
-It is sometime necessary to sniff the network in order to better understand what's going on.
-
-The [connect image](/how-it-works?id=🔗-connect-image-used) used by the playground contains [`tcpdump`](https://www.tcpdump.org) tool for that purpose.
-
-*Example:*
-
-Sniff all traffic on port `8888`:
-
-```bash
-docker exec -d --privileged --user root connect bash -c 'tcpdump -w /tmp/tcpdump.pcap -i eth0 -s 0 port 8888'
-```
-
-The TCP dump will run in background (`-d` option is used).
-
-Once you test is over, you can get the `tcpdump.pcap` file (that you can open with [Wireshark](https://www.wireshark.org) for example) using:
-
-```bash
-docker cp connect:/tmp/tcpdump.pcap .
-```
-
-For other UBI8 images, you can install tcpdump like this:
-
-```bash
-docker exec --privileged --user root control-center bash -c "curl http://mirror.centos.org/centos/8-stream/AppStream/x86_64/os/Packages/tcpdump-4.9.3-1.el8.x86_64.rpm -o tcpdump-4.9.3-1.el8.x86_64.rpm && rpm -Uvh tcpdump-4.9.3-1.el8.x86_64.rpm"
-```
-
-## 👻 Heap Dump
-
-It is sometime necessary to get a [heap dump](https://www.baeldung.com/java-heap-dump-capture).
-
-*Example:*
-
-```bash
-docker exec connect jmap -dump:live,format=b,file=/tmp/dump.hprof 1
-```
-
-Once you test is over, you can get the `dump.hprof` file (that you can open with [VisualVM](https://visualvm.github.io/index.html) for example) using:
-
-```bash
-docker cp connect:/tmp/dump.hprof .
-```
-
-## 🎯 Thread Dump
-
-It is sometime necessary to get a [Java thread dump](https://www.baeldung.com/java-thread-dump).
-
-*Example:*
-
-```bash
-docker exec connect jstack 1 > threaddump.txt
-```
-
-You can use [Thread Dump Analyzer](http://the-babel-tower.github.io/tda.html) for example to analyze results.
-
 ## 🌐 Using HTTPS proxy
 
 There are several connector examples which include HTTPS proxy (check for `also with 🌐 proxy` in the **[Content](/content.md)** section).
@@ -911,7 +910,7 @@ Here are the steps to follow:
 > [!NOTE]
 > If your proxy requires HTTP2 support, there is a full example available in this example: [GCP Pub/Sub Source connector](https://github.com/vdesabou/kafka-docker-playground/blob/master/connect/connect-gcp-pubsub-source/gcp-pubsub-nginx-proxy.sh)
 
-### Proxy with BASIC authentication
+### 🔐 Proxy with BASIC authentication
 
 If you want to setup [BASIC authentication](https://docs.nginx.com/nginx/admin-guide/security-controls/configuring-http-basic-authentication/) with your NGINX proxy, follow those steps:
 

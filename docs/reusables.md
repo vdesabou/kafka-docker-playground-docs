@@ -698,6 +698,30 @@ docker exec connect jstack 1 > threaddump.txt
 
 You can use [Thread Dump Analyzer](http://the-babel-tower.github.io/tda.html) for example to analyze results.
 
+### 🛩️ Flight Recorder
+
+It is sometime necessary to monitor with [Flight Recorder](https://www.baeldung.com/java-flight-recorder-monitoring).
+
+*Example:*
+
+Start monitoring session:
+
+```bash
+docker exec connect jcmd 1 JFR.start name=dump1 filename=/tmp/dump1.jfr
+```
+
+Dump results:
+
+```bash
+docker exec connect jcmd 1 JFR.stop name=dump1 filename=/tmp/dump1.jfr
+```
+
+Once you test is over, you can get the `dump1.jfr` file (that you can open with [JDK Mission Control JMC](https://jdk.java.net/jmc/)) using:
+
+```bash
+docker cp connect:/tmp/dump1.jfr .
+```
+
 ## 🚫 Blocking traffic
 
 It is sometime necessary for a reproduction model to simulate network issues like blocking incoming or outgoing traffic.

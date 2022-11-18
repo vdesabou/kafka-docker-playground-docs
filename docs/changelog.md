@@ -1,5 +1,9 @@
 # Change Log
 
+## 2022-11-18
+
+- Added [🛩️ Flight Recorder](https://kafka-docker-playground.io/#/reusables?id=%f0%9f%9b%a9%ef%b8%8f-flight-recorder)
+
 ## 2022-09-29
 
 - Added [👻 Heap Dump](https://kafka-docker-playground.io/#/reusables?id=%f0%9f%91%bb-heap-dump)

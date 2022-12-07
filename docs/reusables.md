@@ -341,6 +341,15 @@ docker exec -i connect kafka-json-schema-console-producer --broker-list broker:9
 EOF
 ```
 
+#### **Key**
+
+```bash
+docker exec -i connect kafka-json-schema-console-producer --broker-list broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --property key.schema='{"additionalProperties":false,"title":"ID","description":"ID description","type":"object","properties":{"ID":{"description":"ID","type":"integer"}},"required":["ID"]}' --property value.schema='{"type":"object","properties":{"f1":{"type":"string"}}}'  --property parse.key=true --property key.separator="|" << EOF
+{"ID": 111}|{"f1": "value1"}
+{"ID": 222}|{"f1": "value2"}
+EOF
+```
+
 <!-- tabs:end -->
 
 > [!TIP]

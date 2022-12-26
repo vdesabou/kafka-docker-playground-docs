@@ -112,7 +112,66 @@ docker exec producer-repro-12345 bash -c "java -jar producer-1.0.0-jar-with-depe
 # 🚨🚨🚨 FIXTHIS: move it to the correct place 🚨🚨🚨
 ```
 
-Make sure to move it in your script to the right place.
+👉 Make sure to move it in your script to the right place !
+
+By default, the following environment variables are used in producer container:
+
+```yml
+    environment:
+      KAFKA_BOOTSTRAP_SERVERS: broker:9092
+      TOPIC: "customer_avro"
+      REPLICATION_FACTOR: 1
+      NUMBER_OF_PARTITIONS: 1
+      NB_MESSAGES: 10 # -1 for MAX_VALUE
+      MESSAGE_BACKOFF: 100 # Frequency of message injection
+      KAFKA_ACKS: "all" # default: "1"
+      KAFKA_REQUEST_TIMEOUT_MS: 20000
+      KAFKA_RETRY_BACKOFF_MS: 500
+      KAFKA_CLIENT_ID: "my-java-producer-repro-123456"
+      KAFKA_SCHEMA_REGISTRY_URL: "http://schema-registry:8081"
+      JAVA_OPTS: ${GRAFANA_AGENT_PRODUCER}
+```
+
+But you can specify any [producer config](https://docs.confluent.io/platform/current/installation/configuration/producer-configs.html) you like by prefixing it with `KAFKA_`.
+
+For example, for [retries](https://docs.confluent.io/platform/current/installation/configuration/producer-configs.html#retries):
+
+```yml
+      KAFKA_RETRIES: 10
+```
+
+In case this is an example with [ccloud](https://kafka-docker-playground.io/#/content?id=%e2%98%81%ef%b8%8f-confluent-cloud), the producer will be generated with Confluent Cloud security automatically:
+
+```yml
+    environment:
+      KAFKA_BOOTSTRAP_SERVERS: $BOOTSTRAP_SERVERS
+      KAFKA_SSL_ENDPOINT_IDENTIFICATION_ALGORITHM: "https"
+      KAFKA_SASL_MECHANISM: "PLAIN"
+      KAFKA_SASL_JAAS_CONFIG: $SASL_JAAS_CONFIG
+      KAFKA_SECURITY_PROTOCOL: "SASL_SSL"
+      TOPIC: "customer_avro"
+      REPLICATION_FACTOR: 3
+      NUMBER_OF_PARTITIONS: 1
+      NB_MESSAGES: 10 # -1 for MAX_VALUE
+      MESSAGE_BACKOFF: 100 # Frequency of message injection
+      KAFKA_ACKS: "all" # default: "1"
+      KAFKA_REQUEST_TIMEOUT_MS: 20000
+      KAFKA_RETRY_BACKOFF_MS: 500
+      KAFKA_CLIENT_ID: "my-java-producer-repro-123456"
+      KAFKA_SCHEMA_REGISTRY_URL: $SCHEMA_REGISTRY_URL
+      KAFKA_BASIC_AUTH_CREDENTIALS_SOURCE: $BASIC_AUTH_CREDENTIALS_SOURCE
+      KAFKA_SCHEMA_REGISTRY_BASIC_AUTH_USER_INFO: $SCHEMA_REGISTRY_BASIC_AUTH_USER_INFO
+```
+
+You can also specify environment variables directly when running the producer by using docker exec option `-e`:
+
+Example:
+
+Send 100 messages to topic called "test-topic":
+
+```bash
+docker exec -e NB_MESSAGES="100 -e TOPIC="test-topic" producer-repro-12345 bash -c "java -jar producer-1.0.0-jar-with-dependencies.jar"
+```
 
 #### **Protobuf**
 
@@ -140,6 +199,68 @@ option java_outer_classname = "CustomerImpl";
 log "✨ Run the protobuf java producer which produces to topic customer_protobuf"
 docker exec producer-repro-12345 bash -c "java -jar producer-1.0.0-jar-with-dependencies.jar"
 # 🚨🚨🚨 FIXTHIS: move it to the correct place 🚨🚨🚨
+```
+
+
+👉 Make sure to move it in your script to the right place !
+
+By default, the following environment variables are used in producer container:
+
+```yml
+    environment:
+      KAFKA_BOOTSTRAP_SERVERS: broker:9092
+      TOPIC: "customer_protobuf"
+      REPLICATION_FACTOR: 1
+      NUMBER_OF_PARTITIONS: 1
+      NB_MESSAGES: 10 # -1 for MAX_VALUE
+      MESSAGE_BACKOFF: 100 # Frequency of message injection
+      KAFKA_ACKS: "all" # default: "1"
+      KAFKA_REQUEST_TIMEOUT_MS: 20000
+      KAFKA_RETRY_BACKOFF_MS: 500
+      KAFKA_CLIENT_ID: "my-java-producer-repro-123456"
+      KAFKA_SCHEMA_REGISTRY_URL: "http://schema-registry:8081"
+      JAVA_OPTS: ${GRAFANA_AGENT_PRODUCER}
+```
+
+But you can specify any [producer config](https://docs.confluent.io/platform/current/installation/configuration/producer-configs.html) you like by prefixing it with `KAFKA_`.
+
+For example, for [retries](https://docs.confluent.io/platform/current/installation/configuration/producer-configs.html#retries):
+
+```yml
+      KAFKA_RETRIES: 10
+```
+
+In case this is an example with [ccloud](https://kafka-docker-playground.io/#/content?id=%e2%98%81%ef%b8%8f-confluent-cloud), the producer will be generated with Confluent Cloud security automatically:
+
+```yml
+    environment:
+      KAFKA_BOOTSTRAP_SERVERS: $BOOTSTRAP_SERVERS
+      KAFKA_SSL_ENDPOINT_IDENTIFICATION_ALGORITHM: "https"
+      KAFKA_SASL_MECHANISM: "PLAIN"
+      KAFKA_SASL_JAAS_CONFIG: $SASL_JAAS_CONFIG
+      KAFKA_SECURITY_PROTOCOL: "SASL_SSL"
+      TOPIC: "customer_protobuf"
+      REPLICATION_FACTOR: 3
+      NUMBER_OF_PARTITIONS: 1
+      NB_MESSAGES: 10 # -1 for MAX_VALUE
+      MESSAGE_BACKOFF: 100 # Frequency of message injection
+      KAFKA_ACKS: "all" # default: "1"
+      KAFKA_REQUEST_TIMEOUT_MS: 20000
+      KAFKA_RETRY_BACKOFF_MS: 500
+      KAFKA_CLIENT_ID: "my-java-producer-repro-123456"
+      KAFKA_SCHEMA_REGISTRY_URL: $SCHEMA_REGISTRY_URL
+      KAFKA_BASIC_AUTH_CREDENTIALS_SOURCE: $BASIC_AUTH_CREDENTIALS_SOURCE
+      KAFKA_SCHEMA_REGISTRY_BASIC_AUTH_USER_INFO: $SCHEMA_REGISTRY_BASIC_AUTH_USER_INFO
+```
+
+You can also specify environment variables directly when running the producer by using docker exec option `-e`:
+
+Example:
+
+Send 100 messages to topic called "test-topic":
+
+```bash
+docker exec -e NB_MESSAGES="100 -e TOPIC="test-topic" producer-repro-12345 bash -c "java -jar producer-1.0.0-jar-with-dependencies.jar"
 ```
 
 #### **JSON Schema**
@@ -194,6 +315,68 @@ Here are the steps to follow:
 log "✨ Run the json-schema java producer which produces to topic customer_json_schema"
 docker exec producer-repro-12345 bash -c "java -jar producer-1.0.0-jar-with-dependencies.jar"
 # 🚨🚨🚨 FIXTHIS: move it to the correct place 🚨🚨🚨
+```
+
+
+👉 Make sure to move it in your script to the right place !
+
+By default, the following environment variables are used in producer container:
+
+```yml
+    environment:
+      KAFKA_BOOTSTRAP_SERVERS: broker:9092
+      TOPIC: "customer_json_schema"
+      REPLICATION_FACTOR: 1
+      NUMBER_OF_PARTITIONS: 1
+      NB_MESSAGES: 10 # -1 for MAX_VALUE
+      MESSAGE_BACKOFF: 100 # Frequency of message injection
+      KAFKA_ACKS: "all" # default: "1"
+      KAFKA_REQUEST_TIMEOUT_MS: 20000
+      KAFKA_RETRY_BACKOFF_MS: 500
+      KAFKA_CLIENT_ID: "my-java-producer-repro-123456"
+      KAFKA_SCHEMA_REGISTRY_URL: "http://schema-registry:8081"
+      JAVA_OPTS: ${GRAFANA_AGENT_PRODUCER}
+```
+
+But you can specify any [producer config](https://docs.confluent.io/platform/current/installation/configuration/producer-configs.html) you like by prefixing it with `KAFKA_`.
+
+For example, for [retries](https://docs.confluent.io/platform/current/installation/configuration/producer-configs.html#retries):
+
+```yml
+      KAFKA_RETRIES: 10
+```
+
+In case this is an example with [ccloud](https://kafka-docker-playground.io/#/content?id=%e2%98%81%ef%b8%8f-confluent-cloud), the producer will be generated with Confluent Cloud security automatically:
+
+```yml
+    environment:
+      KAFKA_BOOTSTRAP_SERVERS: $BOOTSTRAP_SERVERS
+      KAFKA_SSL_ENDPOINT_IDENTIFICATION_ALGORITHM: "https"
+      KAFKA_SASL_MECHANISM: "PLAIN"
+      KAFKA_SASL_JAAS_CONFIG: $SASL_JAAS_CONFIG
+      KAFKA_SECURITY_PROTOCOL: "SASL_SSL"
+      TOPIC: "customer_json_schema"
+      REPLICATION_FACTOR: 3
+      NUMBER_OF_PARTITIONS: 1
+      NB_MESSAGES: 10 # -1 for MAX_VALUE
+      MESSAGE_BACKOFF: 100 # Frequency of message injection
+      KAFKA_ACKS: "all" # default: "1"
+      KAFKA_REQUEST_TIMEOUT_MS: 20000
+      KAFKA_RETRY_BACKOFF_MS: 500
+      KAFKA_CLIENT_ID: "my-java-producer-repro-123456"
+      KAFKA_SCHEMA_REGISTRY_URL: $SCHEMA_REGISTRY_URL
+      KAFKA_BASIC_AUTH_CREDENTIALS_SOURCE: $BASIC_AUTH_CREDENTIALS_SOURCE
+      KAFKA_SCHEMA_REGISTRY_BASIC_AUTH_USER_INFO: $SCHEMA_REGISTRY_BASIC_AUTH_USER_INFO
+```
+
+You can also specify environment variables directly when running the producer by using docker exec option `-e`:
+
+Example:
+
+Send 100 messages to topic called "test-topic":
+
+```bash
+docker exec -e NB_MESSAGES="100 -e TOPIC="test-topic" producer-repro-12345 bash -c "java -jar producer-1.0.0-jar-with-dependencies.jar"
 ```
 
 <!-- tabs:end -->

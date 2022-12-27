@@ -270,6 +270,9 @@ If you want to send a complex JSON Schema message, the easiest way is to use an 
 > [!TIP]
 > A complete example is available [here](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/schema-format-json-schema).
 
+> [!WARNING]
+> The pojo maven plugin used ([jsonschema2pojo-maven-plugin](https://github.com/joelittlejohn/jsonschema2pojo)) does not [handle](https://github.com/joelittlejohn/jsonschema2pojo/wiki/Reference) `oneOf` so if your json schema is using this, it will not work.  
+
 Here are the steps to follow:
 
 1. Bootstrap your reproduction model by following [🛠 Bootstrap reproduction model](/reusables?id=🛠-bootstrap-reproduction-model) and use `json-schema` as third parameter.

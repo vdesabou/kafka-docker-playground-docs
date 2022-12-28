@@ -8,3 +8,4 @@
 [🚀 How to Use](/how-to-use.md)
 [🎓 How it works](/how-it-works.md)
 [👷‍♂️ Reusables](/reusables.md)
+[🙋 FAQ](/faq.md)

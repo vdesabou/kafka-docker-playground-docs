@@ -5,6 +5,7 @@
 - [🎓 How it works](/how-it-works.md)
 - [👷‍♂️ Reusables](/reusables.md)
 - [🧑‍🎓 Examples](/examples.md)
+- [🙋 FAQ](/faq.md)
 
 - **Links**
 - [<img src="https://github.com/vdesabou/kafka-docker-playground/raw/master/images/icons/octocat.png" width="20">GitHub](https://github.com/vdesabou/kafka-docker-playground)

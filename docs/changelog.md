@@ -1,8 +1,9 @@
 # Change Log
 
-## 2022-12-26
+## 2022-12-28
 
 - Improved [♨️ Java producers](https://kafka-docker-playground.io/#/reusables?id=%e2%99%a8%ef%b8%8f-java-producers) section with more explanations on environment variables that can be used.
+- Added [🙋 FAQ](https://kafka-docker-playground.io/#/faq)
 
 ## 2022-11-18
 

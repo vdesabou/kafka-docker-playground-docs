@@ -13,6 +13,9 @@ If you want to create your own reproduction model, follow these steps:
 > [!TIP]
 > `with-key` will also produce key with selected converter, otherwise LongConverter is used.
 
+> [!TIP]
+> By default, files are produced in `reproduction-models` folder, but you can change it by setting `OUTPUT_FOLDER` environment variable.
+
 Example:
 
 ```bash

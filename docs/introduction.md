@@ -1,5 +1,5 @@
 # 🐳 kafka-docker-playground
-![success tests](https://img.shields.io/badge/success%20tests-2903%2F2960-red)![connector tested](https://img.shields.io/badge/connector%20tested-142-green)![cp versions tested](https://img.shields.io/badge/cp%20version%20tested-%205.5.12%206.0.11%206.1.9%206.2.8%207.0.7%207.1.5%207.2.3%207.3.1-green)![last run](https://img.shields.io/badge/last%20run-2023--01--03%2020:07-green)
+![success tests](https://img.shields.io/badge/success%20tests-2904%2F2960-red)![connector tested](https://img.shields.io/badge/connector%20tested-142-green)![cp versions tested](https://img.shields.io/badge/cp%20version%20tested-%205.5.12%206.0.11%206.1.9%206.2.8%207.0.7%207.1.5%207.2.3%207.3.1-green)![last run](https://img.shields.io/badge/last%20run-2023--01--04%2019:57-green)
 ![GitHub issues by-label](https://img.shields.io/github/issues/vdesabou/kafka-docker-playground/CI%20failing%20🔥)![GitHub issues by-label](https://img.shields.io/github/issues/vdesabou/kafka-docker-playground/enhancement%20✨)
 ![GitHub repo size](https://img.shields.io/github/repo-size/vdesabou/kafka-docker-playground)
 [![Add a star on GitHub](https://img.shields.io/github/stars/vdesabou/kafka-docker-playground?style=social)](https://github.com/vdesabou/kafka-docker-playground)
@@ -7,8 +7,7 @@
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/vdesabou/kafka-docker-playground)
 ## ✨ Features
 
-- 🔗 150+ self-managed connectors [examples](/content?id=🔗-connectors)
-- 🌤️ 20+ fully-managed connectors [examples](/content?id=%f0%9f%a4%96-fully-managed-connectors)
+- 🔗 140+ connectors [examples](/content?id=🔗-connectors)
 - 🔐 10+ secured [environments](/content?id=%F0%9F%94%90-environments) (SASL, RBAC, SSL...)
 - ☁️ Confluent Cloud [examples](/content?id=☁%EF%B8%8F-confluent-cloud)
 - 💸 Confluent commercial [features](/content?id=💸-confluent-commercial) (Tiered Storage, Control Center, Audit logs...)
@@ -17,7 +16,6 @@
 - 🎓 Learn how the playground [works](/how-it-works)
 - 👷‍♂️ Build your own reproduction models with [reusables](/reusables)
 - 📱 Work directly in your browser using [Gitpod.io](/how-to-use?id=🪄-gitpodio)
-- 🎩 Work remotely with VS Code using [AWS EC2 Alfred workflow](/how-to-use?id=%f0%9f%8e%a9-aws-ec2-alfred-workflow)
 - 🤖 Automated testing using Github Actions [CI](/how-it-works?id=🤖-how-ci-works)
 - 👾 And even more [playgrounds](/content?id=👾-other-playgrounds)...
 

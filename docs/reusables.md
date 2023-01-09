@@ -1098,6 +1098,33 @@ Here are the steps to follow:
         server_name  *.service-now.com;
 ```
 
+> [!TIP]
+> If you need a proxy to reach another docker container, as opposed to a domain, use following example, where `schema-registry` is the name of the container:
+> 
+
+```
+http {
+    access_log /var/log/nginx_access.log;
+    error_log /var/log/nginx_errors.log;
+
+    upstream docker-schema-registry {
+        server schema-registry:8081;
+    }
+
+    server {
+        listen       8888;
+        location / {
+            proxy_pass         http://docker-schema-registry;
+            proxy_redirect     off;
+            proxy_set_header   Host $host;
+            proxy_set_header   X-Real-IP $remote_addr;
+            proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header   X-Forwarded-Host $server_name;
+        }
+    }
+}
+```
+
 3. Add this in your `docker-compose` file:
 
 ```yml

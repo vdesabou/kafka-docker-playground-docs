@@ -71,3 +71,11 @@ Example:
 /broker - 172.21.0.2
 /zookeeper - 172.21.0.3
 ```
+
+## Get number of records in a topic
+
+```bash
+docker exec -i broker bash << EOF
+kafka-run-class kafka.tools.GetOffsetShell --broker-list broker:9092 --topic a-topic --time -1 | awk -F ":" '{sum += \$3} END {print sum}'
+EOF
+```

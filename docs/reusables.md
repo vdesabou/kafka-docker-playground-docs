@@ -887,6 +887,17 @@ Once you test is over, you can get the `dump.hprof` file (that you can open with
 docker cp connect:/tmp/dump.hprof .
 ```
 
+You can also set `-XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/tmp` to generate heap dump automatically when hitting OOM:
+
+Example:
+
+```yml
+  connect:
+    environment:
+      KAFKA_OPTS: -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/tmp
+      KAFKA_HEAP_OPTS: " -Xms2G -Xmx4G"
+```
+
 ### 🎯 Thread Dump
 
 It is sometime necessary to get a [Java thread dump](https://www.baeldung.com/java-thread-dump).

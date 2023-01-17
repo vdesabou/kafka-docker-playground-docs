@@ -636,7 +636,7 @@ docker exec connect kafka-json-schema-console-consumer -bootstrap-server broker:
 
 <!-- tabs:end -->
 
-## 🧙 How to install other connector
+## 🧙 How to install other connectors
 
 To run an example with additional connector (or SMT that you can get from Confluent Hub), simply add it to the list of `CONNECT_PLUGIN_PATH`:
 

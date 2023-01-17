@@ -3,7 +3,7 @@
 ## 2023-01-17
 
 - Added [↔️ Default Connect converter used](https://kafka-docker-playground.io/#/how-it-works?id=%e2%86%94%ef%b8%8f-default-connect-converter-used)
-- Added [🧙 How to install other connector](https://kafka-docker-playground.io/#/how-to-build-your-own?id=%f0%9f%a7%99-how-to-install-other-connector)
+- Added [🧙 How to install other connectors](https://kafka-docker-playground.io/#/how-to-build-your-own?id=%f0%9f%a7%99-how-to-install-other-connector)
 - Added [🧑‍ How to build a pipeline](https://kafka-docker-playground.io/#/how-to-build-your-own?id=%f0%9f%94%9b-how-to-build-a-pipeline)
 
 ## 2022-12-28

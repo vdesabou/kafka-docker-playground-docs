@@ -1,5 +1,9 @@
 # Change Log
 
+## 2023-01-17
+
+- Added [↔️ Default Connect converter used](https://kafka-docker-playground.io/#/how-it-works?id=%e2%86%94%ef%b8%8f-default-connect-converter-used)
+
 ## 2022-12-28
 
 - Improved [♨️ Java producers](https://kafka-docker-playground.io/#/how-to-build-your-own?id=%e2%99%a8%ef%b8%8f-java-producers) section with more explanations on environment variables that can be used.

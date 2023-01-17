@@ -219,6 +219,23 @@ See the [Dockerfile](https://github.com/vdesabou/kafka-docker-playground-connect
 > [!NOTE]
 > In the past, the image used to have all latest connectors included, but this is no more the case since [#1426](https://github.com/vdesabou/kafka-docker-playground/issues/1426)
 
+## ↔️ Default Connect converter used
+
+All connect example are using the converters defined in Connect Worker properties defined [here](https://github.com/vdesabou/kafka-docker-playground/blob/95f6e1d34d0261c5de76088d88fc6930f8053fd4/environment/plaintext/docker-compose.yml#L197-L199):
+
+```yml
+CONNECT_KEY_CONVERTER: "org.apache.kafka.connect.storage.StringConverter"
+CONNECT_VALUE_CONVERTER: "io.confluent.connect.avro.AvroConverter"
+CONNECT_VALUE_CONVERTER_SCHEMA_REGISTRY_URL: "http://schema-registry:8081"
+```
+
+Therefore:
+
+* String converter for key
+* Avro converter for value
+
+This can, of course, be overridden at connector level.
+
 
 ## 🤖 How CI works
 

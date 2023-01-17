@@ -1,6 +1,6 @@
-# 👷‍♂️ Reusables
+# 👷‍♂️ How to build your own...
 
-Below is a collection of *how to* that you can re-use when you build your own reproduction models.
+Below is a collection of *how to* that you can re-use when you build your own reproduction model.
 
 ## 🛠 Bootstrap reproduction model
 
@@ -56,7 +56,7 @@ This will create the following files:
 
 ![file structure](./images/bootstrap_reproduction_model.jpg)
 
-Then follow instructions in one of [♨️ Java producer](/reusables?id=♨%EF%B8%8F-java-producers) below.
+Then follow instructions in one of [♨️ Java producer](/how-to-build-your-own?id=♨%EF%B8%8F-java-producers) below.
 
 If you want multiple java producer (to test schema evolution for example), just add a fourth parameter with the number of producers you want, for example 2:
 
@@ -97,7 +97,7 @@ If you want to send a complex AVRO message, the easiest way is to use an Avro JA
 
 Here are the steps to follow:
 
-1. Bootstrap your reproduction model by following [🛠 Bootstrap reproduction model](/reusables?id=🛠-bootstrap-reproduction-model) and use `avro` as third parameter.
+1. Bootstrap your reproduction model by following [🛠 Bootstrap reproduction model](/how-to-build-your-own?id=🛠-bootstrap-reproduction-model) and use `avro` as third parameter.
 
 2. Update `producer-repro-12345/src/main/resources/avro/customer.avsc` with your AVRO schema but be careful, you need to keep `Customer` for the name and `com.github.vdesabou` for the namespace:
 
@@ -186,7 +186,7 @@ If you want to send a complex Protobuf message, the easiest way is to use an Pro
 
 Here are the steps to follow:
 
-1. Bootstrap your reproduction model by following [🛠 Bootstrap reproduction model](/reusables?id=🛠-bootstrap-reproduction-model) and use `protobuf` as third parameter.
+1. Bootstrap your reproduction model by following [🛠 Bootstrap reproduction model](/how-to-build-your-own?id=🛠-bootstrap-reproduction-model) and use `protobuf` as third parameter.
 
 2. Update `producer-repro-12345/src/main/resources/Customer.proto` with your Protobuf schema but be careful, you need to keep `Customer` for the name and `com.github.vdesabou` for the package and `CustomerImpl` for the `java_outer_classname`:
 
@@ -278,7 +278,7 @@ If you want to send a complex JSON Schema message, the easiest way is to use an 
 
 Here are the steps to follow:
 
-1. Bootstrap your reproduction model by following [🛠 Bootstrap reproduction model](/reusables?id=🛠-bootstrap-reproduction-model) and use `json-schema` as third parameter.
+1. Bootstrap your reproduction model by following [🛠 Bootstrap reproduction model](/how-to-build-your-own?id=🛠-bootstrap-reproduction-model) and use `json-schema` as third parameter.
 
 2. Update `producer-repro-12345/src/main/resources/schema/Customer.json` with your JSON Schema schema but be careful, you need to keep `Customer` for the title:
 
@@ -473,7 +473,7 @@ EOF
 
 
 > [!TIP]
-> If AVRO schema is very complex, it is better to use [♨️ Java producer](/reusables?id=♨%EF%B8%8F-java-producers) above.
+> If AVRO schema is very complex, it is better to use [♨️ Java producer](/how-to-build-your-own?id=♨%EF%B8%8F-java-producers) above.
 
 <!-- tabs:end -->
 
@@ -510,7 +510,7 @@ EOF
 <!-- tabs:end -->
 
 > [!TIP]
-> If Protobuf schema is very complex, it is better to use [♨️ Java producer](/reusables?id=♨%EF%B8%8F-java-producers) above.
+> If Protobuf schema is very complex, it is better to use [♨️ Java producer](/how-to-build-your-own?id=♨%EF%B8%8F-java-producers) above.
 
 
 ### 🔣 [kafka-json-schema-console-producer](https://docs.confluent.io/platform/current/schema-registry/serdes-develop/serdes-json.html)
@@ -545,7 +545,7 @@ EOF
 <!-- tabs:end -->
 
 > [!TIP]
-> If JSON Schema schema is very complex, it is better to use [♨️ Java producer](/reusables?id=♨%EF%B8%8F-java-producers) above.
+> If JSON Schema schema is very complex, it is better to use [♨️ Java producer](/how-to-build-your-own?id=♨%EF%B8%8F-java-producers) above.
 
 ### 🌪 kafka-producer-perf-test
 
@@ -695,7 +695,7 @@ control-center is up-to-date
     ]
 }
 
-15:34:36 ℹ️ See https://kafka-docker-playground.io/#/reusables?id=✨-remote-debugging
+15:34:36 ℹ️ See https://kafka-docker-playground.io/#/how-to-build-your-own?id=✨-remote-debugging
 ```
    
 5. [Configure](https://code.visualstudio.com/docs/java/java-debugging#_configure) remote debugging by clicking on menu `Run`->`Add Configuration...`:

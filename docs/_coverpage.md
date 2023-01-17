@@ -7,5 +7,5 @@
 [👾 Content](/content.md)
 [🚀 How to Use](/how-to-use.md)
 [🎓 How it works](/how-it-works.md)
-[👷‍♂️ Reusables](/reusables.md)
-[🙋 FAQ](/faq.md)
+[👷‍♂️ How to build your own](/how-to-build-your-own.md)
+[🎁 Tips & Tricks](/tips-and-tricks.md)

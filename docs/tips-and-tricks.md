@@ -1,4 +1,4 @@
-# 🙋 FAQ
+# 🎁 Tips & Tricks
 
 Below is a collection of tips and tricks
 

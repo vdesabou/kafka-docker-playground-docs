@@ -684,9 +684,9 @@ code debezium-sqlserver-source-repro-pipeline-example.sh
 ./debezium-sqlserver-source-repro-pipeline-example.sh
 ```
 
-[filename](/videos/pipeline1.mp4 ':include :type=video controls width=100%')
+<iframe width="100%" height="400" src="https://www.youtube.com/embed/4_akrQYvPls" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-2. Open `docker-compose.plaintext.repro-pipeline-example.yml` and add details from [JDBC PostGreSQL Sink](https://github.com/vdesabou/kafka-docker-playground/tree/master/connect/connect-jdbc-postgresql-sink), i.e postgres container and jdbc connector:
+1. Open `docker-compose.plaintext.repro-pipeline-example.yml` and add details from [JDBC PostGreSQL Sink](https://github.com/vdesabou/kafka-docker-playground/tree/master/connect/connect-jdbc-postgresql-sink), i.e postgres container and jdbc connector:
 
 Details are:
 
@@ -705,7 +705,7 @@ And jdbc connector path: `/usr/share/confluent-hub-components/confluentinc-kafka
 
 Example:
 
-[filename](/videos/pipeline2.mp4 ':include :type=video controls width=100%')
+<iframe width="100%" height="400" src="https://www.youtube.com/embed/OEe-8ACttI0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 3. Open `debezium-sqlserver-source-repro-pipeline-example.sh` and add details from [JDBC PostGreSQL Sink](https://github.com/vdesabou/kafka-docker-playground/tree/master/connect/connect-jdbc-postgresql-sink), i.e postgres container and jdbc connector:
 
@@ -729,7 +729,7 @@ For JDBC sink, adjust topic name to `mytable` and use Flatten SMT:
 "transforms.flatten.delimiter": "."
 ```
 
-[filename](/videos/pipeline3.mp4 ':include :type=video controls width=100%')
+<iframe width="100%" height="400" src="https://www.youtube.com/embed/XfqDPD6zBZI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 4. Run the test (it is available [there](https://github.com/vdesabou/kafka-docker-playground/blob/master/docs-examples/connect-connect-debezium-sqlserver-source/debezium-sqlserver-source-repro-pipeline-example.sh))
 

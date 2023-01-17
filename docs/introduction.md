@@ -1,5 +1,5 @@
 # 🐳 kafka-docker-playground
-![success tests](https://img.shields.io/badge/success%20tests-2915%2F2960-red)![connector tested](https://img.shields.io/badge/connector%20tested-142-green)![cp versions tested](https://img.shields.io/badge/cp%20version%20tested-%205.5.12%206.0.11%206.1.9%206.2.8%207.0.7%207.1.5%207.2.3%207.3.1-green)![last run](https://img.shields.io/badge/last%20run-2023--01--16%2021:30-green)
+![success tests](https://img.shields.io/badge/success%20tests-2915%2F2960-red)![connector tested](https://img.shields.io/badge/connector%20tested-142-green)![cp versions tested](https://img.shields.io/badge/cp%20version%20tested-%205.5.12%206.0.11%206.1.9%206.2.8%207.0.7%207.1.5%207.2.3%207.3.1-green)![last run](https://img.shields.io/badge/last%20run-2023--01--17%2020:27-green)
 ![GitHub issues by-label](https://img.shields.io/github/issues/vdesabou/kafka-docker-playground/CI%20failing%20🔥)![GitHub issues by-label](https://img.shields.io/github/issues/vdesabou/kafka-docker-playground/enhancement%20✨)
 ![GitHub repo size](https://img.shields.io/github/repo-size/vdesabou/kafka-docker-playground)
 [![Add a star on GitHub](https://img.shields.io/github/stars/vdesabou/kafka-docker-playground?style=social)](https://github.com/vdesabou/kafka-docker-playground)
@@ -15,7 +15,7 @@
 - ♻️ Cluster Linking, Replicator and MirrorMaker 2 [examples](/content?id=🌍-multi-data-center-deployments)
 - 🎯 Run examples with any Confluent Platform or connector [versions](/how-to-use?id=🪄-specify-versions)
 - 🎓 Learn how the playground [works](/how-it-works)
-- 👷‍♂️ Build your own reproduction models with [how-to-build-your-own](/how-to-build-your-own)
+- 👷‍♂️ Build your own reproduction models with [reusables](/reusables)
 - 📱 Work directly in your browser using [Gitpod.io](/how-to-use?id=🪄-gitpodio)
 - 🎩 Work remotely with VS Code using [AWS EC2 Alfred workflow](/how-to-use?id=%f0%9f%8e%a9-aws-ec2-alfred-workflow)
 - 🤖 Automated testing using Github Actions [CI](/how-it-works?id=🤖-how-ci-works)
@@ -27,7 +27,7 @@ Check out the **[How to Use](/how-to-use.md)** section, then select an example i
 
 ## 💡 Ideology
 
-Most of the examples in the playground are very basic, but it allows to quickly test components in an automated way (and with any [versions](/how-to-use?id=🪄-specify-versions)) and most importantly to easily [build](/how-to-build-your-own) your own reproduction models !
+Most of the examples in the playground are very basic, but it allows to quickly test components in an automated way (and with any [versions](/how-to-use?id=🪄-specify-versions)) and most importantly to easily [build](/reusables) your own reproduction models !
 
 ## ⭐️ Support my work
 

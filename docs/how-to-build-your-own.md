@@ -8,7 +8,11 @@ If you want to create your own reproduction model, follow these steps:
 
 * Go into the directory of the example of your choice
 * Choose the script that you want to use as basis
-* Execute `../../scripts/bootstrap-reproduction-model.sh <script file> <description> [<avro>, <avro-with-key>, <protobuf>, <protobuf-with-key>, <json-schema> or <json-schema-with-key>] [number of java producers, default 1]`
+* Execute following script:
+
+```bash
+../../scripts/bootstrap-reproduction-model.sh <script file> <description> [<avro>, <avro-with-key>, <protobuf>, <protobuf-with-key>, <json-schema> or <json-schema-with-key>] [number of java producers, default 1]
+```
 
 > [!TIP]
 > `with-key` will also produce key with selected converter, otherwise LongConverter is used.

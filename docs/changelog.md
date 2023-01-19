@@ -1,5 +1,9 @@
 # Change Log
 
+## 2023-01-19
+
+- Added [🏎️ Performance testing](http://kafka-docker-playground.io/#/how-to-build-your-own?id=%f0%9f%8f%8e%ef%b8%8f-performance-testing)
+
 ## 2023-01-17
 
 - Added [↔️ Default Connect converter used](https://kafka-docker-playground.io/#/how-it-works?id=%e2%86%94%ef%b8%8f-default-connect-converter-used)

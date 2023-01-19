@@ -177,7 +177,7 @@ Example:
 Send 100 messages to topic called "test-topic":
 
 ```bash
-docker exec -e NB_MESSAGES="100 -e TOPIC="test-topic" producer-repro-12345 bash -c "java -jar producer-1.0.0-jar-with-dependencies.jar"
+docker exec -e NB_MESSAGES=100 -e TOPIC="test-topic" producer-repro-12345 bash -c "java -jar producer-1.0.0-jar-with-dependencies.jar"
 ```
 
 #### **Protobuf**
@@ -267,7 +267,7 @@ Example:
 Send 100 messages to topic called "test-topic":
 
 ```bash
-docker exec -e NB_MESSAGES="100 -e TOPIC="test-topic" producer-repro-12345 bash -c "java -jar producer-1.0.0-jar-with-dependencies.jar"
+docker exec -e NB_MESSAGES=100 -e TOPIC="test-topic" producer-repro-12345 bash -c "java -jar producer-1.0.0-jar-with-dependencies.jar"
 ```
 
 #### **JSON Schema**
@@ -386,7 +386,7 @@ Example:
 Send 100 messages to topic called "test-topic":
 
 ```bash
-docker exec -e NB_MESSAGES="100 -e TOPIC="test-topic" producer-repro-12345 bash -c "java -jar producer-1.0.0-jar-with-dependencies.jar"
+docker exec -e NB_MESSAGES=100 -e TOPIC="test-topic" producer-repro-12345 bash -c "java -jar producer-1.0.0-jar-with-dependencies.jar"
 ```
 
 <!-- tabs:end -->
@@ -557,7 +557,7 @@ EOF
 docker exec broker kafka-producer-perf-test --topic a-topic --num-records 200000 --record-size 1000 --throughput 100000 --producer-props bootstrap.servers=broker:9092
 ```
 
-## 👈 Consuming data
+## 👉 Consuming data
 
 ### 🔤 [kafka-console-consumer](https://docs.confluent.io/platform/current/tutorials/examples/clients/docs/kafka-commands.html#consume-records)
 
@@ -1495,4 +1495,187 @@ docker exec connect java -version
 java version "1.8.0_201"
 Java(TM) SE Runtime Environment (build 1.8.0_201-b09)
 Java HotSpot(TM) 64-Bit Server VM (build 25.201-b09, mixed mode)
+```
+
+## 🏎️ Performance testing
+
+Here are some tips and tricks to create reproduction models that require high volume of data.
+
+> [!TIP]
+> It is highly recommended to enable [JMX Grafana](https://kafka-docker-playground.io/#/how-to-use?id=%f0%9f%93%8a-enabling-jmx-grafana) when you're doing performance testing, to see CPU/Memory and all JMX metrics.
+
+### 👈 All sink connectors
+
+Injecting lot of records into topic(s) is really easy using [🛠 Bootstrap reproduction model](https://kafka-docker-playground.io/#/how-to-build-your-own?id=%f0%9f%9b%a0-bootstrap-reproduction-model) with [♨️ Java producers](https://kafka-docker-playground.io/#/how-to-build-your-own?id=%e2%99%a8%ef%b8%8f-java-producers) option.
+
+To inject infinite number of requests as fast as possible, use `NB_MESSAGES=-1` and `MESSAGE_BACKOFF=0` and use `-d` to run the injection in the background:
+
+```bash
+docker exec -e NB_MESSAGES=-1 -e MESSAGE_BACKOFF=0 -e TOPIC="test-topic" -d producer-repro-12345 bash -c "java -jar producer-1.0.0-jar-with-dependencies.jar"
+```
+
+If load is not enough, you can start multiple producers in parallel:
+
+```bash
+docker exec -e NB_MESSAGES=-1 -e MESSAGE_BACKOFF=0 -e TOPIC="test-topic" -d producer-repro-12345 bash -c "java -jar producer-1.0.0-jar-with-dependencies.jar"
+docker exec -e NB_MESSAGES=-1 -e MESSAGE_BACKOFF=0 -e TOPIC="test-topic" -d producer-repro-12345 bash -c "java -jar producer-1.0.0-jar-with-dependencies.jar"
+docker exec -e NB_MESSAGES=-1 -e MESSAGE_BACKOFF=0 -e TOPIC="test-topic" -d producer-repro-12345 bash -c "java -jar producer-1.0.0-jar-with-dependencies.jar"
+docker exec -e NB_MESSAGES=-1 -e MESSAGE_BACKOFF=0 -e TOPIC="test-topic" -d producer-repro-12345 bash -c "java -jar producer-1.0.0-jar-with-dependencies.jar"
+docker exec -e NB_MESSAGES=-1 -e MESSAGE_BACKOFF=0 -e TOPIC="test-topic" -d producer-repro-12345 bash -c "java -jar producer-1.0.0-jar-with-dependencies.jar"
+
+docker exec -e NB_MESSAGES=-1 -e MESSAGE_BACKOFF=0 -e TOPIC="test-topic2" -d producer-repro-12345 bash -c "java -jar producer-1.0.0-jar-with-dependencies.jar"
+docker exec -e NB_MESSAGES=-1 -e MESSAGE_BACKOFF=0 -e TOPIC="test-topic2" -d producer-repro-12345 bash -c "java -jar producer-1.0.0-jar-with-dependencies.jar"
+docker exec -e NB_MESSAGES=-1 -e MESSAGE_BACKOFF=0 -e TOPIC="test-topic2" -d producer-repro-12345 bash -c "java -jar producer-1.0.0-jar-with-dependencies.jar"
+docker exec -e NB_MESSAGES=-1 -e MESSAGE_BACKOFF=0 -e TOPIC="test-topic2" -d producer-repro-12345 bash -c "java -jar producer-1.0.0-jar-with-dependencies.jar"
+docker exec -e NB_MESSAGES=-1 -e MESSAGE_BACKOFF=0 -e TOPIC="test-topic2" -d producer-repro-12345 bash -c "java -jar producer-1.0.0-jar-with-dependencies.jar"
+```
+
+### 👉 Oracle
+
+For all Oracle CDC and JDBC source connector with Oracle examples, you can easily inject load in table using, the following steps.
+
+You can set environment variable `ORACLE_DATAGEN` before running the example and it will use a Java based datagen tool:
+
+Example:
+
+```bash
+DURATION=600
+log "Injecting data for $DURATION seconds"
+docker exec -d oracle-datagen bash -c "java ${JAVA_OPTS} -jar oracle-datagen-1.0-SNAPSHOT-jar-with-dependencies.jar --host oracle --username C##MYUSER --password mypassword --sidOrServerName sid --sidOrServerNameVal ORCLCDB --maxPoolSize 10 --durationTimeMin $DURATION"
+```
+
+> [!TIP]
+> You can increase throughtput with `maxPoolSize`.
+
+### 👉 Microsoft SQL Server
+
+In order to create a large table with random data ([source](http://dba.fyicenter.com/faq/sql_server/Creating_a_Large_Table_with_Random_Data_for_Indexes.html)), you can use:
+
+```bash
+NB_ROWS=100000
+log "Create table with $NB_ROWS "
+docker exec -i sqlserver /opt/mssql-tools/bin/sqlcmd -U sa -P Password! << EOF
+-- Create the test database
+CREATE DATABASE testDB;
+GO
+USE testDB;
+
+-- Create a table with primary key
+CREATE TABLE customers (
+  id INT,
+  rand_integer INT,
+  rand_number numeric(18,9),
+  rand_datetime DATETIME2,
+  rand_string VARCHAR(4000)
+);
+GO
+
+-- Insert rows with random values
+DECLARE @nbrows INT;
+DECLARE @row INT;
+DECLARE @string VARCHAR(4000), @length INT, @code INT;
+SET @nbrows = $NB_ROWS;
+SET @row = 0;
+WHILE @row < @nbrows BEGIN
+   SET @row = @row + 1;
+
+   -- Build the random string
+   SET @length = ROUND(4000*RAND(),0);
+   SET @string = '';
+   WHILE @length > 0 BEGIN
+      SET @length = @length - 1;
+      SET @code = ROUND(32*RAND(),0) - 6;
+      IF @code BETWEEN 1 AND 26 
+         SET @string = @string + CHAR(ASCII('a')+@code-1);
+      ELSE
+         SET @string = @string + ' ';
+   END 
+
+   -- Ready for the record
+   SET NOCOUNT ON;
+   INSERT INTO customers VALUES (
+      @row,
+      ROUND(2000000*RAND()-1000000,0),
+      ROUND(2000000*RAND()-1000000,9),
+      GETDATE(),
+      @string
+   )
+END
+PRINT 'Rows inserted: '+CONVERT(VARCHAR(20),@row);
+GO
+EOF
+```
+
+### 👉 PostgreSQL
+
+In order to create a large table with random data ([source](https://stackoverflow.com/questions/24841142/how-can-i-generate-big-data-sample-for-postgresql-using-generate-series-and-rand)), you can use:
+
+```bash
+
+NB_ROWS=100000
+log "Create table with $NB_ROWS "
+docker exec -i postgres psql -U myuser -d postgres << EOF
+CREATE TABLE mytable (
+  id SERIAL UNIQUE NOT NULL,
+  code TEXT NOT NULL,
+  article TEXT,
+  name TEXT NOT NULL
+);
+
+insert into mytable (
+    code, article, name
+)
+select
+    left(md5(i::text), 10000),
+    md5(random()::text),
+    REPEAT('abcdefghij', 400)
+from generate_series(1, $NB_ROWS) s(i);
+EOF
+```
+
+### 👉 MongoDB
+
+In order to generate random data ([source](https://www.mongodb.com/developer/products/connectors/measuring-mongodb-kafka-connector-performance/)), you can use [robwma/doc-gen](https://github.com/RWaltersMA/doc-gen) docker image.
+
+Add in your docker-compose file:
+
+```yml
+
+  doc-gen:
+    image: robwma/doc-gen:1.0
+    hostname: doc-gen
+    container_name: doc-gen
+    command: "sleep infinity"
+```
+
+Then you can use:
+
+```bash
+NB_DOCUMENTS=15000
+log "Generate $NB_DOCUMENTS sample documents"
+docker exec -i doc-gen python doc-gen.py -s '{"name":"string","email":"string","password":"string"}' -c "mongodb://myuser:mypassword@mongodb:27017" -t $NB_DOCUMENTS -db "kafka" -col "source-perf-test"
+```
+
+Then you can use [MongoDB source](https://github.com/vdesabou/kafka-docker-playground/tree/master/connect/connect-mongodb-source) connector:
+
+```bash
+log "Creating MongoDB source connector"
+curl -X PUT \
+     -H "Content-Type: application/json" \
+     --data '{
+               "connector.class" : "com.mongodb.kafka.connect.MongoSourceConnector",
+               "tasks.max" : "1",
+               "connection.uri" : "mongodb://myuser:mypassword@mongodb:27017",
+               "database": "kafka",
+               "collection": "source-perf-test",
+               "mongo.errors.log.enable": "true",
+               "topic.prefix":"mdb",
+               "output.json.formatter" : "com.mongodb.kafka.connect.source.json.formatter.SimplifiedJson",
+               "output.format.value":"schema",
+               "output.schema.infer.value":true,
+               "output.format.key":"json",
+               "publish.full.document.only": "false",
+               "change.stream.full.document": "updateLookup"
+          }' \
+     http://localhost:8083/connectors/mongodb-source-perf/config | jq .
 ```

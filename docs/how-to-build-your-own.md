@@ -1,6 +1,6 @@
-# 👷‍♂️ How to build your own...
+# 👷‍♂️ How to build your own examples or reproduction models
 
-Below is a collection of *how to* that you can re-use when you build your own reproduction model.
+Below is a collection of *how to* that you can re-use when you build your own examples or reproduction models.
 
 ## 🛠 Bootstrap reproduction model
 

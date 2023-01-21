@@ -16,7 +16,7 @@
 - ♻️ Cluster Linking, Replicator and MirrorMaker 2 [examples](/content?id=🌍-multi-data-center-deployments)
 - 🎯 Run examples with any Confluent Platform or connector [versions](/how-to-use?id=🪄-specify-versions)
 - 🎓 Learn how the playground [works](/how-it-works)
-- 👷‍♂️ Build your own reproduction models with [reusables](/reusables)
+- 👷‍♂️ Build your own examples or reproduction models with [how-to-build-your-own](/how-to-build-your-own) section
 - 📱 Work directly in your browser using [Gitpod.io](/how-to-use?id=🪄-gitpodio)
 - 🎩 Work remotely with VS Code using [AWS EC2 Alfred workflow](/how-to-use?id=%f0%9f%8e%a9-aws-ec2-alfred-workflow)
 - 🤖 Automated testing using Github Actions [CI](/how-it-works?id=🤖-how-ci-works)
@@ -28,7 +28,7 @@ Check out the **[How to Use](/how-to-use.md)** section, then select an example i
 
 ## 💡 Ideology
 
-Most of the examples in the playground are very basic, but it allows to quickly test components in an automated way (and with any [versions](/how-to-use?id=🪄-specify-versions)) and most importantly to easily [build](/reusables) your own reproduction models !
+Most of the examples in the playground are very basic, but it allows to quickly test components in an automated way (and with any [versions](/how-to-use?id=🪄-specify-versions)) and most importantly to easily [build](/how-to-build-your-own) your own examples or reproduction models !
 
 ## ⭐️ Support my work
 

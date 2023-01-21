@@ -3,6 +3,7 @@
 ## 2023-01-19
 
 - Added [🏎️ Performance testing](http://kafka-docker-playground.io/#/how-to-build-your-own?id=%f0%9f%8f%8e%ef%b8%8f-performance-testing)
+- Added [🕸️ Debug ServiceNow or Salesforce](http://kafka-docker-playground.io/#/how-to-build-your-own?id=%f0%9f%95%b8%ef%b8%8f-debug-servicenow-or-salesforce)
 
 ## 2023-01-17
 

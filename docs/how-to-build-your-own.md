@@ -1036,6 +1036,33 @@ In logs, you'll see:
 [Loaded org.reflections.util.FilterBuilder$Matcher from file:/usr/share/java/kafka/reflections-0.9.12.jar]
 ```
 
+### 🕸️ Debug ServiceNow or Salesforce
+
+Those connectors use low level [com.google.api.client.http](https://developers.google.com/api-client-library/java) library.
+
+In order to activate debug logs to see requests/responses, you can just add the `volumes` mount with existing `../../connect/connect-servicenow-source/nginx-proxy/logging.properties` file and add `KAFKA_OPTS: -Djava.util.logging.config.file=/tmp/logging.properties`:
+
+Example:
+
+```yml
+  connect:
+    volumes:
+      - ../../connect/connect-servicenow-source/nginx-proxy/logging.properties:/tmp/logging.properties
+    environment:
+      KAFKA_OPTS: -Djava.util.logging.config.file=/tmp/logging.properties
+```
+
+This is how the `logging.properties` looks like:
+
+```bash
+$ cat /tmp/logging.properties
+handlers=java.util.logging.ConsoleHandler
+java.util.logging.ConsoleHandler.level=ALL
+com.google.api.client.http.level=ALLhandlers=java.util.logging.ConsoleHandler
+java.util.logging.ConsoleHandler.level=ALL
+com.google.api.client.http.level=ALL
+```
+
 ### 🕵 TCP Dump
 
 It is sometime necessary to sniff the network in order to better understand what's going on.

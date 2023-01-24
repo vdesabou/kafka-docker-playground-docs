@@ -1058,8 +1058,6 @@ This is how the `logging.properties` looks like:
 $ cat /tmp/logging.properties
 handlers=java.util.logging.ConsoleHandler
 java.util.logging.ConsoleHandler.level=ALL
-com.google.api.client.http.level=ALLhandlers=java.util.logging.ConsoleHandler
-java.util.logging.ConsoleHandler.level=ALL
 com.google.api.client.http.level=ALL
 ```
 

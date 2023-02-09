@@ -80,3 +80,9 @@ kafka-run-class kafka.tools.GetOffsetShell --broker-list broker:9092 --topic a-t
 EOF
 ```
 
+## Check Kafka Connect offsets topic
+
+```bash
+docker exec connect kafka-console-consumer -bootstrap-server broker:9092 --topic connect-offsets --from-beginning --property print.key=true --property print.timestamp=true
+```
+

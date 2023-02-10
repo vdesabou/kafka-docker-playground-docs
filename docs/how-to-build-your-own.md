@@ -1393,33 +1393,48 @@ http {
 
 ### 🔐 Proxy with BASIC authentication
 
-If you want to setup [BASIC authentication](https://docs.nginx.com/nginx/admin-guide/security-controls/configuring-http-basic-authentication/) with your NGINX proxy, follow those steps:
+If you want to setup BASIC authentication, you can use [ubuntu/squid](https://hub.docker.com/r/ubuntu/squid) image.
 
 > [!TIP]
-> A complete example is available [here](https://github.com/vdesabou/kafka-docker-playground/blob/master/connect/connect-aws-s3-sink/s3-sink-proxy-basic-auth.sh). 
+> Some complete examples are available [here](https://github.com/vdesabou/kafka-docker-playground/blob/master/connect/connect-aws-s3-sink/s3-sink-proxy-basic-auth.sh) and [there](https://github.com/vdesabou/kafka-docker-playground/blob/master/connect/connect-salesforce-platform-events-sink/salesforce-platform-events-sink-proxy-basic-auth.sh)
 
-* Create a `htpasswd` file by executing: `htpasswd -c htpasswd myuser` (I used `mypassword` for the password)
-* In nginx `nginx_whitelist.conf`, add
-
-```properties
-        ...
-        location / {
-            auth_basic "Basic auth required area";
-            auth_basic_user_file /tmp/htpasswd;
-            proxy_pass http://$http_host;
-            proxy_set_header Host $http_host;
-        }
-
-        ...
-```
-
-* in your `docker-compose`, add `htpasswd` line as below:
+* in your `docker-compose`, add `squid` as below:
 
 
 ```yml
+  squid:
+    image: ubuntu/squid
+    hostname: squid
+    container_name: squid
+    ports:
+      - "8888:8888"
     volumes:
-      - ../../connect/connect-aws-s3-sink/nginx-proxy/nginx_whitelist.conf:/usr/local/nginx/conf/nginx.conf
-      - ../../connect/connect-aws-s3-sink/nginx-proxy/htpasswd:/tmp/htpasswd
+      - ../../connect/connect-aws-s3-sink/squid/passwords:/etc/squid/passwords
+      - ../../connect/connect-aws-s3-sink/squid/squid.conf:/etc/squid/squid.conf
+```
+
+Proxy details:
+
+* container: squid
+* port: 8888
+* user: admin
+* password: 1234
+
+Example with S3 sink:
+
+```json
+  "s3.proxy.url": "https://squid:8888",
+  "s3.proxy.user": "admin",
+  "s3.proxy.password": "1234",
+```
+
+Example with Salesforce:
+
+```json
+  "http.proxy": "squid:8888",
+  "http.proxy.auth.scheme": "BASIC",
+  "http.proxy.user": "admin",
+  "http.proxy.password": "1234",
 ```
 
 ## ♨️ Using specific JDK

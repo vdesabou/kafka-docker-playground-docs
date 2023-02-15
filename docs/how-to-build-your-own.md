@@ -410,6 +410,16 @@ This is my message 2
 EOF
 ```
 
+#### **Heredoc JSON**
+
+```bash
+docker exec -i broker kafka-console-producer --broker-list broker:9092 --topic a-topic << EOF
+{"u_name": "scissors", "u_price": 2.75, "u_quantity": 3}
+{"u_name": "tape", "u_price": 0.99, "u_quantity": 10}
+{"u_name": "notebooks", "u_price": 1.99, "u_quantity": 5}
+EOF
+```
+
 #### **Key**
 
 ```bash
@@ -417,6 +427,16 @@ docker exec -i broker kafka-console-producer --broker-list broker:9092 --topic a
 key1,value1
 key1,value2
 key2,value1
+EOF
+```
+
+#### **Key and JSON**
+
+```bash
+docker exec -i broker kafka-console-producer --broker-list broker:9092 --topic a-topic --property parse.key=true --property key.separator=, << EOF
+key1,{"u_name": "scissors", "u_price": 2.75, "u_quantity": 3}
+key2,{"u_name": "tape", "u_price": 0.99, "u_quantity": 10}
+key3,{"u_name": "notebooks", "u_price": 1.99, "u_quantity": 5}
 EOF
 ```
 

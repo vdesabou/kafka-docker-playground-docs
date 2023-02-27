@@ -128,8 +128,7 @@ source /path/to/kafka-docker-playground/scripts/cli/completions.bash
 Example:
 
 ```bash
-$ playground --help         
-playground - cli for Kafka Docker Playground
+$ playground - cli for Kafka Docker Playground
 
 Usage:
   playground COMMAND
@@ -141,6 +140,8 @@ Build your own.. Commands:
 
 Tools Commands:
   get-properties                 Get properties file from a container.
+  enable-remote-debugging        Get properties file from a container.
+  get-jmx-metrics                Get JMX metrics from a component.
   recreate-container             Recreate container(s).
   get-ip-address-container       Get IP address of running containers.
   kill-all-containers            Kill all containers.

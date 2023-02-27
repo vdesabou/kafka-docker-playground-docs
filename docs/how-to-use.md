@@ -23,7 +23,7 @@ You also need internet connectivity when running connect tests as connectors are
 > On MacOS, the [Docker memory](https://docs.docker.com/desktop/mac/#resources) should be set to at least 8Gb.
 
 > [!ATTENTION]
-> With M1 chip Macs, you need `export DOCKER_DEFAULT_PLATFORM=linux/amd64` before running any example.
+> With M1 chip Macs, you need `export DOCKER_DEFAULT_PLATFORM=linux/amd64` before running any example, but that does not work for all examples. This is work in progress.
 
 
 #### 🔽 Clone the repository

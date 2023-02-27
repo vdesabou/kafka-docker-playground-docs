@@ -1,5 +1,9 @@
 # Change Log
 
+## 2023-02-27
+
+- Added [🧠 CLI](https://kafka-docker-playground.io/#/how-to-use?id=%f0%9f%a7%a0-cli)
+
 ## 2023-02-10
 
 - Changed [🔐 Proxy with BASIC authentication](https://kafka-docker-playground.io/#/how-to-build-your-own?id=%f0%9f%94%90-proxy-with-basic-authentication) to use [ubuntu/squid](https://hub.docker.com/r/ubuntu/squid) as nginx example was broken

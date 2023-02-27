@@ -370,22 +370,43 @@ JMX metrics are available locally on those ports:
 * schema-registry: `10001`
 * connect: `10002`
 
-In order to easily gather JMX metrics, you can use [`scripts/get-jmx-metrics.sh`](https://github.com/vdesabou/kafka-docker-playground/blob/master/scripts/get-jmx-metrics.sh):
+In order to easily gather JMX metrics, you can execute [🧠 CLI](https://kafka-docker-playground.io/#/how-to-use?id=%f0%9f%a7%a0-cli) with `get-jmx-metrics` command:
 
 ```bash
-get-jmx-metrics.sh <component> [<domain>]
+$ playground get-jmx-metrics --help 
+playground get-jmx-metrics
+
+  Get JMX metrics from a component.
+  
+  Check documentation https://tinyurl.com/yc2myws9
+
+Usage:
+  playground get-jmx-metrics [COMPONENT] [DOMAIN]
+  playground get-jmx-metrics --help | -h
+
+Options:
+  --help, -h
+    Show this help
+
+Arguments:
+  COMPONENT
+    Component name.
+    Allowed: zookeeper, broker, connect, schema-registry
+
+  DOMAIN
+    Domain name.
+
+Examples:
+  playground get-jmx-metrics connect
+  playground get-jmx-metrics connect "kafka.connect kafka.consumer
+  kafka.producer"
+  playground get-jmx-metrics broker
 ```
-
-where:
-
-*  `component` (mandatory) is one of `zookeeper`, `broker`, `schema-registry` or `connect`
-*  `domain`(optional) is the JMX domain
-
 
 Example (without specifying domain):
 
 ```bash
-$ ../../scripts/get-jmx-metrics.sh connect
+$ playground get-jmx-metrics connect
 17:35:35 ❗ You did not specify a list of domains, all domains will be exported!
 17:35:35 ℹ️ This is the list of domains for component connect
 JMImplementation
@@ -404,7 +425,7 @@ kafka.producer
 Example (specifying domain):
 
 ```bash
-$ ../../scripts/get-jmx-metrics.sh connect "kafka.connect kafka.consumer kafka.producer"
+$ playground get-jmx-metrics connect "kafka.connect kafka.consumer kafka.producer"
 17:38:00 ℹ️ JMX metrics are available in /tmp/jmx_metrics.log file
 ```
 
@@ -431,16 +452,39 @@ docker exec kcat kcat -b broker:9092 -L
 
 Because the playground use **[Docker override](/how-it-works?id=🐳-docker-override)**, not all configuration parameters are in same `docker-compose.yml` file.
 
-In order to easily see the end result properties file, you can use [`scripts/get-properties.sh`](https://github.com/vdesabou/kafka-docker-playground/blob/master/scripts/get-properties.sh):
+In order to easily see the end result properties file, you can use execute [🧠 CLI](https://kafka-docker-playground.io/#/how-to-use?id=%f0%9f%a7%a0-cli) with `get-properties` command:
 
 ```bash
-scripts/get-properties.sh <container>
+playground get-properties --help         
+playground get-properties
+
+  Get properties file from a container.
+  
+  Check documentation https://tinyurl.com/4vj7tm2b
+
+Usage:
+  playground get-properties [CONTAINER]
+  playground get-properties --help | -h
+
+Options:
+  --help, -h
+    Show this help
+
+Arguments:
+  CONTAINER
+    Container name.
+    Allowed: zookeeper, broker, connect, schema-registry, control-center
+    Default: connect
+
+Examples:
+  playground get-properties connect
+  playground get-properties broker
 ```
 
 *Example:*
 
-```properties
-$ ../../scripts/get-properties.sh connect
+```bash
+$ playground get-properties connect
 bootstrap.servers=broker:9092
 config.providers.file.class=org.apache.kafka.common.config.provider.FileConfigProvider
 config.providers=file
@@ -477,26 +521,25 @@ value.converter=io.confluent.connect.avro.AvroConverter
 
 Because the playground uses **[Docker override](/how-it-works?id=🐳-docker-override)**, not all configuration parameters are in same `docker-compose.yml` file and also `docker-compose` files in the playground depends on environment variables to be set.
 
-For these reasons, if you want to make a change in one of the `docker-compose` files (without restarting the test from scratch), it is not simply a matter of doing `docker-compose up -d` 😅 !
+For these reasons, if you want to make a change in one of the `docker-compose` files (without restarting the example from scratch), it is not simply a matter of doing `docker-compose up -d` 😅 !
 
-However, when you execute an example, you get in the output the command to run in order to easily re-create modified container(s) 🥳.
+However, when you execute an example, you get in the output the [🧠 CLI](https://kafka-docker-playground.io/#/how-to-use?id=%f0%9f%a7%a0-cli) command to run `recreate-container` in order to easily re-create modified container(s) 🥳.
 
 *Example:*
 
 ```bash
 12:02:18 ℹ️ ✨If you modify a docker-compose file and want to re-create the container(s),
- run ../../scripts/recreate-containers.sh or use this command:
-12:02:18 ℹ️ ✨source ../../scripts/utils.sh && docker-compose -f ../../environment/plaintext/docker-compose.yml -f docker-compose.plaintext.yml --profile control-center up -d
+ run cli command playground recreate-container
 ```
 
-So you can modify one of the `docker-compose` files (in that case either [`environment/plaintext/docker-compose.yml`](https://github.com/vdesabou/kafka-docker-playground/blob/master/environment/plaintext/docker-compose.yml) or [`connect/connect-http-sink/docker-compose.plaintext.yml`](https://github.com/vdesabou/kafka-docker-playground/blob/master/connect/connect-http-sink/docker-compose.plaintext.yml)), and then run the suggested command:
+So you can modify one of the `docker-compose` files (in that case either [`environment/plaintext/docker-compose.yml`](https://github.com/vdesabou/kafka-docker-playground/blob/master/environment/plaintext/docker-compose.yml) or [`connect/connect-http-sink/docker-compose.plaintext.yml`](https://github.com/vdesabou/kafka-docker-playground/blob/master/connect/connect-http-sink/docker-compose.plaintext.yml)), and then run execute [🧠 CLI](https://kafka-docker-playground.io/#/how-to-use?id=%f0%9f%a7%a0-cli) with `recreate-container` command:
 
 *Example:*
 
-After editing [`connect/connect-http-sink/docker-compose.plaintext.yml`](https://github.com/vdesabou/kafka-docker-playground/blob/master/connect/connect-http-sink/docker-compose.plaintext.yml) and updated both `connect` and `http-service-no-auth`, the suggested command was ran:
+After editing [`connect/connect-http-sink/docker-compose.plaintext.yml`](https://github.com/vdesabou/kafka-docker-playground/blob/master/connect/connect-http-sink/docker-compose.plaintext.yml) and updated both `connect` and `http-service-no-auth`, the suggested cli command was ran:
 
 ```bash
-$ ../../scripts/recreate-containers.sh
+$ playground recreate-container
 http-service-ssl-basic-auth is up-to-date
 http-service-oauth2-auth is up-to-date
 Recreating http-service-no-auth ... 

@@ -103,6 +103,7 @@ cd connect/connect-ibm-mq-sink
 ## 🧠 CLI
 
 A CLI (generated using [bashly](https://bashly.dannyb.co/)) is available in `scripts/cli/playground`.
+
 Add it to your `PATH` environment variable by adding this in your `~/.bashrc` or `~/.zshrc`:
 
 ```bash

@@ -140,7 +140,7 @@ Build your own.. Commands:
 
 Tools Commands:
   get-properties                 Get properties file from a container.
-  enable-remote-debugging        Get properties file from a container.
+  enable-remote-debugging        Enable java remote debugging for container.
   get-jmx-metrics                Get JMX metrics from a component.
   recreate-container             Recreate container(s).
   get-ip-address-container       Get IP address of running containers.
@@ -153,13 +153,6 @@ Tools Commands:
 Connector Commands:
   connector                      Connector commands.
   connect-log-level              Set connect log level.
-
-Options:
-  --help, -h
-    Show this help
-
-  --version, -v
-    Show version number
 ```
 
 ## 🌤️ Confluent Cloud examples
@@ -374,40 +367,39 @@ JMX metrics are available locally on those ports:
 In order to easily gather JMX metrics, you can execute [🧠 CLI](https://kafka-docker-playground.io/#/how-to-use?id=%f0%9f%a7%a0-cli) with `get-jmx-metrics` command:
 
 ```bash
-$ playground get-jmx-metrics --help 
-playground get-jmx-metrics
+$ playground get-jmx-metrics
 
   Get JMX metrics from a component.
   
   Check documentation https://tinyurl.com/yc2myws9
 
 Usage:
-  playground get-jmx-metrics [COMPONENT] [DOMAIN]
+  playground get-jmx-metrics [OPTIONS]
   playground get-jmx-metrics --help | -h
 
 Options:
+  --component, -c COMPONENT
+    Component name.
+    Allowed: zookeeper, broker, connect, schema-registry
+    Default: connect
+
+  --domain, -d DOMAIN
+    Domain name.
+
   --help, -h
     Show this help
 
-Arguments:
-  COMPONENT
-    Component name.
-    Allowed: zookeeper, broker, connect, schema-registry
-
-  DOMAIN
-    Domain name.
-
 Examples:
-  playground get-jmx-metrics connect
-  playground get-jmx-metrics connect "kafka.connect kafka.consumer
-  kafka.producer"
-  playground get-jmx-metrics broker
+  playground get-jmx-metrics --component connect
+  playground get-jmx-metrics --component connect --domain "kafka.connect
+  kafka.consumer kafka.producer"
+  playground get-jmx-metrics -c broker
 ```
 
 Example (without specifying domain):
 
 ```bash
-$ playground get-jmx-metrics connect
+$ playground get-jmx-metrics -c connect
 17:35:35 ❗ You did not specify a list of domains, all domains will be exported!
 17:35:35 ℹ️ This is the list of domains for component connect
 JMImplementation
@@ -426,7 +418,7 @@ kafka.producer
 Example (specifying domain):
 
 ```bash
-$ playground get-jmx-metrics connect "kafka.connect kafka.consumer kafka.producer"
+$ playground get-jmx-metrics -c connect -d "kafka.connect kafka.consumer kafka.producer"
 17:38:00 ℹ️ JMX metrics are available in /tmp/jmx_metrics.log file
 ```
 
@@ -456,36 +448,34 @@ Because the playground use **[Docker override](/how-it-works?id=🐳-docker-over
 In order to easily see the end result properties file, you can use execute [🧠 CLI](https://kafka-docker-playground.io/#/how-to-use?id=%f0%9f%a7%a0-cli) with `get-properties` command:
 
 ```bash
-playground get-properties --help         
-playground get-properties
+$ playground get-properties
 
   Get properties file from a container.
   
   Check documentation https://tinyurl.com/4vj7tm2b
 
 Usage:
-  playground get-properties [CONTAINER]
+  playground get-properties [OPTIONS]
   playground get-properties --help | -h
 
 Options:
+  --container, -c CONTAINER
+    Container name.
+    Default: connect
+
   --help, -h
     Show this help
 
-Arguments:
-  CONTAINER
-    Container name.
-    Allowed: zookeeper, broker, connect, schema-registry, control-center
-    Default: connect
-
 Examples:
-  playground get-properties connect
-  playground get-properties broker
+  playground get-properties
+  playground get-properties --container broker
+  playground get-properties -c broker
 ```
 
 *Example:*
 
 ```bash
-$ playground get-properties connect
+$ playground get-properties -c connect
 bootstrap.servers=broker:9092
 config.providers.file.class=org.apache.kafka.common.config.provider.FileConfigProvider
 config.providers=file

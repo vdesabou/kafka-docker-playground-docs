@@ -15,7 +15,7 @@ docker container logs --tail=100 -f connect
 or use [🧠 CLI](https://kafka-docker-playground.io/#/how-to-use?id=%f0%9f%a7%a0-cli) with:
 
 ```bash
-playground logs connect
+playground logs -c connect
 ```
 
 ## Redirect all container logs to a file
@@ -29,7 +29,7 @@ docker container logs connect > connect.log 2>&1
 or use [🧠 CLI](https://kafka-docker-playground.io/#/how-to-use?id=%f0%9f%a7%a0-cli) with:
 
 ```bash
-playground logs connect -o code
+playground logs -c connect -o code
 ```
 
 Output:
@@ -49,7 +49,7 @@ docker exec -it connect bash
 or use [🧠 CLI](https://kafka-docker-playground.io/#/how-to-use?id=%f0%9f%a7%a0-cli) with:
 
 ```bash
-playground ssh connect
+playground ssh -c connect
 ```
 
 ## Kill all docker containers
@@ -89,7 +89,7 @@ docker exec connect bash -c "whoami"
 or use [🧠 CLI](https://kafka-docker-playground.io/#/how-to-use?id=%f0%9f%a7%a0-cli) with:
 
 ```bash
-playground exec connect "whoami"
+playground exec -c connect -d "whoami"
 ```
 
 ## Run some commands as root
@@ -103,7 +103,7 @@ docker exec --privileged --user root connect bash -c "whoami"
 or use [🧠 CLI](https://kafka-docker-playground.io/#/how-to-use?id=%f0%9f%a7%a0-cli) with:
 
 ```bash
-playground exec connect "whoami" --root
+playground exec -c connect -d "whoami" --root
 ```
 
 ## Get IP address of running containers
@@ -139,7 +139,23 @@ EOF
 or use [🧠 CLI](https://kafka-docker-playground.io/#/how-to-use?id=%f0%9f%a7%a0-cli) with:
 
 ```bash
-playground get-number-records-topic <topic>
+$  playground get-number-records-topic -help            
+playground get-number-records-topic - Get number of records in a topic.
+
+Usage:
+  playground get-number-records-topic [OPTIONS]
+  playground get-number-records-topic --help | -h
+
+Options:
+  --topic, -t TOPIC (required)
+    Topic name.
+
+  --help, -h
+    Show this help
+
+Examples:
+  playground get-number-records-topic --topic a-topic
+  playground get-number-records-topic -t a-topic
 ```
 
 ## Check Kafka Connect offsets topic

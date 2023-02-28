@@ -11,7 +11,7 @@ If you want to create your own reproduction model, follow these steps:
 * Execute [🧠 CLI](https://kafka-docker-playground.io/#/how-to-use?id=%f0%9f%a7%a0-cli) with `bootstrap-reproduction-model` command:
 
 ```bash
-$ playground bootstrap-reproduction-model --help        
+$ playground bootstrap-reproduction-model --help
 playground bootstrap-reproduction-model
 
   Bootstrap reproduction model.
@@ -19,10 +19,16 @@ playground bootstrap-reproduction-model
   Check documentation https://tinyurl.com/bdfs25my
 
 Usage:
-  playground bootstrap-reproduction-model TEST_FILE DESCRIPTION [OPTIONS]
+  playground bootstrap-reproduction-model [OPTIONS]
   playground bootstrap-reproduction-model --help | -h
 
 Options:
+  --file, -f FILE (required)
+    Test file to use as basis.
+
+  --description, -d DESCRIPTION (required)
+    Description.
+
   --producer, -p PRODUCER-TYPE
     Java producer type to use. 
     One of avro, avro-with-key, protobuf, protobuf-with-key, json-schema,
@@ -40,27 +46,21 @@ Options:
   --help, -h
     Show this help
 
-Arguments:
-  TEST_FILE
-    Test file to use as basis.
-
-  DESCRIPTION
-    Description.
-
 Environment Variables:
   OUTPUT_FOLDER
     Output folder where to generate bootstrapped files.
     Default: reproduction-models
 
 Examples:
-  playground bootstrap-reproduction-model hdfs2-sink.sh "123456 testing with
-  parquet format"
-  playground bootstrap-reproduction-model hdfs2-sink.sh "123456 testing with
-  parquet format and avro producer" --producer avro
-  playground bootstrap-reproduction-model hdfs2-sink.sh "123456 testing with
-  parquet format and 2 protobuf producers" --producer protobuf --nb-producers 2
-  playground bootstrap-reproduction-model hdfs2-sink.sh "123456 testing with
-  parquet format and 2 protobuf producers" -p protobuf -n 2
+  playground bootstrap-reproduction-model -f hdfs2-sink.sh -d "123456 testing
+  with parquet format"
+  playground bootstrap-reproduction-model -f hdfs2-sink.sh -d "123456 testing
+  with parquet format and avro producer" --producer avro
+  playground bootstrap-reproduction-model -f hdfs2-sink.sh -d "123456 testing
+  with parquet format and 2 protobuf producers" --producer protobuf
+  --nb-producers 2
+  playground bootstrap-reproduction-model -f hdfs2-sink.sh -d "123456 testing
+  with parquet format and 2 protobuf producers" -p protobuf -n 2
 ```
 
 > [!TIP]
@@ -73,7 +73,7 @@ Example:
 
 ```bash
 cd connect/connect-hdfs2-sink
-playground bootstrap-reproduction-model hdfs2-sink.sh "123456 testing with parquet format"
+playground bootstrap-reproduction-model -f hdfs2-sink.sh -d "123456 testing with parquet format"
 
 12:16:35 ℹ️ ✨ Creating file /Users/vsaboulin/Documents/github/kafka-docker-playground/reproduction-models/connect-connect-hdfs2-sink/docker-compose.plaintext.repro-123456-testing-with-parquet-format.yml
 12:16:35 ℹ️ ✨ Creating file /Users/vsaboulin/Documents/github/kafka-docker-playground/reproduction-models/connect-connect-hdfs2-sink/hdfs2-sink-repro-123456-testing-with-parquet-format.sh
@@ -87,7 +87,7 @@ Example with `protobuf`:
 
 ```bash
 cd connect/connect-hdfs2-sink
-playground bootstrap-reproduction-model hdfs2-sink.sh "123456 testing with parquet format" --producer protobuf
+playground bootstrap-reproduction-model -f hdfs2-sink.sh -d "123456 testing with parquet format" --producer protobuf
 
 19:54:45 ℹ️ ✨ Creating file /Users/vsaboulin/Documents/github/kafka-docker-playground/reproduction-models/connect-connect-hdfs2-sink/docker-compose.plaintext.repro-123456-testing-with-parquet-format.yml
 19:54:45 ℹ️ ✨ Creating file /Users/vsaboulin/Documents/github/kafka-docker-playground/reproduction-models/connect-connect-hdfs2-sink/hdfs2-sink-repro-123456-testing-with-parquet-format.sh
@@ -115,7 +115,7 @@ If you want multiple java producer (to test schema evolution for example), use t
 
 ```bash
 cd connect/connect-hdfs2-sink
-playground bootstrap-reproduction-model hdfs2-sink.sh "123456 testing with avro format" --producer avro 2
+playground bootstrap-reproduction-model -f hdfs2-sink.sh -d "123456 testing with avro format" --producer avro 2
 
 19:57:16 ℹ️ ✨ Creating file /Users/vsaboulin/Documents/github/kafka-docker-playground/reproduction-models/connect-connect-hdfs2-sink/docker-compose.plaintext.repro-123456-testing-with-avro-format.yml
 19:57:16 ℹ️ ✨ Creating file /Users/vsaboulin/Documents/github/kafka-docker-playground/reproduction-models/connect-connect-hdfs2-sink/hdfs2-sink-repro-123456-testing-with-avro-format.sh
@@ -928,7 +928,7 @@ In my example, the connector version is `10.1.1`, so I'm switching to branch tag
 4. Execute [🧠 CLI](https://kafka-docker-playground.io/#/how-to-use?id=%f0%9f%a7%a0-cli) with `enable-remote-debugging` command:
 
 ```bash
-$ playground enable-remote-debugging connect
+$ playground enable-remote-debugging -c connect
 namenode is up-to-date
 zookeeper is up-to-date
 hive-metastore-postgresql is up-to-date

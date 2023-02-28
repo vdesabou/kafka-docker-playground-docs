@@ -127,6 +127,10 @@ source /path/to/kafka-docker-playground/scripts/cli/completions.bash
 
 Example:
 
+[![asciicast](https://asciinema.org/a/9CjlfHXJuAbL5OzM6ShtJAX1H.svg)](https://asciinema.org/a/9CjlfHXJuAbL5OzM6ShtJAX1H)
+
+Usage:
+
 ```bash
 $ playground - cli for Kafka Docker Playground
 

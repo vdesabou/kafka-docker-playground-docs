@@ -2,3 +2,19 @@ https://docsify.js.org
 https://jhildenbiddle.github.io/docsify-themeable/#/
 
 $ docsify serve ./docs
+
+
+---------------
+
+<!-- tabs:start -->
+#### **Step 1**
+This is step 1
+#### **Step 2**
+<!-- select:start -->
+<!-- select-menu-labels: 🙋 see solution previous step ? -->
+#### --No--
+#### --Yes--
+solution step 1
+<!-- select:end -->
+This is step 2
+<!-- tabs:end -->

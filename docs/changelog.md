@@ -1,5 +1,9 @@
 # Change Log
 
+## 2023-03-01
+
+- Added [🧑‍🎓 Examples](https://kafka-docker-playground.io/#/examples) section
+
 ## 2023-02-27
 
 - Added [🧠 CLI](https://kafka-docker-playground.io/#/how-to-use?id=%f0%9f%a7%a0-cli)

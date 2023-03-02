@@ -1,6 +1,20 @@
 # 🧑‍🎓 Examples
 
-Below is a collection of reproduction models examples.
+Below is a collection of real use cases/issues for which a reproduction model was done using the playground.
+
+Each example (categorized by difficulty) is composed of:
+
+* 🔥 A small description of the issue
+* 🤯 A detailed description with all required information
+* 📍 Series of step to follow. An (optional) solution for each step is provided in following step.
+* 🌟 Results with a link to the full reproduction model, which can be executed directly using playground.
+
+🧠 The goal is to let users do the reproduction by themselves. This is the only way to learn 😀.
+
+> [!TIP]
+> This is the counter of ![reproduction models](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/vdesabou/b7d51da11b2e8a7bdd1d2e45d4aaa2e5/raw/badges.json) made with playground so far..
+> 
+
 
 ## ⭐ Beginner
 
@@ -234,3 +248,11 @@ Caused by: java.lang.StackOverflowError
 
 
 <!-- tabs:end -->
+
+## ⭐⭐ Intermediate
+
+Work in Progress...
+
+## ⭐⭐⭐ Expert
+
+Work in Progress...

@@ -4,8 +4,8 @@ Below is a collection of real use cases/issues for which a reproduction model wa
 
 Each example (categorized by difficulty) is composed of:
 
-* 🔥 A small description of the issue
-* 🤯 A detailed description with all required information
+* 🔥 A small description of the issue.
+* 🤯 A detailed description with all required information.
 * 📍 Series of step to follow. An (optional) solution for each step is provided in following step.
 * 🌟 Results with a link to the full reproduction model, which can be executed directly using playground.
 

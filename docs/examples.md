@@ -129,7 +129,7 @@ Caused by: java.lang.StackOverflowError
 
 #### **📍 Step 2**
 <!-- select:start -->
-<!-- select-menu-labels: 🙋 see solution for previous step ? -->
+<!-- select-menu-labels: 🙋 See solution for previous step ? -->
 #### --No--
 #### --Yes--
 
@@ -154,7 +154,7 @@ playground bootstrap-reproduction-model -f s3-sink.sh -d "000001 StackOverflowEr
 
 #### **📍 Step 3**
 <!-- select:start -->
-<!-- select-menu-labels: 🙋 see solution for previous step ? -->
+<!-- select-menu-labels: 🙋 See solution for previous step ? -->
 #### --No--
 #### --Yes--
 
@@ -171,7 +171,7 @@ playground bootstrap-reproduction-model -f s3-sink.sh -d "000001 StackOverflowEr
 
 #### **📍 Step 4**
 <!-- select:start -->
-<!-- select-menu-labels: 🙋 see solution for previous step ? -->
+<!-- select-menu-labels: 🙋 See solution for previous step ? -->
 #### --No--
 #### --Yes--
 

@@ -669,6 +669,14 @@ docker exec connect kafka-avro-console-consumer -bootstrap-server broker:9092 --
 docker exec connect kafka-avro-console-consumer -bootstrap-server broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --property print.key=true --property key.separator=, --from-beginning --max-messages 1
 ```
 
+#### **String Key**
+
+If the key is a string, you can use `key.deserializer` to specify it:
+
+```bash
+docker exec connect kafka-avro-console-consumer --bootstrap-server broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --property print.key=true --property key.deserializer=org.apache.kafka.common.serialization.StringDeserializer --from-beginning --max-messages 1
+```
+
 <!-- tabs:end -->
 ### 🔣 [kafka-protobuf-console-consumer](https://docs.confluent.io/platform/current/schema-registry/serdes-develop/serdes-protobuf.html)
 

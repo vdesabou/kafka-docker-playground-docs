@@ -164,7 +164,7 @@ playground bootstrap-reproduction-model -f s3-sink.sh -d "000001 StackOverflowEr
 
 
 <!-- select:end -->
-👉 Adapt the example to customer details and run it !
+👉 Adapt the example to user details and run it !
 
 > [!TIP]
 > Do not forget to [🪄 Specify versions](https://kafka-docker-playground.io/#/how-to-use?id=%f0%9f%aa%84-specify-versions) for CP and Connector before running the test !

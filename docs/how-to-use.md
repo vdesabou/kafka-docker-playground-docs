@@ -149,31 +149,37 @@ Example:
 Usage:
 
 ```bash
-$ playground - cli for Kafka Docker Playground
+$ playground - 🐳🧠 CLI for Kafka Docker Playground
 
 Usage:
   playground COMMAND
   playground [COMMAND] --help | -h
   playground --version | -v
 
-Build your own.. Commands:
-  bootstrap-reproduction-model   Bootstrap reproduction model.
+Bootstrap Commands:
+  bootstrap-reproduction-model   🛠 Bootstrap reproduction model.
 
-Tools Commands:
-  get-properties                 Get properties file from a container.
-  enable-remote-debugging        Enable java remote debugging for container.
-  get-jmx-metrics                Get JMX metrics from a component.
-  recreate-container             Recreate container(s).
-  get-ip-address-container       Get IP address of running containers.
-  kill-all-containers            Kill all containers.
-  get-number-records-topic       Get number of records in a topic.
-  logs                           Tail and follow container logs.
-  ssh                            SSH into container.
-  exec                           Execute command in a container.
+Kafka Commands:
+  get-properties                 📝 Get properties file from a container.
+  get-jmx-metrics                🔢 Get JMX metrics from a component.
+
+Debug Commands:
+  enable-remote-debugging        ✨ Enable java remote debugging for container.
+
+Container Commands:
+  recreate-container             ♻️ Recreate container(s).
+  get-ip-address-container       🖥️ Get IP address of running containers.
+  kill-all-containers            💀 Kill all containers.
+  logs                           👨‍💻 Tail and follow container logs.
+  ssh                            🚀 SSH into container.
+  exec                           🪄 Execute command in a container.
+
+Topic Commands:
+  get-number-records-topic       💯 Get number of records in a topic.
 
 Connector Commands:
-  connector                      Connector commands.
-  connect-log-level              Set connect log level.
+  connector                      🔗 Connector commands.
+  connect-log-level              🧬 Set connect log level.
 ```
 
 ## 🌤️ Confluent Cloud examples

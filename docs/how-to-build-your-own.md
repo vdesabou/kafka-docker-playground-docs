@@ -150,7 +150,7 @@ If you want to send a complex AVRO message, the easiest way is to use an Avro JA
 
 Here are the steps to follow:
 
-1. Bootstrap your reproduction model by following [🛠 Bootstrap reproduction model](/how-to-build-your-own?id=🛠-bootstrap-reproduction-model) and use `avro` as third parameter.
+1. Bootstrap your reproduction model by following [🛠 Bootstrap reproduction model](/how-to-build-your-own?id=🛠-bootstrap-reproduction-model) and use `avro` for the `--producer` (or `-p`) flag.
 
 2. Update `producer-repro-12345/src/main/resources/avro/customer.avsc` with your AVRO schema but be careful, you need to keep `Customer` for the name and `com.github.vdesabou` for the namespace:
 
@@ -240,7 +240,7 @@ If you want to send a complex Protobuf message, the easiest way is to use an Pro
 
 Here are the steps to follow:
 
-1. Bootstrap your reproduction model by following [🛠 Bootstrap reproduction model](/how-to-build-your-own?id=🛠-bootstrap-reproduction-model) and use `protobuf` as third parameter.
+1. Bootstrap your reproduction model by following [🛠 Bootstrap reproduction model](/how-to-build-your-own?id=🛠-bootstrap-reproduction-model) and use `protobuf` for the `--producer` (or `-p`) flag.
 
 2. Update `producer-repro-12345/src/main/resources/Customer.proto` with your Protobuf schema but be careful, you need to keep `Customer` for the name and `com.github.vdesabou` for the package and `CustomerImpl` for the `java_outer_classname`:
 
@@ -335,7 +335,7 @@ If you want to send a complex JSON Schema message, the easiest way is to use an 
 
 Here are the steps to follow:
 
-1. Bootstrap your reproduction model by following [🛠 Bootstrap reproduction model](/how-to-build-your-own?id=🛠-bootstrap-reproduction-model) and use `json-schema` as third parameter.
+1. Bootstrap your reproduction model by following [🛠 Bootstrap reproduction model](/how-to-build-your-own?id=🛠-bootstrap-reproduction-model) and use `json-schema` for the `--producer` (or `-p`) flag.
 
 2. Update `producer-repro-12345/src/main/resources/schema/Customer.json` with your JSON Schema schema but be careful, you need to keep `Customer` for the title:
 

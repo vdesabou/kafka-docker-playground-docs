@@ -14,17 +14,33 @@ You also need internet connectivity when running connect tests as connectors are
 > [!NOTE]
 > Every command used in the playground is using Docker, this includes `jq` (except if you have it on your host already), `aws`, `az`, `gcloud`, etc..
 > 
-> The goal is to have a consistent behaviour and only depends on Docker.
+> The goal is to have a consistent behavior and only depends on Docker.
 
 > [!WARNING]
-> The playground is only tested on macOS (but not with M1 chip) and Linux (Ubuntu and Amazon Linux) . It is not tested on Windows.
+> The playground is only tested on macOS (including with [M1 *arm64* chip](/how-to-use?id=%f0%9f%a7%91%f0%9f%92%bb-m1-chip-arm64-mac-support)) and Linux (Ubuntu and Amazon Linux) . It is not tested on Windows.
 
 > [!ATTENTION]
 > On MacOS, the [Docker memory](https://docs.docker.com/desktop/mac/#resources) should be set to at least 8Gb.
 
-> [!ATTENTION]
-> With M1 chip Macs, you need `export DOCKER_DEFAULT_PLATFORM=linux/amd64` before running any example, but that does not work for all examples. This is work in progress.
+#### 🧑‍💻 M1 chip (ARM64) Mac Support
 
+Examples in the playground have been tested on best effort (since it is a manual process) on M1 Mac (arm64).
+
+arm64 support results are displayed in **[Content](/content.md)** section:
+
+Example:
+
+![arm64_results](./images/arm64_results.jpg)
+
+The badges are:
+
+* ![arm64](https://img.shields.io/badge/arm64-native%20support-green): example works natively.
+* ![arm64](https://img.shields.io/badge/arm64-not%20working-red): example **cannot work at all**. You will need to run it using [Gitpod.io](/how-to-use?id=🪄-gitpodio) for example.
+* ![arm64](https://img.shields.io/badge/arm64-emulation%20required-orange): example is working but emulation is required. 
+
+Docker Desktop now provides **Rosetta 2** virtualization feature, see detailed steps [here](https://levelup.gitconnected.com/docker-on-apple-silicon-mac-how-to-run-x86-containers-with-rosetta-2-4a679913a0d5) on how to enable it, basically, you need to enable this:
+
+![rosetta](./images/arm64_rosetta.jpg)
 
 #### 🔽 Clone the repository
 

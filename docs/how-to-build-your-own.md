@@ -159,17 +159,6 @@ Here are the steps to follow:
     "namespace": "com.github.vdesabou",
 ```
 
-3. In the generated reproduction model file, you will see this:
-
-```bash
-# 🚨🚨🚨 FIXTHIS: move it to the correct place 🚨🚨🚨
-log "✨ Run the avro java producer which produces to topic customer_avro"
-docker exec producer-repro-12345 bash -c "java -jar producer-1.0.0-jar-with-dependencies.jar"
-# 🚨🚨🚨 FIXTHIS: move it to the correct place 🚨🚨🚨
-```
-
-👉 Make sure to move it in your script to the right place !
-
 By default, the following environment variables are used in producer container:
 
 ```yml
@@ -228,6 +217,18 @@ Send 100 messages to topic called "test-topic":
 ```bash
 docker exec -e NB_MESSAGES=100 -e TOPIC="test-topic" producer-repro-12345 bash -c "java -jar producer-1.0.0-jar-with-dependencies.jar"
 ```
+
+> [!WARNING]
+> In the generated reproduction model file, if you see this:
+> 
+> ```bash
+> # 🚨🚨🚨 FIXTHIS: move it to the correct place 🚨🚨🚨
+> log "✨ Run the avro java producer which produces to topic customer_avro"
+> docker exec producer-repro-12345 bash -c "java -jar producer-1.0.0-jar-with-dependencies.jar"
+> # 🚨🚨🚨 FIXTHIS: move it to the correct place 🚨🚨🚨
+> ```
+> 
+> 👉 Make sure to move it in your script to the right place !
 
 #### **Protobuf**
 
@@ -248,16 +249,6 @@ package com.github.vdesabou;
 option java_outer_classname = "CustomerImpl";
 ```
 
-3. In the generated reproduction model file, you will see this:
-
-```bash
-# 🚨🚨🚨 FIXTHIS: move it to the correct place 🚨🚨🚨
-log "✨ Run the protobuf java producer which produces to topic customer_protobuf"
-docker exec producer-repro-12345 bash -c "java -jar producer-1.0.0-jar-with-dependencies.jar"
-# 🚨🚨🚨 FIXTHIS: move it to the correct place 🚨🚨🚨
-```
-
-
 👉 Make sure to move it in your script to the right place !
 
 By default, the following environment variables are used in producer container:
@@ -318,6 +309,19 @@ Send 100 messages to topic called "test-topic":
 ```bash
 docker exec -e NB_MESSAGES=100 -e TOPIC="test-topic" producer-repro-12345 bash -c "java -jar producer-1.0.0-jar-with-dependencies.jar"
 ```
+
+> [!WARNING]
+> In the generated reproduction model file, if you see this:
+> 
+> ```bash
+> # 🚨🚨🚨 FIXTHIS: move it to the correct place 🚨🚨🚨
+> log "✨ Run the avro java producer which produces to topic customer_protobuf"
+> docker exec producer-repro-12345 bash -c "java -jar producer-1.0.0-jar-with-dependencies.jar"
+> # 🚨🚨🚨 FIXTHIS: move it to the correct place 🚨🚨🚨
+> ```
+> 
+> 👉 Make sure to move it in your script to the right place !
+
 
 #### **JSON Schema**
 
@@ -367,16 +371,6 @@ Here are the steps to follow:
 }
 ```
 
-3. In the generated reproduction model file, you will see this:
-
-```bash
-# 🚨🚨🚨 FIXTHIS: move it to the correct place 🚨🚨🚨
-log "✨ Run the json-schema java producer which produces to topic customer_json_schema"
-docker exec producer-repro-12345 bash -c "java -jar producer-1.0.0-jar-with-dependencies.jar"
-# 🚨🚨🚨 FIXTHIS: move it to the correct place 🚨🚨🚨
-```
-
-
 👉 Make sure to move it in your script to the right place !
 
 By default, the following environment variables are used in producer container:
@@ -437,6 +431,18 @@ Send 100 messages to topic called "test-topic":
 ```bash
 docker exec -e NB_MESSAGES=100 -e TOPIC="test-topic" producer-repro-12345 bash -c "java -jar producer-1.0.0-jar-with-dependencies.jar"
 ```
+
+> [!WARNING]
+> In the generated reproduction model file, if you see this:
+> 
+> ```bash
+> # 🚨🚨🚨 FIXTHIS: move it to the correct place 🚨🚨🚨
+> log "✨ Run the avro java producer which produces to topic customer_json_schema"
+> docker exec producer-repro-12345 bash -c "java -jar producer-1.0.0-jar-with-dependencies.jar"
+> # 🚨🚨🚨 FIXTHIS: move it to the correct place 🚨🚨🚨
+> ```
+> 
+> 👉 Make sure to move it in your script to the right place !
 
 <!-- tabs:end -->
 

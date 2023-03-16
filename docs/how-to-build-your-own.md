@@ -73,7 +73,9 @@ Examples:
 > [!TIP]
 > By default, files are produced in `reproduction-models` folder, but you can change it by setting `OUTPUT_FOLDER` environment variable.
 
-Example:
+Examples:
+
+### Simple
 
 ```bash
 cd connect/connect-hdfs2-sink
@@ -84,6 +86,8 @@ playground bootstrap-reproduction-model -f hdfs2-sink.sh -d "123456 testing with
 12:16:35 ℹ️ 📂 The reproduction files are now available in:
 /Users/vsaboulin/Documents/github/kafka-docker-playground/reproduction-models/connect-connect-hdfs2-sink
 ```
+
+### With Java producer
 
 If you want to automatically generate a Java Producer, use the flag `--producer` (or `-p`):
 
@@ -115,6 +119,8 @@ This will create the following files:
 
 Then follow instructions in one of [♨️ Java producer](/how-to-build-your-own?id=♨%EF%B8%8F-java-producers) below.
 
+### With multiple Java producers
+
 If you want multiple java producer (to test schema evolution for example), use the flag `--nb-producers` (or `-n`):, for example 2:
 
 ```bash
@@ -138,6 +144,8 @@ docker exec connect kafka-avro-console-consumer -bootstrap-server broker:9092 --
 19:57:16 ℹ️ 📂 The reproduction files are now available in:
 /Users/vsaboulin/Documents/github/kafka-docker-playground/reproduction-models/connect-connect-hdfs2-sink
 ```
+
+### With custom SMT
 
 If you want to add a custom SMT, just add `--add-custom-smt`
 

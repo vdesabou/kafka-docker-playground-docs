@@ -149,7 +149,7 @@ Example:
 Usage:
 
 ```bash
-$ playground - 🐳🧠 CLI for Kafka Docker Playground
+$ playground - 🧠 CLI for Kafka Docker Playground 🐳
 
 Usage:
   playground COMMAND
@@ -157,29 +157,36 @@ Usage:
   playground --version | -v
 
 Bootstrap Commands:
-  bootstrap-reproduction-model   🛠 Bootstrap reproduction model.
+  bootstrap-reproduction-model     🛠  Bootstrap reproduction model.
 
 Kafka Commands:
-  get-properties                 📝 Get properties file from a container.
-  get-jmx-metrics                🔢 Get JMX metrics from a component.
+  get-properties                   📝 Get properties file from a container.
+  get-jmx-metrics                  🔢 Get JMX metrics from a component.
 
 Debug Commands:
-  enable-remote-debugging        ✨ Enable java remote debugging for container.
+  enable-remote-debugging          ✨ Enable java remote debugging for container.
 
 Container Commands:
-  recreate-container             ♻️ Recreate container(s).
-  get-ip-address-container       🖥️ Get IP address of running containers.
-  kill-all-containers            💀 Kill all containers.
-  logs                           👨‍💻 Tail and follow container logs.
-  ssh                            🚀 SSH into container.
-  exec                           🪄 Execute command in a container.
+  recreate-container               💫 Recreate container(s).
+  get-ip-address-container         🖥️  Get IP address of running containers.
+  kill-all-containers              💀 Kill all containers.
+  logs                             🕵️  Tail and follow container logs.
+  ssh                              🚀 SSH into container.
+  exec                             🪄  Execute command in a container.
+  restart                          🔁 Restart a container.
+  pause                            ⏸️  Pause a container.
+  resume                           ⏯️  Resume a container.
+  kill                             🔫 Kill a container.
 
 Topic Commands:
-  get-number-records-topic       💯 Get number of records in a topic.
+  get-number-records-topic         💯 Get number of records in a topic.
+  display-connect-offsets-topic    🔺 Display content of connect offsets topic.
+  display-consumer-offsets-topic   🔻 Display content of __consumer_offsets topic.
+  describe-topic                   🔎 Describe topic.
 
 Connector Commands:
-  connector                      🔗 Connector commands.
-  connect-log-level              🧬 Set connect log level.
+  connector                        🔗 Connector commands.
+  connect-log-level                🧬 Set connect log level.
 ```
 
 ## 🌤️ Confluent Cloud examples

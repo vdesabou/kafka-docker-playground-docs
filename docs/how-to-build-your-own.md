@@ -11,12 +11,11 @@ If you want to create your own reproduction model, follow these steps:
 * Execute [🧠 CLI](https://kafka-docker-playground.io/#/how-to-use?id=%f0%9f%a7%a0-cli) with `bootstrap-reproduction-model` command:
 
 ```bash
-$ playground bootstrap-reproduction-model --help
-playground bootstrap-reproduction-model
+$ playground bootstrap-reproduction-model
 
-  Bootstrap reproduction model.
+  🛠 Bootstrap reproduction model.
   
-  Check documentation https://tinyurl.com/bdfs25my
+  👉 Check documentation https://tinyurl.com/bdfs25my
 
 Usage:
   playground bootstrap-reproduction-model [OPTIONS]
@@ -43,12 +42,15 @@ Options:
     Number of java producers to generate.
     Default: 
 
+  --add-custom-smt, -s
+    Add a custom SMT (no-op).
+
   --help, -h
     Show this help
 
 Environment Variables:
   OUTPUT_FOLDER
-    Output folder where to generate bootstrapped files.
+    📁 Output folder where to generate bootstrapped files.
     Default: reproduction-models
 
 Examples:
@@ -61,6 +63,8 @@ Examples:
   --nb-producers 2
   playground bootstrap-reproduction-model -f hdfs2-sink.sh -d "123456 testing
   with parquet format and 2 protobuf producers" -p protobuf -n 2
+  playground bootstrap-reproduction-model -f hdfs2-sink.sh -d "123456 testing
+  with parquet format and custom smt" --add-custom-smt
 ```
 
 > [!TIP]
@@ -133,6 +137,68 @@ docker exec connect kafka-avro-console-consumer -bootstrap-server broker:9092 --
 19:57:16 ℹ️ ✨ Adding Java avro producer in /Users/vsaboulin/Documents/github/kafka-docker-playground/reproduction-models/connect-connect-hdfs2-sink/producer-repro-123456-1
 19:57:16 ℹ️ 📂 The reproduction files are now available in:
 /Users/vsaboulin/Documents/github/kafka-docker-playground/reproduction-models/connect-connect-hdfs2-sink
+```
+
+If you want to add a custom SMT, just add `--add-custom-smt`
+
+This will create the following files:
+
+![file structure](./images/custom_smt.jpg)
+
+This is a no-op custom SMT:
+
+```java
+    @Override
+    public R apply(R record) {
+        log.info("Applying no-op MyCustomSMT");
+        // add your logic here
+        return record.newRecord(
+            record.topic(),
+            record.kafkaPartition(),
+            record.keySchema(),
+            record.key(),
+            record.valueSchema(),
+            record.value(),
+            record.timestamp()
+        );
+    }
+```
+
+It will also add the required steps to compile code:
+
+```bash
+for component in MyCustomSMT-000000
+do
+    set +e
+    log "🏗 Building jar for ${component}"
+    docker run -i --rm -e KAFKA_CLIENT_TAG=$KAFKA_CLIENT_TAG -e TAG=$TAG_BASE -v "${DIR}/${component}":/usr/src/mymaven -v "$HOME/.m2":/root/.m2 -v "${DIR}/${component}/target:/usr/src/mymaven/target" -w /usr/src/mymaven maven:3.6.1-jdk-11 mvn -Dkafka.tag=$TAG -Dkafka.client.tag=$KAFKA_CLIENT_TAG package > /tmp/result.log 2>&1
+    if [ $? != 0 ]
+    then
+        logerror "ERROR: failed to build java component "
+        tail -500 /tmp/result.log
+        exit 1
+    fi
+    set -e
+done
+```
+
+It will copy the jar to the connector lib folder:
+
+```bash
+log "📂 Copying custom jar to connector folder /usr/share/confluent-hub-components/debezium-debezium-connector-sqlserver/lib/"
+docker cp /home/vsaboulin/kafka-docker-playground/scripts/cli/../../reproduction-models/connect-connect-debezium-sqlserver-source/MyCustomSMT-000000/target/MyCustomSMT-1.0.0-SNAPSHOT-jar-with-dependencies.jar connect:/usr/share/confluent-hub-components/debezium-debezium-connector-sqlserver/lib/
+log "📂 Copying custom jar to connector folder /usr/share/confluent-hub-components/confluentinc-connect-transforms/lib/"
+docker cp /home/vsaboulin/kafka-docker-playground/scripts/cli/../../reproduction-models/connect-connect-debezium-sqlserver-source/MyCustomSMT-000000/target/MyCustomSMT-1.0.0-SNAPSHOT-jar-with-dependencies.jar connect:/usr/share/confluent-hub-components/confluentinc-connect-transforms/lib/
+log "♻️ Restart connect worker to load"
+docker restart connect
+sleep 45
+```
+
+And add the transform config to connector:
+
+```json
+  "transforms": "MyCustomSMT",
+  "transforms.MyCustomSMT.type": "com.github.vdesabou.kafka.connect.transforms.MyCustomSMT",
 ```
 
 ## 👉 Producing data

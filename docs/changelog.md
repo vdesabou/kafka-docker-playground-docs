@@ -2,6 +2,7 @@
 
 ## March 2023
 
+- Added `--add-custom-smt` flag option to `playground bootstrap-reproduction-model` command.
 - Added [🔂 Standalone connector examples](/content)
 - Added [🧑‍💻 M1 chip (ARM64) Mac Support](/how-to-use?id=%f0%9f%a7%91%f0%9f%92%bb-m1-chip-arm64-mac-support) section
 - Added [🧑‍🎓 Examples](/examples) section

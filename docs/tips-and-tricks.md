@@ -15,7 +15,7 @@ docker container logs --tail=100 -f connect
 or use [🧠 CLI](https://kafka-docker-playground.io/#/how-to-use?id=%f0%9f%a7%a0-cli) with:
 
 ```bash
-playground logs -c connect
+playground container logs -c connect
 ```
 
 ## Redirect all container logs to a file
@@ -29,7 +29,7 @@ docker container logs connect > connect.log 2>&1
 or use [🧠 CLI](https://kafka-docker-playground.io/#/how-to-use?id=%f0%9f%a7%a0-cli) with:
 
 ```bash
-playground logs -c connect -o code
+playground container logs -c connect -o code
 ```
 
 Output:
@@ -49,7 +49,7 @@ docker exec -it connect bash
 or use [🧠 CLI](https://kafka-docker-playground.io/#/how-to-use?id=%f0%9f%a7%a0-cli) with:
 
 ```bash
-playground ssh -c connect
+playground container ssh -c connect
 ```
 
 ## Kill all docker containers
@@ -61,7 +61,7 @@ docker rm -f $(docker ps -qa)
 or use [🧠 CLI](https://kafka-docker-playground.io/#/how-to-use?id=%f0%9f%a7%a0-cli) with:
 
 ```bash
-playground kill-all-containers
+playground container kill-all
 ```
 
 ## Recover from Docker error `max depth exceeded`
@@ -89,7 +89,7 @@ docker exec connect bash -c "whoami"
 or use [🧠 CLI](https://kafka-docker-playground.io/#/how-to-use?id=%f0%9f%a7%a0-cli) with:
 
 ```bash
-playground exec -c connect -d "whoami"
+playground container exec -c connect -d "whoami"
 ```
 
 ## Run some commands as root
@@ -103,7 +103,7 @@ docker exec --privileged --user root connect bash -c "whoami"
 or use [🧠 CLI](https://kafka-docker-playground.io/#/how-to-use?id=%f0%9f%a7%a0-cli) with:
 
 ```bash
-playground exec -c connect -d "whoami" --root
+playground container exec -c connect -d "whoami" --root
 ```
 
 ## Get IP address of running containers
@@ -125,7 +125,7 @@ Example:
 or use [🧠 CLI](https://kafka-docker-playground.io/#/how-to-use?id=%f0%9f%a7%a0-cli) with:
 
 ```bash
-playground get-ip-address-container
+playground container get-ip-addresses
 ```
 
 ## Get number of records in a topic
@@ -139,14 +139,14 @@ EOF
 or use [🧠 CLI](https://kafka-docker-playground.io/#/how-to-use?id=%f0%9f%a7%a0-cli) with:
 
 ```bash
-$  playground get-number-records-topic -help            
-playground get-number-records-topic - Get number of records in a topic.
+$  playground topic get-number-records --help
+playground topic get-number-records - 💯 Get number of records in a topic.
 
-Usage:
-  playground get-number-records-topic [OPTIONS]
-  playground get-number-records-topic --help | -h
+== Usage ==
+  playground topic get-number-records [OPTIONS]
+  playground topic get-number-records --help | -h
 
-Options:
+== Options ==
   --topic, -t TOPIC (required)
     Topic name.
 
@@ -154,13 +154,28 @@ Options:
     Show this help
 
 Examples:
-  playground get-number-records-topic --topic a-topic
-  playground get-number-records-topic -t a-topic
+  playground get-number-records --topic a-topic
+  playground get-number-records -t a-topic
 ```
 
 ## Check Kafka Connect offsets topic
 
 ```bash
 docker exec connect kafka-console-consumer -bootstrap-server broker:9092 --topic connect-offsets --from-beginning --property print.key=true --property print.timestamp=true
+```
+
+or use [🧠 CLI](https://kafka-docker-playground.io/#/how-to-use?id=%f0%9f%a7%a0-cli) with:
+
+```bash
+$  playground topic display-connect-offsets --help
+playground topic display-connect-offsets - 🔺 Display content of connect offsets topic.
+
+== Usage ==
+  playground topic display-connect-offsets
+  playground topic display-connect-offsets --help | -h
+
+== Options ==
+  --help, -h
+    Show this help
 ```
 

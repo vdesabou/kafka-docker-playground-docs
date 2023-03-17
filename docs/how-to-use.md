@@ -167,26 +167,41 @@ Debug Commands:
   enable-remote-debugging          ✨ Enable java remote debugging for container.
 
 Container Commands:
-  recreate-container               💫 Recreate container(s).
-  get-ip-address-container         🖥️  Get IP address of running containers.
-  kill-all-containers              💀 Kill all containers.
-  logs                             🕵️  Tail and follow container logs.
-  ssh                              🚀 SSH into container.
-  exec                             🪄  Execute command in a container.
-  restart                          🔁 Restart a container.
-  pause                            ⏸️  Pause a container.
-  resume                           ⏯️  Resume a container.
-  kill                             🔫 Kill a container.
+  container                        🐳 Container commands.
+  container recreate               💫 Recreate container(s).
+  container get-ip-addresses       🖥️  Get IP address of running containers.
+  container kill-all               💀 Kill all containers.
+  container logs                   🕵️  Tail and follow container logs.
+  container ssh                    🚀 SSH into container.
+  container exec                   🪄  Execute command in a container.
+  container restart                🔁 Restart a container.
+  container pause                  ⏸️  Pause a container.
+  container resume                 ⏯️  Resume a container.
+  container kill                   🔫 Kill a container.
 
 Topic Commands:
-  get-number-records-topic         💯 Get number of records in a topic.
-  display-connect-offsets-topic    🔺 Display content of connect offsets topic.
-  display-consumer-offsets-topic   🔻 Display content of __consumer_offsets topic.
-  describe-topic                   🔎 Describe topic.
+  topic                            📁 Topic commands.
+  topic get-number-records         💯 Get number of records in a topic.
+  topic display-connect-offsets    🔺 Display content of connect offsets topic.
+  topic display-consumer-offsets   🔻 Display content of __consumer_offsets topic.
+  topic describe                   🔎 Describe topic.
 
 Connector Commands:
   connector                        🔗 Connector commands.
-  connect-log-level                🧬 Set connect log level.
+  connector status                 ℹ️  Show status of all connectors.
+  connector plugins                🔖 Show all plugins installed.
+  connector pause                  ⏸️  Pause connector
+  connector resume                 ⏯️  Resume connector
+  connector delete                 🗑️  Delete connector
+  connector show-lag               🐢 Show lag of sink connector
+  connector log-level              🧬 Set connect log level.
+
+Options:
+  --help, -h
+    Show this help
+
+  --version, -v
+    Show version number
 ```
 
 ## 🌤️ Confluent Cloud examples

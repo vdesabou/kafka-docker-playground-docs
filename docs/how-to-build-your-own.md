@@ -99,9 +99,6 @@ playground bootstrap-reproduction-model -f hdfs2-sink.sh -d "123456 testing with
 
 19:54:45 ℹ️ ✨ Creating file /Users/vsaboulin/Documents/github/kafka-docker-playground/reproduction-models/connect-connect-hdfs2-sink/docker-compose.plaintext.repro-123456-testing-with-parquet-format.yml
 19:54:45 ℹ️ ✨ Creating file /Users/vsaboulin/Documents/github/kafka-docker-playground/reproduction-models/connect-connect-hdfs2-sink/hdfs2-sink-repro-123456-testing-with-parquet-format.sh
-19:54:45 ℹ️ value converter should be set with:
-"value.converter": "io.confluent.connect.protobuf.ProtobufConverter",
-"value.converter.schema.registry.url": "http://schema-registry:8081",
 
 19:54:45 ℹ️ Examples to consume:
 19:54:45 ℹ️ 1️⃣ Simplest
@@ -125,14 +122,10 @@ If you want multiple java producer (to test schema evolution for example), use t
 
 ```bash
 cd connect/connect-hdfs2-sink
-playground bootstrap-reproduction-model -f hdfs2-sink.sh -d "123456 testing with avro format" --producer avro 2
+playground bootstrap-reproduction-model -f hdfs2-sink.sh -d "123456 testing with avro format" --producer avro --nb-producers 2
 
 19:57:16 ℹ️ ✨ Creating file /Users/vsaboulin/Documents/github/kafka-docker-playground/reproduction-models/connect-connect-hdfs2-sink/docker-compose.plaintext.repro-123456-testing-with-avro-format.yml
 19:57:16 ℹ️ ✨ Creating file /Users/vsaboulin/Documents/github/kafka-docker-playground/reproduction-models/connect-connect-hdfs2-sink/hdfs2-sink-repro-123456-testing-with-avro-format.sh
-
-19:57:16 ℹ️ value converter should be set with:
-"value.converter": "io.confluent.connect.avro.AvroConverter",
-"value.converter.schema.registry.url": "http://schema-registry:8081",
 
 19:57:16 ℹ️ Examples to consume:
 19:57:16 ℹ️ 1️⃣ Simplest
@@ -292,18 +285,6 @@ Send 100 messages to topic called "test-topic":
 docker exec -e NB_MESSAGES=100 -e TOPIC="test-topic" producer-repro-12345 bash -c "java -jar producer-1.0.0-jar-with-dependencies.jar"
 ```
 
-> [!WARNING]
-> In the generated reproduction model file, if you see this:
-> 
-> ```bash
-> # 🚨🚨🚨 FIXTHIS: move it to the correct place 🚨🚨🚨
-> log "✨ Run the avro java producer which produces to topic customer_avro"
-> docker exec producer-repro-12345 bash -c "java -jar producer-1.0.0-jar-with-dependencies.jar"
-> # 🚨🚨🚨 FIXTHIS: move it to the correct place 🚨🚨🚨
-> ```
-> 
-> 👉 Make sure to move it in your script to the right place !
-
 #### **Protobuf**
 
 
@@ -383,19 +364,6 @@ Send 100 messages to topic called "test-topic":
 ```bash
 docker exec -e NB_MESSAGES=100 -e TOPIC="test-topic" producer-repro-12345 bash -c "java -jar producer-1.0.0-jar-with-dependencies.jar"
 ```
-
-> [!WARNING]
-> In the generated reproduction model file, if you see this:
-> 
-> ```bash
-> # 🚨🚨🚨 FIXTHIS: move it to the correct place 🚨🚨🚨
-> log "✨ Run the avro java producer which produces to topic customer_protobuf"
-> docker exec producer-repro-12345 bash -c "java -jar producer-1.0.0-jar-with-dependencies.jar"
-> # 🚨🚨🚨 FIXTHIS: move it to the correct place 🚨🚨🚨
-> ```
-> 
-> 👉 Make sure to move it in your script to the right place !
-
 
 #### **JSON Schema**
 
@@ -505,18 +473,6 @@ Send 100 messages to topic called "test-topic":
 ```bash
 docker exec -e NB_MESSAGES=100 -e TOPIC="test-topic" producer-repro-12345 bash -c "java -jar producer-1.0.0-jar-with-dependencies.jar"
 ```
-
-> [!WARNING]
-> In the generated reproduction model file, if you see this:
-> 
-> ```bash
-> # 🚨🚨🚨 FIXTHIS: move it to the correct place 🚨🚨🚨
-> log "✨ Run the avro java producer which produces to topic customer_json_schema"
-> docker exec producer-repro-12345 bash -c "java -jar producer-1.0.0-jar-with-dependencies.jar"
-> # 🚨🚨🚨 FIXTHIS: move it to the correct place 🚨🚨🚨
-> ```
-> 
-> 👉 Make sure to move it in your script to the right place !
 
 <!-- tabs:end -->
 

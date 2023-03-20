@@ -11,19 +11,20 @@ If you want to create your own reproduction model, follow these steps:
 * Execute [🧠 CLI](https://kafka-docker-playground.io/#/how-to-use?id=%f0%9f%a7%a0-cli) with `bootstrap-reproduction-model` command:
 
 ```bash
-$ playground bootstrap-reproduction-model
+$ playground bootstrap-reproduction-model --help
+playground bootstrap-reproduction-model
 
-  🛠 Bootstrap reproduction model.
+  🛠  Bootstrap reproduction model.
   
   👉 Check documentation https://tinyurl.com/bdfs25my
 
-Usage:
+== Usage ==
   playground bootstrap-reproduction-model [OPTIONS]
   playground bootstrap-reproduction-model --help | -h
 
-Options:
+== Options ==
   --file, -f FILE (required)
-    Test file to use as basis.
+    Example file to use as basis.
 
   --description, -d DESCRIPTION (required)
     Description.
@@ -42,8 +43,11 @@ Options:
     Number of java producers to generate.
     Default: 
 
-  --add-custom-smt, -s
+  --custom-smt, -s
     Add a custom SMT (no-op).
+
+  --pipeline SINK_FILE
+    Sink example file to use for creating a pipeline.
 
   --help, -h
     Show this help
@@ -53,7 +57,7 @@ Environment Variables:
     📁 Output folder where to generate bootstrapped files.
     Default: reproduction-models
 
-Examples:
+Examples
   playground bootstrap-reproduction-model -f hdfs2-sink.sh -d "123456 testing
   with parquet format"
   playground bootstrap-reproduction-model -f hdfs2-sink.sh -d "123456 testing
@@ -64,7 +68,10 @@ Examples:
   playground bootstrap-reproduction-model -f hdfs2-sink.sh -d "123456 testing
   with parquet format and 2 protobuf producers" -p protobuf -n 2
   playground bootstrap-reproduction-model -f hdfs2-sink.sh -d "123456 testing
-  with parquet format and custom smt" --add-custom-smt
+  with parquet format and custom smt" --custom-smt
+  playground bootstrap-reproduction-model -f debezium-postgres-source.sh -d
+  "create pipeline" --pipeline
+  ../../connect/connect-jdbc-sqlserver-sink/sqlserver-microsoft-sink.sh
 ```
 
 > [!TIP]
@@ -75,7 +82,7 @@ Examples:
 
 Examples:
 
-### Simple
+### Basic
 
 ```bash
 cd connect/connect-hdfs2-sink
@@ -87,7 +94,7 @@ playground bootstrap-reproduction-model -f hdfs2-sink.sh -d "123456 testing with
 /Users/vsaboulin/Documents/github/kafka-docker-playground/reproduction-models/connect-connect-hdfs2-sink
 ```
 
-### With Java producer
+### With Java producer (`--producer`)
 
 If you want to automatically generate a Java Producer, use the flag `--producer` (or `-p`):
 
@@ -116,7 +123,7 @@ This will create the following files:
 
 Then follow instructions in one of [♨️ Java producer](/how-to-build-your-own?id=♨%EF%B8%8F-java-producers) below.
 
-### With multiple Java producers
+### With multiple Java producers (`--nb-producers`)
 
 If you want multiple java producer (to test schema evolution for example), use the flag `--nb-producers` (or `-n`):, for example 2:
 
@@ -138,9 +145,9 @@ docker exec connect kafka-avro-console-consumer -bootstrap-server broker:9092 --
 /Users/vsaboulin/Documents/github/kafka-docker-playground/reproduction-models/connect-connect-hdfs2-sink
 ```
 
-### With custom SMT
+### With custom SMT (`--custom-smt`)
 
-If you want to add a custom SMT, just add `--add-custom-smt`
+If you want to add a custom SMT, just add `--custom-smt` flag.
 
 This will create the following files:
 
@@ -201,6 +208,53 @@ And add the transform config to connector:
   "transforms": "MyCustomSMT",
   "transforms.MyCustomSMT.type": "com.github.vdesabou.kafka.connect.transforms.MyCustomSMT",
 ```
+
+### With pipeline (`--pipeline`)
+
+All the steps to create a pipeline, i.e an example with source and sink connectors are now automated using `--pipeline`flag.
+
+Example:
+
+```bash
+$ playground bootstrap-reproduction-model -f debezium-postgres-source.sh -d "create a pipeline example" --pipeline ../../connect/connect-jdbc-sqlserver-sink/sqlserver-microsoft-sink.sh 
+09:01:11 ℹ️ 📂 Output folder is reproduction-models (set with OUTPUT_FOLDER environment variable)
+09:01:11 ℹ️ ✨ Creating file /home/vsaboulin/kafka-docker-playground/scripts/cli/../../reproduction-models/connect-connect-debezium-postgresql-source/docker-compose.plaintext.repro-create-a-pipeline-example.yml
+09:01:11 ℹ️ ✨ Creating file /home/vsaboulin/kafka-docker-playground/scripts/cli/../../reproduction-models/connect-connect-debezium-postgresql-source/debezium-postgres-source-repro-create-a-pipeline-example.sh
+09:01:12 ℹ️ 💱 Source connector is using key.converter io.confluent.connect.avro.AvroConverter
+09:01:12 ℹ️ 💱 Source connector is using value.converter io.confluent.connect.avro.AvroConverter
+09:01:12 ℹ️ 💱 Sink connector is using default key.converter, i.e org.apache.kafka.connect.storage.StringConverter
+09:01:12 ℹ️ 💱 Sink connector is using default value.converter, i.e io.confluent.connect.avro.AvroConverter
+09:01:12 ℹ️ 🧑‍🏭 Changing Sink connector value.converter to use same as source:
+                "value.converter" : "io.confluent.connect.avro.AvroConverter",
+                "value.converter.schema.registry.url": "http://schema-registry:8081",
+09:01:13 ℹ️ 🧑‍🏭 Changing Sink connector key.converter to use same as source:
+                "key.converter" : "io.confluent.connect.avro.AvroConverter",
+                "key.converter.schema.registry.url": "http://schema-registry:8081",
+09:01:13 ℹ️ 📂 The reproduction files are now available in:
+/home/vsaboulin/kafka-docker-playground/scripts/cli/../../reproduction-models/connect-connect-debezium-postgresql-source
+09:01:13 ℹ️ 🚀 Copy/paste the following to get it right away:
+
+cd /home/vsaboulin/kafka-docker-playground/scripts/cli/../../reproduction-models/connect-connect-debezium-postgresql-source
+code debezium-postgres-source-repro-create-a-pipeline-example.sh
+./debezium-postgres-source-repro-create-a-pipeline-example.sh
+```
+
+It will automatically:
+
+* Add sink example to the end of source example
+* Modify sink converters (key and value) to use same as source example
+* Use same kafka topic for both connectors
+* Add all required containers for both sink and source
+* Update `CONNECT_PLUGIN_PATH` to include both connectors
+
+See example there:
+
+<iframe width="100%" height="400" src="https://www.youtube.com/embed/TrWipv6DeX8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+
+> [!TIP]
+> A complete example is available in [🧑‍🔧 How to build a pipeline](/how-to-build-your-own?id=%f0%9f%a7%91%f0%9f%94%a7-how-to-build-a-pipeline).
+
 
 ## 👉 Producing data
 
@@ -780,54 +834,33 @@ services:
 
 ## 🧑‍🔧 How to build a pipeline
 
-If you want to create a "pipeline" example with both source and sink connectors, this is very simple.
+If you want to create a "pipeline" example with both source and sink connectors, this is very simple. You just need [🛠 Bootstrap reproduction model](/how-to-build-your-own?id=🛠-bootstrap-reproduction-model) with [`--pipeline`)](/how-to-build-your-own?id=with-pipeline-pipeline) flag.
 
 Here are the steps to follow to create a [Debezium CDC Microsoft SQL Server Source](https://github.com/vdesabou/kafka-docker-playground/tree/master/connect/connect-debezium-sqlserver-source) to [JDBC PostGreSQL Sink](https://github.com/vdesabou/kafka-docker-playground/tree/master/connect/connect-jdbc-postgresql-sink):
 
-1. Bootstrap your reproduction model by following [🛠 Bootstrap reproduction model](/how-to-build-your-own?id=🛠-bootstrap-reproduction-model) and use an example from [Debezium CDC Microsoft SQL Server Source](https://github.com/vdesabou/kafka-docker-playground/tree/master/connect/connect-debezium-sqlserver-source)
+1. Bootstrap your reproduction model by following [🛠 Bootstrap reproduction model](/how-to-build-your-own?id=🛠-bootstrap-reproduction-model) and use an example from [Debezium CDC Microsoft SQL Server Source](https://github.com/vdesabou/kafka-docker-playground/tree/master/connect/connect-debezium-sqlserver-source) and use it with `pipeline` flag set with example from [JDBC PostGreSQL Sink](https://github.com/vdesabou/kafka-docker-playground/tree/master/connect/connect-jdbc-postgresql-sink).
 
 Example:
 
 ```bash
-16:57:58 ℹ️ 📂 Output folder is set with OUTPUT_FOLDER environment variable
-16:57:58 ℹ️ ✨ Creating file /home/vsaboulin/kafka-docker-playground/docs-examples/connect-connect-debezium-sqlserver-source/docker-compose.plaintext.repro-pipeline-example.yml
-16:57:58 ℹ️ ✨ Creating file /home/vsaboulin/kafka-docker-playground/docs-examples/connect-connect-debezium-sqlserver-source/debezium-sqlserver-source-repro-pipeline-example.sh
-16:57:58 ℹ️ 📂 The reproduction files are now available in:
-/home/vsaboulin/kafka-docker-playground/docs-examples/connect-connect-debezium-sqlserver-source
-16:57:58 ℹ️ 🚀 Copy/paste the following to get it right away:
+$ playground bootstrap-reproduction-model --file debezium-sqlserver-source.sh --description "pipeline example" --pipeline ../../connect/connect-jdbc-postgresql-sink/postgres-sink.sh 
+08:40:49 ℹ️ 📂 Output folder is docs-examples (set with OUTPUT_FOLDER environment variable)
+08:40:49 ℹ️ ✨ Creating file /home/vsaboulin/kafka-docker-playground/scripts/cli/../../docs-examples/connect-connect-debezium-sqlserver-source/docker-compose.plaintext.repro-pipeline-example.yml
+08:40:49 ℹ️ ✨ Creating file /home/vsaboulin/kafka-docker-playground/scripts/cli/../../docs-examples/connect-connect-debezium-sqlserver-source/debezium-sqlserver-source-repro-pipeline-example.sh
+08:40:50 ℹ️ 💱 Source connector is using default key.converter, i.e org.apache.kafka.connect.storage.StringConverter
+08:40:50 ℹ️ 💱 Source connector is using default value.converter, i.e io.confluent.connect.avro.AvroConverter
+08:40:50 ℹ️ 💱 Sink connector is using default key.converter, i.e org.apache.kafka.connect.storage.StringConverter
+08:40:50 ℹ️ 💱 Sink connector is using default value.converter, i.e io.confluent.connect.avro.AvroConverter
+08:40:50 ℹ️ 📂 The reproduction files are now available in:
+/home/vsaboulin/kafka-docker-playground/scripts/cli/../../docs-examples/connect-connect-debezium-sqlserver-source
+08:40:50 ℹ️ 🚀 Copy/paste the following to get it right away:
 
-cd /home/vsaboulin/kafka-docker-playground/docs-examples/connect-connect-debezium-sqlserver-source
+cd /home/vsaboulin/kafka-docker-playground/scripts/cli/../../docs-examples/connect-connect-debezium-sqlserver-source
 code debezium-sqlserver-source-repro-pipeline-example.sh
 ./debezium-sqlserver-source-repro-pipeline-example.sh
 ```
 
-<iframe width="100%" height="400" src="https://www.youtube.com/embed/4_akrQYvPls" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-
-1. Open `docker-compose.plaintext.repro-pipeline-example.yml` and add details from [JDBC PostGreSQL Sink](https://github.com/vdesabou/kafka-docker-playground/tree/master/connect/connect-jdbc-postgresql-sink), i.e postgres container and jdbc connector:
-
-Details are:
-
-```yml
-  postgres:
-    image: postgres:15
-    hostname: postgres
-    container_name: postgres
-    environment:
-      - POSTGRES_USER=myuser
-      - POSTGRES_PASSWORD=mypassword
-      - POSTGRES_DB=postgres
-```
-
-And jdbc connector path: `/usr/share/confluent-hub-components/confluentinc-kafka-connect-jdbc`
-
-Example:
-
-<iframe width="100%" height="400" src="https://www.youtube.com/embed/OEe-8ACttI0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-
-3. Open `debezium-sqlserver-source-repro-pipeline-example.sh` and add details from [JDBC PostGreSQL Sink](https://github.com/vdesabou/kafka-docker-playground/tree/master/connect/connect-jdbc-postgresql-sink), i.e postgres container and jdbc connector:
-
-You can remove the sending part since topic used with be the one from source connector `server1.testDB.dbo.customers`.
-Make adjustments as needed. For example in that case, add Debezium SMT `ExtractNewRecordState` and rename topic to `mytable`:
+1. Open `debezium-sqlserver-source-repro-pipeline-example.sh` and make adjustments as needed. For example in that case, add Debezium SMT `ExtractNewRecordState` and rename topic to `mytable`:
 
 ```json
 "transforms": "unwrap,RemoveDots",
@@ -846,9 +879,7 @@ For JDBC sink, adjust topic name to `mytable` and use Flatten SMT:
 "transforms.flatten.delimiter": "."
 ```
 
-<iframe width="100%" height="400" src="https://www.youtube.com/embed/XfqDPD6zBZI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-
-4. Run the test (it is available [there](https://github.com/vdesabou/kafka-docker-playground/blob/master/docs-examples/connect-connect-debezium-sqlserver-source/debezium-sqlserver-source-repro-pipeline-example.sh))
+1. Run the test (it is available [there](https://github.com/vdesabou/kafka-docker-playground/blob/master/docs-examples/connect-connect-debezium-sqlserver-source/debezium-sqlserver-source-repro-pipeline-example.sh))
 
 ```bash
 ./debezium-sqlserver-source-repro-pipeline-example.sh

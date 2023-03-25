@@ -197,13 +197,9 @@ services:
 
 ## 🔗 Connect image used
 
-The Kafka Connect image [used](https://github.com/vdesabou/kafka-docker-playground/blob/714b36289981f9fe8f699ae3eab9a508127b625e/environment/plaintext/docker-compose.yml#L80) in the playground is `vdesabou/kafka-docker-playground-connect`
+The Kafka Connect image is either based on [`cp-server-connect-base`](https://hub.docker.com/r/confluentinc/cp-server-connect-base) for version greater than `5.3.0` or [`cp-kafka-connect-base`](https://hub.docker.com/r/confluentinc/cp-kafka-connect-base) otherwise.
 
-It is built [everyday](https://github.com/vdesabou/kafka-docker-playground-connect/actions) using the repository [vdesabou/kafka-docker-playground-connect](https://github.com/vdesabou/kafka-docker-playground-connect).
-
-It is either based on [`cp-server-connect-base`](https://hub.docker.com/r/confluentinc/cp-server-connect-base) for version greater than `5.3.0` or [`cp-kafka-connect-base`](https://hub.docker.com/r/confluentinc/cp-kafka-connect-base) otherwise.
-
-Several tools are [installed](https://github.com/vdesabou/kafka-docker-playground-connect/blob/00f29069be566162a5be84d64637b3e1f9920f95/Dockerfile#L11-L15) on this image such as `openssl`, `tcpdump`, `iptables`, `netcat`, etc..
+Several tools are [installed](https://github.com/vdesabou/kafka-docker-playground/blob/5b7a6842e7d9e87242ca0b5948e1a70a7b4b80ce/scripts/utils.sh#L4) automatically on the image such as `openssl`, `tcpdump`, `iptables`, `netcat`, etc..
 
 If you're missing a tool, you can install it at runtime, some examples:
 
@@ -213,11 +209,6 @@ docker exec -i --user root connect bash -c "curl http://mirror.centos.org/centos
 # using yum
 docker exec -i --user root connect bash -c "yum update -y --disablerepo='Confluent*' && yum install findutils -y"
 ```
-
-See the [Dockerfile](https://github.com/vdesabou/kafka-docker-playground-connect/blob/master/Dockerfile) used to build the images.
-
-> [!NOTE]
-> In the past, the image used to have all latest connectors included, but this is no more the case since [#1426](https://github.com/vdesabou/kafka-docker-playground/issues/1426)
 
 ## ↔️ Default Connect converter used
 

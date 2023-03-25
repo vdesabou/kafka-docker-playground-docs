@@ -1611,8 +1611,9 @@ Here are the steps to follow:
 Example with JDK 11:
 
 ```yml
+ARG CP_CONNECT_IMAGE
 ARG CONNECT_TAG
-FROM vdesabou/kafka-docker-playground-connect:${CONNECT_TAG}
+FROM ${CP_CONNECT_IMAGE}:${CONNECT_TAG}
 USER root
 RUN wget https://cdn.azul.com/zulu/bin/zulu11.48.21-ca-jdk11.0.11-linux.x86_64.rpm && yum install -y zulu11.48.21-ca-jdk11.0.11-linux.x86_64.rpm && alternatives --set java /usr/lib/jvm/zulu-11/bin/java
 USER appuser
@@ -1621,8 +1622,9 @@ USER appuser
 Another example with JDK 8:
 
 ```yml
+ARG CP_CONNECT_IMAGE
 ARG CONNECT_TAG
-FROM vdesabou/kafka-docker-playground-connect:${CONNECT_TAG}
+FROM ${CP_CONNECT_IMAGE}:${CONNECT_TAG}
 USER root
 RUN wget https://cdn.azul.com/zulu/bin/zulu8.60.0.21-ca-jdk8.0.322-linux.x86_64.rpm && yum install -y zulu8.60.0.21-ca-jdk8.0.322-linux.x86_64.rpm && alternatives --set java /usr/lib/jvm/zulu-8/jre/bin/java
 USER appuser
@@ -1663,7 +1665,7 @@ Here are the steps to follow:
 
 ```yml
 ARG CONNECT_TAG
-FROM vdesabou/kafka-docker-playground-connect:${TAG}
+FROM ${CP_CONNECT_IMAGE}:${TAG}
 COPY jdk-8u201-linux-x64.rpm /tmp/
 USER root
 RUN yum -y install /tmp/jdk-8u201-linux-x64.rpm && alternatives --set java /usr/java/jdk1.8.0_201-amd64/jre/bin/java && rm /tmp/jdk-8u201-linux-x64.rpm

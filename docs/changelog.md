@@ -2,7 +2,7 @@
 
 ## March 2023
 
-
+- No more using `vdesabou/kafka-docker-playground-connect` image [#3564](https://github.com/vdesabou/kafka-docker-playground/issues/3564)
 - Added Google Cloud Pub/Sub Group Kafka Connector [Source](https://github.com/vdesabou/kafka-docker-playground/tree/master/connect/connect-gcp-google-pubsub-source) and [Sink](https://github.com/vdesabou/kafka-docker-playground/tree/master/connect/connect-gcp-google-pubsub-sink) connectors examples
 - Added `--pipeline` flag option to `playground bootstrap-reproduction-model` command: [🧑‍ How to build a pipeline](/how-to-build-your-own?id=%f0%9f%94%9b-how-to-build-a-pipeline) is now fully automated !
 - Added `--custom-smt` flag option to `playground bootstrap-reproduction-model` command.

@@ -1206,6 +1206,32 @@ java.util.logging.ConsoleHandler.level=ALL
 com.google.api.client.http.level=ALL
 ```
 
+### 🌍 Debug HTTP sink
+
+This connector use low level [Apache HTTP client](https://hc.apache.org/httpcomponents-client-5.2.x/) library.
+
+In order to activate debug logs to see requests/responses, you can use `jcl-over-slf4j-2.0.7.jar` (wget https://repo1.maven.org/maven2/org/slf4j/jcl-over-slf4j/2.0.7/jcl-over-slf4j-2.0.7.jar):
+
+Example:
+
+```yml
+  connect:
+    volumes:
+      - ../../connect/connect-http-sink/jcl-over-slf4j-2.0.7.jar:/usr/share/confluent-hub-components/confluentinc-kafka-connect-http/lib/jcl-over-slf4j-2.0.7.jar
+```
+
+Then you can enable TRACE logs on `org.apache.http`:
+
+```bash
+curl --request PUT \
+  --url http://localhost:8083/admin/loggers/org.apache.http \
+  --header 'Accept: application/json' \
+  --header 'Content-Type: application/json' \
+  --data '{
+ "level": "TRACE"
+}'
+```
+
 ### 🕵 TCP Dump
 
 It is sometime necessary to sniff the network in order to better understand what's going on.

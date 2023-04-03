@@ -1,5 +1,9 @@
 # Change Log
 
+## April 2023
+
+- Added [🌍 Debug HTTP sink](/#/how-to-build-your-own?id=%f0%9f%8c%8d-debug-http-sink)
+
 ## March 2023
 
 - No more using `vdesabou/kafka-docker-playground-connect` image [#3564](https://github.com/vdesabou/kafka-docker-playground/issues/3564)

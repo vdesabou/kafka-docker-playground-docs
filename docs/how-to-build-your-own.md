@@ -1892,3 +1892,55 @@ curl -X PUT \
           }' \
      http://localhost:8083/connectors/mongodb-source-perf/config | jq .
 ```
+
+### 👉 MQTT
+
+In order to generate perf injection, you can use [Solace SDKPerf tool](https://docs.solace.com/API/SDKPerf/SDKPerf.htm), [download](https://solace.com/downloads/?fwp_downloads_types=other) it first.
+
+(optional) Add in your docker-compose file a EQMX MQTT broker:
+
+```yml
+  emqx:
+    image: emqx/emqx:latest
+    hostname: emqx
+    container_name: emqx
+    environment:
+    - "EMQX_NAME=emqx"
+    - "EMQX_HOST=emqx"
+    - "MQTT_SESSION_MAX_INFLIGHT=64" 
+    ports:
+      - 1883:1883
+      - 18083:18083
+```
+
+Note: EQMX dashboard is available on http://localhost:18083/ (`admin`/`public`)
+
+Send MQTT messages at 3000 messages/sec with QOS 1 (`"mqtt.topics":"test_mqtt"`):
+
+```bash
+./sdkperf-mqtt-8.4.10.6/sdkperf_mqtt.sh -cip=localhost:1883 -ptl=test_mqtt -msa=100 -mn=5000000 -mr=3000 -mpq=1
+```
+
+Then you can use [MQTT source](https://github.com/vdesabou/kafka-docker-playground/tree/master/connect/connect-mqtt-source) connector:
+
+```bash
+log "Creating MQTT Source connector"
+curl -X PUT \
+     -H "Content-Type: application/json" \
+     --data '{
+               "connector.class": "io.confluent.connect.mqtt.MqttSourceConnector",
+               "tasks.max": "1",
+               "mqtt.server.uri": "tcp://emqx:1883",
+               "mqtt.topics":"test_mqtt",
+               "kafka.topic":"mqtt-source-1",
+               "mqtt.qos": "1",
+               "confluent.license": "",
+               "confluent.topic.bootstrap.servers": "broker:9092",
+               "confluent.topic.replication.factor": "1",
+
+               "records.buffer.queue.size": "10000",
+               "records.buffer.queue.max.batch.size": "100",
+               "records.buffer.queue.empty.timeout": "10" 
+          }' \
+     http://localhost:8083/connectors/source-mqtt/config | jq .
+```

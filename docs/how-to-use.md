@@ -96,26 +96,6 @@ More details [here](https://github.com/vdesabou/kafka-docker-playground/tree/mas
 
 👉 [Download workflow](https://github.com/vdesabou/kafka-docker-playground/raw/master/cloudformation/aws-ec2-kafka-docker-playground.alfred5workflow)
 
-## 🏎️ Start an example
-
-Select an example in the **[Content](/content.md)** section and simply run the bash script you want !
-
-*Example:* if you want to run a test with IBM MQ sink connector, check out the [README](https://github.com/vdesabou/kafka-docker-playground/tree/master/connect/connect-ibm-mq-sink) and the list of tests in [How to Run](https://github.com/vdesabou/kafka-docker-playground/tree/master/connect/connect-ibm-mq-sink#how-to-run) section, then simply execute the script you want:
-
-```bash
-cd connect/connect-ibm-mq-sink
-./ibm-mq-sink-mtls.sh
-```
-
-> [!NOTE]
-> When some additional steps are required, it is specified in the corresponding `README` file
-> 
-> Examples:
-> 
-> * [AWS S3 sink connector](https://github.com/vdesabou/kafka-docker-playground/tree/master/connect/connect-aws-s3-sink#aws-setup): Files `~/.aws/credentials` and `~/.aws/config` or environnement variables are required
-> 
-> * [Zendesk source connector](https://github.com/vdesabou/kafka-docker-playground/tree/master/connect/connect-zendesk-source#how-to-run): arguments `ZENDESK_URL`, `ZENDESK_USERNAME`and `ZENDESK_PASSWORD` are required (you can also pass them as enviroment variables)
-
 ## 🧠 CLI
 
 A CLI (generated using [bashly](https://bashly.dannyb.co/)) is available in `scripts/cli/playground`.
@@ -141,32 +121,30 @@ source /path/to/kafka-docker-playground/scripts/cli/completions.bash
 > [!NOTE]
 > If you use ZSH, but **not** `Oh-My-Zsh`, please check [this](https://bashly.dannyb.co/advanced/bash-completion/#completions-in-zsh).
 
-
-Example:
-
-[![asciicast](https://asciinema.org/a/9CjlfHXJuAbL5OzM6ShtJAX1H.svg)](https://asciinema.org/a/9CjlfHXJuAbL5OzM6ShtJAX1H)
-
 Usage:
 
 ```bash
 $ playground - 🧠 CLI for Kafka Docker Playground 🐳
 
-Usage:
+== Usage ==
   playground COMMAND
   playground [COMMAND] --help | -h
   playground --version | -v
 
-Bootstrap Commands:
+Run commands:
+  run                              🚀  Run example.
+
+Bootstrap commands:
   bootstrap-reproduction-model     🛠  Bootstrap reproduction model.
 
-Kafka Commands:
+Kafka commands:
   get-properties                   📝 Get properties file from a container.
   get-jmx-metrics                  🔢 Get JMX metrics from a component.
 
-Debug Commands:
+Debug commands:
   enable-remote-debugging          ✨ Enable java remote debugging for container.
 
-Container Commands:
+Container commands:
   container                        🐳 Container commands.
   container recreate               💫 Recreate container(s).
   container get-ip-addresses       🖥️  Get IP address of running containers.
@@ -179,30 +157,121 @@ Container Commands:
   container resume                 ⏯️  Resume a container.
   container kill                   🔫 Kill a container.
 
-Topic Commands:
+Topic commands:
   topic                            📁 Topic commands.
   topic get-number-records         💯 Get number of records in a topic.
   topic display-connect-offsets    🔺 Display content of connect offsets topic.
   topic display-consumer-offsets   🔻 Display content of __consumer_offsets topic.
   topic describe                   🔎 Describe topic.
 
-Connector Commands:
+Connector commands:
   connector                        🔗 Connector commands.
   connector status                 ℹ️  Show status of all connectors.
   connector plugins                🔖 Show all plugins installed.
   connector pause                  ⏸️  Pause connector
+  connector restart                ♻️  Restart connector
   connector resume                 ⏯️  Resume connector
   connector delete                 🗑️  Delete connector
   connector show-lag               🐢 Show lag of sink connector
   connector log-level              🧬 Set connect log level.
 
-Options:
+== Options ==
   --help, -h
     Show this help
 
   --version, -v
     Show version number
+
 ```
+
+## 🏎️ Start an example
+
+### 🧠 With CLI
+
+Use `playground run` command !
+
+
+<iframe width="100%" height="400" src="https://www.youtube.com/embed/9FpXj1EXMqA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+
+> [!WARNING]
+> The `run` command requires to have [fzf](https://github.com/junegunn/fzf) installed, it can easily be installed with `brew install fzf` on Mac.
+
+> [!TIP]
+> [bat](https://github.com/sharkdp/bat) is also used by `run` command to display files with syntax highlighting and colors, you can install it using `brew install bat` on Mac.
+
+```bash
+$ playground run
+
+  🚀  Run example.
+  
+  👉 Check documentation https://tinyurl.com/yx3vbwu5
+
+== Usage ==
+  playground run [OPTIONS]
+  playground run --help | -h
+
+== Options ==
+  --file, -f FILE (required)
+    Example file to run.
+
+  --tag TAG
+    CP version to use
+
+  --connector-tag CONNECTOR_TAG
+    Connector version to use
+
+  --connector-zip CONNECTOR_ZIP
+    Connector zip to use
+
+  --connector-jar CONNECTOR_JAR
+    Connector jar to use
+
+  --disable-ksqldb
+    Disable ksqlDB
+
+  --disable-control-center
+    Disable Control Center
+
+  --enable-conduktor
+    Enable Conduktor
+
+  --enable-multiple-brokers
+    Enable Multiple brokers
+
+  --enable-multiple-connect-workers
+    Enable Multiple Connect Workers
+
+  --enable-jmx-grafana
+    Enable Grafana
+
+  --enable-kcat
+    Enable kcat
+
+  --help, -h
+    Show this help
+
+```
+
+### 👴 Old school 
+
+Select an example in the **[Content](/content.md)** section and simply run the bash script you want !
+
+*Example:* if you want to run a test with IBM MQ sink connector, check out the [README](https://github.com/vdesabou/kafka-docker-playground/tree/master/connect/connect-ibm-mq-sink) and the list of tests in [How to Run](https://github.com/vdesabou/kafka-docker-playground/tree/master/connect/connect-ibm-mq-sink#how-to-run) section, then simply execute the script you want:
+
+```bash
+cd connect/connect-ibm-mq-sink
+./ibm-mq-sink-mtls.sh
+```
+
+> [!NOTE]
+> When some additional steps are required, it is specified in the corresponding `README` file
+> 
+> Examples:
+> 
+> * [AWS S3 sink connector](https://github.com/vdesabou/kafka-docker-playground/tree/master/connect/connect-aws-s3-sink#aws-setup): Files `~/.aws/credentials` and `~/.aws/config` or environnement variables are required
+> 
+> * [Zendesk source connector](https://github.com/vdesabou/kafka-docker-playground/tree/master/connect/connect-zendesk-source#how-to-run): arguments `ZENDESK_URL`, `ZENDESK_USERNAME`and `ZENDESK_PASSWORD` are required (you can also pass them as enviroment variables)
 
 ## 🌤️ Confluent Cloud examples
 

@@ -215,6 +215,9 @@ $ playground run
   --file, -f FILE (required)
     Example file to run.
 
+  --skip-editor, -s
+    Skip opening example file with text editor
+
   --tag TAG
     CP version to use
 
@@ -248,8 +251,15 @@ $ playground run
   --enable-kcat
     Enable kcat
 
+  --enable-sr-maven-plugin-app
+    Enable Schema Registry Maven plugin App
+
   --help, -h
     Show this help
+
+Environment Variables:
+  EDITOR
+    🔖 Editor to use to open the example file.
 
 ```
 

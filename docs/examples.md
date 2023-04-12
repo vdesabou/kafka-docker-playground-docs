@@ -125,7 +125,7 @@ Caused by: java.lang.StackOverflowError
 
 *  🎯 Choose the best [example](https://kafka-docker-playground.io/#/content) to use as basis.
 
-* 🛠 [Bootstrap](http://localhost:3000/#/how-to-build-your-own?id=%f0%9f%9b%a0-bootstrap-reproduction-model) your reproduction model!
+* 🛠 [Bootstrap](http://localhost:3000/#/reusables?id=%f0%9f%9b%a0-bootstrap-reproduction-model) your reproduction model!
 
 #### **📍 Step 2**
 <!-- select:start -->
@@ -143,14 +143,14 @@ playground bootstrap-reproduction-model -f s3-sink.sh -d "000001 StackOverflowEr
 💡 Explanations:
 
 * [s3-sink.sh](https://github.com/vdesabou/kafka-docker-playground/blob/master/connect/connect-aws-s3-sink/s3-sink.sh) is the closest example.
-* The problem seems related to input data, so using [avro java producer](https://kafka-docker-playground.io/#/how-to-build-your-own?id=%e2%99%a8%ef%b8%8f-java-producers) seems the right thing to do.
+* The problem seems related to input data, so using [avro java producer](https://kafka-docker-playground.io/#/reusables?id=%e2%99%a8%ef%b8%8f-java-producers) seems the right thing to do.
 
 > [!NOTE]
 > As the key converter is StringConverter, we should not use `avro-with-key` for `--producer` flag.
 
 <!-- select:end -->
 
-* 👉 Follow steps from [♨️ Java producers](https://kafka-docker-playground.io/#/how-to-build-your-own?id=%e2%99%a8%ef%b8%8f-java-producers) in order to produce same data as user.
+* 👉 Follow steps from [♨️ Java producers](https://kafka-docker-playground.io/#/reusables?id=%e2%99%a8%ef%b8%8f-java-producers) in order to produce same data as user.
 
 #### **📍 Step 3**
 <!-- select:start -->

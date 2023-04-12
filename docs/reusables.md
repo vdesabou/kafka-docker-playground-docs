@@ -121,7 +121,7 @@ This will create the following files:
 
 ![file structure](./images/bootstrap_reproduction_model.jpg)
 
-Then follow instructions in one of [♨️ Java producer](/how-to-build-your-own?id=♨%EF%B8%8F-java-producers) below.
+Then follow instructions in one of [♨️ Java producer](/reusables?id=♨%EF%B8%8F-java-producers) below.
 
 ### With multiple Java producers (`--nb-producers`)
 
@@ -253,7 +253,7 @@ See example there:
 
 
 > [!TIP]
-> A complete example is available in [🧑‍🔧 How to build a pipeline](/how-to-build-your-own?id=%f0%9f%a7%91%f0%9f%94%a7-how-to-build-a-pipeline).
+> A complete example is available in [🧑‍🔧 How to build a pipeline](/reusables?id=%f0%9f%a7%91%f0%9f%94%a7-how-to-build-a-pipeline).
 
 
 ## 👉 Producing data
@@ -271,7 +271,7 @@ If you want to send a complex AVRO message, the easiest way is to use an Avro JA
 
 Here are the steps to follow:
 
-1. Bootstrap your reproduction model by following [🛠 Bootstrap reproduction model](/how-to-build-your-own?id=🛠-bootstrap-reproduction-model) and use `avro` for the `--producer` (or `-p`) flag.
+1. Bootstrap your reproduction model by following [🛠 Bootstrap reproduction model](/reusables?id=🛠-bootstrap-reproduction-model) and use `avro` for the `--producer` (or `-p`) flag.
 
 2. Update `producer-repro-12345/src/main/resources/avro/customer.avsc` with your AVRO schema but be careful, you need to keep `Customer` for the name and `com.github.vdesabou` for the namespace:
 
@@ -349,7 +349,7 @@ If you want to send a complex Protobuf message, the easiest way is to use an Pro
 
 Here are the steps to follow:
 
-1. Bootstrap your reproduction model by following [🛠 Bootstrap reproduction model](/how-to-build-your-own?id=🛠-bootstrap-reproduction-model) and use `protobuf` for the `--producer` (or `-p`) flag.
+1. Bootstrap your reproduction model by following [🛠 Bootstrap reproduction model](/reusables?id=🛠-bootstrap-reproduction-model) and use `protobuf` for the `--producer` (or `-p`) flag.
 
 2. Update `producer-repro-12345/src/main/resources/Customer.proto` with your Protobuf schema but be careful, you need to keep `Customer` for the name and `com.github.vdesabou` for the package and `CustomerImpl` for the `java_outer_classname`:
 
@@ -431,7 +431,7 @@ If you want to send a complex JSON Schema message, the easiest way is to use an 
 
 Here are the steps to follow:
 
-1. Bootstrap your reproduction model by following [🛠 Bootstrap reproduction model](/how-to-build-your-own?id=🛠-bootstrap-reproduction-model) and use `json-schema` for the `--producer` (or `-p`) flag.
+1. Bootstrap your reproduction model by following [🛠 Bootstrap reproduction model](/reusables?id=🛠-bootstrap-reproduction-model) and use `json-schema` for the `--producer` (or `-p`) flag.
 
 2. Update `producer-repro-12345/src/main/resources/schema/Customer.json` with your JSON Schema schema but be careful, you need to keep `Customer` for the title:
 
@@ -636,7 +636,7 @@ EOF
 
 
 > [!TIP]
-> If AVRO schema is very complex, it is better to use [♨️ Java producer](/how-to-build-your-own?id=♨%EF%B8%8F-java-producers) above.
+> If AVRO schema is very complex, it is better to use [♨️ Java producer](/reusables?id=♨%EF%B8%8F-java-producers) above.
 
 <!-- tabs:end -->
 
@@ -673,7 +673,7 @@ EOF
 <!-- tabs:end -->
 
 > [!TIP]
-> If Protobuf schema is very complex, it is better to use [♨️ Java producer](/how-to-build-your-own?id=♨%EF%B8%8F-java-producers) above.
+> If Protobuf schema is very complex, it is better to use [♨️ Java producer](/reusables?id=♨%EF%B8%8F-java-producers) above.
 
 
 ### 🔣 [kafka-json-schema-console-producer](https://docs.confluent.io/platform/current/schema-registry/serdes-develop/serdes-json.html)
@@ -708,7 +708,7 @@ EOF
 <!-- tabs:end -->
 
 > [!TIP]
-> If JSON Schema schema is very complex, it is better to use [♨️ Java producer](/how-to-build-your-own?id=♨%EF%B8%8F-java-producers) above.
+> If JSON Schema schema is very complex, it is better to use [♨️ Java producer](/reusables?id=♨%EF%B8%8F-java-producers) above.
 
 ### 🌪 kafka-producer-perf-test
 
@@ -834,11 +834,11 @@ services:
 
 ## 🧑‍🔧 How to build a pipeline
 
-If you want to create a "pipeline" example with both source and sink connectors, this is very simple. You just need [🛠 Bootstrap reproduction model](/how-to-build-your-own?id=🛠-bootstrap-reproduction-model) with [`--pipeline`)](/how-to-build-your-own?id=with-pipeline-pipeline) flag.
+If you want to create a "pipeline" example with both source and sink connectors, this is very simple. You just need [🛠 Bootstrap reproduction model](/reusables?id=🛠-bootstrap-reproduction-model) with [`--pipeline`)](/reusables?id=with-pipeline-pipeline) flag.
 
 Here are the steps to follow to create a [Debezium CDC Microsoft SQL Server Source](https://github.com/vdesabou/kafka-docker-playground/tree/master/connect/connect-debezium-sqlserver-source) to [JDBC PostGreSQL Sink](https://github.com/vdesabou/kafka-docker-playground/tree/master/connect/connect-jdbc-postgresql-sink):
 
-1. Bootstrap your reproduction model by following [🛠 Bootstrap reproduction model](/how-to-build-your-own?id=🛠-bootstrap-reproduction-model) and use an example from [Debezium CDC Microsoft SQL Server Source](https://github.com/vdesabou/kafka-docker-playground/tree/master/connect/connect-debezium-sqlserver-source) and use it with `pipeline` flag set with example from [JDBC PostGreSQL Sink](https://github.com/vdesabou/kafka-docker-playground/tree/master/connect/connect-jdbc-postgresql-sink).
+1. Bootstrap your reproduction model by following [🛠 Bootstrap reproduction model](/reusables?id=🛠-bootstrap-reproduction-model) and use an example from [Debezium CDC Microsoft SQL Server Source](https://github.com/vdesabou/kafka-docker-playground/tree/master/connect/connect-debezium-sqlserver-source) and use it with `pipeline` flag set with example from [JDBC PostGreSQL Sink](https://github.com/vdesabou/kafka-docker-playground/tree/master/connect/connect-jdbc-postgresql-sink).
 
 Example:
 
@@ -1033,7 +1033,7 @@ control-center is up-to-date
     ]
 }
 
-15:34:36 ℹ️ See https://kafka-docker-playground.io/#/how-to-build-your-own?id=✨-remote-debugging
+15:34:36 ℹ️ See https://kafka-docker-playground.io/#/reusables?id=✨-remote-debugging
 ```
    
 5. [Configure](https://code.visualstudio.com/docs/java/java-debugging#_configure) remote debugging by clicking on menu `Run`->`Add Configuration...`:
@@ -1719,7 +1719,7 @@ Here are some tips and tricks to create reproduction models that require high vo
 
 ### 👈 All sink connectors
 
-Injecting lot of records into topic(s) is really easy using [🛠 Bootstrap reproduction model](https://kafka-docker-playground.io/#/how-to-build-your-own?id=%f0%9f%9b%a0-bootstrap-reproduction-model) with [♨️ Java producers](https://kafka-docker-playground.io/#/how-to-build-your-own?id=%e2%99%a8%ef%b8%8f-java-producers) option.
+Injecting lot of records into topic(s) is really easy using [🛠 Bootstrap reproduction model](https://kafka-docker-playground.io/#/reusables?id=%f0%9f%9b%a0-bootstrap-reproduction-model) with [♨️ Java producers](https://kafka-docker-playground.io/#/reusables?id=%e2%99%a8%ef%b8%8f-java-producers) option.
 
 To inject infinite number of requests as fast as possible, use `NB_MESSAGES=-1` and `MESSAGE_BACKOFF=0` and use `-d` to run the injection in the background:
 

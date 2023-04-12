@@ -2,6 +2,8 @@
 
 ## April 2023
 
+- Added [Fully Managed SFTP source](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/fully-managed-connect-sftp-source) example
+- Added [JDBC Amazon Redshift Sink](https://github.com/vdesabou/kafka-docker-playground/tree/master/connect/connect-jdbc-aws-redshift-sink) example
 - Added [🏎️ Start an example with CLI](/#/how-to-use?id=%f0%9f%a7%a0-with-cli) using `playground run` command
 - Added [👉 MQTT](/#/how-to-build-your-own?id=%f0%9f%91%89-mqtt) performances injection tool
 - Added [🌍 Debug HTTP sink](/#/how-to-build-your-own?id=%f0%9f%8c%8d-debug-http-sink)

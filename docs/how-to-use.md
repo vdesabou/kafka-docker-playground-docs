@@ -133,6 +133,7 @@ $ playground - 🧠 CLI for Kafka Docker Playground 🐳
 
 Run commands:
   run                              🚀  Run example.
+  re-run                           🛸  Re-run last example.
 
 Bootstrap commands:
   bootstrap-reproduction-model     🛠  Bootstrap reproduction model.

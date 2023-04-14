@@ -309,7 +309,7 @@ In case you want to use your own existing cluster, you need to setup these envir
 
 ### 🎯 For Confluent Platform (CP)
 
-By default, latest Confluent Platform version is used (currently `7.3.2`).
+By default, latest Confluent Platform version is used (currently `7.3.3`).
 Before running an example, you can change the CP version used (must be greater or equal to `5.0.0`), simply by exporting `TAG` environment variable:
 
 *Example:*

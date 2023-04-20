@@ -2,6 +2,8 @@
 
 ## April 2023
 
+- Added [Pyroscope](https://pyroscope.io/docs/) to JMX Grafana
+📛 [Pyroscope](https://pyroscope.io/docs/) is reachable at [http://127.0.0.1:4040](http://127.0.0.1:4040)
 - Added CLI command `playground get-all-schemas` to get all schemas versions for all subjects.
 - Added CLI command `playground topic consume` to consume automatically topic from currently running connect example.
 - Added CLI command `re-run` to re-run last example

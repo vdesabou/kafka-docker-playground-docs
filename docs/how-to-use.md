@@ -204,7 +204,7 @@ Use `playground run` command and completion with `fzf` when selecting the exampl
 ```bash
 $ playground run
 
-  🚀  Run example.
+    🚀  Run example.
   
   👉 Check documentation https://tinyurl.com/yx3vbwu5
 
@@ -215,9 +215,13 @@ $ playground run
 == Options ==
   --file, -f FILE (required)
     Example file to run.
+    It must be absolute full path. 
+    
+    🎓 Tip: use <tab> completion to trigger fzf completion.
 
-  --skip-editor, -s
-    Skip opening example file with text editor
+  --open, -o
+    Opening example file with text editor set with EDITOR environment variable
+    (default is code).
 
   --tag TAG
     CP version to use
@@ -247,7 +251,11 @@ $ playground run
     Enable Multiple Connect Workers
 
   --enable-jmx-grafana
-    Enable Grafana
+    Enable Grafana, Prometheus and Pyroscope
+    
+    📊 Grafana is reachable at http://127.0.0.1:3000
+    🛡️ Prometheus is reachable at http://127.0.0.1:9090
+    📛 Pyroscope is reachable at http://127.0.0.1:4040
 
   --enable-kcat
     Enable kcat
@@ -482,7 +490,9 @@ By default, Grafana dashboard using JMX metrics is not started for every test. Y
 export ENABLE_JMX_GRAFANA=true
 ```
 
-📊 If set, Grafana is reachable at [http://127.0.0.1:3000](http://127.0.0.1:3000).
+📊 Grafana is reachable at [http://127.0.0.1:3000](http://127.0.0.1:3000)
+🛡️ Prometheus is reachable at [http://127.0.0.1:9090](http://127.0.0.1:9090)
+📛 [Pyroscope](https://pyroscope.io/docs/) is reachable at [http://127.0.0.1:4040](http://127.0.0.1:4040)
 
 ## 🔢 JMX Metrics
 

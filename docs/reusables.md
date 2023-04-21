@@ -1794,6 +1794,23 @@ docker exec -d sql-datagen bash -c "java ${JAVA_OPTS} -jar sql-datagen-1.0-SNAPS
 > [!TIP]
 > You can increase throughtput with `maxPoolSize`.
 
+### 👉 MySQL
+
+For all Debezium and JDBC source connector with MySQL examples, you can easily inject load in table using, the following steps.
+
+You can set environment variable `SQL_DATAGEN` before running the example and it will use a Java based datagen tool:
+
+Example:
+
+```bash
+DURATION=10
+log "Injecting data for $DURATION seconds"
+docker exec -d sql-datagen bash -c "java ${JAVA_OPTS} -jar sql-datagen-1.0-SNAPSHOT-jar-with-dependencies.jar --connectionUrl 'jdbc:mysql://mysql:3306/mydb?user=user&password=password&useSSL=false' --maxPoolSize 10 --durationTimeMin $DURATION"
+```
+
+> [!TIP]
+> You can increase throughtput with `maxPoolSize`.
+
 ### 👉 MongoDB
 
 In order to generate random data ([source](https://www.mongodb.com/developer/products/connectors/measuring-mongodb-kafka-connector-performance/)), you can use [robwma/doc-gen](https://github.com/RWaltersMA/doc-gen) docker image.

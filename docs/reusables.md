@@ -1747,7 +1747,7 @@ docker exec -e NB_MESSAGES=-1 -e MESSAGE_BACKOFF=0 -e TOPIC="test-topic2" -d pro
 
 For all Oracle CDC and JDBC source connector with Oracle examples, you can easily inject load in table using, the following steps.
 
-You can set environment variable `ORACLE_DATAGEN` before running the example and it will use a Java based datagen tool:
+You can set environment variable `SQL_DATAGEN` before running the example and it will use a Java based datagen tool:
 
 Example:
 
@@ -1762,62 +1762,20 @@ docker exec -d oracle-datagen bash -c "java ${JAVA_OPTS} -jar oracle-datagen-1.0
 
 ### 👉 Microsoft SQL Server
 
-In order to create a large table with random data ([source](http://dba.fyicenter.com/faq/sql_server/Creating_a_Large_Table_with_Random_Data_for_Indexes.html)), you can use:
+For all Debezium and JDBC source connector with Microsoft SQL Server examples, you can easily inject load in table using, the following steps.
+
+You can set environment variable `SQL_DATAGEN` before running the example and it will use a Java based datagen tool:
+
+Example:
 
 ```bash
-NB_ROWS=100000
-log "Create table with $NB_ROWS "
-docker exec -i sqlserver /opt/mssql-tools/bin/sqlcmd -U sa -P Password! << EOF
--- Create the test database
-CREATE DATABASE testDB;
-GO
-USE testDB;
-
--- Create a table with primary key
-CREATE TABLE customers (
-  id INT,
-  rand_integer INT,
-  rand_number numeric(18,9),
-  rand_datetime DATETIME2,
-  rand_string VARCHAR(4000)
-);
-GO
-
--- Insert rows with random values
-DECLARE @nbrows INT;
-DECLARE @row INT;
-DECLARE @string VARCHAR(4000), @length INT, @code INT;
-SET @nbrows = $NB_ROWS;
-SET @row = 0;
-WHILE @row < @nbrows BEGIN
-   SET @row = @row + 1;
-
-   -- Build the random string
-   SET @length = ROUND(4000*RAND(),0);
-   SET @string = '';
-   WHILE @length > 0 BEGIN
-      SET @length = @length - 1;
-      SET @code = ROUND(32*RAND(),0) - 6;
-      IF @code BETWEEN 1 AND 26 
-         SET @string = @string + CHAR(ASCII('a')+@code-1);
-      ELSE
-         SET @string = @string + ' ';
-   END 
-
-   -- Ready for the record
-   SET NOCOUNT ON;
-   INSERT INTO customers VALUES (
-      @row,
-      ROUND(2000000*RAND()-1000000,0),
-      ROUND(2000000*RAND()-1000000,9),
-      GETDATE(),
-      @string
-   )
-END
-PRINT 'Rows inserted: '+CONVERT(VARCHAR(20),@row);
-GO
-EOF
+DURATION=10
+log "Injecting data for $DURATION seconds"
+docker exec -d sql-datagen bash -c "java ${JAVA_OPTS} -jar sql-datagen-1.0-SNAPSHOT-jar-with-dependencies.jar --username sa --password 'Password!' --connectionUrl 'jdbc:sqlserver://sqlserver:1433;databaseName=testDB;encrypt=false' --maxPoolSize 10 --durationTimeMin $DURATION"
 ```
+
+> [!TIP]
+> You can increase throughtput with `maxPoolSize`.
 
 ### 👉 PostgreSQL
 

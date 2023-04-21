@@ -2,10 +2,11 @@
 
 ## April 2023
 
+- Added 🌪️ SQL Datagen tool for [Microsoft Sql Server](/reusables?id=%f0%9f%91%89-microsoft-sql-server) examples
 - Added [Pyroscope](https://pyroscope.io/docs/) to JMX Grafana
 📛 [Pyroscope](https://pyroscope.io/docs/) is reachable at [http://127.0.0.1:4040](http://127.0.0.1:4040)
 - Added CLI command `playground get-all-schemas` to get all schemas versions for all subjects.
-- Added CLI command `playground topic consume` to consume automatically topic from currently running connect example.
+- Added CLI command `playground topic consume` to consume automatically topic from currently running connect example
 - Added CLI command `re-run` to re-run last example
 - Added [Recovery from schema hard deletion](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/recover-from-schema-hard-deletion)
 - Added AWS Lambda sink [with custom STS credentials provider](https://github.com/vdesabou/kafka-docker-playground/blob/master/connect/connect-aws-lambda-sink/lambda-sink-assuming-iam-role-with-custom-aws-credential-provider.sh)

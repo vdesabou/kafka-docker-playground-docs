@@ -1779,30 +1779,20 @@ docker exec -d sql-datagen bash -c "java ${JAVA_OPTS} -jar sql-datagen-1.0-SNAPS
 
 ### 👉 PostgreSQL
 
-In order to create a large table with random data ([source](https://stackoverflow.com/questions/24841142/how-can-i-generate-big-data-sample-for-postgresql-using-generate-series-and-rand)), you can use:
+For all Debezium and JDBC source connector with PostgreSQL examples, you can easily inject load in table using, the following steps.
+
+You can set environment variable `SQL_DATAGEN` before running the example and it will use a Java based datagen tool:
+
+Example:
 
 ```bash
-
-NB_ROWS=100000
-log "Create table with $NB_ROWS "
-docker exec -i postgres psql -U myuser -d postgres << EOF
-CREATE TABLE mytable (
-  id SERIAL UNIQUE NOT NULL,
-  code TEXT NOT NULL,
-  article TEXT,
-  name TEXT NOT NULL
-);
-
-insert into mytable (
-    code, article, name
-)
-select
-    left(md5(i::text), 10000),
-    md5(random()::text),
-    REPEAT('abcdefghij', 400)
-from generate_series(1, $NB_ROWS) s(i);
-EOF
+DURATION=10
+log "Injecting data for $DURATION seconds"
+docker exec -d sql-datagen bash -c "java ${JAVA_OPTS} -jar sql-datagen-1.0-SNAPSHOT-jar-with-dependencies.jar --connectionUrl 'jdbc:postgresql://postgres/postgres?user=myuser&password=mypassword&ssl=false' --maxPoolSize 10 --durationTimeMin $DURATION"
 ```
+
+> [!TIP]
+> You can increase throughtput with `maxPoolSize`.
 
 ### 👉 MongoDB
 

@@ -2,6 +2,7 @@
 
 ## April 2023
 
+- Added `--producer-schema-key` and `--producer-schema-value` to `playground bootstrap-reproduction-model`
 - Added 🌪️ SQL Datagen tool for [PostgreSQL](/reusables?id=%f0%9f%91%89-postgresql) examples
 - Added 🌪️ SQL Datagen tool for [MySql](/reusables?id=%f0%9f%91%89-mysql) examples
 - Added 🌪️ SQL Datagen tool for [Microsoft Sql Server](/reusables?id=%f0%9f%91%89-microsoft-sql-server) examples

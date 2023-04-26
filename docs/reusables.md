@@ -11,10 +11,10 @@ If you want to create your own reproduction model, follow these steps:
 * Execute [🧠 CLI](https://kafka-docker-playground.io/#/how-to-use?id=%f0%9f%a7%a0-cli) with `bootstrap-reproduction-model` command:
 
 ```bash
-$ playground bootstrap-reproduction-model --help
+$ playground bootstrap-reproduction-model --help                          
 playground bootstrap-reproduction-model
 
-  🛠  Bootstrap reproduction model.
+  🛠  Bootstrap reproduction model
   
   👉 Check documentation https://tinyurl.com/bdfs25my
 
@@ -24,54 +24,77 @@ playground bootstrap-reproduction-model
 
 == Options ==
   --file, -f FILE (required)
-    Example file to use as basis.
+    🔖 Example file to use as basis
+    
+    It must be absolute full path
+    
+    🎓 Tip: use <tab> completion to trigger fzf completion
 
   --description, -d DESCRIPTION (required)
-    Description.
+    💭 Description for the reproduction model
 
   --producer, -p PRODUCER-TYPE
-    Java producer type to use. 
-    One of avro, avro-with-key, protobuf, protobuf-with-key, json-schema,
-    json-schema-with-key.
+    ♨️ Java producer type to use
     
-    Note: 'with-key' will also produce key with selected converter, otherwise
-    LongConverter is used.
+    One of avro, avro-with-key, protobuf, protobuf-with-key, json-schema,
+    json-schema-with-key
+    
+    🎓 Tip: 'with-key' will also produce key with selected converter, otherwise
+    LongConverter is used
     Allowed: none, avro, avro-with-key, protobuf, protobuf-with-key, json-schema, json-schema-with-key
     Default: none
 
   --nb-producers, -n NB-PRODUCERS
-    Number of java producers to generate.
+    2️⃣ Number of java producers to generate
     Default: 
 
-  --custom-smt, -s
-    Add a custom SMT (no-op).
+  --producer-schema-key PRODUCER_SCHEMA
+    🔰 Schema file to use for the key
+    
+    It must be absolute full path
+    
+    🎓 Tip: use <tab> completion to trigger fzf completion 
+            use folder_producer_schema (default: ~/Downloads) in config.ini file
+    to configure where to search the files
+
+  --producer-schema-value PRODUCER_SCHEMA
+    🔰 Schema file to use for the value
+    
+    It must be absolute full path
+    
+    🎓 Tip: use <tab> completion to trigger fzf completion 
+            use folder_producer_schema (default: ~/Downloads) in config.ini file
+    to configure where to search the files
+
+  --custom-smt
+    ⚙️ Add a custom SMT (which is a no-op)
 
   --pipeline SINK_FILE
-    Sink example file to use for creating a pipeline.
+    🔖 Sink example file to use for creating a pipeline
+    
+    It must be absolute full path. 
+    
+    🎓 Tip: use <tab> completion to trigger fzf completion
 
   --help, -h
     Show this help
 
 Environment Variables:
   OUTPUT_FOLDER
-    📁 Output folder where to generate bootstrapped files.
+    📁 Output folder where to generate bootstrapped files
     Default: reproduction-models
 
 Examples
-  playground bootstrap-reproduction-model -f hdfs2-sink.sh -d "123456 testing
-  with parquet format"
-  playground bootstrap-reproduction-model -f hdfs2-sink.sh -d "123456 testing
-  with parquet format and avro producer" --producer avro
-  playground bootstrap-reproduction-model -f hdfs2-sink.sh -d "123456 testing
-  with parquet format and 2 protobuf producers" --producer protobuf
-  --nb-producers 2
-  playground bootstrap-reproduction-model -f hdfs2-sink.sh -d "123456 testing
-  with parquet format and 2 protobuf producers" -p protobuf -n 2
-  playground bootstrap-reproduction-model -f hdfs2-sink.sh -d "123456 testing
-  with parquet format and custom smt" --custom-smt
-  playground bootstrap-reproduction-model -f debezium-postgres-source.sh -d
-  "create pipeline" --pipeline
-  ../../connect/connect-jdbc-sqlserver-sink/sqlserver-microsoft-sink.sh
+  playground bootstrap-reproduction-model -f hdfs2<tab> -d "simple test"
+  playground bootstrap-reproduction-model -f /full/path/hdfs2-sink.sh -d
+  "testing with avro producer" --producer avro --producer-schema-value
+  myschema<tab>
+  playground bootstrap-reproduction-model -f hdfs2<tab> -d "testing with 2
+  protobuf producers" --producer protobuf --nb-producers 2
+  playground bootstrap-reproduction-model -f hdfs2<tab> -d "testing custom smt"
+  --custom-smt
+  playground bootstrap-reproduction-model -f debeziumpostgres<tab> -d "create
+  pipeline" --pipeline jdbcsink<tab>
 ```
 
 > [!TIP]
@@ -273,12 +296,7 @@ Here are the steps to follow:
 
 1. Bootstrap your reproduction model by following [🛠 Bootstrap reproduction model](/reusables?id=🛠-bootstrap-reproduction-model) and use `avro` for the `--producer` (or `-p`) flag.
 
-2. Update `producer-repro-12345/src/main/resources/avro/customer.avsc` with your AVRO schema but be careful, you need to keep `Customer` for the name and `com.github.vdesabou` for the namespace:
-
-```json
-    "name": "Customer",
-    "namespace": "com.github.vdesabou",
-```
+2. *optional*: use `--producer-schema-key` and/or `--producer-schema-value` flag to specify another schema to use
 
 By default, the following environment variables are used in producer container:
 
@@ -351,12 +369,7 @@ Here are the steps to follow:
 
 1. Bootstrap your reproduction model by following [🛠 Bootstrap reproduction model](/reusables?id=🛠-bootstrap-reproduction-model) and use `protobuf` for the `--producer` (or `-p`) flag.
 
-2. Update `producer-repro-12345/src/main/resources/Customer.proto` with your Protobuf schema but be careful, you need to keep `Customer` for the name and `com.github.vdesabou` for the package and `CustomerImpl` for the `java_outer_classname`:
-
-```
-package com.github.vdesabou;
-option java_outer_classname = "CustomerImpl";
-```
+2. *optional*: use `--producer-schema-key` and/or `--producer-schema-value` flag to specify another schema to use
 
 👉 Make sure to move it in your script to the right place !
 
@@ -433,41 +446,7 @@ Here are the steps to follow:
 
 1. Bootstrap your reproduction model by following [🛠 Bootstrap reproduction model](/reusables?id=🛠-bootstrap-reproduction-model) and use `json-schema` for the `--producer` (or `-p`) flag.
 
-2. Update `producer-repro-12345/src/main/resources/schema/Customer.json` with your JSON Schema schema but be careful, you need to keep `Customer` for the title:
-
-```json
-{
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "additionalProperties": false,
-  "$id": "http://lh.test/Customer.schema.json",
-  "title": "Customer",
-  "description": "Customer description",
-  "type": "object",
-  "properties": {
-    "name": {
-      "description": "Customer name",
-      "type": "string",
-      "maxLength": 25
-    },
-    "surname": {
-      "description": "Customer surname",
-      "type": "string",
-      "minLength": 2
-    },
-    "email": {
-      "description": "Email",
-      "type": "string",
-      "pattern": "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$"
-    }
-  },
-  "required": [
-    "name",
-    "surname"
-  ]
-}
-```
-
-👉 Make sure to move it in your script to the right place !
+2. *optional*: use `--producer-schema-key` and/or `--producer-schema-value` flag(s) to specify another schema(s) to use
 
 By default, the following environment variables are used in producer container:
 

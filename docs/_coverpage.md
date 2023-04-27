@@ -8,7 +8,7 @@
 [🐳 Introduction](/introduction.md)
 [👾 Content](/content.md)
 [🚀 How to Use](/how-to-use.md)
+[🧠 CLI](/cli.md)
 [🎓 How it works](/how-it-works.md)
 [👷‍♂️ Reusables](/reusables.md)
 [🧑‍🎓 Examples](/examples.md)
-[🎁 Tips & Tricks](/tips-and-tricks.md)

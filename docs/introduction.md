@@ -1,5 +1,5 @@
 # 🐳 kafka-docker-playground
-![success tests](https://img.shields.io/badge/success%20tests-2524%2F2779-red)![connector tested](https://img.shields.io/badge/connector%20tested-148-green)![cp versions tested](https://img.shields.io/badge/cp%20version%20tested-%206.0.13%206.1.10%206.2.9%207.0.8%207.1.6%207.2.4%207.3.3-green)![last run](https://img.shields.io/badge/last%20run-2023--04--28%2000:17-green)
+![success tests](https://img.shields.io/badge/success%20tests-2576%2F2779-red)![connector tested](https://img.shields.io/badge/connector%20tested-148-green)![cp versions tested](https://img.shields.io/badge/cp%20version%20tested-%206.0.13%206.1.10%206.2.9%207.0.8%207.1.6%207.2.4%207.3.3-green)![last run](https://img.shields.io/badge/last%20run-2023--04--28%2010:47-green)
 ![GitHub issues by-label](https://img.shields.io/github/issues/vdesabou/kafka-docker-playground/CI%20failing%20🔥)![GitHub issues by-label](https://img.shields.io/github/issues/vdesabou/kafka-docker-playground/enhancement%20✨)
 ![GitHub repo size](https://img.shields.io/github/repo-size/vdesabou/kafka-docker-playground)
 [![Add a star on GitHub](https://img.shields.io/github/stars/vdesabou/kafka-docker-playground?style=social)](https://github.com/vdesabou/kafka-docker-playground)
@@ -15,7 +15,7 @@
 - 💸 Confluent commercial [features](/content?id=💸-confluent-commercial) (Tiered Storage, Control Center, Audit logs...)
 - ♻️ Cluster Linking, Replicator and MirrorMaker 2 [examples](/content?id=🌍-multi-data-center-deployments)
 - 🎯 Run examples with any Confluent Platform or connector [versions](/how-to-use?id=🪄-specify-versions)
-- 🧠 Easily run commands with playground [CLI](/cli)
+- 🧠 Easily run commands with playground [CLI](https://kafka-docker-playground.io/#/how-to-use?id=%f0%9f%a7%a0-cli)
 - 🎓 Learn how the playground [works](/how-it-works)
 - 👷‍♂️ Build your own reproduction models with [reusables](/reusables)
 - 📱 Work directly in your browser using [Gitpod.io](/how-to-use?id=🪄-gitpodio)

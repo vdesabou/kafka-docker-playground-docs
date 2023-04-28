@@ -208,14 +208,14 @@ Examples:
 $ playground re-run
 
 # will re-run same example:
-# playground run -f /Users/vsaboulin/Documents/github/kafka-docker-playground/connect/connect-jdbc-postgresql-sink/postgres-sink.sh --tag=7.3.3 --connector-tag=10.6.0 --disable-control-center
+$ playground run -f /path/to/kafka-docker-playground/connect/connect-jdbc-postgresql-sink/postgres-sink.sh --tag=7.3.3 --connector-tag=10.6.0 --disable-control-center
 ```
 
 ```bash
 $ playground re-run --connector-tag=10.6.1
 
 # will re-run same example but replace previous flags with:
-# playground run -f /Users/vsaboulin/Documents/github/kafka-docker-playground/connect/connect-jdbc-postgresql-sink/postgres-sink.sh --connector-tag=10.6.1
+$ playground run -f /path/to/kafka-docker-playground/connect/connect-jdbc-postgresql-sink/postgres-sink.sh --connector-tag=10.6.1
 ```
 
 #### 🍿 Example
@@ -348,3 +348,82 @@ playground open - 👐 Simply open last example you ran with <playground run>
     Show this help
 
 ```
+
+## 🔗 Connector commands
+
+Easily interact with running connectors.
+
+### 🧩 `status`
+
+Show status of all connectors
+
+<script async id="asciicast-581278" src="https://asciinema.org/a/581278.js"></script>
+
+### 🎨 `plugins`
+
+Show all plugins installed
+
+<script async id="asciicast-581279" src="https://asciinema.org/a/581279.js"></script>
+
+### ⏸️ `pause`
+
+Pause connector
+
+<script async id="asciicast-581280" src="https://asciinema.org/a/581280.js"></script>
+
+> [!TIP]
+> If flag `--connector` (`-c`) is not specified, the command will apply to all connectors.
+
+### ⏯️ `resume`
+
+Resume connector
+
+<script async id="asciicast-581281" src="https://asciinema.org/a/581281.js"></script>
+
+> [!TIP]
+> If flag `--connector` (`-c`) is not specified, the command will apply to all connectors.
+
+### 🧞 `versions`
+
+Get current version used in example
+
+<script async id="asciicast-581282" src="https://asciinema.org/a/581282.js"></script>
+
+> [!TIP]
+> If flag `--connector` (`-c`) is not specified, the command will apply to all connectors.
+
+### ♻️ `restart`
+
+Restart connector(s)
+
+<script async id="asciicast-581284" src="https://asciinema.org/a/581284.js"></script>
+
+> [!TIP]
+> If flag `--connector` (`-c`) is not specified, the command will apply to all connectors.
+
+### 🗑️ `delete`
+
+Delete connector
+
+<script async id="asciicast-581288" src="https://asciinema.org/a/581288.js"></script>
+
+> [!TIP]
+> If flag `--connector` (`-c`) is not specified, the command will apply to all connectors.
+
+### 🐢 `show-lag`
+
+Show lag of sink connector
+
+<script async id="asciicast-581285" src="https://asciinema.org/a/581285.js"></script>
+
+> [!TIP]
+> If flag `--connector` (`-c`) is not specified, the command will apply to all connectors.
+
+### 🧬 `log-level`
+
+Set connect log level
+
+<script async id="asciicast-581287" src="https://asciinema.org/a/581287.js"></script>
+
+> [!TIP]
+> If flag `--connector` (`-c`) is not specified, the command will apply to all connectors.

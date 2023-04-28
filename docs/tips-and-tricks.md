@@ -12,7 +12,7 @@ Example with `connect` container:
 docker container logs --tail=100 -f connect
 ```
 
-or use [🧠 CLI](https://kafka-docker-playground.io/#/how-to-use?id=%f0%9f%a7%a0-cli) with:
+or use [🧠 CLI](/cli) with:
 
 ```bash
 playground container logs -c connect
@@ -26,7 +26,7 @@ Example with `connect` container:
 docker container logs connect > connect.log 2>&1
 ```
 
-or use [🧠 CLI](https://kafka-docker-playground.io/#/how-to-use?id=%f0%9f%a7%a0-cli) with:
+or use [🧠 CLI](/cli) with:
 
 ```bash
 playground container logs -c connect -o code
@@ -46,7 +46,7 @@ Example with `connect` container:
 docker exec -it connect bash
 ```
 
-or use [🧠 CLI](https://kafka-docker-playground.io/#/how-to-use?id=%f0%9f%a7%a0-cli) with:
+or use [🧠 CLI](/cli) with:
 
 ```bash
 playground container ssh -c connect
@@ -58,7 +58,7 @@ playground container ssh -c connect
 docker rm -f $(docker ps -qa)
 ```
 
-or use [🧠 CLI](https://kafka-docker-playground.io/#/how-to-use?id=%f0%9f%a7%a0-cli) with:
+or use [🧠 CLI](/cli) with:
 
 ```bash
 playground container kill-all
@@ -86,7 +86,7 @@ Example with `connect` container:
 docker exec connect bash -c "whoami"
 ```
 
-or use [🧠 CLI](https://kafka-docker-playground.io/#/how-to-use?id=%f0%9f%a7%a0-cli) with:
+or use [🧠 CLI](/cli) with:
 
 ```bash
 playground container exec -c connect -d "whoami"
@@ -100,7 +100,7 @@ Example with `connect` container:
 docker exec --privileged --user root connect bash -c "whoami"
 ```
 
-or use [🧠 CLI](https://kafka-docker-playground.io/#/how-to-use?id=%f0%9f%a7%a0-cli) with:
+or use [🧠 CLI](/cli) with:
 
 ```bash
 playground container exec -c connect -d "whoami" --root
@@ -122,7 +122,7 @@ Example:
 /zookeeper - 172.21.0.3
 ```
 
-or use [🧠 CLI](https://kafka-docker-playground.io/#/how-to-use?id=%f0%9f%a7%a0-cli) with:
+or use [🧠 CLI](/cli) with:
 
 ```bash
 playground container get-ip-addresses
@@ -136,7 +136,7 @@ kafka-run-class kafka.tools.GetOffsetShell --broker-list broker:9092 --topic a-t
 EOF
 ```
 
-or use [🧠 CLI](https://kafka-docker-playground.io/#/how-to-use?id=%f0%9f%a7%a0-cli) with:
+or use [🧠 CLI](/cli) with:
 
 ```bash
 $  playground topic get-number-records --help
@@ -164,7 +164,7 @@ Examples:
 docker exec connect kafka-console-consumer -bootstrap-server broker:9092 --topic connect-offsets --from-beginning --property print.key=true --property print.timestamp=true
 ```
 
-or use [🧠 CLI](https://kafka-docker-playground.io/#/how-to-use?id=%f0%9f%a7%a0-cli) with:
+or use [🧠 CLI](/cli) with:
 
 ```bash
 $  playground topic display-connect-offsets --help

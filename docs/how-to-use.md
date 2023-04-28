@@ -556,7 +556,7 @@ JMX metrics are available locally on those ports:
 * schema-registry: `10001`
 * connect: `10002`
 
-In order to easily gather JMX metrics, you can execute [🧠 CLI](https://kafka-docker-playground.io/#/how-to-use?id=%f0%9f%a7%a0-cli) with `get-jmx-metrics` command:
+In order to easily gather JMX metrics, you can execute [🧠 CLI](/cli) with `get-jmx-metrics` command:
 
 ```bash
 $ playground get-jmx-metrics
@@ -621,7 +621,7 @@ $ playground get-jmx-metrics -c connect -d "kafka.connect kafka.consumer kafka.p
 
 Because the playground use **[Docker override](/how-it-works?id=🐳-docker-override)**, not all configuration parameters are in same `docker-compose.yml` file.
 
-In order to easily see the end result properties file, you can use execute [🧠 CLI](https://kafka-docker-playground.io/#/how-to-use?id=%f0%9f%a7%a0-cli) with `get-properties` command:
+In order to easily see the end result properties file, you can use execute [🧠 CLI](/cli) with `get-properties` command:
 
 ```bash
 $ playground get-properties
@@ -690,7 +690,7 @@ Because the playground uses **[Docker override](/how-it-works?id=🐳-docker-ove
 
 For these reasons, if you want to make a change in one of the `docker-compose` files (without restarting the example from scratch), it is not simply a matter of doing `docker-compose up -d` 😅 !
 
-However, when you execute an example, you get in the output the [🧠 CLI](https://kafka-docker-playground.io/#/how-to-use?id=%f0%9f%a7%a0-cli) command to run `recreate-container` in order to easily re-create modified container(s) 🥳.
+However, when you execute an example, you get in the output the [🧠 CLI](/cli) command to run `recreate-container` in order to easily re-create modified container(s) 🥳.
 
 *Example:*
 
@@ -699,7 +699,7 @@ However, when you execute an example, you get in the output the [🧠 CLI](https
  run cli command playground recreate-container
 ```
 
-So you can modify one of the `docker-compose` files (in that case either [`environment/plaintext/docker-compose.yml`](https://github.com/vdesabou/kafka-docker-playground/blob/master/environment/plaintext/docker-compose.yml) or [`connect/connect-http-sink/docker-compose.plaintext.yml`](https://github.com/vdesabou/kafka-docker-playground/blob/master/connect/connect-http-sink/docker-compose.plaintext.yml)), and then run execute [🧠 CLI](https://kafka-docker-playground.io/#/how-to-use?id=%f0%9f%a7%a0-cli) with `recreate-container` command:
+So you can modify one of the `docker-compose` files (in that case either [`environment/plaintext/docker-compose.yml`](https://github.com/vdesabou/kafka-docker-playground/blob/master/environment/plaintext/docker-compose.yml) or [`connect/connect-http-sink/docker-compose.plaintext.yml`](https://github.com/vdesabou/kafka-docker-playground/blob/master/connect/connect-http-sink/docker-compose.plaintext.yml)), and then run execute [🧠 CLI](/cli) with `recreate-container` command:
 
 *Example:*
 

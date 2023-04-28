@@ -34,7 +34,7 @@
 
 ## February 2023
 
-- Added [🧠 CLI](/how-to-use?id=%f0%9f%a7%a0-cli)
+- Added [🧠 CLI](//cli)
 - Changed [🔐 Proxy with BASIC authentication](/reusables?id=%f0%9f%94%90-proxy-with-basic-authentication) to use [ubuntu/squid](https://hub.docker.com/r/ubuntu/squid) as nginx example was broken
 
 ## January 2023

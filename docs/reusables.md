@@ -8,7 +8,7 @@ If you want to create your own reproduction model, follow these steps:
 
 * Go into the directory of the example of your choice
 * Choose the script that you want to use as basis
-* Execute [🧠 CLI](https://kafka-docker-playground.io/#/how-to-use?id=%f0%9f%a7%a0-cli) with `bootstrap-reproduction-model` command:
+* Execute [🧠 CLI](/cli) with `bootstrap-reproduction-model` command:
 
 ```bash
 $ playground bootstrap-reproduction-model --help                          
@@ -979,7 +979,7 @@ In my example, the connector version is `10.1.1`, so I'm switching to branch tag
 
 ![remote_debugging](./images/remote_debugging2.jpg)
 
-4. Execute [🧠 CLI](https://kafka-docker-playground.io/#/how-to-use?id=%f0%9f%a7%a0-cli) with `enable-remote-debugging` command:
+4. Execute [🧠 CLI](/cli) with `enable-remote-debugging` command:
 
 ```bash
 $ playground enable-remote-debugging -c connect

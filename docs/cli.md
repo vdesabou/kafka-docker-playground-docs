@@ -29,11 +29,43 @@ source /path/to/kafka-docker-playground/scripts/cli/completions.bash
 > [!NOTE]
 > If you use ZSH, but **not** `Oh-My-Zsh`, please check [this](https://bashly.dannyb.co/advanced/bash-completion/#completions-in-zsh).
 
-## 🕹️ Commands
+### ⚙️ Config file 
 
-### 🚀 Run commands
+CLI can be configured using `config.ini` [file](https://github.com/vdesabou/kafka-docker-playground/blob/master/scripts/cli/config.ini)
 
-#### run
+```ini
+;; Configuration file for playground CLI
+
+;; You can configure the path to your config.ini file using CONFIG_FILE environment variable
+;; export CONFIG_FILE="path/to/config.ini"
+
+; editor to use to open files
+editor = code
+
+; list (comma separated) of folders where to search for zip or jar
+; Current folder is always included
+; examples:
+; folder_zip_or_jar = ~/Downloads,~/Documents/github/kafka-connect-*
+folder_zip_or_jar = ~/Downloads
+
+; list (comma separated) of folders where to search for schema files (*.avsc, *.json, *.proto, *.proto3)
+; Current folder is always included
+; examples:
+; folder_producer_schema = ~/Downloads,~/Documents/github/kafka-connect-*
+folder_producer_schema = ~/Downloads
+```
+
+You can configure the path to your own config.ini file using `CONFIG_FILE` environment variable:
+
+```bash
+export CONFIG_FILE="path/to/config.ini"
+```
+
+## 🚀 Run commands
+
+### 🕹️ `run`
+
+Run any example from anywhere using all the possible options available !
 
 
 > [!WARNING]
@@ -41,3 +73,278 @@ source /path/to/kafka-docker-playground/scripts/cli/completions.bash
 
 > [!TIP]
 > [bat](https://github.com/sharkdp/bat) is also used by `run` command to display files with syntax highlighting and colors, you can install it using `brew install bat` on Mac.
+
+#### 🍿 Example
+
+<script async id="asciicast-581275" src="https://asciinema.org/a/581275.js" async data-autoplay="true" data-size="big"></script>
+
+#### 🧑‍🎓 Usage
+
+```bash
+playground run --help
+playground run
+
+  🕹️ Run any example
+  
+  👉 Check documentation https://tinyurl.com/xxx
+
+== Usage ==
+  playground run [OPTIONS] [ARGUMENTS...]
+  playground run --help | -h
+
+== Options ==
+  --file, -f FILE (required)
+    🔖 Example file to run
+    
+    It must be absolute full path
+    
+    🎓 Tip: use <tab> completion to trigger fzf completion
+
+  --open, -o
+    📖 Opening example file with text editor set with config.ini (default is
+    code)
+
+  --tag TAG
+    🎯 Confluent Platform (CP) version to use
+    
+    Must be greater or equal to 5.0.0
+
+  --connector-tag CONNECTOR_TAG
+    🔗 Connector version to use
+    
+    By default, for each connector, the latest available version on Confluent
+    Hub is used
+
+  --connector-zip CONNECTOR_ZIP
+    🤐 Connector zip to use
+    
+    It must be absolute full path
+    
+    🎓 Tip: use <tab> completion to trigger fzf completion 
+            use folder_zip_or_jar (default: ~/Downloads) in config.ini file to
+    configure where to search the files (current folder is always used)
+
+  --connector-jar CONNECTOR_JAR
+    ♨️ Connector jar to use
+    
+    It must be absolute full path
+    
+    🎓 Tip: use <tab> completion to trigger fzf completion 
+            use folder_zip_or_jar (default: ~/Downloads) in config.ini file to
+    configure where to search the files (current folder is always used)
+
+  --disable-ksqldb
+    🛑 Disable ksqlDB
+    
+    By default, ksqldb-server and ksqldb-cli containers are started for every
+    test
+
+  --disable-control-center
+    🛑 Disable Control Center
+    
+    By default, control-center container is started for every test
+    
+    Control Center is reachable at http://127.0.0.1:9021
+
+  --enable-conduktor
+    🐺 Enable Conduktor Platform
+    
+    By default, Conduktor Platform container is not started for every test
+    
+    Conduktor is reachable at http://127.0.0.1:8080/console (admin/admin)
+
+  --enable-multiple-brokers
+    3️⃣ Enable multiple brokers
+    
+    By default, there is only one broker node enabled
+
+  --enable-multiple-connect-workers
+    🥉 Enable multiple connect node
+    
+    By default, there is only one connect node enabled
+    
+    It only works when plaintext environment is used
+
+  --enable-jmx-grafana
+    Enable Grafana, Prometheus and Pyroscope
+    
+    📊 Grafana is reachable at http://127.0.0.1:3000
+    🛡️ Prometheus is reachable at http://127.0.0.1:9090
+    📛 Pyroscope is reachable at http://127.0.0.1:4040
+
+  --enable-kcat
+    🐈‍⬛ Enable kcat
+    
+    You can use it with:
+    
+    $ docker exec kcat kcat -b broker:9092 -L
+
+  --enable-sr-maven-plugin-app
+    🔰 Enable Schema Registry Maven plugin App
+
+  --enable-sql-datagen
+    🌪️ Enable SQL Datagen injection
+    
+    This only works for Oracle, MySql, Postgres and Microsoft Sql Server source
+    connector examples with JDBC and Debezium
+
+  --help, -h
+    Show this help
+
+== Arguments ==
+  ARGUMENTS...
+    Arguments to use by example script
+```
+
+### ⚡ `re-run`
+
+Simply re-run last example you ran with `run` [command](/cli?id=%f0%9f%95%b9%ef%b8%8f-run) !
+
+If you don't specify any flags, it will re-run with same flags as before.
+
+Examples:
+
+```bash
+$ playground re-run
+
+# will re-run same example:
+# playground run -f /Users/vsaboulin/Documents/github/kafka-docker-playground/connect/connect-jdbc-postgresql-sink/postgres-sink.sh --tag=7.3.3 --connector-tag=10.6.0 --disable-control-center
+```
+
+```bash
+$ playground re-run --connector-tag=10.6.1
+
+# will re-run same example but replace previous flags with:
+# playground run -f /Users/vsaboulin/Documents/github/kafka-docker-playground/connect/connect-jdbc-postgresql-sink/postgres-sink.sh --connector-tag=10.6.1
+```
+
+#### 🍿 Example
+
+<script async id="asciicast-581276" src="https://asciinema.org/a/581276.js"></script>
+
+#### 🧑‍🎓 Usage
+
+```bash
+playground re-run --help
+playground re-run - ⚡ Simply re-run last example you ran with <playground run>
+
+== Usage ==
+  playground re-run [OPTIONS] [ARGUMENTS...]
+  playground re-run --help | -h
+
+== Options ==
+  --tag TAG
+    🎯 Confluent Platform (CP) version to use
+    
+    Must be greater or equal to 5.0.0
+
+  --connector-tag CONNECTOR_TAG
+    🔗 Connector version to use
+    
+    By default, for each connector, the latest available version on Confluent
+    Hub is used
+
+  --connector-zip CONNECTOR_ZIP
+    🤐 Connector zip to use
+    
+    It must be absolute full path
+    
+    🎓 Tip: use <tab> completion to trigger fzf completion 
+            use folder_zip_or_jar (default: ~/Downloads) in config.ini file to
+    configure where to search the files (current folder is always used)
+
+  --connector-jar CONNECTOR_JAR
+    ♨️ Connector jar to use
+    
+    It must be absolute full path
+    
+    🎓 Tip: use <tab> completion to trigger fzf completion 
+            use folder_zip_or_jar (default: ~/Downloads) in config.ini file to
+    configure where to search the files (current folder is always used)
+
+  --disable-ksqldb
+    🛑 Disable ksqlDB
+    
+    By default, ksqldb-server and ksqldb-cli containers are started for every
+    test
+
+  --disable-control-center
+    🛑 Disable Control Center
+    
+    By default, control-center container is started for every test
+    
+    Control Center is reachable at http://127.0.0.1:9021
+
+  --enable-conduktor
+    🐺 Enable Conduktor Platform
+    
+    By default, Conduktor Platform container is not started for every test
+    
+    Conduktor is reachable at http://127.0.0.1:8080/console (admin/admin)
+
+  --enable-multiple-brokers
+    3️⃣ Enable multiple brokers
+    
+    By default, there is only one broker node enabled
+
+  --enable-multiple-connect-workers
+    🥉 Enable multiple connect node
+    
+    By default, there is only one connect node enabled
+    
+    It only works when plaintext environment is used
+
+  --enable-jmx-grafana
+    Enable Grafana, Prometheus and Pyroscope
+    
+    📊 Grafana is reachable at http://127.0.0.1:3000
+    🛡️ Prometheus is reachable at http://127.0.0.1:9090
+    📛 Pyroscope is reachable at http://127.0.0.1:4040
+
+  --enable-kcat
+    🐈‍⬛ Enable kcat
+    
+    You can use it with:
+    
+    $ docker exec kcat kcat -b broker:9092 -L
+
+  --enable-sr-maven-plugin-app
+    🔰 Enable Schema Registry Maven plugin App
+
+  --enable-sql-datagen
+    🌪️ Enable SQL Datagen injection
+    
+    This only works for Oracle, MySql, Postgres and Microsoft Sql Server source
+    connector examples with JDBC and Debezium
+
+  --help, -h
+    Show this help
+
+== Arguments ==
+  ARGUMENTS...
+    Arguments to use by example script
+```
+
+### 👐 `open`
+
+Simply open last example you ran with `run` [command](/cli?id=%f0%9f%95%b9%ef%b8%8f-run) in your configured editor (see `editor` config in [⚙️ Config file](/cli?id=%e2%9a%99%ef%b8%8f-config-file), default is code).
+
+#### 🍿 Example
+
+<script async id="asciicast-581277" src="https://asciinema.org/a/581277.js"></script>
+
+#### 🧑‍🎓 Usage
+
+```bash
+playground open --help
+playground open - 👐 Simply open last example you ran with <playground run>
+
+== Usage ==
+  playground open
+  playground open --help | -h
+
+== Options ==
+  --help, -h
+    Show this help
+
+```

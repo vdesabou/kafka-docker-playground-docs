@@ -427,3 +427,119 @@ Set connect log level
 
 > [!TIP]
 > If flag `--connector` (`-c`) is not specified, the command will apply to all connectors.
+
+## 📦 Container commands
+
+Easily interact with running docker containers.
+
+### 💫 `recreate`
+
+Recreate container(s)
+
+### 🖥️ `get-ip-addresses`
+
+Get ip address of running containers
+
+<script async id="asciicast-581364" src="https://asciinema.org/a/581364.js"></script>
+
+### 🕵️ `logs`
+
+Tail and follow container logs
+
+### 🛬 `ssh`
+
+SSH into container
+
+<script async id="asciicast-581366" src="https://asciinema.org/a/581366.js"></script>
+
+```bash
+$ playground container ssh --help
+playground container ssh - 🛬 SSH into container
+
+== Usage ==
+  playground container ssh [OPTIONS]
+  playground container ssh --help | -h
+
+== Options ==
+  --container, -c CONTAINER
+    🐳 Container name
+    Default: connect
+
+  --shell, -s SHELL
+    💾 Shell to use (default is bash)
+    Allowed: bash, sh, ksh, zsh
+    Default: bash
+
+  --help, -h
+    Show this help
+
+Examples
+  playground ssh -c connect
+  playground ssh -c connect -s sh
+  playground ssh --container connect --shell sh
+```
+
+> [!TIP]
+> If flag `--container` (`-c`) is not specified, the command will apply to `connect` container.
+
+### 🪄 `exec`
+
+Execute command in a container
+
+<script async id="asciicast-581367" src="https://asciinema.org/a/581367.js"></script>
+
+```bash
+$ playground container exec --help                                        
+playground container exec - 🪄  Execute command in a container
+
+== Usage ==
+  playground container exec [OPTIONS]
+  playground container exec --help | -h
+
+== Options ==
+  --container, -c CONTAINER
+    🐳 Container name
+    Default: connect
+
+  --command COMMAND (required)
+    📲 Command to execute
+
+  --root
+    👑 Run command as root
+
+  --shell SHELL
+    💾 Shell to use (default is bash)
+    Allowed: bash, sh, ksh, zsh
+    Default: bash
+
+  --help, -h
+    Show this help
+
+Examples
+  playground exec -c connect -d "date"
+  playground exec -c connect -d "whoami" --root
+  playground exec --container connect --command "whoami" --shell sh
+```
+
+> [!TIP]
+> If flag `--container` (`-c`) is not specified, the command will apply to `connect` container.
+
+### 🔁 `restart`
+
+Restart a container
+
+<script async id="asciicast-581368" src="https://asciinema.org/a/581368.js"></script>
+
+### ⏸️ `pause`
+
+Pause a container
+### ⏯️ `resume`
+
+Resume a container
+### 🔫 `kill`
+
+Kill a container
+
+### 💀 `kill-all`
+
+Kill all containers 

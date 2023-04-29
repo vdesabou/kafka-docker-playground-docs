@@ -533,6 +533,9 @@ Restart a container
 ### ⏸️ `pause`
 
 Pause a container
+
+<script async id="asciicast-581369" src="https://asciinema.org/a/581369.js"></script>
+
 ### ⏯️ `resume`
 
 Resume a container

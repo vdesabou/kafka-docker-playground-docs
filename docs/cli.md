@@ -539,10 +539,42 @@ Pause a container
 ### ⏯️ `resume`
 
 Resume a container
+
+<script async id="asciicast-581584" src="https://asciinema.org/a/581584.js"></script>
+
 ### 🔫 `kill`
 
 Kill a container
 
+<script async id="asciicast-581586" src="https://asciinema.org/a/581586.js"></script>
+
 ### 💀 `kill-all`
 
-Kill all containers 
+Kill all containers
+
+<script async id="asciicast-581587" src="https://asciinema.org/a/581587.js"></script>
+
+## 🗳 Topics commands
+
+Easily interact with kafka topics.
+
+### 💫 `recreate`
+
+# 💯 `get-number-records`         
+
+Get number of records in a topic
+
+# 📬 `display-connect-offsets`
+
+Display content of connect offsets topic
+# 📭 `display-consumer-offsets`
+
+Display content of __consumer_offsets topic
+
+# 🔬 `describe`
+
+🔬 Describe topic
+
+# 📥 `consume`
+
+Consume topic(s) from current running examples

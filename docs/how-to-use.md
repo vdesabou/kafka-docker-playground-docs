@@ -99,16 +99,13 @@ More details [here](https://github.com/vdesabou/kafka-docker-playground/tree/mas
 
 ## 🏎️ Start an example
 
-Select an example in the **[Content](/content.md)** section and simply run it using `playground run` CLI command !
+Check the list of examples in the **[Content](/content.md)** section and simply run one of them using `playground run` CLI command!
 
 *Example:* if you want to run a test with IBM MQ sink connector, check out the [README](https://github.com/vdesabou/kafka-docker-playground/tree/master/connect/connect-ibm-mq-sink) and the list of tests in [How to Run](https://github.com/vdesabou/kafka-docker-playground/tree/master/connect/connect-ibm-mq-sink#how-to-run) section, then simply execute the script you want using CLI:
 
-Use `playground run` command and <tab> completion with `fzf` when selecting the example file !
+Use `playground run` command and <tab> completion with `fzf` when selecting the example file!
 
-
-<iframe width="100%" height="400" src="https://www.youtube.com/embed/9FpXj1EXMqA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-
-
+<script async id="asciicast-581275" src="https://asciinema.org/a/581275.js" async data-autoplay="true" data-size="big"></script>
 
 > [!NOTE]
 > When some additional steps are required, it is specified in the corresponding `README` file
@@ -118,8 +115,8 @@ Use `playground run` command and <tab> completion with `fzf` when selecting the 
 > * [AWS S3 sink connector](https://github.com/vdesabou/kafka-docker-playground/tree/master/connect/connect-aws-s3-sink#aws-setup): file `~/.aws/credentials` or environnement variables `AWS_REGION`, `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` are required.
 > 
 > * [Zendesk source connector](https://github.com/vdesabou/kafka-docker-playground/tree/master/connect/connect-zendesk-source#how-to-run): arguments `ZENDESK_URL`, `ZENDESK_USERNAME`and `ZENDESK_PASSWORD` are required (you can also pass them as environment variables)
-> 
-
+>
+> Example: playground run -f zendesk-source<tab> <ZENDESK_URL> <ZENDESK_USERNAME> <ZENDESK_PASSWORD>
 
 
 ```bash
@@ -242,6 +239,8 @@ Environment Variables:
 
 
 ## 🌤️ Confluent Cloud examples
+
+Use `playground run-ccloud` command and <tab> completion with `fzf` when selecting the example file!
 
 All you have to do is to be already logged in with [confluent CLI](https://docs.confluent.io/confluent-cli/current/overview.html#confluent-cli-overview).
 
@@ -385,47 +384,47 @@ ls: cannot access '/usr/share/confluent-hub-components/debezium-debezium-connect
 > [!NOTE]
 > For more information about the Connect image used, check [here](/how-it-works?id=🔗-connect-image-used).
 
-## 🛑 Disabling ksqldb
+## 🚀 Enabling ksqlDB
 
-By default, [`ksqldb-server`](https://github.com/vdesabou/kafka-docker-playground/blob/7098800a582bfb2629005366b514a923d2fa037f/environment/plaintext/docker-compose.yml#L135-L171) and [`ksqldb-cli`](https://github.com/vdesabou/kafka-docker-playground/blob/7098800a582bfb2629005366b514a923d2fa037f/environment/plaintext/docker-compose.yml#L173-L183) containers are started for every test. You can disable this by setting environment variable `DISABLE_KSQLDB`:
+By default, [`ksqldb-server`](https://github.com/vdesabou/kafka-docker-playground/blob/7098800a582bfb2629005366b514a923d2fa037f/environment/plaintext/docker-compose.yml#L135-L171) and [`ksqldb-cli`](https://github.com/vdesabou/kafka-docker-playground/blob/7098800a582bfb2629005366b514a923d2fa037f/environment/plaintext/docker-compose.yml#L173-L183) containers are not started for every test. You can enable this by setting environment variable `ENABLE_KSQLDB`:
 
 *Example:*
 
 ```bash
-export DISABLE_KSQLDB=true
+export ENABLE_KSQLDB=true
 ```
 
-or setting flag `--disable-ksqldb`
+or setting flag `--enable-ksqldb`
 
 *Example:*
 
 ```bash
-  --disable-ksqldb
-    🛑 Disable ksqlDB
+  --enable-ksqldb
+    🚀 Enable ksqlDB
     
-    By default, ksqldb-server and ksqldb-cli containers are started for every
+    By default, ksqldb-server and ksqldb-cli containers are not started for every
     test
 ```
 
-## 🛑 Disabling control-center
+## 💠 Enabling Control Center
 
-By default, [`control-center`](https://github.com/vdesabou/kafka-docker-playground/blob/7098800a582bfb2629005366b514a923d2fa037f/environment/plaintext/docker-compose.yml#L185-L221) container is started for every test. You can disable this by setting environment variable `DISABLE_CONTROL_CENTER`:
+By default, [`control-center`](https://github.com/vdesabou/kafka-docker-playground/blob/7098800a582bfb2629005366b514a923d2fa037f/environment/plaintext/docker-compose.yml#L185-L221) container is not started for every test. You can enable this by setting environment variable `ENABLE_CONTROL_CENTER`:
 
 *Example:*
 
 ```bash
-export DISABLE_CONTROL_CENTER=true
+export ENABLE_CONTROL_CENTER=true
 ```
 
-or setting flag `--disable-control-center`
+or setting flag `--enable-control-center`
 
 *Example:*
 
 ```bash
-  --disable-control-center
-    🛑 Disable Control Center
+  --enable-control-center
+    💠 Enable Control Center
     
-    By default, control-center container is started for every test
+    By default, control-center container is not started for every test
     
     Control Center is reachable at http://127.0.0.1:9021
 ```
@@ -688,25 +687,25 @@ value.converter=io.confluent.connect.avro.AvroConverter
 
 Because the playground uses **[Docker override](/how-it-works?id=🐳-docker-override)**, not all configuration parameters are in same `docker-compose.yml` file and also `docker-compose` files in the playground depends on environment variables to be set.
 
-For these reasons, if you want to make a change in one of the `docker-compose` files (without restarting the example from scratch), it is not simply a matter of doing `docker-compose up -d` 😅 !
+For these reasons, if you want to make a change in one of the `docker-compose` files (without restarting the example from scratch), it is not simply a matter of doing `docker-compose up -d` 😅!
 
-However, when you execute an example, you get in the output the [🧠 CLI](/cli) command to run `recreate-container` in order to easily re-create modified container(s) 🥳.
+However, when you execute an example, you get in the output the [🧠 CLI](/cli) command to run `container recreate` in order to easily re-create modified container(s) 🥳.
 
 *Example:*
 
 ```bash
 12:02:18 ℹ️ ✨If you modify a docker-compose file and want to re-create the container(s),
- run cli command playground recreate-container
+ run cli command playground container recreate
 ```
 
-So you can modify one of the `docker-compose` files (in that case either [`environment/plaintext/docker-compose.yml`](https://github.com/vdesabou/kafka-docker-playground/blob/master/environment/plaintext/docker-compose.yml) or [`connect/connect-http-sink/docker-compose.plaintext.yml`](https://github.com/vdesabou/kafka-docker-playground/blob/master/connect/connect-http-sink/docker-compose.plaintext.yml)), and then run execute [🧠 CLI](/cli) with `recreate-container` command:
+So you can modify one of the `docker-compose` files (in that case either [`environment/plaintext/docker-compose.yml`](https://github.com/vdesabou/kafka-docker-playground/blob/master/environment/plaintext/docker-compose.yml) or [`connect/connect-http-sink/docker-compose.plaintext.yml`](https://github.com/vdesabou/kafka-docker-playground/blob/master/connect/connect-http-sink/docker-compose.plaintext.yml)), and then run execute [🧠 CLI](/cli) with `playground container recreate` command:
 
 *Example:*
 
 After editing [`connect/connect-http-sink/docker-compose.plaintext.yml`](https://github.com/vdesabou/kafka-docker-playground/blob/master/connect/connect-http-sink/docker-compose.plaintext.yml) and updated both `connect` and `http-service-no-auth`, the suggested cli command was ran:
 
 ```bash
-$ playground recreate-container
+$ playground container recreate
 http-service-ssl-basic-auth is up-to-date
 http-service-oauth2-auth is up-to-date
 Recreating http-service-no-auth ... 

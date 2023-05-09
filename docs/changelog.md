@@ -1,5 +1,9 @@
 # Change Log
 
+## May 2023
+
+- Added 🔍 [ksqlDB Schema Inference with ID](https://github.com/vdesabou/kafka-docker-playground/tree/master/ksqldb/schema-inference-with-id) (🙏 @danielpetisme)
+
 ## April 2023
 
 - Added 🖇️ [Monitoring cluster linking](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/monitoring-cluster-linking) (🙏 @danielpetisme)
@@ -9,8 +13,7 @@
 - Added 🌪️ SQL Datagen tool for [PostgreSQL](/reusables?id=%f0%9f%91%89-postgresql) examples
 - Added 🌪️ SQL Datagen tool for [MySql](/reusables?id=%f0%9f%91%89-mysql) examples
 - Added 🌪️ SQL Datagen tool for [Microsoft Sql Server](/reusables?id=%f0%9f%91%89-microsoft-sql-server) examples
-- Added [Pyroscope](https://pyroscope.io/docs/) to JMX Grafana
-📛 [Pyroscope](https://pyroscope.io/docs/) is reachable at [http://127.0.0.1:4040](http://127.0.0.1:4040)
+- Added 📛 [Pyroscope](https://pyroscope.io/docs/) to JMX Grafana
 - Added CLI command `playground get-all-schemas` to get all schemas versions for all subjects.
 - Added CLI command `playground topic consume` to consume automatically topic from currently running connect example
 - Added CLI command `re-run` to re-run last example

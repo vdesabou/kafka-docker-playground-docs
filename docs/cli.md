@@ -58,7 +58,7 @@ folder_producer_schema = ~/Downloads
 You can configure the path to your own config.ini file using `CONFIG_FILE` environment variable:
 
 ```bash
-export CONFIG_FILE="path/to/config.ini"
+export CONFIG_FILE="/path/to/config.ini"
 ```
 
 ## 🚀 Run commands
@@ -80,7 +80,7 @@ Run any example, except for Confluent Cloud (in this case use `run-ccloud` comma
 #### 🧑‍🎓 Usage
 
 ```bash
-$ playground run --help       
+$ playground run --help
 playground run
 
   🕹️ Run any example, except for Confluent Cloud (in this case use run-ccloud
@@ -96,7 +96,7 @@ playground run
   --file, -f FILE (required)
     🔖 Example file to run
     
-    It must be absolute full path
+    ❕ It must be absolute full path
     
     🎓 Tip: use <tab> completion to trigger fzf completion
 
@@ -118,7 +118,7 @@ playground run
   --connector-zip CONNECTOR_ZIP
     🤐 Connector zip to use
     
-    It must be absolute full path
+    ❕ It must be absolute full path
     
     🎓 Tip: use <tab> completion to trigger fzf completion 
             use folder_zip_or_jar (default: ~/Downloads) in config.ini file to
@@ -127,7 +127,7 @@ playground run
   --connector-jar CONNECTOR_JAR
     ♨️ Connector jar to use
     
-    It must be absolute full path
+    ❕ It must be absolute full path
     
     🎓 Tip: use <tab> completion to trigger fzf completion 
             use folder_zip_or_jar (default: ~/Downloads) in config.ini file to
@@ -194,6 +194,19 @@ playground run
 == Arguments ==
   ARGUMENTS...
     Arguments to use by example script
+    
+    Most of examples support to get required options either by using arguments
+    or environment variables.
+    
+    Example with Zendesk:
+    
+    playground run -f zendesk-source<tab> <ZENDESK_URL> <ZENDESK_USERNAME>
+    <ZENDESK_PASSWORD>
+
+Examples
+  playground run -f zendesk-source<tab> --tag 7.2.1 --enable-control-center
+  <ZENDESK_URL> <ZENDESK_USERNAME> <ZENDESK_PASSWORD>
+  playground run -f jdbc<tab> --connector-tag 10.6.0 --enable-jmx-grafana --open
 ```
 
 ### ⛅ `run-ccloud`
@@ -239,7 +252,7 @@ playground run-ccloud
   --file, -f FILE (required)
     🔖 Example file to run
     
-    It must be absolute full path
+    ❕ It must be absolute full path
     
     🎓 Tip: use <tab> completion to trigger fzf completion
 
@@ -261,7 +274,7 @@ playground run-ccloud
   --connector-zip CONNECTOR_ZIP
     🤐 Connector zip to use
     
-    It must be absolute full path
+    ❕ It must be absolute full path
     
     🎓 Tip: use <tab> completion to trigger fzf completion 
             use folder_zip_or_jar (default: ~/Downloads) in config.ini file to
@@ -270,7 +283,7 @@ playground run-ccloud
   --connector-jar CONNECTOR_JAR
     ♨️ Connector jar to use
     
-    It must be absolute full path
+    ❕ It must be absolute full path
     
     🎓 Tip: use <tab> completion to trigger fzf completion 
             use folder_zip_or_jar (default: ~/Downloads) in config.ini file to
@@ -298,15 +311,14 @@ playground run-ccloud
     $ docker exec kcat kcat -b broker:9092 -L
 
   --cluster-cloud CLUSTER-CLOUD
-    🌤 The cloud provider (aws, gcp or azure). Default is aws
+    🌤 The cloud provider: aws, gcp or azure. Default is aws
     
     🎓 Tip: you can also use CLUSTER_CLOUD environment variable
-    Allowed: aws, gcp, aws
+    Allowed: aws, gcp, azure
     Default: aws
 
   --cluster-region CLUSTER-REGION
-    🗺 The Cloud region. Use <confluent kafka region list> to get the list of
-    possible regions
+    🗺 The Cloud region. 
     
     🎓 Tip: you can also use CLUSTER_REGION environment variable
     Default: eu-west-2
@@ -349,6 +361,18 @@ playground run-ccloud
 == Arguments ==
   ARGUMENTS...
     Arguments to use by example script
+    
+    Most of examples support to get required options either by using arguments
+    or environment variables.
+    
+    Example with Zendesk:
+    
+    playground run -f zendesk-source<tab> <ZENDESK_URL> <ZENDESK_USERNAME>
+    <ZENDESK_PASSWORD>
+
+Examples
+  playground run-ccloud mqtt<tab> --cluster-cloud aws --cluster-region eu-west-3
+  --enable-control-center --connector-tag 1.2.3
 ```
 
 ### ⚡ `re-run`
@@ -380,8 +404,8 @@ $ playground run -f /path/to/kafka-docker-playground/connect/connect-jdbc-postgr
 #### 🧑‍🎓 Usage
 
 ```bash
-playground re-run --help
-playground re-run - ⚡ Simply re-run last example you ran with <playground run>
+$ playground re-run --help
+playground re-run - ⚡ Simply re-run last example you ran with <playground run> or <playground run-ccloud>
 
 == Usage ==
   playground re-run [OPTIONS] [ARGUMENTS...]
@@ -402,7 +426,7 @@ playground re-run - ⚡ Simply re-run last example you ran with <playground run>
   --connector-zip CONNECTOR_ZIP
     🤐 Connector zip to use
     
-    It must be absolute full path
+    ❕ It must be absolute full path
     
     🎓 Tip: use <tab> completion to trigger fzf completion 
             use folder_zip_or_jar (default: ~/Downloads) in config.ini file to
@@ -411,22 +435,22 @@ playground re-run - ⚡ Simply re-run last example you ran with <playground run>
   --connector-jar CONNECTOR_JAR
     ♨️ Connector jar to use
     
-    It must be absolute full path
+    ❕ It must be absolute full path
     
     🎓 Tip: use <tab> completion to trigger fzf completion 
             use folder_zip_or_jar (default: ~/Downloads) in config.ini file to
     configure where to search the files (current folder is always used)
 
-  --disable-ksqldb
-    🛑 Disable ksqlDB
+  --enable-ksqldb
+    🚀 Enable ksqlDB
     
-    By default, ksqldb-server and ksqldb-cli containers are started for every
-    test
+    By default, ksqldb-server and ksqldb-cli containers are not started for
+    every test
 
-  --disable-control-center
-    🛑 Disable Control Center
+  --enable-control-center
+    💠 Enable Control Center
     
-    By default, control-center container is started for every test
+    By default, control-center container is not started for every test
     
     Control Center is reachable at http://127.0.0.1:9021
 
@@ -478,6 +502,18 @@ playground re-run - ⚡ Simply re-run last example you ran with <playground run>
 == Arguments ==
   ARGUMENTS...
     Arguments to use by example script
+    
+    Most of examples support to get required options either by using arguments
+    or environment variables.
+    
+    Example with Zendesk:
+    
+    playground run -f zendesk-source<tab> <ZENDESK_URL> <ZENDESK_USERNAME>
+    <ZENDESK_PASSWORD>
+
+Examples
+  playground re-run
+  playground re-run --tag=6.2.1
 ```
 
 ### 👐 `open`
@@ -594,7 +630,7 @@ Easily interact with running docker containers.
 
 ### 💫 `recreate`
 
-Recreate container(s)
+Recreate container(s). See documentation [there](/how-to-use?id=%e2%99%bb%ef%b8%8f-re-create-containers)
 
 ### 🖥️ `get-ip-addresses`
 
@@ -605,6 +641,39 @@ Get ip address of running containers
 ### 🕵️ `logs`
 
 Tail and follow container logs
+
+```bash
+playground container logs --help    
+playground container logs - 🕵️  Tail and follow container logs
+
+== Usage ==
+  playground container logs [OPTIONS]
+  playground container logs --help | -h
+
+== Options ==
+  --container, -c CONTAINER
+    🐳 Container name
+    Default: connect
+
+  --open, -o
+    🔖 Save output to a file and open with text editor set with config.ini
+    (default is code)
+
+  --wait-for-log, -w LOG
+    😴 Wait until log appears
+
+  --max-wait, -m MAX_WAIT
+    ⏳ Max time in seconds to wait when using --wait-for-log (default 600s)
+    Default: 600
+
+  --help, -h
+    Show this help
+
+Examples
+  playground container logs --container connect
+  playground container logs -c connect --open
+  playground container logs -c connect --wait-for-log "StackOverflowError"
+```
 
 ### 🛬 `ssh`
 
@@ -718,23 +787,24 @@ Kill all containers
 
 Easily interact with kafka topics.
 
-### 💫 `recreate`
-
-# 💯 `get-number-records`         
+### 💯 `get-number-records`
 
 Get number of records in a topic
 
-# 📬 `display-connect-offsets`
+<script async id="asciicast-583916" src="https://asciinema.org/a/583916.js"></script>
 
-Display content of connect offsets topic
-# 📭 `display-consumer-offsets`
+### 📭 `display-consumer-offsets`
 
 Display content of __consumer_offsets topic
 
-# 🔬 `describe`
+### 🔬 `describe`
 
 🔬 Describe topic
 
-# 📥 `consume`
+<script async id="asciicast-583917" src="https://asciinema.org/a/583917.js"></script>
 
-Consume topic(s) from current running examples
+### 📥 `consume`
+
+Consume topic from beginning without needing to specify any configuration !
+
+<script async id="asciicast-583918" src="https://asciinema.org/a/583918.js"></script>

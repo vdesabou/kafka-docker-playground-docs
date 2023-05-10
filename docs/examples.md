@@ -18,6 +18,11 @@ Each example (categorized by difficulty) is composed of:
 
 ## ⭐ Beginner
 
+
+## ⭐⭐ Intermediate
+
+Work in Progress...
+
 ### StackOverflowError with S3 sink connector
 
 <!-- tabs:start -->
@@ -329,10 +334,6 @@ Caused by: java.lang.StackOverflowError
 
 
 <!-- tabs:end -->
-
-## ⭐⭐ Intermediate
-
-Work in Progress...
 
 ## ⭐⭐⭐ Expert
 

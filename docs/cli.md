@@ -74,11 +74,9 @@ Run any example, except for Confluent Cloud (in this case use `run-ccloud` comma
 > [!TIP]
 > [bat](https://github.com/sharkdp/bat) is also used by `run` command to display files with syntax highlighting and colors, you can install it using `brew install bat` on Mac.
 
-#### 🍿 Example
 
 <script async id="asciicast-581275" src="https://asciinema.org/a/581275.js" async data-autoplay="true" data-size="big"></script>
 
-#### 🧑‍🎓 Usage
 
 ```bash
 $ playground run --help
@@ -212,10 +210,8 @@ Examples
 
 Run any Confluent Cloud (ccloud) example from anywhere using all the possible options available!
 
-#### 🍿 Example
 
 
-#### 🧑‍🎓 Usage
 
 ```bash
 $ playground run-ccloud --help
@@ -394,11 +390,7 @@ $ playground re-run --connector-tag=10.6.1
 $ playground run -f /path/to/kafka-docker-playground/connect/connect-jdbc-postgresql-sink/postgres-sink.sh --connector-tag=10.6.1
 ```
 
-#### 🍿 Example
-
 <script async id="asciicast-581276" src="https://asciinema.org/a/581276.js"></script>
-
-#### 🧑‍🎓 Usage
 
 ```bash
 $ playground re-run --help
@@ -522,11 +514,9 @@ Simply open last example you ran with `run` [command](/cli?id=%f0%9f%95%b9%ef%b8
 Stop currently running example.
 
 
-#### 🍿 Example
+
 
 <script async id="asciicast-581277" src="https://asciinema.org/a/581277.js"></script>
-
-#### 🧑‍🎓 Usage
 
 ```bash
 playground open --help

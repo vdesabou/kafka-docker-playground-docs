@@ -1,4 +1,4 @@
-# 🧑‍🎓 Examples
+# 🧑‍🎓 Playground Academy
 
 Below is a collection of real use cases/issues for which a reproduction model was done using the playground.
 
@@ -23,7 +23,7 @@ Each example (categorized by difficulty) is composed of:
 <!-- tabs:start -->
 #### **🔥 Description**
 
-User is getting StackOverflowError with S3 sink connector.
+User is getting StackOverflowError with S3 sink connector. See stack trace in Details section.
 
 #### **🤯 Details**
 
@@ -123,9 +123,12 @@ Caused by: java.lang.StackOverflowError
 
 #### **📍 Step 1**
 
-*  🎯 Choose the best [example](https://kafka-docker-playground.io/#/content) to use as basis.
+*  🎯 Choose the best [example](/content) to use as basis.
 
-* 🛠 [Bootstrap](http://localhost:3000/#/reusables?id=%f0%9f%9b%a0-bootstrap-reproduction-model) your reproduction model!
+* 🛠 [Bootstrap](/reusables?id=%f0%9f%9b%a0-bootstrap-reproduction-model) your reproduction model!
+
+> [!TIP]
+> Do not forget to [🪄 Specify versions](/how-to-use?id=%f0%9f%aa%84-specify-versions) for CP and Connector before running the test !
 
 #### **📍 Step 2**
 <!-- select:start -->
@@ -133,24 +136,27 @@ Caused by: java.lang.StackOverflowError
 #### --No--
 #### --Yes--
 
-🛠 Bootstrap reproduction model was done as following:
+
+🛠 Bootstrap reproduction model was done as following (use tab completion to select the files s3-sink.sh using `fzf`):
 
 ```bash
-cd connect/connect-aws-s3-sink
-playground bootstrap-reproduction-model -f s3-sink.sh -d "000001 StackOverflowError with S3 sink connector" -p avro
+playground bootstrap-reproduction-model --file s3-sink<tab> --description "000001 StackOverflowError with S3 sink connector" --producer avro --tag 7.3.1 --connector-tag 10.3.3
 ```
 
 💡 Explanations:
 
 * [s3-sink.sh](https://github.com/vdesabou/kafka-docker-playground/blob/master/connect/connect-aws-s3-sink/s3-sink.sh) is the closest example.
-* The problem seems related to input data, so using [avro java producer](https://kafka-docker-playground.io/#/reusables?id=%e2%99%a8%ef%b8%8f-java-producers) seems the right thing to do.
+* The problem seems related to input data, so using [avro java producer](/reusables?id=%e2%99%a8%ef%b8%8f-java-producers) seems the right thing to do.
 
 > [!NOTE]
 > As the key converter is StringConverter, we should not use `avro-with-key` for `--producer` flag.
 
 <!-- select:end -->
 
-* 👉 Follow steps from [♨️ Java producers](https://kafka-docker-playground.io/#/reusables?id=%e2%99%a8%ef%b8%8f-java-producers) in order to produce same data as user.
+* 👉 Follow steps from [♨️ Java producers](/reusables?id=%e2%99%a8%ef%b8%8f-java-producers) in order to produce same data as user.
+
+> [!TIP]
+> Since we did not use `--producer-schema-value` flag when bootstrapping the reproduction model, step 3 in [♨️ Java producers](/reusables?id=%e2%99%a8%ef%b8%8f-java-producers) should be done manually.
 
 #### **📍 Step 3**
 <!-- select:start -->
@@ -160,14 +166,65 @@ playground bootstrap-reproduction-model -f s3-sink.sh -d "000001 StackOverflowEr
 
 ⌨️ Here are the steps to follow:
 
-<iframe width="100%" height="400" src="https://www.youtube.com/embed/oXDdHh00TFw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+Update `producer-repro-000001/src/main/resources/schema/customer.avsc` file with content of user schema:
 
+```
+{
+    "type": "record",
+    "namespace": "acme",
+    "name": "Characteristic",
+    "fields": [
+        {
+            "name": "physicalCharacteristic",
+            "type": [
+                "null",
+                {
+                    "type": "record",
+                    "name": "PhysicalCharacteristic",
+                    "fields": [
+                        {
+                            "name": "children",
+                            "type": [
+                                "null",
+                                {
+                                    "type": "array",
+                                    "items": "PhysicalCharacteristic"
+                                }
+                            ],
+                            "default": null
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
+```
+
+And replace:
+
+```json
+    "namespace": "acme",
+    "name": "Characteristic",
+```
+
+by
+
+```json
+    "namespace": "com.github.vdesabou",
+    "name": "Customer",
+```
+
+Note that you could have use step 2 when bootstrapping reproduction model and this step would be fully automated:
+
+Example:
+
+```bash
+playground bootstrap-reproduction-model -f s3-sink<tab> -d "000001 StackOverflowError with S3 sink connector" -p avro --producer-schema-value schema<tab>
+```
 
 <!-- select:end -->
 👉 Adapt the example to user details and run it !
-
-> [!TIP]
-> Do not forget to [🪄 Specify versions](https://kafka-docker-playground.io/#/how-to-use?id=%f0%9f%aa%84-specify-versions) for CP and Connector before running the test !
 
 #### **📍 Step 4**
 <!-- select:start -->
@@ -188,6 +245,9 @@ curl -X PUT \
      -H "Content-Type: application/json" \
      --data '{
                "connector.class": "io.confluent.connect.s3.S3SinkConnector",
+               "key.converter": "org.apache.kafka.connect.storage.StringConverter",
+               "value.converter": "io.confluent.connect.avro.AvroConverter",
+               "value.converter.schema.registry.url": "http://schema-registry:8081",
                "tasks.max": "1",
                "topics": "customer_avro",
                "s3.region": "'"$AWS_REGION"'",
@@ -204,22 +264,6 @@ curl -X PUT \
      http://localhost:8083/connectors/s3-sink/config | jq .
 ```
 
-* Added the version to use at very beginning of script (needs to be before `source ${DIR}/../../scripts/utils.sh`):
-
-```bash
-#!/bin/bash
-set -e
-
-export TAG=7.3.1
-export CONNECTOR_TAG=10.3.3
-```
-
-* Then I ran the test:
-
-```bash
-./s3-sink-repro-000001-stackoverflowerror-with-s3-sink-connector.sh
-```
-
 <!-- select:end -->
 🥁 So...did you reproduce ??
 
@@ -228,20 +272,57 @@ export CONNECTOR_TAG=10.3.3
 * Check the connector status
 
 ```bash
-$ playground connector status
-sink  |  s3-sink  |  RUNNING  |  FAILED  |  io.confluent.connect.s3.S3SinkConnector
+$ 15:18:58 ℹ️ 🧩 Displaying connector(s) status
+Name                           Status       Tasks                          Stack Trace                                       
+-------------------------------------------------------------------------------------------------------------
+s3-sink                        ✅ RUNNING  0:🛑 FAILED                   tasks: org.apache.kafka.connect.errors.ConnectException: Exiting WorkerSinkTask due to unrecoverable exception.
+        at org.apache.kafka.connect.runtime.WorkerSinkTask.deliverMessages(WorkerSinkTask.java:618)
+        at org.apache.kafka.connect.runtime.WorkerSinkTask.poll(WorkerSinkTask.java:334)
+        at org.apache.kafka.connect.runtime.WorkerSinkTask.iteration(WorkerSinkTask.java:235)
+        at org.apache.kafka.connect.runtime.WorkerSinkTask.execute(WorkerSinkTask.java:204)
+        at org.apache.kafka.connect.runtime.WorkerTask.doRun(WorkerTask.java:201)
+        at org.apache.kafka.connect.runtime.WorkerTask.run(WorkerTask.java:256)
+        at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+        at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+        at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+        at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+        at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: java.lang.StackOverflowError
+        at org.apache.avro.Schema$RecordSchema.getFields(Schema.java:902)
+        at org.apache.parquet.avro.AvroSchemaConverter.convertField(AvroSchemaConverter.java:163)
+        at org.apache.parquet.avro.AvroSchemaConverter.convertField(AvroSchemaConverter.java:169)
+        at org.apache.parquet.avro.AvroSchemaConverter.convertUnion(AvroSchemaConverter.java:226)
+        at org.apache.parquet.avro.AvroSchemaConverter.convertField(AvroSchemaConverter.java:182)
+        at org.apache.parquet.avro.AvroSchemaConverter.convertField(AvroSchemaConverter.java:141)
+        at org.apache.parquet.avro.AvroSchemaConverter.convertField(AvroSchemaConverter.java:244)
+        at org.apache.parquet.avro.AvroSchemaConverter.convertFields(AvroSchemaConverter.java:135)
+        at org.apache.parquet.avro.AvroSchemaConverter.convertField(AvroSchemaConverter.java:163)
+        at org.apache.parquet.avro.AvroSchemaConverter.convertField(AvroSchemaConverter.java:169)
+        at org.apache.parquet.avro.AvroSchemaConverter.convertUnion(AvroSchemaConverter.java:226)
+        at org.apache.parquet.avro.AvroSchemaConverter.convertField(AvroSchemaConverter.java:182)
+        at org.apache.parquet.avro.AvroSchemaConverter.convertField(AvroSchemaConverter.java:141)
+        at org.apache.parquet.avro.AvroSchemaConverter.convertField(AvroSchemaConverter.java:244)
+        at org.apache.parquet.avro.AvroSchemaConverter.convertFields(AvroSchemaConverter.java:135)
+        at org.apache.parquet.avro.AvroSchemaConverter.convertField(AvroSchemaConverter.java:163)
+        at org.apache.parquet.avro.AvroSchemaConverter.convertField(AvroSchemaConverter.java:169)
+        at org.apache.parquet.avro.AvroSchemaConverter.convertUnion(AvroSchemaConverter.java:226)
+        at org.apache.parquet.avro.AvroSchemaConverter.convertField(AvroSchemaConverter.java:182)
+        at org.apache.parquet.avro.AvroSchemaConverter.convertField(AvroSchemaConverter.java:141)
+        at org.apache.parquet.avro.AvroSchemaConverter.convertField(AvroSchemaConverter.java:244)
+        at org.apache.parquet.avro.AvroSchemaConverter.convertFields(AvroSchemaConverter.java:135)
+        at org.apache.parquet.avro.AvroSchemaConverter.convertField(AvroSchemaConverter.java:163)
 ```
 
 👍 It failed as expected 
 
-* Check the connector logs and search for the `StackOverflowError` ERROR
+Note: You can also check the logs for a pattern `StackOverflowError` ERROR using
 
 ```bash
-$ playground logs -c connect --wait-for-log "StackOverflowError"
-23:04:59 ℹ️ ⌛ Waiting up to 600 seconds for message StackOverflowError to be present in connect container logs...
+$ playground container logs -c connect --wait-for-log "StackOverflowError"
+15:25:00 ℹ️ ⌛ Waiting up to 600 seconds for message StackOverflowError to be present in connect container logs...
 java.lang.StackOverflowError
 Caused by: java.lang.StackOverflowError
-23:04:59 ℹ️ The log is there !
+15:25:00 ℹ️ The log is there !
 ```
 
 * Full example is available [here](https://github.com/vdesabou/kafka-docker-playground/blob/master/docs-examples/connect-connect-aws-s3-sink/s3-sink-repro-000001-stackoverflowerror-with-s3-sink-connector.sh)

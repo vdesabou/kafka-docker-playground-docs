@@ -11,4 +11,4 @@
 [🧠 CLI](/cli.md)
 [🎓 How it works](/how-it-works.md)
 [👷‍♂️ Reusables](/reusables.md)
-[🧑‍🎓 Examples](/examples.md)
+[🧑‍🎓 Academy](/examples.md)

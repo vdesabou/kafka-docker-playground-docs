@@ -120,9 +120,8 @@ Use `playground run` command and <tab> completion with `fzf` when selecting the 
 
 
 ```bash
-$   🚀 Run example
-  
-  👉 Check documentation https://tinyurl.com/yx3vbwu5
+$  playground run --help                                                   
+playground run - 🕹️ Run any example, except for Confluent Cloud (in this case use run-ccloud command)
 
 == Usage ==
   playground run [OPTIONS] [ARGUMENTS...]
@@ -132,13 +131,13 @@ $   🚀 Run example
   --file, -f FILE (required)
     🔖 Example file to run
     
-    It must be absolute full path
+    ❕ It must be absolute full path
     
     🎓 Tip: use <tab> completion to trigger fzf completion
 
   --open, -o
-    📖 Opening example file with text editor set with EDITOR environment variable
-    (default is vscode)
+    📖 Opening example file with text editor set with config.ini (default is
+    code)
 
   --tag TAG
     🎯 Confluent Platform (CP) version to use
@@ -154,31 +153,31 @@ $   🚀 Run example
   --connector-zip CONNECTOR_ZIP
     🤐 Connector zip to use
     
-    It must be absolute full path
+    ❕ It must be absolute full path
     
     🎓 Tip: use <tab> completion to trigger fzf completion 
             use folder_zip_or_jar (default: ~/Downloads) in config.ini file to
-    configure where to search the files
+    configure where to search the files (current folder is always used)
 
   --connector-jar CONNECTOR_JAR
     ♨️ Connector jar to use
     
-    It must be absolute full path
+    ❕ It must be absolute full path
     
     🎓 Tip: use <tab> completion to trigger fzf completion 
             use folder_zip_or_jar (default: ~/Downloads) in config.ini file to
-    configure where to search the files
+    configure where to search the files (current folder is always used)
 
-  --disable-ksqldb
-    🛑 Disable ksqlDB
+  --enable-ksqldb
+    🚀 Enable ksqlDB
     
-    By default, ksqldb-server and ksqldb-cli containers are started for every
-    test
+    By default, ksqldb-server and ksqldb-cli containers are not started for
+    every test
 
-  --disable-control-center
-    🛑 Disable Control Center
+  --enable-control-center
+    💠 Enable Control Center
     
-    By default, control-center container is started for every test
+    By default, control-center container is not started for every test
     
     Control Center is reachable at http://127.0.0.1:9021
 
@@ -230,10 +229,20 @@ $   🚀 Run example
 == Arguments ==
   ARGUMENTS...
     Arguments to use by example script
+    
+    Most of examples support to get required options either by using arguments
+    or environment variables.
+    
+    Example with Zendesk:
+    
+    playground run -f zendesk-source<tab> <ZENDESK_URL> <ZENDESK_USERNAME>
+    <ZENDESK_PASSWORD>
 
-Environment Variables:
-  EDITOR
-    🔖 Editor to use to open the example file
+Examples
+  playground run -f zendesk-source<tab> --tag 7.2.1 --enable-control-center
+  <ZENDESK_URL> <ZENDESK_USERNAME> <ZENDESK_PASSWORD>
+  playground run -f jdbc<tab> --connector-tag 10.6.0 --enable-jmx-grafana --open
+
 
 ```
 
@@ -562,7 +571,7 @@ $ playground get-jmx-metrics
 
   Get JMX metrics from a component.
   
-  Check documentation https://tinyurl.com/yc2myws9
+  Check documentation https://kafka-docker-playground.io/#/how-to-use?id=%f0%9f%94%a2-jmx-metrics
 
 Usage:
   playground get-jmx-metrics [OPTIONS]
@@ -627,7 +636,7 @@ $ playground get-properties
 
   Get properties file from a container.
   
-  Check documentation https://tinyurl.com/4vj7tm2b
+  Check documentation https://kafka-docker-playground.io/#/how-to-use?id=%f0%9f%93%9d-see-properties-file
 
 Usage:
   playground get-properties [OPTIONS]

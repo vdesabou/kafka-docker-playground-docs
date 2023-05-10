@@ -16,7 +16,7 @@ playground bootstrap-reproduction-model
 
   🛠  Bootstrap reproduction model
   
-  👉 Check documentation https://tinyurl.com/bdfs25my
+  👉 Check documentation https://kafka-docker-playground.io/#/reusables?id=%f0%9f%9b%a0-bootstrap-reproduction-model
 
 == Usage ==
   playground bootstrap-reproduction-model [OPTIONS]

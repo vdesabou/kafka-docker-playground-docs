@@ -86,8 +86,6 @@ playground run
   🕹️ Run any example, except for Confluent Cloud (in this case use run-ccloud
   command)
   
-  👉 Check documentation https://tinyurl.com/xxx
-
 == Usage ==
   playground run [OPTIONS] [ARGUMENTS...]
   playground run --help | -h
@@ -241,8 +239,6 @@ playground run-ccloud
   --cluster-creds (or CLUSTER_CREDS environment variable)
   --cluster-schema-registry-creds (or SCHEMA_REGISTRY_CREDS environment
   variable)
-  
-  👉 Check documentation https://tinyurl.com/xxx
 
 == Usage ==
   playground run-ccloud [OPTIONS] [ARGUMENTS...]
@@ -838,8 +834,6 @@ Get all schemas versions for all subjects.
 playground get-all-schemas
 
   🔰 Get all schemas versions for all subjects
-  
-  👉 Check documentation xxxx
 
 == Usage ==
   playground get-all-schemas [OPTIONS]
@@ -879,8 +873,6 @@ playground log-level --help
 playground log-level
 
   🧬 Set log level for any package
-  
-  👉 Check documentation https://tinyurl.com/xxx
 
 == Usage ==
   playground log-level COMMAND

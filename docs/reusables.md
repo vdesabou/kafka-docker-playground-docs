@@ -296,7 +296,14 @@ Here are the steps to follow:
 
 1. Bootstrap your reproduction model by following [🛠 Bootstrap reproduction model](/reusables?id=🛠-bootstrap-reproduction-model) and use `avro` for the `--producer` (or `-p`) flag.
 
-2. *optional*: use `--producer-schema-key` and/or `--producer-schema-value` flag to specify another schema to use
+2. *optional*: use `--producer-schema-key` and/or `--producer-schema-value` flag(s) to specify another schema(s) to use, if you use this option, step 3 below is **not** required as it is done automatically
+
+3. *not required if step 2 was done* Update `producer-repro-12345/src/main/resources/avro/customer.avsc` with your AVRO schema but be careful, you need to keep `Customer` for the name and `com.github.vdesabou` for the namespace:
+
+```json
+    "name": "Customer",
+    "namespace": "com.github.vdesabou",
+```
 
 By default, the following environment variables are used in producer container:
 
@@ -369,7 +376,14 @@ Here are the steps to follow:
 
 1. Bootstrap your reproduction model by following [🛠 Bootstrap reproduction model](/reusables?id=🛠-bootstrap-reproduction-model) and use `protobuf` for the `--producer` (or `-p`) flag.
 
-2. *optional*: use `--producer-schema-key` and/or `--producer-schema-value` flag to specify another schema to use
+2. *optional*: use `--producer-schema-key` and/or `--producer-schema-value` flag(s) to specify another schema(s) to use, if you use this option, step 3 below is **not** required as it is done automatically
+
+3. *not required if step 2 was done* Update `producer-repro-12345/src/main/resources/Customer.proto` with your Protobuf schema but be careful, you need to keep `Customer` for the name and `com.github.vdesabou` for the package and `CustomerImpl` for the `java_outer_classname`:
+
+```
+package com.github.vdesabou;
+option java_outer_classname = "CustomerImpl";
+```
 
 👉 Make sure to move it in your script to the right place !
 
@@ -446,7 +460,41 @@ Here are the steps to follow:
 
 1. Bootstrap your reproduction model by following [🛠 Bootstrap reproduction model](/reusables?id=🛠-bootstrap-reproduction-model) and use `json-schema` for the `--producer` (or `-p`) flag.
 
-2. *optional*: use `--producer-schema-key` and/or `--producer-schema-value` flag(s) to specify another schema(s) to use
+2. *optional*: use `--producer-schema-key` and/or `--producer-schema-value` flag(s) to specify another schema(s) to use, if you use this option, step 3 below is **not** required as it is done automatically
+
+3. *not required if step 2 was done* Update `producer-repro-12345/src/main/resources/schema/Customer.json` with your JSON Schema schema but be careful, you need to keep `Customer` for the title:
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "additionalProperties": false,
+  "$id": "http://lh.test/Customer.schema.json",
+  "title": "Customer",
+  "description": "Customer description",
+  "type": "object",
+  "properties": {
+    "name": {
+      "description": "Customer name",
+      "type": "string",
+      "maxLength": 25
+    },
+    "surname": {
+      "description": "Customer surname",
+      "type": "string",
+      "minLength": 2
+    },
+    "email": {
+      "description": "Email",
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$"
+    }
+  },
+  "required": [
+    "name",
+    "surname"
+  ]
+}
+```
 
 By default, the following environment variables are used in producer container:
 
@@ -626,7 +674,7 @@ EOF
 #### **seq**
 
 ```
-seq -f "{\"f1\": \"value%g\"}" 10 | docker exec -i connect kafka-protobuf-console-producer --broker-list broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --property value.schema='syntax = "proto3"; message MyRecord { string f1 = 1; }'
+seq -f "{\"f1\": \"value%g\"}" 10 | docker exec -i connect kafka-protobuf-console-producer --broker-list broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic-proto --property value.schema='syntax = "proto3"; message MyRecord { string f1 = 1; }'
 ```
 
 #### **Heredoc**

@@ -1,5 +1,5 @@
 # 🐳 kafka-docker-playground
-![success tests](https://img.shields.io/badge/success%20tests-2640%2F2779-red)![connector tested](https://img.shields.io/badge/connector%20tested-148-green)![cp versions tested](https://img.shields.io/badge/cp%20version%20tested-%206.1.10%206.2.9%207.0.8%207.1.6%207.2.4%207.3.3%207.4.0-green)![last run](https://img.shields.io/badge/last%20run-2023--05--10%2003:10-green)
+![success tests](https://img.shields.io/badge/success%20tests-2649%2F2779-red)![connector tested](https://img.shields.io/badge/connector%20tested-148-green)![cp versions tested](https://img.shields.io/badge/cp%20version%20tested-%206.1.10%206.2.9%207.0.8%207.1.6%207.2.4%207.3.3%207.4.0-green)![last run](https://img.shields.io/badge/last%20run-2023--05--10%2021:09-green)
 ![GitHub issues by-label](https://img.shields.io/github/issues/vdesabou/kafka-docker-playground/CI%20failing%20🔥)![GitHub issues by-label](https://img.shields.io/github/issues/vdesabou/kafka-docker-playground/enhancement%20✨)
 ![GitHub repo size](https://img.shields.io/github/repo-size/vdesabou/kafka-docker-playground)
 [![Add a star on GitHub](https://img.shields.io/github/stars/vdesabou/kafka-docker-playground?style=social)](https://github.com/vdesabou/kafka-docker-playground)
@@ -15,13 +15,17 @@
 - 💸 Confluent commercial [features](/content?id=💸-confluent-commercial) (Tiered Storage, Control Center, Audit logs...)
 - ♻️ Cluster Linking, Replicator and MirrorMaker 2 [examples](/content?id=🌍-multi-data-center-deployments)
 - 🎯 Run examples with any Confluent Platform or connector [versions](/how-to-use?id=🪄-specify-versions)
-- 🧠 Easily run commands with playground [CLI](https://kafka-docker-playground.io/#/how-to-use?id=%f0%9f%a7%a0-cli)
+- 🧠 Easily run commands with playground [CLI](/cli)
 - 🎓 Learn how the playground [works](/how-it-works)
 - 👷‍♂️ Build your own reproduction models with [reusables](/reusables)
 - 📱 Work directly in your browser using [Gitpod.io](/how-to-use?id=🪄-gitpodio)
 - 🎩 Work remotely with VS Code using [AWS EC2 Alfred workflow](/how-to-use?id=%f0%9f%8e%a9-aws-ec2-alfred-workflow)
 - 🤖 Automated testing using Github Actions [CI](/how-it-works?id=🤖-how-ci-works)
 - 👾 And even more [playgrounds](/content?id=👾-other-playgrounds)...
+
+## 🍿 See CLI in action
+
+<script async id="asciicast-581275" src="https://asciinema.org/a/581275.js" async data-autoplay="true" data-size="big"></script>
 
 ## 🏁 Getting Started
 

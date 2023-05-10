@@ -1774,13 +1774,13 @@ docker exec -e NB_MESSAGES=-1 -e MESSAGE_BACKOFF=0 -e TOPIC="test-topic2" -d pro
 
 For all Oracle CDC and JDBC source connector with Oracle examples, you can easily inject load in table using, the following steps.
 
-You can set environment variable `SQL_DATAGEN` before running the example and it will use a Java based datagen tool:
+You can enable this by setting flag `--enable-sql-datagen`, it will start inserting rows at the end of the example for a duration that you can configure:
 
 Example:
 
 ```bash
 DURATION=10
-log "Injecting data for $DURATION seconds"
+log "Injecting data for $DURATION minutes"
 docker exec -d oracle-datagen bash -c "java ${JAVA_OPTS} -jar oracle-datagen-1.0-SNAPSHOT-jar-with-dependencies.jar --host oracle --username C##MYUSER --password mypassword --sidOrServerName sid --sidOrServerNameVal ORCLCDB --maxPoolSize 10 --durationTimeMin $DURATION"
 ```
 
@@ -1791,13 +1791,13 @@ docker exec -d oracle-datagen bash -c "java ${JAVA_OPTS} -jar oracle-datagen-1.0
 
 For all Debezium and JDBC source connector with Microsoft SQL Server examples, you can easily inject load in table using, the following steps.
 
-You can set environment variable `SQL_DATAGEN` before running the example and it will use a Java based datagen tool:
+You can enable this by setting flag `enable-sql-datagen`, it will start inserting rows at the end of the example for a duration that you can configure:
 
 Example:
 
 ```bash
 DURATION=10
-log "Injecting data for $DURATION seconds"
+log "Injecting data for $DURATION minutes"
 docker exec -d sql-datagen bash -c "java ${JAVA_OPTS} -jar sql-datagen-1.0-SNAPSHOT-jar-with-dependencies.jar --username sa --password 'Password!' --connectionUrl 'jdbc:sqlserver://sqlserver:1433;databaseName=testDB;encrypt=false' --maxPoolSize 10 --durationTimeMin $DURATION"
 ```
 
@@ -1808,13 +1808,13 @@ docker exec -d sql-datagen bash -c "java ${JAVA_OPTS} -jar sql-datagen-1.0-SNAPS
 
 For all Debezium and JDBC source connector with PostgreSQL examples, you can easily inject load in table using, the following steps.
 
-You can set environment variable `SQL_DATAGEN` before running the example and it will use a Java based datagen tool:
+You can enable this by setting flag `enable-sql-datagen`, it will start inserting rows at the end of the example for a duration that you can configure:
 
 Example:
 
 ```bash
 DURATION=10
-log "Injecting data for $DURATION seconds"
+log "Injecting data for $DURATION minutes"
 docker exec -d sql-datagen bash -c "java ${JAVA_OPTS} -jar sql-datagen-1.0-SNAPSHOT-jar-with-dependencies.jar --connectionUrl 'jdbc:postgresql://postgres/postgres?user=myuser&password=mypassword&ssl=false' --maxPoolSize 10 --durationTimeMin $DURATION"
 ```
 
@@ -1825,13 +1825,13 @@ docker exec -d sql-datagen bash -c "java ${JAVA_OPTS} -jar sql-datagen-1.0-SNAPS
 
 For all Debezium and JDBC source connector with MySQL examples, you can easily inject load in table using, the following steps.
 
-You can set environment variable `SQL_DATAGEN` before running the example and it will use a Java based datagen tool:
+You can enable this by setting flag `enable-sql-datagen`, it will start inserting rows at the end of the example for a duration that you can configure:
 
 Example:
 
 ```bash
 DURATION=10
-log "Injecting data for $DURATION seconds"
+log "Injecting data for $DURATION minutes"
 docker exec -d sql-datagen bash -c "java ${JAVA_OPTS} -jar sql-datagen-1.0-SNAPSHOT-jar-with-dependencies.jar --connectionUrl 'jdbc:mysql://mysql:3306/mydb?user=user&password=password&useSSL=false' --maxPoolSize 10 --durationTimeMin $DURATION"
 ```
 

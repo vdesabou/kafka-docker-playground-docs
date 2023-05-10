@@ -545,6 +545,14 @@ playground open - 👐 Simply open last example you ran with <playground run>
 
 ```
 
+## 👷 Bootstrap commands
+
+Build your own example or reproduction model !
+
+### 🛠 `bootstrap-reproduction-model`
+
+Bootstrap reproduction model. See documentation [here](/reusables?id=%f0%9f%9b%a0-bootstrap-reproduction-model).
+
 ## 🔗 Connector commands
 
 Easily interact with running connectors.
@@ -808,3 +816,88 @@ Display content of __consumer_offsets topic
 Consume topic from beginning without needing to specify any configuration !
 
 <script async id="asciicast-583918" src="https://asciinema.org/a/583918.js"></script>
+
+
+## 🔮 Kafka commands
+
+Kafka specific commands.
+
+### 📝 `get-properties`
+
+Get properties file from a container. See documentation [here](/how-to-use?id=%f0%9f%93%9d-see-properties-file).
+
+<script async id="asciicast-583919" src="https://asciinema.org/a/583919.js"></script>
+
+### 🔰 `get-all-schemas`
+
+Get all schemas versions for all subjects.
+
+<script async id="asciicast-583920" src="https://asciinema.org/a/583920.js"></script>
+
+```bash
+playground get-all-schemas
+
+  🔰 Get all schemas versions for all subjects
+  
+  👉 Check documentation xxxx
+
+== Usage ==
+  playground get-all-schemas [OPTIONS]
+  playground get-all-schemas --help | -h
+
+== Options ==
+  --open, -o
+    🔖 Save output to a file and open with text editor set with config.ini
+    (default is code)
+
+  --help, -h
+    Show this help
+
+Examples
+  playground get-all-schemas
+```
+
+### 🔢 `get-jmx-metrics`
+
+Get JMX metrics from a component. See documentation [there](/how-to-use?id=%f0%9f%94%a2-jmx-metrics).
+
+
+## 🐛 Debug commands
+
+Debug specific commands.
+
+### ✨ `enable-remote-debugging`
+
+Enable java remote debugging for container. See documentation [here](/reusables?id=%e2%9c%a8-remote-debugging).
+
+### 🧬 `log-level`
+
+Set log level for any package.
+
+```bash
+playground log-level --help
+playground log-level
+
+  🧬 Set log level for any package
+  
+  👉 Check documentation https://tinyurl.com/xxx
+
+== Usage ==
+  playground log-level COMMAND
+  playground log-level [COMMAND] --help | -h
+
+== Commands ==
+  get   Get log levels
+  set   Set log level for specific logger
+
+== Options ==
+  --help, -h
+    Show this help
+
+Examples
+  playground log-level get
+  playground log-level get -p io.confluent.connect.oracle.cdc
+  playground log-level get --package io.confluent.connect.oracle.cdc
+  playground log-level set -p io.confluent.connect.oracle.cdc.logging.LogUtils
+  -l TRACE
+```

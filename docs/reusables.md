@@ -871,18 +871,18 @@ Example:
 
 ```bash
 $ playground bootstrap-reproduction-model --file debezium-sqlserver-source.sh --description "pipeline example" --pipeline ../../connect/connect-jdbc-postgresql-sink/postgres-sink.sh 
-08:40:49 ℹ️ 📂 Output folder is docs-examples (set with OUTPUT_FOLDER environment variable)
-08:40:49 ℹ️ ✨ Creating file /home/vsaboulin/kafka-docker-playground/scripts/cli/../../docs-examples/connect-connect-debezium-sqlserver-source/docker-compose.plaintext.repro-pipeline-example.yml
-08:40:49 ℹ️ ✨ Creating file /home/vsaboulin/kafka-docker-playground/scripts/cli/../../docs-examples/connect-connect-debezium-sqlserver-source/debezium-sqlserver-source-repro-pipeline-example.sh
+08:40:49 ℹ️ 📂 Output folder is academy (set with OUTPUT_FOLDER environment variable)
+08:40:49 ℹ️ ✨ Creating file /home/vsaboulin/kafka-docker-playground/scripts/cli/../../academy/connect-connect-debezium-sqlserver-source/docker-compose.plaintext.repro-pipeline-example.yml
+08:40:49 ℹ️ ✨ Creating file /home/vsaboulin/kafka-docker-playground/scripts/cli/../../academy/connect-connect-debezium-sqlserver-source/debezium-sqlserver-source-repro-pipeline-example.sh
 08:40:50 ℹ️ 💱 Source connector is using default key.converter, i.e org.apache.kafka.connect.storage.StringConverter
 08:40:50 ℹ️ 💱 Source connector is using default value.converter, i.e io.confluent.connect.avro.AvroConverter
 08:40:50 ℹ️ 💱 Sink connector is using default key.converter, i.e org.apache.kafka.connect.storage.StringConverter
 08:40:50 ℹ️ 💱 Sink connector is using default value.converter, i.e io.confluent.connect.avro.AvroConverter
 08:40:50 ℹ️ 📂 The reproduction files are now available in:
-/home/vsaboulin/kafka-docker-playground/scripts/cli/../../docs-examples/connect-connect-debezium-sqlserver-source
+/home/vsaboulin/kafka-docker-playground/scripts/cli/../../academy/connect-connect-debezium-sqlserver-source
 08:40:50 ℹ️ 🚀 Copy/paste the following to get it right away:
 
-cd /home/vsaboulin/kafka-docker-playground/scripts/cli/../../docs-examples/connect-connect-debezium-sqlserver-source
+cd /home/vsaboulin/kafka-docker-playground/scripts/cli/../../academy/connect-connect-debezium-sqlserver-source
 code debezium-sqlserver-source-repro-pipeline-example.sh
 ./debezium-sqlserver-source-repro-pipeline-example.sh
 ```
@@ -906,7 +906,7 @@ For JDBC sink, adjust topic name to `mytable` and use Flatten SMT:
 "transforms.flatten.delimiter": "."
 ```
 
-1. Run the test (it is available [there](https://github.com/vdesabou/kafka-docker-playground/blob/master/docs-examples/connect-connect-debezium-sqlserver-source/debezium-sqlserver-source-repro-pipeline-example.sh))
+1. Run the test (it is available [there](https://github.com/vdesabou/kafka-docker-playground/blob/master/academy/connect-connect-debezium-sqlserver-source/debezium-sqlserver-source-repro-pipeline-example.sh))
 
 ```bash
 ./debezium-sqlserver-source-repro-pipeline-example.sh

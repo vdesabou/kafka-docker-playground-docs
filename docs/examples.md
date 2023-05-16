@@ -330,7 +330,7 @@ Caused by: java.lang.StackOverflowError
 15:25:00 ℹ️ The log is there !
 ```
 
-* Full example is available [here](https://github.com/vdesabou/kafka-docker-playground/blob/master/docs-examples/connect-connect-aws-s3-sink/s3-sink-repro-000001-stackoverflowerror-with-s3-sink-connector.sh)
+* Full example is available [here](https://github.com/vdesabou/kafka-docker-playground/blob/master/academy/connect-connect-aws-s3-sink/s3-sink-repro-000001-stackoverflowerror-with-s3-sink-connector.sh)
 
 
 <!-- tabs:end -->

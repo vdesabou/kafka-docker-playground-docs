@@ -804,6 +804,41 @@ Consume topic from beginning without needing to specify any configuration !
 
 <script async id="asciicast-583918" src="https://asciinema.org/a/583918.js"></script>
 
+### 🛡️ `set-schema-compatibility`
+
+Change topic's schema compatibility
+
+```bash
+$ playground topic set-schema-compatibility --help
+playground topic set-schema-compatibility - 🛡️ Change topic's schema compatibility
+
+== Usage ==
+  playground topic set-schema-compatibility [OPTIONS]
+  playground topic set-schema-compatibility --help | -h
+
+== Options ==
+  --topic, -t TOPIC (required)
+    🗳 Topic name
+
+  --compatibility COMPATIBILITY (required)
+    Schema Registry compatibility rule
+    Allowed: BACKWARD, BACKWARD_TRANSITIVE, FORWARD, FORWARD_TRANSITIVE, FULL, FULL_TRANSITIVE, NONE
+
+  --help, -h
+    Show this help
+```
+<script async id="asciicast-584428" src="https://asciinema.org/a/584428.js"></script>
+
+### 🧞 `display-schema-id-statistics`
+
+Easily identify the usage of different schema versions within a topic.
+
+It makes use of https://github.com/EladLeev/schema-registry-statistics
+
+It only works when plaintext environment is used
+
+<script async id="asciicast-584424" src="https://asciinema.org/a/584424.js"></script>
+
 
 ## 🔮 Kafka commands
 

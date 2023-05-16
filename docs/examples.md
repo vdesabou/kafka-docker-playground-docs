@@ -296,6 +296,10 @@ filestream-sink                ✅ RUNNING  0:🟢 RUNNING                 -
 
 User is getting StackOverflowError with S3 sink connector. See stack trace in Details section.
 
+💡 What you'll learn:
+
+* [Bootstrap a reproduction model](/reusables?id=%f0%9f%9b%a0-bootstrap-reproduction-model) and use [Java Producer](/reusables?id=%e2%99%a8%ef%b8%8f-java-producers) to inject data using custom Avro schema.
+
 #### **🤯 Details**
 
 Versions used:

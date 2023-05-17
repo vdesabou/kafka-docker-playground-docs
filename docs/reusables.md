@@ -1393,7 +1393,7 @@ The [connect image](/how-it-works?id=🔗-connect-image-used) used by the playgr
 Sniff all traffic on port `8888`:
 
 ```bash
-docker exec -d --privileged --user root connect bash -c 'tcpdump -w /tmp/tcpdump.pcap -i eth0 -s 0 port 8888'
+docker exec -d --privileged --user root connect bash -c 'tcpdump -w /tmp/tcpdump.pcap port 8888'
 ```
 
 The TCP dump will run in background (`-d` option is used).

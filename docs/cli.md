@@ -800,7 +800,7 @@ Display content of __consumer_offsets topic
 
 ### 📥 `consume`
 
-Consume topic from beginning without needing to specify any configuration !
+Consume topic from beginning without needing to specify any configuration (even the topic name is optional)!
 
 <script async id="asciicast-583918" src="https://asciinema.org/a/583918.js"></script>
 
@@ -817,7 +817,7 @@ playground topic set-schema-compatibility - 🛡️ Change topic's schema compat
   playground topic set-schema-compatibility --help | -h
 
 == Options ==
-  --topic, -t TOPIC (required)
+  --topic, -t TOPIC
     🗳 Topic name
 
   --compatibility COMPATIBILITY (required)
@@ -839,6 +839,28 @@ It only works when plaintext environment is used
 
 <script async id="asciicast-584424" src="https://asciinema.org/a/584424.js"></script>
 
+Example:
+
+```bash
+playground topic display-schema-id-statistics 
+13:34:27 ℹ️ ✨ --topic flag was not provided, applying command to all topics
+13:34:31 ℹ️ ✨ Display statistics of topic test_hdfs, it contains 10 messages
+{
+  "1": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ]
+}
+
+```
 
 ## 🔮 Kafka commands
 

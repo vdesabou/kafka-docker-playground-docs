@@ -16,17 +16,139 @@ playground bootstrap-reproduction-model
 
   🛠  Bootstrap reproduction model
   
-  👉 Check documentation https://kafka-docker-playground.io/#/reusables?id=%f0%9f%9b%a0-bootstrap-reproduction-model
+  👉 Check documentation
+  https://kafka-docker-playground.io/#/reusables?id=0.0000000 0.000000         0x0p+00-bootstrap-reproduction-model
 
 == Usage ==
-  playground bootstrap-reproduction-model [OPTIONS]
+  playground bootstrap-reproduction-model [OPTIONS] [ARGUMENTS...]
   playground bootstrap-reproduction-model --help | -h
 
 == Options ==
+  --tag TAG
+    🎯 Confluent Platform (CP) version to use
+    
+    Must be greater or equal to 5.0.0
+
+  --connector-tag CONNECTOR_TAG
+    🔗 Connector version to use
+    
+    By default, for each connector, the latest available version on Confluent
+    Hub is used
+
+  --connector-zip CONNECTOR_ZIP
+    🤐 Connector zip to use
+    
+    ❕ It must be absolute full path
+    
+    🎓 Tip: use <tab> completion to trigger fzf completion 
+            use folder_zip_or_jar (default: ~/Downloads) in config.ini file to
+    configure where to search the files (current folder is always used)
+
+  --connector-jar CONNECTOR_JAR
+    ♨️ Connector jar to use
+    
+    ❕ It must be absolute full path
+    
+    🎓 Tip: use <tab> completion to trigger fzf completion 
+            use folder_zip_or_jar (default: ~/Downloads) in config.ini file to
+    configure where to search the files (current folder is always used)
+
+  --enable-ksqldb
+    🚀 Enable ksqlDB
+    
+    By default, ksqldb-server and ksqldb-cli containers are not started for
+    every test
+
+  --enable-control-center
+    💠 Enable Control Center
+    
+    By default, control-center container is not started for every test
+    
+    Control Center is reachable at http://127.0.0.1:9021
+
+  --enable-conduktor
+    🐺 Enable Conduktor Platform
+    
+    By default, Conduktor Platform container is not started for every test
+    
+    Conduktor is reachable at http://127.0.0.1:8080/console (admin/admin)
+
+  --enable-multiple-brokers
+    3️⃣ Enable multiple brokers
+    
+    By default, there is only one broker node enabled
+
+  --enable-multiple-connect-workers
+    🥉 Enable multiple connect node
+    
+    By default, there is only one connect node enabled
+    
+    It only works when plaintext environment is used
+
+  --enable-jmx-grafana
+    Enable Grafana, Prometheus and Pyroscope
+    
+    📊 Grafana is reachable at http://127.0.0.1:3000
+    🛡️ Prometheus is reachable at http://127.0.0.1:9090
+    📛 Pyroscope is reachable at http://127.0.0.1:4040
+
+  --enable-kcat
+    🐈‍⬛ Enable kcat
+    
+    You can use it with:
+    
+    $ docker exec kcat kcat -b broker:9092 -L
+
+  --enable-sr-maven-plugin-app
+    🔰 Enable Schema Registry Maven plugin App
+
+  --enable-sql-datagen
+    🌪️ Enable SQL Datagen injection
+    
+    This only works for Oracle, MySql, Postgres and Microsoft Sql Server source
+    connector examples with JDBC and Debezium
+
+  --cluster-region CLUSTER-REGION
+    🗺 The Cloud region. 
+    
+    🎓 Tip: you can also use CLUSTER_REGION environment variable
+
+  --cluster-environment CLUSTER-ENVIRONMENT
+    🌐 The environment id where want your new cluster (example: env-xxxxx)
+    
+    ℹ️ Optional, if not set, new environment will be created
+    
+    🎓 Tip: you can also use ENVIRONMENT environment variable
+
+  --cluster-name CLUSTER-NAME
+    🎰 The cluster name. 
+    
+    ❣️ Only required if you want to use your own existing cluster
+    
+    🎓 Tip: you can also use CLUSTER_NAME environment variable
+
+  --cluster-creds CLUSTER-CREDS
+    🔒 The Kafka api key and secret to use, it should be separated with
+    semi-colon (example: <API_KEY>:<API_KEY_SECRET>)
+    
+    ❣️ Only required if you want to use your own existing cluster
+    
+    🎓 Tip: you can also use CLUSTER_CREDS environment variable
+
+  --cluster-schema-registry-creds CLUSTER-SCHEMA-REGISTRY-CREDS
+    🔒 The Schema Registry api key and secret to use, it should be separated with
+    semi-colon (example: <SR_API_KEY>:<SR_API_KEY_SECRET>)
+    
+    ℹ️ Optional, if not set, new credentials will be created
+    
+    ❣️ Only required if you want to use your own existing cluster
+    
+    🎓 Tip: you can also use SCHEMA_REGISTRY_CREDS environment variable
+
   --file, -f FILE (required)
     🔖 Example file to use as basis
     
-    It must be absolute full path
+    ❕ It must be absolute full path
     
     🎓 Tip: use <tab> completion to trigger fzf completion
 
@@ -48,23 +170,17 @@ playground bootstrap-reproduction-model
     2️⃣ Number of java producers to generate
     Default: 
 
-  --producer-schema-key PRODUCER_SCHEMA
-    🔰 Schema file to use for the key
+  --producer-schema-key
+    🔰 Schema to use for the key
     
-    It must be absolute full path
-    
-    🎓 Tip: use <tab> completion to trigger fzf completion 
-            use folder_producer_schema (default: ~/Downloads) in config.ini file
-    to configure where to search the files
+    ✨ Copy and paste the schema you want to use for the key, save and close the
+    file to continue
 
-  --producer-schema-value PRODUCER_SCHEMA
-    🔰 Schema file to use for the value
+  --producer-schema-value
+    🔰 Schema to use for the value
     
-    It must be absolute full path
-    
-    🎓 Tip: use <tab> completion to trigger fzf completion 
-            use folder_producer_schema (default: ~/Downloads) in config.ini file
-    to configure where to search the files
+    ✨ Copy and paste the schema you want to use for the key, save and close the
+    file to continue
 
   --custom-smt
     ⚙️ Add a custom SMT (which is a no-op)
@@ -72,12 +188,24 @@ playground bootstrap-reproduction-model
   --pipeline SINK_FILE
     🔖 Sink example file to use for creating a pipeline
     
-    It must be absolute full path. 
+    ❕ It must be absolute full path. 
     
     🎓 Tip: use <tab> completion to trigger fzf completion
 
   --help, -h
     Show this help
+
+== Arguments ==
+  ARGUMENTS...
+    Arguments to use by example script
+    
+    Most of examples support to get required options either by using arguments
+    or environment variables.
+    
+    Example with Zendesk:
+    
+    playground run -f zendesk-source<tab> <ZENDESK_URL> <ZENDESK_USERNAME>
+    <ZENDESK_PASSWORD>
 
 Environment Variables:
   OUTPUT_FOLDER
@@ -157,11 +285,6 @@ playground bootstrap-reproduction-model -f hdfs2-sink.sh -d "123456 testing with
 19:57:16 ℹ️ ✨ Creating file /Users/vsaboulin/Documents/github/kafka-docker-playground/reproduction-models/connect-connect-hdfs2-sink/docker-compose.plaintext.repro-123456-testing-with-avro-format.yml
 19:57:16 ℹ️ ✨ Creating file /Users/vsaboulin/Documents/github/kafka-docker-playground/reproduction-models/connect-connect-hdfs2-sink/hdfs2-sink-repro-123456-testing-with-avro-format.sh
 
-19:57:16 ℹ️ Examples to consume:
-19:57:16 ℹ️ 1️⃣ Simplest
-docker exec connect kafka-avro-console-consumer -bootstrap-server broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --from-beginning --max-messages 1
-19:57:16 ℹ️ 2️⃣ Displaying key:
-docker exec connect kafka-avro-console-consumer -bootstrap-server broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --property print.key=true --property key.separator=, --from-beginning --max-messages 1
 19:57:16 ℹ️ ✨ Adding Java avro producer in /Users/vsaboulin/Documents/github/kafka-docker-playground/reproduction-models/connect-connect-hdfs2-sink/producer-repro-123456-2
 19:57:16 ℹ️ ✨ Adding Java avro producer in /Users/vsaboulin/Documents/github/kafka-docker-playground/reproduction-models/connect-connect-hdfs2-sink/producer-repro-123456-1
 19:57:16 ℹ️ 📂 The reproduction files are now available in:

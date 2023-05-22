@@ -305,7 +305,7 @@ To produce Protobuf data, please refer to [this](/reusables?id=%f0%9f%94%a3-kafk
 
 
 
-### InsertField SMT: DataException: Only Struct objects supported 
+### InsertField SMT: DataException: Only Struct objects supported (sink connector)
 
 <!-- tabs:start -->
 #### **🔥 Description**
@@ -645,6 +645,132 @@ __kafka_ts=2023-05-22 14:14:27.068
 
 
 <!-- tabs:end -->
+
+### InsertField SMT: DataException: Only Struct objects supported (source connector)
+
+<!-- tabs:start -->
+#### **🔥 Description**
+
+Source connector is getting "Only Struct objects supported for [field insertion], found: java.lang.String" SMT error when using [InsertField](https://docs.confluent.io/platform/current/connect/transforms/insertfield.html) SMT.
+
+```bash
+org.apache.kafka.connect.errors.DataException: Only Struct objects supported for [field insertion], found: java.lang.String
+```
+
+💡 What you'll learn:
+
+* Understand difference between source & sink connectors when dealing with SMT issue.
+
+#### **🤯 Details**
+
+Versions used:
+
+* 🎯 CP: 7.4.0
+
+* 🔗 Filestream source: 7.4.0 (shipped with CP)
+
+> [!TIP] Make sure to be aware of default converters used at worker level, see [↔️ Default Connect converter used](/how-it-works?id=%e2%86%94%ef%b8%8f-default-connect-converter-used)
+
+Full stack trace:
+
+```bash
+[2023-05-22 14:36:19,975] ERROR [filestream-source|task-0] WorkerSourceTask{id=filestream-source-0} Task threw an uncaught and unrecoverable exception. Task is being killed and will not recover until manually restarted (org.apache.kafka.connect.runtime.WorkerTask:221)
+org.apache.kafka.connect.errors.ConnectException: Tolerance exceeded in error handler
+        at org.apache.kafka.connect.runtime.errors.RetryWithToleranceOperator.execAndHandleError(RetryWithToleranceOperator.java:244)
+        at org.apache.kafka.connect.runtime.errors.RetryWithToleranceOperator.execute(RetryWithToleranceOperator.java:166)
+        at org.apache.kafka.connect.runtime.TransformationChain.transformRecord(TransformationChain.java:70)
+        at org.apache.kafka.connect.runtime.TransformationChain.apply(TransformationChain.java:50)
+        at org.apache.kafka.connect.runtime.AbstractWorkerSourceTask.sendRecords(AbstractWorkerSourceTask.java:400)
+        at org.apache.kafka.connect.runtime.AbstractWorkerSourceTask.execute(AbstractWorkerSourceTask.java:364)
+        at org.apache.kafka.connect.runtime.WorkerTask.doRun(WorkerTask.java:213)
+        at org.apache.kafka.connect.runtime.WorkerTask.run(WorkerTask.java:268)
+        at org.apache.kafka.connect.runtime.AbstractWorkerSourceTask.run(AbstractWorkerSourceTask.java:78)
+        at org.apache.kafka.connect.runtime.isolation.Plugins.lambda$withClassLoader$1(Plugins.java:177)
+        at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+        at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+        at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+        at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+        at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: org.apache.kafka.connect.errors.DataException: Only Struct objects supported for [field insertion], found: java.lang.String
+        at org.apache.kafka.connect.transforms.util.Requirements.requireStruct(Requirements.java:52)
+        at org.apache.kafka.connect.transforms.InsertField.applyWithSchema(InsertField.java:164)
+        at org.apache.kafka.connect.transforms.InsertField.apply(InsertField.java:135)
+        at org.apache.kafka.connect.runtime.TransformationChain.lambda$transformRecord$0(TransformationChain.java:70)
+        at org.apache.kafka.connect.runtime.errors.RetryWithToleranceOperator.execAndRetry(RetryWithToleranceOperator.java:190)
+        at org.apache.kafka.connect.runtime.errors.RetryWithToleranceOperator.execAndHandleError(RetryWithToleranceOperator.java:224)
+        ... 14 more
+```
+
+#### **📍 Step 1**
+
+Run the example `filestream-source-repro-000004-insertfield-smt-dataexception-only-struct-objects-supported.sh` (use `fzf` completion to find the example with `-f`):
+
+```bash
+playground run -f 000004<tab> --tag 7.4.0
+```
+
+As you can see, connector is failing (check output of `playground connector status`)
+
+❔Questions:
+
+* Do you know why it is failing ?
+* Do you know how it could have been avoided ?
+
+#### **📍 Step 2**
+<!-- select:start -->
+<!-- select-menu-labels: 🙋 See solution for previous step ? -->
+#### --No--
+#### --Yes--
+
+> Do you know why it is failing ?
+
+💡 Explanations:
+
+Despite connector configured with JsonConverter for the value, which was the way to fix the problem with sink example:
+
+```json
+"value.converter":"org.apache.kafka.connect.json.JsonConverter",
+"value.converter.schemas.enable":"false",
+```
+
+The connector is still failing...
+
+The SMT InsertField requires a `STRUCT`, but here the FileStream connector's logic create the ConnectRecord with a schema which is just a `STRING`, not a `STRUCT`:
+
+```log
+[2023-05-22 14:36:19,973] ERROR [filestream-source|task-0] Error encountered in task filestream-source-0. Executing stage 'TRANSFORMATION' with class 'org.apache.kafka.connect.transforms.InsertField$Value', where source record is = SourceRecord{sourcePartition={filename=/tmp/kafka-connect/examples/file.json}, sourceOffset={position=232}} ConnectRecord{topic='filestream', kafkaPartition=null, key=null, keySchema=null, value={"id":1,"first_name":"Jenelle","last_name":"Fick","email":"jfick0@census.gov","gender":"Female","ip_address":"158.201.163.89","last_login":"2019-04-03T05:49:31Z","account_balance":22810.68,"country":"PH","favorite_color":"#5ebf9d"}, valueSchema=Schema{STRING}, timestamp=1684766179966, headers=ConnectHeaders(headers=)}. (org.apache.kafka.connect.runtime.errors.LogReporter:66)
+org.apache.kafka.connect.errors.DataException: Only Struct objects supported for [field insertion], found: java.lang.String
+```
+
+Note `valueSchema=Schema{STRING}`
+
+
+> [!TIP] This log trace with `Executing stage 'TRANSFORMATION'` is displayed because the connector has:
+>               "errors.log.enable": "true",
+>               "errors.log.include.messages": "true",
+
+
+> Do you know how it could have been avoided ?
+
+You can't avoid it, the problem here is that connector is only creating ConnectRecord with STRING schema.
+
+As you can see below, for source connector, the SMT is applied after the source connector logic, so nothing can be done as the record is not meeting the InsertField SMT requirements here.
+
+![SMT](./images/SMT.jpg)
+
+Please also note that converter is called after SMT, so for source connector, it is not relevant at all here (as opposed to sink connectors).
+
+<!-- select:end -->
+🥁 So...did you learn about SMT issue and difference between source and sink connectors ?
+
+
+#### **🎓 Next Steps**
+
+* You can run an example with a connector that creates records with STRUCT, for example JDBC source, and then use InsertField and makes sure it works as expected
+
+
+<!-- tabs:end -->
+
 
 ## ⭐⭐ Intermediate
 

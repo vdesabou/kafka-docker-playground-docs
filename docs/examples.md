@@ -18,7 +18,7 @@ Each example (categorized by difficulty) is composed of:
 
 ## ⭐ Beginner
 
-### Unknown magic byte
+### Avro Converter: Unknown magic byte
 
 <!-- tabs:start -->
 #### **🔥 Description**

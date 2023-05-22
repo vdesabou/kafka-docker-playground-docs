@@ -223,6 +223,8 @@ To add DLQ, add this in connector config:
 
 See the difference in behaviour.
 
+> [!TIP] To check content of topic (by default all non-internal topics will be displayed), just use `playground topic consume`
+
 #### **📍 Step 4**
 <!-- select:start -->
 <!-- select-menu-labels: 🙋 See solution for previous step ? -->
@@ -301,6 +303,348 @@ To produce Protobuf data, please refer to [this](/reusables?id=%f0%9f%94%a3-kafk
 
 <!-- tabs:end -->
 
+
+
+### InsertField SMT: DataException: Only Struct objects supported 
+
+<!-- tabs:start -->
+#### **🔥 Description**
+
+Sink connector is getting "Only Struct objects supported for [field insertion], found: java.lang.String" SMT error when using [InsertField](https://docs.confluent.io/platform/current/connect/transforms/insertfield.html) SMT.
+
+```bash
+org.apache.kafka.connect.errors.DataException: Only Struct objects supported for [field insertion], found: java.lang.String
+```
+
+💡 What you'll learn:
+
+* Understand SMT issue
+* Understand impact of DLQ on SMT
+
+#### **🤯 Details**
+
+Versions used:
+
+* 🎯 CP: 7.4.0
+
+* 🔗 Filestream sink: 7.4.0 (shipped with CP)
+
+> [!TIP] Make sure to be aware of default converters used at worker level, see [↔️ Default Connect converter used](/how-it-works?id=%e2%86%94%ef%b8%8f-default-connect-converter-used)
+
+Full stack trace:
+
+```bash
+[2023-05-22 13:28:13,246] ERROR [filestream-sink|task-0] WorkerSinkTask{id=filestream-sink-0} Task threw an uncaught and unrecoverable exception. Task is being killed and will not recover until manually restarted (org.apache.kafka.connect.runtime.WorkerTask:221)
+org.apache.kafka.connect.errors.ConnectException: Tolerance exceeded in error handler
+        at org.apache.kafka.connect.runtime.errors.RetryWithToleranceOperator.execAndHandleError(RetryWithToleranceOperator.java:244)
+        at org.apache.kafka.connect.runtime.errors.RetryWithToleranceOperator.execute(RetryWithToleranceOperator.java:166)
+        at org.apache.kafka.connect.runtime.TransformationChain.transformRecord(TransformationChain.java:70)
+        at org.apache.kafka.connect.runtime.TransformationChain.apply(TransformationChain.java:50)
+        at org.apache.kafka.connect.runtime.WorkerSinkTask.convertAndTransformRecord(WorkerSinkTask.java:549)
+        at org.apache.kafka.connect.runtime.WorkerSinkTask.convertMessages(WorkerSinkTask.java:500)
+        at org.apache.kafka.connect.runtime.WorkerSinkTask.poll(WorkerSinkTask.java:336)
+        at org.apache.kafka.connect.runtime.WorkerSinkTask.iteration(WorkerSinkTask.java:238)
+        at org.apache.kafka.connect.runtime.WorkerSinkTask.execute(WorkerSinkTask.java:207)
+        at org.apache.kafka.connect.runtime.WorkerTask.doRun(WorkerTask.java:213)
+        at org.apache.kafka.connect.runtime.WorkerTask.run(WorkerTask.java:268)
+        at org.apache.kafka.connect.runtime.isolation.Plugins.lambda$withClassLoader$1(Plugins.java:177)
+        at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+        at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+        at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+        at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+        at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: org.apache.kafka.connect.errors.DataException: Only Struct objects supported for [field insertion], found: java.lang.String
+        at org.apache.kafka.connect.transforms.util.Requirements.requireStruct(Requirements.java:52)
+        at org.apache.kafka.connect.transforms.InsertField.applyWithSchema(InsertField.java:164)
+        at org.apache.kafka.connect.transforms.InsertField.apply(InsertField.java:135)
+        at org.apache.kafka.connect.runtime.TransformationChain.lambda$transformRecord$0(TransformationChain.java:70)
+        at org.apache.kafka.connect.runtime.errors.RetryWithToleranceOperator.execAndRetry(RetryWithToleranceOperator.java:190)
+        at org.apache.kafka.connect.runtime.errors.RetryWithToleranceOperator.execAndHandleError(RetryWithToleranceOperator.java:224)
+        ... 16 more
+```
+
+#### **📍 Step 1**
+
+Run the example `filestream-sink-repro-000003-insertfield-smt-dataexception-only-struct-objects-supported.sh` (use `fzf` completion to find the example with `-f`):
+
+```bash
+playground run -f 000003<tab> --tag 7.4.0
+```
+
+As you can see, connector is failing (check output of `playground connector status`)
+
+❔Questions:
+
+* Do you know why it is failing ?
+* Do you know how it could have been avoided ?
+
+#### **📍 Step 2**
+<!-- select:start -->
+<!-- select-menu-labels: 🙋 See solution for previous step ? -->
+#### --No--
+#### --Yes--
+
+> Do you know why it is failing ?
+
+💡 Explanations:
+
+Connector is configured with StringConverter for the value:
+
+```json
+"value.converter": "org.apache.kafka.connect.storage.StringConverter",
+```
+
+The request is sent using Plain JSON as `kafka-console-producer` is used:
+
+```bash
+log "Sending messages to topic filestream"
+docker exec -i broker kafka-console-producer --broker-list broker:9092 --topic filestream << EOF
+{"customer_name":"Ed", "complaint_type":"Dirty car", "trip_cost": 29.10, "new_customer": false, "number_of_rides": 22}
+EOF
+```
+
+The SMT InsertField requires a `STRUCT`, but here StringConverter is used which creates a `STRING` hence the issue.
+
+> Do you know how it could have been avoided ?
+
+To avoid this situation is to use JsonConverter converter instead with `schemas.enable=false` (since our data in topic is plain JSON)
+
+```json
+"value.converter":"org.apache.kafka.connect.json.JsonConverter",
+"value.converter.schemas.enable":"false",
+```
+
+<!-- select:end -->
+
+👉 Now add a DLQ and re-run the example
+
+To add DLQ, add this in connector config:
+
+```json
+               "errors.tolerance": "all",
+               "errors.deadletterqueue.topic.name": "dlq",
+               "errors.deadletterqueue.topic.replication.factor": "1",
+               "errors.deadletterqueue.context.headers.enable": "true",
+               "errors.log.enable": "true",
+               "errors.log.include.messages": "true",
+```
+
+> [!TIP] to run again the example, just use `playground re-run`
+
+See the difference in behaviour.
+
+> [!TIP] To check content of topic (by default all non-internal topics will be displayed), just use `playground topic consume`
+
+
+#### **📍 Step 3**
+<!-- select:start -->
+<!-- select-menu-labels: 🙋 See solution for previous step ? -->
+#### --No--
+#### --Yes--
+
+
+Record is going to DLQ:
+
+```bash
+$ playground topic consume 
+15:55:55 ℹ️ ✨ --topic flag was not provided, applying command to all topics
+15:55:57 ℹ️ ✨ Display content of topic dlq, it contains 1 messages
+15:55:57 ℹ️ 🔮🙅 topic is not using any schema for key
+15:55:57 ℹ️ 🔮🙅 topic is not using any schema for value
+CreateTime: 2023-05-22 15:54:46.681|Partition:0|Offset:0|__connect.errors.topic:filestream,__connect.errors.partition:0,__connect.errors.offset:0,__connect.errors.connector.name:filestream-sink,__connect.errors.task.id:0,__connect.errors.stage:TRANSFORMATION,__connect.errors.class.name:org.apache.kafka.connect.transforms.InsertField$Value,__connect.errors.exception.class.name:org.apache.kafka.connect.errors.DataException,__connect.errors.exception.message:Only Struct objects supported for [field insertion], found: java.lang.String,__connect.errors.exception.stacktrace:org.apache.kafka.connect.errors.DataException: Only Struct objects supported for [field insertion], found: java.lang.String
+at org.apache.kafka.connect.transforms.util.Requirements.requireStruct(Requirements.java:52)
+at org.apache.kafka.connect.transforms.InsertField.applyWithSchema(InsertField.java:164)
+at org.apache.kafka.connect.transforms.InsertField.apply(InsertField.java:135)
+at org.apache.kafka.connect.runtime.TransformationChain.lambda$transformRecord$0(TransformationChain.java:70)
+at org.apache.kafka.connect.runtime.errors.RetryWithToleranceOperator.execAndRetry(RetryWithToleranceOperator.java:190)
+at org.apache.kafka.connect.runtime.errors.RetryWithToleranceOperator.execAndHandleError(RetryWithToleranceOperator.java:224)
+at org.apache.kafka.connect.runtime.errors.RetryWithToleranceOperator.execute(RetryWithToleranceOperator.java:166)
+at org.apache.kafka.connect.runtime.TransformationChain.transformRecord(TransformationChain.java:70)
+at org.apache.kafka.connect.runtime.TransformationChain.apply(TransformationChain.java:50)
+at org.apache.kafka.connect.runtime.WorkerSinkTask.convertAndTransformRecord(WorkerSinkTask.java:549)
+at org.apache.kafka.connect.runtime.WorkerSinkTask.convertMessages(WorkerSinkTask.java:500)
+at org.apache.kafka.connect.runtime.WorkerSinkTask.poll(WorkerSinkTask.java:336)
+at org.apache.kafka.connect.runtime.WorkerSinkTask.iteration(WorkerSinkTask.java:238)
+at org.apache.kafka.connect.runtime.WorkerSinkTask.execute(WorkerSinkTask.java:207)
+at org.apache.kafka.connect.runtime.WorkerTask.doRun(WorkerTask.java:213)
+at org.apache.kafka.connect.runtime.WorkerTask.run(WorkerTask.java:268)
+at org.apache.kafka.connect.runtime.isolation.Plugins.lambda$withClassLoader$1(Plugins.java:177)
+at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+at java.base/java.lang.Thread.run(Thread.java:829)
+|null|{"customer_name":"Ed", "complaint_type":"Dirty car", "trip_cost": 29.10, "new_customer": false, "number_of_rides": 22}
+15:56:04 ℹ️ ✨ Display content of topic filestream, it contains 1 messages
+15:56:04 ℹ️ 🔮🙅 topic is not using any schema for key
+15:56:04 ℹ️ 🔮🙅 topic is not using any schema for value
+```
+
+And connector is RUNNING:
+
+```bash
+playground connector status 
+15:56:30 ℹ️ 🧩 Displaying connector(s) status
+Name                           Status       Tasks (Worker ID)                                            Stack Trace                                       
+-----------------------------------------------------------------------------------------------------------------------------
+filestream-sink                ✅ RUNNING  0:🟢 RUNNING[connect]        -                                                 
+-------------------------------------------------------------------------------------------------------------
+```
+
+<!-- select:end -->
+Fix the issue by choosing the right converter
+
+#### **📍 Step 4**
+<!-- select:start -->
+<!-- select-menu-labels: 🙋 See solution for previous step ? -->
+#### --No--
+#### --Yes--
+
+
+Replace:
+
+```json
+"value.converter": "org.apache.kafka.connect.storage.StringConverter",
+```
+
+by 
+
+```json
+"value.converter":"org.apache.kafka.connect.json.JsonConverter",
+"value.converter.schemas.enable":"false",
+```
+
+And redeploy the connector (just copy/paste the updated curl command in your terminal)
+
+Verify connector is now running
+
+```bash
+playground connector status
+```
+
+Check data was processed:
+
+```bash
+docker exec connect cat /tmp/output.json
+{trip_cost=29.1, MessageSource=Kafka Connect framework, complaint_type=Dirty car, customer_name=Ed, new_customer=false, number_of_rides=22}
+```
+
+As you can see the InsertField SMT worked in that case and field `MessageSource=Kafka Connect framework` was added.
+
+```json
+               "transforms": "InsertField",
+               "transforms.InsertField.type": "org.apache.kafka.connect.transforms.InsertField$Value",
+               "transforms.InsertField.static.field": "MessageSource",
+               "transforms.InsertField.static.value": "Kafka Connect framework"
+```
+<!-- select:end -->
+Test InsertField SMT with different [properties](https://docs.confluent.io/platform/current/connect/transforms/insertfield.html#properties), include:
+
+* topic
+* offset
+* partition
+* timestamp
+
+
+#### **📍 Step 5**
+<!-- select:start -->
+<!-- select-menu-labels: 🙋 See solution for previous step ? -->
+#### --No--
+#### --Yes--
+
+Use the following SMT config (make sure that *JsonConverter* is still being used!):
+
+```json
+"transforms": "InsertTopic,InsertOffset,InsertPartition,InsertTimestamp"
+"transforms.InsertOffset.offset.field": "__kafka_offset",
+"transforms.InsertOffset.type": "org.apache.kafka.connect.transforms.InsertField$Value",
+"transforms.InsertPartition.partition.field": "__kafka_partition",
+"transforms.InsertPartition.type": "org.apache.kafka.connect.transforms.InsertField$Value",
+"transforms.InsertTimestamp.timestamp.field": "__kafka_ts",
+"transforms.InsertTimestamp.type": "org.apache.kafka.connect.transforms.InsertField$Value",
+"transforms.InsertTopic.topic.field": "__kafka_topic",
+"transforms.InsertTopic.type": "org.apache.kafka.connect.transforms.InsertField$Value",
+```
+
+Send one more record:
+
+```bash
+log "Sending messages to topic filestream"
+docker exec -i broker kafka-console-producer --broker-list broker:9092 --topic filestream << EOF
+{"customer_name":"Ed", "complaint_type":"Dirty car", "trip_cost": 29.10, "new_customer": false, "number_of_rides": 22}
+EOF
+```
+
+Check the output of json file:
+
+```bash
+log "Verify we have received the data in file"
+docker exec connect cat /tmp/output.json
+{__kafka_topic=filestream, __kafka_partition=0, complaint_type=Dirty car, new_customer=false, __kafka_offset=2, __kafka_ts=1684764616428, trip_cost=29.1, customer_name=Ed, number_of_rides=22}
+```
+
+<!-- select:end -->
+Change format of `__kafka_ts` field to make it human readable, i.e instead of Unix number, use format `yyyy-MM-dd HH:mm:ss.SSS`
+
+> [!TIP] Use [TimestampConverter](https://docs.confluent.io/platform/current/connect/transforms/timestampconverter.html#) SMT to do this conversion
+> Be careful with order of SMTs when you add TimestampConverter !
+
+#### **📍 Step 6**
+<!-- select:start -->
+<!-- select-menu-labels: 🙋 See solution for previous step ? -->
+#### --No--
+#### --Yes--
+
+Add `TimestampConverter` (you can use any string) at the end of the existing list (or just make sure to add it after `InsertTimestamp`):
+
+```json
+"transforms": "InsertTopic,InsertOffset,InsertPartition,InsertTimestamp,TimestampConverter",
+```
+
+And then add:
+
+```json
+"transforms.TimestampConverter.type": "org.apache.kafka.connect.transforms.TimestampConverter$Value",
+"transforms.TimestampConverter.format": "yyyy-MM-dd HH:mm:ss.SSS",
+"transforms.TimestampConverter.target.type": "string",
+"transforms.TimestampConverter.field": "__kafka_ts",
+```
+
+It will convert field `__kafka_ts` to a string with format `yyyy-MM-dd HH:mm:ss.SSS`.
+
+Send one more record:
+
+```bash
+log "Sending messages to topic filestream"
+docker exec -i broker kafka-console-producer --broker-list broker:9092 --topic filestream << EOF
+{"customer_name":"Ed", "complaint_type":"Dirty car", "trip_cost": 29.10, "new_customer": false, "number_of_rides": 22}
+EOF
+```
+
+Check the output of json file:
+
+```bash
+log "Verify we have received the data in file"
+docker exec connect cat /tmp/output.json
+{__kafka_topic=filestream, __kafka_partition=0, complaint_type=Dirty car, new_customer=false, __kafka_offset=3, __kafka_ts=2023-05-22 14:14:27.068, trip_cost=29.1, customer_name=Ed, number_of_rides=22}
+```
+
+As you can see, the date/time is now human readable:
+
+```json
+__kafka_ts=2023-05-22 14:14:27.068
+```
+
+<!-- select:end -->
+🥁 So...did you learn about SMT issue ?
+
+
+#### **🎓 Next Steps**
+
+* Read [🎄 Twelve Days of SMT 🎄 - Day 1: InsertField](https://rmoff.net/2020/12/08/twelve-days-of-smt-day-1-insertfield-timestamp/)
+
+
+<!-- tabs:end -->
 
 ## ⭐⭐ Intermediate
 

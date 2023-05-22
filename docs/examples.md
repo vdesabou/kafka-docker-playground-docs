@@ -772,6 +772,206 @@ Please also note that converter is called after SMT, so for source connector, it
 <!-- tabs:end -->
 
 
+### InsertField SMT: adding topic, offset and partition not working
+
+<!-- tabs:start -->
+#### **🔥 Description**
+
+When using [InsertField](https://docs.confluent.io/platform/current/connect/transforms/insertfield.html) SMT to add topic, offset and partition with source connector, it does not work as expected.
+
+
+💡 What you'll learn:
+
+* Understand difference between source & sink connectors when dealing with SMT issue.
+
+#### **🤯 Details**
+
+Versions used:
+
+* 🎯 CP: 7.4.0
+
+* 🔗 Filestream source: 7.4.0 (shipped with CP)
+
+> [!TIP] Make sure to be aware of default converters used at worker level, see [↔️ Default Connect converter used](/how-it-works?id=%e2%86%94%ef%b8%8f-default-connect-converter-used)
+
+Full stack trace:
+
+```bash
+[2023-05-22 15:02:04,397] ERROR [mysql-source|task-0] WorkerSourceTask{id=mysql-source-0} Task threw an uncaught and unrecoverable exception. Task is being killed and will not recover until manually restarted (org.apache.kafka.connect.runtime.WorkerTask:221)
+org.apache.kafka.connect.errors.ConnectException: Tolerance exceeded in error handler
+        at org.apache.kafka.connect.runtime.errors.RetryWithToleranceOperator.execAndHandleError(RetryWithToleranceOperator.java:244)
+        at org.apache.kafka.connect.runtime.errors.RetryWithToleranceOperator.execute(RetryWithToleranceOperator.java:166)
+        at org.apache.kafka.connect.runtime.TransformationChain.transformRecord(TransformationChain.java:70)
+        at org.apache.kafka.connect.runtime.TransformationChain.apply(TransformationChain.java:50)
+        at org.apache.kafka.connect.runtime.AbstractWorkerSourceTask.sendRecords(AbstractWorkerSourceTask.java:400)
+        at org.apache.kafka.connect.runtime.AbstractWorkerSourceTask.execute(AbstractWorkerSourceTask.java:364)
+        at org.apache.kafka.connect.runtime.WorkerTask.doRun(WorkerTask.java:213)
+        at org.apache.kafka.connect.runtime.WorkerTask.run(WorkerTask.java:268)
+        at org.apache.kafka.connect.runtime.AbstractWorkerSourceTask.run(AbstractWorkerSourceTask.java:78)
+        at org.apache.kafka.connect.runtime.isolation.Plugins.lambda$withClassLoader$1(Plugins.java:177)
+        at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+        at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+        at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+        at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+        at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: org.apache.kafka.connect.errors.DataException: Only SinkRecord supported for [field insertion], found: org.apache.kafka.connect.source.SourceRecord
+        at org.apache.kafka.connect.transforms.util.Requirements.requireSinkRecord(Requirements.java:66)
+        at org.apache.kafka.connect.transforms.InsertField.applyWithSchema(InsertField.java:185)
+        at org.apache.kafka.connect.transforms.InsertField.apply(InsertField.java:135)
+        at org.apache.kafka.connect.runtime.TransformationChain.lambda$transformRecord$0(TransformationChain.java:70)
+        at org.apache.kafka.connect.runtime.errors.RetryWithToleranceOperator.execAndRetry(RetryWithToleranceOperator.java:190)
+        at org.apache.kafka.connect.runtime.errors.RetryWithToleranceOperator.execAndHandleError(RetryWithToleranceOperator.java:224)
+        ... 14 more
+```
+
+#### **📍 Step 1**
+
+Run the example `mysql-repro-000005-insertfield-smt:-adding-topic-offset-and-partition-not-working.sh` (use `fzf` completion to find the example with `-f`):
+
+```bash
+playground run -f 000005<tab> --tag 7.4.0
+```
+
+As you can see, connector is failing (check output of `playground connector status`)
+
+❔Questions:
+
+* Do you know why it is failing ?
+
+#### **📍 Step 2**
+<!-- select:start -->
+<!-- select-menu-labels: 🙋 See solution for previous step ? -->
+#### --No--
+#### --Yes--
+
+> Do you know why it is failing ?
+
+💡 Explanations:
+
+Connector is configured with same SMTs as with sink connector example [there](/examples?id=insertfield-smt-dataexception-only-struct-objects-supported-sink-connector).
+
+```json
+               "transforms": "InsertTopic,InsertOffset,InsertPartition,InsertTimestamp,TimestampConverter",
+               "transforms.InsertOffset.offset.field": "__kafka_offset",
+               "transforms.InsertOffset.type": "org.apache.kafka.connect.transforms.InsertField$Value",
+               "transforms.InsertPartition.partition.field": "__kafka_partition",
+               "transforms.InsertPartition.type": "org.apache.kafka.connect.transforms.InsertField$Value",
+               "transforms.InsertTimestamp.timestamp.field": "__kafka_ts",
+               "transforms.InsertTimestamp.type": "org.apache.kafka.connect.transforms.InsertField$Value",
+               "transforms.InsertTopic.topic.field": "__kafka_topic",
+               "transforms.InsertTopic.type": "org.apache.kafka.connect.transforms.InsertField$Value",
+               "transforms.TimestampConverter.type": "org.apache.kafka.connect.transforms.TimestampConverter$Value",
+               "transforms.TimestampConverter.format": "yyyy-MM-dd HH:mm:ss.SSS",
+               "transforms.TimestampConverter.target.type": "string",
+               "transforms.TimestampConverter.field": "__kafka_ts"
+```
+
+The connector is failing with `Only SinkRecord supported for [field insertion], found: org.apache.kafka.connect.source.SourceRecord`
+
+We don't know which SMT in the list is failing:
+
+```json
+"transforms": "InsertTopic,InsertOffset,InsertPartition,InsertTimestamp,TimestampConverter"
+```
+
+So in order to troubleshoot this, you can set TRACE level on `org.apache.kafka.connect.runtime.TransformationChain`
+
+```bash
+playground log-level set --package "org.apache.kafka.connect.runtime.TransformationChain" --level TRACE
+17:08:33 ℹ️ 🧬 Set log level for package org.apache.kafka.connect.runtime.TransformationChain to TRACE
+[
+  "org.apache.kafka.connect.runtime.TransformationChain"
+]
+```
+
+We see then in logs:
+
+```log
+[2023-05-22 15:08:37,203] TRACE [mysql-source|task-0] Applying transformation org.apache.kafka.connect.transforms.InsertField$Value to SourceRecord{sourcePartition={protocol=1, table=mydb.team}, sourceOffset={timestamp_nanos=0, incrementing=102, timestamp=1684767720000}} ConnectRecord{topic='mysql-team', kafkaPartition=null, key=null, keySchema=null, value=Struct{id=102,name=another,email=another@apache.org,last_modified=2023-05-22 15:02:00.0}, valueSchema=Schema{team:STRUCT}, timestamp=null, headers=ConnectHeaders(headers=)} (org.apache.kafka.connect.runtime.TransformationChain:47)
+[2023-05-22 15:08:37,203] TRACE [mysql-source|task-0] Applying transformation org.apache.kafka.connect.transforms.InsertField$Value to SourceRecord{sourcePartition={protocol=1, table=mydb.team}, sourceOffset={timestamp_nanos=0, incrementing=102, timestamp=1684767720000}} ConnectRecord{topic='mysql-team', kafkaPartition=null, key=null, keySchema=null, value=Struct{id=102,name=another,email=another@apache.org,last_modified=2023-05-22 15:02:00.0,__kafka_topic=mysql-team}, valueSchema=Schema{team:STRUCT}, timestamp=null, headers=ConnectHeaders(headers=)} (org.apache.kafka.connect.runtime.TransformationChain:47)
+[2023-05-22 15:08:37,203] ERROR [mysql-source|task-0] Error encountered in task mysql-source-0. Executing stage 'TRANSFORMATION' with class 'org.apache.kafka.connect.transforms.InsertField$Value', where source record is = SourceRecord{sourcePartition={protocol=1, table=mydb.team}, sourceOffset={timestamp_nanos=0, incrementing=102, timestamp=1684767720000}} ConnectRecord{topic='mysql-team', kafkaPartition=null, key=null, keySchema=null, value=Struct{id=102,name=another,email=another@apache.org,last_modified=2023-05-22 15:02:00.0}, valueSchema=Schema{team:STRUCT}, timestamp=null, headers=ConnectHeaders(headers=)}. (org.apache.kafka.connect.runtime.errors.LogReporter:66)
+```
+
+So it's failing at 2nd SMT in the list, which is `InsertOffset`
+
+
+<!-- select:end -->
+
+Remove `InsertOffset` SMT and see if that fixes the problem
+
+
+#### **📍 Step 3**
+<!-- select:start -->
+<!-- select-menu-labels: 🙋 See solution for previous step ? -->
+#### --No--
+#### --Yes--
+
+After removing `InsertOffset`:
+
+
+```json
+               "transforms": "InsertTopic,InsertPartition,InsertTimestamp,TimestampConverter",
+               "transforms.InsertPartition.partition.field": "__kafka_partition",
+               "transforms.InsertPartition.type": "org.apache.kafka.connect.transforms.InsertField$Value",
+               "transforms.InsertTimestamp.timestamp.field": "__kafka_ts",
+               "transforms.InsertTimestamp.type": "org.apache.kafka.connect.transforms.InsertField$Value",
+               "transforms.InsertTopic.topic.field": "__kafka_topic",
+               "transforms.InsertTopic.type": "org.apache.kafka.connect.transforms.InsertField$Value",
+               "transforms.TimestampConverter.type": "org.apache.kafka.connect.transforms.TimestampConverter$Value",
+               "transforms.TimestampConverter.format": "yyyy-MM-dd HH:mm:ss.SSS",
+               "transforms.TimestampConverter.target.type": "string",
+               "transforms.TimestampConverter.field": "__kafka_ts"
+```
+
+The connector is no more failing.
+
+<!-- select:end -->
+
+Check the content of the topic with `playground topic consume`
+
+Does that work as you would expect ?
+
+#### **📍 Step 4**
+<!-- select:start -->
+<!-- select-menu-labels: 🙋 See solution for previous step ? -->
+#### --No--
+#### --Yes--
+
+> Does that work as you would expect ?
+
+Record's value is:
+
+
+```json
+{
+  "id": 102,
+  "name": "another",
+  "email": "another@apache.org",
+  "last_modified": 1684767720000,
+  "__kafka_topic": {
+    "string": "mysql-team"
+  },
+  "__kafka_partition": null,
+  "__kafka_ts": null
+}
+```
+
+`__kafka_topic` is set, but not `__kafka_partition` and `__kafka_ts`
+
+As you can see below, for source connector, the SMT is applied after the source connector logic and before sending request to Kafka topic, hence the record's partition and timestamp is completely unknown to SMT, so `null` values are expected.
+
+![SMT](./images/SMT.jpg)
+
+N.B: For `offset` property it fails with `Only SinkRecord supported for [field insertion], found: org.apache.kafka.connect.source.SourceRecord`, which makes sense. Same check for `partition` and `timestamp` could probably be added  (I don't know why it's not the case)
+
+<!-- select:end -->
+
+🥁 So...did you learn about why InsertField is not setting some fields with source connectors ?
+
+
+<!-- tabs:end -->
+
+
 ## ⭐⭐ Intermediate
 
 ### StackOverflowError with S3 sink connector

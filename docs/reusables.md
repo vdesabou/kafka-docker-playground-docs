@@ -680,7 +680,7 @@ docker exec -e NB_MESSAGES=100 -e TOPIC="test-topic" producer-repro-12345 bash -
 
 <!-- tabs:end -->
 
-### 🔤 [kafka-console-producer](https://docs.confluent.io/platform/current/tutorials/examples/clients/docs/kafka-commands.html#produce-records)
+### 🔤 kafka-console-producer
 
 <!-- tabs:start -->
 
@@ -741,7 +741,7 @@ EOF
 
 <!-- tabs:end -->
 
-### 🔣 [kafka-avro-console-producer](https://docs.confluent.io/platform/current/tutorials/examples/clients/docs/kafka-commands.html#produce-avro-records)
+### 🔣 kafka-avro-console-producer
 
 <!-- tabs:start -->
 
@@ -790,7 +790,7 @@ EOF
 
 <!-- tabs:end -->
 
-### 🔣 [kafka-protobuf-console-producer](https://docs.confluent.io/platform/current/schema-registry/serdes-develop/serdes-protobuf.html)
+### 🔣 kafka-protobuf-console-producer
 
 <!-- tabs:start -->
 
@@ -826,7 +826,7 @@ EOF
 > If Protobuf schema is very complex, it is better to use [♨️ Java producer](/reusables?id=♨%EF%B8%8F-java-producers) above.
 
 
-### 🔣 [kafka-json-schema-console-producer](https://docs.confluent.io/platform/current/schema-registry/serdes-develop/serdes-json.html)
+### 🔣 kafka-json-schema-console-producer
 
 <!-- tabs:start -->
 
@@ -918,7 +918,7 @@ docker exec connect kafka-avro-console-consumer --bootstrap-server broker:9092 -
 ```
 
 <!-- tabs:end -->
-### 🔣 [kafka-protobuf-console-consumer](https://docs.confluent.io/platform/current/schema-registry/serdes-develop/serdes-protobuf.html)
+### 🔣 kafka-protobuf-console-consumer
 
 <!-- tabs:start -->
 
@@ -938,7 +938,7 @@ docker exec connect kafka-protobuf-console-consumer -bootstrap-server broker:909
 
 
 
-### 🔣 [kafka-json-schema-console-consumer](https://docs.confluent.io/platform/current/schema-registry/serdes-develop/serdes-json.html)
+### 🔣 kafka-json-schema-console-consumer
 
 
 <!-- tabs:start -->

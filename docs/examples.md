@@ -283,6 +283,21 @@ filestream-sink                ✅ RUNNING  0:🟢 RUNNING                 -
 
 * Read [Kafka Connect Deep Dive – Error Handling and Dead Letter Queues](https://www.confluent.io/en-gb/blog/kafka-connect-deep-dive-error-handling-dead-letter-queues/) and plays with different config parameters.
 * Update example to enable [Broker-side Schema ID Validation](https://docs.confluent.io/platform/7.4/schema-registry/schema-validation.html)
+* `Unknown magic byte` is when using AVRO. You can also test with JSON Schema and Protobuf to see the differences in stack traces, error messages.
+
+To produce JSON Schema data, please refer to [this](/reusables?id=%f0%9f%94%a3-kafka-json-schema-console-producer) (use a new topic!) and make sure to change connector config with:
+
+```json
+"value.converter": "io.confluent.connect.json.JsonSchemaConverter",
+"value.converter.schema.registry.url": "http://schema-registry:8081",
+```
+
+To produce Protobuf data, please refer to [this](/reusables?id=%f0%9f%94%a3-kafka-protobuf-console-producer) (use a new topic!) and make sure to change connector config with:
+
+```json
+"value.converter": "io.confluent.connect.protobuf.ProtobufConverter",
+"value.converter.schema.registry.url": "http://schema-registry:8081",
+```
 
 <!-- tabs:end -->
 

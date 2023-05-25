@@ -7,9 +7,11 @@
 
 #### ☑️ Prerequisites
 
-You just need to have [docker](https://docs.docker.com/get-docker/) and [docker-compose](https://docs.docker.com/compose/install/) installed on your machine !
+* You just need to have [docker](https://docs.docker.com/get-docker/) and [docker-compose](https://docs.docker.com/compose/install/) installed on your machine !
 
-You also need internet connectivity when running connect tests as connectors are downloaded from Confluent Hub on the fly.
+* bash version 4 or higher is required. Mac users can upgrade bash with [brew](https://brew.sh/) by running `brew install bash`
+
+* You also need internet connectivity when running connect tests as connectors are downloaded from Confluent Hub on the fly.
 
 > [!NOTE]
 > Every command used in the playground is using Docker, this includes `jq` (except if you have it on your host already), `aws`, `az`, `gcloud`, etc..

@@ -2,7 +2,7 @@
 
 ## May 2023
 
-- Use playground topic consume in all examples
+- Use `playground topic consume` in all examples (bash version 4 or higher is now required to use playground)
 - ACADEMY:
   * Avro Converter: Unknown magic byte
   * InsertField SMT: DataException: Only Struct objects supported (sink connector)

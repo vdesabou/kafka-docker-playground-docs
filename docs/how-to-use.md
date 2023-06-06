@@ -9,6 +9,8 @@
 
 * You just need to have [docker](https://docs.docker.com/get-docker/) and [docker-compose](https://docs.docker.com/compose/install/) installed on your machine !
 
+* Install the [🧠 CLI](/cli) by following [Setup](/cli?id=%f0%9f%9a%9c-setup)
+
 * bash version 4 or higher is required. Mac users can upgrade bash with [brew](https://brew.sh/) by running `brew install bash`
 
 * You also need internet connectivity when running connect tests as connectors are downloaded from Confluent Hub on the fly.

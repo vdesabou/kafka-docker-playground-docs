@@ -48,12 +48,6 @@ editor = code
 ; examples:
 ; folder_zip_or_jar = ~/Downloads,~/Documents/github/kafka-connect-*
 folder_zip_or_jar = ~/Downloads
-
-; list (comma separated) of folders where to search for schema files (*.avsc, *.json, *.proto, *.proto3)
-; Current folder is always included
-; examples:
-; folder_producer_schema = ~/Downloads,~/Documents/github/kafka-connect-*
-folder_producer_schema = ~/Downloads
 ```
 
 You can configure the path to your own config.ini file using `CONFIG_FILE` environment variable:
@@ -79,12 +73,8 @@ Run any example, except for Confluent Cloud (in this case use `run-ccloud` comma
 
 
 ```bash
-$ playground run --help
-playground run
+$ playground run - 🕹️ Run any example, except for Confluent Cloud (in this case use run-ccloud command)
 
-  🕹️ Run any example, except for Confluent Cloud (in this case use run-ccloud
-  command)
-  
 == Usage ==
   playground run [OPTIONS] [ARGUMENTS...]
   playground run --help | -h
@@ -576,9 +566,17 @@ Resume connector
 
 ### 🧞 `versions`
 
-Get current version used in example
+Get current and latest version available on Confluent Hub for connector(s) used in example
 
-<script async id="asciicast-581282" src="https://asciinema.org/a/581282.js"></script>
+Example:
+
+```bash
+15:36:21 ℹ️ 🗯️ Version currently used for confluentinc-kafka-connect-jdbc is not latest
+15:36:21 ℹ️ Current
+"🔢 v5.5.0 - 📅 release date: 2020-04-22"
+15:36:21 ℹ️ Latest on Hub
+"🔢 v10.7.2 - 📅 release date: 2023-05-29"
+```
 
 > [!TIP]
 > If flag `--connector` (`-c`) is not specified, the command will apply to all connectors.

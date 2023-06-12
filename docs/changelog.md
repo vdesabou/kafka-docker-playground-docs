@@ -1,5 +1,9 @@
 # Change Log
 
+## June 2023
+
+- Added [SSL example](https://github.com/vdesabou/kafka-docker-playground/blob/master/connect/connect-rabbitmq-source/rabbitmq-source-ssl.sh) for RabbitMQ source
+
 ## May 2023
 
 - Use `playground topic consume` in all examples (bash version 4 or higher is now required to use playground)
@@ -14,7 +18,7 @@
   * `bootstrap-reproduction-model`: `--producer-schema-key` and `--producer-schema-value` will now open text editor: Copy and paste the schema you want to use for the key/value, save and close the file to continue, it will automatically make required changes
   * Added [playground topic display-schema-id-statistics](/cli?id=%f0%9f%a7%9e-display-schema-id-statistics)
   * `--topic` is now optional for all [Topics commands](/cli?id=%f0%9f%97%b3-topics-commands) ! By default it will loop on all non-internal topics
-- [🧠 CLI](//cli) is now version 1.0.0
+- [🧠 CLI](/cli) is now version 1.0.0
 - Added 🔍 [ksqlDB Schema Inference with ID](https://github.com/vdesabou/kafka-docker-playground/tree/master/ksqldb/schema-inference-with-id) (🙏 @danielpetisme)
 
 ## April 2023

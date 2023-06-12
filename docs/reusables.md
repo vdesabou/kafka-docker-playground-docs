@@ -1690,6 +1690,7 @@ Here are the steps to follow:
     build:
       context: ../../connect/connect-filestream-sink/
       args:
+        CP_CONNECT_IMAGE: ${CP_CONNECT_IMAGE}
         CONNECT_TAG: ${CONNECT_TAG}
 ```
 > [!WARNING]
@@ -1745,6 +1746,7 @@ Here are the steps to follow:
     build:
       context: ../../connect/connect-filestream-sink/
       args:
+        CP_CONNECT_IMAGE: ${CP_CONNECT_IMAGE}
         CONNECT_TAG: ${CONNECT_TAG}
 ```
 > [!WARNING]

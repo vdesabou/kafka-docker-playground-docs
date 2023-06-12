@@ -534,6 +534,35 @@ Bootstrap reproduction model. See documentation [here](/reusables?id=%f0%9f%9b%a
 
 Easily interact with running connectors.
 
+The `connector` command applies for all *onprem* and *self-managed* examples.
+
+⛅ For *fully-managed* connector examples, the command is named `ccloud-connector`.
+
+### 🧑‍🎨 `create-or-update`
+
+Example:
+
+```bash
+playground connector create-or-update -c filestream-sink << EOF
+{
+    "tasks.max": "1",
+    "connector.class": "org.apache.kafka.connect.file.FileStreamSinkConnector",
+    "topics": "filestream",
+    "file": "/tmp/output.json",
+    "key.converter": "org.apache.kafka.connect.storage.StringConverter",
+    "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+    "value.converter.schemas.enable": "false"
+}
+EOF
+22:19:57 ℹ️ 🛠️ Creating connector filestream-sink
+22:19:57 ℹ️ ✅ Connector filestream-sink was successfully created
+22:19:57 ℹ️ 🥁 Waiting a few seconds to get new status
+22:20:06 ℹ️ 🧩 Displaying connector status
+Name                           Status       Tasks                                                        Stack Trace                                       
+-----------------------------------------------------------------------------------------------------------------------------
+filestream-sink                ✅ RUNNING  0:🟢 RUNNING[connect]        - 
+```
+
 ### 🧩 `status`
 
 Show status of all connectors
@@ -780,6 +809,325 @@ Kill all containers
 
 Easily interact with kafka topics.
 
+### 📥 `produce`
+
+💫 Magically produce to topic.
+
+🔥 You can either:
+
+1. Set your own schema (avro, json-schema, protobuf) with *stdin* (`<< 'EOF'`)
+
+<!-- tabs:start -->
+
+#### **json-schema**
+
+```bash
+$ playground topic produce -t topic-json-schema --nb-messages 3 << 'EOF'
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "additionalProperties": false,
+  "$id": "http://lh.test/Customer.schema.json",
+  "title": "Customer",
+  "description": "Customer description",
+  "type": "object",
+  "properties": {
+    "name": {
+      "description": "Customer name",
+      "type": "string",
+      "maxLength": 25
+    },
+    "surname": {
+      "description": "Customer surname",
+      "type": "string",
+      "minLength": 2
+    },
+    "email": {
+      "description": "Email",
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$"
+    }
+  },
+  "required": [
+    "name",
+    "surname"
+  ]
+}
+EOF
+
+21:41:18 ℹ️ 🔮 schema was identified as json schema
+21:41:18 ℹ️ ✨ 3 records were generated
+{"name":"deserunt est in anim pr","surname":"enim dolore sunt","email":"j7B@u89Gm.a66LQ"}
+{"name":"","surname":"in Excepteur fugiat dolor","email":"o@DvfTGuIA.qIwtqrzo"}
+{"name":"do","surname":"id dolore","email":"woRlT@mA4pdr9eG2.m"}
+21:41:20 ❗ topic topic-json-schema does not exist !
+21:41:20 ℹ️ 📤 producing 3 records to topic topic-json-schema
+[2023-06-12 19:41:22,385] WARN [Producer clientId=console-producer] Error while fetching metadata with correlation id 4 : {topic-json-schema=LEADER_NOT_AVAILABLE} (org.apache.kafka.clients.NetworkClient)
+21:41:23 ℹ️ 💯 Get number of records in topic topic-json-schema
+3
+```
+
+#### **avro**
+
+```bash
+$ playground topic produce -t topic-avro --nb-messages 1 << 'EOF'
+{
+    "type": "record",
+    "namespace": "com.github.vdesabou",
+    "name": "Customer",
+    "fields": [
+        {
+            "name": "count",
+            "type": "long",
+            "doc": "count"
+        },
+        {
+            "name": "first_name",
+            "type": "string",
+            "doc": "First Name of Customer"
+        },
+        {
+            "name": "last_name",
+            "type": "string",
+            "doc": "Last Name of Customer"
+        },
+        {
+            "name": "address",
+            "type": "string",
+            "doc": "Address of Customer"
+        }
+    ]
+}
+EOF
+```
+
+#### **protobuf**
+
+```bash
+$ playground topic produce -t topic-proto --nb-messages 10 << 'EOF'
+syntax = "proto3";
+
+message Order {
+  float         total = 1;
+  repeated Item items = 2;
+
+  message Item {
+    string name  = 1;
+    float  price = 2;
+  }
+}
+EOF
+```
+
+<!-- tabs:end -->
+
+2. You can also generate json data using json or sql format using syntax from [MaterializeInc/datagen](https://github.com/MaterializeInc/datagen)
+
+
+<!-- tabs:start -->
+#### **json**
+
+
+```bash
+$ playground topic produce -t topic-json --nb-messages 5 << 'EOF'
+[
+    {
+        "_meta": {
+            "topic": "",
+            "key": "",
+            "relationships": [
+            ]
+        },
+        "nested": {
+            "phone": "faker.phone.imei()",
+            "website": "faker.internet.domainName()"
+        },
+        "id": "iteration.index",
+        "name": "faker.internet.userName()",
+        "email": "faker.internet.exampleEmail()",
+        "phone": "faker.phone.imei()",
+        "website": "faker.internet.domainName()",
+        "city": "faker.address.city()",
+        "company": "faker.company.name()"
+    }
+]
+EOF
+21:53:06 ℹ️ 🔮 schema was identified as json
+21:53:07 ℹ️ ✨ 5 records were generated
+{"nested":{"phone":"33-782181-043799-9","website":"insubstantial-tomato.info"},"id":1,"name":"Amos.Nitzsche","email":"Emmanuelle23@example.com","phone":"00-112159-149949-9","website":"outstanding-hydrant.net","city":"North
+{"nested":{"phone":"30-226290-881807-4","website":"charming-ant.info"},"id":2,"name":"Michael33","email":"Litzy_Feil@example.net","phone":"66-855187-415752-7","website":"accurate-deputy.biz","city":"Jonesboro","company":"Satterfield
+{"nested":{"phone":"70-808242-265994-9","website":"untrue-indicator.net"},"id":3,"name":"Emmy.Barrows7","email":"Laurine65@example.org","phone":"31-815588-513073-1","website":"responsible-soap.net","city":"South
+{"nested":{"phone":"02-314544-912274-2","website":"thoughtful-settler.info"},"id":4,"name":"Santos.Hoppe86","email":"Jarrett8@example.net","phone":"04-582921-373278-6","website":"immaculate-nerve.net","city":"Wolffcester","company":"Jacobs
+{"nested":{"phone":"52-898377-349339-0","website":"clean-hybridization.info"},"id":5,"name":"Davonte_Gleichner72","email":"Adell.Schmitt@example.org","phone":"06-356015-789964-9","website":"scary-protein.org","city":"Missouri
+21:53:10 ❗ topic topic-json does not exist !
+21:53:10 ℹ️ 📤 producing 5 records to topic topic-json
+[2023-06-12 19:53:12,117] WARN [Producer clientId=console-producer] Error while fetching metadata with correlation id 1 : {topic-json=LEADER_NOT_AVAILABLE} (org.apache.kafka.clients.NetworkClient)
+21:53:12 ℹ️ 💯 Get number of records in topic topic-json
+5
+```
+
+#### **sql**
+
+
+```bash
+$ playground topic produce -t topic-json-sql --nb-messages 10 << 'EOF'
+CREATE TABLE "notused"."notused" (
+  "id" int PRIMARY KEY,
+  "name" varchar COMMENT 'faker.internet.userName()',
+  "merchant_id" int NOT NULL COMMENT 'faker.datatype.number()',
+  "price" int COMMENT 'faker.datatype.number()',
+  "status" int COMMENT 'faker.datatype.boolean()',
+  "created_at" datetime DEFAULT (now())
+);
+EOF
+21:53:58 ℹ️ 🔮 schema was identified as sql
+21:53:59 ℹ️ ✨ 10 records were generated (only showing first 10)
+{"id":59126,"name":"Diana89","merchant_id":16039,"price":82506,"status":true,"created_at":"IM*gyUS%AK"}
+{"id":58849,"name":"Drake5","merchant_id":56477,"price":60429,"status":true,"created_at":"dO?KiiMbTA"}
+{"id":72877,"name":"Itzel_Kling","merchant_id":40582,"price":55787,"status":false,"created_at":"E3.9Zv@oy("}
+{"id":34161,"name":"Orland.Hoppe31","merchant_id":49733,"price":36431,"status":false,"created_at":"gP^y*\"A=vO"}
+{"id":3877,"name":"Kamryn.Raynor","merchant_id":33305,"price":56642,"status":false,"created_at":"G=Wv>ag0Fw"}
+{"id":46320,"name":"Mitchell_Bednar","merchant_id":68132,"price":96747,"status":true,"created_at":"#e{tBT`^y<"}
+{"id":41523,"name":"Freda.Oberbrunner","merchant_id":29066,"price":29099,"status":true,"created_at":"+SXnJ';;<H"}
+{"id":57987,"name":"Dedrick_Erdman97","merchant_id":24643,"price":9425,"status":false,"created_at":"R|KEb,B^$O"}
+{"id":98803,"name":"Geovany.Skiles","merchant_id":48406,"price":77861,"status":false,"created_at":"xy:5R9B6V3"}
+{"id":56777,"name":"Isabella.Ziemann88","merchant_id":44384,"price":54554,"status":true,"created_at":"x>9K.4te/q"}
+21:54:02 ❗ topic topic-json-sql does not exist !
+21:54:02 ℹ️ 📤 producing 10 records to topic topic-json-sql
+[2023-06-12 19:54:03,425] WARN [Producer clientId=console-producer] Error while fetching metadata with correlation id 1 : {topic-json-sql=LEADER_NOT_AVAILABLE} (org.apache.kafka.clients.NetworkClient)
+21:54:04 ℹ️ 💯 Get number of records in topic topic-json-sql
+10
+```
+<!-- tabs:end -->
+
+3. Use `fzf` completion (use `--input` and then <tab>) to select predefined schemas or your own schemas (`.avsc`, `proto`, `proto5`, `sql` or `json` file should be within subfolders where command is started)
+
+See example:
+
+[![asciicast](https://asciinema.org/a/591076.svg)](https://asciinema.org/a/591076)
+
+4. and much more
+
+<!-- tabs:start -->
+
+#### **json with schema**
+
+```bash
+$ playground topic produce -t topic-json-with-schema --nb-messages 10 << 'EOF'
+{
+  "schema": {
+    "type": "struct",
+    "fields": [
+      {
+        "type": "string",
+        "optional": false,
+        "field": "record"
+      }
+    ]
+  },
+  "payload": {
+    "record": "cdcd"
+  }
+}
+EOF
+22:08:24 ℹ️ 📢 no known schema could be identified, payload will be sent as raw data
+22:08:24 ℹ️ 💫 payload is single json, it will be sent as one record
+22:08:24 ℹ️ ✨ 10 records were generated (only showing first 10)
+{"schema":{"type":"struct","fields":[{"type":"string","optional":false,"field":"record"}]},"payload":{"record":"cdcd"}}
+{"schema":{"type":"struct","fields":[{"type":"string","optional":false,"field":"record"}]},"payload":{"record":"cdcd"}}
+{"schema":{"type":"struct","fields":[{"type":"string","optional":false,"field":"record"}]},"payload":{"record":"cdcd"}}
+{"schema":{"type":"struct","fields":[{"type":"string","optional":false,"field":"record"}]},"payload":{"record":"cdcd"}}
+{"schema":{"type":"struct","fields":[{"type":"string","optional":false,"field":"record"}]},"payload":{"record":"cdcd"}}
+{"schema":{"type":"struct","fields":[{"type":"string","optional":false,"field":"record"}]},"payload":{"record":"cdcd"}}
+{"schema":{"type":"struct","fields":[{"type":"string","optional":false,"field":"record"}]},"payload":{"record":"cdcd"}}
+{"schema":{"type":"struct","fields":[{"type":"string","optional":false,"field":"record"}]},"payload":{"record":"cdcd"}}
+{"schema":{"type":"struct","fields":[{"type":"string","optional":false,"field":"record"}]},"payload":{"record":"cdcd"}}
+{"schema":{"type":"struct","fields":[{"type":"string","optional":false,"field":"record"}]},"payload":{"record":"cdcd"}}
+22:08:26 ❗ topic topic-json-with-schema does not exist !
+22:08:26 ℹ️ 📤 producing 10 records to topic topic-json-with-schema
+[2023-06-12 20:08:28,031] WARN [Producer clientId=console-producer] Error while fetching metadata with correlation id 1 : {topic-json-with-schema=LEADER_NOT_AVAILABLE} (org.apache.kafka.clients.NetworkClient)
+22:08:28 ℹ️ 💯 Get number of records in topic topic-json-with-schema
+10
+```
+
+#### **simple records**
+
+```bash
+$ playground topic produce -t topic-string --nb-messages 30 << 'EOF'
+Ad et ut pariatur officia eos.
+Nesciunt fugit nam libero ut qui itaque sed earum at itaque nesciunt eveniet atque.
+Quidem libero quis quod et illum excepturi voluptas et in perspiciatis iusto neque.
+Quibusdam commodi explicabo dolores molestiae qui delectus dolorum fugiat molestiae natus assumenda omnis expedita.
+Et sunt aut architecto suscipit fugiat qui voluptate iure vel doloremque eum culpa.
+Qui enim facilis eos similique aperiam totam eius et at dolor dolores.
+Ut sunt quia qui quia consectetur aut reiciendis.
+Modi adipisci iusto aut voluptatem dolores laudantium.
+Sequi sint quia quibusdam molestias minus et aliquid voluptatum aliquam.
+Rerum aut amet quo possimus nihil velit quisquam ut cumque.
+Pariatur ad officiis voluptatibus quia vel corporis ea fugit adipisci porro.
+EOF
+22:09:11 ℹ️ 📢 no known schema could be identified, payload will be sent as raw data
+22:09:11 ℹ️ 💫 payload is not single json, one record per line will be sent
+22:09:11 ℹ️ ✨ 30 records were generated (only showing first 10)
+Ad et ut pariatur officia eos.
+Nesciunt fugit nam libero ut qui itaque sed earum at itaque nesciunt eveniet atque.
+Quidem libero quis quod et illum excepturi voluptas et in perspiciatis iusto neque.
+Quibusdam commodi explicabo dolores molestiae qui delectus dolorum fugiat molestiae natus assumenda omnis expedita.
+Et sunt aut architecto suscipit fugiat qui voluptate iure vel doloremque eum culpa.
+Qui enim facilis eos similique aperiam totam eius et at dolor dolores.
+Ut sunt quia qui quia consectetur aut reiciendis.
+Modi adipisci iusto aut voluptatem dolores laudantium.
+Sequi sint quia quibusdam molestias minus et aliquid voluptatum aliquam.
+Rerum aut amet quo possimus nihil velit quisquam ut cumque.
+22:09:13 ❗ topic topic-string does not exist !
+22:09:13 ℹ️ 📤 producing 30 records to topic topic-string
+[2023-06-12 20:09:15,054] WARN [Producer clientId=console-producer] Error while fetching metadata with correlation id 1 : {topic-string=LEADER_NOT_AVAILABLE} (org.apache.kafka.clients.NetworkClient)
+22:09:15 ℹ️ 💯 Get number of records in topic topic-string
+30
+```
+
+#### **with key**
+
+```bash
+$ playground topic produce -t topic-json-multiple-lines --nb-messages 10 --key "mykey" << 'EOF'
+{"u_name": "scissors", "u_price": 2.75, "u_quantity": 3}
+{"u_name": "tape", "u_price": 0.99, "u_quantity": 10}
+{"u_name": "notebooks", "u_price": 1.99, "u_quantity": 5}
+EOF
+22:11:11 ℹ️ 📢 no known schema could be identified, payload will be sent as raw data
+22:11:11 ℹ️ 💫 payload is single json, it will be sent as one record
+22:11:12 ℹ️ ✨ 30 records were generated (only showing first 10)
+{"u_name":"scissors","u_price":2.75,"u_quantity":3}
+{"u_name":"tape","u_price":0.99,"u_quantity":10}
+{"u_name":"notebooks","u_price":1.99,"u_quantity":5}
+{"u_name":"scissors","u_price":2.75,"u_quantity":3}
+{"u_name":"tape","u_price":0.99,"u_quantity":10}
+{"u_name":"notebooks","u_price":1.99,"u_quantity":5}
+{"u_name":"scissors","u_price":2.75,"u_quantity":3}
+{"u_name":"tape","u_price":0.99,"u_quantity":10}
+{"u_name":"notebooks","u_price":1.99,"u_quantity":5}
+{"u_name":"scissors","u_price":2.75,"u_quantity":3}
+22:11:14 ❗ topic topic-json-multiple-lines does not exist !
+22:11:14 ℹ️ 🗝️ key is set mykey
+22:11:14 ℹ️ 📤 producing 30 records to topic topic-json-multiple-lines
+[2023-06-12 20:11:15,665] WARN [Producer clientId=console-producer] Error while fetching metadata with correlation id 1 : {topic-json-multiple-lines=LEADER_NOT_AVAILABLE} (org.apache.kafka.clients.NetworkClient)
+22:11:16 ℹ️ 💯 Get number of records in topic topic-json-multiple-lines
+30
+```
+
+#### **tombstone**
+
+```bash
+$ playground topic produce -t topic-json-multiple-lines --key mykey --tombstone 
+22:12:06 ℹ️ ⚰️ Sending tombstone for key mykey in topic topic-json-multiple-lines
+```
+<!-- tabs:end -->
+
+### 📥 `consume`
+
+Consume topic from beginning without needing to specify any configuration (even the topic name is optional)!
+
+<script async id="asciicast-583918" src="https://asciinema.org/a/583918.js"></script>
+
 ### 💯 `get-number-records`
 
 Get number of records in a topic
@@ -795,12 +1143,6 @@ Display content of __consumer_offsets topic
 🔬 Describe topic
 
 <script async id="asciicast-583917" src="https://asciinema.org/a/583917.js"></script>
-
-### 📥 `consume`
-
-Consume topic from beginning without needing to specify any configuration (even the topic name is optional)!
-
-<script async id="asciicast-583918" src="https://asciinema.org/a/583918.js"></script>
 
 ### 🛡️ `set-schema-compatibility`
 
@@ -857,7 +1199,59 @@ playground topic display-schema-id-statistics
     9
   ]
 }
+```
 
+### 🆕 `create`
+
+Create a topic.
+
+```bash
+playground topic create --help
+playground topic create - 🆕 Create topic
+
+== Usage ==
+  playground topic create [OPTIONS] [ARGUMENTS...]
+  playground topic create --help | -h
+
+== Options ==
+  --topic, -t TOPIC (required)
+    🗳 Topic name
+
+  --nb-partitions NB-PARTITIONS
+    Number of partitions for the topic. (default is 1)
+    Default: 
+
+  --help, -h
+    Show this help
+
+== Arguments ==
+  ARGUMENTS...
+    Any arguments to be used with kafka-topics --create
+
+Examples
+  playground topic create --topic atopic
+  playground topic create --topic atopic --nb-partitions 8 --config
+  retention.ms=30000
+```
+
+### ❌ `delete`
+
+Delete a topic.
+
+```bash
+playground topic delete --help
+playground topic delete - ❌ Delete topic
+
+== Usage ==
+  playground topic delete [OPTIONS]
+  playground topic delete --help | -h
+
+== Options ==
+  --topic, -t TOPIC (required)
+    🗳 Topic name
+
+  --help, -h
+    Show this help
 ```
 
 ## 🔮 Kafka commands

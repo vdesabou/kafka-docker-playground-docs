@@ -1066,7 +1066,7 @@ In my example, the connector version is `10.1.1`, so I'm switching to branch tag
 4. Execute [🧠 CLI](/cli) with `enable-remote-debugging` command:
 
 ```bash
-$ playground enable-remote-debugging -c connect
+$ playground debug enable-remote-debugging -c connect
 namenode is up-to-date
 zookeeper is up-to-date
 hive-metastore-postgresql is up-to-date

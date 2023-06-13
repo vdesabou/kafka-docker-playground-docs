@@ -877,7 +877,7 @@ We don't know which SMT in the list is failing:
 So in order to troubleshoot this, you can set TRACE level on `org.apache.kafka.connect.runtime.TransformationChain`
 
 ```bash
-playground log-level set --package "org.apache.kafka.connect.runtime.TransformationChain" --level TRACE
+playground debug log-level set --package "org.apache.kafka.connect.runtime.TransformationChain" --level TRACE
 17:08:33 ℹ️ 🧬 Set log level for package org.apache.kafka.connect.runtime.TransformationChain to TRACE
 [
   "org.apache.kafka.connect.runtime.TransformationChain"

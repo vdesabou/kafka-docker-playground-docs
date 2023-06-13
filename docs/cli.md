@@ -1309,14 +1309,14 @@ Enable java remote debugging for container. See documentation [here](/reusables?
 Set log level for any package.
 
 ```bash
-playground log-level --help
-playground log-level
+playground debug log-level --help
+playground debug log-level
 
   🧬 Set log level for any package
 
 == Usage ==
-  playground log-level COMMAND
-  playground log-level [COMMAND] --help | -h
+  playground debug log-level COMMAND
+  playground debug log-level [COMMAND] --help | -h
 
 == Commands ==
   get   Get log levels
@@ -1327,9 +1327,9 @@ playground log-level
     Show this help
 
 Examples
-  playground log-level get
-  playground log-level get -p io.confluent.connect.oracle.cdc
-  playground log-level get --package io.confluent.connect.oracle.cdc
-  playground log-level set -p io.confluent.connect.oracle.cdc.logging.LogUtils
+  playground debug log-level get
+  playground debug log-level get -p io.confluent.connect.oracle.cdc
+  playground debug log-level get --package io.confluent.connect.oracle.cdc
+  playground debug log-level set -p io.confluent.connect.oracle.cdc.logging.LogUtils
   -l TRACE
 ```

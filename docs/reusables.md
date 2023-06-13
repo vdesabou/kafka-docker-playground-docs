@@ -1354,11 +1354,7 @@ Example:
 
 It is sometime necessary to get a [Java thread dump](https://www.baeldung.com/java-thread-dump).
 
-*Example:*
-
-```bash
-docker exec connect jstack 1 > threaddump.txt
-```
+Just use [CLI](/cli?id=%f0%9f%8e%af-thread-dump) `playground debug thread-dump`.
 
 You can use [Thread Dump Analyzer](http://the-babel-tower.github.io/tda.html) for example to analyze results.
 

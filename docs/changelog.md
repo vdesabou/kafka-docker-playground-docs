@@ -3,6 +3,7 @@
 ## June 2023
 
 - CLI: 
+  * Add `--tail` option to `topic consume`
   * Add `ccloud-connector` command to interact with [fully-managed connectors](/content?id=%f0%9f%a4%96-fully-managed-connectors)
   * 🔥 Add `topic produce` [command](/cli?id=%f0%9f%93%a5-produce)
   * Add `topic create` and `topic delete` commands

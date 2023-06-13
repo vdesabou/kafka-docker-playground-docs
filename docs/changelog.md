@@ -3,10 +3,11 @@
 ## June 2023
 
 - CLI: 
-  * Add `--tail` option to `topic consume`
-  * Add `ccloud-connector` command to interact with [fully-managed connectors](/content?id=%f0%9f%a4%96-fully-managed-connectors)
-  * 🔥 Add `topic produce` [command](/cli?id=%f0%9f%93%a5-produce)
-  * Add `topic create` and `topic delete` commands
+  * Added `debug thread-dump`
+  * Added `--tail` option to `topic consume`
+  * Added `ccloud-connector` command to interact with [fully-managed connectors](/content?id=%f0%9f%a4%96-fully-managed-connectors)
+  * 🔥 Added `topic produce` [command](/cli?id=%f0%9f%93%a5-produce)
+  * Added `topic create` and `topic delete` commands
 - Added [SSL example](https://github.com/vdesabou/kafka-docker-playground/blob/master/connect/connect-rabbitmq-source/rabbitmq-source-ssl.sh) for RabbitMQ source
 
 ## May 2023

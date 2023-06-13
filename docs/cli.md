@@ -1333,3 +1333,34 @@ Examples
   playground debug log-level set -p io.confluent.connect.oracle.cdc.logging.LogUtils
   -l TRACE
 ```
+
+### 🎯 `thread-dump`
+
+Take a thread dump with jstack for container (pid 1)
+
+```bash
+playground debug thread-dump --help                                     
+playground debug thread-dump
+
+  🎯 Take a java thread dump
+  
+  🔖 It will save output to a file and open with text editor set with config.ini
+  (default is code)
+
+== Usage ==
+  playground debug thread-dump [OPTIONS]
+  playground debug thread-dump --help | -h
+
+== Options ==
+  --container, -c CONTAINER
+    🐳 Container name
+    Default: connect
+
+  --help, -h
+    Show this help
+
+Examples
+  playground debug thread-dump
+  playground debug thread-dump --container broker
+
+```

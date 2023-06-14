@@ -870,6 +870,97 @@ docker exec broker kafka-producer-perf-test --topic a-topic --num-records 200000
 
 Just use [CLI](/cli?id=%f0%9f%93%a5-consume) `playground topic consume`, it's magic !
 
+It you prefer to use legacy way, see below:
+
+### 🔤 [kafka-console-consumer](https://docs.confluent.io/platform/current/tutorials/examples/clients/docs/kafka-commands.html#consume-records)
+
+<!-- tabs:start -->
+
+#### **Simplest**
+
+```
+timeout 60 docker exec broker kafka-console-consumer --bootstrap-server broker:9092 --topic a-topic --from-beginning --max-messages 1
+```
+
+#### **Display Key**
+
+```bash
+timeout 60 docker exec broker kafka-console-consumer --bootstrap-server broker:9092 --topic a-topic --property print.key=true --property key.separator=, --from-beginning --max-messages 1
+```
+
+
+<!-- tabs:end -->
+
+
+> [!TIP]
+> Using `timeout` command prevents the command to run forever.
+> It is [ignored](https://github.com/vdesabou/kafka-docker-playground/blob/c65704df7b66a2c47321d04fb75f43a8bbb4fef1/scripts/utils.sh#L650-L658) if not present on your machine.
+
+
+### 🔣 [kafka-avro-console-consumer](https://docs.confluent.io/platform/current/tutorials/examples/clients/docs/kafka-commands.html#consume-avro-records)
+
+<!-- tabs:start -->
+
+#### **Simplest**
+
+```
+docker exec connect kafka-avro-console-consumer -bootstrap-server broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --from-beginning --max-messages 1
+```
+
+#### **Display Key**
+
+```
+docker exec connect kafka-avro-console-consumer -bootstrap-server broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --property print.key=true --property key.separator=, --from-beginning --max-messages 1
+```
+
+#### **String Key**
+
+If the key is a string, you can use `key.deserializer` to specify it:
+
+```bash
+docker exec connect kafka-avro-console-consumer --bootstrap-server broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --property print.key=true --property key.deserializer=org.apache.kafka.common.serialization.StringDeserializer --from-beginning --max-messages 1
+```
+
+<!-- tabs:end -->
+### 🔣 kafka-protobuf-console-consumer
+
+<!-- tabs:start -->
+
+#### **Simplest**
+
+```
+docker exec connect kafka-protobuf-console-consumer -bootstrap-server broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --from-beginning --max-messages 1
+```
+
+#### **Display Key**
+
+```
+docker exec connect kafka-protobuf-console-consumer -bootstrap-server broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --property print.key=true --property key.separator=, --from-beginning --max-messages 1
+```
+
+<!-- tabs:end -->
+
+
+
+### 🔣 kafka-json-schema-console-consumer
+
+
+<!-- tabs:start -->
+
+#### **Simplest**
+
+```
+docker exec connect kafka-json-schema-console-consumer -bootstrap-server broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --from-beginning --max-messages 1
+```
+
+#### **Display Key**
+
+```
+docker exec connect kafka-json-schema-console-consumer -bootstrap-server broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --property print.key=true --property key.separator=, --from-beginning --max-messages 1
+```
+
+<!-- tabs:end -->
+
 ## 🧙 How to install other connectors
 
 To run an example with additional connector (or SMT that you can get from Confluent Hub), simply add it to the list of `CONNECT_PLUGIN_PATH`:

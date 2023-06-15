@@ -499,13 +499,6 @@ Examples
 
 Simply open last example you ran with `run` [command](/cli?id=%f0%9f%95%b9%ef%b8%8f-run) in your configured editor (see `editor` config in [⚙️ Config file](/cli?id=%e2%9a%99%ef%b8%8f-config-file), default is code).
 
-### 🛑 `stop`
-
-Stop currently running example.
-
-
-
-
 <script async id="asciicast-581277" src="https://asciinema.org/a/581277.js"></script>
 
 ```bash
@@ -521,6 +514,11 @@ playground open - 👐 Simply open last example you ran with <playground run>
     Show this help
 
 ```
+
+### 🛑 `stop`
+
+Stop currently running example.
+
 
 ## 👷 Bootstrap commands
 

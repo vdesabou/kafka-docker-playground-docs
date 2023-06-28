@@ -1167,38 +1167,6 @@ playground topic set-schema-compatibility - 🛡️ Change topic's schema compat
 ```
 <script async id="asciicast-584428" src="https://asciinema.org/a/584428.js"></script>
 
-### 🧞 `display-schema-id-statistics`
-
-Easily identify the usage of different schema versions within a topic.
-
-It makes use of https://github.com/EladLeev/schema-registry-statistics
-
-It only works when plaintext environment is used
-
-<script async id="asciicast-584424" src="https://asciinema.org/a/584424.js"></script>
-
-Example:
-
-```bash
-playground topic display-schema-id-statistics 
-13:34:27 ℹ️ ✨ --topic flag was not provided, applying command to all topics
-13:34:31 ℹ️ ✨ Display statistics of topic test_hdfs, it contains 10 messages
-{
-  "1": [
-    0,
-    1,
-    2,
-    3,
-    4,
-    5,
-    6,
-    7,
-    8,
-    9
-  ]
-}
-```
-
 ### 🆕 `create`
 
 Create a topic.

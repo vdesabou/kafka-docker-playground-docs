@@ -2,6 +2,8 @@
 
 ## June 2023
 
+- Added [Adding Lenses JMS source for ActiveMQ](https://github.com/vdesabou/kafka-docker-playground/tree/master/connect/connect-lenses-active-mq-source)
+- Add [Oracle CDC JMX metrics](https://docs.confluent.io/kafka-connectors/oracle-cdc/current/oracle-metrics.html) to JMX Grafana dashboard
 - CLI: 
   * Added `debug thread-dump`
   * Added `--tail` option to `topic consume`

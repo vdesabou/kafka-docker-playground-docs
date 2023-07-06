@@ -1315,7 +1315,8 @@ Add `-verbose:class` in your `docker-compose` file to troubleshoot a `ClassNotFo
 
 ```yml
   connect:
-    KAFKA_OPTS: -verbose:class
+    environment:
+      KAFKA_OPTS: -verbose:class
 ```
 
 In logs, you'll see:

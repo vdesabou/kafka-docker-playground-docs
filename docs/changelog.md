@@ -1,5 +1,12 @@
 # Change Log
 
+## July 2023
+
+- CLI: 
+  * Added `debug block-traffic`
+  * Added `debug testssl`
+  * Added `generate-only` and `force-value` to `topic produce` [command](/cli?id=%f0%9f%93%a5-produce)
+
 ## June 2023
 
 - Added [Adding Lenses JMS source for ActiveMQ](https://github.com/vdesabou/kafka-docker-playground/tree/master/connect/connect-lenses-active-mq-source)

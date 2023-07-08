@@ -1375,7 +1375,16 @@ Example:
       - ../../connect/connect-http-sink/jcl-over-slf4j-2.0.7.jar:/usr/share/confluent-hub-components/confluentinc-kafka-connect-http/lib/jcl-over-slf4j-2.0.7.jar
 ```
 
+> [!NOTE]
+> It is already set in all HTTP sink examples.
+
 Then you can enable TRACE logs on `org.apache.http`:
+
+```bash
+$ playground debug log-level set --package "org.apache.http" --level TRACE
+```
+
+or 
 
 ```bash
 curl --request PUT \

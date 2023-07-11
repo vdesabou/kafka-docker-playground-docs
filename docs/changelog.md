@@ -2,14 +2,16 @@
 
 ## July 2023
 
+- Added [JDBC Google BigQuery Source](https://github.com/vdesabou/kafka-docker-playground/tree/master/connect/connect-jdbc-gcp-bigquery-source)
 - CLI: 
   * Added `debug block-traffic`
   * Added `debug testssl`
-  * Added `generate-only` and `force-value` to `topic produce` [command](/cli?id=%f0%9f%93%a5-produce)
+  * Added `--generate-only` and `--force-value` to `topic produce` [command](/cli?id=%f0%9f%93%a5-produce)
+  * Added `--headers` to `topic produce` [command](/cli?id=%f0%9f%93%a5-produce)
 
 ## June 2023
 
-- Added [Adding Lenses JMS source for ActiveMQ](https://github.com/vdesabou/kafka-docker-playground/tree/master/connect/connect-lenses-active-mq-source)
+- Added [Lenses JMS source for ActiveMQ](https://github.com/vdesabou/kafka-docker-playground/tree/master/connect/connect-lenses-active-mq-source)
 - Add [Oracle CDC JMX metrics](https://docs.confluent.io/kafka-connectors/oracle-cdc/current/oracle-metrics.html) to JMX Grafana dashboard
 - CLI: 
   * Added `debug thread-dump`
@@ -17,6 +19,7 @@
   * Added `ccloud-connector` command to interact with [fully-managed connectors](/content?id=%f0%9f%a4%96-fully-managed-connectors)
   * 🔥 Added `topic produce` [command](/cli?id=%f0%9f%93%a5-produce)
   * Added `topic create` and `topic delete` commands
+  * Added `--verbose` flag for produce and consume
 - Added [SSL example](https://github.com/vdesabou/kafka-docker-playground/blob/master/connect/connect-rabbitmq-source/rabbitmq-source-ssl.sh) for RabbitMQ source
 
 ## May 2023

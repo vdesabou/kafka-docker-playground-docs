@@ -2,6 +2,7 @@
 
 ## July 2023
 
+- Added ssl examples for mongo source and sink
 - Added [JDBC Google BigQuery Source](https://github.com/vdesabou/kafka-docker-playground/tree/master/connect/connect-jdbc-gcp-bigquery-source)
 - CLI: 
   * Added `connector show-config` command

@@ -4,6 +4,8 @@
 
 - Added [JDBC Google BigQuery Source](https://github.com/vdesabou/kafka-docker-playground/tree/master/connect/connect-jdbc-gcp-bigquery-source)
 - CLI: 
+  * Added `connector show-config` command
+  * Added `open-docs` command
   * Added `debug block-traffic`
   * Added `debug testssl`
   * Added `--generate-only` and `--force-value` to `topic produce` [command](/cli?id=%f0%9f%93%a5-produce)

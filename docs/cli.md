@@ -1305,7 +1305,7 @@ Examples
 Take a thread dump with jstack for container (pid 1)
 
 ```bash
-playground debug thread-dump --help                                     
+$ playground debug thread-dump --help                                     
 playground debug thread-dump
 
   🎯 Take a java thread dump
@@ -1329,4 +1329,139 @@ Examples
   playground debug thread-dump
   playground debug thread-dump --container broker
 
+```
+
+### 🕵 `tcp-dump`
+
+Sniff the network using tcpdump.
+
+```bash
+playground debug tcp-dump --help
+playground debug tcp-dump - 🕵️‍♂️ Take a tcp dump (sniffing network)
+
+== Usage ==
+  playground debug tcp-dump [OPTIONS]
+  playground debug tcp-dump --help | -h
+
+== Options ==
+  --container, -c CONTAINER
+    🐳 Container name
+    Default: connect
+
+  --port PORT
+    Port on which tcp dump should be done, if not set sniffing is done on every
+    port
+
+  --duration DURATION
+    Duration of the dump (default is 30 seconds).
+    Default: 30
+
+  --help, -h
+    Show this help
+
+Examples
+  playground debug tcp-dump --container control-center --port 9021 --duration 60
+
+```
+
+
+### 👻 `heap-dump`
+
+Get a [heap dump](https://www.baeldung.com/java-heap-dump-capture)
+
+```bash
+$ playground debug heap-dump --help  
+playground debug heap-dump
+
+  👻 Take a heap dump
+  
+  🔖 It will save output to a .hprof file. VisualVM (https://visualvm.github.io/)
+  or MAT (https://www.eclipse.org/mat/) can be used to read the file.
+
+== Usage ==
+  playground debug heap-dump [OPTIONS]
+  playground debug heap-dump --help | -h
+
+== Options ==
+  --container, -c CONTAINER
+    🐳 Container name
+    Default: connect
+
+  --help, -h
+    Show this help
+
+Examples
+  playground debug heap-dump
+  playground debug heap-dump --container broker
+```
+
+### 🛩️ `flight-recorder`
+
+Monitor with [Flight Recorder](https://www.baeldung.com/java-flight-recorder-monitoring).
+
+```bash
+$ playground debug flight-recorder --help 
+playground debug flight-recorder
+
+  🛩️ Record flight recorder
+  
+  Read more about it at https://www.baeldung.com/java-flight-recorder-monitoring
+  
+  Open the jfr file with JDK Mission Control JMC(https://jdk.java.net/jmc/)
+
+== Usage ==
+  playground debug flight-recorder [OPTIONS]
+  playground debug flight-recorder --help | -h
+
+== Options ==
+  --container, -c CONTAINER
+    🐳 Container name
+    Default: connect
+
+  --action ACTION (required)
+    🟢 start or stop
+    Allowed: start, stop
+
+  --help, -h
+    Show this help
+
+Examples
+  playground debug flight-recorder --action start
+  playground debug flight-recorder --action stop
+```
+
+## 🚫 `block-traffic`
+
+Simulate network issues like blocking incoming or outgoing traffic.
+
+```bash
+$ playground debug block-traffic --help
+playground debug block-traffic - 🚫 Blocking traffic using iptables
+
+== Usage ==
+  playground debug block-traffic [OPTIONS]
+  playground debug block-traffic --help | -h
+
+== Options ==
+  --container, -c CONTAINER
+    🐳 Container name
+    Default: connect
+
+  --destination DESTINATION (required)
+    Destination: it could be an ip address, a container name or a hostname
+
+  --port PORT
+    Port on which tcp traffic should be blocked
+
+  --action ACTION (required)
+    🟢 start or stop
+    Allowed: start, stop
+
+  --help, -h
+    Show this help
+
+Examples
+  playground debug block-traffic --destination google.com --action start
+  playground debug block-traffic --container broker --destination zookeeper
+  --action start
 ```

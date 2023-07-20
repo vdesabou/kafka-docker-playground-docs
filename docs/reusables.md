@@ -1384,7 +1384,7 @@ Then you can enable TRACE logs on `org.apache.http`:
 $ playground debug log-level set --package "org.apache.http" --level TRACE
 ```
 
-or 
+or legacy way:
 
 ```bash
 curl --request PUT \
@@ -1400,44 +1400,66 @@ curl --request PUT \
 
 It is sometime necessary to sniff the network in order to better understand what's going on.
 
-The [connect image](/how-it-works?id=🔗-connect-image-used) used by the playground contains [`tcpdump`](https://www.tcpdump.org) tool for that purpose.
-
-*Example:*
-
-Sniff all traffic on port `8888`:
+Just use [CLI](/cli?id=%f0%9f%8e%af-thread-dump) `playground debug tcp-dump`.
 
 ```bash
-docker exec -d --privileged --user root connect bash -c 'tcpdump -w /tmp/tcpdump.pcap port 8888'
-```
+playground debug tcp-dump --help
+playground debug tcp-dump - 🕵️‍♂️ Take a tcp dump (sniffing network)
 
-The TCP dump will run in background (`-d` option is used).
+== Usage ==
+  playground debug tcp-dump [OPTIONS]
+  playground debug tcp-dump --help | -h
 
-Once you test is over, you can get the `tcpdump.pcap` file (that you can open with [Wireshark](https://www.wireshark.org) for example) using:
+== Options ==
+  --container, -c CONTAINER
+    🐳 Container name
+    Default: connect
 
-```bash
-docker cp connect:/tmp/tcpdump.pcap .
-```
+  --port PORT
+    Port on which tcp dump should be done, if not set sniffing is done on every
+    port
 
-For other UBI8 images, you can install tcpdump like this:
+  --duration DURATION
+    Duration of the dump (default is 30 seconds).
+    Default: 30
 
-```bash
-docker exec --privileged --user root control-center bash -c "curl http://mirror.centos.org/centos/8-stream/AppStream/x86_64/os/Packages/tcpdump-4.9.3-1.el8.x86_64.rpm -o tcpdump-4.9.3-1.el8.x86_64.rpm && rpm -Uvh tcpdump-4.9.3-1.el8.x86_64.rpm"
+  --help, -h
+    Show this help
+
+Examples
+  playground debug tcp-dump --container control-center --port 9021 --duration 60
 ```
 
 ### 👻 Heap Dump
 
 It is sometime necessary to get a [heap dump](https://www.baeldung.com/java-heap-dump-capture).
 
-*Example:*
+Just use [CLI](/cli?id=%f0%9f%8e%af-thread-dump) `playground debug heap-dump`.
 
 ```bash
-docker exec connect jmap -dump:live,format=b,file=/tmp/dump.hprof 1
-```
+$ playground debug heap-dump --help  
+playground debug heap-dump
 
-Once you test is over, you can get the `dump.hprof` file (that you can open with [VisualVM](https://visualvm.github.io/index.html) for example) using:
+  👻 Take a heap dump
+  
+  🔖 It will save output to a .hprof file. VisualVM (https://visualvm.github.io/)
+  or MAT (https://www.eclipse.org/mat/) can be used to read the file.
 
-```bash
-docker cp connect:/tmp/dump.hprof .
+== Usage ==
+  playground debug heap-dump [OPTIONS]
+  playground debug heap-dump --help | -h
+
+== Options ==
+  --container, -c CONTAINER
+    🐳 Container name
+    Default: connect
+
+  --help, -h
+    Show this help
+
+Examples
+  playground debug heap-dump
+  playground debug heap-dump --container broker
 ```
 
 You can also set `-XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/tmp` to generate heap dump automatically when hitting OOM:
@@ -1457,80 +1479,106 @@ It is sometime necessary to get a [Java thread dump](https://www.baeldung.com/ja
 
 Just use [CLI](/cli?id=%f0%9f%8e%af-thread-dump) `playground debug thread-dump`.
 
+```bash
+$ playground debug thread-dump --help
+playground debug thread-dump
+
+  🎯 Take a java thread dump
+  
+  🔖 It will save output to a file and open with text editor set with config.ini
+  (default is code)
+
+== Usage ==
+  playground debug thread-dump [OPTIONS]
+  playground debug thread-dump --help | -h
+
+== Options ==
+  --container, -c CONTAINER
+    🐳 Container name
+    Default: connect
+
+  --help, -h
+    Show this help
+
+Examples
+  playground debug thread-dump
+  playground debug thread-dump --container broker
+```
 You can use [Thread Dump Analyzer](http://the-babel-tower.github.io/tda.html) for example to analyze results.
 
 ### 🛩️ Flight Recorder
 
 It is sometime necessary to monitor with [Flight Recorder](https://www.baeldung.com/java-flight-recorder-monitoring).
 
-*Example:*
-
-Start monitoring session:
+Just use [CLI](/cli?id=%f0%9f%8e%af-thread-dump) `playground debug flight-recorder`.
 
 ```bash
-docker exec connect jcmd 1 JFR.start name=dump1 filename=/tmp/dump1.jfr
-```
+$ playground debug flight-recorder --help 
+playground debug flight-recorder
 
-Dump results:
+  🛩️ Record flight recorder
+  
+  Read more about it at https://www.baeldung.com/java-flight-recorder-monitoring
+  
+  Open the jfr file with JDK Mission Control JMC(https://jdk.java.net/jmc/)
 
-```bash
-docker exec connect jcmd 1 JFR.stop name=dump1 filename=/tmp/dump1.jfr
-```
+== Usage ==
+  playground debug flight-recorder [OPTIONS]
+  playground debug flight-recorder --help | -h
 
-Once you test is over, you can get the `dump1.jfr` file (that you can open with [JDK Mission Control JMC](https://jdk.java.net/jmc/)) using:
+== Options ==
+  --container, -c CONTAINER
+    🐳 Container name
+    Default: connect
 
-```bash
-docker cp connect:/tmp/dump1.jfr .
+  --action ACTION (required)
+    🟢 start or stop
+    Allowed: start, stop
+
+  --help, -h
+    Show this help
+
+Examples
+  playground debug flight-recorder --action start
+  playground debug flight-recorder --action stop
 ```
 
 ## 🚫 Blocking traffic
 
 It is sometime necessary for a reproduction model to simulate network issues like blocking incoming or outgoing traffic.
 
-The [connect image](/how-it-works?id=🔗-connect-image-used) used by the playground contains [`iptables`](https://en.wikipedia.org/wiki/Iptables) tool, so it is really easy to simulate network issues:
-
-*Examples:*
-
-* Block outgoing HTTPS traffic
+Just use [CLI](/cli?id=%f0%9f%8e%af-thread-dump) `playground debug block-traffic`.
 
 ```bash
-docker exec --privileged --user root connect bash -c "iptables -A OUTPUT -p tcp --dport 443 -j DROP"
-```
+$ playground debug block-traffic --help
+playground debug block-traffic - 🚫 Blocking traffic using iptables
 
-* Block incoming traffic from an IP address
+== Usage ==
+  playground debug block-traffic [OPTIONS]
+  playground debug block-traffic --help | -h
 
-```bash
-docker exec --privileged --user root connect bash -c 'iptables -A INPUT -p tcp -s 35.205.238.172 -j DROP'
-```
+== Options ==
+  --container, -c CONTAINER
+    🐳 Container name
+    Default: connect
 
-* Block incoming traffic from another container 
+  --destination DESTINATION (required)
+    Destination: it could be an ip address, a container name or a hostname
 
-```bash
-container="nginx-proxy"
-ip=$(docker inspect -f '{{.Name}} - {{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $(docker ps -aq) | grep $container | cut -d " " -f 3)
-log "Block incoming traffic from $container (ip=$ip)"
-docker exec --privileged --user root connect bash -c "iptables -A INPUT -p tcp -s $ip -j DROP"
-```
+  --port PORT
+    Port on which tcp traffic should be blocked
 
-* Block ougoing traffic to another container 
+  --action ACTION (required)
+    🟢 start or stop
+    Allowed: start, stop
 
-```bash
-container="nginx-proxy"
-ip=$(docker inspect -f '{{.Name}} - {{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $(docker ps -aq) | grep $container | cut -d " " -f 3)
-log "Block outgoing traffic to $container (ip=$ip)"
-docker exec --privileged --user root connect bash -c "iptables -A OUTPUT -p tcp -d $ip -j DROP"
-```
+  --help, -h
+    Show this help
 
-> [!TIP]
-> Notice the use of `--privileged --user root`.
-
-> [!TIP]
-> Use same command but with "-D" instead of "-A" to remove the rule.
-
-To drop random packets, you can use statistic module like this:
-
-```bash
-docker exec --privileged --user root connect bash -c "iptables -A OUTPUT -p tcp --dport 443 -m statistic --mode random --probability 0.01 -j DROP"
+Examples
+  playground debug block-traffic --destination google.com --action start
+  playground debug block-traffic --container broker --destination zookeeper
+  --action start
 ```
 
 ## 🐌 Add latency

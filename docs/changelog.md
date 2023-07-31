@@ -5,6 +5,7 @@
 - Added ssl examples for mongo source and sink
 - Added [JDBC Google BigQuery Source](https://github.com/vdesabou/kafka-docker-playground/tree/master/connect/connect-jdbc-gcp-bigquery-source)
 - CLI:
+  * Added `--compatibility` to `topic produce` [command](/cli?id=%f0%9f%93%a5-produce)
   * Only show fzf preview when terminal is wide enough
   * Added `debug flight-recorder`
   * Added `wait-for-zero-lag` to `connector show-lag` command

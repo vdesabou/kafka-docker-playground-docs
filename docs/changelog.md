@@ -1,5 +1,11 @@
 # Change Log
 
+## August 2023
+
+- CLI:
+  * Added `connector show-config` and `ccloud-connector show-config`
+
+
 ## July 2023
 
 - Added ssl examples for mongo source and sink

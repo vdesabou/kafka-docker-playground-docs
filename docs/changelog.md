@@ -9,7 +9,7 @@
   * Only show fzf preview when terminal is wide enough
   * Added `debug flight-recorder`
   * Added `wait-for-zero-lag` to `connector show-lag` command
-  * Added `connector show-config` and `ccloud-connector show-config` commands
+  * Added `connector show-config-parameters` and `ccloud-connector show-config-parameters` commands
   * Added `open-docs` command
   * Added `debug block-traffic`
   * Added `debug testssl`

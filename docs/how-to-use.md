@@ -278,7 +278,7 @@ In case you want to use your own existing cluster, you need to setup these envir
 
 ### 🎯 For Confluent Platform (CP)
 
-By default, latest Confluent Platform version is used (currently `7.3.3`).
+By default, latest Confluent Platform version is used.
 Use `playground run` with this flag to change CP version used:
 
 ```bash

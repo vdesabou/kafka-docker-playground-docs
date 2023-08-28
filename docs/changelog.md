@@ -2,6 +2,7 @@
 
 ## August 2023
 
+* Oracle 19 examples are now supported on M1 chip (ARM64) Mac
 - CLI:
   * Added `connector show-config` and `ccloud-connector show-config`
 

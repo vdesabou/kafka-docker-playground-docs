@@ -2,6 +2,7 @@
 
 ## August 2023
 
+* Added [MQTT Proxy example](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/mqtt-proxy)
 * Oracle 19 examples are now supported on M1 chip (ARM64) Mac
 - CLI:
   * Added `connector show-config` and `ccloud-connector show-config`

@@ -6,6 +6,7 @@
 * Oracle 19 examples are now supported on M1 chip (ARM64) Mac
 - CLI:
   * Added `connector show-config` and `ccloud-connector show-config`
+  * Renamed `playground bootstrap-reproduction-model` to `playground repro bootstrap`
 
 
 ## July 2023
@@ -48,7 +49,7 @@
 - CLI: 
   * Add latest version from hub in `playground connector versions` command 
   * Added `--expected-messages` to `topic consume`
-  * `bootstrap-reproduction-model`: `--producer-schema-key` and `--producer-schema-value` will now open text editor: Copy and paste the schema you want to use for the key/value, save and close the file to continue, it will automatically make required changes
+  * `repro bootstrap`: `--producer-schema-key` and `--producer-schema-value` will now open text editor: Copy and paste the schema you want to use for the key/value, save and close the file to continue, it will automatically make required changes
   * `--topic` is now optional for all [Topics commands](/cli?id=%f0%9f%97%b3-topics-commands) ! By default it will loop on all non-internal topics
 - [🧠 CLI](/cli) is now version 1.0.0
 - Added 🔍 [ksqlDB Schema Inference with ID](https://github.com/vdesabou/kafka-docker-playground/tree/master/ksqldb/schema-inference-with-id) (🙏 @danielpetisme)
@@ -58,7 +59,7 @@
 - Added 🖇️ [Monitoring cluster linking](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/monitoring-cluster-linking) (🙏 @danielpetisme)
 - Added 🤿 [Anonymous SR-example with RBAC](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/rbac-with-anonymous-sr) (🙏 @Schm1tz1)
 - Added 🧢 [RBAC with SR Basic Auth and ACLs](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/rbac-with-sr-basic-auth-acl) (🙏 @Schm1tz1)
-- Added `--producer-schema-key` and `--producer-schema-value` to `playground bootstrap-reproduction-model`
+- Added `--producer-schema-key` and `--producer-schema-value` to `playground repro bootstrap`
 - Added 🌪️ SQL Datagen tool for [PostgreSQL](/reusables?id=%f0%9f%91%89-postgresql) examples
 - Added 🌪️ SQL Datagen tool for [MySql](/reusables?id=%f0%9f%91%89-mysql) examples
 - Added 🌪️ SQL Datagen tool for [Microsoft Sql Server](/reusables?id=%f0%9f%91%89-microsoft-sql-server) examples
@@ -78,8 +79,8 @@
 
 - No more using `vdesabou/kafka-docker-playground-connect` image [#3564](https://github.com/vdesabou/kafka-docker-playground/issues/3564)
 - Added Google Cloud Pub/Sub Group Kafka Connector [Source](https://github.com/vdesabou/kafka-docker-playground/tree/master/connect/connect-gcp-google-pubsub-source) and [Sink](https://github.com/vdesabou/kafka-docker-playground/tree/master/connect/connect-gcp-google-pubsub-sink) connectors examples
-- Added `--pipeline` flag option to `playground bootstrap-reproduction-model` command: [🧑‍ How to build a pipeline](/reusables?id=%f0%9f%94%9b-how-to-build-a-pipeline) is now fully automated !
-- Added `--custom-smt` flag option to `playground bootstrap-reproduction-model` command.
+- Added `--pipeline` flag option to `playground repro bootstrap` command: [🧑‍ How to build a pipeline](/reusables?id=%f0%9f%94%9b-how-to-build-a-pipeline) is now fully automated !
+- Added `--custom-smt` flag option to `playground repro bootstrap` command.
 - Added [🔂 Standalone connector examples](/content)
 - Added [🧑‍💻 M1 chip (ARM64) Mac Support](/how-to-use?id=%f0%9f%a7%91%f0%9f%92%bb-m1-chip-arm64-mac-support) section
 - Added [🧑‍🎓 Academy](/examples) section

@@ -1100,7 +1100,7 @@ Caused by: java.lang.StackOverflowError
 🛠 Bootstrap reproduction model was done as following (use tab completion to select the files s3-sink.sh using `fzf`):
 
 ```bash
-playground bootstrap-reproduction-model --file s3-sink<tab> --description "000001 StackOverflowError with S3 sink connector" --producer avro --tag 7.3.1 --connector-tag 10.3.3
+playground repro bootstrap --file s3-sink<tab> --description "000001 StackOverflowError with S3 sink connector" --producer avro --tag 7.3.1 --connector-tag 10.3.3
 ```
 
 💡 Explanations:
@@ -1180,7 +1180,7 @@ Note that you could have use step 2 when bootstrapping reproduction model and th
 Example:
 
 ```bash
-playground bootstrap-reproduction-model -f s3-sink<tab> -d "000001 StackOverflowError with S3 sink connector" -p avro --producer-schema-value schema<tab>
+playground repro bootstrap -f s3-sink<tab> -d "000001 StackOverflowError with S3 sink connector" -p avro --producer-schema-value schema<tab>
 ```
 
 <!-- select:end -->

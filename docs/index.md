@@ -29,9 +29,10 @@ visit $(blue_underlined https://docs.docker.com/get-docker) to install
 - [stop](playground%20stop) - 🛑 Stop currently running example
 - [open-docs](playground%20open-docs) - 🧑‍🎓 Open Confluent documentation of currently running example
 
-## Bootstrap commands
+## Repro commands
 
-- [bootstrap-reproduction-model](playground%20bootstrap-reproduction-model) - 🛠  Bootstrap reproduction model
+- [repro](playground%20repro) - 👷‍♂️ Reproduction model commands
+- [bootstrap](playground%20repro%20bootstrap) - 🛠  Bootstrap reproduction model
 
 ## Kafka commands
 

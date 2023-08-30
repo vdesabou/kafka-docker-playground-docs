@@ -1,35 +1,35 @@
-# playground bootstrap-reproduction-model
+# playground reproduction-model bootstrap
 
 🛠  Bootstrap reproduction model  
   
-👉 Check documentation https://kafka-docker-playground.io/#/reusables?id=%f0%9f%9b%a0-bootstrap-reproduction-model
+👉 Check documentation https://kafka-docker-playground.io/#/reusables?id=%f0%9f%9b%a0-bootstrap
 
 ## Usage
 
 ```bash
-playground bootstrap-reproduction-model [OPTIONS] [ARGUMENTS...]
+playground reproduction-model bootstrap [OPTIONS] [ARGUMENTS...]
 ```
 
 ## Examples
 
 ```bash
-playground bootstrap-reproduction-model -f hdfs2<tab> -d "simple test"
+playground reproduction-model bootstrap -f hdfs2<tab> -d "simple test"
 ```
 
 ```bash
-playground bootstrap-reproduction-model -f /full/path/hdfs2-sink.sh -d "testing with avro producer" --producer avro --producer-schema-value myschema<tab>
+playground reproduction-model bootstrap -f /full/path/hdfs2-sink.sh -d "testing with avro producer" --producer avro --producer-schema-value myschema<tab>
 ```
 
 ```bash
-playground bootstrap-reproduction-model -f hdfs2<tab> -d "testing with 2 protobuf producers" --producer protobuf --nb-producers 2
+playground reproduction-model bootstrap -f hdfs2<tab> -d "testing with 2 protobuf producers" --producer protobuf --nb-producers 2
 ```
 
 ```bash
-playground bootstrap-reproduction-model -f hdfs2<tab> -d "testing custom smt" --custom-smt
+playground reproduction-model bootstrap -f hdfs2<tab> -d "testing custom smt" --custom-smt
 ```
 
 ```bash
-playground bootstrap-reproduction-model -f debeziumpostgres<tab> -d "create pipeline" --pipeline jdbcsink<tab>
+playground reproduction-model bootstrap -f debeziumpostgres<tab> -d "create pipeline" --pipeline jdbcsink<tab>
 ```
 
 ## Dependencies

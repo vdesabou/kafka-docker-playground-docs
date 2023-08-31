@@ -32,22 +32,6 @@ playground repro bootstrap -f hdfs2<tab> -d "testing custom smt" --custom-smt
 playground repro bootstrap -f debeziumpostgres<tab> -d "create pipeline" --pipeline jdbcsink<tab>
 ```
 
-## Dependencies
-
-#### *fzf*
-
-visit $(blue_underlined https://github.com/junegunn/fzf#installation) to install
-
-## Environment Variables
-
-#### *OUTPUT_FOLDER*
-
-📁 Output folder where to generate bootstrapped files
-
-| Attributes      | &nbsp;
-|-----------------|-------------
-| Default Value:  | reproduction-models
-
 ## Options
 
 #### *--tag TAG*

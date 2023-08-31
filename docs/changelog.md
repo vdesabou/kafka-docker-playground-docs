@@ -1,5 +1,9 @@
 # Change Log
 
+## September 2023
+- CLI:
+  * Added `repro export` and `repro import`
+
 ## August 2023
 
 * Added [MQTT Proxy example](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/mqtt-proxy)

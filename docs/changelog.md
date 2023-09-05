@@ -3,6 +3,7 @@
 ## September 2023
 - CLI:
   * Added `repro export` and `repro import`
+  * Added `--validate` flag to `playground topic produce` command
 
 ## August 2023
 

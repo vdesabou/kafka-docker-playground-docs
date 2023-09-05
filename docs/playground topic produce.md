@@ -222,10 +222,27 @@ Used with --forced-value, this is a powerful way to send specific messages.
 
 #### *--tombstone*
 
-Generate tombstone (record with null value).   
+⚰️ Generate tombstone (record with null value).   
   
 --key must be set when this flag is used.  
   
 Note: CP 7.2+ is required.
+
+#### *--validate*
+
+☑️ Validate schema according to connect sink converter used
+
+#### *--validate-config VALIDATE-CONFIG*
+
+🔩 Converter configuration parameters to use   
+  
+See docs: https://docs.confluent.io/platform/current/schema-registry/connect.html#using-kconnect-long-with-sr  
+  
+🎓 Tip: you can pass multiple parameters by specifying --validate-config multiple times
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Repeatable:     |  ✓ Yes
+| Allowed Values: | scrub.invalid.names=true, enhanced.avro.schema.support=true, connect.meta.data=false, object.additional.properties=false, use.optional.for.nonrequired=true, ignore.default.for.nullables=true, generalized.sum.type.support=true, enhanced.protobuf.schema.support=true, generate.index.for.unions=false, int.for.enums=true, optional.for.nullables=true, generate.struct.for.nulls=true, wrapper.for.nullables=true, wrapper.for.raw.primitives=false
 
 

@@ -80,6 +80,10 @@ playground COMMAND
 
 visit $(blue_underlined https://docs.docker.com/get-docker) to install
 
+## == Commands ==
+
+- [help](playground%20help) - Show help about a command
+
 ## Run commands
 
 - [run](playground%20run) - 🕹️ Run any example, except for Confluent Cloud (in this case use run-ccloud command)

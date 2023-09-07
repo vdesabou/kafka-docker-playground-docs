@@ -1,6 +1,8 @@
 # Change Log
 
 ## September 2023
+
+* Added [MQTT Proxy example](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/mqtt-proxy) with SASL_PLAINTEXT
 - CLI:
   * Added `repro export` and `repro import`
   * Added `--validate` flag to `playground topic produce` command

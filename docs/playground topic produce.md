@@ -112,7 +112,7 @@ message Order {
 }
 EOF
 
-playground topic produce -t vincent-jsql --nb-messages 10 << 'EOF'
+playground topic produce -t topic-jsql --nb-messages 10 << 'EOF'
 CREATE TABLE "notused"."notused" (
   "id" int PRIMARY KEY,
   "name" varchar COMMENT 'faker.internet.userName()',
@@ -122,6 +122,8 @@ CREATE TABLE "notused"."notused" (
   "created_at" datetime DEFAULT (now())
 );
 EOF
+
+playground topic produce -t topic-json --nb-messages 1 --producer-property "max.request.size=990485760" < bigjson.json
 
 ```
 
@@ -244,5 +246,19 @@ See docs: https://docs.confluent.io/platform/current/schema-registry/connect.htm
 |-----------------|-------------
 | Repeatable:     |  ✓ Yes
 | Allowed Values: | scrub.invalid.names=true, enhanced.avro.schema.support=true, connect.meta.data=false, object.additional.properties=false, use.optional.for.nonrequired=true, ignore.default.for.nullables=true, generalized.sum.type.support=true, enhanced.protobuf.schema.support=true, generate.index.for.unions=false, int.for.enums=true, optional.for.nullables=true, generate.struct.for.nulls=true, wrapper.for.nullables=true, wrapper.for.raw.primitives=false
+
+#### *--producer-property PRODUCER-PROPERTY*
+
+🔩 Producer configuration parameters to use   
+  
+See docs: https://docs.confluent.io/platform/current/installation/configuration/producer-configs.html#cp-config-producer  
+  
+🎓 Tip: you can pass multiple parameters by specifying --producer-property multiple times  
+  
+Example: --producer-property "max.request.size=990485760" --producer-property "client.id=myid"
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Repeatable:     |  ✓ Yes
 
 

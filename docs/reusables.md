@@ -16,7 +16,7 @@ Examples:
 
 ```bash
 cd connect/connect-hdfs2-sink
-playground repro bootstrap -f hdfs2-sink.sh -d "123456 testing with parquet format"
+playground repro bootstrap -f hdfs2-sink<tab> -d "123456 testing with parquet format"
 
 12:16:35 ℹ️ ✨ Creating file /Users/vsaboulin/Documents/github/kafka-docker-playground/reproduction-models/connect-connect-hdfs2-sink/docker-compose.plaintext.repro-123456-testing-with-parquet-format.yml
 12:16:35 ℹ️ ✨ Creating file /Users/vsaboulin/Documents/github/kafka-docker-playground/reproduction-models/connect-connect-hdfs2-sink/hdfs2-sink-repro-123456-testing-with-parquet-format.sh
@@ -32,7 +32,7 @@ Example with `protobuf`:
 
 ```bash
 cd connect/connect-hdfs2-sink
-playground repro bootstrap -f hdfs2-sink.sh -d "123456 testing with parquet format" --producer protobuf
+playground repro bootstrap -f hdfs2-sink<tab> -d "123456 testing with parquet format" --producer protobuf
 
 19:54:45 ℹ️ ✨ Creating file /Users/vsaboulin/Documents/github/kafka-docker-playground/reproduction-models/connect-connect-hdfs2-sink/docker-compose.plaintext.repro-123456-testing-with-parquet-format.yml
 19:54:45 ℹ️ ✨ Creating file /Users/vsaboulin/Documents/github/kafka-docker-playground/reproduction-models/connect-connect-hdfs2-sink/hdfs2-sink-repro-123456-testing-with-parquet-format.sh
@@ -59,7 +59,7 @@ If you want multiple java producer (to test schema evolution for example), use t
 
 ```bash
 cd connect/connect-hdfs2-sink
-playground repro bootstrap -f hdfs2-sink.sh -d "123456 testing with avro format" --producer avro --nb-producers 2
+playground repro bootstrap -f hdfs2-sink<tab> -d "123456 testing with avro format" --producer avro --nb-producers 2
 
 19:57:16 ℹ️ ✨ Creating file /Users/vsaboulin/Documents/github/kafka-docker-playground/reproduction-models/connect-connect-hdfs2-sink/docker-compose.plaintext.repro-123456-testing-with-avro-format.yml
 19:57:16 ℹ️ ✨ Creating file /Users/vsaboulin/Documents/github/kafka-docker-playground/reproduction-models/connect-connect-hdfs2-sink/hdfs2-sink-repro-123456-testing-with-avro-format.sh

@@ -7,6 +7,8 @@
   * Added `repro export` and `repro import`
   * Added `--validate` flag to `playground topic produce` command
   * Added `--producer-property` (can be set multiple times) to `playground topic produce` command
+  * Added `--record-size` to `playground topic produce` command
+  * Added `alter topic` command
 
 ## August 2023
 

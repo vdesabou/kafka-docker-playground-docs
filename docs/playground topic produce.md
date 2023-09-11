@@ -261,4 +261,14 @@ Example: --producer-property "max.request.size=990485760" --producer-property "c
 |-----------------|-------------
 | Repeatable:     |  ✓ Yes
 
+#### *--record-size RECORD-SIZE*
+
+🏋️ Record size in bytes, eg. 1048576 for 1MB  
+  
+📢 If size is \> 1Mb, --producer-property max.request.size and topic max.message.bytes will be automatically set to support the record size.
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Default Value:  | 0
+
 

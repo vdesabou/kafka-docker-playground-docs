@@ -84,6 +84,7 @@ visit $(blue_underlined https://docs.docker.com/get-docker) to install
 - [produce](playground%20topic%20produce) - 📤 Produce to a topic
 - [create](playground%20topic%20create) - 🆕 Create topic
 - [delete](playground%20topic%20delete) - ❌ Delete topic
+- [alter](playground%20topic%20alter) - 🪛 Alter topic config
 
 ## Connector commands
 

@@ -98,17 +98,16 @@ playground topic produce -t topic-json-schema --nb-messages 3 << 'EOF'
 EOF
 
 
-playground topic produce -t topic-proto --nb-messages 3 << 'EOF'
+playground topic produce -t topic-proto --nb-messages 1 << 'EOF'
 syntax = "proto3";
 
-message Order {
-  float         total = 1;
-  repeated Item items = 2;
+package com.github.vdesabou;
 
-  message Item {
-    string name  = 1;
-    float  price = 2;
-  }
+message Customer {
+    int64 count = 1;
+    string first_name = 2;
+    string last_name = 3;
+    string address = 4;
 }
 EOF
 

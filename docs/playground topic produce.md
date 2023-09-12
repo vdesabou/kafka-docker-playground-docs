@@ -138,7 +138,7 @@ playground topic produce -t topic-json --nb-messages 1 --producer-property "max.
   
 * Use completion to select predefined schemas (or use your own schema file) 🎓 Tip: use \<tab\> completion to trigger fzf completion  
   
-* Directly set payload
+* Directly set payload ("%g" can be used to generate a counter)
 
 | Attributes      | &nbsp;
 |-----------------|-------------
@@ -196,8 +196,12 @@ Value Subject Name Strategy
   
 If the key contain a number, it will be used as starting point and incremented for each record.   
   
-Example: key1 will start with key1, then key1, etc..  
+Example: key1 will start with key1, then key2, etc..  
 Example: mykey-10-suffix will start with mykey-10-suffix then mykey-11-suffix, etc..  
+  
+"%g" can also be used to generate a counter  
+  
+Example: key%g will start with key1, then key2, etc..  
   
 Otherwise, the key will be same for all records.
 

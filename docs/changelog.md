@@ -9,6 +9,7 @@
   * Added `--producer-property` (can be set multiple times) to `playground topic produce` command
   * Added `--record-size` to `playground topic produce` command
   * Added `alter topic` command
+  * Added `debug generate-diagnostics` command
 
 ## August 2023
 

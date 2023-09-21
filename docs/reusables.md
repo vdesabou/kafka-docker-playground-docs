@@ -26,6 +26,11 @@ playground repro bootstrap -f hdfs2-sink<tab> -d "123456 testing with parquet fo
 
 ### With Java producer (`--producer`)
 
+> [!TIP]
+> Most of times, it's much simpler to use `playground topic produce` [CLI](/playground%20topic%20produce)
+> 
+> Use java producer only if you have very specific requirements such as specifying record timestamp, use key with schema or to do [perf testing](/reusables?id=%f0%9f%91%88-all-sink-connectors)
+
 If you want to automatically generate a Java Producer, use the flag `--producer` (or `-p`):
 
 Example with `protobuf`:

@@ -200,6 +200,8 @@ This only works for Oracle, MySql, Postgres and Microsoft Sql Server source conn
   
 One of avro, avro-with-key, protobuf, protobuf-with-key, json-schema, json-schema-with-key  
   
+🎓 Tip: Most of times, it's much simpler to use 'playground topic produce'. Use java producer only if you have very specific requirements such as specifying record timestamp, use key with schema or to do perf testing  
+  
 🎓 Tip: 'with-key' will also produce key with selected converter, otherwise LongConverter is used
 
 | Attributes      | &nbsp;

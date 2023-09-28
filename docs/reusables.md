@@ -1807,49 +1807,78 @@ docker exec -d sql-datagen bash -c "java ${JAVA_OPTS} -jar sql-datagen-1.0-SNAPS
 
 ### 👉 MongoDB
 
-In order to generate random data ([source](https://www.mongodb.com/developer/products/connectors/measuring-mongodb-kafka-connector-performance/)), you can use [robwma/doc-gen](https://github.com/RWaltersMA/doc-gen) docker image.
-
-Add in your docker-compose file:
-
-```yml
-
-  doc-gen:
-    image: robwma/doc-gen:1.0
-    hostname: doc-gen
-    container_name: doc-gen
-    command: "sleep infinity"
-```
-
-Then you can use:
+Here is an example that I used to setup a reproduction environment where I inject 250 (`REQ`) req/s on 13 (`NB_COLLECTIONS`) collections. 
+It is sending 50000 (`TOTAL_REQ`) records per collection.
+The size of the record can be ajusted by changing the payload `{ _id : "Document " + j + "_" + i, first_name : 'john', last_name : 'hope', email : 'john@email/com', timestamp: new Date().getTime() }`
 
 ```bash
-NB_DOCUMENTS=15000
-log "Generate $NB_DOCUMENTS sample documents"
-docker exec -i doc-gen python doc-gen.py -s '{"name":"string","email":"string","password":"string"}' -c "mongodb://myuser:mypassword@mongodb:27017" -t $NB_DOCUMENTS -db "kafka" -col "source-perf-test"
+function inject () {
+docker exec -i mongodb mongosh << EOF
+use kafka
+var counter = 0;
+var j = 0;
+while(counter < $TOTAL_REQ) {
+var bulk = db.collection$i.initializeUnorderedBulkOp();
+for (var i = 0; i < $REQ; i++) {
+    bulk.insert({ _id : "Document " + j + "_" + i, first_name : 'john', last_name : 'hope', email : 'john@email/com', timestamp: new Date().getTime() });
+}
+bulk.execute();
+j++;
+counter+=$REQ;
+sleep(1000);
+}
+EOF
+date > end_collection$i.txt
+}
+
+REQ=250
+NB_COLLECTIONS=13
+TOTAL_REQ=50000
+for((i=1;i<=$NB_COLLECTIONS;i++)); do
+  log "Inserting $TOTAL_REQ documents ($REQ req/second) on collection$i"
+  inject > /dev/null 2>&1 &
+done
+
+log "Wait for $TOTAL_REQ records to be processed"
+playground topic consume --topic myprefix.kafka.collection1 --min-expected-messages $TOTAL_REQ --timeout 80000
+
+log "mongo injection ended at"
+cat end_collection1.txt
 ```
 
 Then you can use [MongoDB source](https://github.com/vdesabou/kafka-docker-playground/tree/master/connect/connect-mongodb-source) connector:
 
 ```bash
-log "Creating MongoDB source connector"
-curl -X PUT \
-     -H "Content-Type: application/json" \
-     --data '{
-               "connector.class" : "com.mongodb.kafka.connect.MongoSourceConnector",
-               "tasks.max" : "1",
-               "connection.uri" : "mongodb://myuser:mypassword@mongodb:27017",
-               "database": "kafka",
-               "collection": "source-perf-test",
-               "mongo.errors.log.enable": "true",
-               "topic.prefix":"mdb",
-               "output.json.formatter" : "com.mongodb.kafka.connect.source.json.formatter.SimplifiedJson",
-               "output.format.value":"schema",
-               "output.schema.infer.value":true,
-               "output.format.key":"json",
-               "publish.full.document.only": "false",
-               "change.stream.full.document": "updateLookup"
-          }' \
-     http://localhost:8083/connectors/mongodb-source-perf/config | jq .
+playground connector create-or-update --connector mongodb-source << EOF
+{
+  "connector.class" : "com.mongodb.kafka.connect.MongoSourceConnector",
+  "tasks.max" : "1",
+  "connection.uri" : "mongodb://myuser:mypassword@mongodb:27017",
+  "database": "kafka",
+  "mongo.errors.log.enable": "true",
+  "topic.prefix":"myprefix",
+
+  "output.format.key":"json",
+  "output.format.value":"json",
+  "output.json.formatter":"com.mongodb.kafka.connect.source.json.formatter.SimplifiedJson",
+  "output.schema.infer.value":"false",
+  "value.converter": "org.apache.kafka.connect.storage.StringConverter",
+
+  "poll.await.time.ms": "10000",
+  "poll.max.batch.size": "50",
+
+  "batch.size":"50",
+  "publish.full.document.only":"true",
+  "change.stream.full.document":"updateLookup",
+
+  "heartbeat.interval.ms": "5000",
+
+  "_producer.override.linger.ms":"500",
+  "_producer.override.batch.size":"2000000",
+  "producer.override.client.id":"mongo-producer",
+  "_producer.override.compression.type": "lz4"
+}
+EOF
 ```
 
 ### 👉 MQTT

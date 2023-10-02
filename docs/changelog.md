@@ -1,5 +1,23 @@
 # Change Log
 
+## October 2023
+
+* Improved JMX Grafana [dashboard](/how-to-use?id=grafana-dashboards):
+  * List of provided dashboards:
+     - Confluent Platform overview 🆕
+     - Zookeeper cluster 🆕
+     - Kafka cluster
+     - Kafka topics 🆕
+     - Kafka quotas 🆕
+     - Schema Registry cluster 🆕
+     - Kafka Connect cluster
+     - ksqlDB cluster 🆕
+     - Kafka Clients 🆕
+     - Kafka lag exporter
+     - Cluster Linking 🆕
+     - Kafka streams RocksDB 🆕
+     - Oracle CDC source Connector 🆕
+
 ## September 2023
 
 * Added [Debezium CDC example with Oracle 19c](https://github.com/vdesabou/kafka-docker-playground/tree/master/connect/connect-debezium-oracle19-source)

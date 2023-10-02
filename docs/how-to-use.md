@@ -526,6 +526,86 @@ or setting flag `--disable-ksqldb`
 🛡️ Prometheus is reachable at [http://127.0.0.1:9090](http://127.0.0.1:9090)
 📛 [Pyroscope](https://pyroscope.io/docs/) is reachable at [http://127.0.0.1:4040](http://127.0.0.1:4040)
 
+### Grafana dashboards
+
+List of provided dashboards:
+ - Confluent Platform overview
+ - Zookeeper cluster
+ - Kafka cluster
+ - Kafka topics
+ - Kafka quotas
+ - Schema Registry cluster
+ - Kafka Connect cluster
+ - ksqlDB cluster
+ - Kafka Clients
+ - Kafka lag exporter
+ - Cluster Linking
+ - Kafka streams RocksDB
+ - Oracle CDC source Connector
+
+
+
+<!-- tabs:start -->
+
+#### **Confluent Platform overview**
+
+![Confluent Platform overview](images/confluent-platform-overview.png)
+
+### **Zookeeper cluster**
+
+![Zookeeper cluster dashboard](images/zookeeper-cluster.png)
+
+### **Kafka cluster**
+
+![Kafka cluster dashboard 0](images/kafka-cluster-0.png)
+![Kafka cluster dashboard 1](images/kafka-cluster-1.png)
+
+### **Kafka topics**
+
+![Kafka topics](images/kafka-topics.png)
+
+### **Kafka quotas**
+
+For Kafka to output quota metrics, at least one quota configuration is necessary.
+
+A quota can be configured using:
+
+```bash
+docker exec broker kafka-configs --bootstrap-server broker:9092 --alter --add-config 'producer_byte_rate=10000,consumer_byte_rate=30000,request_percentage=0.2' --entity-type users --entity-name unknown --entity-type clients --entity-name unknown
+```
+
+![Kafka quotas](images/kafka-quotas.png)
+
+### **Schema Registry cluster**
+
+![Schema Registry cluster](images/schema-registry-cluster.png)
+
+### **Kafka Connect cluster**
+
+![Kafka Connect cluster dashboard 0](images/kafka-connect-cluster-0.png)
+![Kafka Connect cluster dashboard 1](images/kafka-connect-cluster-1.png)
+
+### **ksqlDB cluster**
+
+![ksqlDB cluster dashboard 0](images/ksqldb-cluster-0.png)
+![ksqlDB cluster dashboard 1](images/ksqldb-cluster-1.png)
+
+### **Kafka streams RocksDB**
+
+![kafkastreams-rocksdb 0](images/kafkastreams-rocksdb.png)
+
+### **Kafka Clients**
+
+![Kafka Producer](images/kafka-producer.png)
+
+![Kafka Consumer](images/kafka-consumer.png)
+
+### **Oracle CDC source Connector**
+
+![oraclecdc](images/oraclecdc.jpg)
+
+<!-- tabs:end -->
+
 
 ## 🐈‍⬛ Enabling kcat
 

@@ -509,7 +509,7 @@ By default, Grafana dashboard using JMX metrics is not started for every test. Y
 export ENABLE_JMX_GRAFANA=true
 ```
 
-or setting flag `--disable-ksqldb`
+or setting flag `--enable-jmx-grafana`
 
 *Example:*
 

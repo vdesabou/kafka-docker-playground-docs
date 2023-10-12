@@ -2,6 +2,7 @@
 
 ## October 2023
 
+* Added [🎏 KSQL examples](/content?id=%f0%9f%8e%8f-ksql) (🙏 @jocelyndrean and @SamiShaikh)
 * Improved JMX Grafana [dashboard](/how-to-use?id=grafana-dashboards):
   * List of provided dashboards:
      - Confluent Platform overview 🆕

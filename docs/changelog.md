@@ -2,7 +2,10 @@
 
 ## October 2023
 
-* Added [Shell Script Command Completion Visual Studio Code extension](/cli?id=%f0%9f%aa%84-setup-shell-script-command-completion-visual-studio-code-extension) ![vscode-extension](https://github.com/vdesabou/gifs/raw/master/docs/images/vscode-extension.gif)
+* Added [Shell Script Command Completion Visual Studio Code extension](/cli?id=%f0%9f%aa%84-setup-shell-script-command-completion-visual-studio-code-extension)
+
+![vscode-extension](./images/vscode-extension.gif)
+
 * Added [🎏 KSQL examples](/content?id=%f0%9f%8e%8f-ksql) (🙏 @jocelyndrean and @SamiShaikh)
 * Improved JMX Grafana [dashboard](/how-to-use?id=grafana-dashboards):
   * List of provided dashboards:

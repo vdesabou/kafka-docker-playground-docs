@@ -34,7 +34,7 @@ source /path/to/kafka-docker-playground/scripts/cli/completions.bash
 
 Get nice [IntelliSense](https://learn.microsoft.com/en-us/visualstudio/ide/using-intellisense?view=vs-2022) completion for `playground` CLI in Visual Studio Code !
 
-![vscode-extension](https://github.com/vdesabou/gifs/raw/master/docs/images/vscode-extension.gif)
+![vscode-extension](./images/vscode-extension.gif)
 
 To install it, follow those 2 steps:
 

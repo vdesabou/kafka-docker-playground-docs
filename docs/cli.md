@@ -30,6 +30,24 @@ source /path/to/kafka-docker-playground/scripts/cli/completions.bash
 > [!NOTE]
 > If you use ZSH, but **not** `Oh-My-Zsh`, please check [this](https://bashly.dannyb.co/advanced/bash-completion/#completions-in-zsh).
 
+### 🪄 Setup Shell Script Command Completion Visual Studio Code extension
+
+Get nice [IntelliSense](https://learn.microsoft.com/en-us/visualstudio/ide/using-intellisense?view=vs-2022) completion for `playground` CLI in Visual Studio Code ! It uses a slightly modified version of "Shell Script Command Completion" Visual Studio Code extension (https://marketplace.visualstudio.com/items?itemName=tetradresearch.vscode-h2o):
+
+![vscode-extension](./images/vscode-extension.gif)
+
+To install it, follow those 2 steps:
+
+```bash
+playground debug install-vscode-extension
+```
+
+Once installed, go on a `.sh` script and then type  in Palette `Ctrl+Shift+P` (or `⌘+⇧+P` on macOS) and choose `Shell Completion: Load Command Spec (experimental)` and then type `playground`
+
+![extension](./images/vscode_extension1.jpg)
+
+![extension](./images/vscode_extension2.jpg)
+
 ### ⚙️ Config file 
 
 CLI can be configured using `config.ini` [file](https://github.com/vdesabou/kafka-docker-playground/blob/master/scripts/cli/config.ini)

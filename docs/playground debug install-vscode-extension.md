@@ -8,7 +8,7 @@ After installation, install "playground" command:
   
 * Type Ctrl+Shift+P (or ⌘+⇧+P on macOS) and choose "Shell Completion: Load Command Spec (experimental)"" and then type "playground"  
   
-👉 Check documentation xxx
+👉 Check documentation https://kafka-docker-playground.io/#/cli?id=%f0%9f%aa%84-setup-shell-script-command-completion-visual-studio-code-extension
 
 ## Usage
 

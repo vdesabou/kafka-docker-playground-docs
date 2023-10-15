@@ -22,6 +22,9 @@
      - Cluster Linking 🆕
      - Kafka streams RocksDB 🆕
      - Oracle CDC source Connector 🆕
+- CLI:
+  * Added `--subject` flag to `playground topic consume` command  (useful when data was produced with --value-subject-name-strategy other than TopicNameStrategy)
+
 
 ## September 2023
 

@@ -66,4 +66,10 @@ Tail on logs.
 
 🗳 Timestamp field name that represents when record was created in source system
 
+#### *--subject SUBJECT*
+
+📛 Subject for value in schema-registry to use (useful when data was produced with --value-subject-name-strategy other than TopicNameStrategy)  
+  
+Note: --topic should be specified in this case.
+
 

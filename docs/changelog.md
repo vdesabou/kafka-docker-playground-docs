@@ -2,6 +2,27 @@
 
 ## October 2023
 
+* HTTP sink examples ([no-auth](https://github.com/vdesabou/kafka-docker-playground/blob/master/connect/connect-http-sink/http_no_auth.sh) and [Oauth2](https://github.com/vdesabou/kafka-docker-playground/blob/master/connect/connect-http-sink/http_oauth2_auth.sh)) have endpoints to set response error code, add delay and set response body:
+
+```bash
+log "Set webserver to reply with 503"
+curl -X PUT -H "Content-Type: application/json" --data '{"errorCode": 503}' http://localhost:9006/set-response-error-code
+```
+
+You can also adjust response time to add delay:
+
+```bash
+log "Set webserver to reply with 2 seconds delay"
+curl -X PUT -H "Content-Type: application/json" --data '{"delay": 2000}' http://localhost:9006/set-response-time
+```
+
+And also set json response to send back:
+
+```bash
+log "Set webserver to reply with {"message":"Hello, World!"} json body"
+curl -X PUT -H "Content-Type: application/json" --data '{"message":"Hello, World!"}' http://localhost:9006/set-response-body
+```
+
 * Added [Shell Script Command Completion Visual Studio Code extension](/cli?id=%f0%9f%aa%84-setup-shell-script-command-completion-visual-studio-code-extension)
 
 ![vscode-extension](./images/vscode-extension.gif)

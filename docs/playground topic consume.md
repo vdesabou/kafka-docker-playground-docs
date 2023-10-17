@@ -72,4 +72,12 @@ Tail on logs.
   
 Note: --topic should be specified in this case.
 
+#### *--max-characters MAX-CHARACTERS*
+
+Max characters per message to display (default is 2500)
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Default Value:  | 2500
+
 

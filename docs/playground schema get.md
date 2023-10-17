@@ -1,6 +1,6 @@
 # playground schema get
 
-🔰 Get all schemas versions for all subjects
+🔰 Get all schemas versions for specified subject (if --subject is not specified, all subjects will be used)
 
 ## Usage
 
@@ -22,6 +22,6 @@ playground schema get --subject <SUBJECT>
 
 #### *--subject SUBJECT*
 
-📛 Subject
+📛 Subject name
 
 

@@ -45,7 +45,10 @@ curl -X PUT -H "Content-Type: application/json" --data '{"message":"Hello, World
      - Kafka streams RocksDB 🆕
      - Oracle CDC source Connector 🆕
 - CLI:
-  * Added `--subject` flag to `playground topic consume` command  (useful when data was produced with --value-subject-name-strategy other than TopicNameStrategy)
+  * Added `--subject` flag to `playground topic consume` command (useful when data was produced with --value-subject-name-strategy other than TopicNameStrategy)
+  * Added `playground topic list` command
+  * Displaying schema with `playground topic consume` command
+  * Added `--max-characters` flag to `playground topic consume` command
 
 
 ## September 2023

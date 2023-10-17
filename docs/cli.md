@@ -74,7 +74,7 @@ You can configure the path to your own config.ini file using `CONFIG_FILE` envir
 export CONFIG_FILE="/path/to/config.ini"
 ```
 
-## ✨ Generated documentation
+## ✨ Command Reference
 
 # playground
 
@@ -164,6 +164,7 @@ visit $(blue_underlined https://docs.docker.com/get-docker) to install
 - [topic](playground%20topic) - 🗳 Topic commands
 - [get-number-records](playground%20topic%20get-number-records) - 💯 Get number of records in a topic
 - [display-consumer-offsets](playground%20topic%20display-consumer-offsets) - 📭 Display content of __consumer_offsets topic
+- [list](playground%20topic%20list) - 🔘 List topics
 - [describe](playground%20topic%20describe) - 🔬 Describe topic
 - [set-schema-compatibility](playground%20topic%20set-schema-compatibility) - 🛡️ Change topic's schema compatibility
 - [consume](playground%20topic%20consume) - 📥 Consume topic from beginning

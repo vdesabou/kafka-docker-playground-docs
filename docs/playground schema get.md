@@ -18,10 +18,18 @@ playground schema get
 playground schema get --subject <SUBJECT>
 ```
 
+```bash
+playground schema get --deleted
+```
+
 ## Options
 
 #### *--subject SUBJECT*
 
 📛 Subject name
+
+#### *--deleted*
+
+🧟 Include soft deleted subjects
 
 

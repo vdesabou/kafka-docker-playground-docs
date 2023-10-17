@@ -122,8 +122,12 @@ visit $(blue_underlined https://docs.docker.com/get-docker) to install
 
 - [get-docker-compose](playground%20get-docker-compose) - 🐋 Get docker-compose
 - [get-properties](playground%20get-properties) - 📝 Get properties file from a container
-- [get-all-schemas](playground%20get-all-schemas) - 🔰 Get all schemas versions for all subjects
 - [get-jmx-metrics](playground%20get-jmx-metrics) - 🔢 Get JMX metrics from a component
+
+## Schema commands
+
+- [schema](playground%20schema) - 🔰 Schema commands
+- [get](playground%20schema%20get) - 🔰 Get all schemas versions for all subjects
 
 ## Debug commands
 

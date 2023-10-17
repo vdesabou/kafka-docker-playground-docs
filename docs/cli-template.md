@@ -74,5 +74,5 @@ You can configure the path to your own config.ini file using `CONFIG_FILE` envir
 export CONFIG_FILE="/path/to/config.ini"
 ```
 
-## ✨ Generated documentation
+## ✨ Command Reference
 

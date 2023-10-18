@@ -1,4 +1,4 @@
-# playground
+**playground**
 
 🧠 CLI for Kafka Docker Playground 🐳  
   
@@ -8,23 +8,23 @@
 |------------------|-------------
 | Version:         | 1.0.0
 
-## Usage
+### Usage
 
 ```bash
 playground COMMAND
 ```
 
-## Dependencies
+### Dependencies
 
-#### *docker*
+*docker*
 
 visit $(blue_underlined https://docs.docker.com/get-docker) to install
 
-## == Commands ==
+### == Commands ==
 
 - [help](playground%20help) - Show help about a command
 
-## Run commands
+### Run commands
 
 - [run](playground%20run) - 🕹️ Run any example, except for Confluent Cloud (in this case use run-ccloud command)
 - [re-run](playground%20re-run) - ⚡ Simply re-run last example you ran with \<playground run\> or \<playground run-ccloud\>
@@ -33,27 +33,27 @@ visit $(blue_underlined https://docs.docker.com/get-docker) to install
 - [stop](playground%20stop) - 🛑 Stop currently running example
 - [open-docs](playground%20open-docs) - 🧑‍🎓 Open Confluent documentation of currently running example
 
-## Repro commands
+### Repro commands
 
 - [repro](playground%20repro) - 👷‍♂️ Reproduction model commands
 - [export](playground%20repro%20export) - 📤 Export as tgz file uncommitted reproduction models from the folder of current reproduction model
 - [import](playground%20repro%20import) - 📥 Import tgz file which was created with export command
 - [bootstrap](playground%20repro%20bootstrap) - 🛠  Bootstrap reproduction model
 
-## Kafka commands
+### Kafka commands
 
 - [get-docker-compose](playground%20get-docker-compose) - 🐋 Get docker-compose
 - [get-properties](playground%20get-properties) - 📝 Get properties file from a container
 - [get-jmx-metrics](playground%20get-jmx-metrics) - 🔢 Get JMX metrics from a component
 
-## Schema commands
+### Schema commands
 
 - [schema](playground%20schema) - 🔰 Schema commands
 - [get](playground%20schema%20get) - 🔰 Get all schemas versions for specified subject (if --subject is not specified, all subjects will be used)
 - [register](playground%20schema%20register) - ⏺️ Register a schema in specified subject
 - [delete](playground%20schema%20delete) - 🧟 Delete schema
 
-## Debug commands
+### Debug commands
 
 - [debug](playground%20debug) - 🐞 Debug commands
 - [install-vscode-extension](playground%20debug%20install-vscode-extension) - 🪄 Install a slightly modified version of "Shell Script Command Completion" Visual Studio Code extension (https://marketplace.visualstudio.com/items?itemName=tetradresearch.vscode-h2o)
@@ -67,7 +67,7 @@ visit $(blue_underlined https://docs.docker.com/get-docker) to install
 - [flight-recorder](playground%20debug%20flight-recorder) - 🛩️ Record flight recorder
 - [log-level](playground%20debug%20log-level) - 🧬 Set log level for any package
 
-## Container commands
+### Container commands
 
 - [container](playground%20container) - 🐳 Container commands
 - [recreate](playground%20container%20recreate) - 💫 Recreate container(s)
@@ -81,7 +81,7 @@ visit $(blue_underlined https://docs.docker.com/get-docker) to install
 - [resume](playground%20container%20resume) - ⏯️  Resume a container
 - [kill](playground%20container%20kill) - 🔫 Kill a container
 
-## Topic commands
+### Topic commands
 
 - [topic](playground%20topic) - 🗳 Topic commands
 - [get-number-records](playground%20topic%20get-number-records) - 💯 Get number of records in a topic
@@ -95,7 +95,7 @@ visit $(blue_underlined https://docs.docker.com/get-docker) to install
 - [delete](playground%20topic%20delete) - ❌ Delete topic
 - [alter](playground%20topic%20alter) - 🪛 Alter topic config
 
-## Connector commands
+### Connector commands
 
 - [ccloud-connector](playground%20ccloud-connector) - 🔗☁️ Fully Managed Connector commands
 - [status](playground%20ccloud-connector%20status) - 🧩 Show status of all connectors

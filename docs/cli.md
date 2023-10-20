@@ -201,6 +201,7 @@ visit $(blue_underlined https://docs.docker.com/get-docker) to install
 - [show-config](playground%20connector%20show-config) - 🧰 Show current connector config
 - [show-config-parameters](playground%20connector%20show-config-parameters) - 🔩 Show all possible configuration parameters of connector
 - [log-level](playground%20connector%20log-level) - 🧬 Set connect log level
+- [update-version](playground%20connector%20update-version) - ✨ Update currently running connector(s) with new version 
 - [create-or-update](playground%20connector%20create-or-update) - 🧑‍🎨  Create or update connector
 
 

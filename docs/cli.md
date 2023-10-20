@@ -107,6 +107,7 @@ visit $(blue_underlined https://docs.docker.com/get-docker) to install
 - [run](playground%20run) - 🕹️ Run any example, except for Confluent Cloud (in this case use run-ccloud command)
 - [re-run](playground%20re-run) - ⚡ Simply re-run last example you ran with \<playground run\> or \<playground run-ccloud\>
 - [run-ccloud](playground%20run-ccloud) - ⛅ Run any Confluent Cloud (ccloud) example
+- [update-version](playground%20update-version) - ✨ Update current confluent platform or connector(s) with new version(s)
 - [open](playground%20open) - 👐 When --file is not provided, simply open last example you ran with \<playground run\> or \<playground run-ccloud\>
 - [stop](playground%20stop) - 🛑 Stop currently running example
 - [open-docs](playground%20open-docs) - 🧑‍🎓 Open Confluent documentation of currently running example
@@ -201,7 +202,6 @@ visit $(blue_underlined https://docs.docker.com/get-docker) to install
 - [show-config](playground%20connector%20show-config) - 🧰 Show current connector config
 - [show-config-parameters](playground%20connector%20show-config-parameters) - 🔩 Show all possible configuration parameters of connector
 - [log-level](playground%20connector%20log-level) - 🧬 Set connect log level
-- [update-version](playground%20connector%20update-version) - ✨ Update currently running connector(s) with new version 
 - [create-or-update](playground%20connector%20create-or-update) - 🧑‍🎨  Create or update connector
 
 

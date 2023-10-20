@@ -7,7 +7,15 @@
 ## Usage
 
 ```bash
-playground container recreate
+playground container recreate [OPTIONS]
 ```
+
+## Options
+
+#### *--ignore-current-versions*
+
+Ignore current confluent platform version  
+  
+By default, the current version is used
 
 

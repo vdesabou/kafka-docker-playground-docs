@@ -45,8 +45,4 @@ playground connector delete -c <connector-name>
 - [log-level](playground%20connector%20log-level) - 🧬 Set connect log level
 - [create-or-update](playground%20connector%20create-or-update) - 🧑‍🎨  Create or update connector
 
-## Run commands
-
-- [update-version](playground%20connector%20update-version) - ✨ Update currently running connector(s) with new version 
-
 

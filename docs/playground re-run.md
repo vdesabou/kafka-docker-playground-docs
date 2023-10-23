@@ -22,7 +22,7 @@ playground re-run --tag=6.2.1
 
 #### *fzf*
 
-visit $(blue_underlined https://github.com/junegunn/fzf#installation) to install
+visit https://github.com/junegunn/fzf#installation to install
 
 ## Options
 

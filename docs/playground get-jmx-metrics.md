@@ -28,7 +28,7 @@ playground get-jmx-metrics -c broker
 
 #### *java*
 
-visit $(blue_underlined https://openjdk.org/install/) to install
+visit https://openjdk.org/install/ to install
 
 ## Options
 

@@ -12,7 +12,7 @@ playground repro export [OPTIONS]
 
 #### *git*
 
-visit $(blue_underlined https://git-scm.com/downloads) to install
+visit https://git-scm.com/downloads to install
 
 ## Options
 

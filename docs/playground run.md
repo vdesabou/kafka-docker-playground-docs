@@ -22,7 +22,7 @@ playground run -f jdbc<tab> --connector-tag 10.6.0 --enable-jmx-grafana --open
 
 #### *fzf*
 
-visit $(blue_underlined https://github.com/junegunn/fzf#installation) to install
+visit https://github.com/junegunn/fzf#installation to install
 
 ## Options
 

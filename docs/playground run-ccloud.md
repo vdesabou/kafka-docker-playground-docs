@@ -34,11 +34,11 @@ playground run-ccloud mqtt<tab> --cluster-cloud aws --cluster-region eu-west-3 -
 
 #### *fzf*
 
-visit $(blue_underlined https://github.com/junegunn/fzf#installation) to install
+visit https://github.com/junegunn/fzf#installation to install
 
 #### *confluent*
 
-visit $(blue_underlined https://docs.confluent.io/confluent-cli/current/overview.html) to install
+visit https://docs.confluent.io/confluent-cli/current/overview.html to install
 
 ## Options
 

@@ -26,6 +26,6 @@ playground install-vscode-extension
 
 #### *code*
 
-visit $(blue_underlined https://code.visualstudio.com/docs/setup/mac#_launching-from-the-command-line) to install
+visit https://code.visualstudio.com/docs/setup/mac#_launching-from-the-command-line to install
 
 

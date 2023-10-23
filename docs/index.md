@@ -18,7 +18,7 @@ playground COMMAND
 
 *docker*
 
-visit $(blue_underlined https://docs.docker.com/get-docker) to install
+visit https://docs.docker.com/get-docker to install
 
 ### == Commands ==
 

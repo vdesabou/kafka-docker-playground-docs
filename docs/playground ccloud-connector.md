@@ -12,7 +12,7 @@ playground ccloud-connector COMMAND
 
 #### *confluent*
 
-visit $(blue_underlined https://docs.confluent.io/confluent-cli/current/overview.html) to install
+visit https://docs.confluent.io/confluent-cli/current/overview.html to install
 
 ## Environment Variables
 

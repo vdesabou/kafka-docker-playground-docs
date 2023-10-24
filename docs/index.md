@@ -23,6 +23,7 @@ visit https://docs.docker.com/get-docker to install
 ### == Commands ==
 
 - [help](playground%20help) - Show help about a command
+- [status](playground%20status) - 🗺️ Show a status
 
 ### Run commands
 

@@ -24,4 +24,8 @@ playground ccloud-connector show-config-parameters [OPTIONS]
 
 ☢️ Force refresh.
 
+#### *--only-show-file-path*
+
+📂 Only show the path of the file containing the configuration parameters
+
 

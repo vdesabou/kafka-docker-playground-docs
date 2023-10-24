@@ -254,7 +254,7 @@ Examples
 
 ## 🌤️ Confluent Cloud examples
 
-Use `[playground run](/playground%20run)-ccloud` command and <tab> completion with `fzf` when selecting the example file!
+Use [playground run-ccloud](/playground%20run-ccloud) command and <tab> completion with `fzf` when selecting the example file!
 
 All you have to do is to be already logged in with [confluent CLI](https://docs.confluent.io/confluent-cli/current/overview.html#confluent-cli-overview).
 

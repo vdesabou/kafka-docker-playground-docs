@@ -49,7 +49,8 @@ curl -X PUT -H "Content-Type: application/json" --data '{"message":"Hello, World
   * Added `playground topic list` command
   * Displaying schema with `playground topic consume` command
   * Added `--max-characters` flag to `playground topic consume` command
-  * 🔥 Added [playground update-version](/playground%20update-version): you can now change cp version and/or connector(s) version(s) while running an example 
+  * 🔥 Added [playground update-version](/playground%20update-version): you can now change cp version and/or connector(s) version(s) while running an example
+  * Added [playground status](/playground%20status) command
 
 
 ## September 2023

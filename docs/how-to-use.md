@@ -103,11 +103,11 @@ More details [here](https://github.com/vdesabou/kafka-docker-playground/tree/mas
 
 ## 🏎️ Start an example
 
-Check the list of examples in the **[Content](/content.md)** section and simply run one of them using `playground run` CLI command!
+Check the list of examples in the **[Content](/content.md)** section and simply run one of them using [playground run](/playground%20run) CLI command!
 
 *Example:* if you want to run a test with IBM MQ sink connector, check out the [README](https://github.com/vdesabou/kafka-docker-playground/tree/master/connect/connect-ibm-mq-sink) and the list of tests in [How to Run](https://github.com/vdesabou/kafka-docker-playground/tree/master/connect/connect-ibm-mq-sink#how-to-run) section, then simply execute the script you want using CLI:
 
-Use `playground run` command and <tab> completion with `fzf` when selecting the example file!
+Use [playground run](/playground%20run) command and <tab> completion with `fzf` when selecting the example file!
 
 <script async id="asciicast-581275" src="https://asciinema.org/a/581275.js" async data-autoplay="true" data-size="big"></script>
 
@@ -120,16 +120,16 @@ Use `playground run` command and <tab> completion with `fzf` when selecting the 
 > 
 > * [Zendesk source connector](https://github.com/vdesabou/kafka-docker-playground/tree/master/connect/connect-zendesk-source#how-to-run): arguments `ZENDESK_URL`, `ZENDESK_USERNAME`and `ZENDESK_PASSWORD` are required (you can also pass them as environment variables)
 >
-> Example: playground run -f zendesk-source<tab> <ZENDESK_URL> <ZENDESK_USERNAME> <ZENDESK_PASSWORD>
+> Example: [playground run](/playground%20run) -f zendesk-source<tab> <ZENDESK_URL> <ZENDESK_USERNAME> <ZENDESK_PASSWORD>
 
 
 ```bash
-$  playground run --help                                                   
-playground run - 🕹️ Run any example, except for Confluent Cloud (in this case use run-ccloud command)
+$  [playground run](/playground%20run) --help                                                   
+[playground run](/playground%20run) - 🕹️ Run any example, except for Confluent Cloud (in this case use run-ccloud command)
 
 == Usage ==
-  playground run [OPTIONS] [ARGUMENTS...]
-  playground run --help | -h
+  [playground run](/playground%20run) [OPTIONS] [ARGUMENTS...]
+  [playground run](/playground%20run) --help | -h
 
 == Options ==
   --file, -f FILE (required)
@@ -208,7 +208,9 @@ playground run - 🕹️ Run any example, except for Confluent Cloud (in this ca
     Enable Grafana, Prometheus and Pyroscope
     
     📊 Grafana is reachable at http://127.0.0.1:3000
+    
     🛡️ Prometheus is reachable at http://127.0.0.1:9090
+    
     📛 Pyroscope is reachable at http://127.0.0.1:4040
 
   --enable-kcat
@@ -239,21 +241,20 @@ playground run - 🕹️ Run any example, except for Confluent Cloud (in this ca
     
     Example with Zendesk:
     
-    playground run -f zendesk-source<tab> <ZENDESK_URL> <ZENDESK_USERNAME>
+    [playground run](/playground%20run) -f zendesk-source<tab> <ZENDESK_URL> <ZENDESK_USERNAME>
     <ZENDESK_PASSWORD>
 
 Examples
-  playground run -f zendesk-source<tab> --tag 7.2.1 --enable-control-center
+  [playground run](/playground%20run) -f zendesk-source<tab> --tag 7.2.1 --enable-control-center
   <ZENDESK_URL> <ZENDESK_USERNAME> <ZENDESK_PASSWORD>
-  playground run -f jdbc<tab> --connector-tag 10.6.0 --enable-jmx-grafana --open
-
+  [playground run](/playground%20run) -f jdbc<tab> --connector-tag 10.6.0 --enable-jmx-grafana --open
 
 ```
 
 
 ## 🌤️ Confluent Cloud examples
 
-Use `playground run-ccloud` command and <tab> completion with `fzf` when selecting the example file!
+Use `[playground run](/playground%20run)-ccloud` command and <tab> completion with `fzf` when selecting the example file!
 
 All you have to do is to be already logged in with [confluent CLI](https://docs.confluent.io/confluent-cli/current/overview.html#confluent-cli-overview).
 
@@ -279,7 +280,7 @@ In case you want to use your own existing cluster, you need to setup these envir
 ### 🎯 For Confluent Platform (CP)
 
 By default, latest Confluent Platform version is used.
-Use `playground run` with this flag to change CP version used:
+Use [playground run](/playground%20run) with this flag to change CP version used:
 
 ```bash
   --tag TAG
@@ -287,6 +288,9 @@ Use `playground run` with this flag to change CP version used:
     
     Must be greater or equal to 5.0.0
 ```
+
+> [!TIP]
+> You can also change cp version while running an example using [playground update-version](/playground%20update-version)
 
 ### 🔗 For Connectors
 
@@ -297,13 +301,13 @@ The only 2 exceptions are:
 * replicator which is using same version as CP (but you can force a version using `REPLICATOR_TAG` environment variable)
 * JDBC which is using same version as CP (but only for CP version lower than 6.x)
 
-Each latest version used is specified on the [Connectors list](https://kafka-docker-playground.io/#/content?id=connectors).
+Each latest version used is specified on the [Connectors list](/content?id=connectors).
 
 The playground has 3 different ways to use different connector version when running a connector test:
 
 1. Specify the connector version
 
-Use `playground run` with this flag:
+Use [playground run](/playground%20run) with this flag:
 
 ```bash
   --connector-tag CONNECTOR_TAG
@@ -335,7 +339,7 @@ CONNECT_PLUGIN_PATH: /usr/share/confluent-hub-components/confluentinc-kafka-conn
 
 1. Specify a connector ZIP file
 
-Use `playground run` with this flag:
+Use [playground run](/playground%20run) with this flag:
 
 ```bash
   --connector-zip CONNECTOR_ZIP
@@ -357,7 +361,7 @@ Use `playground run` with this flag:
 
 3. Specify a connector JAR file
 
-Use `playground run` with this flag:
+Use [playground run](/playground%20run) with this flag:
 
 ```bash
   --connector-jar CONNECTOR_JAR
@@ -396,6 +400,9 @@ ls: cannot access '/usr/share/confluent-hub-components/debezium-debezium-connect
 
 > [!NOTE]
 > For more information about the Connect image used, check [here](/how-it-works?id=🔗-connect-image-used).
+
+> [!TIP]
+> You can also change connector(s) version(s) while running an example using [playground update-version](/playground%20update-version)
 
 ## 🚀 Enabling ksqlDB
 
@@ -655,7 +662,7 @@ $ playground get-jmx-metrics
 
   Get JMX metrics from a component.
   
-  Check documentation https://kafka-docker-playground.io/#/how-to-use?id=%f0%9f%94%a2-jmx-metrics
+  Check documentation /how-to-use?id=%f0%9f%94%a2-jmx-metrics
 
 Usage:
   playground get-jmx-metrics [OPTIONS]
@@ -720,7 +727,7 @@ $ playground get-properties
 
   Get properties file from a container.
   
-  Check documentation https://kafka-docker-playground.io/#/how-to-use?id=%f0%9f%93%9d-see-properties-file
+  Check documentation /how-to-use?id=%f0%9f%93%9d-see-properties-file
 
 Usage:
   playground get-properties [OPTIONS]

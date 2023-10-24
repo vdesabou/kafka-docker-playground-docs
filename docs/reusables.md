@@ -1069,6 +1069,11 @@ curl --request PUT \
 > [!WARNING]
 > Make sure to update `io.confluent.connect.oracle.cdc` above with the package you want to troubleshoot.
 
+Useful packages:
+
+* `io.confluent.kafka.schemaregistry.client.rest.RestService`: to track schema registry requests
+* `org.apache.kafka.connect.runtime.TransformationChain`: to see records before, during and after SMT
+
 ### 🔑 SSL debug
 
 Add `-Djavax.net.debug=all` in your `docker-compose` file:

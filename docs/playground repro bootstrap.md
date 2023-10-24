@@ -136,6 +136,16 @@ $ docker exec kcat kcat -b broker:9092 -L
   
 This only works for Oracle, MySql, Postgres and Microsoft Sql Server source connector examples with JDBC and Debezium
 
+#### *--cluster-type CLUSTER-TYPE*
+
+🔋 The cluster type: basic, standard or dedicated. Default is basic  
+  
+🎓 Tip: you can also use CLUSTER_TYPE environment variable
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Allowed Values: | basic, standard, dedicated
+
 #### *--cluster-region CLUSTER-REGION*
 
 🗺 The Cloud region.   

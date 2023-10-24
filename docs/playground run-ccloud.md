@@ -8,6 +8,7 @@ By default, a new Confluent Cloud environment with a Cluster will be created.
   
 You can configure the new cluster by setting:  
   
+--cluster-type (or CLUSTER_TYPEenvironment variable)  
 --cluster-cloud (or CLUSTER_CLOUD environment variable)  
 --cluster-region (or CLUSTER_REGION environment variable)  
 --cluster-environment (or ENVIRONMENT environment variable)  
@@ -129,6 +130,16 @@ $ docker exec kcat kcat -b broker:9092 -L
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Allowed Values: | aws, gcp, azure
+
+#### *--cluster-type CLUSTER-TYPE*
+
+🔋 The cluster type: basic, standard or dedicated. Default is basic  
+  
+🎓 Tip: you can also use CLUSTER_TYPE environment variable
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Allowed Values: | basic, standard, dedicated
 
 #### *--cluster-region CLUSTER-REGION*
 

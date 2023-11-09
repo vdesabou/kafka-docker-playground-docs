@@ -1,5 +1,10 @@
 # Change Log
 
+## November 2023
+
+- CLI:
+  * `--pipeline` flag for `playground repro boostrap` command is now repeatable, meaning you can create a pipeline from one source connector to multiple sink connectors !
+
 ## October 2023
 
 * Added JDBC MariaDB [Source](https://github.com/vdesabou/kafka-docker-playground/tree/master/connect/connect-jdbc-mariadb-source) and [Sink](https://github.com/vdesabou/kafka-docker-playground/tree/master/connect/connect-jdbc-mariadb-sink) examples (🙏 @pulkitnt)

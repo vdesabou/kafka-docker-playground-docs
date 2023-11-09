@@ -256,6 +256,7 @@ One of avro, avro-with-key, protobuf, protobuf-with-key, json-schema, json-schem
 
 | Attributes      | &nbsp;
 |-----------------|-------------
+| Repeatable:     |  ✓ Yes
 | Conflicts With: | *--producer*
 
 

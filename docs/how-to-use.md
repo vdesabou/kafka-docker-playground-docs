@@ -207,7 +207,7 @@ $  [playground run](/playground%20run) --help
   --enable-jmx-grafana
     Enable Grafana, Prometheus and Pyroscope
     
-    📊 Grafana is reachable at http://127.0.0.1:3000
+    📊 Grafana is reachable at http://127.0.0.1:3000 (login/password is admin/password)
     
     🛡️ Prometheus is reachable at http://127.0.0.1:9090
     
@@ -525,7 +525,7 @@ or setting flag `--enable-jmx-grafana`
   --enable-jmx-grafana
     Enable Grafana, Prometheus and Pyroscope
     
-    📊 Grafana is reachable at http://127.0.0.1:3000
+    📊 Grafana is reachable at http://127.0.0.1:3000 (login/password is admin/password)
     🛡️ Prometheus is reachable at http://127.0.0.1:9090
     📛 Pyroscope is reachable at http://127.0.0.1:4040
 ```

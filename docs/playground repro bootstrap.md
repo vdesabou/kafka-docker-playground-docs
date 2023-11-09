@@ -112,7 +112,7 @@ It only works when plaintext environment is used
 
 Enable Grafana, Prometheus and Pyroscope  
   
-📊 Grafana is reachable at http://127.0.0.1:3000  
+📊 Grafana is reachable at http://127.0.0.1:3000 (login/password is admin/password)  
   
 🛡️ Prometheus is reachable at http://127.0.0.1:9090  
   

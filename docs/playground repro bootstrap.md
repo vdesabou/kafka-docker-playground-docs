@@ -248,7 +248,7 @@ One of avro, avro-with-key, protobuf, protobuf-with-key, json-schema, json-schem
 
 #### *--pipeline SINK_FILE*
 
-🔖 Sink example file to use for creating a pipeline  
+🔖 Sink example file to use for creating a pipeline. multiple --pipeline flags can be used to create a pipeline with multiple sinks.  
   
 ❕ It must be absolute full path.   
   

@@ -465,10 +465,6 @@ Otherwise, the key will be same for all records.
 
 debug mode (internal)
 
-| Attributes      | &nbsp;
-|-----------------|-------------
-| Required:       | ✓ Yes
-
 #### *--topic, -t TOPIC*
 
 🗳 Topic name

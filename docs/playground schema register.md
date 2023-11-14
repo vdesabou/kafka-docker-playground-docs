@@ -70,7 +70,7 @@ EOF
 
 🐞 Show command being ran.
 
-#### *--input INPUT*
+#### *--schema SCHEMA*
 
 🔥 You can either:  
   

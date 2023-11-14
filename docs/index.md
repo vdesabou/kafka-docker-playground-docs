@@ -29,6 +29,7 @@ visit https://docs.docker.com/get-docker to install
 
 - [run](playground%20run) - 🕹️ Run any example, except for Confluent Cloud (in this case use run-ccloud command)
 - [re-run](playground%20re-run) - ⚡ Simply re-run last example you ran with \<playground run\> or \<playground run-ccloud\>
+- [start-environment](playground%20start-environment) - 🔐 Simply start an environment listed in https://kafka-docker-playground.io/#/content?id=%f0%9f%94%90-environments:
 - [run-ccloud](playground%20run-ccloud) - ⛅ Run any Confluent Cloud (ccloud) example
 - [update-version](playground%20update-version) - ✨ Update current confluent platform or connector(s) with new version(s)
 - [open](playground%20open) - 👐 When --file is not provided, simply open last example you ran with \<playground run\> or \<playground run-ccloud\>

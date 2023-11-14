@@ -15,7 +15,7 @@ playground re-run
 ```
 
 ```bash
-playground re-run --tag=6.2.1
+playground re-run --tag 6.2.1
 ```
 
 ## Dependencies

@@ -178,7 +178,19 @@ playground topic produce -t topic-json-multiple-lines --nb-messages 10 --key "my
 EOF
 
 # avro key
-playground topic produce -t topic-avro-with-key --nb-messages 10 --key '{"fields":[{"name":"id","type":"long"}],"name":"Key","namespace":"com.github.vdesabou","type":"record"}' << 'EOF'
+playground topic produce -t topic-avro-with-key --nb-messages 10 --key '
+{
+  "fields": [
+    {
+      "name": "id",
+      "type": "long"
+    }
+  ],
+  "name": "Key",
+  "namespace": "com.github.vdesabou",
+  "type": "record"
+}
+' << 'EOF'
 {
   "fields": [
     {

@@ -3,6 +3,86 @@
 ## November 2023
 
 - CLI:
+  * `--key` for [playground topic produce](https://kafka-docker-playground.io/#/playground%20topic%20produce) can now use same input parameters as `--value`:
+
+```bash
+–key KEY
+🗝️ Key to use. If not set, no key is used.
+
+🔥 You can either:
+
+Set your own schema (avro, json-schema, protobuf) within single quotes (see examples)
+
+You can also generate json data using json or sql format using syntax from https://github.com/MaterializeInc/datagen
+
+Directly set payload (“%g” can be used to generate a counter)
+
+In case of ‘raw’ data (i.e not using schema):
+
+If the key contain a number, it will be used as starting point and incremented for each record.
+
+Example: key1 will start with key1, then key2, etc..
+Example: mykey-10-suffix will start with mykey-10-suffix then mykey-11-suffix, etc..
+
+“%g” can also be used to generate a counter
+
+Example: key%g will start with key1, then key2, etc..
+
+Otherwise, the key will be same for all records.
+```
+
+  example:
+
+```bash
+playground topic produce -t topic-avro-with-key --nb-messages 10 --key '{"fields":[{"name":"id","type":"long"}],"name":"Key","namespace":"com.github.vdesabou","type":"record"}' << 'EOF'
+{
+  "fields": [
+    {
+      "doc": "count",
+      "name": "count",
+      "type": "long"
+    },
+    {
+      "doc": "First Name of Customer",
+      "name": "first_name",
+      "type": "string"
+    },
+    {
+      "doc": "Last Name of Customer",
+      "name": "last_name",
+      "type": "string"
+    }
+  ],
+  "name": "Customer",
+  "namespace": "com.github.vdesabou",
+  "type": "record"
+}
+EOF
+16:57:04 ℹ️ 🔮 key schema was identified as avro
+16:57:04 ℹ️ 🔮 value schema was identified as avro
+16:57:04 ℹ️ ✨ generating data...
+16:57:12 ℹ️ ✨ 10 records were generated (only showing first 10), took: 0min 8sec
+{"id":1}|{"count":1,"first_name":"Judge","last_name":"Bennett"}
+{"id":2}|{"count":2,"first_name":"Haylie","last_name":"Demario"}
+{"id":3}|{"count":3,"first_name":"Nicklaus","last_name":"Sabina"}
+{"id":4}|{"count":4,"first_name":"Concepcion","last_name":"Avery"}
+{"id":5}|{"count":5,"first_name":"Nico","last_name":"Mohamed"}
+{"id":6}|{"count":6,"first_name":"Dedric","last_name":"Vernon"}
+{"id":7}|{"count":7,"first_name":"Dejuan","last_name":"Giuseppe"}
+{"id":8}|{"count":8,"first_name":"Cordie","last_name":"Ned"}
+{"id":9}|{"count":9,"first_name":"Josie","last_name":"Dewayne"}
+{"id":10}|{"count":10,"first_name":"Jasper","last_name":"Cristal"}
+16:57:16 ℹ️ ✨ topic topic-avro-with-key does not exist, it will be created..
+16:57:16 ℹ️ ⛅ creating topic in confluent cloud
+16:57:19 ℹ️ 🆕 Creating topic topic-avro-with-key
+Created topic topic-avro-with-key.
+16:57:22 ℹ️ 📤 producing 10 records to topic topic-avro-with-key
+16:57:25 ℹ️ 📤 produced 10 records to topic topic-avro-with-key, took: 0min 3sec
+16:57:25 ℹ️ 💯 Get number of records in topic topic-avro-with-key
+10
+```
+
+  * Added [playground start-environment](https://kafka-docker-playground.io/#/playground%20start-environment) command
   * `--pipeline` flag for `playground repro boostrap` command is now repeatable, meaning you can create a pipeline from one source connector to multiple sink connectors !
 
 ## October 2023

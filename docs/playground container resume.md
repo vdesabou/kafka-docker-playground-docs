@@ -2,6 +2,10 @@
 
 ⏯️  Resume a container
 
+| Attributes       | &nbsp;
+|------------------|-------------
+| Alias:           | unpause
+
 ## Usage
 
 ```bash

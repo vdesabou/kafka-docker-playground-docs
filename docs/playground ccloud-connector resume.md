@@ -2,6 +2,10 @@
 
 ⏯️  Resume connector
 
+| Attributes       | &nbsp;
+|------------------|-------------
+| Alias:           | unpause
+
 ## Usage
 
 ```bash

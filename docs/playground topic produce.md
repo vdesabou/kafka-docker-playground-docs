@@ -177,6 +177,32 @@ playground topic produce -t topic-json-multiple-lines --nb-messages 10 --key "my
 {"u_name": "notebooks", "u_price": 1.99, "u_quantity": 5}
 EOF
 
+# avro key
+playground topic produce -t topic-avro-with-key --nb-messages 10 --key '{"fields":[{"name":"id","type":"long"}],"name":"Key","namespace":"com.github.vdesabou","type":"record"}' << 'EOF'
+{
+  "fields": [
+    {
+      "doc": "count",
+      "name": "count",
+      "type": "long"
+    },
+    {
+      "doc": "First Name of Customer",
+      "name": "first_name",
+      "type": "string"
+    },
+    {
+      "doc": "Last Name of Customer",
+      "name": "last_name",
+      "type": "string"
+    }
+  ],
+  "name": "Customer",
+  "namespace": "com.github.vdesabou",
+  "type": "record"
+}
+EOF
+
 # tombstone
 playground topic produce -t topic-json-multiple-lines --tombstone --key "mykey1"
 
@@ -390,7 +416,32 @@ EOF
 
 ## Options
 
-#### *--input INPUT*
+#### *--key KEY*
+
+🗝️ Key to use. If not set, no key is used.  
+  
+🔥 You can either:  
+  
+* Set your own schema (avro, json-schema, protobuf) within single quotes (see examples)   
+  
+* You can also generate json data using json or sql format using syntax from https://github.com/MaterializeInc/datagen  
+  
+* Directly set payload ("%g" can be used to generate a counter)  
+  
+In case of 'raw' data (i.e not using schema):  
+  
+If the key contain a number, it will be used as starting point and incremented for each record.   
+  
+Example: key1 will start with key1, then key2, etc..  
+Example: mykey-10-suffix will start with mykey-10-suffix then mykey-11-suffix, etc..  
+  
+"%g" can also be used to generate a counter  
+  
+Example: key%g will start with key1, then key2, etc..  
+  
+Otherwise, the key will be same for all records.
+
+#### *--value VALUE*
 
 🔥 You can either:  
   
@@ -444,6 +495,14 @@ Schema Registry compatibility rule
 |-----------------|-------------
 | Allowed Values: | BACKWARD, BACKWARD_TRANSITIVE, FORWARD, FORWARD_TRANSITIVE, FULL, FULL_TRANSITIVE, NONE
 
+#### *--key-subject-name-strategy KEY-SUBJECT-NAME-STRATEGY*
+
+Key Subject Name Strategy
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Allowed Values: | TopicNameStrategy, RecordNameStrategy, TopicRecordNameStrategy
+
 #### *--value-subject-name-strategy VALUE-SUBJECT-NAME-STRATEGY*
 
 Value Subject Name Strategy
@@ -451,21 +510,6 @@ Value Subject Name Strategy
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Allowed Values: | TopicNameStrategy, RecordNameStrategy, TopicRecordNameStrategy
-
-#### *--key KEY*
-
-🗝️ Key to use. If not set, no key is used.  
-  
-If the key contain a number, it will be used as starting point and incremented for each record.   
-  
-Example: key1 will start with key1, then key2, etc..  
-Example: mykey-10-suffix will start with mykey-10-suffix then mykey-11-suffix, etc..  
-  
-"%g" can also be used to generate a counter  
-  
-Example: key%g will start with key1, then key2, etc..  
-  
-Otherwise, the key will be same for all records.
 
 #### *--headers HEADERS*
 

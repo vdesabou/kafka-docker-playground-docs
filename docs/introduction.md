@@ -1,5 +1,5 @@
 # 🐳 kafka-docker-playground
-![success tests](https://img.shields.io/badge/success%20tests-2626%2F2702-red)![connector tested](https://img.shields.io/badge/connector%20tested-150-green)![cp versions tested](https://img.shields.io/badge/cp%20version%20tested-%206.2.12%207.0.11%207.1.9%207.2.7%207.3.5%207.4.2%207.5.2-green)![last run](https://img.shields.io/badge/last%20run-2023--11--14%2020:33-green)
+![success tests](https://img.shields.io/badge/success%20tests-2647%2F2702-red)![connector tested](https://img.shields.io/badge/connector%20tested-150-green)![cp versions tested](https://img.shields.io/badge/cp%20version%20tested-%206.2.12%207.0.11%207.1.9%207.2.7%207.3.5%207.4.2%207.5.2-green)![last run](https://img.shields.io/badge/last%20run-2023--11--15%2016:19-green)
 ![GitHub issues by-label](https://img.shields.io/github/issues/vdesabou/kafka-docker-playground/CI%20failing%20🔥)![GitHub issues by-label](https://img.shields.io/github/issues/vdesabou/kafka-docker-playground/enhancement%20✨)
 ![GitHub repo size](https://img.shields.io/github/repo-size/vdesabou/kafka-docker-playground)
 [![Add a star on GitHub](https://img.shields.io/github/stars/vdesabou/kafka-docker-playground?style=social)](https://github.com/vdesabou/kafka-docker-playground)

@@ -146,27 +146,24 @@ All the steps to create a pipeline, i.e an example with source and sink connecto
 Example:
 
 ```bash
-$ playground repro bootstrap -f debezium-postgres-source.sh -d "create a pipeline example" --pipeline ../../connect/connect-jdbc-sqlserver-sink/sqlserver-microsoft-sink.sh 
-09:01:11 ℹ️ 📂 Output folder is reproduction-models (set with OUTPUT_FOLDER environment variable)
-09:01:11 ℹ️ ✨ Creating file /home/vsaboulin/kafka-docker-playground/scripts/cli/../../reproduction-models/connect-connect-debezium-postgresql-source/docker-compose.plaintext.repro-create-a-pipeline-example.yml
-09:01:11 ℹ️ ✨ Creating file /home/vsaboulin/kafka-docker-playground/scripts/cli/../../reproduction-models/connect-connect-debezium-postgresql-source/debezium-postgres-source-repro-create-a-pipeline-example.sh
-09:01:12 ℹ️ 💱 Source connector is using key.converter io.confluent.connect.avro.AvroConverter
-09:01:12 ℹ️ 💱 Source connector is using value.converter io.confluent.connect.avro.AvroConverter
-09:01:12 ℹ️ 💱 Sink connector is using default key.converter, i.e org.apache.kafka.connect.storage.StringConverter
-09:01:12 ℹ️ 💱 Sink connector is using default value.converter, i.e io.confluent.connect.avro.AvroConverter
-09:01:12 ℹ️ 🧑‍🏭 Changing Sink connector value.converter to use same as source:
-                "value.converter" : "io.confluent.connect.avro.AvroConverter",
-                "value.converter.schema.registry.url": "http://schema-registry:8081",
-09:01:13 ℹ️ 🧑‍🏭 Changing Sink connector key.converter to use same as source:
-                "key.converter" : "io.confluent.connect.avro.AvroConverter",
-                "key.converter.schema.registry.url": "http://schema-registry:8081",
-09:01:13 ℹ️ 📂 The reproduction files are now available in:
-/home/vsaboulin/kafka-docker-playground/scripts/cli/../../reproduction-models/connect-connect-debezium-postgresql-source
-09:01:13 ℹ️ 🚀 Copy/paste the following to get it right away:
-
-cd /home/vsaboulin/kafka-docker-playground/scripts/cli/../../reproduction-models/connect-connect-debezium-postgresql-source
-code debezium-postgres-source-repro-create-a-pipeline-example.sh
-./debezium-postgres-source-repro-create-a-pipeline-example.sh
+$ playground repro bootstrap -f debezium-postgres-source.sh -d "create a pipeline example" --pipeline sqlserver-microsoft-sink.sh<tab>
+09:35:55 ℹ️ 📂 Output folder is reproduction-models (set with OUTPUT_FOLDER environment variable)
+09:35:55 ℹ️ ✨ Creating file /Users/vsaboulin/Documents/github/kafka-docker-playground/reproduction-models/connect-connect-debezium-postgresql-source/debezium-postgres-source-repro-create-a-pipeline-example.sh
+09:35:55 ℹ️ ✨ Creating file /Users/vsaboulin/Documents/github/kafka-docker-playground/reproduction-models/connect-connect-debezium-postgresql-source/docker-compose.plaintext.repro-create-a-pipeline-example.yml
+09:35:55 ℹ️ 💱 Source connector is using key.converter io.confluent.connect.avro.AvroConverter
+09:35:55 ℹ️ 💱 Source connector is using value.converter io.confluent.connect.avro.AvroConverter
+09:35:55 ℹ️ 💱 Sink connector is using default key.converter, i.e org.apache.kafka.connect.storage.StringConverter
+09:35:55 ℹ️ 💱 Sink connector is using default value.converter, i.e io.confluent.connect.avro.AvroConverter
+09:35:55 ℹ️ 🔮 Changing Sink connector value.converter to use same as source:
+     "value.converter" : "io.confluent.connect.avro.AvroConverter",
+     "value.converter.schema.registry.url": "http://schema-registry:8081",
+09:35:55 ℹ️ 🔮 Changing Sink connector key.converter to use same as source:
+     "key.converter" : "io.confluent.connect.avro.AvroConverter",
+     "key.converter.schema.registry.url": "http://schema-registry:8081",
+09:35:55 ℹ️ 🌟 Command to run generated example
+playground run -f /Users/vsaboulin/Documents/github/kafka-docker-playground/reproduction-models/connect-connect-debezium-postgresql-source/debezium-postgres-source-repro-create-a-pipeline-example.sh
+09:35:55 ℹ️ 📖 Opening debezium-postgres-source-repro-create-a-pipeline-example.sh using configured editor code
+09:35:56 ℹ️ 🕹️ Ready? Run it now?
 ```
 
 It will automatically:

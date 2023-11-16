@@ -487,7 +487,9 @@ debug mode (internal)
 
 #### *--nb-messages NB-MESSAGES*
 
-💯 Number of messages to produce (default is 1)
+💯 Number of messages to produce (default is 1).  
+  
+🎓 if you set it to -1, an infinite number of records will be sent by batches of 300000 records.
 
 | Attributes      | &nbsp;
 |-----------------|-------------

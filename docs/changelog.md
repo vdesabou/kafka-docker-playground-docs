@@ -3,6 +3,7 @@
 ## November 2023
 
 - CLI:
+  * `--nb-messages` for [playground topic produce](https://kafka-docker-playground.io/#/playground%20topic%20produce): if you set it to -1, an infinite number of records will be sent by batches of 300000 records
   * `--key` for [playground topic produce](https://kafka-docker-playground.io/#/playground%20topic%20produce) can now use same input parameters as `--value`:
 
 ```bash

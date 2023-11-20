@@ -39,55 +39,47 @@ playground topic produce -t topic-avro --nb-messages 10 << 'EOF'
 {
   "fields": [
     {
-      "doc": "count",
       "name": "count",
       "type": "long"
     },
     {
-      "doc": "First Name of Customer",
       "name": "first_name",
       "type": "string"
     },
     {
-      "doc": "Last Name of Customer",
       "name": "last_name",
       "type": "string"
     },
     {
-      "doc": "Address of Customer",
+      "default": null,
       "name": "address",
-      "type": "string"
+      "type": [
+        "null",
+        "string"
+      ]
     },
     {
-      "name": "createdDate",
+      "name": "last_sale_date",
       "type": {
         "logicalType": "timestamp-millis",
         "type": "long"
       }
     },
     {
-      "default": null,
-      "name": "myDecimal",
-      "type": [
-        "null",
-        {
-          "logicalType": "decimal",
-          "precision": 15,
-          "scale": 2,
-          "type": "bytes"
-        }
-      ]
+      "name": "last_sale_price",
+      "type": {
+        "logicalType": "decimal",
+        "precision": 15,
+        "scale": 2,
+        "type": "bytes"
+      }
     },
     {
-      "default": null,
-      "name": "warranty_expiration",
-      "type": [
-        "null",
-        {
-          "logicalType": "date",
-          "type": "int"
-        }
-      ]
+      "name": "last_connection",
+      "type": {
+        "logicalType": "date",
+        "type": "int"
+      }
     }
   ],
   "name": "Customer",
@@ -487,13 +479,33 @@ debug mode (internal)
 
 #### *--nb-messages NB-MESSAGES*
 
-💯 Number of messages to produce (default is 1).  
-  
-🎓 if you set it to -1, an infinite number of records will be sent by batches of 300000 records.
+💯 Number of messages to produce (default is 1)  
+     
+🎓  - if \> \<value of --max-nb-messages-per-batch\> (default 300000), messages will be sent in batches of \<value of --max-nb-messages-per-batch\> (default 300000) records  
+    - if you set it to -1, an infinite number of records will also be sent in batches
 
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Default Value:  | 1
+
+#### *--max-nb-messages-per-batch MAX-NB-MESSAGES-PER-BATCH*
+
+🔼 Max number of messages to send per batch when --nb-messages \> --max-nb-messages-per-batch  
+   if --nb-messages is set to -1, this is the number of messages sent per batch  
+   default is 300000
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Default Value:  | 300000
+
+#### *--sleep-time-between-batch SLEEP-TIME-BETWEEN-BATCH*
+
+💤 Sleep time in seconds between batches  
+   default is 0
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Default Value:  | 0
 
 #### *--nb-partitions NB-PARTITIONS*
 
@@ -536,6 +548,12 @@ Value Subject Name Strategy
 Example: --headers "header1:value1,header2:value2"  
   
 Note: CP 7.2+ is required.
+
+#### *--forced-key FORCED-KEY*
+
+☢️ Key to use for all records.   
+  
+🎓 Tip: use --generate-only first with avro, json-schema or protobuf to get skeleton of messages and then use --forced-key to send the message you need. 
 
 #### *--forced-value FORCED-VALUE*
 

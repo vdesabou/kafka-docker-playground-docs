@@ -78,6 +78,12 @@ By default, for each connector, the latest available version on Confluent Hub is
   
 By default, ksqldb-server and ksqldb-cli containers are not started for every test
 
+#### *--enable-rest-proxy*
+
+🧲 Enable Rest Proxy  
+  
+By default, rest-proxy container is not started for every test
+
 #### *--enable-control-center*
 
 💠 Enable Control Center  
@@ -212,7 +218,7 @@ This only works for Oracle, MySql, Postgres and Microsoft Sql Server source conn
   
 One of avro, avro-with-key, protobuf, protobuf-with-key, json-schema, json-schema-with-key  
   
-🎓 Tip: Most of times, it's much simpler to use 'playground topic produce'. Use java producer only if you have very specific requirements such as specifying record timestamp, use key with schema or to do perf testing  
+🎓 Tip: Most of times, it's much simpler to use 'playground topic produce'. Use java producer only if you have very specific requirements such as specifying record timestamp or to do perf testing (even though CLI is also good for that)  
   
 🎓 Tip: 'with-key' will also produce key with selected converter, otherwise LongConverter is used
 

@@ -79,6 +79,12 @@ Must be greater or equal to 5.0.0
   
 By default, ksqldb-server and ksqldb-cli containers are not started for every test
 
+#### *--enable-rest-proxy*
+
+🧲 Enable Rest Proxy  
+  
+By default, rest-proxy container is not started for every test
+
 #### *--enable-control-center*
 
 💠 Enable Control Center  

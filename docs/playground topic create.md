@@ -12,7 +12,7 @@ playground topic create [OPTIONS] [ARGUMENTS...]
 
 ```bash
 playground topic create --topic atopic
-playground topic create --topic atopic --nb-partitions 8 --config retention.ms=30000
+playground topic create --topic atopic --nb-partitions 8 --config retention.ms=30000 --config cleanup.policy=compact
 
 ```
 

@@ -517,6 +517,15 @@ debug mode (internal)
 |-----------------|-------------
 | Default Value:  | 
 
+#### *--compression-codec COMPRESSION-CODEC*
+
+🤐 The compression codec: either 'gzip', 'snappy', 'lz4', or 'zstd'  
+If not set, there is no compression
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Allowed Values: | gzip, snappy, lz4, zstd
+
 #### *--compatibility COMPATIBILITY*
 
 Schema Registry compatibility rule

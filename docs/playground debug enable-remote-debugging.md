@@ -10,6 +10,16 @@
 playground debug enable-remote-debugging [OPTIONS]
 ```
 
+## Options
+
+#### *--container, -c CONTAINER*
+
+🐳 Container name
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Default Value:  | connect
+
 ## Examples
 
 ```bash
@@ -23,15 +33,5 @@ playground debug enable-remote-debugging --container broker
 ```bash
 playground debug enable-remote-debugging -c broker
 ```
-
-## Options
-
-#### *--container, -c CONTAINER*
-
-🐳 Container name
-
-| Attributes      | &nbsp;
-|-----------------|-------------
-| Default Value:  | connect
 
 

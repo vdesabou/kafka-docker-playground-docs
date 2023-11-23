@@ -8,14 +8,6 @@
 playground topic create [OPTIONS] [ARGUMENTS...]
 ```
 
-## Examples
-
-```bash
-playground topic create --topic atopic
-playground topic create --topic atopic --nb-partitions 8 --config retention.ms=30000 --config cleanup.policy=compact
-
-```
-
 ## Options
 
 #### *--topic, -t TOPIC*
@@ -33,5 +25,13 @@ Number of partitions for the topic. (default is 1)
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Default Value:  | 
+
+## Examples
+
+```bash
+playground topic create --topic atopic
+playground topic create --topic atopic --nb-partitions 8 --config retention.ms=30000 --config cleanup.policy=compact
+
+```
 
 

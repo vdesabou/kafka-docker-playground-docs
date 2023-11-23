@@ -8,20 +8,6 @@
 playground container exec [OPTIONS]
 ```
 
-## Examples
-
-```bash
-playground exec -c connect -d "date"
-```
-
-```bash
-playground exec -c connect -d "whoami" --root
-```
-
-```bash
-playground exec --container connect --command "whoami" --shell sh
-```
-
 ## Options
 
 #### *--container, -c CONTAINER*
@@ -52,5 +38,19 @@ playground exec --container connect --command "whoami" --shell sh
 |-----------------|-------------
 | Default Value:  | bash
 | Allowed Values: | bash, sh, ksh, zsh
+
+## Examples
+
+```bash
+playground exec -c connect -d "date"
+```
+
+```bash
+playground exec -c connect -d "whoami" --root
+```
+
+```bash
+playground exec --container connect --command "whoami" --shell sh
+```
 
 

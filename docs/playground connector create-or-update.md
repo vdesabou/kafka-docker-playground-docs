@@ -8,23 +8,6 @@
 playground connector create-or-update [JSON] [OPTIONS]
 ```
 
-## Examples
-
-```bash
-playground connector create-or-update -c filestream-sink << EOF
-{
-    "tasks.max": "1",
-    "connector.class": "org.apache.kafka.connect.file.FileStreamSinkConnector",
-    "topics": "filestream",
-    "file": "/tmp/output.json",
-    "key.converter": "org.apache.kafka.connect.storage.StringConverter",
-    "value.converter": "org.apache.kafka.connect.json.JsonConverter",
-    "value.converter.schemas.enable": "false"
-}
-EOF
-
-```
-
 ## Arguments
 
 #### *JSON*
@@ -60,5 +43,22 @@ Package name
 #### *--validate*
 
 ✅ Validate config using PUT /connector-plugins/(string:name)/config/validate (https://docs.confluent.io/platform/current/connect/references/restapi.html#put--connector-plugins-(string-name)-config-validate)
+
+## Examples
+
+```bash
+playground connector create-or-update -c filestream-sink << EOF
+{
+    "tasks.max": "1",
+    "connector.class": "org.apache.kafka.connect.file.FileStreamSinkConnector",
+    "topics": "filestream",
+    "file": "/tmp/output.json",
+    "key.converter": "org.apache.kafka.connect.storage.StringConverter",
+    "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+    "value.converter.schemas.enable": "false"
+}
+EOF
+
+```
 
 

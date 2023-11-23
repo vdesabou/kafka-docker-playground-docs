@@ -8,12 +8,6 @@
 playground debug tcp-dump [OPTIONS]
 ```
 
-## Examples
-
-```bash
-playground debug tcp-dump --container control-center --port 9021 --duration 60
-```
-
 ## Options
 
 #### *--container, -c CONTAINER*
@@ -35,5 +29,11 @@ Duration of the dump (default is 30 seconds).
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Default Value:  | 30
+
+## Examples
+
+```bash
+playground debug tcp-dump --container control-center --port 9021 --duration 60
+```
 
 

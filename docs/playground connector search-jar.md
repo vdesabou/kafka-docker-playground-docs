@@ -8,13 +8,6 @@
 playground connector search-jar [OPTIONS]
 ```
 
-## Examples
-
-```bash
-playground connector search-jar --connector-plugin confluentinc/kafka-connect-s3 --class WebIdentityTokenCredentialsProvider
-
-```
-
 ## Options
 
 #### *--connector-plugin, -c CONNECTOR-PLUGIN*
@@ -40,5 +33,12 @@ By default, for each connector, the latest available version on Confluent Hub is
 #### *--class CLASS*
 
 ☕ Java class name to search for in all jars
+
+## Examples
+
+```bash
+playground connector search-jar --connector-plugin confluentinc/kafka-connect-s3 --class WebIdentityTokenCredentialsProvider
+
+```
 
 

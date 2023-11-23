@@ -8,16 +8,6 @@
 playground debug block-traffic [OPTIONS]
 ```
 
-## Examples
-
-```bash
-playground debug block-traffic --destination google.com --action start
-```
-
-```bash
-playground debug block-traffic --container broker --destination zookeeper --action start
-```
-
 ## Options
 
 #### *--container, -c CONTAINER*
@@ -48,5 +38,15 @@ Port on which tcp traffic should be blocked
 |-----------------|-------------
 | Required:       | ✓ Yes
 | Allowed Values: | start, stop
+
+## Examples
+
+```bash
+playground debug block-traffic --destination google.com --action start
+```
+
+```bash
+playground debug block-traffic --container broker --destination zookeeper --action start
+```
 
 

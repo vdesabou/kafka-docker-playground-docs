@@ -8,6 +8,16 @@
 playground schema get [OPTIONS]
 ```
 
+## Options
+
+#### *--subject SUBJECT*
+
+📛 Subject name
+
+#### *--deleted*
+
+🧟 Include soft deleted subjects
+
 ## Examples
 
 ```bash
@@ -21,15 +31,5 @@ playground schema get --subject <SUBJECT>
 ```bash
 playground schema get --deleted
 ```
-
-## Options
-
-#### *--subject SUBJECT*
-
-📛 Subject name
-
-#### *--deleted*
-
-🧟 Include soft deleted subjects
 
 

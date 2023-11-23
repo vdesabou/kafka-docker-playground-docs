@@ -12,16 +12,6 @@ see https://docs.confluent.io/platform/current/tools/diagnostics-tool.html#colle
 playground debug generate-diagnostics [OPTIONS]
 ```
 
-## Examples
-
-```bash
-playground debug generate-diagnostics
-```
-
-```bash
-playground debug generate-diagnostics --container broker
-```
-
 ## Options
 
 #### *--container, -c CONTAINER*
@@ -31,5 +21,15 @@ playground debug generate-diagnostics --container broker
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Default Value:  | connect
+
+## Examples
+
+```bash
+playground debug generate-diagnostics
+```
+
+```bash
+playground debug generate-diagnostics --container broker
+```
 
 

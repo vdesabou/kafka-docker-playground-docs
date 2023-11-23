@@ -8,16 +8,6 @@
 playground re-run [OPTIONS] [ARGUMENTS...]
 ```
 
-## Examples
-
-```bash
-playground re-run
-```
-
-```bash
-playground re-run --tag 6.2.1
-```
-
 ## Dependencies
 
 #### *fzf*
@@ -137,5 +127,15 @@ $ docker exec kcat kcat -b broker:9092 -L
 🌪️ Enable SQL Datagen injection  
   
 This only works for Oracle, MySql, Postgres and Microsoft Sql Server source connector examples with JDBC and Debezium
+
+## Examples
+
+```bash
+playground re-run
+```
+
+```bash
+playground re-run --tag 6.2.1
+```
 
 

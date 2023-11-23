@@ -8,6 +8,12 @@
 playground topic get-number-records [OPTIONS]
 ```
 
+## Options
+
+#### *--topic, -t TOPIC*
+
+🗳 Topic name
+
 ## Examples
 
 ```bash
@@ -17,11 +23,5 @@ playground get-number-records --topic a-topic
 ```bash
 playground get-number-records -t a-topic
 ```
-
-## Options
-
-#### *--topic, -t TOPIC*
-
-🗳 Topic name
 
 

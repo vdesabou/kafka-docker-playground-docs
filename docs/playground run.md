@@ -8,16 +8,6 @@
 playground run [OPTIONS] [ARGUMENTS...]
 ```
 
-## Examples
-
-```bash
-playground run -f zendesk-source<tab> --tag 7.2.1 --enable-control-center <ZENDESK_URL> <ZENDESK_USERNAME> <ZENDESK_PASSWORD>
-```
-
-```bash
-playground run -f jdbc<tab> --connector-tag 10.6.0 --enable-jmx-grafana --open
-```
-
 ## Dependencies
 
 #### *fzf*
@@ -149,5 +139,15 @@ $ docker exec kcat kcat -b broker:9092 -L
 🌪️ Enable SQL Datagen injection  
   
 This only works for Oracle, MySql, Postgres and Microsoft Sql Server source connector examples with JDBC and Debezium
+
+## Examples
+
+```bash
+playground run -f zendesk-source<tab> --tag 7.2.1 --enable-control-center <ZENDESK_URL> <ZENDESK_USERNAME> <ZENDESK_PASSWORD>
+```
+
+```bash
+playground run -f jdbc<tab> --connector-tag 10.6.0 --enable-jmx-grafana --open
+```
 
 

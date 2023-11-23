@@ -10,16 +10,6 @@
 playground debug thread-dump [OPTIONS]
 ```
 
-## Examples
-
-```bash
-playground debug thread-dump
-```
-
-```bash
-playground debug thread-dump --container broker
-```
-
 ## Options
 
 #### *--container, -c CONTAINER*
@@ -29,5 +19,15 @@ playground debug thread-dump --container broker
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Default Value:  | connect
+
+## Examples
+
+```bash
+playground debug thread-dump
+```
+
+```bash
+playground debug thread-dump --container broker
+```
 
 

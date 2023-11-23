@@ -10,20 +10,6 @@
 playground get-jmx-metrics [OPTIONS]
 ```
 
-## Examples
-
-```bash
-playground get-jmx-metrics --component connect
-```
-
-```bash
-playground get-jmx-metrics --component connect --domain "kafka.connect kafka.consumer kafka.producer"
-```
-
-```bash
-playground get-jmx-metrics -c broker
-```
-
 ## Dependencies
 
 #### *java*
@@ -48,5 +34,19 @@ Component name
 #### *--domain, -d DOMAIN*
 
 Domain name
+
+## Examples
+
+```bash
+playground get-jmx-metrics --component connect
+```
+
+```bash
+playground get-jmx-metrics --component connect --domain "kafka.connect kafka.consumer kafka.producer"
+```
+
+```bash
+playground get-jmx-metrics -c broker
+```
 
 

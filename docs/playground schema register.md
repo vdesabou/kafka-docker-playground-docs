@@ -8,6 +8,32 @@
 playground schema register [OPTIONS]
 ```
 
+## Options
+
+#### *--subject SUBJECT*
+
+📛 Subject name
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Required:       | ✓ Yes
+
+#### *--verbose, -v*
+
+🐞 Show command being ran.
+
+#### *--schema SCHEMA*
+
+🔥 You can either:  
+  
+* Set your own schema (avro, json-schema, protobuf) with stdin (see example section).   
+  
+* Use completion to select predefined schemas (or use your own schema file) 🎓 Tip: use \<tab\> completion to trigger fzf completion
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Default Value:  | -
+
 ## Examples
 
 ```bash
@@ -55,31 +81,5 @@ playground schema register --subject test-avro << 'EOF'
 EOF
 
 ```
-
-## Options
-
-#### *--subject SUBJECT*
-
-📛 Subject name
-
-| Attributes      | &nbsp;
-|-----------------|-------------
-| Required:       | ✓ Yes
-
-#### *--verbose, -v*
-
-🐞 Show command being ran.
-
-#### *--schema SCHEMA*
-
-🔥 You can either:  
-  
-* Set your own schema (avro, json-schema, protobuf) with stdin (see example section).   
-  
-* Use completion to select predefined schemas (or use your own schema file) 🎓 Tip: use \<tab\> completion to trigger fzf completion
-
-| Attributes      | &nbsp;
-|-----------------|-------------
-| Default Value:  | -
 
 

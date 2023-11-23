@@ -8,20 +8,6 @@
 playground container logs [OPTIONS]
 ```
 
-## Examples
-
-```bash
-playground container logs --container connect
-```
-
-```bash
-playground container logs -c connect --open
-```
-
-```bash
-playground container logs -c connect --wait-for-log "StackOverflowError"
-```
-
 ## Options
 
 #### *--container, -c CONTAINER*
@@ -56,5 +42,19 @@ playground container logs -c connect --wait-for-log "StackOverflowError"
 |-----------------|-------------
 | Default Value:  | 600
 | Conflicts With: | *--open*
+
+## Examples
+
+```bash
+playground container logs --container connect
+```
+
+```bash
+playground container logs -c connect --open
+```
+
+```bash
+playground container logs -c connect --wait-for-log "StackOverflowError"
+```
 
 

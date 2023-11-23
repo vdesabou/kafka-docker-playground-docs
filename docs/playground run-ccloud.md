@@ -25,12 +25,6 @@ In case you want to use your own existing cluster, you need to setup, in additio
 playground run-ccloud [OPTIONS] [ARGUMENTS...]
 ```
 
-## Examples
-
-```bash
-playground run-ccloud mqtt<tab> --cluster-cloud aws --cluster-region eu-west-3 --enable-control-center --connector-tag 1.2.3
-```
-
 ## Dependencies
 
 #### *fzf*
@@ -180,5 +174,11 @@ $ docker exec kcat kcat -b broker:9092 -L
 ❣️ Only required if you want to use your own existing cluster  
   
 🎓 Tip: you can also use SCHEMA_REGISTRY_CREDS environment variable
+
+## Examples
+
+```bash
+playground run-ccloud mqtt<tab> --cluster-cloud aws --cluster-region eu-west-3 --enable-control-center --connector-tag 1.2.3
+```
 
 

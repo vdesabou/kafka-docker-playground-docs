@@ -16,16 +16,16 @@ After installation, install "playground" command:
 playground debug install-vscode-extension
 ```
 
-## Examples
-
-```bash
-playground install-vscode-extension
-```
-
 ## Dependencies
 
 #### *code*
 
 visit https://code.visualstudio.com/docs/setup/mac#_launching-from-the-command-line to install
+
+## Examples
+
+```bash
+playground install-vscode-extension
+```
 
 

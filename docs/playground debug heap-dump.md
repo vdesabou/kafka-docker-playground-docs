@@ -10,16 +10,6 @@
 playground debug heap-dump [OPTIONS]
 ```
 
-## Examples
-
-```bash
-playground debug heap-dump
-```
-
-```bash
-playground debug heap-dump --container broker
-```
-
 ## Options
 
 #### *--container, -c CONTAINER*
@@ -29,5 +19,15 @@ playground debug heap-dump --container broker
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Default Value:  | connect
+
+## Examples
+
+```bash
+playground debug heap-dump
+```
+
+```bash
+playground debug heap-dump --container broker
+```
 
 

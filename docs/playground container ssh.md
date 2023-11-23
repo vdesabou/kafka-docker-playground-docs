@@ -8,20 +8,6 @@
 playground container ssh [OPTIONS]
 ```
 
-## Examples
-
-```bash
-playground ssh -c connect
-```
-
-```bash
-playground ssh -c connect -s sh
-```
-
-```bash
-playground ssh --container connect --shell sh
-```
-
 ## Options
 
 #### *--container, -c CONTAINER*
@@ -40,5 +26,19 @@ playground ssh --container connect --shell sh
 |-----------------|-------------
 | Default Value:  | bash
 | Allowed Values: | bash, sh, ksh, zsh
+
+## Examples
+
+```bash
+playground ssh -c connect
+```
+
+```bash
+playground ssh -c connect -s sh
+```
+
+```bash
+playground ssh --container connect --shell sh
+```
 
 

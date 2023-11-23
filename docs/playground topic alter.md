@@ -8,13 +8,6 @@
 playground topic alter [OPTIONS] [ARGUMENTS...]
 ```
 
-## Examples
-
-```bash
-playground topic alter --topic atopic --add-config max.message.bytes=5242940
-
-```
-
 ## Options
 
 #### *--topic, -t TOPIC*
@@ -24,5 +17,12 @@ playground topic alter --topic atopic --add-config max.message.bytes=5242940
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Required:       | ✓ Yes
+
+## Examples
+
+```bash
+playground topic alter --topic atopic --add-config max.message.bytes=5242940
+
+```
 
 

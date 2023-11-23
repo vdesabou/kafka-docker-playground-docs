@@ -12,16 +12,6 @@ Open the jfr file with JDK Mission Control JMC(https://jdk.java.net/jmc/)
 playground debug flight-recorder [OPTIONS]
 ```
 
-## Examples
-
-```bash
-playground debug flight-recorder --action start
-```
-
-```bash
-playground debug flight-recorder --action stop
-```
-
 ## Options
 
 #### *--container, -c CONTAINER*
@@ -40,5 +30,15 @@ playground debug flight-recorder --action stop
 |-----------------|-------------
 | Required:       | ✓ Yes
 | Allowed Values: | start, stop
+
+## Examples
+
+```bash
+playground debug flight-recorder --action start
+```
+
+```bash
+playground debug flight-recorder --action stop
+```
 
 

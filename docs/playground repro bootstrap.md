@@ -10,28 +10,6 @@
 playground repro bootstrap [OPTIONS] [ARGUMENTS...]
 ```
 
-## Examples
-
-```bash
-playground repro bootstrap -f hdfs2<tab> -d "simple test"
-```
-
-```bash
-playground repro bootstrap -f /full/path/hdfs2-sink.sh -d "testing with avro producer" --producer avro --producer-schema-value myschema<tab>
-```
-
-```bash
-playground repro bootstrap -f hdfs2<tab> -d "testing with 2 protobuf producers" --producer protobuf --nb-producers 2
-```
-
-```bash
-playground repro bootstrap -f hdfs2<tab> -d "testing custom smt" --custom-smt
-```
-
-```bash
-playground repro bootstrap -f debeziumpostgres<tab> -d "create pipeline" --pipeline jdbcsink<tab>
-```
-
 ## Options
 
 #### *--tag TAG*
@@ -264,5 +242,27 @@ One of avro, avro-with-key, protobuf, protobuf-with-key, json-schema, json-schem
 |-----------------|-------------
 | Repeatable:     |  ✓ Yes
 | Conflicts With: | *--producer*
+
+## Examples
+
+```bash
+playground repro bootstrap -f hdfs2<tab> -d "simple test"
+```
+
+```bash
+playground repro bootstrap -f /full/path/hdfs2-sink.sh -d "testing with avro producer" --producer avro --producer-schema-value myschema<tab>
+```
+
+```bash
+playground repro bootstrap -f hdfs2<tab> -d "testing with 2 protobuf producers" --producer protobuf --nb-producers 2
+```
+
+```bash
+playground repro bootstrap -f hdfs2<tab> -d "testing custom smt" --custom-smt
+```
+
+```bash
+playground repro bootstrap -f debeziumpostgres<tab> -d "create pipeline" --pipeline jdbcsink<tab>
+```
 
 

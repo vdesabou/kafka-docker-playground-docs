@@ -10,6 +10,16 @@
 playground get-properties [OPTIONS]
 ```
 
+## Options
+
+#### *--container, -c CONTAINER*
+
+🐳 Container name
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Default Value:  | connect
+
 ## Examples
 
 ```bash
@@ -23,15 +33,5 @@ playground get-properties --container broker
 ```bash
 playground get-properties -c broker
 ```
-
-## Options
-
-#### *--container, -c CONTAINER*
-
-🐳 Container name
-
-| Attributes      | &nbsp;
-|-----------------|-------------
-| Default Value:  | connect
 
 

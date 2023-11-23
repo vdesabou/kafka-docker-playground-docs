@@ -57,4 +57,8 @@ json (reads from stdin if empty)
 
 Package name
 
+#### *--validate*
+
+✅ Validate config using PUT /connector-plugins/(string:name)/config/validate (https://docs.confluent.io/platform/current/connect/references/restapi.html#put--connector-plugins-(string-name)-config-validate)
+
 

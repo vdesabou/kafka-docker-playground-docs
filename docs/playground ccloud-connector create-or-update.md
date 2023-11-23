@@ -48,4 +48,8 @@ json (reads from stdin if empty)
 |-----------------|-------------
 | Required:       | ✓ Yes
 
+#### *--validate*
+
+✅ Validate config using PUT https://api.confluent.cloud/connect/v1/environments/{environment_id}/clusters/{kafka_cluster_id}/connector-plugins/{plugin_name}/config/validate (https://docs.confluent.io/cloud/current/api.html#tag/Managed-Connector-Plugins-(connectv1)/operation/validateConnectv1ConnectorPlugin)
+
 

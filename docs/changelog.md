@@ -3,6 +3,7 @@
 ## November 2023
 
 - CLI:
+  * Added `--validate` to `playground connector create-or-update` and `playground ccloud-connector create-or-update`
   * Added [playground connector search-jar](https://kafka-docker-playground.io/#/playground%20connector%20search-jar) command
   * Added `--enable-rest-proxy` flag to run, re-run, start-environment and repro bootstrap commands
   * Added [playground connector stop](https://kafka-docker-playground.io/#/playground%20connector%20stop) command 

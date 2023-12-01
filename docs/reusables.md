@@ -26,7 +26,7 @@ playground repro bootstrap -f hdfs2-sink<tab> -d "123456 testing with parquet fo
 
 ### With Java producer (`--producer`)
 
-> [!TIP]
+> [!WARNING]
 > Most of times, it's much simpler to use `playground topic produce` [CLI](/playground%20topic%20produce)
 > 
 > Use java producer only if you have very specific requirements such as specifying record timestamp, use key with schema or to do [perf testing](/reusables?id=%f0%9f%91%88-all-sink-connectors)
@@ -185,11 +185,21 @@ See example there:
 
 ## 👉 Producing data
 
+Just use `playground topic produce` [CLI](/playground%20topic%20produce), it's magic !
+
+It you prefer to use legacy way, see below:
+
 ### ♨️ Java producers
 
 <!-- tabs:start -->
 
 #### **Avro**
+
+> [!WARNING]
+> Most of times, it's much simpler to use `playground topic produce` [CLI](/playground%20topic%20produce)
+> 
+> Use java producer only if you have very specific requirements such as specifying record timestamp, use key with schema or to do [perf testing](/reusables?id=%f0%9f%91%88-all-sink-connectors)
+
 
 If you want to send a complex AVRO message, the easiest way is to use an Avro JAVA producer which creates a Specific Record using Maven plugin and populate it using [j-easy/easy-random](https://github.com/j-easy/easy-random).
 
@@ -270,6 +280,10 @@ docker exec -e NB_MESSAGES=100 -e TOPIC="test-topic" producer-repro-12345 bash -
 
 #### **Protobuf**
 
+> [!WARNING]
+> Most of times, it's much simpler to use `playground topic produce` [CLI](/playground%20topic%20produce)
+> 
+> Use java producer only if you have very specific requirements such as specifying record timestamp, use key with schema or to do [perf testing](/reusables?id=%f0%9f%91%88-all-sink-connectors)
 
 If you want to send a complex Protobuf message, the easiest way is to use an Protobuf JAVA producer which creates a Protobuf Record using Maven [plugin](https://github.com/os72/protoc-jar-maven-plugin) and populate it using [j-easy/easy-random](https://github.com/j-easy/easy-random).
 
@@ -351,6 +365,11 @@ docker exec -e NB_MESSAGES=100 -e TOPIC="test-topic" producer-repro-12345 bash -
 ```
 
 #### **JSON Schema**
+
+> [!WARNING]
+> Most of times, it's much simpler to use `playground topic produce` [CLI](/playground%20topic%20produce)
+> 
+> Use java producer only if you have very specific requirements such as specifying record timestamp, use key with schema or to do [perf testing](/reusables?id=%f0%9f%91%88-all-sink-connectors)
 
 If you want to send a complex JSON Schema message, the easiest way is to use an JSON Schema JAVA producer which creates a JSON Schema Record using Maven [plugin](https://github.com/joelittlejohn/jsonschema2pojo) and populate it using [j-easy/easy-random](https://github.com/j-easy/easy-random).
 

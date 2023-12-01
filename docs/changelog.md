@@ -3,12 +3,13 @@
 ## November 2023
 
 - CLI:
+  * Added [playground history](/playground%20history) command
   * Added `--validate` to `playground connector create-or-update` and `playground ccloud-connector create-or-update`
-  * Added [playground connector search-jar](https://kafka-docker-playground.io/#/playground%20connector%20search-jar) command
+  * Added [playground connector search-jar](/playground%20connector%20search-jar) command
   * Added `--enable-rest-proxy` flag to run, re-run, start-environment and repro bootstrap commands
-  * Added [playground connector stop](https://kafka-docker-playground.io/#/playground%20connector%20stop) command 
-  * `--nb-messages` for [playground topic produce](https://kafka-docker-playground.io/#/playground%20topic%20produce): if you set it to -1, an infinite number of records will be sent by batches of 300000 records
-  * `--key` for [playground topic produce](https://kafka-docker-playground.io/#/playground%20topic%20produce) can now use same input parameters as `--value`:
+  * Added [playground connector stop](/playground%20connector%20stop) command 
+  * `--nb-messages` for [playground topic produce](/playground%20topic%20produce): if you set it to -1, an infinite number of records will be sent by batches of 300000 records
+  * `--key` for [playground topic produce](/playground%20topic%20produce) can now use same input parameters as `--value`:
 
 ```bash
 –key KEY
@@ -99,7 +100,7 @@ Created topic topic-avro-with-key.
 10
 ```
 
-  * Added [playground start-environment](https://kafka-docker-playground.io/#/playground%20start-environment) command
+  * Added [playground start-environment](/playground%20start-environment) command
   * `--pipeline` flag for `playground repro boostrap` command is now repeatable, meaning you can create a pipeline from one source connector to multiple sink connectors !
 
 ## October 2023

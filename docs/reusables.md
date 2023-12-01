@@ -185,6 +185,8 @@ See example there:
 
 ## 👉 Producing data
 
+### 🧠 playground topic produce
+
 Just use `playground topic produce` [CLI](/playground%20topic%20produce), it's magic !
 
 It you prefer to use legacy way, see below:
@@ -668,7 +670,9 @@ docker exec broker kafka-producer-perf-test --topic a-topic --num-records 200000
 
 ## 👉 Consuming data
 
-Just use [CLI](/cli?id=%f0%9f%93%a5-consume) `playground topic consume`, it's magic !
+### 🧠 playground topic consume
+
+Just use `playground topic consume` [CLI](/playground%20topic%20consume), it's magic !
 
 It you prefer to use legacy way, see below:
 

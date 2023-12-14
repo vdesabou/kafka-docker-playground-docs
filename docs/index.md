@@ -117,7 +117,7 @@ visit https://docs.docker.com/get-docker to install
 - [create-or-update](playground%20ccloud-connector%20create-or-update) - 🧑‍🎨  Create or update connector
 - [connector](playground%20connector) - 🔗 Connector commands
 - [status](playground%20connector%20status) - 🧩 Show status of all connectors
-- [plugins](playground%20connector%20plugins) - 🎨 Show all plugins installed
+- [plugins](playground%20connector%20plugins) - 🎨 Show all connector plugins installed. You can also display transforms, converters and predicates using --all flag
 - [pause](playground%20connector%20pause) - ⏸️  Pause connector
 - [versions](playground%20connector%20versions) - 🧞 Get current and latest version available on Confluent Hub for connector(s) used in example
 - [restart](playground%20connector%20restart) - ♻️  Restart connector

@@ -110,6 +110,8 @@ visit https://docs.docker.com/get-docker to install
 - [history](playground%20history) - 🏰 Get an history of the examples which were run with run command and run it again
 - [start-environment](playground%20start-environment) - 🔐 Simply start an environment listed in https://kafka-docker-playground.io/#/content?id=%f0%9f%94%90-environments:
 - [run-ccloud](playground%20run-ccloud) - ⛅ Run any Confluent Cloud (ccloud) example
+- [switch-ccloud](playground%20switch-ccloud) - 🌩️  Switch to ccloud environment.
+- [switch-onprem](playground%20switch-onprem) - 💺  Switch back from ccloud environment to onprem environment. 
 - [update-version](playground%20update-version) - ✨ Update current confluent platform or connector(s) with new version(s)
 - [open](playground%20open) - 👐 When --file is not provided, simply open last example you ran with \<playground run\> or \<playground run-ccloud\>
 - [stop](playground%20stop) - 🛑 Stop currently running example

@@ -18,4 +18,8 @@ playground schema get-mode [OPTIONS]
 |-----------------|-------------
 | Required:       | ✓ Yes
 
+#### *--verbose, -v*
+
+🐞 Show command being ran.
+
 

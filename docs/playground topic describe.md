@@ -14,4 +14,8 @@ playground topic describe [OPTIONS]
 
 🗳 Topic name
 
+#### *--verbose, -v*
+
+🐞 Show command being ran.
+
 

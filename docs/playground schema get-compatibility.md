@@ -18,4 +18,8 @@ playground schema get-compatibility [OPTIONS]
 |-----------------|-------------
 | Required:       | ✓ Yes
 
+#### *--verbose, -v*
+
+🐞 Show command being ran.
+
 

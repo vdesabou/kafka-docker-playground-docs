@@ -10,6 +10,10 @@ playground ccloud-connector show-config [OPTIONS]
 
 ## Options
 
+#### *--verbose, -v*
+
+🐞 Show command being ran.
+
 #### *--connector, -c CONNECTOR*
 
 🔗 Connector name  

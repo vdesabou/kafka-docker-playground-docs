@@ -10,6 +10,10 @@ playground connector status [OPTIONS]
 
 ## Options
 
+#### *--verbose, -v*
+
+🐞 Show command being ran.
+
 #### *--connector, -c CONNECTOR*
 
 🔗 Connector name  

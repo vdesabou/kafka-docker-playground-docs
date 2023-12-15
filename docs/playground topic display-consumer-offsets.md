@@ -5,7 +5,13 @@
 ## Usage
 
 ```bash
-playground topic display-consumer-offsets
+playground topic display-consumer-offsets [OPTIONS]
 ```
+
+## Options
+
+#### *--verbose, -v*
+
+🐞 Show command being ran.
 
 

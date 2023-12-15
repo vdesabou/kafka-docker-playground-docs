@@ -10,6 +10,10 @@ playground topic alter [OPTIONS] [ARGUMENTS...]
 
 ## Options
 
+#### *--verbose, -v*
+
+🐞 Show command being ran.
+
 #### *--topic, -t TOPIC*
 
 🗳 Topic name

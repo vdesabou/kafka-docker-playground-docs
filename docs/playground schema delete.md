@@ -26,4 +26,8 @@ Can only be used when --subject is provided
 
 💀 Hard delete (default is soft delete)
 
+#### *--verbose, -v*
+
+🐞 Show command being ran.
+
 

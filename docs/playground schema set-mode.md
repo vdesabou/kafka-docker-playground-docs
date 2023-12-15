@@ -20,6 +20,10 @@ playground schema set-mode [OPTIONS]
 |-----------------|-------------
 | Required:       | ✓ Yes
 
+#### *--verbose, -v*
+
+🐞 Show command being ran.
+
 #### *--mode MODE*
 
 Schema Registry mode

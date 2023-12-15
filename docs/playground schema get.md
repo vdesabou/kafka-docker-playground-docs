@@ -14,6 +14,10 @@ playground schema get [OPTIONS]
 
 📛 Subject name
 
+#### *--verbose, -v*
+
+🐞 Show command being ran.
+
 #### *--deleted*
 
 🧟 Include soft deleted subjects

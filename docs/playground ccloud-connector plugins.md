@@ -5,7 +5,13 @@
 ## Usage
 
 ```bash
-playground ccloud-connector plugins
+playground ccloud-connector plugins [OPTIONS]
 ```
+
+## Options
+
+#### *--verbose, -v*
+
+🐞 Show command being ran.
 
 

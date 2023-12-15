@@ -20,6 +20,10 @@ json (reads from stdin if empty)
 
 ## Options
 
+#### *--verbose, -v*
+
+🐞 Show command being ran.
+
 #### *--connector, -c CONNECTOR*
 
 🔗 Connector name

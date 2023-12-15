@@ -18,6 +18,10 @@ playground schema set-compatibility [OPTIONS]
 |-----------------|-------------
 | Required:       | ✓ Yes
 
+#### *--verbose, -v*
+
+🐞 Show command being ran.
+
 #### *--compatibility COMPATIBILITY*
 
 Schema Registry compatibility rule

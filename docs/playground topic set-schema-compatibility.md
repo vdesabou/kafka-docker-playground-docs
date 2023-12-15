@@ -23,4 +23,8 @@ Schema Registry compatibility rule
 | Required:       | ✓ Yes
 | Allowed Values: | BACKWARD, BACKWARD_TRANSITIVE, FORWARD, FORWARD_TRANSITIVE, FULL, FULL_TRANSITIVE, NONE
 
+#### *--verbose, -v*
+
+🐞 Show command being ran.
+
 

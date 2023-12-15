@@ -10,6 +10,10 @@ playground topic delete [OPTIONS]
 
 ## Options
 
+#### *--verbose, -v*
+
+🐞 Show command being ran.
+
 #### *--topic, -t TOPIC*
 
 🗳 Topic name

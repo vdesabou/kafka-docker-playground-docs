@@ -10,6 +10,10 @@ playground connector plugins [OPTIONS]
 
 ## Options
 
+#### *--verbose, -v*
+
+🐞 Show command being ran.
+
 #### *--all*
 
 🌕 Show also transforms, converters, predicates available

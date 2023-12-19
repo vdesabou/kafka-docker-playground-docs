@@ -1,6 +1,6 @@
 # 🧑‍🎓 Playground Academy
 
-Below is a collection of real use cases/issues for which a reproduction model was done using the playground.
+Below is a collection of use cases/issues for which a reproduction model was done using the playground.
 
 Each example (categorized by difficulty) is composed of:
 
@@ -35,9 +35,9 @@ Sink connector is getting "Unknown magic byte" deserialization error.
 
 Versions used:
 
-* 🎯 CP: 7.4.0
+* 🎯 CP: 7.5.2
 
-* 🔗 Filestream sink: 7.4.0 (shipped with CP)
+* 🔗 Filestream sink: 7.5.2 (shipped with CP)
 
 > [!TIP] Make sure to be aware of default converters used at worker level, see [↔️ Default Connect converter used](/how-it-works?id=%e2%86%94%ef%b8%8f-default-connect-converter-used)
 
@@ -46,7 +46,7 @@ Versions used:
 Run the example `filestream-sink-repro-000002-deserialization-error.sh` (use `fzf` completion to find the example with `-f`):
 
 ```bash
-playground run -f 000002<tab> --tag 7.4.0
+playground run -f 000002<tab> --tag 7.5.2
 ```
 
 As you can see, connector is failing (check output of `playground connector status`)
@@ -66,37 +66,32 @@ As you can see, connector is failing (check output of `playground connector stat
 
 💡 Explanations:
 
-Connector is configured with AvroConverter for the value:
+Connector is configured with AvroConverter for the value (default converters are documented [there](/how-it-works?id=%e2%86%94%ef%b8%8f-default-connect-converter-used)):
 
 ```json
-               "value.converter": "io.confluent.connect.avro.AvroConverter",
-               "value.converter.schema.registry.url": "http://schema-registry:8081"
+"value.converter": "io.confluent.connect.avro.AvroConverter",
+"value.converter.schema.registry.url": "http://schema-registry:8081"
 ```
 
-The 3 first requests are sent using Avro as `kafka-avro-console-producer` is used:
+The 3 first requests are sent using Avro as we provide an avro schema as input of [playground topic produce](/playground%20topic%20produce) (`kafka-avro-console-producer` is used under the hood):
 
 ```bash
-log "Sending messages to topic filestream"
-docker exec -i connect kafka-avro-console-producer --broker-list broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --property value.schema='{"type":"record","name":"myrecord","fields":[{"name":"u_name","type":"string"},
-{"name":"u_price", "type": "float"}, {"name":"u_quantity", "type": "int"}]}' << EOF
-{"u_name": "scissors", "u_price": 2.75, "u_quantity": 3}
-{"u_name": "tape", "u_price": 0.99, "u_quantity": 10}
-{"u_name": "notebooks", "u_price": 1.99, "u_quantity": 5}
+playground topic produce -t filestream --nb-messages 3 --verbose << 'EOF'
+{"type":"record","name":"myrecord","fields":[{"name":"u_name","type":"string"},{"name":"u_price", "type": "float"}, {"name":"u_quantity", "type": "int"}]}
 EOF
 ```
 
 This is fine.
 
-But 4th message is sent using `kafka-console-producer`:
+But 4th message is sent without schema, so simple json will be sent (`kafka-console-producer` is used under the hood):
 
 ```bash
-log "Sending again message to topic filestream"
-docker exec -i broker kafka-console-producer --broker-list broker:9092 --topic filestream << EOF
+playground topic produce -t filestream --nb-messages 1 --verbose << 'EOF'
 {"u_name": "poison pill", "u_price": 1.75, "u_quantity": 1}
 EOF
 ```
 
-So this is not AVRO, it is only sending plain JSON string.
+So this is not AVRO, it is only sending plain JSON string. That's what we call a *poison pill*.
 
 This is why avro converter fails with `Unknown magic byte` since 4th message does not contain in the first 4 bytes the avro schema id.
 
@@ -108,7 +103,7 @@ If this is setup, the 4th message would have been rejected by broker validation.
 
 <!-- select:end -->
 
-* Skip the 4th message (also called "Poison pill") by resetting consumer offset using `kafka-consumer-groups` CLI 
+* Skip the 4th message (also called *poison pill*) by resetting consumer offset using `kafka-consumer-groups` CLI 
 
 > [!TIP] If you're Confluent customer, check this [Knowledge Base article](https://support.confluent.io/hc/en-us/articles/360031115091-How-to-skip-messages-in-Kafka-Connect-or-reset-a-connector-to-the-earliest-offset-for-sink-connectors)
 
@@ -124,27 +119,45 @@ docker exec broker kafka-consumer-groups --bootstrap-server broker:9092 --group 
 
 ```bash
 playground topic consume                                                
-11:03:51 ℹ️ ✨ --topic flag was not provided, applying command to all topics
-11:17:03 ℹ️ ✨ Display content of topic filestream, it contains 5 messages
-11:17:03 ℹ️ 🔮🙅 topic is not using any schema for key
-11:17:03 ℹ️ 🔮🔰 topic is using avro for value
-[2023-05-16 09:17:08,473] ERROR Error processing message, skipping this message:  (kafka.tools.ConsoleConsumer$)
+16:15:08 ℹ️ ✨ --topic flag was not provided, applying command to all topics
+16:15:13 ℹ️ ✨ Display content of topic filestream, it contains 5 messages
+16:15:13 ℹ️ 🔮🙅 topic is not using any schema for key
+16:15:13 ℹ️ 🔮🔰 topic is using avro for value
+16:15:14 ℹ️ 🔰 subject filestream-value 💯 version 1 (id 1)
+{
+  "type": "record",
+  "name": "myrecord",
+  "fields": [
+    {
+      "name": "u_name",
+      "type": "string"
+    },
+    {
+      "name": "u_price",
+      "type": "float"
+    },
+    {
+      "name": "u_quantity",
+      "type": "int"
+    }
+  ]
+}
+CreateTime:2023-12-19 16:14:19.296|Partition:0|Offset:0|Headers:NO_HEADERS|Key:null|Value:{"u_name":"Neil","u_price":0.25018042,"u_quantity":1}|ValueSchemaId:1
+CreateTime:2023-12-19 16:14:19.315|Partition:0|Offset:1|Headers:NO_HEADERS|Key:null|Value:{"u_name":"Gertrude","u_price":0.5933151,"u_quantity":2}|ValueSchemaId:1
+CreateTime:2023-12-19 16:14:19.315|Partition:0|Offset:2|Headers:NO_HEADERS|Key:null|Value:{"u_name":"Hazle","u_price":0.4817881,"u_quantity":3}|ValueSchemaId:1
+CreateTime:2023-12-19 16:14:29.232|Partition:0|Offset:3|Headers:NO_HEADERS|Key:null|Value:[2023-12-19 15:15:19,624] ERROR Error processing message, skipping this message:  (kafka.tools.ConsoleConsumer$)|ValueSchemaId:
 org.apache.kafka.common.errors.SerializationException: Unknown magic byte!
-        at io.confluent.kafka.serializers.AbstractKafkaSchemaSerDe.getByteBuffer(AbstractKafkaSchemaSerDe.java:539)
-        at io.confluent.kafka.serializers.AbstractKafkaAvroDeserializer$DeserializationContext.<init>(AbstractKafkaAvroDeserializer.java:386)
-        at io.confluent.kafka.serializers.AbstractKafkaAvroDeserializer.deserialize(AbstractKafkaAvroDeserializer.java:184)
-        at io.confluent.kafka.formatter.AvroMessageFormatter$AvroMessageDeserializer.deserialize(AvroMessageFormatter.java:134)
-        at io.confluent.kafka.formatter.AvroMessageFormatter.writeTo(AvroMessageFormatter.java:89)
-        at io.confluent.kafka.formatter.SchemaMessageFormatter.writeTo(SchemaMessageFormatter.java:262)
-        at kafka.tools.ConsoleConsumer$.process(ConsoleConsumer.scala:116)
-        at kafka.tools.ConsoleConsumer$.run(ConsoleConsumer.scala:76)
-        at kafka.tools.ConsoleConsumer$.main(ConsoleConsumer.scala:53)
-        at kafka.tools.ConsoleConsumer.main(ConsoleConsumer.scala)
-CreateTime: 2023-05-16 11:16:50.530|Partition:0|Offset:0|NO_HEADERS|null|{"u_name":"scissors","u_price":2.75,"u_quantity":3}
-Processed a total of 5 messages
-CreateTime: 2023-05-16 11:16:50.543|Partition:0|Offset:1|NO_HEADERS|null|{"u_name":"tape","u_price":0.99,"u_quantity":10}
-CreateTime: 2023-05-16 11:16:50.543|Partition:0|Offset:2|NO_HEADERS|null|{"u_name":"notebooks","u_price":1.99,"u_quantity":5}
-CreateTime: 2023-05-16 11:16:52.232|Partition:0|Offset:3|NO_HEADERS|null|CreateTime:1684228614066|Partition:0|Offset:4|NO_HEADERS|null|{"u_name":"bottle","u_price":2.75,"u_quantity":3}
+at io.confluent.kafka.serializers.AbstractKafkaSchemaSerDe.getByteBuffer(AbstractKafkaSchemaSerDe.java:600)
+at io.confluent.kafka.serializers.AbstractKafkaAvroDeserializer$DeserializationContext.<init>(AbstractKafkaAvroDeserializer.java:389)
+at io.confluent.kafka.serializers.AbstractKafkaAvroDeserializer.deserialize(AbstractKafkaAvroDeserializer.java:187)
+at io.confluent.kafka.formatter.AvroMessageFormatter$AvroMessageDeserializer.deserialize(AvroMessageFormatter.java:134)
+at io.confluent.kafka.formatter.AvroMessageFormatter.writeTo(AvroMessageFormatter.java:89)
+at io.confluent.kafka.formatter.SchemaMessageFormatter.writeTo(SchemaMessageFormatter.java:266)
+at kafka.tools.ConsoleConsumer$.process(ConsoleConsumer.scala:117)
+at kafka.tools.ConsoleConsumer$.run(ConsoleConsumer.scala:77)
+at kafka.tools.ConsoleConsumer$.main(ConsoleConsumer.scala:54)
+at kafka.tools.ConsoleConsumer.main(ConsoleConsumer.scala)
+CreateTime:2023-12-19 16:14:44.581|Partition:0|Offset:4|Headers:NO_HEADERS|Key:null|Value:{"u_name":"Eulalia","u_price":0.17915314,"u_quantity":1}|ValueSchemaId:1
 ```
 
 Poison pill is at `Partition:0|Offset:3`
@@ -211,17 +224,17 @@ Note: First 3 records were skipped, filestream connector is very basic, so not h
 To add DLQ, add this in connector config:
 
 ```json
-               "errors.tolerance": "all",
-               "errors.deadletterqueue.topic.name": "dlq",
-               "errors.deadletterqueue.topic.replication.factor": "1",
-               "errors.deadletterqueue.context.headers.enable": "true",
-               "errors.log.enable": "true",
-               "errors.log.include.messages": "true",
+"errors.tolerance": "all",
+"errors.deadletterqueue.topic.name": "dlq",
+"errors.deadletterqueue.topic.replication.factor": "1",
+"errors.deadletterqueue.context.headers.enable": "true",
+"errors.log.enable": "true",
+"errors.log.include.messages": "true",
 ```
 
 > [!TIP] to run again the example, just use `playground re-run`
 
-See the difference in behaviour.
+See the difference in behavior.
 
 > [!TIP] To check content of topic (by default all non-internal topics will be displayed), just use `playground topic consume`
 
@@ -234,37 +247,36 @@ See the difference in behaviour.
 Poison pill is going to DLQ:
 
 ```bash
-11:23:53 ℹ️ ✨ Display content of topic dlq, it contains 1 messages
-11:23:54 ℹ️ 🔮🙅 topic is not using any schema for key
-11:23:54 ℹ️ 🔮🙅 topic is not using any schema for value
-CreateTime: 2023-05-16 11:23:43.57|Partition:0|Offset:0|__connect.errors.topic:filestream,__connect.errors.partition:0,__connect.errors.offset:3,__connect.errors.connector.name:filestream-sink,__connect.errors.task.id:0,__connect.errors.stage:VALUE_CONVERTER,__connect.errors.class.name:io.confluent.connect.avro.AvroConverter,__connect.errors.exception.class.name:org.apache.kafka.connect.errors.DataException,__connect.errors.exception.message:Failed to deserialize data for topic filestream to Avro: ,__connect.errors.exception.stacktrace:org.apache.kafka.connect.errors.DataException: Failed to deserialize data for topic filestream to Avro:
+16:21:56 ℹ️ ✨ Display content of topic dlq, it contains 1 messages
+16:21:57 ℹ️ 🔮🙅 topic is not using any schema for key
+16:21:57 ℹ️ 🔮🙅 topic is not using any schema for value
+CreateTime:2023-12-19 16:21:19.347|Partition:0|Offset:0|Headers:__connect.errors.topic:filestream,__connect.errors.partition:0,__connect.errors.offset:3,__connect.errors.connector.name:filestream-sink,__connect.errors.task.id:0,__connect.errors.stage:VALUE_CONVERTER,__connect.errors.class.name:io.confluent.connect.avro.AvroConverter,__connect.errors.exception.class.name:org.apache.kafka.connect.errors.DataException,__connect.errors.exception.message:Failed to deserialize data for topic filestream to Avro: ,__connect.errors.exception.stacktrace:org.apache.kafka.connect.errors.DataException: Failed to deserialize data for topic filestream to Avro:|Key:|Value:|ValueSchemaId:
 at io.confluent.connect.avro.AvroConverter.toConnectData(AvroConverter.java:148)
-at org.apache.kafka.connect.runtime.WorkerSinkTask.lambda$convertAndTransformRecord$5(WorkerSinkTask.java:525)
+at org.apache.kafka.connect.runtime.WorkerSinkTask.lambda$convertAndTransformRecord$5(WorkerSinkTask.java:528)
 at org.apache.kafka.connect.runtime.errors.RetryWithToleranceOperator.execAndRetry(RetryWithToleranceOperator.java:190)
 at org.apache.kafka.connect.runtime.errors.RetryWithToleranceOperator.execAndHandleError(RetryWithToleranceOperator.java:224)
 at org.apache.kafka.connect.runtime.errors.RetryWithToleranceOperator.execute(RetryWithToleranceOperator.java:166)
-at org.apache.kafka.connect.runtime.WorkerSinkTask.convertAndTransformRecord(WorkerSinkTask.java:525)
-at org.apache.kafka.connect.runtime.WorkerSinkTask.convertMessages(WorkerSinkTask.java:500)
-at org.apache.kafka.connect.runtime.WorkerSinkTask.poll(WorkerSinkTask.java:336)
+at org.apache.kafka.connect.runtime.WorkerSinkTask.convertAndTransformRecord(WorkerSinkTask.java:528)
+at org.apache.kafka.connect.runtime.WorkerSinkTask.convertMessages(WorkerSinkTask.java:503)
+at org.apache.kafka.connect.runtime.WorkerSinkTask.poll(WorkerSinkTask.java:339)
 at org.apache.kafka.connect.runtime.WorkerSinkTask.iteration(WorkerSinkTask.java:238)
 at org.apache.kafka.connect.runtime.WorkerSinkTask.execute(WorkerSinkTask.java:207)
-at org.apache.kafka.connect.runtime.WorkerTask.doRun(WorkerTask.java:213)
-at org.apache.kafka.connect.runtime.WorkerTask.run(WorkerTask.java:268)
-at org.apache.kafka.connect.runtime.isolation.Plugins.lambda$withClassLoader$1(Plugins.java:177)
+at org.apache.kafka.connect.runtime.WorkerTask.doRun(WorkerTask.java:229)
+at org.apache.kafka.connect.runtime.WorkerTask.run(WorkerTask.java:284)
+at org.apache.kafka.connect.runtime.isolation.Plugins.lambda$withClassLoader$1(Plugins.java:181)
 at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
 at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
 at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
 at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
 at java.base/java.lang.Thread.run(Thread.java:829)
 Caused by: org.apache.kafka.common.errors.SerializationException: Unknown magic byte!
-at io.confluent.kafka.serializers.AbstractKafkaSchemaSerDe.getByteBuffer(AbstractKafkaSchemaSerDe.java:539)
-at io.confluent.kafka.serializers.AbstractKafkaAvroDeserializer$DeserializationContext.<init>(AbstractKafkaAvroDeserializer.java:386)
-at io.confluent.kafka.serializers.AbstractKafkaAvroDeserializer.deserializeWithSchemaAndVersion(AbstractKafkaAvroDeserializer.java:261)
+at io.confluent.kafka.serializers.AbstractKafkaSchemaSerDe.getByteBuffer(AbstractKafkaSchemaSerDe.java:600)
+at io.confluent.kafka.serializers.AbstractKafkaAvroDeserializer$DeserializationContext.<init>(AbstractKafkaAvroDeserializer.java:389)
+at io.confluent.kafka.serializers.AbstractKafkaAvroDeserializer.deserializeWithSchemaAndVersion(AbstractKafkaAvroDeserializer.java:264)
 at io.confluent.connect.avro.AvroConverter$Deserializer.deserialize(AvroConverter.java:199)
 at io.confluent.connect.avro.AvroConverter.toConnectData(AvroConverter.java:126)
 ... 17 more
-|null|{"u_name": "poison pill", "u_price": 1.75, "u_quantity": 1}
-Processed a total of 1 messages
+|null|{"u_name":"poison pill","u_price":1.75,"u_quantity":1}
 ```
 
 And connector is RUNNING:
@@ -285,16 +297,28 @@ filestream-sink                ✅ RUNNING  0:🟢 RUNNING                 -
 
 * Read [Kafka Connect Deep Dive – Error Handling and Dead Letter Queues](https://www.confluent.io/en-gb/blog/kafka-connect-deep-dive-error-handling-dead-letter-queues/) and plays with different config parameters.
 * Update example to enable [Broker-side Schema ID Validation](https://docs.confluent.io/platform/7.4/schema-registry/schema-validation.html)
+
+Tips: you'll need to update docker-compose file to add 
+
+```yml
+
+  broker:
+    environment:
+      KAFKA_CONFLUENT_SCHEMA_REGISTRY_URL: "https://schema-registry:8081"
+```
+
+After doing that, you can call [playground container recreate](/playground%20container%20recreate) to apply modifications and restart broker.
+
 * `Unknown magic byte` is when using AVRO. You can also test with JSON Schema and Protobuf to see the differences in stack traces, error messages.
 
-To produce JSON Schema data, please refer to [this](/reusables?id=%f0%9f%94%a3-kafka-json-schema-console-producer) (use a new topic!) and make sure to change connector config with:
+To produce JSON Schema data, just use [playground topic produce](/playground%20topic%20produce) with a json schema (use a new topic!) and make sure to change connector config with:
 
 ```json
 "value.converter": "io.confluent.connect.json.JsonSchemaConverter",
 "value.converter.schema.registry.url": "http://schema-registry:8081",
 ```
 
-To produce Protobuf data, please refer to [this](/reusables?id=%f0%9f%94%a3-kafka-protobuf-console-producer) (use a new topic!) and make sure to change connector config with:
+To produce Protobuf data, just use [playground topic produce](/playground%20topic%20produce) with a protobuf schema (use a new topic!) and make sure to change connector config with:
 
 ```json
 "value.converter": "io.confluent.connect.protobuf.ProtobufConverter",
@@ -325,9 +349,9 @@ org.apache.kafka.connect.errors.DataException: Only Struct objects supported for
 
 Versions used:
 
-* 🎯 CP: 7.4.0
+* 🎯 CP: 7.5.2
 
-* 🔗 Filestream sink: 7.4.0 (shipped with CP)
+* 🔗 Filestream sink: 7.5.2 (shipped with CP)
 
 > [!TIP] Make sure to be aware of default converters used at worker level, see [↔️ Default Connect converter used](/how-it-works?id=%e2%86%94%ef%b8%8f-default-connect-converter-used)
 
@@ -368,7 +392,7 @@ Caused by: org.apache.kafka.connect.errors.DataException: Only Struct objects su
 Run the example `filestream-sink-repro-000003-insertfield-smt-dataexception-only-struct-objects-supported.sh` (use `fzf` completion to find the example with `-f`):
 
 ```bash
-playground run -f 000003<tab> --tag 7.4.0
+playground run -f 000003<tab> --tag 7.5.2
 ```
 
 As you can see, connector is failing (check output of `playground connector status`)
@@ -665,9 +689,9 @@ org.apache.kafka.connect.errors.DataException: Only Struct objects supported for
 
 Versions used:
 
-* 🎯 CP: 7.4.0
+* 🎯 CP: 7.5.2
 
-* 🔗 Filestream source: 7.4.0 (shipped with CP)
+* 🔗 Filestream source: 7.5.2 (shipped with CP)
 
 > [!TIP] Make sure to be aware of default converters used at worker level, see [↔️ Default Connect converter used](/how-it-works?id=%e2%86%94%ef%b8%8f-default-connect-converter-used)
 
@@ -706,7 +730,7 @@ Caused by: org.apache.kafka.connect.errors.DataException: Only Struct objects su
 Run the example `filestream-source-repro-000004-insertfield-smt-dataexception-only-struct-objects-supported.sh` (use `fzf` completion to find the example with `-f`):
 
 ```bash
-playground run -f 000004<tab> --tag 7.4.0
+playground run -f 000004<tab> --tag 7.5.2
 ```
 
 As you can see, connector is failing (check output of `playground connector status`)
@@ -788,9 +812,9 @@ When using [InsertField](https://docs.confluent.io/platform/current/connect/tran
 
 Versions used:
 
-* 🎯 CP: 7.4.0
+* 🎯 CP: 7.5.2
 
-* 🔗 Filestream source: 7.4.0 (shipped with CP)
+* 🔗 Filestream source: 7.5.2 (shipped with CP)
 
 > [!TIP] Make sure to be aware of default converters used at worker level, see [↔️ Default Connect converter used](/how-it-works?id=%e2%86%94%ef%b8%8f-default-connect-converter-used)
 
@@ -829,7 +853,7 @@ Caused by: org.apache.kafka.connect.errors.DataException: Only SinkRecord suppor
 Run the example `mysql-repro-000005-insertfield-smt:-adding-topic-offset-and-partition-not-working.sh` (use `fzf` completion to find the example with `-f`):
 
 ```bash
-playground run -f 000005<tab> --tag 7.4.0
+playground run -f 000005<tab> --tag 7.5.2
 ```
 
 As you can see, connector is failing (check output of `playground connector status`)

@@ -418,11 +418,11 @@ Connector is configured with StringConverter for the value:
 "value.converter": "org.apache.kafka.connect.storage.StringConverter",
 ```
 
-The request is sent using Plain JSON as `kafka-console-producer` is used:
+The request is sent using Plain JSON as [playground topic produce](/playground%20topic%20produce) is used without schema (`kafka-console-producer` is used under the hood):
 
 ```bash
 log "Sending messages to topic filestream"
-docker exec -i broker kafka-console-producer --broker-list broker:9092 --topic filestream << EOF
+playground topic produce -t filestream --nb-messages 1 --verbose << 'EOF'
 {"customer_name":"Ed", "complaint_type":"Dirty car", "trip_cost": 29.10, "new_customer": false, "number_of_rides": 22}
 EOF
 ```
@@ -445,17 +445,17 @@ To avoid this situation is to use JsonConverter converter instead with `schemas.
 To add DLQ, add this in connector config:
 
 ```json
-               "errors.tolerance": "all",
-               "errors.deadletterqueue.topic.name": "dlq",
-               "errors.deadletterqueue.topic.replication.factor": "1",
-               "errors.deadletterqueue.context.headers.enable": "true",
-               "errors.log.enable": "true",
-               "errors.log.include.messages": "true",
+"errors.tolerance": "all",
+"errors.deadletterqueue.topic.name": "dlq",
+"errors.deadletterqueue.topic.replication.factor": "1",
+"errors.deadletterqueue.context.headers.enable": "true",
+"errors.log.enable": "true",
+"errors.log.include.messages": "true",
 ```
 
 > [!TIP] to run again the example, just use `playground re-run`
 
-See the difference in behaviour.
+See the difference in behavior.
 
 > [!TIP] To check content of topic (by default all non-internal topics will be displayed), just use `playground topic consume`
 
@@ -556,10 +556,10 @@ docker exec connect cat /tmp/output.json
 As you can see the InsertField SMT worked in that case and field `MessageSource=Kafka Connect framework` was added.
 
 ```json
-               "transforms": "InsertField",
-               "transforms.InsertField.type": "org.apache.kafka.connect.transforms.InsertField$Value",
-               "transforms.InsertField.static.field": "MessageSource",
-               "transforms.InsertField.static.value": "Kafka Connect framework"
+"transforms": "InsertField",
+"transforms.InsertField.type": "org.apache.kafka.connect.transforms.InsertField\$Value",
+"transforms.InsertField.static.field": "MessageSource",
+"transforms.InsertField.static.value": "Kafka Connect framework"
 ```
 <!-- select:end -->
 Test InsertField SMT with different [properties](https://docs.confluent.io/platform/current/connect/transforms/insertfield.html#properties), include:
@@ -581,20 +581,19 @@ Use the following SMT config (make sure that *JsonConverter* is still being used
 ```json
 "transforms": "InsertTopic,InsertOffset,InsertPartition,InsertTimestamp"
 "transforms.InsertOffset.offset.field": "__kafka_offset",
-"transforms.InsertOffset.type": "org.apache.kafka.connect.transforms.InsertField$Value",
+"transforms.InsertOffset.type": "org.apache.kafka.connect.transforms.InsertField\$Value",
 "transforms.InsertPartition.partition.field": "__kafka_partition",
-"transforms.InsertPartition.type": "org.apache.kafka.connect.transforms.InsertField$Value",
+"transforms.InsertPartition.type": "org.apache.kafka.connect.transforms.InsertField\$Value",
 "transforms.InsertTimestamp.timestamp.field": "__kafka_ts",
-"transforms.InsertTimestamp.type": "org.apache.kafka.connect.transforms.InsertField$Value",
+"transforms.InsertTimestamp.type": "org.apache.kafka.connect.transforms.InsertField\$Value",
 "transforms.InsertTopic.topic.field": "__kafka_topic",
-"transforms.InsertTopic.type": "org.apache.kafka.connect.transforms.InsertField$Value",
+"transforms.InsertTopic.type": "org.apache.kafka.connect.transforms.InsertField\$Value",
 ```
 
 Send one more record:
 
 ```bash
-log "Sending messages to topic filestream"
-docker exec -i broker kafka-console-producer --broker-list broker:9092 --topic filestream << EOF
+playground topic produce -t filestream --nb-messages 1 --verbose << 'EOF'
 {"customer_name":"Ed", "complaint_type":"Dirty car", "trip_cost": 29.10, "new_customer": false, "number_of_rides": 22}
 EOF
 ```
@@ -628,7 +627,7 @@ Add `TimestampConverter` (you can use any string) at the end of the existing lis
 And then add:
 
 ```json
-"transforms.TimestampConverter.type": "org.apache.kafka.connect.transforms.TimestampConverter$Value",
+"transforms.TimestampConverter.type": "org.apache.kafka.connect.transforms.TimestampConverter\$Value",
 "transforms.TimestampConverter.format": "yyyy-MM-dd HH:mm:ss.SSS",
 "transforms.TimestampConverter.target.type": "string",
 "transforms.TimestampConverter.field": "__kafka_ts",
@@ -639,8 +638,7 @@ It will convert field `__kafka_ts` to a string with format `yyyy-MM-dd HH:mm:ss.
 Send one more record:
 
 ```bash
-log "Sending messages to topic filestream"
-docker exec -i broker kafka-console-producer --broker-list broker:9092 --topic filestream << EOF
+playground topic produce -t filestream --nb-messages 1 --verbose << 'EOF'
 {"customer_name":"Ed", "complaint_type":"Dirty car", "trip_cost": 29.10, "new_customer": false, "number_of_rides": 22}
 EOF
 ```
@@ -875,19 +873,19 @@ As you can see, connector is failing (check output of `playground connector stat
 Connector is configured with same SMTs as with sink connector example [there](/examples?id=insertfield-smt-dataexception-only-struct-objects-supported-sink-connector).
 
 ```json
-               "transforms": "InsertTopic,InsertOffset,InsertPartition,InsertTimestamp,TimestampConverter",
-               "transforms.InsertOffset.offset.field": "__kafka_offset",
-               "transforms.InsertOffset.type": "org.apache.kafka.connect.transforms.InsertField$Value",
-               "transforms.InsertPartition.partition.field": "__kafka_partition",
-               "transforms.InsertPartition.type": "org.apache.kafka.connect.transforms.InsertField$Value",
-               "transforms.InsertTimestamp.timestamp.field": "__kafka_ts",
-               "transforms.InsertTimestamp.type": "org.apache.kafka.connect.transforms.InsertField$Value",
-               "transforms.InsertTopic.topic.field": "__kafka_topic",
-               "transforms.InsertTopic.type": "org.apache.kafka.connect.transforms.InsertField$Value",
-               "transforms.TimestampConverter.type": "org.apache.kafka.connect.transforms.TimestampConverter$Value",
-               "transforms.TimestampConverter.format": "yyyy-MM-dd HH:mm:ss.SSS",
-               "transforms.TimestampConverter.target.type": "string",
-               "transforms.TimestampConverter.field": "__kafka_ts"
+"transforms": "InsertTopic,InsertOffset,InsertPartition,InsertTimestamp,TimestampConverter",
+"transforms.InsertOffset.offset.field": "__kafka_offset",
+"transforms.InsertOffset.type": "org.apache.kafka.connect.transforms.InsertField\$Value",
+"transforms.InsertPartition.partition.field": "__kafka_partition",
+"transforms.InsertPartition.type": "org.apache.kafka.connect.transforms.InsertField\$Value",
+"transforms.InsertTimestamp.timestamp.field": "__kafka_ts",
+"transforms.InsertTimestamp.type": "org.apache.kafka.connect.transforms.InsertField\$Value",
+"transforms.InsertTopic.topic.field": "__kafka_topic",
+"transforms.InsertTopic.type": "org.apache.kafka.connect.transforms.InsertField\$Value",
+"transforms.TimestampConverter.type": "org.apache.kafka.connect.transforms.TimestampConverter\$Value",
+"transforms.TimestampConverter.format": "yyyy-MM-dd HH:mm:ss.SSS",
+"transforms.TimestampConverter.target.type": "string",
+"transforms.TimestampConverter.field": "__kafka_ts"
 ```
 
 The connector is failing with `Only SinkRecord supported for [field insertion], found: org.apache.kafka.connect.source.SourceRecord`
@@ -906,6 +904,18 @@ playground debug log-level set --package "org.apache.kafka.connect.runtime.Trans
 [
   "org.apache.kafka.connect.runtime.TransformationChain"
 ]
+```
+
+Note that using this command will also enable logs on `org.apache.kafka.connect.runtime.TransformationChain`:
+
+```bash
+playground connector log-level --level TRACE
+```
+
+Another way is to set `--level` when using [playground connector create-or-update](/playground%20ccloud-connector%20create-or-update):
+
+```bash
+playground connector create-or-update --connector mysql-source --level TRACE
 ```
 
 We see then in logs:
@@ -934,17 +944,17 @@ After removing `InsertOffset`:
 
 
 ```json
-               "transforms": "InsertTopic,InsertPartition,InsertTimestamp,TimestampConverter",
-               "transforms.InsertPartition.partition.field": "__kafka_partition",
-               "transforms.InsertPartition.type": "org.apache.kafka.connect.transforms.InsertField$Value",
-               "transforms.InsertTimestamp.timestamp.field": "__kafka_ts",
-               "transforms.InsertTimestamp.type": "org.apache.kafka.connect.transforms.InsertField$Value",
-               "transforms.InsertTopic.topic.field": "__kafka_topic",
-               "transforms.InsertTopic.type": "org.apache.kafka.connect.transforms.InsertField$Value",
-               "transforms.TimestampConverter.type": "org.apache.kafka.connect.transforms.TimestampConverter$Value",
-               "transforms.TimestampConverter.format": "yyyy-MM-dd HH:mm:ss.SSS",
-               "transforms.TimestampConverter.target.type": "string",
-               "transforms.TimestampConverter.field": "__kafka_ts"
+"transforms": "InsertTopic,InsertPartition,InsertTimestamp,TimestampConverter",
+"transforms.InsertPartition.partition.field": "__kafka_partition",
+"transforms.InsertPartition.type": "org.apache.kafka.connect.transforms.InsertField\$Value",
+"transforms.InsertTimestamp.timestamp.field": "__kafka_ts",
+"transforms.InsertTimestamp.type": "org.apache.kafka.connect.transforms.InsertField\$Value",
+"transforms.InsertTopic.topic.field": "__kafka_topic",
+"transforms.InsertTopic.type": "org.apache.kafka.connect.transforms.InsertField\$Value",
+"transforms.TimestampConverter.type": "org.apache.kafka.connect.transforms.TimestampConverter\$Value",
+"transforms.TimestampConverter.format": "yyyy-MM-dd HH:mm:ss.SSS",
+"transforms.TimestampConverter.target.type": "string",
+"transforms.TimestampConverter.field": "__kafka_ts"
 ```
 
 The connector is no more failing.
@@ -1007,13 +1017,13 @@ User is getting StackOverflowError with S3 sink connector. See stack trace in De
 
 💡 What you'll learn:
 
-* [Bootstrap a reproduction model](/reusables?id=%f0%9f%9b%a0-bootstrap-reproduction-model) and use [Java Producer](/reusables?id=%e2%99%a8%ef%b8%8f-java-producers) to inject data using custom Avro schema.
+* [Bootstrap a reproduction model](/reusables?id=%f0%9f%9b%a0-bootstrap-reproduction-model).
 
 #### **🤯 Details**
 
 Versions used:
 
-* 🎯 CP: 7.3.1
+* 🎯 CP: 7.5.2
 
 * 🔗 S3 sink: 10.3.3
 
@@ -1124,23 +1134,18 @@ Caused by: java.lang.StackOverflowError
 🛠 Bootstrap reproduction model was done as following (use tab completion to select the files s3-sink.sh using `fzf`):
 
 ```bash
-playground repro bootstrap --file s3-sink<tab> --description "000001 StackOverflowError with S3 sink connector" --producer avro --tag 7.3.1 --connector-tag 10.3.3
+playground repro bootstrap --file s3-sink<tab> --description "000001 StackOverflowError with S3 sink connector" --tag 7.5.2 --connector-tag 10.3.3
 ```
 
 💡 Explanations:
 
 * [s3-sink.sh](https://github.com/vdesabou/kafka-docker-playground/blob/master/connect/connect-aws-s3-sink/s3-sink.sh) is the closest example.
-* The problem seems related to input data, so using [avro java producer](/reusables?id=%e2%99%a8%ef%b8%8f-java-producers) seems the right thing to do.
+* The problem seems related to input data, so using [playground topic produce](/playground%20topic%20produce) with avro schema seems the right thing to do.
 
-> [!NOTE]
-> As the key converter is StringConverter, we should not use `avro-with-key` for `--producer` flag.
 
 <!-- select:end -->
 
-* 👉 Follow steps from [♨️ Java producers](/reusables?id=%e2%99%a8%ef%b8%8f-java-producers) in order to produce same data as user.
-
-> [!TIP]
-> Since we did not use `--producer-schema-value` flag when bootstrapping the reproduction model, step 3 in [♨️ Java producers](/reusables?id=%e2%99%a8%ef%b8%8f-java-producers) should be done manually.
+* 👉 Use [playground topic produce](/playground%20topic%20produce) to produce data
 
 #### **📍 Step 3**
 <!-- select:start -->
@@ -1150,9 +1155,10 @@ playground repro bootstrap --file s3-sink<tab> --description "000001 StackOverfl
 
 ⌨️ Here are the steps to follow:
 
-Update `producer-repro-000001/src/main/resources/schema/customer.avsc` file with content of user schema:
+Update playground topic produce command in existing example to use avro schema used:
 
-```
+```bash
+playground topic produce -t customer_avro --nb-messages 1 --verbose << 'EOF'
 {
     "type": "record",
     "namespace": "acme",
@@ -1183,28 +1189,7 @@ Update `producer-repro-000001/src/main/resources/schema/customer.avsc` file with
         }
     ]
 }
-```
-
-And replace:
-
-```json
-    "namespace": "acme",
-    "name": "Characteristic",
-```
-
-by
-
-```json
-    "namespace": "com.github.vdesabou",
-    "name": "Customer",
-```
-
-Note that you could have use step 2 when bootstrapping reproduction model and this step would be fully automated:
-
-Example:
-
-```bash
-playground repro bootstrap -f s3-sink<tab> -d "000001 StackOverflowError with S3 sink connector" -p avro --producer-schema-value schema<tab>
+EOF
 ```
 
 <!-- select:end -->
@@ -1224,28 +1209,27 @@ playground repro bootstrap -f s3-sink<tab> -d "000001 StackOverflowError with S3
 
 * Full connector config:
 
-```json
-curl -X PUT \
-     -H "Content-Type: application/json" \
-     --data '{
-               "connector.class": "io.confluent.connect.s3.S3SinkConnector",
-               "key.converter": "org.apache.kafka.connect.storage.StringConverter",
-               "value.converter": "io.confluent.connect.avro.AvroConverter",
-               "value.converter.schema.registry.url": "http://schema-registry:8081",
-               "tasks.max": "1",
-               "topics": "customer_avro",
-               "s3.region": "'"$AWS_REGION"'",
-               "s3.bucket.name": "'"$AWS_BUCKET_NAME"'",
-               "topics.dir": "'"$TAG"'",
-               "s3.part.size": 52428801,
-               "flush.size": "3",
-               "aws.access.key.id" : "'"$AWS_ACCESS_KEY_ID"'",
-               "aws.secret.access.key": "'"$AWS_SECRET_ACCESS_KEY"'",
-               "storage.class": "io.confluent.connect.s3.storage.S3Storage",
-               "format.class": "io.confluent.connect.s3.format.parquet.ParquetFormat",
-               "schema.compatibility": "NONE"
-          }' \
-     http://localhost:8083/connectors/s3-sink/config | jq .
+```bash
+playground connector create-or-update --connector s3-sink << EOF
+{
+    "connector.class": "io.confluent.connect.s3.S3SinkConnector",
+    "key.converter": "org.apache.kafka.connect.storage.StringConverter",
+    "value.converter": "io.confluent.connect.avro.AvroConverter",
+    "value.converter.schema.registry.url": "http://schema-registry:8081",
+    "tasks.max": "1",
+    "topics": "customer_avro",
+    "s3.region": "$AWS_REGION",
+    "s3.bucket.name": "$AWS_BUCKET_NAME",
+    "topics.dir": "$TAG",
+    "s3.part.size": 52428801,
+    "flush.size": "3",
+    "aws.access.key.id" : "$AWS_ACCESS_KEY_ID",
+    "aws.secret.access.key": "$AWS_SECRET_ACCESS_KEY",
+    "storage.class": "io.confluent.connect.s3.storage.S3Storage",
+    "format.class": "io.confluent.connect.s3.format.parquet.ParquetFormat",
+    "schema.compatibility": "NONE"
+}
+EOF
 ```
 
 <!-- select:end -->

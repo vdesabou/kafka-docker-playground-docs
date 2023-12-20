@@ -253,7 +253,7 @@ curl -X PUT -H "Content-Type: application/json" --data '{"message":"Hello, World
 - Added `--custom-smt` flag option to `playground repro bootstrap` command.
 - Added [🔂 Standalone connector examples](/content)
 - Added [🧑‍💻 M1 chip (ARM64) Mac Support](/how-to-use?id=%f0%9f%a7%91%f0%9f%92%bb-m1-chip-arm64-mac-support) section
-- Added [🧑‍🎓 Academy](/examples) section
+- Added [🧑‍🎓 Academy](/academy) section
 
 ## February 2023
 

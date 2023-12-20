@@ -5,7 +5,7 @@
 - [🧠 CLI](/cli.md)
 - [🎓 How it works](/how-it-works.md)
 - [👷‍♂️ Reusables](/reusables.md)
-- [🧑‍🎓 Academy](/examples.md)
+- [🧑‍🎓 Academy](/academy.md)
 
 
 - **Links**

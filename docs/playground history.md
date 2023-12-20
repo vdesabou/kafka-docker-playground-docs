@@ -14,8 +14,4 @@ playground history
 
 visit https://github.com/junegunn/fzf#installation to install
 
-#### *confluent*
-
-visit https://docs.confluent.io/confluent-cli/current/overview.html to install
-
 

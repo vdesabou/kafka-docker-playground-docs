@@ -29,7 +29,7 @@ Component name
 
 #### *--open, -o*
 
-🔖 Save output to a file and open with text editor set with config.ini (default is code)
+🔖 Save output to a file and open with text editor set with playground config editor \<editor\> (default is code)
 
 #### *--domain, -d DOMAIN*
 

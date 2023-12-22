@@ -102,6 +102,7 @@ visit https://docs.docker.com/get-docker to install
 
 - [help](playground%20help) - Show help about a command
 - [status](playground%20status) - 🗺️ Show a status
+- [config](playground%20config) - ⚙️ Configure CLI
 
 ### Run commands
 

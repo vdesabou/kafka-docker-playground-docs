@@ -35,7 +35,7 @@ By default, for each connector, the latest available version on Confluent Hub is
 ❕ It must be absolute full path  
   
 🎓 Tip: use \<tab\> completion to trigger fzf completion   
-        use folder_zip_or_jar (default: ~/Downloads) in config.ini file to configure where to search the files (current folder is always used)
+        use playground config folder_zip_or_jar \<folder1\> \<folder2\>... (default is home folder and current folder is always included) to configure where to search the files
 
 | Attributes      | &nbsp;
 |-----------------|-------------
@@ -48,7 +48,7 @@ By default, for each connector, the latest available version on Confluent Hub is
 ❕ It must be absolute full path  
   
 🎓 Tip: use \<tab\> completion to trigger fzf completion   
-        use folder_zip_or_jar (default: ~/Downloads) in config.ini file to configure where to search the files (current folder is always used)
+        use playground config folder_zip_or_jar \<folder1\> \<folder2\>... (default is home folder and current folder is always included) to configure where to search the files
 
 #### *--enable-ksqldb*
 

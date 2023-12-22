@@ -24,7 +24,7 @@ Note: when running an example with \<playground run\> or \<playground run-ccloud
 ## Usage
 
 ```bash
-playground start-environment [OPTIONS] [ARGUMENTS...]
+playground start-environment [OPTIONS]
 ```
 
 ## Options
@@ -56,6 +56,12 @@ Default is plaintext
 |-----------------|-------------
 | Default Value:  | plaintext
 | Allowed Values: | ccloud, 2way-ssl, kerberos, kraft-external-plaintext, kraft-plaintext, ldap-authorizer-sasl-plain, ldap-sasl-plain, mdc-kerberos, mdc-plaintext, mdc-sasl-plain, plaintext, rbac-sasl-plain, sasl-plain, sasl-scram, sasl-ssl, ssl_kerberos
+
+#### *--docker-compose-override-file, -f DOCKER-COMPOSE-OVERRIDE-FILE*
+
+🔖 docker-compose override file  
+  
+❕ It must be absolute full path
 
 #### *--tag TAG*
 

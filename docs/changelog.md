@@ -3,6 +3,7 @@
 ## November 2023
 
 - CLI:
+  * [playground topic delete](/playground%20topic%20delete) now also delete associated schema/subject (use `skip-delete-schema` to disable)
   * Added `--all` flag to [playground connector plugins](/playground%20connector%20plugins)
   * Added [playground history](/playground%20history) command
   * Added `--validate` to `playground connector create-or-update` and `playground ccloud-connector create-or-update`

@@ -1,6 +1,6 @@
 # playground topic delete
 
-❌ Delete topic
+❌ Delete topic and associated schema/subject if applicable
 
 ## Usage
 
@@ -21,5 +21,9 @@ playground topic delete [OPTIONS]
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Required:       | ✓ Yes
+
+#### *--skip-delete-schema SKIP-DELETE-SCHEMA*
+
+🔰 Do not delete subject/schema
 
 

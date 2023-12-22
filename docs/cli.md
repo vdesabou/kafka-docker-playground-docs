@@ -159,7 +159,7 @@ visit https://docs.docker.com/get-docker to install
 - [consume](playground%20topic%20consume) - 📥 Consume topic from beginning
 - [produce](playground%20topic%20produce) - 📤 Produce to a topic
 - [create](playground%20topic%20create) - 🆕 Create topic
-- [delete](playground%20topic%20delete) - ❌ Delete topic
+- [delete](playground%20topic%20delete) - ❌ Delete topic and associated schema/subject if applicable
 - [alter](playground%20topic%20alter) - 🪛 Alter topic config
 
 ### Connector commands

@@ -48,31 +48,9 @@ Once installed, go on a `.sh` script and then type  in Palette `Ctrl+Shift+P` (o
 
 ![extension](./images/vscode_extension2.jpg)
 
-### ⚙️ Config file 
+### ⚙️ Config
 
-CLI can be configured using `config.ini` [file](https://github.com/vdesabou/kafka-docker-playground/blob/master/scripts/cli/config.ini)
-
-```ini
-;; Configuration file for playground CLI
-
-;; You can configure the path to your config.ini file using CONFIG_FILE environment variable
-;; export CONFIG_FILE="path/to/config.ini"
-
-; editor to use to open files
-editor = code
-
-; list (comma separated) of folders where to search for zip or jar
-; Current folder is always included
-; examples:
-; folder_zip_or_jar = ~/Downloads,~/Documents/github/kafka-connect-*
-folder_zip_or_jar = ~/Downloads
-```
-
-You can configure the path to your own config.ini file using `CONFIG_FILE` environment variable:
-
-```bash
-export CONFIG_FILE="/path/to/config.ini"
-```
+CLI can be configured using [playground config](/playground%20config) 
 
 ## ✨ Command Reference
 

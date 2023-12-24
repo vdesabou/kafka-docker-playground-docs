@@ -16,6 +16,32 @@ visit https://github.com/junegunn/fzf#installation to install
 
 ## Options
 
+#### *--environment ENVIRONMENT*
+
+🔐 The environment to start when running a connector example   
+  
+- plaintext  
+- ccloud  
+- 2way-ssl (not supported yet)  
+- kerberos (not supported yet)  
+- kraft-external-plaintext (not supported yet)  
+- kraft-plaintext (not supported yet)  
+- ldap-authorizer-sasl-plain (not supported yet)  
+- ldap-sasl-plain (not supported yet)  
+- rbac-sasl-plain (not supported yet)  
+- sasl-plain (not supported yet)  
+- sasl-scram (not supported yet)  
+- sasl-ssl (not supported yet)  
+- ssl_kerberos (not supported yet)  
+  
+Default is plaintext.  
+This is only supported when example is a connector example
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Default Value:  | plaintext
+| Allowed Values: | ccloud, plaintext
+
 #### *--file, -f FILE*
 
 🔖 Example file to run  

@@ -24,7 +24,7 @@ Note: when running an example with \<playground run\> or \<playground run-ccloud
 ## Usage
 
 ```bash
-playground start-environment [OPTIONS]
+playground start-environment [OPTIONS] [ARGUMENTS...]
 ```
 
 ## Options

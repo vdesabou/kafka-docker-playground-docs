@@ -31,7 +31,7 @@ visit https://github.com/junegunn/fzf#installation to install
 - rbac-sasl-plain (not supported yet)  
 - sasl-plain (not supported yet)  
 - sasl-scram (not supported yet)  
-- sasl-ssl (not supported yet)  
+- sasl-ssl  
 - ssl_kerberos (not supported yet)  
   
 Default is plaintext.  
@@ -40,7 +40,7 @@ This is only supported when example is a connector example
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Default Value:  | plaintext
-| Allowed Values: | ccloud, plaintext
+| Allowed Values: | ccloud, plaintext, sasl-ssl
 
 #### *--file, -f FILE*
 

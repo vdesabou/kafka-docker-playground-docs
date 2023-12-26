@@ -22,17 +22,17 @@ visit https://github.com/junegunn/fzf#installation to install
   
 - plaintext  
 - ccloud  
-- 2way-ssl (not supported yet)  
-- kerberos (not supported yet)  
-- kraft-external-plaintext (not supported yet)  
-- kraft-plaintext (not supported yet)  
-- ldap-authorizer-sasl-plain (not supported yet)  
-- ldap-sasl-plain (not supported yet)  
-- rbac-sasl-plain (not supported yet)  
-- sasl-plain (not supported yet)  
-- sasl-scram (not supported yet)  
+- 2way-ssl  
+- kerberos  
+- kraft-external-plaintext  
+- kraft-plaintext  
+- ldap-authorizer-sasl-plain  
+- ldap-sasl-plain  
+- rbac-sasl-plain  
+- sasl-plain  
+- sasl-scram  
 - sasl-ssl  
-- ssl_kerberos (not supported yet)  
+- ssl_kerberos  
   
 Default is plaintext.  
 This is only supported when example is a connector example
@@ -40,7 +40,7 @@ This is only supported when example is a connector example
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Default Value:  | plaintext
-| Allowed Values: | ccloud, plaintext, sasl-ssl
+| Allowed Values: | ccloud, plaintext, sasl-ssl, sasl-plain, 2way-ssl, sasl-scram, kraft-external-plaintext, kraft-plaintext, kerberos, ssl_kerberos, ldap-authorizer-sasl-plain, ldap-sasl-plain, rbac-sasl-plain
 
 #### *--file, -f FILE*
 

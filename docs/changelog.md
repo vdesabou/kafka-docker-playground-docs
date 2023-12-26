@@ -3,6 +3,7 @@
 ## December 2023
 
 - CLI:
+  * Any connector example can be ran with any environment using `--environment` option of [playground run](/playground%20run?id=environment-environment)
   * [playground topic delete](/playground%20topic%20delete) now also delete associated schema/subject (use `skip-delete-schema` to disable)
   * Added `--all` flag to [playground connector plugins](/playground%20connector%20plugins)
   * Added [playground history](/playground%20history) command

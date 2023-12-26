@@ -66,7 +66,8 @@ Example with ([active-mq-sink.sh](https://github.com/vdesabou/kafka-docker-playg
 At the beginning of the script, we have:
 
 ```shell
-${DIR}/../../environment/plaintext/start.sh "${PWD}/docker-compose.plaintext.yml"
+$ PLAYGROUND_ENVIRONMENT=${PLAYGROUND_ENVIRONMENT:-"plaintext"}
+$ playground start-environment --environment "${PLAYGROUND_ENVIRONMENT}" --docker-compose-override-file "${PWD}/docker-compose.plaintext.yml"
 ```
 
 The *local* [`${PWD}/docker-compose.plaintext.yml`](https://github.com/vdesabou/kafka-docker-playground/blob/master/connect/connect-active-mq-sink/docker-compose.plaintext.yml) file is only composed of:
@@ -93,22 +94,11 @@ It contains:
 * `activemq` which is a container required for the test.
 * `connect` container, which overrides value `CONNECT_PLUGIN_PATH` from [`environment/plaintext/docker-compose.yml`](https://github.com/vdesabou/kafka-docker-playground/blob/master/environment/plaintext/docker-compose.yml)
 
-PLAINTEXT environment is used thanks to the call to [`${DIR}/../../environment/plaintext/start.sh`](https://github.com/vdesabou/kafka-docker-playground/blob/master/environment/plaintext/start.sh), which invokes the docker-compose command in the end like this:
+PLAINTEXT environment is used thanks to the call to [playground start-environment](/playground%20start-environment), which invokes the docker-compose command in the end like this:
 
 ```bash
 docker-compose -f ../../environment/plaintext/docker-compose.yml -f ${PWD}/docker-compose.plaintext.yml up -d
 ```
-
-
-> [!WARNING]
-> The *local* docker-compose file should be named docker-compose.%environment%[.%optional'%].yml 
-> 
-> Example: 
-> 
-> `docker-compose.plaintext.yml` or `docker-compose.plaintext.mtls.yml`
-> 
-> This is required for [stop.sh](https://github.com/vdesabou/kafka-docker-playground/blob/master/connect/connect-active-mq-sink/stop.sh) script to work properly.
-
 
 ### 🔐 Environment SASL/SSL 
 
@@ -166,34 +156,9 @@ Environments are also overriding [PLAINTEXT](https://github.com/vdesabou/kafka-d
 
 As you can see, it only contains what is required to add SASL/SSL to a PLAINTEXT environment 💫 !
 
-### 🔏 Connector using SASL/SSL
+### 🔏 Connector using non-plaintext environment
 
-Example with ([gcs-sink-sasl-ssl.sh](https://github.com/vdesabou/kafka-docker-playground/blob/master/connect/connect-gcp-gcs-sink/gcs-sink-sasl-ssl.sh)):
-
-```shell
-${DIR}/../../environment/sasl-ssl/start.sh "${PWD}/docker-compose.sasl-ssl.yml""
-```
-
-The *local* [`${PWD}/docker-compose.sasl-ssl.yml`](https://github.com/vdesabou/kafka-docker-playground/blob/master/connect/connect-gcp-gcs-sink/docker-compose.sasl-ssl.yml) is only composed of:
-
-```yml
-version: '3.5'
-services:
-  connect:
-    volumes:
-        - ../../connect/connect-gcp-gcs-sink/keyfile.json:/tmp/keyfile.json:ro
-        - ../../environment/sasl-ssl/security:/etc/kafka/secrets
-    environment:
-      CONNECT_PLUGIN_PATH: /usr/share/confluent-hub-components/confluentinc-kafka-connect-gcs
-```
-
-> [!TIP]
-> If you're looking for a connector example with different environments, [GCS sink](https://github.com/vdesabou/kafka-docker-playground/tree/master/connect/connect-gcp-gcs-sink) contains various examples:
-> * [SASL/SSL](https://github.com/vdesabou/kafka-docker-playground/blob/master/connect/connect-gcp-gcs-sink/gcs-sink-sasl-ssl.sh)
-> * [2WAY/SSL](https://github.com/vdesabou/kafka-docker-playground/blob/master/connect/connect-gcp-gcs-sink/gcs-sink-2way-ssl.sh)
-> * [KERBEROS](https://github.com/vdesabou/kafka-docker-playground/blob/master/connect/connect-gcp-gcs-sink/gcs-sink-kerberos.sh)
-> * [LDAP Authentication with SASL/PLAIN](https://github.com/vdesabou/kafka-docker-playground/blob/master/connect/connect-gcp-gcs-sink/gcs-sink-ldap-authorizer-sasl-plain.sh)
-> * [RBAC with SASL/PLAIN](https://github.com/vdesabou/kafka-docker-playground/blob/master/connect/connect-gcp-gcs-sink/gcs-sink-rbac-sasl-plain.sh)
+Any connector example can be ran with any environment using `--environment` option of [playground run](/playground%20run?id=environment-environment) command.
 
 ## 🔗 Connect image used
 

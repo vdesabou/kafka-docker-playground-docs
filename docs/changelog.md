@@ -3,7 +3,8 @@
 ## December 2023
 
 - CLI:
-  * Any connector example can be ran with any environment using `--environment` option of [playground run](/playground%20run?id=environment-environment)
+  * 💫 Any connector example can be run as *self-managed* by using `--environment ccloud` option when running it with [playground run](/playground%20run) command ! This is also the case for any other [environment](/content?id=%f0%9f%94%90-environments)
+  * Added [playground switch-ccloud](/playground%20switch-ccloud) to quickly switch to ccloud environment and [playground switch-back](/playground%20switch-back) to switch back to original environment
   * [playground topic delete](/playground%20topic%20delete) now also delete associated schema/subject (use `skip-delete-schema` to disable)
   * Added `--all` flag to [playground connector plugins](/playground%20connector%20plugins)
   * Added [playground history](/playground%20history) command

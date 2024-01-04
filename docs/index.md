@@ -106,7 +106,7 @@ visit https://docs.docker.com/get-docker to install
 - [delete](playground%20topic%20delete) - ❌ Delete topic and associated schema/subject if applicable
 - [alter](playground%20topic%20alter) - 🪛 Alter topic config
 
-### Connector commands
+### Fully Managed Connector commands
 
 - [ccloud-connector](playground%20ccloud-connector) - 🔗☁️ Fully Managed Connector commands
 - [status](playground%20ccloud-connector%20status) - 🧩 Show status of all connectors
@@ -118,6 +118,9 @@ visit https://docs.docker.com/get-docker to install
 - [show-config](playground%20ccloud-connector%20show-config) - 🧰 Show current connector config
 - [show-config-parameters](playground%20ccloud-connector%20show-config-parameters) - 🔩 Show all possible configuration parameters of connector
 - [create-or-update](playground%20ccloud-connector%20create-or-update) - 🧑‍🎨  Create or update connector
+
+### Connector commands
+
 - [connector](playground%20connector) - 🔗 Connector commands
 - [status](playground%20connector%20status) - 🧩 Show status of all connectors
 - [plugins](playground%20connector%20plugins) - 🎨 Show all connector plugins installed. You can also display transforms, converters and predicates using --all flag

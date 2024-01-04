@@ -1,6 +1,6 @@
 # playground start-environment
 
-🔐 Simply start an environment listed in https://kafka-docker-playground.io/#/content?id=%f0%9f%94%90-environments:  
+🔐 Simply start an environment listed in http://tinyurl.com/y4ybbw32:  
   
 - ccloud  
 - 2way-ssl  

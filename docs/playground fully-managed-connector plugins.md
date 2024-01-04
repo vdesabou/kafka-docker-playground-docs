@@ -1,11 +1,11 @@
-# playground ccloud-connector plugins
+# playground fully-managed-connector plugins
 
 🎨 Show all plugins installed
 
 ## Usage
 
 ```bash
-playground ccloud-connector plugins [OPTIONS]
+playground fully-managed-connector plugins [OPTIONS]
 ```
 
 ## Options

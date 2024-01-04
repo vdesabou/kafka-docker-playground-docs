@@ -1,11 +1,11 @@
-# playground ccloud-connector show-config-parameters
+# playground fully-managed-connector show-config-parameters
 
 🔩 Show all possible configuration parameters of connector
 
 ## Usage
 
 ```bash
-playground ccloud-connector show-config-parameters [OPTIONS]
+playground fully-managed-connector show-config-parameters [OPTIONS]
 ```
 
 ## Options

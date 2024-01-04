@@ -1,11 +1,11 @@
-# playground ccloud-connector create-or-update
+# playground fully-managed-connector create-or-update
 
 🧑‍🎨  Create or update connector
 
 ## Usage
 
 ```bash
-playground ccloud-connector create-or-update [JSON] [OPTIONS]
+playground fully-managed-connector create-or-update [JSON] [OPTIONS]
 ```
 
 ## Arguments
@@ -39,7 +39,7 @@ json (reads from stdin if empty)
 ## Examples
 
 ```bash
-playground ccloud-connector create-or-update --connector HttpSink << EOF
+playground fully-managed-connector create-or-update --connector HttpSink << EOF
 {
     "connector.class": "HttpSink",
     "name": "HttpSink",

@@ -1,11 +1,11 @@
-# playground ccloud-connector status
+# playground fully-managed-connector status
 
 🧩 Show status of all connectors
 
 ## Usage
 
 ```bash
-playground ccloud-connector status [OPTIONS]
+playground fully-managed-connector status [OPTIONS]
 ```
 
 ## Options

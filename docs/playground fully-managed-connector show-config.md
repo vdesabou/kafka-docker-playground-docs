@@ -1,11 +1,11 @@
-# playground ccloud-connector show-lag
+# playground fully-managed-connector show-config
 
-🐢 Show lag of sink connector
+🧰 Show current connector config
 
 ## Usage
 
 ```bash
-playground ccloud-connector show-lag [OPTIONS]
+playground fully-managed-connector show-config [OPTIONS]
 ```
 
 ## Options
@@ -19,9 +19,5 @@ playground ccloud-connector show-lag [OPTIONS]
 🔗 Connector name  
   
 🎓 Tip: If not specified, the command will apply to all connectors
-
-#### *--wait-for-zero-lag*
-
-😴 Wait until lag becomes 0
 
 

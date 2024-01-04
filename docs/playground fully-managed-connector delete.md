@@ -1,11 +1,11 @@
-# playground ccloud-connector show-config
+# playground fully-managed-connector delete
 
-🧰 Show current connector config
+🗑️  Delete connector
 
 ## Usage
 
 ```bash
-playground ccloud-connector show-config [OPTIONS]
+playground fully-managed-connector delete [OPTIONS]
 ```
 
 ## Options

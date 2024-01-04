@@ -1,11 +1,15 @@
-# playground ccloud-connector delete
+# playground fully-managed-connector resume
 
-🗑️  Delete connector
+⏯️  Resume connector
+
+| Attributes       | &nbsp;
+|------------------|-------------
+| Alias:           | unpause
 
 ## Usage
 
 ```bash
-playground ccloud-connector delete [OPTIONS]
+playground fully-managed-connector resume [OPTIONS]
 ```
 
 ## Options

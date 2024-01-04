@@ -1,15 +1,11 @@
-# playground ccloud-connector resume
+# playground fully-managed-connector pause
 
-⏯️  Resume connector
-
-| Attributes       | &nbsp;
-|------------------|-------------
-| Alias:           | unpause
+⏸️  Pause connector
 
 ## Usage
 
 ```bash
-playground ccloud-connector resume [OPTIONS]
+playground fully-managed-connector pause [OPTIONS]
 ```
 
 ## Options

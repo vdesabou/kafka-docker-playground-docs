@@ -164,16 +164,16 @@ visit https://docs.docker.com/get-docker to install
 
 ### Fully Managed Connector commands
 
-- [ccloud-connector](playground%20ccloud-connector) - 🔗☁️ Fully Managed Connector commands
-- [status](playground%20ccloud-connector%20status) - 🧩 Show status of all connectors
-- [plugins](playground%20ccloud-connector%20plugins) - 🎨 Show all plugins installed
-- [pause](playground%20ccloud-connector%20pause) - ⏸️  Pause connector
-- [resume](playground%20ccloud-connector%20resume) - ⏯️  Resume connector
-- [delete](playground%20ccloud-connector%20delete) - 🗑️  Delete connector
-- [show-lag](playground%20ccloud-connector%20show-lag) - 🐢 Show lag of sink connector
-- [show-config](playground%20ccloud-connector%20show-config) - 🧰 Show current connector config
-- [show-config-parameters](playground%20ccloud-connector%20show-config-parameters) - 🔩 Show all possible configuration parameters of connector
-- [create-or-update](playground%20ccloud-connector%20create-or-update) - 🧑‍🎨  Create or update connector
+- [fully-managed-connector](playground%20fully-managed-connector) - 🔗☁️ Fully Managed Connector commands
+- [status](playground%20fully-managed-connector%20status) - 🧩 Show status of all connectors
+- [plugins](playground%20fully-managed-connector%20plugins) - 🎨 Show all plugins installed
+- [pause](playground%20fully-managed-connector%20pause) - ⏸️  Pause connector
+- [resume](playground%20fully-managed-connector%20resume) - ⏯️  Resume connector
+- [delete](playground%20fully-managed-connector%20delete) - 🗑️  Delete connector
+- [show-lag](playground%20fully-managed-connector%20show-lag) - 🐢 Show lag of sink connector
+- [show-config](playground%20fully-managed-connector%20show-config) - 🧰 Show current connector config
+- [show-config-parameters](playground%20fully-managed-connector%20show-config-parameters) - 🔩 Show all possible configuration parameters of connector
+- [create-or-update](playground%20fully-managed-connector%20create-or-update) - 🧑‍🎨  Create or update connector
 
 ### Connector commands
 

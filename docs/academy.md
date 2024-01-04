@@ -912,7 +912,7 @@ Note that using this command will also enable logs on `org.apache.kafka.connect.
 playground connector log-level --level TRACE
 ```
 
-Another way is to set `--level` when using [playground connector create-or-update](/playground%20ccloud-connector%20create-or-update):
+Another way is to set `--level` when using [playground connector create-or-update](/playground%20connector%20create-or-update):
 
 ```bash
 playground connector create-or-update --connector mysql-source --level TRACE

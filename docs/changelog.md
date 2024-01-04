@@ -8,7 +8,7 @@
   * [playground topic delete](/playground%20topic%20delete) now also delete associated schema/subject (use `skip-delete-schema` to disable)
   * Added `--all` flag to [playground connector plugins](/playground%20connector%20plugins)
   * Added [playground history](/playground%20history) command
-  * Added `--validate` to `playground connector create-or-update` and `playground ccloud-connector create-or-update`
+  * Added `--validate` to `playground connector create-or-update` and `playground fully-managed-connector create-or-update`
 
 ## November 2023
 
@@ -70,7 +70,7 @@
 * Added [MQTT Proxy example](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/mqtt-proxy)
 * Oracle 19 examples are now supported on M1 chip (ARM64) Mac
 - CLI:
-  * Added `connector show-config` and `ccloud-connector show-config`
+  * Added `connector show-config` and `fully-managed-connector show-config`
   * Renamed `playground bootstrap-reproduction-model` to `playground repro bootstrap`
 
 
@@ -83,7 +83,7 @@
   * Only show fzf preview when terminal is wide enough
   * Added `debug flight-recorder`
   * Added `wait-for-zero-lag` to `connector show-lag` command
-  * Added `connector show-config-parameters` and `ccloud-connector show-config-parameters` commands
+  * Added `connector show-config-parameters` and `fully-managed-connector show-config-parameters` commands
   * Added `open-docs` command
   * Added `debug block-traffic`
   * Added `debug testssl`
@@ -97,7 +97,7 @@
 - CLI: 
   * Added `debug thread-dump`
   * Added `--tail` option to `topic consume`
-  * Added `ccloud-connector` command to interact with [fully-managed connectors](/content?id=%f0%9f%a4%96-fully-managed-connectors)
+  * Added `fully-managed-connector` command to interact with [fully-managed connectors](/content?id=%f0%9f%a4%96-fully-managed-connectors)
   * 🔥 Added `topic produce` [command](/cli?id=%f0%9f%93%a5-produce)
   * Added `topic create` and `topic delete` commands
   * Added `--verbose` flag for produce and consume

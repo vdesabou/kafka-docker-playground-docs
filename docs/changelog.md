@@ -1,5 +1,9 @@
 # Change Log
 
+## January 2024
+
+* Added [HBase sink example with kerberos](https://github.com/vdesabou/kafka-docker-playground/blob/master/connect/connect-hbase-sink/hbase-sink-kerberos.sh)
+
 ## December 2023
 
 - CLI:

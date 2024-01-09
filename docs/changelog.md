@@ -23,7 +23,7 @@
   * `--nb-messages` for [playground topic produce](/playground%20topic%20produce): if you set it to -1, an infinite number of records will be sent by batches of 300000 records
   * `--key` for [playground topic produce](/playground%20topic%20produce) can now use same input parameters as `--value`
   * Added [playground start-environment](/playground%20start-environment) command
-  * `--pipeline` flag for `playground repro boostrap` command is now repeatable, meaning you can create a pipeline from one source connector to multiple sink connectors !
+  * `--pipeline` flag for `playground repro bootstrap` command is now repeatable, meaning you can create a pipeline from one source connector to multiple sink connectors !
 
 ## October 2023
 

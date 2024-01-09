@@ -8,6 +8,10 @@
 playground container COMMAND
 ```
 
+## == Commands ==
+
+- [get-properties](playground%20container%20get-properties) - 📝 Get properties file from a container
+
 ## Container commands
 
 - [recreate](playground%20container%20recreate) - 💫 Recreate container(s)

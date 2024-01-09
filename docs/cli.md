@@ -106,7 +106,6 @@ visit https://docs.docker.com/get-docker to install
 ### Kafka commands
 
 - [get-docker-compose](playground%20get-docker-compose) - 🐋 Get docker-compose
-- [get-properties](playground%20get-properties) - 📝 Get properties file from a container
 - [get-jmx-metrics](playground%20get-jmx-metrics) - 🔢 Get JMX metrics from a component
 
 ### Schema commands
@@ -137,6 +136,7 @@ visit https://docs.docker.com/get-docker to install
 ### Container commands
 
 - [container](playground%20container) - 🐳 Container commands
+- [get-properties](playground%20container%20get-properties) - 📝 Get properties file from a container
 - [recreate](playground%20container%20recreate) - 💫 Recreate container(s)
 - [get-ip-addresses](playground%20container%20get-ip-addresses) - 🖥️  Get ip address of running containers
 - [kill-all](playground%20container%20kill-all) - 💀 Kill all containers

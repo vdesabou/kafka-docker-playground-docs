@@ -190,6 +190,7 @@ visit https://docs.docker.com/get-docker to install
 - [show-config](playground%20connector%20show-config) - 🧰 Show current connector config
 - [show-config-parameters](playground%20connector%20show-config-parameters) - 🔩 Show all possible configuration parameters of connector
 - [search-jar](playground%20connector%20search-jar) - 🔌 List jars for a connector plugin from confluent hub https://www.confluent.io/hub/ Search for specific class and display method signatures
+- [snippets](playground%20connector%20snippets) - 🔌 useful snippets
 - [log-level](playground%20connector%20log-level) - 🧬 Set connect log level
 - [create-or-update](playground%20connector%20create-or-update) - 🧑‍🎨  Create or update connector
 

@@ -2,6 +2,8 @@
 
 ## January 2024
 
+- CLI:
+  * Added `--only-show-json` to `connector show-config-parameters` and `fully-managed-connector show-config-parameters` commands in order to list of all available parameters for connector (with default value when applicable)
 * Added [HBase sink example with kerberos](https://github.com/vdesabou/kafka-docker-playground/blob/master/connect/connect-hbase-sink/hbase-sink-kerberos.sh)
 
 ## December 2023

@@ -5,6 +5,7 @@
 - CLI:
   * Added `--only-show-json` to `connector show-config-parameters` and `fully-managed-connector show-config-parameters` commands in order to list of all available parameters for connector (with default value when applicable)
   * Added `playground connector open-docs` command
+  * Connector config is copied to the clipboard (MacOS only) when calling `playground connector create-or-update` and `playground fully-managed-connector create-or-update` and `playground connector status` and `playground fully-managed-connector status`
 * Added [HBase sink example with kerberos](https://github.com/vdesabou/kafka-docker-playground/blob/master/connect/connect-hbase-sink/hbase-sink-kerberos.sh)
 
 ## December 2023

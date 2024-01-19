@@ -20,7 +20,7 @@ playground connector snippets [OPTIONS]
 
 #### *--dlq*
 
-🔗 dlq
+💀 dlq
 
 ## Examples
 

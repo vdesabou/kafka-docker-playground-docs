@@ -36,4 +36,8 @@ playground fully-managed-connector show-config-parameters [OPTIONS]
 
 📗 Only show list of all available parameters for connector (with default value when applicable)
 
+#### *--only-show-json-file-path*
+
+📂 Only show the path of the json file containing the configuration parameters
+
 

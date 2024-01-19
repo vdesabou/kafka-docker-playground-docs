@@ -40,8 +40,9 @@ Cloud API secret, see https://docs.confluent.io/cloud/current/access-management/
 - [resume](playground%20fully-managed-connector%20resume) - ⏯️  Resume connector
 - [delete](playground%20fully-managed-connector%20delete) - 🗑️  Delete connector
 - [show-lag](playground%20fully-managed-connector%20show-lag) - 🐢 Show lag of sink connector
-- [show-config](playground%20fully-managed-connector%20show-config) - 🧰 Show current connector config
+- [show-config](playground%20fully-managed-connector%20show-config) - 🧰 Show current connector config that was applied
 - [show-config-parameters](playground%20fully-managed-connector%20show-config-parameters) - 🔩 Show all possible configuration parameters of connector
+- [select-config](playground%20fully-managed-connector%20select-config) - 🗜️ Easily select config from all possible configuration parameters of connector
 - [create-or-update](playground%20fully-managed-connector%20create-or-update) - 🧑‍🎨  Create or update connector
 
 

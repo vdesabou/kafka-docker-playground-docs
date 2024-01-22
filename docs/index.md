@@ -38,6 +38,7 @@ visit https://docs.docker.com/get-docker to install
 - [update-version](playground%20update-version) - ✨ Update current confluent platform or connector(s) with new version(s)
 - [open](playground%20open) - 👐 When --file is not provided, simply open last example you ran with \<playground run\> or \<playground run-ccloud\>
 - [stop](playground%20stop) - 🛑 Stop currently running example
+- [remove-all-docker-images](playground%20remove-all-docker-images) - 🧨 Remove all docker images (including docker volumes)
 - [open-docs](playground%20open-docs) - 🧑‍🎓 Open Confluent documentation of currently running example
 
 ### Repro commands

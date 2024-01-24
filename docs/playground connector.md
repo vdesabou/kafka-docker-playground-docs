@@ -22,7 +22,6 @@ playground connector COMMAND
 - [show-config](playground%20connector%20show-config) - 🧰 Show current connector config that was applied
 - [show-config-parameters](playground%20connector%20show-config-parameters) - 🔩 Show all possible configuration parameters of connector
 - [select-config](playground%20connector%20select-config) - 🗜️ Easily select config from all possible configuration parameters of connector
-- [search-jar](playground%20connector%20search-jar) - 🔌 List jars for a connector plugin from confluent hub https://www.confluent.io/hub/ Search for specific class and display method signatures
 - [snippets](playground%20connector%20snippets) - 🔌 useful snippets
 - [open-docs](playground%20connector%20open-docs) - 🧑‍🎓 Open connector documentation of currently running conector(s)
 - [log-level](playground%20connector%20log-level) - 🧬 Set connect log level

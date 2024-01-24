@@ -20,6 +20,14 @@ playground connector-plugin versions [OPTIONS]
 |-----------------|-------------
 | Required:       | ✓ Yes
 
+#### *--last LAST*
+
+🆕 Number of last versions to show
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Conflicts With: | *--all*
+
 ## Examples
 
 ```bash

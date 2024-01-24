@@ -1205,6 +1205,49 @@ curl --request PUT \
 }'
 ```
 
+### 🕵️‍♂️ See TLS traffic with mitmproxy
+
+[mitmproxy](https://github.com/mitmproxy/mitmproxy) 
+
+1. Add `mitmproxy` container in your `docker-compose` file:
+
+```yml
+  mitmproxy:
+    image: mitmproxy/mitmproxy
+    hostname: mitmproxy
+    container_name: mitmproxy
+    command: mitmdump --flow-detail 4
+    ports:
+      - "8080:8080"
+    volumes:
+      - $HOME/.mitmproxy:/home/mitmproxy/.mitmproxy
+```
+
+2. Add in your script after all containers are started:
+
+```bash
+cat $HOME/.mitmproxy/mitmproxy-ca-cert.pem | docker exec -i --privileged --user root connect bash -c "cat >> /etc/ssl/certs/ca-bundle.crt"
+cat $HOME/.mitmproxy/mitmproxy-ca-cert.pem | docker exec -i --privileged --user root connect bash -c "keytool -importcert --cacerts -storepass changeit -noprompt"
+```
+
+3. Use mitmproxy proxy in your connector config:
+
+Example:
+
+```json
+"proxy.url": "mitmproxy:8080"
+```
+
+4. Check TLS traffic in clear text by checking logs of `mitmproxy` container
+
+```bash
+playgroundd container  logs -c mitmproxy
+
+or
+
+playground container logs --open --container mitmproxy
+```
+
 ### 🕵 TCP Dump
 
 It is sometime necessary to sniff the network in order to better understand what's going on.

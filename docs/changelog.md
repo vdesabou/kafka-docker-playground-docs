@@ -9,6 +9,7 @@
   * Added `playground connector open-docs` command
   * Connector config is copied to the clipboard (MacOS only) when calling `playground connector create-or-update` and `playground fully-managed-connector create-or-update` and `playground connector status` and `playground fully-managed-connector status`
 
+* Added [See TLS traffic with mitmproxy](https://kafka-docker-playground.io/#/reusables?id=%f0%9f%95%b5%ef%b8%8f%e2%99%82%ef%b8%8f-see-tls-traffic-with-mitmproxy)
 * Added [Custom Connector with S3 sink](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/custom-connector-connect-aws-s3-sink)
 * Added [HBase sink example with kerberos](https://github.com/vdesabou/kafka-docker-playground/blob/master/connect/connect-hbase-sink/hbase-sink-kerberos.sh)
 

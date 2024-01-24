@@ -43,7 +43,7 @@ By default, for each connector, the latest available version on Confluent Hub is
 ## Examples
 
 ```bash
-playground connector search-jar --connector-plugin confluentinc/kafka-connect-s3 --class WebIdentityTokenCredentialsProvider
+playground connector-plugin search-jar --connector-plugin confluentinc/kafka-connect-s3 --class WebIdentityTokenCredentialsProvider
 
 ```
 

@@ -28,7 +28,7 @@
 ## November 2023
 
 - CLI:
-  * Added [playground connector search-jar](/playground%20connector%20search-jar) command
+  * Added [playground connector-plugin search-jar](/playground%20connector-plugin%20search-jar) command
   * Added `--enable-rest-proxy` flag to run, re-run, start-environment and repro bootstrap commands
   * Added [playground connector stop](/playground%20connector%20stop) command 
   * `--nb-messages` for [playground topic produce](/playground%20topic%20produce): if you set it to -1, an infinite number of records will be sent by batches of 300000 records

@@ -3,7 +3,7 @@
 ## January 2024
 
 - CLI:
-  * 🔥 if `--connector-tag` is set to `" "`, it will allow you to select version dynamically !
+  * 🔥 if `--connector-tag` is set to `" "`, it will allow you to select version dynamically ! See [example](https://asciinema.org/a/633205)
   * Added [playground connector-plugin versions](/playground%20connector-plugin%20versions) command
   * Added [playground remove-all-docker-images](/playground%20remove-all-docker-images) command
   * 🔥 Add [playground connector select-config](/playground%20connector%20select-config) and  [playground fully-managed-connector select-config](/playground%20fully-managed-connector%20select-config) to easily select config from all possible configuration parameters of connector ! Tip: use <tab> to select multiple config at once !

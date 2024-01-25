@@ -30,11 +30,13 @@ visit https://openjdk.org/install/ to install
 
 🔗 Connector version to use  
   
-By default, for each connector, the latest available version on Confluent Hub is used
+By default, for each connector, the latest available version on Confluent Hub is used  
+  
+🎓 Tip: set to " " in order to select the version dynamically
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Default Value:  | latest
+| Conflicts With: | *--connector-zip*
 
 #### *--class CLASS*
 

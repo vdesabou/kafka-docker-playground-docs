@@ -124,14 +124,35 @@ Use [playground run](/playground%20run) command and <tab> completion with `fzf` 
 
 
 ```bash
-$  [playground run](/playground%20run) --help                                                   
-[playground run](/playground%20run) - 🕹️ Run any example, except for Confluent Cloud (in this case use run-ccloud command)
+$ playground run - 🕹️ Run any example, except for Confluent Cloud (in this case use run-ccloud command)
 
 == Usage ==
-  [playground run](/playground%20run) [OPTIONS] [ARGUMENTS...]
-  [playground run](/playground%20run) --help | -h
+  playground run [OPTIONS] [ARGUMENTS...]
+  playground run --help | -h
 
 == Options ==
+  --environment ENVIRONMENT
+    🔐 The environment to start when running a connector example 
+    
+    - plaintext
+    - ccloud
+    - 2way-ssl
+    - kerberos
+    - kraft-external-plaintext
+    - kraft-plaintext
+    - ldap-authorizer-sasl-plain
+    - ldap-sasl-plain
+    - rbac-sasl-plain
+    - sasl-plain
+    - sasl-scram
+    - sasl-ssl
+    - ssl_kerberos
+    
+    Default is plaintext.
+    This is only supported when example is a connector example
+    Allowed: ccloud, plaintext, sasl-ssl, sasl-plain, 2way-ssl, sasl-scram, kraft-external-plaintext, kraft-plaintext, kerberos, ssl_kerberos, ldap-authorizer-sasl-plain, ldap-sasl-plain, rbac-sasl-plain
+    Default: plaintext
+
   --file, -f FILE (required)
     🔖 Example file to run
     
@@ -140,8 +161,8 @@ $  [playground run](/playground%20run) --help
     🎓 Tip: use <tab> completion to trigger fzf completion
 
   --open, -o
-    📖 Opening example file with text editor set with config.ini (default is
-    code)
+    📖 Opening example file with text editor set with playground config editor
+    <editor> (default is code)
 
   --tag TAG
     🎯 Confluent Platform (CP) version to use
@@ -153,6 +174,8 @@ $  [playground run](/playground%20run) --help
     
     By default, for each connector, the latest available version on Confluent
     Hub is used
+    
+    🎓 Tip: set to " " in order to select the version dynamically
 
   --connector-zip CONNECTOR_ZIP
     🤐 Connector zip to use
@@ -160,8 +183,9 @@ $  [playground run](/playground%20run) --help
     ❕ It must be absolute full path
     
     🎓 Tip: use <tab> completion to trigger fzf completion 
-            use folder_zip_or_jar (default: ~/Downloads) in config.ini file to
-    configure where to search the files (current folder is always used)
+            use playground config folder_zip_or_jar <folder1> <folder2>...
+    (default is home folder and current folder is always included) to configure
+    where to search the files
 
   --connector-jar CONNECTOR_JAR
     ♨️ Connector jar to use
@@ -169,14 +193,20 @@ $  [playground run](/playground%20run) --help
     ❕ It must be absolute full path
     
     🎓 Tip: use <tab> completion to trigger fzf completion 
-            use folder_zip_or_jar (default: ~/Downloads) in config.ini file to
-    configure where to search the files (current folder is always used)
+            use playground config folder_zip_or_jar <folder1> <folder2>...
+    (default is home folder and current folder is always included) to configure
+    where to search the files
 
   --enable-ksqldb
     🚀 Enable ksqlDB
     
     By default, ksqldb-server and ksqldb-cli containers are not started for
     every test
+
+  --enable-rest-proxy
+    🧲 Enable Rest Proxy
+    
+    By default, rest-proxy container is not started for every test
 
   --enable-control-center
     💠 Enable Control Center
@@ -207,7 +237,8 @@ $  [playground run](/playground%20run) --help
   --enable-jmx-grafana
     Enable Grafana, Prometheus and Pyroscope
     
-    📊 Grafana is reachable at http://127.0.0.1:3000 (login/password is admin/password)
+    📊 Grafana is reachable at http://127.0.0.1:3000 (login/password is
+    admin/password)
     
     🛡️ Prometheus is reachable at http://127.0.0.1:9090
     
@@ -241,14 +272,13 @@ $  [playground run](/playground%20run) --help
     
     Example with Zendesk:
     
-    [playground run](/playground%20run) -f zendesk-source<tab> <ZENDESK_URL> <ZENDESK_USERNAME>
+    playground run -f zendesk-source<tab> <ZENDESK_URL> <ZENDESK_USERNAME>
     <ZENDESK_PASSWORD>
 
 Examples
-  [playground run](/playground%20run) -f zendesk-source<tab> --tag 7.2.1 --enable-control-center
+  playground run -f zendesk-source<tab> --tag 7.2.1 --enable-control-center
   <ZENDESK_URL> <ZENDESK_USERNAME> <ZENDESK_PASSWORD>
-  [playground run](/playground%20run) -f jdbc<tab> --connector-tag 10.6.0 --enable-jmx-grafana --open
-
+  playground run -f jdbc<tab> --connector-tag 10.6.0 --enable-jmx-grafana --open
 ```
 
 
@@ -316,9 +346,15 @@ Use [playground run](/playground%20run) with this flag:
     
     By default, for each connector, the latest available version on Confluent
     Hub is used
+    
+    🎓 Tip: set to " " in order to select the version dynamically
 ```
 
-If you have multiple connectors, you can provide a comma-separated list:
+If you have multiple connectors, it is highly recommended to use `--connector-tag " "` in order to select versions dynamically:
+
+[![asciicast](https://asciinema.org/a/633205.svg)](https://asciinema.org/a/633205)
+
+You can also provide a comma-separated list manually:
 
 Example:
 

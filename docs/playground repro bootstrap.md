@@ -22,7 +22,9 @@ Must be greater or equal to 5.0.0
 
 🔗 Connector version to use  
   
-By default, for each connector, the latest available version on Confluent Hub is used
+By default, for each connector, the latest available version on Confluent Hub is used  
+  
+🎓 Tip: set to " " in order to select the version dynamically
 
 | Attributes      | &nbsp;
 |-----------------|-------------

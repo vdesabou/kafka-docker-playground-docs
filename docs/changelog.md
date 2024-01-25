@@ -6,7 +6,7 @@
   * 🔥 if `--connector-tag` is set to `" "`, it will allow you to select version dynamically ! See [example](https://asciinema.org/a/633205)
   * Added [playground connector-plugin versions](/playground%20connector-plugin%20versions) command
   * Added [playground remove-all-docker-images](/playground%20remove-all-docker-images) command
-  * 🔥 Add [playground connector select-config](/playground%20connector%20select-config) and  [playground fully-managed-connector select-config](/playground%20fully-managed-connector%20select-config) to easily select config from all possible configuration parameters of connector ! Tip: use <tab> to select multiple config at once !
+  * 🔥 Add [playground connector select-config](/playground%20connector%20select-config) and  [playground fully-managed-connector select-config](/playground%20fully-managed-connector%20select-config) to easily select config from all possible configuration parameters of connector ! Tip: use <tab> to select multiple config at once ! See [example](https://asciinema.org/a/633314)
   * Added `--only-show-json` to `connector show-config-parameters` and `fully-managed-connector show-config-parameters` commands in order to list of all available parameters for connector (with default value when applicable)
   * Added `playground connector open-docs` command
   * Connector config is copied to the clipboard (MacOS only) when calling `playground connector create-or-update` and `playground fully-managed-connector create-or-update` and `playground connector status` and `playground fully-managed-connector status`

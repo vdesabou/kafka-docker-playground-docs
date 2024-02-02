@@ -20,6 +20,10 @@ playground connector-plugin versions [OPTIONS]
 |-----------------|-------------
 | Required:       | ✓ Yes
 
+#### *--force-refresh*
+
+☢️ Force refresh.
+
 #### *--last LAST*
 
 🆕 Number of last versions to show

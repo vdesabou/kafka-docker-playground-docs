@@ -1,5 +1,15 @@
 # Change Log
 
+## February 2024
+
+- CLI:
+  * Improved `playground connector show-lag` and `playground fully-managed-connector show-lag` 
+
+[![asciicast](https://asciinema.org/a/635654.svg)](https://asciinema.org/a/635654)
+  
+* Added [Fully Managed JDBC MySQL Source connector](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/fully-managed-connect-jdbc-mysql-source)
+
+
 ## January 2024
 
 - CLI:

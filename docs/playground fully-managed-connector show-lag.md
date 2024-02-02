@@ -24,4 +24,12 @@ playground fully-managed-connector show-lag [OPTIONS]
 
 😴 Wait until lag becomes 0
 
+#### *--wait-for-zero-lag-interval WAITFORZEROLAGINTERVAL*
+
+Interval between lag checks when --wait-for-zero-lag is used (default is 10 seconds).
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Default Value:  | 10
+
 

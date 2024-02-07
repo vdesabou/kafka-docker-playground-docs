@@ -26,6 +26,7 @@ playground connector COMMAND
 - [open-docs](playground%20connector%20open-docs) - 🧑‍🎓 Open connector documentation of currently running conector(s)
 - [log-level](playground%20connector%20log-level) - 🧬 Set connect log level
 - [create-or-update](playground%20connector%20create-or-update) - 🧑‍🎨  Create or update connector
+- [update](playground%20connector%20update) - 🛠️ Update connector configuration by opening current connector config in text editor set with playground config editor \<editor\> (default is code). Once file is saved, the new configuration is updated.
 
 ## Examples
 

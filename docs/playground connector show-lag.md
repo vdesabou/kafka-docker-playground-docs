@@ -26,10 +26,10 @@ playground connector show-lag [OPTIONS]
 
 #### *--wait-for-zero-lag-interval WAITFORZEROLAGINTERVAL*
 
-Interval between lag checks when --wait-for-zero-lag is used (default is 10 seconds).
+Interval between lag checks when --wait-for-zero-lag is used (default is 20 seconds).
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Default Value:  | 10
+| Default Value:  | 20
 
 

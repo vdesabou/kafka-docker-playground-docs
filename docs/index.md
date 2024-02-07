@@ -107,20 +107,6 @@ visit https://docs.docker.com/get-docker to install
 - [delete](playground%20topic%20delete) - ❌ Delete topic and associated schema/subject if applicable
 - [alter](playground%20topic%20alter) - 🪛 Alter topic config
 
-### Fully Managed Connector commands
-
-- [fully-managed-connector](playground%20fully-managed-connector) - 🔗☁️ Fully Managed Connector commands
-- [status](playground%20fully-managed-connector%20status) - 🧩 Show status of all connectors
-- [plugins](playground%20fully-managed-connector%20plugins) - 🎨 Show all plugins installed
-- [pause](playground%20fully-managed-connector%20pause) - ⏸️  Pause connector
-- [resume](playground%20fully-managed-connector%20resume) - ⏯️  Resume connector
-- [delete](playground%20fully-managed-connector%20delete) - 🗑️  Delete connector
-- [show-lag](playground%20fully-managed-connector%20show-lag) - 🐢 Show lag of sink connector
-- [show-config](playground%20fully-managed-connector%20show-config) - 🧰 Show current connector config that was applied
-- [show-config-parameters](playground%20fully-managed-connector%20show-config-parameters) - 🔩 Show all possible configuration parameters of connector
-- [select-config](playground%20fully-managed-connector%20select-config) - 🗜️ Easily select config from all possible configuration parameters of connector
-- [create-or-update](playground%20fully-managed-connector%20create-or-update) - 🧑‍🎨  Create or update connector
-
 ### Connector-Plugin commands
 
 - [connector-plugin](playground%20connector-plugin) - 🔌 Connector-plugin commands
@@ -146,5 +132,6 @@ visit https://docs.docker.com/get-docker to install
 - [open-docs](playground%20connector%20open-docs) - 🧑‍🎓 Open connector documentation of currently running conector(s)
 - [log-level](playground%20connector%20log-level) - 🧬 Set connect log level
 - [create-or-update](playground%20connector%20create-or-update) - 🧑‍🎨  Create or update connector
+- [update](playground%20connector%20update) - 🛠️ Update connector configuration by opening current connector config in text editor set with playground config editor \<editor\> (default is code). Once file is saved, the new configuration is updated.
 
 

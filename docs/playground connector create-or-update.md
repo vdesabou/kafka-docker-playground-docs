@@ -34,7 +34,9 @@ json (reads from stdin if empty)
 
 #### *--level, -l LEVEL*
 
-❕Log level
+❕Log level  
+  
+⚠️ Not available for ccloud connectors
 
 | Attributes      | &nbsp;
 |-----------------|-------------

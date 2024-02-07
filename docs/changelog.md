@@ -3,12 +3,12 @@
 ## February 2024
 
 - CLI:
-  * Improved `playground connector show-lag` and `playground fully-managed-connector show-lag` 
+  * Removed `playground fully-managed-connector` (handle transparently by `playground connector`)
+  * Improved `playground connector show-lag`
 
 [![asciicast](https://asciinema.org/a/635654.svg)](https://asciinema.org/a/635654)
   
 * Added [Fully Managed JDBC MySQL Source connector](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/fully-managed-connect-jdbc-mysql-source)
-
 
 ## January 2024
 
@@ -16,10 +16,10 @@
   * 🔥 if `--connector-tag` is set to `" "`, it will allow you to select version dynamically ! See [example](https://asciinema.org/a/633205)
   * Added [playground connector-plugin versions](/playground%20connector-plugin%20versions) command
   * Added [playground remove-all-docker-images](/playground%20remove-all-docker-images) command
-  * 🔥 Add [playground connector select-config](/playground%20connector%20select-config) and  [playground fully-managed-connector select-config](/playground%20fully-managed-connector%20select-config) to easily select config from all possible configuration parameters of connector ! Tip: use <tab> to select multiple config at once ! See [example](https://asciinema.org/a/633314)
-  * Added `--only-show-json` to `connector show-config-parameters` and `fully-managed-connector show-config-parameters` commands in order to list of all available parameters for connector (with default value when applicable)
+  * 🔥 Add [playground connector select-config](/playground%20connector%20select-config) to easily select config from all possible configuration parameters of connector ! Tip: use <tab> to select multiple config at once ! See [example](https://asciinema.org/a/633314)
+  * Added `--only-show-json` to `connector show-config-parameters` command in order to list of all available parameters for connector (with default value when applicable)
   * Added `playground connector open-docs` command
-  * Connector config is copied to the clipboard (MacOS only) when calling `playground connector create-or-update` and `playground fully-managed-connector create-or-update` and `playground connector status` and `playground fully-managed-connector status`
+  * Connector config is copied to the clipboard (MacOS only) when calling `playground connector create-or-update` and `playground connector status`
 
 * Added [See TLS traffic with mitmproxy](/reusables?id=%f0%9f%95%b5%ef%b8%8f%e2%99%82%ef%b8%8f-see-tls-traffic-with-mitmproxy)
 * Added [Custom Connector with S3 sink](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/custom-connector-connect-aws-s3-sink)
@@ -33,7 +33,7 @@
   * [playground topic delete](/playground%20topic%20delete) now also delete associated schema/subject (use `skip-delete-schema` to disable)
   * Added `--all` flag to [playground connector plugins](/playground%20connector%20plugins)
   * Added [playground history](/playground%20history) command
-  * Added `--validate` to `playground connector create-or-update` and `playground fully-managed-connector create-or-update`
+  * Added `--validate` to `playground connector create-or-update`
 
 ## November 2023
 
@@ -95,7 +95,7 @@
 * Added [MQTT Proxy example](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/mqtt-proxy)
 * Oracle 19 examples are now supported on M1 chip (ARM64) Mac
 - CLI:
-  * Added `connector show-config` and `fully-managed-connector show-config`
+  * Added `connector show-config` 
   * Renamed `playground bootstrap-reproduction-model` to `playground repro bootstrap`
 
 
@@ -108,7 +108,7 @@
   * Only show fzf preview when terminal is wide enough
   * Added `debug flight-recorder`
   * Added `wait-for-zero-lag` to `connector show-lag` command
-  * Added `connector show-config-parameters` and `fully-managed-connector show-config-parameters` commands
+  * Added `connector show-config-parameters` command
   * Added `open-docs` command
   * Added `debug block-traffic`
   * Added `debug testssl`
@@ -122,7 +122,6 @@
 - CLI: 
   * Added `debug thread-dump`
   * Added `--tail` option to `topic consume`
-  * Added `fully-managed-connector` command to interact with [fully-managed connectors](/content?id=%f0%9f%a4%96-fully-managed-connectors)
   * 🔥 Added `topic produce` [command](/cli?id=%f0%9f%93%a5-produce)
   * Added `topic create` and `topic delete` commands
   * Added `--verbose` flag for produce and consume

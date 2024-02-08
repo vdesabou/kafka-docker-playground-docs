@@ -129,10 +129,6 @@ You can use it with:
   
 $ docker exec kcat kcat -b broker:9092 -L
 
-#### *--enable-sr-maven-plugin-app*
-
-🔰 Enable Schema Registry Maven plugin App
-
 ## Examples
 
 ```bash

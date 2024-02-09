@@ -28,16 +28,8 @@ playground connector show-config-parameters [OPTIONS]
 
 ☢️ Force refresh.
 
-#### *--only-show-file-path*
-
-📂 Only show the path of the file containing the configuration parameters
-
 #### *--only-show-json*
 
 📗 Only show list of all available parameters for connector (with default value when applicable)
-
-#### *--only-show-json-file-path*
-
-📂 Only show the path of the json file containing the configuration parameters
 
 

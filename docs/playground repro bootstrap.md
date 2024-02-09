@@ -188,42 +188,6 @@ This only works for Oracle, MySql, Postgres and Microsoft Sql Server source conn
 |-----------------|-------------
 | Required:       | ✓ Yes
 
-#### *--producer, -p PRODUCER-TYPE*
-
-♨️ Java producer type to use  
-  
-One of avro, avro-with-key, protobuf, protobuf-with-key, json-schema, json-schema-with-key  
-  
-🎓 Tip: Most of times, it's much simpler to use 'playground topic produce'. Use java producer only if you have very specific requirements such as specifying record timestamp or to do perf testing (even though CLI is also good for that)  
-  
-🎓 Tip: 'with-key' will also produce key with selected converter, otherwise LongConverter is used
-
-| Attributes      | &nbsp;
-|-----------------|-------------
-| Default Value:  | none
-| Allowed Values: | none, avro, avro-with-key, protobuf, protobuf-with-key, json-schema, json-schema-with-key
-| Conflicts With: | *--pipeline*
-
-#### *--nb-producers, -n NB-PRODUCERS*
-
-2️⃣ Number of java producers to generate
-
-| Attributes      | &nbsp;
-|-----------------|-------------
-| Default Value:  | 
-
-#### *--producer-schema-key*
-
-🔰 Schema to use for the key  
-  
-✨ Copy and paste the schema you want to use for the key, save and close the file to continue
-
-#### *--producer-schema-value*
-
-🔰 Schema to use for the value  
-  
-✨ Copy and paste the schema you want to use for the key, save and close the file to continue
-
 #### *--custom-smt*
 
 ⚙️ Add a custom SMT (which is a no-op)

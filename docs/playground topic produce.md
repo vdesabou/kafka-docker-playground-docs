@@ -57,10 +57,6 @@ Otherwise, the key will be same for all records.
 
 🐞 Show command being ran.
 
-#### *--debug, -d*
-
-debug mode (internal)
-
 #### *--topic, -t TOPIC*
 
 🗳 Topic name

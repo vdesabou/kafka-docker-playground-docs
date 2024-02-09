@@ -23,10 +23,6 @@ playground connector show-config [OPTIONS]
   
 🎓 Tip: If not specified, the command will apply to all connectors
 
-#### *--no-clipboard*
-
-do not copy to clipboard (internal)
-
 #### *--force-rest-endpoint*
 
 ☢️ Force using REST API /config endpoint (https://docs.confluent.io/platform/current/connect/references/restapi.html#get--connectors-(string-name)-config)

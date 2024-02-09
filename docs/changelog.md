@@ -7,7 +7,8 @@
   * Improved `playground connector show-lag`
 
 [![asciicast](https://asciinema.org/a/635654.svg)](https://asciinema.org/a/635654)
-  
+
+* Added [Fully Managed GCP BigQuery Sink V2](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/fully-managed-connect-gcp-bigquery-v2-sink)
 * Added [Fully Managed JDBC MySQL Source connector](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/fully-managed-connect-jdbc-mysql-source)
 
 ## January 2024

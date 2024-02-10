@@ -192,7 +192,7 @@ visit https://docs.docker.com/get-docker to install
 
 ## Options
 
-#### *--verbose, -v*
+#### *--vvv, -v*
 
 🐛 set verbose output (set -x)  
   

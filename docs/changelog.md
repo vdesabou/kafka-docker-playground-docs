@@ -1,4 +1,4 @@
-# Change Log
+# 📜 Change Log
 
 ## February 2024
 

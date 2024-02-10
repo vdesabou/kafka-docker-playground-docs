@@ -12,3 +12,4 @@
 [🎓 How it works](/how-it-works.md)
 [👷‍♂️ Reusables](/reusables.md)
 [🧑‍🎓 Academy](/academy.md)
+[📜 Changelog](/changelog.md)

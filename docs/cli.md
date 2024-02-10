@@ -67,7 +67,7 @@ CLI can be configured using [playground config](/playground%20config)
 ### Usage
 
 ```bash
-playground COMMAND
+playground [OPTIONS] COMMAND
 ```
 
 ### Dependencies
@@ -189,5 +189,14 @@ visit https://docs.docker.com/get-docker to install
 - [log-level](playground%20connector%20log-level) - 🧬 Set connect log level
 - [create-or-update](playground%20connector%20create-or-update) - 🧑‍🎨  Create or update connector
 - [update](playground%20connector%20update) - 🛠️ Update connector configuration by opening current connector config in text editor set with playground config editor \<editor\> (default is code). Once file is saved, the new configuration is updated.
+
+## Options
+
+#### *--verbose, -v*
+
+🐛 set verbose output (set -x)  
+  
+❗ it can print sensitive information ❗  
+
 
 

@@ -3,7 +3,7 @@
 ## February 2024
 
 - CLI:
-  * Added `--verbose` (or `v`) generic flag to activate verbose mode (example `playground --verbose status`))
+  * Added `--vvv` (or `-v`) generic flag to activate verbose mode (example `playground --vvv status`))
   * Removed `playground fully-managed-connector` (handle transparently by `playground connector`)
   * Improved `playground connector show-lag`
   * Deprecated playground repro bootstrap `--producer` flag in favor of `playground topic produce`: flags are now hidden. Instructions are [here](/legacy-java-producer) if you still want to use it

@@ -170,15 +170,11 @@ This only works for Oracle, MySql, Postgres and Microsoft Sql Server source conn
 
 #### *--file, -f FILE*
 
-🔖 Example file to use as basis  
+🔖 Example file to use as basis, if not set, currently running example is used  
   
 ❕ It must be absolute full path  
   
 🎓 Tip: use \<tab\> completion to trigger fzf completion
-
-| Attributes      | &nbsp;
-|-----------------|-------------
-| Required:       | ✓ Yes
 
 #### *--description, -d DESCRIPTION*
 

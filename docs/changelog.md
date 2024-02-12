@@ -110,7 +110,6 @@
   * Added `--compatibility` to `topic produce` [command](/cli?id=%f0%9f%93%a5-produce)
   * Only show fzf preview when terminal is wide enough
   * Added `debug flight-recorder`
-  * Added `wait-for-zero-lag` to `connector show-lag` command
   * Added `connector show-config-parameters` command
   * Added `open-docs` command
   * Added `debug block-traffic`

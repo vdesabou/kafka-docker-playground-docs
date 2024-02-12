@@ -1,6 +1,9 @@
 # playground connector show-lag
 
-🐢 Show lag of sink connector
+🐢 Show lag of sink connector  
+  
+It will run until all lag becomes 0 (press ctrl-c to exit)  
+
 
 ## Usage
 
@@ -20,13 +23,9 @@ playground connector show-lag [OPTIONS]
   
 🎓 Tip: If not specified, the command will apply to all connectors
 
-#### *--wait-for-zero-lag*
+#### *--interval INTERVAL*
 
-😴 Wait until lag becomes 0
-
-#### *--wait-for-zero-lag-interval WAITFORZEROLAGINTERVAL*
-
-Interval between lag checks when --wait-for-zero-lag is used (default is 20 seconds).
+Interval between lag checks (default is 20 seconds).
 
 | Attributes      | &nbsp;
 |-----------------|-------------

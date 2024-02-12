@@ -3,6 +3,8 @@
 ## February 2024
 
 - CLI:
+  * `playground connector show-lag`: removed `--wait-for-zero-lag` flag, it will always wait for lag to becomes 0
+  * `playground repro boostrap`: --file is now optional (if not set, currently running example is used)
   * Added `--vvv` (or `-v`) generic flag to activate verbose mode (example `playground --vvv status`))
   * Removed `playground fully-managed-connector` (handle transparently by `playground connector`)
   * Improved `playground connector show-lag`

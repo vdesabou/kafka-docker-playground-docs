@@ -1427,6 +1427,7 @@ Here are the steps to follow:
 3. Create a `Dockerfile` file in `context` directory above (`../../connect/connect-filestream-sink/`).
 
 ```yml
+ARG CP_CONNECT_IMAGE
 ARG CONNECT_TAG
 FROM ${CP_CONNECT_IMAGE}:${TAG}
 COPY jdk-8u201-linux-x64.rpm /tmp/

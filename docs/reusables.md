@@ -1429,7 +1429,7 @@ Here are the steps to follow:
 ```yml
 ARG CP_CONNECT_IMAGE
 ARG CONNECT_TAG
-FROM ${CP_CONNECT_IMAGE}:${TAG}
+FROM ${CP_CONNECT_IMAGE}:${CONNECT_TAG}
 COPY jdk-8u201-linux-x64.rpm /tmp/
 USER root
 RUN yum -y install /tmp/jdk-8u201-linux-x64.rpm && alternatives --set java /usr/java/jdk1.8.0_201-amd64/jre/bin/java && rm /tmp/jdk-8u201-linux-x64.rpm

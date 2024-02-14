@@ -1370,6 +1370,17 @@ Here are the steps to follow:
 
 3. Create a `Dockerfile` file in `context` directory above (`../../connect/connect-filestream-sink/`).
 
+Example with JDK 17:
+
+```yml
+ARG CP_CONNECT_IMAGE
+ARG CONNECT_TAG
+FROM ${CP_CONNECT_IMAGE}:${CONNECT_TAG}
+USER root
+RUN curl -L https://cdn.azul.com/zulu/bin/zulu17.42.19-ca-jdk17.0.7-linux.x86_64.rpm -o zulu17.42.19-ca-jdk17.0.7-linux..x86_64.rpm && yum install -y zulu17.42.19-ca-jdk17.0.7-linux..x86_64.rpm && alternatives --list && alternatives --set java /usr/lib/jvm/java-17-zulu-openjdk-jdk/bin/java
+USER appuser
+```
+
 Example with JDK 11:
 
 ```yml
@@ -1396,7 +1407,7 @@ USER appuser
 > [!WARNING]
 > Make sure to update `alternatives --set java` above with the right path.
 
-4. Verify the correct JDK version is installed once your test is started:
+1. Verify the correct JDK version is installed once your test is started:
 
 ```bash
 docker exec connect java -version

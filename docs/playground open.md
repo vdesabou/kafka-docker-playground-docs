@@ -1,6 +1,6 @@
 # playground open
 
-👐 When --file is not provided, simply open last example you ran with \<playground run\> or \<playground run-ccloud\>  
+👐 When --file is not provided, simply open last example you ran with \<playground run\>  
   
 Otherwise, open any file from the playground using --file.
 

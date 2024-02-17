@@ -54,13 +54,17 @@ By default, for each connector, the latest available version on Confluent Hub is
 
 #### *--enable-ksqldb*
 
-🚀 Enable ksqlDB  
+🚀 Enable ksqlDB   
+  
+❗ not supported with ccloud examples  
   
 By default, ksqldb-server and ksqldb-cli containers are not started for every test
 
 #### *--enable-rest-proxy*
 
 🧲 Enable Rest Proxy  
+  
+❗ not supported with ccloud examples  
   
 By default, rest-proxy container is not started for every test
 

@@ -28,15 +28,14 @@ visit https://docs.docker.com/get-docker to install
 
 ### Run commands
 
-- [run](playground%20run) - 🕹️ Run any example, except for Confluent Cloud (in this case use run-ccloud command)
-- [re-run](playground%20re-run) - ⚡ Simply re-run last example you ran with \<playground run\> or \<playground run-ccloud\>
+- [run](playground%20run) - 🕹️ Run any example
+- [re-run](playground%20re-run) - ⚡ Simply re-run last example you ran with \<playground run\>
 - [history](playground%20history) - 🏰 Get an history of the examples which were run with run command and run it again
 - [start-environment](playground%20start-environment) - 🔐 Simply start an environment listed in http://tinyurl.com/y4ybbw32:
-- [run-ccloud](playground%20run-ccloud) - ⛅ Run any Confluent Cloud (ccloud) example
 - [switch-ccloud](playground%20switch-ccloud) - 🌩️  Switch to ccloud environment.
 - [switch-back](playground%20switch-back) - 💺  Switch back from previous environment before switch-ccloud was called.
 - [update-version](playground%20update-version) - ✨ Update current confluent platform or connector(s) with new version(s)
-- [open](playground%20open) - 👐 When --file is not provided, simply open last example you ran with \<playground run\> or \<playground run-ccloud\>
+- [open](playground%20open) - 👐 When --file is not provided, simply open last example you ran with \<playground run\>
 - [stop](playground%20stop) - 🛑 Stop currently running example
 - [remove-all-docker-images](playground%20remove-all-docker-images) - 🧨 Remove all docker images (including docker volumes)
 - [open-docs](playground%20open-docs) - 🧑‍🎓 Open Confluent documentation of currently running example

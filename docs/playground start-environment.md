@@ -19,7 +19,7 @@
 - sasl-ssl  
 - ssl_kerberos  
   
-Note: when running an example with \<playground run\> or \<playground run-ccloud\>, it is already automatically done
+Note: when running an example with \<playground run\>, it is already automatically done
 
 ## Usage
 
@@ -71,13 +71,17 @@ Must be greater or equal to 5.0.0
 
 #### *--enable-ksqldb*
 
-🚀 Enable ksqlDB  
+🚀 Enable ksqlDB   
+  
+❗ not supported with ccloud examples  
   
 By default, ksqldb-server and ksqldb-cli containers are not started for every test
 
 #### *--enable-rest-proxy*
 
 🧲 Enable Rest Proxy  
+  
+❗ not supported with ccloud examples  
   
 By default, rest-proxy container is not started for every test
 

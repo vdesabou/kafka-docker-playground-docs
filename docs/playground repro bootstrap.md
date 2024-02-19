@@ -156,7 +156,8 @@ This only works for Oracle, MySql, Postgres and Microsoft Sql Server source conn
   
 ❣️ Only required if you want to use your own existing cluster  
   
-🎓 Tip: you can also use CLUSTER_NAME environment variable
+🎓 Tip: you can also use CLUSTER_NAME environment variable  
+🎓 Tip: use \<tab\> completion to trigger fzf completion
 
 #### *--cluster-creds CLUSTER-CREDS*
 

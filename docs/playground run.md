@@ -18,8 +18,8 @@
   In case you want to use your own existing cluster, you need to setup, in addition to previous ones:  
   
   --cluster-name (or CLUSTER_NAME environment variable): The cluster name  
-  --cluster-creds (or CLUSTER_CREDS environment variable): The Kafka api key and secret to use, it should be separated with semi-colon (example: `\<API_KEY\>:\<API_KEY_SECRET\>`)  
-  --cluster-schema-registry-creds (or SCHEMA_REGISTRY_CREDS environment variable) (optional, if not set, new one will be created): The Schema Registry api key and secret to use, it should be separated with semi-colon (example: `\<SR_API_KEY\>:\<SR_API_KEY_SECRET\>`)
+  --cluster-creds (or CLUSTER_CREDS environment variable): The Kafka api key and secret to use, it should be separated with colon (example: `\<API_KEY\>:\<API_KEY_SECRET\>`)  
+  --cluster-schema-registry-creds (or SCHEMA_REGISTRY_CREDS environment variable) (optional, if not set, new one will be created): The Schema Registry api key and secret to use, it should be separated with colon (example: `\<SR_API_KEY\>:\<SR_API_KEY_SECRET\>`)
 
 ## Usage
 
@@ -231,7 +231,7 @@ This only works for Oracle, MySql, Postgres and Microsoft Sql Server source conn
 
 #### *--cluster-creds CLUSTER-CREDS*
 
-🔒 The Kafka api key and secret to use, it should be separated with semi-colon (example: \<API_KEY\>:\<API_KEY_SECRET\>)  
+🔒 The Kafka api key and secret to use, it should be separated with colon (example: \<API_KEY\>:\<API_KEY_SECRET\>)  
   
 ❣️ Only required if you want to use your own existing cluster  
   
@@ -239,7 +239,7 @@ This only works for Oracle, MySql, Postgres and Microsoft Sql Server source conn
 
 #### *--cluster-schema-registry-creds CLUSTER-SCHEMA-REGISTRY-CREDS*
 
-🔒 The Schema Registry api key and secret to use, it should be separated with semi-colon (example: \<SR_API_KEY\>:\<SR_API_KEY_SECRET\>)  
+🔒 The Schema Registry api key and secret to use, it should be separated with colon (example: \<SR_API_KEY\>:\<SR_API_KEY_SECRET\>)  
   
 ℹ️ Optional, if not set, new credentials will be created  
   

@@ -16,7 +16,9 @@ playground repro bootstrap [OPTIONS] [ARGUMENTS...]
 
 🎯 Confluent Platform (CP) version to use  
   
-Must be greater or equal to 5.0.0
+Must be greater or equal to 5.3.0  
+  
+🎓 Tip: use \<tab\> completion to trigger fzf completion
 
 #### *--connector-tag CONNECTOR_TAG*
 

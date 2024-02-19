@@ -156,9 +156,11 @@ Use [playground run](/playground%20run) with this flag to change CP version used
 
 ```bash
   --tag TAG
-    🎯 Confluent Platform (CP) version to use
+  🎯 Confluent Platform (CP) version to use  
     
-    Must be greater or equal to 5.0.0
+  Must be greater or equal to 5.3.0  
+    
+  🎓 Tip: use \<tab\> completion to trigger fzf completion
 ```
 
 > [!TIP]

@@ -3,7 +3,7 @@
 ## February 2024
 
 - CLI:
-  * `--tag` has now completion with fzf
+  * `--tag` and `cluster-environment` have now completion with fzf
   * `playground run-ccloud` has been removed, use `playground run` instead
   * `playground connector show-lag`: removed `--wait-for-zero-lag` flag, it will always wait for lag to becomes 0
   * `playground repro boostrap`: --file is now optional (if not set, currently running example is used)

@@ -138,7 +138,8 @@ This only works for Oracle, MySql, Postgres and Microsoft Sql Server source conn
 
 🗺 The Cloud region.   
   
-🎓 Tip: you can also use CLUSTER_REGION environment variable
+🎓 Tip: you can also use CLUSTER_REGION environment variable  
+🎓 Tip: use \<tab\> completion to trigger fzf completion
 
 #### *--cluster-environment CLUSTER-ENVIRONMENT*
 
@@ -146,7 +147,8 @@ This only works for Oracle, MySql, Postgres and Microsoft Sql Server source conn
   
 ℹ️ Optional, if not set, new environment will be created  
   
-🎓 Tip: you can also use ENVIRONMENT environment variable
+🎓 Tip: you can also use ENVIRONMENT environment variable  
+🎓 Tip: use \<tab\> completion to trigger fzf completion
 
 #### *--cluster-name CLUSTER-NAME*
 

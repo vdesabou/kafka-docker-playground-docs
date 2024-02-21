@@ -3,6 +3,7 @@
 ## February 2024
 
 - CLI:
+  * adding `--id` to `playground schema delete` and `playground schema register`
   * `--tag`, `cluster-name` and `cluster-environment` have now completion with fzf
   * `playground run-ccloud` has been removed, use `playground run` instead
   * `playground connector show-lag`: removed `--wait-for-zero-lag` flag, it will always wait for lag to becomes 0

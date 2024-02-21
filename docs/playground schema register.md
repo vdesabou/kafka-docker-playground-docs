@@ -34,6 +34,12 @@ playground schema register [OPTIONS]
 |-----------------|-------------
 | Default Value:  | -
 
+#### *--id ID*
+
+☢️ Force schema id  
+  
+❗it will replace any schema which already exists at given id
+
 ## Examples
 
 ```bash

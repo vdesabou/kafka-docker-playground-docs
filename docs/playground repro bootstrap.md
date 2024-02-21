@@ -143,7 +143,7 @@ This only works for Oracle, MySql, Postgres and Microsoft Sql Server source conn
 
 #### *--cluster-environment CLUSTER-ENVIRONMENT*
 
-🌐 The environment id where want your new cluster (example: env-xxxxx)  
+🌐 The environment id where want your new cluster (example: txxxxx)  
   
 ℹ️ Optional, if not set, new environment will be created  
   

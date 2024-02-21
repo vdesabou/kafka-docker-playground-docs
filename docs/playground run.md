@@ -12,8 +12,8 @@
   
   --cluster-type (or CLUSTER_TYPE environment variable): The type of cluster (possible values: `basic`, `standard` and `dedicated`, default `basic`)  
   --cluster-cloud (or CLUSTER_CLOUD environment variable): The Cloud provider (possible values: `aws`, `gcp` and `azure`, default `aws`)  
-  --cluster-region (or CLUSTER_REGION environment variable): The Cloud region (use `confluent kafka region list` to get the list, default `eu-west-2`)  
-  --cluster-environment (or ENVIRONMENT environment variable) (optional): The environment id where want your new cluster (example: `env-xxxxx`)   
+  --cluster-region (or CLUSTER_REGION environment variable): The Cloud region (use `confluent kafka region list` to get the list, default `eu-west-2` for aws, `westeurope`for azure and `europe-west2` for gcp)  
+  --cluster-environment (or ENVIRONMENT environment variable) (optional): The environment id where want your new cluster (example: `txxxxx`)   
   
   In case you want to use your own existing cluster, you need to setup, in addition to previous ones:  
   
@@ -32,10 +32,6 @@ playground run [OPTIONS] [ARGUMENTS...]
 #### *fzf*
 
 visit https://github.com/junegunn/fzf#installation to install
-
-#### *confluent*
-
-visit https://docs.confluent.io/confluent-cli/current/overview.html to install
 
 ## Options
 
@@ -218,7 +214,7 @@ This only works for Oracle, MySql, Postgres and Microsoft Sql Server source conn
 
 #### *--cluster-environment CLUSTER-ENVIRONMENT*
 
-🌐 The environment id where want your new cluster (example: env-xxxxx)  
+🌐 The environment id where want your new cluster (example: txxxxx)  
   
 ℹ️ Optional, if not set, new environment will be created  
   

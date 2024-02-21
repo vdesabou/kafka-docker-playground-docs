@@ -2,6 +2,8 @@
 
 🕹️ Run any example  
   
+🪄 to start in interactive mode, just run playground run  
+  
 ⛅ When running Confluent Cloud (ccloud) example:  
   
   All you have to do is to be already logged in with confluent CLI.  
@@ -108,7 +110,7 @@ By default, for each connector, the latest available version on Confluent Hub is
 
 #### *--connector-jar CONNECTOR_JAR*
 
-♨️ Connector jar to use  
+🤎 Connector jar to use  
   
 ❕ It must be absolute full path  
   

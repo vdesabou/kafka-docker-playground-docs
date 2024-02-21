@@ -81,7 +81,7 @@ By default, for each connector, the latest available version on Confluent Hub is
 
 #### *--connector-jar CONNECTOR_JAR*
 
-♨️ Connector jar to use  
+🤎 Connector jar to use  
   
 ❕ It must be absolute full path  
   

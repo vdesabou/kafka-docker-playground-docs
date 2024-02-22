@@ -253,7 +253,7 @@ This only works for Oracle, MySql, Postgres and Microsoft Sql Server source conn
 ## Examples
 
 ```bash
-playground run
+playground run (interactive mode)
 ```
 
 ```bash

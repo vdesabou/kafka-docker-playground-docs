@@ -31,7 +31,6 @@ visit https://docs.docker.com/get-docker to install
 - [run](playground%20run) - 🕹️ Run any example
 - [re-run](playground%20re-run) - ⚡ Simply re-run last example you ran with \<playground run\>
 - [history](playground%20history) - 🏰 Get an history of the examples which were run with run command and run it again
-- [start-environment](playground%20start-environment) - 🔐 Simply start an environment listed in http://tinyurl.com/y4ybbw32:
 - [switch-ccloud](playground%20switch-ccloud) - 🌩️  Switch to ccloud environment.
 - [switch-back](playground%20switch-back) - 💺  Switch back from previous environment before switch-ccloud was called.
 - [update-version](playground%20update-version) - ✨ Update current confluent platform or connector(s) with new version(s)

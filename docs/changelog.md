@@ -3,6 +3,8 @@
 ## February 2024
 
 - CLI:
+  * 🔥 Added interactive mode when `playground run` is executed without providing `--file`
+  * removed `playground start-environment` in favor of interactive `playground run`
   * adding `--id` to `playground schema delete` and `playground schema register`
   * `--tag`, `cluster-name` and `cluster-environment` have now completion with fzf
   * `playground run-ccloud` has been removed, use `playground run` instead

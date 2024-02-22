@@ -253,6 +253,10 @@ This only works for Oracle, MySql, Postgres and Microsoft Sql Server source conn
 ## Examples
 
 ```bash
+playground run
+```
+
+```bash
 playground run -f zendesk-source<tab> --tag 7.2.1 --enable-control-center <ZENDESK_URL> <ZENDESK_USERNAME> <ZENDESK_PASSWORD>
 ```
 

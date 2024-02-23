@@ -1,8 +1,9 @@
 # playground run
 
-🕹️ Run any example  
+🕹️ Run any example ! just run \<playground run\> !  
   
-🪄 to start in interactive mode, just run playground run  
+🔥 HIGHLY RECOMMENDED: start in interactive mode by simple running \<playground run\> !  
+  
   
 ⛅ When running Confluent Cloud (ccloud) example:  
   

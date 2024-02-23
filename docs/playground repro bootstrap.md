@@ -1,6 +1,8 @@
 # playground repro bootstrap
 
-🛠  Bootstrap reproduction model  
+🛠  Bootstrap reproduction model, just run \<playground repro bootstrap\> !  
+  
+🔥 HIGHLY RECOMMENDED: start in interactive mode by simple running \<playground repro bootstrap\> !  
   
 👉 Check documentation https://kafka-docker-playground.io/#/reusables?id=%f0%9f%9b%a0-bootstrap-reproduction-model
 

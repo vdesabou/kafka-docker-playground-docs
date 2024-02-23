@@ -28,7 +28,7 @@ visit https://docs.docker.com/get-docker to install
 
 ### Run commands
 
-- [run](playground%20run) - 🕹️ Run any example
+- [run](playground%20run) - 🕹️ Run any example ! just run \<playground run\> !
 - [re-run](playground%20re-run) - ⚡ Simply re-run last example you ran with \<playground run\>
 - [history](playground%20history) - 🏰 Get an history of the examples which were run with run command and run it again
 - [switch-ccloud](playground%20switch-ccloud) - 🌩️  Switch to ccloud environment.
@@ -44,7 +44,7 @@ visit https://docs.docker.com/get-docker to install
 - [repro](playground%20repro) - 👷‍♂️ Reproduction model commands
 - [export](playground%20repro%20export) - 📤 Export as tgz file uncommitted reproduction models from the folder of current reproduction model
 - [import](playground%20repro%20import) - 📥 Import tgz file which was created with export command
-- [bootstrap](playground%20repro%20bootstrap) - 🛠  Bootstrap reproduction model
+- [bootstrap](playground%20repro%20bootstrap) - 🛠  Bootstrap reproduction model, just run \<playground repro bootstrap\> !
 
 ### Kafka commands
 

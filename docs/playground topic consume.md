@@ -34,7 +34,7 @@ Note: --topic should be specified in this case.
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Default Value:  | 
+| Default Value:  | 0
 
 #### *--grep GREP*
 

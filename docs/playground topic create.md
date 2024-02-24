@@ -28,7 +28,7 @@ Number of partitions for the topic. (default is 1)
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Default Value:  | 
+| Default Value:  | 1
 
 ## Examples
 

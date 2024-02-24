@@ -46,6 +46,10 @@ json (reads from stdin if empty)
 
 Package name
 
+#### *--wait-for-zero-lag*
+
+😴 Wait until lag becomes 0
+
 #### *--validate*
 
 ✅ Validate config using PUT /connector-plugins/(string:name)/config/validate (https://docs.confluent.io/platform/current/connect/references/restapi.html#put--connector-plugins-(string-name)-config-validate)

@@ -103,7 +103,7 @@ Otherwise, the key will be same for all records.
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Default Value:  | 
+| Default Value:  | 1
 
 #### *--compression-codec COMPRESSION-CODEC*
 

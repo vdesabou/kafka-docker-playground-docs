@@ -38,6 +38,7 @@ visit https://docs.docker.com/get-docker to install
 - [stop](playground%20stop) - 🛑 Stop currently running example
 - [remove-all-docker-images](playground%20remove-all-docker-images) - 🧨 Remove all docker images (including docker volumes)
 - [open-docs](playground%20open-docs) - 🧑‍🎓 Open Confluent documentation of currently running example
+- [cleanup-cloud-resources](playground%20cleanup-cloud-resources) - 🧹 Cleanup cloud resources that were created by running examples from the playground
 
 ### Repro commands
 

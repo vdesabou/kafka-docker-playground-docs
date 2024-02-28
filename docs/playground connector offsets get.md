@@ -1,6 +1,8 @@
 # playground connector offsets get
 
-💈 Get current offsets for connector  
+🏹 Get current offsets for source and sink connectors  
+  
+⚠️ Not available for ccloud source connectors  
 
 
 ## Usage

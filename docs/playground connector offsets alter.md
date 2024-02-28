@@ -1,6 +1,8 @@
 # playground connector offsets alter
 
-💈 Alter offsets for connector  
+⛏️ Alter offsets for source and sink connectors  
+  
+⚠️ Not available for ccloud connectors  
 
 
 ## Usage

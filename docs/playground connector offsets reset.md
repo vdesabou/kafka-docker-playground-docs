@@ -1,6 +1,8 @@
 # playground connector offsets reset
 
-💈 Reset offsets for connector  
+🆕 Reset offsets for source and sink connectors  
+  
+⚠️ Not available for ccloud connectors  
 
 
 ## Usage

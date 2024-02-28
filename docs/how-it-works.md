@@ -3,50 +3,6 @@
 
 Before learning how to create your own examples/reproduction models, here are some explanations on how the playground works internally...
 
-## 📁 Folder structure
-
-The main categories like `ccloud`, `connect`, `environment` are in root folder:
-
-```
-├── 3rdparty
-├── ccloud
-├── cloudformation
-├── connect
-├── docs
-├── environment
-├── images
-├── ksqldb
-├── operator
-├── other
-├── replicator
-├── scripts
-├── tools
-└── troubleshooting
-```
-
-All the tests are and **must** be at second level.
-
-Example with `connect`folder:
-
-```
-connect
-├── connect-active-mq-sink
-├── connect-active-mq-source
-├── connect-amps-source
-├── connect-appdynamics-metrics-sink
-├── connect-aws-cloudwatch-logs-source
-├── connect-aws-cloudwatch-metrics-sink
-<snip>
-
-131 directories
-```
-
-This is important because each test is sourcing [`scripts/utils.sh`](https://github.com/vdesabou/kafka-docker-playground/blob/master/scripts/utils.sh) like this:
-
-```bash
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
-source ${DIR}/../../scripts/utils.sh
-```
 
 ## 🐳 Docker override
 
@@ -158,7 +114,9 @@ As you can see, it only contains what is required to add SASL/SSL to a PLAINTEXT
 
 ### 🔏 Connector using non-plaintext environment
 
-Any connector example can be ran with any environment using `--environment` option of [playground run](/playground%20run?id=environment-environment) command.
+Any connector example can be ran with any environment using `environment` option of [playground run](/playground%20run?id=environment-environment) command.
+
+![environment](./images/environment.jpg)
 
 ## 🔗 Connect image used
 

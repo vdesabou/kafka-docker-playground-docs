@@ -7,6 +7,7 @@
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/vdesabou/kafka-docker-playground)
 ## ✨ Features
 
+- 🧠 Easily run commands with playground [CLI](/cli)
 - 🔗 170+ self-managed connectors [examples](/content?id=🔗-connectors)
 - 🌤️ 20+ fully-managed connectors [examples](/content?id=%f0%9f%a4%96-fully-managed-connectors)
 - 🔐 10+ secured [environments](/content?id=%F0%9F%94%90-environments) (SASL, RBAC, SSL...)
@@ -14,7 +15,6 @@
 - 💸 Confluent commercial [features](/content?id=💸-confluent-commercial) (Tiered Storage, Control Center, Audit logs...)
 - ♻️ Cluster Linking, Replicator and MirrorMaker 2 [examples](/content?id=🌍-multi-data-center-deployments)
 - 🎯 Run examples with any Confluent Platform or connector [versions](/how-to-use?id=🪄-specify-versions)
-- 🧠 Easily run commands with playground [CLI](/cli)
 - 🎓 Learn how the playground [works](/how-it-works)
 - 👷‍♂️ Build your own reproduction models with [reusables](/reusables)
 - 📱 Work directly in your browser using [Gitpod.io](/how-to-use?id=🪄-gitpodio)
@@ -24,7 +24,7 @@
 
 ## 🍿 See CLI in action
 
-<script async id="asciicast-581275" src="https://asciinema.org/a/581275.js" async data-autoplay="true" data-size="big"></script>
+[![asciicast](https://asciinema.org/a/643687.svg)](https://asciinema.org/a/643687)
 
 ## 🏁 Getting Started
 

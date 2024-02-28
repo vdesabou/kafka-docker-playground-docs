@@ -1,6 +1,7 @@
 # playground connector offsets reset
 
-fixthis
+💈 Reset offsets for connector  
+
 
 ## Usage
 

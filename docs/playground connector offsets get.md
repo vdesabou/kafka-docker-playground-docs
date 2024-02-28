@@ -1,6 +1,7 @@
 # playground connector offsets get
 
-fixthis
+💈 Get current offsets for connector  
+
 
 ## Usage
 

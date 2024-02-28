@@ -1,6 +1,7 @@
 # playground connector offsets alter
 
-fixthis
+💈 Alter offsets for connector  
+
 
 ## Usage
 

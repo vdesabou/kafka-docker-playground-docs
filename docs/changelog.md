@@ -3,6 +3,8 @@
 ## February 2024
 
 - CLI:
+  * Added `playground cleanup-cloud-resources` 🧹 Cleanup cloud resources that were created by running examples from the playground
+  * 🔥 Added interactive mode with `playground re-run` and `playground repro bootstrap`
   * 🔥 Added interactive mode when `playground run` is executed without providing `--file`
   * removed `playground start-environment` in favor of interactive `playground run`
   * adding `--id` to `playground schema delete` and `playground schema register`

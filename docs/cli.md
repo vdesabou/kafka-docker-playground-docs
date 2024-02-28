@@ -172,6 +172,7 @@ visit https://docs.docker.com/get-docker to install
 
 - [connector](playground%20connector) - 🔗 Connector commands
 - [status](playground%20connector%20status) - 🧩 Show status of all connectors
+- [offsets](playground%20connector%20offsets) - Handle (only source for now) source connector offsets (only available if CP \> 7.6)
 - [plugins](playground%20connector%20plugins) - 🎨 Show all connector plugins installed. You can also display transforms, converters and predicates using --all flag
 - [pause](playground%20connector%20pause) - ⏸️  Pause connector
 - [versions](playground%20connector%20versions) - 🧞 Get current and latest versions available on Confluent Hub for connector(s) used in example

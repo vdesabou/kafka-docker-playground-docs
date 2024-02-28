@@ -3,6 +3,7 @@
 ## February 2024
 
 - CLI:
+  * Added [playground connector offsets](/playground%20connector%20offsets) commands `get`, `reset` and `alter` for source (only with CP 7.6+) and sink connectors !
   * Added `playground cleanup-cloud-resources` 🧹 Cleanup cloud resources that were created by running examples from the playground
   * 🔥 Added interactive mode with `playground re-run` and `playground repro bootstrap`
   * 🔥 Added interactive mode when `playground run` is executed without providing `--file`

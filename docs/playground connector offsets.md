@@ -2,8 +2,7 @@
 
 💈 Handle source and sink connectors offsets  
   
-  * for source (KIP-875: First-class offsets support in Kafka Connect): it only available if CP \> 7.6  
-  * for sink:   
+  Note: First-class offsets (KIP-875) is only available if CP \> 7.6  
 
 
 ## Usage

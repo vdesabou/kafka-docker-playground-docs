@@ -1,5 +1,9 @@
 # 📜 Change Log
 
+## March 2024
+
+* Added [JMS source with Active MQ](https://github.com/vdesabou/kafka-docker-playground/tree/master/connect-jms-active-mq-source)
+
 ## February 2024
 
 - CLI:

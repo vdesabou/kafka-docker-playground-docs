@@ -9,7 +9,7 @@
 ## Usage
 
 ```bash
-playground repro bootstrap [OPTIONS] [ARGUMENTS...]
+playground repro bootstrap [OPTIONS]
 ```
 
 ## Options

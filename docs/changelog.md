@@ -2,6 +2,8 @@
 
 ## March 2024
 
+- CLI:
+  * `playground connector log-level` also set `org.apache.kafka.connect.runtime.WorkerSinkTask` for sink and `org.apache.kafka.connect.runtime.WorkerSourceTask` for source connectors
 * Added [JMS source with Active MQ](https://github.com/vdesabou/kafka-docker-playground/tree/master/connect-jms-active-mq-source)
 
 ## February 2024

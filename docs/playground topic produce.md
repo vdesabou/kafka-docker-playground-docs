@@ -176,6 +176,12 @@ Note: CP 7.2+ is required.
 
 ☑️ Validate schema according to connect sink converter used
 
+#### *--no-null*
+
+🪹 Never generate null fields even for optional fields  
+  
+N.B: only work with avro
+
 #### *--validate-config VALIDATE-CONFIG*
 
 🔩 Converter configuration parameters to use   

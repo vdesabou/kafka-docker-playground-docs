@@ -2,8 +2,7 @@
 
 🧬 Set connect log level  
   
-🎓 Tip: it will also set io.confluent.kafka.schemaregistry.client.rest.RestService (to see schema registry rest requests) and org.apache.kafka.connect.runtime.TransformationChain (to see records before and after SMTs)  
-        it will also set org.apache.kafka.connect.runtime.WorkerSinkTask for sink and org.apache.kafka.connect.runtime.WorkerSourceTask for source connectors.
+🎓 Tip: it will also set io.confluent.kafka.schemaregistry.client.rest.RestService (to see schema registry rest requests) and org.apache.kafka.connect.runtime.TransformationChain (to see records before and after SMTs)
 
 ## Usage
 

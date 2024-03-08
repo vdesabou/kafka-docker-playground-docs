@@ -3,9 +3,11 @@
 ## March 2024
 
 - CLI:
+  * Added `--id` flag to `playground get schema` command
   * `playground connector log-level` also set `org.apache.kafka.connect.runtime.WorkerSinkTask` for sink and `org.apache.kafka.connect.runtime.WorkerSourceTask` for source connectors
-* Added [JMS source with Active MQ](https://github.com/vdesabou/kafka-docker-playground/tree/master/connect-jms-active-mq-source)
-
+* Added [JMS source with Active MQ](https://github.com/vdesabou/kafka-docker-playground/tree/master/connect/connect-jms-active-mq-source)
+* Added [Schema references](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/schema-references)
+  
 ## February 2024
 
 - CLI:

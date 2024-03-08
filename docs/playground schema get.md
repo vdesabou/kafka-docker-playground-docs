@@ -14,6 +14,18 @@ playground schema get [OPTIONS]
 
 📛 Subject name
 
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Conflicts With: | *id*
+
+#### *--id ID*
+
+💯 Schema id
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Conflicts With: | *subject, deleted*
+
 #### *--verbose, -v*
 
 🐞 Show command being ran.
@@ -21,6 +33,10 @@ playground schema get [OPTIONS]
 #### *--deleted*
 
 🧟 Include soft deleted subjects
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Conflicts With: | *id*
 
 ## Examples
 

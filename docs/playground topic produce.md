@@ -213,6 +213,12 @@ Example: --producer-property "max.request.size=990485760" --producer-property "c
 |-----------------|-------------
 | Default Value:  | 0
 
+#### *--value-schema-id VALUE-SCHEMA-ID*
+
+🔰 Do not auto register schema and specify schema id to use.   
+  
+It sets --property value.schema.id=x --property auto.register=false --property use.latest.version=true
+
 ## Examples
 
 ```bash

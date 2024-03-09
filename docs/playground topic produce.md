@@ -180,7 +180,7 @@ Note: CP 7.2+ is required.
 
 🪹 Never generate null fields even for optional fields  
   
-N.B: only work with avro
+N.B: only work with avro and json-schema
 
 #### *--validate-config VALIDATE-CONFIG*
 

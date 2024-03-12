@@ -633,6 +633,9 @@ playground topic produce -t topic-avro-example-forced-value --nb-messages 1 --fo
 }
 EOF
 
+# json schema references
+playground topic produce --value /path/to/scripts/cli/predefined-schemas/json-schema/schema-reference/customer.json --reference /path/to/scripts/cli/predefined-schemas/json-schema/schema-reference/address.json --reference /path/to/scripts/cli/predefined-schemas/json-schema/schema-reference/email.json --topic customers
+
 ```
 
 

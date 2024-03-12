@@ -3,6 +3,7 @@
 ## March 2024
 
 - CLI:
+  * Added generic flag `--output-level`
   * Added `--no-null` flag to `playground topic produce`, see example https://github.com/vdesabou/kafka-docker-playground/issues/5285#issue-2162976678
   * Added `--id` flag to `playground get schema` command
   * `playground connector log-level` also set `org.apache.kafka.connect.runtime.WorkerSinkTask` for sink and `org.apache.kafka.connect.runtime.WorkerSourceTask` for source connectors

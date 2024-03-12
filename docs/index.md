@@ -143,4 +143,14 @@ visit https://docs.docker.com/get-docker to install
 ❗ it can print sensitive information ❗  
 
 
+#### *--output-level, -o LEVEL*
+
+❕Log level used by all commands  
+  
+Default is INFO (all INFO, WARN and ERROR will be printed in command output)
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Allowed Values: | INFO, WARN, ERROR
+
 

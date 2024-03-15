@@ -58,7 +58,7 @@ Package name
 
 🤖 If example is run (playground run) with --environment flag, automatic configuration to adapt to the environment is added.   
   
-This flag allows to skip this automatic configuration.
+This flag allows to skip this automatic configuration (only useful to reproduce issues)
 
 ## Examples
 

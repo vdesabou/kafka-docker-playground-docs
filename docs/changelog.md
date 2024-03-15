@@ -3,6 +3,7 @@
 ## March 2024
 
 - CLI:
+  * Added `--skip-automatic-connector-config` flag to `create-or-update-connector` to skip automatic configuration when `--environment` flag is used (only useful to reproduce issues)
   * Added generic flag `--output-level`
   * Added `--no-null` flag to `playground topic produce`, see example https://github.com/vdesabou/kafka-docker-playground/issues/5285#issue-2162976678
   * Added `--id` flag to `playground get schema` command

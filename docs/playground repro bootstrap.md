@@ -49,24 +49,4 @@ playground repro bootstrap [OPTIONS]
 playground repro bootstrap (interactive mode)
 ```
 
-```bash
-playground repro bootstrap -f hdfs2<tab> -d "simple test"
-```
-
-```bash
-playground repro bootstrap -f /full/path/hdfs2-sink.sh -d "testing with avro producer" --producer avro --producer-schema-value myschema<tab>
-```
-
-```bash
-playground repro bootstrap -f hdfs2<tab> -d "testing with 2 protobuf producers" --producer protobuf --nb-producers 2
-```
-
-```bash
-playground repro bootstrap -f hdfs2<tab> -d "testing custom smt" --custom-smt
-```
-
-```bash
-playground repro bootstrap -f debeziumpostgres<tab> -d "create pipeline" --pipeline jdbcsink<tab>
-```
-
 

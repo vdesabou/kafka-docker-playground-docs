@@ -54,6 +54,12 @@ Package name
 
 ✅ Validate config using PUT /connector-plugins/(string:name)/config/validate (https://docs.confluent.io/platform/current/connect/references/restapi.html#put--connector-plugins-(string-name)-config-validate)
 
+#### *--skip-automatic-connector-config*
+
+🤖 If example is run (playground run) with --environment flag, automatic configuration to adapt to the environment is added.   
+  
+This flag allows to skip this automatic configuration.
+
 ## Examples
 
 ```bash

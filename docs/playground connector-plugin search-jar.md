@@ -26,6 +26,18 @@ visit https://openjdk.org/install/ to install
 |-----------------|-------------
 | Required:       | ✓ Yes
 
+#### *--connector-tag CONNECTOR_TAG*
+
+🔗 Connector version to use  
+  
+By default, for each connector, the latest available version on Confluent Hub is used  
+  
+🎓 Tip: set to " " in order to select the version dynamically
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Conflicts With: | *--connector-zip*
+
 #### *--class CLASS*
 
 ☕ Java class name to search for in all jars

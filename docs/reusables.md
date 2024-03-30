@@ -928,7 +928,7 @@ Examples
   --action start
 ```
 
-## 🐌 Add latency
+<!-- ## 🐌 Add latency
 
 It is sometime necessary for a reproduction model to simulate latency between components.
 
@@ -955,7 +955,7 @@ clear_traffic_control nginx_proxy
 
 ```bash
 docker exec --privileged --user root -i broker bash -c 'yum install -y libmnl && wget http://vault.centos.org/8.1.1911/BaseOS/x86_64/os/Packages/iproute-tc-4.18.0-15.el8.x86_64.rpm && rpm -i --nodeps --nosignature http://vault.centos.org/8.1.1911/BaseOS/x86_64/os/Packages/iproute-tc-4.18.0-15.el8.x86_64.rpm'
-```
+``` -->
 
 ## 🏚 Simulate TCP connections problems
 

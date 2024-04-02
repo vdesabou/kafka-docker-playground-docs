@@ -1,5 +1,5 @@
 # 🐳 kafka-docker-playground
-![success tests](https://img.shields.io/badge/success%20tests-1216%2F1239-red)![connector tested](https://img.shields.io/badge/connector%20tested-151-green)![cp versions tested](https://img.shields.io/badge/cp%20version%20tested-%207.4.4%207.5.3%207.6.0-green)![last run](https://img.shields.io/badge/last%20run-2024--04--02%2019:55-green)
+![success tests](https://img.shields.io/badge/success%20tests-1207%2F1242-red)![connector tested](https://img.shields.io/badge/connector%20tested-151-green)![cp versions tested](https://img.shields.io/badge/cp%20version%20tested-%207.4.4%207.5.3%207.6.0-green)![last run](https://img.shields.io/badge/last%20run-2024--04--02%2022:17-green)
 ![GitHub issues by-label](https://img.shields.io/github/issues/vdesabou/kafka-docker-playground/CI%20failing%20🔥)![GitHub issues by-label](https://img.shields.io/github/issues/vdesabou/kafka-docker-playground/enhancement%20✨)
 ![GitHub repo size](https://img.shields.io/github/repo-size/vdesabou/kafka-docker-playground)
 [![Add a star on GitHub](https://img.shields.io/github/stars/vdesabou/kafka-docker-playground?style=social)](https://github.com/vdesabou/kafka-docker-playground)
@@ -7,8 +7,8 @@
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/vdesabou/kafka-docker-playground)
 ## ✨ Features
 
-- 🔗 170+ self-managed connectors [examples](/content?id=🔗-connectors)
-- 🌤️ 20+ fully-managed connectors [examples](/content?id=%f0%9f%a4%96-fully-managed-connectors)
+- 🔗 170+ onprem (or self-managed) connectors [examples](/content?id=🔗-connectors)
+- 🌤️ 30+ fully-managed connectors [examples](/content?id=%f0%9f%a4%96-fully-managed-connectors)
 - 🔐 10+ secured [environments](/content?id=%F0%9F%94%90-environments) (SASL, RBAC, SSL...)
 - ☁️ Confluent Cloud [examples](/content?id=☁%EF%B8%8F-confluent-cloud)
 - 💸 Confluent commercial [features](/content?id=💸-confluent-commercial) (Tiered Storage, Control Center, Audit logs...)

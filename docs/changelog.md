@@ -1,5 +1,10 @@
 # 📜 Change Log
 
+## April 2024
+
+- CLI:
+  * Added `playground connector logs` command. This is basically a shortcut for `playground container logs --container connect`. It does not work for Fully Managed connectors, except if you're a Confluent employee, this will open log in our internal tools (make sure to follow this first https://github.com/confluentinc/kafka-docker-playground-internal#how-to-use) 
+
 ## March 2024
 
 - CLI:

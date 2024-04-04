@@ -29,6 +29,10 @@ playground connector COMMAND
 - [create-or-update](playground%20connector%20create-or-update) - 🧑‍🎨  Create or update connector
 - [update](playground%20connector%20update) - 🛠️ Update connector configuration by opening current connector config in text editor set with playground config editor \<editor\> (default is code). Once file is saved, the new configuration is updated.
 
+## Connect commands
+
+- [logs](playground%20connector%20logs) - 🕵️  Tail and follow connect logs
+
 ## Examples
 
 ```bash

@@ -32,6 +32,7 @@ playground connector COMMAND
 ## Connect commands
 
 - [logs](playground%20connector%20logs) - 🕵️  Tail and follow connect logs
+- [open-in-confluent-cloud](playground%20connector%20open-in-confluent-cloud) - 🤖 Open Fully Managed connector in Confluent Cloud dashboard
 
 ## Examples
 

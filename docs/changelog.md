@@ -3,6 +3,7 @@
 ## April 2024
 
 - CLI:
+  * Added `playground connector open-in-confluent-cloud` (🤖 Open Fully Managed connector in Confluent Cloud dashboard)
   * Added `playground connector logs` command. This is basically a shortcut for `playground container logs --container connect`. It does not work for Fully Managed connectors, except if you're a Confluent employee, this will open log in our internal tools (make sure to follow this first https://github.com/confluentinc/kafka-docker-playground-internal#how-to-use) 
 - Added Fully Managed connectors (also in CI):
   - <img src="https://github.com/vdesabou/kafka-docker-playground/raw/master/images/icons/aws_redshift.png" width="15"> [Amazon Redshift Sink](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/fully-managed-connect-aws-redshift-sink)

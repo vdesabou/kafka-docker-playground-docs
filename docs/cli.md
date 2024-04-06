@@ -188,6 +188,7 @@ visit https://docs.docker.com/get-docker to install
 - [open-docs](playground%20connector%20open-docs) - 🧑‍🎓 Open connector documentation of currently running conector(s)
 - [log-level](playground%20connector%20log-level) - 🧬 Set connect log level
 - [logs](playground%20connector%20logs) - 🕵️  Tail and follow connect logs
+- [open-in-confluent-cloud](playground%20connector%20open-in-confluent-cloud) - 🤖 Open Fully Managed connector in Confluent Cloud dashboard
 - [create-or-update](playground%20connector%20create-or-update) - 🧑‍🎨  Create or update connector
 - [update](playground%20connector%20update) - 🛠️ Update connector configuration by opening current connector config in text editor set with playground config editor \<editor\> (default is code). Once file is saved, the new configuration is updated.
 

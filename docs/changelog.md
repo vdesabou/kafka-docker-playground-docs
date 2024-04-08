@@ -3,6 +3,7 @@
 ## April 2024
 
 - CLI:
+  * 🔥 Added support for [Manage Offsets for Fully-Managed Connectors](https://docs.confluent.io/cloud/current/connectors/offsets.html) in [playground connector offsets](https://kafka-docker-playground.io/#/playground%20connector%20offsets) commands
   * Added `playground connector open-in-confluent-cloud` (🤖 Open Fully Managed connector in Confluent Cloud dashboard)
   * Added `playground connector logs` command. This is basically a shortcut for `playground container logs --container connect`. It does not work for Fully Managed connectors, except if you're a Confluent employee, this will open log in our internal tools (make sure to follow this first https://github.com/confluentinc/kafka-docker-playground-internal#how-to-use) 
 - Added Fully Managed connectors (also in CI):

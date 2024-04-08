@@ -2,7 +2,7 @@
 
 🏹 Get current offsets for source and sink connectors  
   
-⚠️ Not available for ccloud source connectors  
+⚠️ Available for ccloud source connectors as EA (see https://docs.confluent.io/cloud/current/connectors/offsets.html)  
 
 
 ## Usage

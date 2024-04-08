@@ -2,7 +2,7 @@
 
 ⛏️ Alter offsets for source and sink connectors  
   
-⚠️ Not available for ccloud connectors  
+⚠️ Available for ccloud connectors as EA (see https://docs.confluent.io/cloud/current/connectors/offsets.html)  
 
 
 ## Usage

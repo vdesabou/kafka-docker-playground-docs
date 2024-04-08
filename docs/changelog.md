@@ -47,6 +47,7 @@
   - <img src="https://github.com/vdesabou/kafka-docker-playground/raw/master/images/icons/sqs.svg" width="15"> [Amazon SQS Source](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/fully-managed-connect-aws-sqs-source)
   * <img src="https://github.com/vdesabou/kafka-docker-playground/raw/master/images/icons/blob_storage.png" width="15"> [Azure Blob Storage Source](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/fully-managed-connect-azure-blob-storage-source)
   * <img src="https://github.com/vdesabou/kafka-docker-playground/raw/master/images/icons/spanner.png" width="15"> [Google Cloud Spanner Sink](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/fully-managed-connect-gcp-spanner-sink)
+  - <img src="https://github.com/vdesabou/kafka-docker-playground/raw/master/images/icons/datadog.png" height="15"> [Datadog Metrics Sink](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/fully-managed-datadog-metrics-sink)
 
 ## March 2024
 

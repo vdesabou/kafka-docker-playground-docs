@@ -5,7 +5,7 @@
 ## Usage
 
 ```bash
-playground topic create [OPTIONS] [ARGUMENTS...]
+playground topic create [OPTIONS] [--] [ARGUMENTS...]
 ```
 
 ## Options

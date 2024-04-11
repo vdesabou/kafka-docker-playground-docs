@@ -5,7 +5,7 @@
 ## Usage
 
 ```bash
-playground topic alter [OPTIONS] [ARGUMENTS...]
+playground topic alter [OPTIONS] [--] [ARGUMENTS...]
 ```
 
 ## Options

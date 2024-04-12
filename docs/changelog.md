@@ -54,6 +54,7 @@
   - <img src="https://github.com/vdesabou/kafka-docker-playground/raw/master/images/icons/mongodb.png" width="15"> [MongoDB Atlas Source](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/fm-mongodb-source)
   - <img src="https://github.com/vdesabou/kafka-docker-playground/raw/master/images/icons/mongodb.png" width="15"> [MongoDB Atlas Sink](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/fm-mongodb-sink)
   - <img src="https://github.com/vdesabou/kafka-docker-playground/raw/master/images/icons/sql_server.png" width="15"> [JDBC Microsoft SQL Server Source](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/fm-jdbc-sqlserver-source)
+  - <img src="https://github.com/vdesabou/kafka-docker-playground/raw/master/images/icons/zendesk.png" width="15"> [Zendesk Source](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/fm-zendesk-source)
   
 ## March 2024
 

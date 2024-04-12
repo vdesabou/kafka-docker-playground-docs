@@ -62,6 +62,7 @@
   - <img src="https://github.com/vdesabou/kafka-docker-playground/raw/master/images/icons/servicenow.png" width="15"> [ServiceNow Source](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/fm-servicenow-source)
   - <img src="https://github.com/vdesabou/kafka-docker-playground/raw/master/images/icons/servicenow.png" width="15"> [ServiceNow Sink](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/fm-servicenow-sink)
   - <img src="https://github.com/vdesabou/kafka-docker-playground/raw/master/images/icons/splunk.png" width="15"> [Splunk Sink](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/fm-splunk-sink)
+  - <img src="https://github.com/vdesabou/kafka-docker-playground/raw/master/images/icons/solace.png" width="15"> [Solace Sink](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/fm-solace-sink)
 
 ## March 2024
 

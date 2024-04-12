@@ -57,7 +57,11 @@
   - <img src="https://github.com/vdesabou/kafka-docker-playground/raw/master/images/icons/zendesk.png" width="15"> [Zendesk Source](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/fm-zendesk-source)
   - <img src="https://github.com/vdesabou/kafka-docker-playground/raw/master/images/icons/salesforce.png" height="15"> [SalesForce Bulk API Source](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/fm-salesforce-bulkapi-source)
   - <img src="https://github.com/vdesabou/kafka-docker-playground/raw/master/images/icons/salesforce.png" height="15"> [SalesForce Bulk API 2.0 Source](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/fm-salesforce-bulkapi-2-0-source)
-  
+  - <img src="https://github.com/vdesabou/kafka-docker-playground/raw/master/images/icons/salesforce.png" height="15"> [SalesForce Bulk API 2.0 Sink](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/fm-salesforce-bulkapi-2-0-sink)
+  - <img src="https://github.com/vdesabou/kafka-docker-playground/raw/master/images/icons/salesforce.png" height="15"> [Salesforce Platform Event Source](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/fm-salesforce-platform-events-source)
+  - <img src="https://github.com/vdesabou/kafka-docker-playground/raw/master/images/icons/servicenow.png" width="15"> [ServiceNow Source](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/fm-servicenow-source)
+  - <img src="https://github.com/vdesabou/kafka-docker-playground/raw/master/images/icons/servicenow.png" width="15"> [ServiceNow Sink](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/fm-servicenow-sink)
+
 ## March 2024
 
 - CLI:

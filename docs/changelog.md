@@ -66,6 +66,8 @@
   - <img src="https://github.com/vdesabou/kafka-docker-playground/raw/master/images/icons/opensearch.png" width="15"> [OpenSearch Sink](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/fm-opensearch-sink)
   - <img src="https://github.com/vdesabou/kafka-docker-playground/raw/master/images/icons/sftp.png" width="15"> [SFTP Sink](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/fm-sftp-sink)
   - <img src="https://github.com/vdesabou/kafka-docker-playground/raw/master/images/icons/redis.png" width="15"> [Redis Sink](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/fm-redis-sink)
+  - <img src="https://github.com/vdesabou/kafka-docker-playground/raw/master/images/icons/rabbitmq.svg" width="15">  [RabbitMQ Sink](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/fm-rabbitmq-sink)
+  - <img src="https://github.com/vdesabou/kafka-docker-playground/raw/master/images/icons/pagerduty.png" width="15"> [PagerDuty Sink](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/fm-pagerduty-sink)
 
 ## March 2024
 

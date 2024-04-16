@@ -64,6 +64,7 @@
   - <img src="https://github.com/vdesabou/kafka-docker-playground/raw/master/images/icons/splunk.png" width="15"> [Splunk Sink](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/fm-splunk-sink)
   - <img src="https://github.com/vdesabou/kafka-docker-playground/raw/master/images/icons/solace.png" width="15"> [Solace Sink](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/fm-solace-sink)
   - <img src="https://github.com/vdesabou/kafka-docker-playground/raw/master/images/icons/opensearch.png" width="15"> [OpenSearch Sink](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/fm-opensearch-sink)
+  - <img src="https://github.com/vdesabou/kafka-docker-playground/raw/master/images/icons/sftp.png" width="15"> [SFTP Sink](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/fm-sftp-sink)
 
 ## March 2024
 

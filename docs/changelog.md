@@ -71,6 +71,7 @@
   - <img src="https://github.com/vdesabou/kafka-docker-playground/raw/master/images/icons/mysql.png" width="15"> [JDBC MySQL Sink](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/fm-jdbc-mysql-sink)
   - <img src="https://github.com/vdesabou/kafka-docker-playground/raw/master/images/icons/postgresql.png" width="15"> [JDBC PostGreSQL Source](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/fm-jdbc-postgresql-source)
   - <img src="https://github.com/vdesabou/kafka-docker-playground/raw/master/images/icons/oracle_12.jpg" width="15"> [JDBC Oracle 19c Sink](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/fm-jdbc-oracle19-sink)
+  - <img src="https://github.com/vdesabou/kafka-docker-playground/raw/master/images/icons/azure_loganalytics.png" width="15"> [Azure Log Analytics Sink](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/fm-azure-log-analytics-sink)
 
 ## March 2024
 

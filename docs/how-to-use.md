@@ -130,14 +130,49 @@ All you have to do is to be already logged in with [confluent CLI](https://docs.
 
 By default, a new Confluent Cloud environment with a Cluster will be created.
 
-In case you want to use your own existing cluster, you can setup these environment variables (or set it up using playground run](/playground%20run) command):
+You can configure the new cluster by using flags with [playground run](/playground%20run) command or just by setting environment variables:
 
-* `ENVIRONMENT`: The environment id where your cluster is located (example: `txxxxx`) 
-* `CLUSTER_NAME`: The cluster name
-* `CLUSTER_CLOUD`: The Cloud provider (possible values: `aws`, `gcp` and `azure`)
-* `CLUSTER_REGION`: The Cloud region
-* `CLUSTER_CREDS`: The Kafka api key and secret to use, it should be separated with colon (example: `<API_KEY>:<API_KEY_SECRET>`)
-* `SCHEMA_REGISTRY_CREDS` (optional, if not set, new one will be created): The Schema Registry api key and secret to use, it should be separated with colon (example: `<SR_API_KEY>:<SR_API_KEY_SECRET>`)
+* `–cluster-type` (or `CLUSTER_TYPE`  environment variable): the type of cluster (possible values: `basic`, `standard` and `dedicated`, default `basic`)
+* `–cluster-cloud` (or `CLUSTER_CLOUD` environment variable): The Cloud provider (possible values: `aws`, `gcp` and `azure`, default `aws`)
+* `–cluster-region` (or )`CLUSTER_REGION` environment variable): The Cloud region (use `confluent kafka region list` to get the list, default `eu-west-2` for aws, `westeurope`for azure and `europe-west2` for gcp)
+* `–cluster-environment` (or `ENVIRONMENT` environment variable) (optional): The environment id where want your new cluster (example: `txxxxx`) 
+
+In case you want to use your own existing cluster, you need to setup, in addition to previous ones:
+
+* `–cluster-name ` (or `CLUSTER_NAME` environment variable): The cluster name
+* `–cluster-creds` (or `CLUSTER_CREDS` environment variable): The Kafka api key and secret to use, it should be separated with colon (example: `<API_KEY>:<API_KEY_SECRET>`)
+* `–cluster-schema-registry-creds ` (or `SCHEMA_REGISTRY_CREDS` environment variable) (optional, if not set, new one will be created): The Schema Registry api key and secret to use, it should be separated with colon (example: `<SR_API_KEY>:<SR_API_KEY_SECRET>`)
+
+🤖 For [Fully Managed connectors](/content?id=%f0%9f%a4%96-fully-managed-connectors), as examples are [dependent of cloud providers](https://docs.confluent.io/cloud/current/connectors/index.html#cloud-platforms-support), you have the possibility to define specific existing clusters per cloud provider:
+
+* AWS:
+
+```bash
+AWS_CLUSTER_NAME
+AWS_CLUSTER_REGION
+AWS_CLUSTER_CLOUD
+AWS_CLUSTER_CREDS
+```
+
+* GCP:
+
+```bash
+GCP_CLUSTER_NAME
+GCP_CLUSTER_REGION
+GCP_CLUSTER_CLOUD
+GCP_CLUSTER_CREDS
+```
+
+* AZURE:
+
+```bash
+AZURE_CLUSTER_NAME
+AZURE_CLUSTER_REGION
+AZURE_CLUSTER_CLOUD
+AZURE_CLUSTER_CREDS
+```
+
+For example, if you're running an AZURE Fully Managed connector example and `AZURE_CLUSTER_NAME` is set, then this cluster will be used even if you have `CLUSTER_NAME` set.
 
 ## 🪄 Specify versions
 

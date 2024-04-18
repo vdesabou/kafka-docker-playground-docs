@@ -1,6 +1,6 @@
 # playground get-jmx-metrics
 
-🔢 Get JMX metrics from a component  
+🔢 Get JMX metrics from a container  
   
 👉 Check documentation https://kafka-docker-playground.io/#/how-to-use?id=%f0%9f%94%a2-jmx-metrics
 
@@ -18,14 +18,13 @@ visit https://openjdk.org/install/ to install
 
 ## Options
 
-#### *--component, -c COMPONENT*
+#### *--container, -c CONTAINER*
 
-Component name
+🐳 Container name
 
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Default Value:  | connect
-| Allowed Values: | zookeeper, broker, connect, schema-registry
 
 #### *--open, -o*
 
@@ -38,11 +37,11 @@ Domain name
 ## Examples
 
 ```bash
-playground get-jmx-metrics --component connect
+playground get-jmx-metrics --container connect
 ```
 
 ```bash
-playground get-jmx-metrics --component connect --domain "kafka.connect kafka.consumer kafka.producer"
+playground get-jmx-metrics --container connect --domain "kafka.connect kafka.consumer kafka.producer"
 ```
 
 ```bash

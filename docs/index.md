@@ -50,7 +50,7 @@ visit https://docs.docker.com/get-docker to install
 ### Kafka commands
 
 - [get-docker-compose](playground%20get-docker-compose) - 🐋 Get docker-compose
-- [get-jmx-metrics](playground%20get-jmx-metrics) - 🔢 Get JMX metrics from a component
+- [get-jmx-metrics](playground%20get-jmx-metrics) - 🔢 Get JMX metrics from a container
 
 ### Schema commands
 

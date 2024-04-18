@@ -50,4 +50,18 @@ GCP keyfile (generated with "cat keyfile.json | jq -aRs .")
   
 ❗use with caution
 
+#### *--resource RESOURCE*
+
+🛁 resource to cleanup  
+  
+If not provided, all of them are cleaned up  
+  
+🎓 Tip: you can pass multiple resources by specifying --resource multiple times
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Repeatable:     |  ✓ Yes
+| Default Value:  | ["aws", "gcp", "azure", "ccloud", "salesforce"]
+| Allowed Values: | aws, gcp, azure, ccloud, salesforce
+
 

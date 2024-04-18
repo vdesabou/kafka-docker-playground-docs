@@ -1190,14 +1190,25 @@ Here are the steps to follow:
 
 3. Create a `Dockerfile` file in `context` directory above (`../../connect/connect-filestream-sink/`).
 
-Example with JDK 17:
+Example with JDK 17 and `x86_64` architecture:
 
 ```yml
 ARG CP_CONNECT_IMAGE
 ARG CONNECT_TAG
 FROM ${CP_CONNECT_IMAGE}:${CONNECT_TAG}
 USER root
-RUN curl -L https://cdn.azul.com/zulu/bin/zulu17.42.19-ca-jdk17.0.7-linux.x86_64.rpm -o zulu17.42.19-ca-jdk17.0.7-linux..x86_64.rpm && yum install -y zulu17.42.19-ca-jdk17.0.7-linux..x86_64.rpm && alternatives --list && alternatives --set java /usr/lib/jvm/java-17-zulu-openjdk-jdk/bin/java
+RUN curl -L https://cdn.azul.com/zulu/bin/zulu17.42.19-ca-jdk17.0.7-linux.x86_64.rpm -o zulu17.42.19-ca-jdk17.0.7-linux.x86_64.rpm && yum install -y zulu17.42.19-ca-jdk17.0.7-linux.x86_64.rpm && alternatives --list && alternatives --set java /usr/lib/jvm/java-17-zulu-openjdk-jdk/bin/java
+USER appuser
+```
+
+If you use arm architecture (Mac M1 for example), you need to use different rpm (`aarch64`), example:
+
+```yml
+ARG CP_CONNECT_IMAGE
+ARG CONNECT_TAG
+FROM ${CP_CONNECT_IMAGE}:${CONNECT_TAG}
+USER root
+RUN curl -L https://cdn.azul.com/zulu/bin/zulu17.42.19-ca-jdk17.0.7-linux.aarch64.rpm -o zulu17.42.19-ca-jdk17.0.7-linux.aarch64.rpm && yum install -y zulu17.42.19-ca-jdk17.0.7-linux.aarch64.rpm && alternatives --list && alternatives --set java /usr/lib/jvm/java-17-zulu-openjdk-jdk/bin/java
 USER appuser
 ```
 

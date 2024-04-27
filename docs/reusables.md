@@ -1173,9 +1173,7 @@ Here are some examples:
 
 Here are the steps to follow:
 
-1. Get the JDK `.rpm` version link you want to install from the [website](https://www.azul.com/downloads). In our example, that will be `https://cdn.azul.com/zulu/bin/zulu11.48.21-ca-jdk11.0.11-linux.x86_64.rpm`
-
-2. Add this in your `docker-compose` file:
+1. Add this in your `docker-compose` file:
 
 ```yml
   connect:
@@ -1188,57 +1186,18 @@ Here are the steps to follow:
 > [!WARNING]
 > Make sure to update `context` above with the right path.
 
-3. Create a `Dockerfile` file in `context` directory above (`../../connect/connect-filestream-sink/`).
-
-Example with JDK 17 and `x86_64` architecture:
+2. Create a `Dockerfile` file in `context` directory above (`../../connect/connect-filestream-sink/`).
 
 ```yml
 ARG CP_CONNECT_IMAGE
 ARG CONNECT_TAG
 FROM ${CP_CONNECT_IMAGE}:${CONNECT_TAG}
 USER root
-RUN curl -L https://cdn.azul.com/zulu/bin/zulu17.42.19-ca-jdk17.0.7-linux.x86_64.rpm -o zulu17.42.19-ca-jdk17.0.7-linux.x86_64.rpm && yum install -y zulu17.42.19-ca-jdk17.0.7-linux.x86_64.rpm && alternatives --list && alternatives --set java /usr/lib/jvm/java-17-zulu-openjdk-jdk/bin/java
+RUN RUN yum install -y https://cdn.azul.com/zulu/bin/zulu-repo-1.0.0-1.noarch.rpm && yum -y install zulu17-jdk
 USER appuser
 ```
 
-If you use arm architecture (Mac M1 for example), you need to use different rpm (`aarch64`), example:
-
-```yml
-ARG CP_CONNECT_IMAGE
-ARG CONNECT_TAG
-FROM ${CP_CONNECT_IMAGE}:${CONNECT_TAG}
-USER root
-RUN curl -L https://cdn.azul.com/zulu/bin/zulu17.42.19-ca-jdk17.0.7-linux.aarch64.rpm -o zulu17.42.19-ca-jdk17.0.7-linux.aarch64.rpm && yum install -y zulu17.42.19-ca-jdk17.0.7-linux.aarch64.rpm && alternatives --list && alternatives --set java /usr/lib/jvm/java-17-zulu-openjdk-jdk/bin/java
-USER appuser
-```
-
-Example with JDK 11:
-
-```yml
-ARG CP_CONNECT_IMAGE
-ARG CONNECT_TAG
-FROM ${CP_CONNECT_IMAGE}:${CONNECT_TAG}
-USER root
-RUN wget https://cdn.azul.com/zulu/bin/zulu11.48.21-ca-jdk11.0.11-linux.x86_64.rpm && yum install -y zulu11.48.21-ca-jdk11.0.11-linux.x86_64.rpm && alternatives --set java /usr/lib/jvm/zulu-11/bin/java
-USER appuser
-```
-
-Another example with JDK 8:
-
-```yml
-ARG CP_CONNECT_IMAGE
-ARG CONNECT_TAG
-FROM ${CP_CONNECT_IMAGE}:${CONNECT_TAG}
-USER root
-RUN wget https://cdn.azul.com/zulu/bin/zulu8.60.0.21-ca-jdk8.0.322-linux.x86_64.rpm && yum install -y zulu8.60.0.21-ca-jdk8.0.322-linux.x86_64.rpm && alternatives --set java /usr/lib/jvm/zulu-8/jre/bin/java
-USER appuser
-```
-
-
-> [!WARNING]
-> Make sure to update `alternatives --set java` above with the right path.
-
-1. Verify the correct JDK version is installed once your test is started:
+3. Verify the correct JDK version is installed once your test is started:
 
 ```bash
 docker exec connect java -version

@@ -160,9 +160,7 @@ By default, there is only one broker node enabled
 
 🥉 Enable multiple connect node  
   
-By default, there is only one connect node enabled  
-  
-It only works when plaintext environment is used
+By default, there is only one connect node enabled
 
 #### *--enable-jmx-grafana*
 

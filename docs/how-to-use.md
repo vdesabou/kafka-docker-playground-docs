@@ -273,9 +273,6 @@ By default, there is only one kafka node enabled. To enable a three node count, 
 
 By default, there is only one connect node enabled. To enable a three connect node count, select it in menu.
 
-> [!WARNING]
-> It only works when [plaintext](https://github.com/vdesabou/kafka-docker-playground/tree/master/environment/plaintext) environment is used.
-
 ### 📊 Enabling JMX Grafana
 
 By default, Grafana dashboard using JMX metrics is not started for every test.

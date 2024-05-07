@@ -1,5 +1,9 @@
 # 📜 Change Log
 
+## May 2024
+
+- Enable multiple connect workers to work with every environment (not only plaintext) #5612
+
 ## April 2024
 
 - CLI:

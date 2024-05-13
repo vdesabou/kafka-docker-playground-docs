@@ -158,9 +158,9 @@ By default, there is only one broker node enabled
 
 #### *--enable-multiple-connect-workers*
 
-🥉 Enable multiple connect node  
+🥉 Enable multiple connect worker node  
   
-By default, there is only one connect node enabled
+By default, there is only one connect worker node enabled
 
 #### *--enable-jmx-grafana*
 

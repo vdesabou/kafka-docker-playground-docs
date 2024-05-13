@@ -22,7 +22,7 @@ playground topic delete [OPTIONS]
 |-----------------|-------------
 | Required:       | ✓ Yes
 
-#### *--skip-delete-schema SKIP-DELETE-SCHEMA*
+#### *--skip-delete-schema*
 
 🔰 Do not delete subject/schema
 

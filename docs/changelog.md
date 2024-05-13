@@ -2,6 +2,7 @@
 
 ## May 2024
 
+- Added lcc id in `playground connector status` when fully managed connector is used
 - Enable multiple connect workers to work with every environment (not only plaintext) [#5612](https://github.com/vdesabou/kafka-docker-playground/issues/5612)
 - Enable multiple brokers to work with every environment (not only plaintext) [#5613](https://github.com/vdesabou/kafka-docker-playground/issues/5613)
 

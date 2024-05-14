@@ -186,6 +186,10 @@ N.B: only work with avro and json-schema
 
 📥 After producing, directly consume topic.
 
+#### *--delete-topic*
+
+❌ Delete topic and associated schema/subject if applicable before producing data.
+
 #### *--validate-config VALIDATE-CONFIG*
 
 🔩 Converter configuration parameters to use   

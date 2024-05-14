@@ -182,6 +182,10 @@ Note: CP 7.2+ is required.
   
 N.B: only work with avro and json-schema
 
+#### *--consume*
+
+📥 After producing, directly consume topic.
+
 #### *--validate-config VALIDATE-CONFIG*
 
 🔩 Converter configuration parameters to use   

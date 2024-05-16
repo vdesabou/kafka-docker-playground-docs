@@ -80,10 +80,10 @@ Note: --topic should be specified in this case.
 
 #### *--max-characters MAX-CHARACTERS*
 
-Max characters per message to display (default is 2500)
+Max characters per message to display (default is 3000)
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Default Value:  | 2500
+| Default Value:  | 3000
 
 

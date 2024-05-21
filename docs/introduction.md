@@ -26,6 +26,10 @@
 
 <script async id="asciicast-581275" src="https://asciinema.org/a/581275.js" async data-autoplay="true" data-size="big"></script>
 
+Overview of [playground topic produce](/playground%20topic%20produce) CLI command:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/mbzHCewG_XE?si=J-bWKaH7ZoL6oPgt" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
 ## 🏁 Getting Started
 
 Check out the **[How to Use](/how-to-use.md)** section, then select an example in the **[Content](/content.md)** section and run it !

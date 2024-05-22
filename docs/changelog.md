@@ -3,6 +3,10 @@
 ## May 2024
 
 - CLI:
+  * Created video: Overview of [playground topic produce](/playground%20topic%20produce) CLI command:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/mbzHCewG_XE?si=J-bWKaH7ZoL6oPgt" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
   * Added `--delete-topic` flag to `playground topic produce` (❌ Delete topic and associated schema/subject if applicable before producing data.)
   * Added `--consume` flag to `playground topic produce` (📥 After producing, directly consume topic)
   * Added lcc id in `playground connector status` when fully managed connector is used

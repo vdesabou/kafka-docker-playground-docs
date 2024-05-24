@@ -1171,9 +1171,130 @@ Here are some examples:
 
 ### 🌀 Azul Zulu JDK
 
-Here are the steps to follow:
-
 Just use [playground container change-jdk](/playground%20container%20change-jdk) CLI command !
+
+Example:
+
+```bash
+$ playground container change-jdk --version 21 --container control-center 
+17:03:25 ℹ️ 🤎 Installing Azul JDK 21 on container control-center /usr/lib/jvm/java-11-zulu-openjdk/bin/java
+17:03:25 ℹ️ Executing command as root in container control-center with bash
+Last metadata expiration check: 0:26:16 ago on Fri May 24 14:37:10 2024.
+zulu-repo-1.0.0-1.noarch.rpm                    4.4 kB/s | 3.0 kB     00:00    
+Package zulu-repo-1.0.0-1.noarch is already installed.
+Dependencies resolved.
+Nothing to do.
+Complete!
+Last metadata expiration check: 0:26:17 ago on Fri May 24 14:37:10 2024.
+Dependencies resolved.
+================================================================================
+ Package                     Architecture Version       Repository         Size
+================================================================================
+Installing:
+ zulu21-jdk                  aarch64      21.0.3-1      zulu-openjdk      4.3 k
+Installing dependencies:
+ zulu21-ca-doc               aarch64      21.0.3-1      zulu-openjdk      232 k
+ zulu21-ca-jdk               aarch64      21.0.3-1      zulu-openjdk       23 k
+ zulu21-ca-jdk-headless      aarch64      21.0.3-1      zulu-openjdk       81 M
+ zulu21-ca-jre               aarch64      21.0.3-1      zulu-openjdk      354 k
+ zulu21-ca-jre-headless      aarch64      21.0.3-1      zulu-openjdk       47 M
+ zulu21-doc                  aarch64      21.0.3-1      zulu-openjdk      4.2 k
+ zulu21-jdk-headless         aarch64      21.0.3-1      zulu-openjdk      4.3 k
+ zulu21-jre                  aarch64      21.0.3-1      zulu-openjdk      4.2 k
+ zulu21-jre-headless         aarch64      21.0.3-1      zulu-openjdk      4.2 k
+
+Transaction Summary
+================================================================================
+Install  10 Packages
+
+Total download size: 128 M
+Installed size: 295 M
+Downloading Packages:
+(1/10): zulu21-ca-jdk-21.0.3-1.aarch64.rpm      180 kB/s |  23 kB     00:00    
+(2/10): zulu21-ca-doc-21.0.3-1.aarch64.rpm      1.2 MB/s | 232 kB     00:00    
+(3/10): zulu21-ca-jre-21.0.3-1.aarch64.rpm      1.5 MB/s | 354 kB     00:00    
+(4/10): zulu21-doc-21.0.3-1.aarch64.rpm          36 kB/s | 4.2 kB     00:00    
+(5/10): zulu21-jdk-21.0.3-1.aarch64.rpm          66 kB/s | 4.3 kB     00:00    
+(6/10): zulu21-jdk-headless-21.0.3-1.aarch64.rp  36 kB/s | 4.3 kB     00:00    
+(7/10): zulu21-jre-21.0.3-1.aarch64.rpm          76 kB/s | 4.2 kB     00:00    
+(8/10): zulu21-jre-headless-21.0.3-1.aarch64.rp 100 kB/s | 4.2 kB     00:00    
+(9/10): zulu21-ca-jre-headless-21.0.3-1.aarch64 3.2 MB/s |  47 MB     00:14    
+(10/10): zulu21-ca-jdk-headless-21.0.3-1.aarch6 5.3 MB/s |  81 MB     00:15    
+--------------------------------------------------------------------------------
+Total                                           8.4 MB/s | 128 MB     00:15     
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+  Running scriptlet: zulu21-ca-jre-headless-21.0.3-1.aarch64                1/1 
+  Running scriptlet: zulu21-ca-jdk-headless-21.0.3-1.aarch64                1/1 
+  Running scriptlet: zulu21-ca-jre-21.0.3-1.aarch64                         1/1 
+  Running scriptlet: zulu21-jre-headless-21.0.3-1.aarch64                   1/1 
+  Running scriptlet: zulu21-ca-doc-21.0.3-1.aarch64                         1/1 
+  Running scriptlet: zulu21-ca-jdk-21.0.3-1.aarch64                         1/1 
+  Running scriptlet: zulu21-doc-21.0.3-1.aarch64                            1/1 
+  Running scriptlet: zulu21-jdk-headless-21.0.3-1.aarch64                   1/1 
+  Running scriptlet: zulu21-jre-21.0.3-1.aarch64                            1/1 
+  Running scriptlet: zulu21-jdk-21.0.3-1.aarch64                            1/1 
+  Preparing        :                                                        1/1 
+  Installing       : zulu21-ca-jre-headless-21.0.3-1.aarch64               1/10 
+  Running scriptlet: zulu21-ca-jre-headless-21.0.3-1.aarch64               1/10 
+  Installing       : zulu21-ca-jdk-headless-21.0.3-1.aarch64               2/10 
+  Running scriptlet: zulu21-ca-jdk-headless-21.0.3-1.aarch64               2/10 
+  Installing       : zulu21-ca-jre-21.0.3-1.aarch64                        3/10 
+  Running scriptlet: zulu21-ca-jre-21.0.3-1.aarch64                        3/10 
+  Installing       : zulu21-jre-headless-21.0.3-1.aarch64                  4/10 
+  Running scriptlet: zulu21-jre-headless-21.0.3-1.aarch64                  4/10 
+  Installing       : zulu21-ca-doc-21.0.3-1.aarch64                        5/10 
+  Running scriptlet: zulu21-ca-doc-21.0.3-1.aarch64                        5/10 
+  Installing       : zulu21-ca-jdk-21.0.3-1.aarch64                        6/10 
+  Running scriptlet: zulu21-ca-jdk-21.0.3-1.aarch64                        6/10 
+  Installing       : zulu21-doc-21.0.3-1.aarch64                           7/10 
+  Running scriptlet: zulu21-doc-21.0.3-1.aarch64                           7/10 
+  Installing       : zulu21-jdk-headless-21.0.3-1.aarch64                  8/10 
+  Running scriptlet: zulu21-jdk-headless-21.0.3-1.aarch64                  8/10 
+  Installing       : zulu21-jre-21.0.3-1.aarch64                           9/10 
+  Running scriptlet: zulu21-jre-21.0.3-1.aarch64                           9/10 
+  Installing       : zulu21-jdk-21.0.3-1.aarch64                          10/10 
+  Running scriptlet: zulu21-jdk-21.0.3-1.aarch64                          10/10 
+  Running scriptlet: zulu21-ca-jre-headless-21.0.3-1.aarch64              10/10 
+  Running scriptlet: zulu21-ca-jdk-headless-21.0.3-1.aarch64              10/10 
+  Running scriptlet: zulu21-ca-jre-21.0.3-1.aarch64                       10/10 
+  Running scriptlet: zulu21-jre-headless-21.0.3-1.aarch64                 10/10 
+  Running scriptlet: zulu21-ca-doc-21.0.3-1.aarch64                       10/10 
+  Running scriptlet: zulu21-ca-jdk-21.0.3-1.aarch64                       10/10 
+  Running scriptlet: zulu21-doc-21.0.3-1.aarch64                          10/10 
+  Running scriptlet: zulu21-jdk-headless-21.0.3-1.aarch64                 10/10 
+  Running scriptlet: zulu21-jre-21.0.3-1.aarch64                          10/10 
+  Running scriptlet: zulu21-jdk-21.0.3-1.aarch64                          10/10 
+  Verifying        : zulu21-ca-doc-21.0.3-1.aarch64                        1/10 
+  Verifying        : zulu21-ca-jdk-21.0.3-1.aarch64                        2/10 
+  Verifying        : zulu21-ca-jdk-headless-21.0.3-1.aarch64               3/10 
+  Verifying        : zulu21-ca-jre-21.0.3-1.aarch64                        4/10 
+  Verifying        : zulu21-ca-jre-headless-21.0.3-1.aarch64               5/10 
+  Verifying        : zulu21-doc-21.0.3-1.aarch64                           6/10 
+  Verifying        : zulu21-jdk-21.0.3-1.aarch64                           7/10 
+  Verifying        : zulu21-jdk-headless-21.0.3-1.aarch64                  8/10 
+  Verifying        : zulu21-jre-21.0.3-1.aarch64                           9/10 
+  Verifying        : zulu21-jre-headless-21.0.3-1.aarch64                 10/10 
+
+Installed:
+  zulu21-ca-doc-21.0.3-1.aarch64           zulu21-ca-jdk-21.0.3-1.aarch64       
+  zulu21-ca-jdk-headless-21.0.3-1.aarch64  zulu21-ca-jre-21.0.3-1.aarch64       
+  zulu21-ca-jre-headless-21.0.3-1.aarch64  zulu21-doc-21.0.3-1.aarch64          
+  zulu21-jdk-21.0.3-1.aarch64              zulu21-jdk-headless-21.0.3-1.aarch64 
+  zulu21-jre-21.0.3-1.aarch64              zulu21-jre-headless-21.0.3-1.aarch64 
+
+Complete!
+17:03:54 ℹ️ Executing command as root in container control-center with bash
+17:03:54 ℹ️ Restarting docker container control-center
+control-center
+17:04:02 ℹ️ Executing command in container control-center with bash
+openjdk version "21.0.3" 2024-04-16 LTS
+OpenJDK Runtime Environment Zulu21.34+19-CA (build 21.0.3+9-LTS)
+OpenJDK 64-Bit Server VM Zulu21.34+19-CA (build 21.0.3+9-LTS, mixed mode, sharing)
+```
 
 ### ⭕️ Oracle JDK
 

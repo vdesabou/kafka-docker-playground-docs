@@ -19,6 +19,7 @@ playground container COMMAND
 - [kill-all](playground%20container%20kill-all) - 💀 Kill all containers
 - [logs](playground%20container%20logs) - 🕵️  Tail and follow container logs
 - [ssh](playground%20container%20ssh) - 🛬 SSH into container
+- [change-jdk](playground%20container%20change-jdk) - 🤎 Change java JDK version using Azul JDK (https://www.azul.com/downloads/#downloads-table-zulu)
 - [exec](playground%20container%20exec) - 🪄  Execute command in a container
 - [restart](playground%20container%20restart) - 🔁 Restart a container
 - [pause](playground%20container%20pause) - ⏸️  Pause a container

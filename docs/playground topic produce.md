@@ -1,6 +1,8 @@
 # playground topic produce
 
-📤 Produce to a topic
+📤 Produce to a topic  
+  
+See video tutorial https://youtu.be/mbzHCewG_XE
 
 ## Usage
 

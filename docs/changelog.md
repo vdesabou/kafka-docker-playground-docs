@@ -3,6 +3,7 @@
 ## May 2024
 
 - CLI:
+  * Add [playground container change-jdk](/playground%20container%20change-jdk) CLI command [#5584](https://github.com/vdesabou/kafka-docker-playground/issues/)
   * Created video: Overview of [playground topic produce](/playground%20topic%20produce) CLI command:
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/mbzHCewG_XE?si=J-bWKaH7ZoL6oPgt" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>

@@ -1173,38 +1173,7 @@ Here are some examples:
 
 Here are the steps to follow:
 
-1. Add this in your `docker-compose` file:
-
-```yml
-  connect:
-    build:
-      context: ../../connect/connect-filestream-sink/
-      args:
-        CP_CONNECT_IMAGE: ${CP_CONNECT_IMAGE}
-        CONNECT_TAG: ${CONNECT_TAG}
-```
-> [!WARNING]
-> Make sure to update `context` above with the right path.
-
-2. Create a `Dockerfile` file in `context` directory above (`../../connect/connect-filestream-sink/`).
-
-```yml
-ARG CP_CONNECT_IMAGE
-ARG CONNECT_TAG
-FROM ${CP_CONNECT_IMAGE}:${CONNECT_TAG}
-USER root
-RUN RUN yum install -y https://cdn.azul.com/zulu/bin/zulu-repo-1.0.0-1.noarch.rpm && yum -y install zulu17-jdk
-USER appuser
-```
-
-3. Verify the correct JDK version is installed once your test is started:
-
-```bash
-docker exec connect java -version
-openjdk version "11.0.11" 2021-04-20 LTS
-OpenJDK Runtime Environment Zulu11.48+21-CA (build 11.0.11+9-LTS)
-OpenJDK 64-Bit Server VM Zulu11.48+21-CA (build 11.0.11+9-LTS, mixed mode)
-```
+Just use [playground container change-jdk](/playground%20container%20change-jdk) CLI command !
 
 ### ⭕️ Oracle JDK
 

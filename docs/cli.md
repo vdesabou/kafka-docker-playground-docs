@@ -120,6 +120,19 @@ visit https://docs.docker.com/get-docker to install
 - [set-mode](playground%20schema%20set-mode) - 🔏 Set subject-level mode
 - [delete](playground%20schema%20delete) - 🧟 Delete schema
 
+### TCP Proxy commands
+
+- [tcp-proxy](playground%20tcp-proxy) - 🏚 TCP Proxy commands
+- [start](playground%20tcp-proxy%20start) - 💗 Start the TCP proxy
+- [get-connections](playground%20tcp-proxy%20get-connections) - 🧲 Get Zazkia active TCP connections config and stats
+- [delay](playground%20tcp-proxy%20delay) - ⏲️ Add milliseconds delay to service response.
+- [close-connection](playground%20tcp-proxy%20close-connection) - ❌ Close the Zazkia active TCP connections
+- [toggle-accept-connections](playground%20tcp-proxy%20toggle-accept-connections) - 🙅‍♂️ Change whether new connections can be accepted
+- [toggle-reads-client](playground%20tcp-proxy%20toggle-reads-client) - ✅ Change whether reading data from the client is enabled.
+- [toggle-reads-service](playground%20tcp-proxy%20toggle-reads-service) - ✅ Change whether reading data from the service is enabled.
+- [toggle-writes-client](playground%20tcp-proxy%20toggle-writes-client) - ✅ Change whether writing data to the client is enabled.
+- [toggle-writes-service](playground%20tcp-proxy%20toggle-writes-service) - ✅ Change whether reading data to the service is enabled.
+
 ### Debug commands
 
 - [debug](playground%20debug) - 🐞 Debug commands

@@ -13,7 +13,7 @@ playground tcp-proxy delay [OPTIONS]
 
 #### *--delay-service-response DELAY-SERVICE-RESPONSE*
 
-⏲️ Add milliseconds delay to service response. Default is 0 ms.
+⏲️ Add milliseconds delay to service response.
 
 | Attributes      | &nbsp;
 |-----------------|-------------

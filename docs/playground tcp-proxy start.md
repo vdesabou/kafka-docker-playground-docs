@@ -44,7 +44,7 @@ Port used by the tcp proxy to forward request
 
 #### *--break-service-response BREAK-SERVICE-RESPONSE*
 
-💔 Percentage of broken connections. Default is none.
+💔 Percentage of broken connections. Default is 0%.
 
 | Attributes      | &nbsp;
 |-----------------|-------------

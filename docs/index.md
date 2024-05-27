@@ -25,6 +25,7 @@ visit https://docs.docker.com/get-docker to install
 - [help](playground%20help) - Show help about a command
 - [status](playground%20status) - 🗺️ Show a status
 - [config](playground%20config) - ⚙️ Configure CLI
+- [install-vscode-extension](playground%20install-vscode-extension) - 🪄 Install a slightly modified version of "Shell Script Command Completion" Visual Studio Code extension (https://marketplace.visualstudio.com/items?itemName=tetradresearch.vscode-h2o)
 
 ### Run commands
 
@@ -66,7 +67,6 @@ visit https://docs.docker.com/get-docker to install
 ### Debug commands
 
 - [debug](playground%20debug) - 🐞 Debug commands
-- [install-vscode-extension](playground%20debug%20install-vscode-extension) - 🪄 Install a slightly modified version of "Shell Script Command Completion" Visual Studio Code extension (https://marketplace.visualstudio.com/items?itemName=tetradresearch.vscode-h2o)
 - [enable-remote-debugging](playground%20debug%20enable-remote-debugging) - ✨ Enable java remote debugging for container
 - [testssl](playground%20debug%20testssl) - 🔐 Testing TLS/SSL encryption using https://testssl.sh/
 - [generate-diagnostics](playground%20debug%20generate-diagnostics) - ⛑️ Generate a diagnostic bundle with Diagnostics Bundle Tool

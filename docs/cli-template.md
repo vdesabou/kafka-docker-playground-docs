@@ -39,7 +39,7 @@ Get nice [IntelliSense](https://learn.microsoft.com/en-us/visualstudio/ide/using
 To install it, follow those 2 steps:
 
 ```bash
-playground debug install-vscode-extension
+playground install-vscode-extension
 ```
 
 Once installed, go on a `.sh` script and then type  in Palette `Ctrl+Shift+P` (or `⌘+⇧+P` on macOS) and choose `Shell Completion: Load Command Spec (experimental)` and then type `playground`

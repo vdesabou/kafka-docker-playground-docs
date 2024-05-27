@@ -1,4 +1,4 @@
-# playground debug install-vscode-extension
+# playground install-vscode-extension
 
 🪄 Install a slightly modified version of "Shell Script Command Completion" Visual Studio Code extension (https://marketplace.visualstudio.com/items?itemName=tetradresearch.vscode-h2o)  
   
@@ -13,7 +13,7 @@ After installation, install "playground" command:
 ## Usage
 
 ```bash
-playground debug install-vscode-extension
+playground install-vscode-extension
 ```
 
 ## Dependencies

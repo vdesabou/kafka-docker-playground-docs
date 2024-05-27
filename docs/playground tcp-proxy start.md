@@ -1,6 +1,6 @@
 # playground tcp-proxy start
 
-💗 Start the TCP proxy
+💗 Start the TCP proxy and automatically replace connector config with zazkia hostname and port 49998
 
 ## Usage
 
@@ -53,6 +53,12 @@ Port used by the tcp proxy to forward request
 #### *--service-response-corrupt*
 
 🦹‍♂️ Corrupt service response with random mangled bytes. By default, there is no corruption.
+
+#### *--skip-automatic-connector-config*
+
+🤖 By default, script will attempt to modify automatically the running connector config to use Zazkia proxy.  
+  
+This flag allows to skip this automatic configuration (only useful if you want to manually update connector config with zazkia tcp proxy details)
 
 ## Examples
 

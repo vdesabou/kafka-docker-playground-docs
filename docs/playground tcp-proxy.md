@@ -12,7 +12,7 @@ playground tcp-proxy COMMAND
 
 ## == Commands ==
 
-- [start](playground%20tcp-proxy%20start) - 💗 Start the TCP proxy
+- [start](playground%20tcp-proxy%20start) - 💗 Start the TCP proxy and automatically replace connector config with zazkia hostname and port 49998
 - [get-connections](playground%20tcp-proxy%20get-connections) - 🧲 Get Zazkia active TCP connections config and stats
 - [delay](playground%20tcp-proxy%20delay) - ⏲️ Add milliseconds delay to service response.
 - [close-connection](playground%20tcp-proxy%20close-connection) - ❌ Close the Zazkia active TCP connections

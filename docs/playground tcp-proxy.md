@@ -1,8 +1,8 @@
 # playground tcp-proxy
 
-🏚 TCP Proxy commands  
+🏚 Zazkia TCP Proxy commands  
   
-emicklei/zazkia (https://github.com/emicklei/zazkia) is a nice tool to simulate a TCP connection issues (reset,delay,throttle,corrupt)
+Simulate TCP connection issues (reset,delay,throttle,corrupt) using emicklei/zazkia (https://github.com/emicklei/zazkia) TCP proxy
 
 ## Usage
 

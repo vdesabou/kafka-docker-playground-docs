@@ -66,7 +66,7 @@ visit https://docs.docker.com/get-docker to install
 
 ### TCP Proxy commands
 
-- [tcp-proxy](playground%20tcp-proxy) - 🏚 TCP Proxy commands
+- [tcp-proxy](playground%20tcp-proxy) - 🏚 Zazkia TCP Proxy commands
 - [start](playground%20tcp-proxy%20start) - 💗 Start the TCP proxy
 - [get-connections](playground%20tcp-proxy%20get-connections) - 🧲 Get Zazkia active TCP connections config and stats
 - [delay](playground%20tcp-proxy%20delay) - ⏲️ Add milliseconds delay to service response.

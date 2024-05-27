@@ -3,6 +3,7 @@
 ## May 2024
 
 - CLI:
+  * 🔥 Added [playground tcp-proxy](/playground%20tcp-proxy) CLI command to simulate TCP connection issues (reset,delay,throttle,corrupt) using emicklei/zazkia (https://github.com/emicklei/zazkia) TCP proxy
   * Add [playground container change-jdk](/playground%20container%20change-jdk) CLI command [#5584](https://github.com/vdesabou/kafka-docker-playground/issues/)
   * Created video: Overview of [playground topic produce](/playground%20topic%20produce) CLI command:
 

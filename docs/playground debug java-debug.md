@@ -1,6 +1,6 @@
 # playground debug java-debug
 
-🐞 JVM arguments for SSL, Kerberos or Class Loading
+🤎 JVM arguments for SSL, Kerberos or Class Loading
 
 ## Usage
 

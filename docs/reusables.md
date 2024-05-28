@@ -986,16 +986,17 @@ $ playground tcp-proxy
   playground tcp-proxy [COMMAND] --help | -h
 
 == Commands ==
-  start                       💗 Start the TCP proxy and automatically replace connector config with zazkia hostname and port 49998
-  get-connections             🧲 Get Zazkia active TCP connections config and stats
-  delay                       ⏲️ Add milliseconds delay to service response.
-  break                       💔 Break sending the response to the client.
-  close-connection            ❌ Close the Zazkia active TCP connections
-  toggle-accept-connections   🙅‍♂️ Change whether new connections can be accepted
-  toggle-reads-client         ✅ Change whether reading data from the client is enabled.
-  toggle-reads-service        ✅ Change whether reading data from the service is enabled.
-  toggle-writes-client        ✅ Change whether writing data to the client is enabled.
-  toggle-writes-service       ✅ Change whether reading data to the service is enabled.
+  start                             💗 Start the TCP proxy and automatically replace connector config with zazkia hostname and port 49998
+  get-connections                   🧲 Get Zazkia active TCP connections config and stats
+  delay                             ⏲️ Add milliseconds delay to service response.
+  break                             💔 Break sending the response to the client.
+  close-connection                  ❌ Close the Zazkia active TCP connections
+  close-all-connection-with-error   🧹 Close all Zazkia TCP connections which are in error state (close all with error button in Zazkia UI)
+  toggle-accept-connections         🙅‍♂️ Change whether new connections can be accepted
+  toggle-reads-client               ✅ Change whether reading data from the client is enabled.
+  toggle-reads-service              ✅ Change whether reading data from the service is enabled.
+  toggle-writes-client              ✅ Change whether writing data to the client is enabled.
+  toggle-writes-service             ✅ Change whether reading data to the service is enabled.
 ```
 
 ## 🌐 Using HTTPS proxy

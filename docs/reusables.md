@@ -589,6 +589,14 @@ Useful packages:
 * `io.confluent.kafka.schemaregistry.client.rest.RestService`: to track schema registry requests
 * `org.apache.kafka.connect.runtime.TransformationChain`: to see records before, during and after SMT
 
+Or just use [CLI](/playground%20connector%20log-level) `playground connector log-level` 
+
+Example:
+
+```bash
+playground connector log-level --level TRACE
+```
+
 ### 🔑 SSL debug
 
 Add `-Djavax.net.debug=all` in your `docker-compose` file:
@@ -597,8 +605,10 @@ Add `-Djavax.net.debug=all` in your `docker-compose` file:
 
 ```yml
   connect:
-    KAFKA_OPTS: -Djavax.net.debug=all
+    KAFKA_OPTS: -Djavax.net.debug=all (or -Djavax.net.debug=ssl:handshake)
 ```
+
+Or just use [CLI](/playground%20debug%20java-debug) `playground debug java-debug` with `--type ssl_all` or `--type ssl_handshake`.
 
 ### 🔒 Kerberos debug
 
@@ -611,6 +621,8 @@ Add `-Dsun.security.krb5.debug=true` in your `docker-compose` file:
     KAFKA_OPTS: -Dsun.security.krb5.debug=true
 ```
 
+Or just use [CLI](/playground%20debug%20java-debug) `playground debug java-debug` with `--type kerberos`.
+
 ### 🔬 Class loading
 
 Add `-verbose:class` in your `docker-compose` file to troubleshoot a `ClassNotFoundException` for example:
@@ -622,6 +634,8 @@ Add `-verbose:class` in your `docker-compose` file to troubleshoot a `ClassNotFo
     environment:
       KAFKA_OPTS: -verbose:class
 ```
+
+Or just use [CLI](/playground%20debug%20java-debug) `playground debug java-debug` with `--type class_loading`.
 
 In logs, you'll see:
 

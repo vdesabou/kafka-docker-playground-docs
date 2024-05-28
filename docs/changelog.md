@@ -12,6 +12,8 @@
   * Added `--delete-topic` flag to `playground topic produce` (❌ Delete topic and associated schema/subject if applicable before producing data.)
   * Added `--consume` flag to `playground topic produce` (📥 After producing, directly consume topic)
   * Added lcc id in `playground connector status` when fully managed connector is used
+- Add source and sink rabbitmq FM examples with SSL [#5664](https://github.com/vdesabou/kafka-docker-playground/issues/5664)
+- Add sink rabbitmq example with SSL [#5666](https://github.com/vdesabou/kafka-docker-playground/issues/5666)
 - Enable multiple connect workers to work with every environment (not only plaintext) [#5612](https://github.com/vdesabou/kafka-docker-playground/issues/5612)
 - Enable multiple brokers to work with every environment (not only plaintext) [#5613](https://github.com/vdesabou/kafka-docker-playground/issues/5613)
 

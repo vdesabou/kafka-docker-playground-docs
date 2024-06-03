@@ -1,5 +1,9 @@
 # 📜 Change Log
 
+## June 2024
+
+* Add Fully Managed HTTP sink example with MTLS Auth [#5668](https://github.com/vdesabou/kafka-docker-playground/issues/5668)
+
 ## May 2024
 
 - CLI:

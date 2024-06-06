@@ -25,7 +25,6 @@ visit https://docs.docker.com/get-docker to install
 - [help](playground%20help) - Show help about a command
 - [status](playground%20status) - 🗺️ Show a status
 - [config](playground%20config) - ⚙️ Configure CLI
-- [install-vscode-extension](playground%20install-vscode-extension) - 🪄 Install a slightly modified version of "Shell Script Command Completion" Visual Studio Code extension (https://marketplace.visualstudio.com/items?itemName=tetradresearch.vscode-h2o)
 
 ### Run commands
 
@@ -82,6 +81,7 @@ visit https://docs.docker.com/get-docker to install
 ### Tools commands
 
 - [tools](playground%20tools) - 🧰 Tools commands
+- [install-vscode-extension](playground%20tools%20install-vscode-extension) - 🪄 Install a slightly modified version of "Shell Script Command Completion" Visual Studio Code extension (https://marketplace.visualstudio.com/items?itemName=tetradresearch.vscode-h2o)
 - [read-avro-file](playground%20tools%20read-avro-file) - 🔐 Read provided avro file
 - [read-parquet-file](playground%20tools%20read-parquet-file) - 🔐 Read provided parquet file
 

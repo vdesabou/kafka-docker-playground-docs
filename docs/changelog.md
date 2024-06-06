@@ -2,6 +2,8 @@
 
 ## June 2024
 
+- CLI:
+  * Add playground tools read-avro-file command [#5681](https://github.com/vdesabou/kafka-docker-playground/issues/5681)
 * Add Fully Managed HTTP sink example with MTLS Auth [#5668](https://github.com/vdesabou/kafka-docker-playground/issues/5668)
 
 ## May 2024

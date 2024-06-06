@@ -135,6 +135,11 @@ visit https://docs.docker.com/get-docker to install
 - [toggle-writes-client](playground%20tcp-proxy%20toggle-writes-client) - ✅ Change whether writing data to the client is enabled.
 - [toggle-writes-service](playground%20tcp-proxy%20toggle-writes-service) - ✅ Change whether reading data to the service is enabled.
 
+### Tools commands
+
+- [tools](playground%20tools) - 🧰 Tools commands
+- [read-avro-file](playground%20tools%20read-avro-file) - 🔐 Read provided avro file
+
 ### Debug commands
 
 - [debug](playground%20debug) - 🐞 Debug commands

@@ -1,6 +1,6 @@
 # playground tools read-parquet-file
 
-🔐 Read provided parquet file
+🔖 Read provided parquet file
 
 ## Usage
 

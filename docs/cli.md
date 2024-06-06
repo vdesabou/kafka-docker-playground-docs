@@ -39,7 +39,7 @@ Get nice [IntelliSense](https://learn.microsoft.com/en-us/visualstudio/ide/using
 To install it, follow those 2 steps:
 
 ```bash
-playground install-vscode-extension
+playground tools install-vscode-extension
 ```
 
 Once installed, go on a `.sh` script and then type  in Palette `Ctrl+Shift+P` (or `⌘+⇧+P` on macOS) and choose `Shell Completion: Load Command Spec (experimental)` and then type `playground`
@@ -138,8 +138,8 @@ visit https://docs.docker.com/get-docker to install
 
 - [tools](playground%20tools) - 🧰 Tools commands
 - [install-vscode-extension](playground%20tools%20install-vscode-extension) - 🪄 Install a slightly modified version of "Shell Script Command Completion" Visual Studio Code extension (https://marketplace.visualstudio.com/items?itemName=tetradresearch.vscode-h2o)
-- [read-avro-file](playground%20tools%20read-avro-file) - 🔐 Read provided avro file
-- [read-parquet-file](playground%20tools%20read-parquet-file) - 🔐 Read provided parquet file
+- [read-avro-file](playground%20tools%20read-avro-file) - 🔖 Read provided avro file
+- [read-parquet-file](playground%20tools%20read-parquet-file) - 🔖 Read provided parquet file
 
 ### Debug commands
 

@@ -1,6 +1,6 @@
 # playground tools read-avro-file
 
-🔐 Read provided avro file
+🔖 Read provided avro file
 
 ## Usage
 

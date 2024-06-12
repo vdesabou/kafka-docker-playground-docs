@@ -1,6 +1,6 @@
-# playground connector offsets get
+# playground connector offsets get-offsets-request-status
 
-🏹 Get current offsets for source and sink connectors  
+👁️‍🗨️ Get the status of the previous offset request  
   
 ⚠️ Available for ccloud source connectors (see https://docs.confluent.io/cloud/current/connectors/offsets.html)  
 
@@ -8,7 +8,7 @@
 ## Usage
 
 ```bash
-playground connector offsets get [OPTIONS]
+playground connector offsets get-offsets-request-status [OPTIONS]
 ```
 
 ## Options

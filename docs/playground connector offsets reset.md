@@ -2,7 +2,7 @@
 
 🆕 Reset offsets for source and sink connectors  
   
-⚠️ Available for ccloud connectors as EA (see https://docs.confluent.io/cloud/current/connectors/offsets.html)  
+⚠️ Available for ccloud connectors (see https://docs.confluent.io/cloud/current/connectors/offsets.html)  
 
 
 ## Usage

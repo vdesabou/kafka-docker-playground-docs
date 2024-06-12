@@ -16,5 +16,6 @@ playground connector offsets COMMAND
 - [get](playground%20connector%20offsets%20get) - 🏹 Get current offsets for source and sink connectors
 - [reset](playground%20connector%20offsets%20reset) - 🆕 Reset offsets for source and sink connectors
 - [alter](playground%20connector%20offsets%20alter) - ⛏️ Alter offsets for source and sink connectors
+- [get-offsets-request-status](playground%20connector%20offsets%20get-offsets-request-status) - 👁️‍🗨️ Get the status of the previous offset request
 
 

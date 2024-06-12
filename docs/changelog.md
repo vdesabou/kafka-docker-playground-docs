@@ -3,10 +3,11 @@
 ## June 2024
 
 - CLI:
-  * Add support for [Create connectors with offsets](https://docs.confluent.io/cloud/current/connectors/offsets.html#create-connectors-with-offsets) for fully managed connectors with `--offsets` option [#5689](https://github.com/vdesabou/kafka-docker-playground/issues/5689) in `playground connector create-or-update`
+  * Added `playground connector offsets get-offsets-request-status` [#5691](https://github.com/vdesabou/kafka-docker-playground/issues/5691)
+  * Added support for [Create connectors with offsets](https://docs.confluent.io/cloud/current/connectors/offsets.html#create-connectors-with-offsets) for fully managed connectors with `--offsets` option [#5689](https://github.com/vdesabou/kafka-docker-playground/issues/5689) in `playground connector create-or-update`
   * Added `max-wait` option to `playground connector show-lag`
-  * Add [playground tools read-parquet-file](/playground%20tools%20read-parquet-file) command [#5682](https://github.com/vdesabou/kafka-docker-playground/issues/5682)
-  * Add [playground tools read-avro-file](/playground%20tools%20read-avro-file) command [#5681](https://github.com/vdesabou/kafka-docker-playground/issues/5681)
+  * Added [playground tools read-parquet-file](/playground%20tools%20read-parquet-file) command [#5682](https://github.com/vdesabou/kafka-docker-playground/issues/5682)
+  * Added [playground tools read-avro-file](/playground%20tools%20read-avro-file) command [#5681](https://github.com/vdesabou/kafka-docker-playground/issues/5681)
 * Add Fully Managed HTTP sink example with MTLS Auth [#5668](https://github.com/vdesabou/kafka-docker-playground/issues/5668)
 
 ## May 2024

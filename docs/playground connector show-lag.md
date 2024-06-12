@@ -31,4 +31,12 @@ Interval between lag checks (default is 20 seconds).
 |-----------------|-------------
 | Default Value:  | 20
 
+#### *--max-wait MAX_WAIT*
+
+⏳ Max time in seconds to wait for lag to become 0. If set to 0 (default), it will run until all lag becomes 0.
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Default Value:  | 0
+
 

@@ -1,11 +1,11 @@
-# playground container set-enviroment-variables
+# playground container set-environment-variables
 
-📦  Resume a container
+📦  Change
 
 ## Usage
 
 ```bash
-playground container set-enviroment-variables [OPTIONS]
+playground container set-environment-variables [OPTIONS]
 ```
 
 ## Options

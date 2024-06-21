@@ -25,6 +25,6 @@ playground container COMMAND
 - [pause](playground%20container%20pause) - ⏸️  Pause a container
 - [resume](playground%20container%20resume) - ⏯️  Resume a container
 - [kill](playground%20container%20kill) - 🔫 Kill a container
-- [set-enviroment-variables](playground%20container%20set-enviroment-variables) - 📦  Resume a container
+- [set-environment-variables](playground%20container%20set-environment-variables) - 📦  Change
 
 

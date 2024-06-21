@@ -3,6 +3,7 @@
 ## June 2024
 
 - CLI:
+  * Add `playground container set-enviroment-variables` command [#5712](https://github.com/vdesabou/kafka-docker-playground/issues/5712)
   * Added `playground cleanup-cloud-details` [#5692](https://github.com/vdesabou/kafka-docker-playground/issues/5692)
   * Added `playground connector offsets get-offsets-request-status` [#5691](https://github.com/vdesabou/kafka-docker-playground/issues/5691)
   * 🔥 Added support for [Create connectors with offsets](https://docs.confluent.io/cloud/current/connectors/offsets.html#create-connectors-with-offsets) for fully managed connectors with `--offsets` option [#5689](https://github.com/vdesabou/kafka-docker-playground/issues/5689) in `playground connector create-or-update`

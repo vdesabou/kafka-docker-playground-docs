@@ -293,7 +293,7 @@
   - 🔰 [Confluent Cloud Networking](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/haproxy) using HAProxy ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
   - 🌎️ [Apache Mirror Maker 2](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/mirrormaker2) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
   - ♻️ [Cluster Linking Quick Start with service account only](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/cluster-linking-with-service-accounts-only) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
-  - 🧬 [Confluent Cloud example of connector getting data from Audit Log cluster](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/audit-log-connector/) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI fail](https://img.shields.io/badge/0/1-fail!-red)](https://github.com/vdesabou/kafka-docker-playground/issues/5708) 
+  - 🧬 [Confluent Cloud example of connector getting data from Audit Log cluster](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/audit-log-connector/) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/9611761661/job/26511005047) 
 
 ## 🌍 Multi-Data-Center deployments
 

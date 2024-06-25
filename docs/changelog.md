@@ -11,6 +11,7 @@
   * Added [playground tools read-parquet-file](/playground%20tools%20read-parquet-file) command [#5682](https://github.com/vdesabou/kafka-docker-playground/issues/5682)
   * Added [playground tools read-avro-file](/playground%20tools%20read-avro-file) command [#5681](https://github.com/vdesabou/kafka-docker-playground/issues/5681)
 - Add [Mongo source and sink JMX metrics](https://www.mongodb.com/docs/kafka-connector/current/monitoring/#sink-connector-jmx-metrics) to JMX Grafana dashboard [#5720](https://github.com/vdesabou/kafka-docker-playground/issues/5720)
+* Add onprem HTTP source connector example [#5727](https://github.com/vdesabou/kafka-docker-playground/issues/5727)
 * Add Fully Managed HTTP sink example with MTLS Auth [#5668](https://github.com/vdesabou/kafka-docker-playground/issues/5668)
 * Removed cp-ansible-playground examples [#5694](https://github.com/vdesabou/kafka-docker-playground/issues/5694)
 

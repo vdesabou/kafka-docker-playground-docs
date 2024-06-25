@@ -22,7 +22,9 @@
   
   --cluster-name (or CLUSTER_NAME environment variable): The cluster name  
   --cluster-creds (or CLUSTER_CREDS environment variable): The Kafka api key and secret to use, it should be separated with colon (example: \<API_KEY\>:\<API_KEY_SECRET\>)  
-  --cluster-schema-registry-creds (or SCHEMA_REGISTRY_CREDS environment variable) (optional, if not set, new one will be created): The Schema Registry api key and secret to use, it should be separated with colon (example: \<SR_API_KEY\>:\<SR_API_KEY_SECRET\>)
+  --cluster-schema-registry-creds (or SCHEMA_REGISTRY_CREDS environment variable) (optional, if not set, new one will be created): The Schema Registry api key and secret to use, it should be separated with colon (example: \<SR_API_KEY\>:\<SR_API_KEY_SECRET\>)  
+  
+❗ this command will kill all containers using playground container kill-all
 
 ## Usage
 

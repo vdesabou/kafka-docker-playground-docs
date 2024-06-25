@@ -1,6 +1,10 @@
 # playground container set-environment-variables
 
-📦  Change
+📦  Set environment variable(s) for a container  
+  
+🎓 Tip: you can pass multiple environment variables by specifying --env multiple times  
+  
+Example: --env "KAFKA_OPTS: -verbose:class" --env "CONNECT_LOG4J_LOGGERS: org.apache.zookeeper=ERROR,org.I0Itec.zkclient=ERROR,org.reflections=ERROR,org.apache.kafka.connect.runtime.rest.RestServer=ERROR"
 
 ## Usage
 
@@ -21,9 +25,8 @@ playground container set-environment-variables [OPTIONS]
 #### *--env ENV*
 
 📦 Environment variables to set  
-🎓 Tip: you can pass multiple environment variables by specifying --env multiple times  
   
-Example: --env "KAFKA_OPTS: -verbose:class" --env "CONNECT_LOG4J_LOGGERS: org.apache.zookeeper=ERROR,org.I0Itec.zkclient=ERROR,org.reflections=ERROR,org.apache.kafka.connect.runtime.rest.RestServer=ERROR"
+🎓 Tip: you can pass multiple environment variables by specifying --env multiple times
 
 | Attributes      | &nbsp;
 |-----------------|-------------

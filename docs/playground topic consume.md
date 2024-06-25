@@ -20,11 +20,11 @@ playground topic consume [OPTIONS]
 
 #### *--max-messages MAX-MESSAGES*
 
-Max number of messages to display (default is 10)
+Max number of messages to display (default is 100)
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Default Value:  | 10
+| Default Value:  | 100
 
 #### *--min-expected-messages MIN-EXPECTED-MESSAGES*
 

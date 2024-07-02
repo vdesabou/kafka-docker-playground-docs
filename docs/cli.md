@@ -217,6 +217,18 @@ visit https://docs.docker.com/get-docker to install
 - [create-or-update](playground%20connector%20create-or-update) - 🧑‍🎨  Create or update connector
 - [update](playground%20connector%20update) - 🛠️ Update connector configuration by opening current connector config in text editor set with playground config editor \<editor\> (default is code). Once file is saved, the new configuration is updated.
 
+### ec2 commands
+
+- [ec2](playground%20ec2) - 😶‍🌫️ AWS EC2 instance (using Cloud Formation)
+- [create](playground%20ec2%20create) - 🏭 Create an EC2 instance using Cloud Formation
+- [delete](playground%20ec2%20delete) - ❌ Delete an EC2 instance created with Cloud Formation
+- [open](playground%20ec2%20open) - 👨‍💻 Open an EC2 instance using Visual Studio code
+- [list](playground%20ec2%20list) - 🔘 List all EC2 instance
+- [stop](playground%20ec2%20stop) - 🔴 Stop an EC2 instance
+- [start](playground%20ec2%20start) - 🟢 Start an EC2 instance
+- [stop-all](playground%20ec2%20stop-all) - 🔴 Stop all your EC2 instance(s)
+- [start-all](playground%20ec2%20start-all) - 🟢 Start all your EC2 instance(s)
+
 ## Options
 
 #### *--vvv, -v*

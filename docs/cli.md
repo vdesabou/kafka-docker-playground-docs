@@ -217,7 +217,7 @@ visit https://docs.docker.com/get-docker to install
 - [create-or-update](playground%20connector%20create-or-update) - 🧑‍🎨  Create or update connector
 - [update](playground%20connector%20update) - 🛠️ Update connector configuration by opening current connector config in text editor set with playground config editor \<editor\> (default is code). Once file is saved, the new configuration is updated.
 
-### ec2 commands
+### EC2 commands
 
 - [ec2](playground%20ec2) - 😶‍🌫️ AWS EC2 instance (using Cloud Formation)
 - [create](playground%20ec2%20create) - 🏭 Create an EC2 instance using Cloud Formation

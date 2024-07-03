@@ -1,6 +1,8 @@
 # playground ec2 delete
 
-❌ Delete an EC2 instance created with Cloud Formation
+❌ Delete an EC2 instance created with Cloud Formation  
+  
+WARNING:  This will delete your cloud formation and associated EC2 instance
 
 ## Usage
 

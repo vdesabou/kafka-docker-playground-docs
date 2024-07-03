@@ -1,6 +1,8 @@
 # playground ec2 open
 
-👨‍💻 Open an EC2 instance using Visual Studio code
+👨‍💻 Open an EC2 instance using Visual Studio code  
+  
+🔐 Only your current ip address will be allowed to connect
 
 ## Usage
 

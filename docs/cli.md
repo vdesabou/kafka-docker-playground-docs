@@ -219,8 +219,8 @@ visit https://docs.docker.com/get-docker to install
 
 ### EC2 commands
 
-- [ec2](playground%20ec2) - 😶‍🌫️ AWS EC2 instance (using Cloud Formation)
-- [create](playground%20ec2%20create) - 🏭 Create an EC2 instance using Cloud Formation
+- [ec2](playground%20ec2) - ✨ Create and manage AWS EC2 instances (using Cloud Formation) to run kafka-docker-playground
+- [create](playground%20ec2%20create) - 👷 Create kafka-docker-playground EC2 instance using AWS Cloud Formation
 - [delete](playground%20ec2%20delete) - ❌ Delete an EC2 instance created with Cloud Formation
 - [open](playground%20ec2%20open) - 👨‍💻 Open an EC2 instance using Visual Studio code
 - [list](playground%20ec2%20list) - 🔘 List all EC2 instance

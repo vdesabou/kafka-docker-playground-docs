@@ -1,6 +1,6 @@
 # playground ec2 create
 
-🏭 Create an EC2 instance using Cloud Formation
+👷 Create kafka-docker-playground EC2 instance using AWS Cloud Formation
 
 ## Usage
 
@@ -36,7 +36,7 @@ You can also specify it with EC2_CLOUD_FORMATION_PEM_FILE environment variable
   
 ❕ It must be absolute full path  
   
-If not set default is used https://github.com/vdesabou/kafka-docker-playground/blob/master/cloudformation/alfred-aws-vscode-workflow/kafka-docker-playground.yml  
+If not set default is used https://github.com/vdesabou/kafka-docker-playground/blob/master/cloudformation/kafka-docker-playground.yml  
   
 You can also specify it with EC2_CLOUD_FORMATION_YML_FILE environment variable  
   

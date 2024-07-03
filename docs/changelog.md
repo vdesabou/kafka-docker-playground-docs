@@ -1,9 +1,15 @@
 # 📜 Change Log
 
+## July 2024
+
+- CLI:
+  * 🔥 Added `playground ec2` [command](/playground%20ec2) [#5730](https://github.com/vdesabou/kafka-docker-playground/issues/5730) to create and manage AWS EC2 instances (using Cloud Formation) to run
+  kafka-docker-playground. 🪄 Open EC2 instances directly in Visual Studio code using Remote Development (over SSH). This is replacing Alfred workflow which was available earlier.
+
 ## June 2024
 
 - CLI:
-  * Add `playground container set-environment-variables` command [#5712](https://github.com/vdesabou/kafka-docker-playground/issues/5712)
+  * Added `playground container set-environment-variables` command [#5712](https://github.com/vdesabou/kafka-docker-playground/issues/5712)
   * Added `playground cleanup-cloud-details` [#5692](https://github.com/vdesabou/kafka-docker-playground/issues/5692)
   * Added `playground connector offsets get-offsets-request-status` [#5691](https://github.com/vdesabou/kafka-docker-playground/issues/5691)
   * 🔥 Added support for [Create connectors with offsets](https://docs.confluent.io/cloud/current/connectors/offsets.html#create-connectors-with-offsets) for fully managed connectors with `--offsets` option [#5689](https://github.com/vdesabou/kafka-docker-playground/issues/5689) in `playground connector create-or-update`

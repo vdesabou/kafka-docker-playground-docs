@@ -80,26 +80,42 @@ You can set your own environment variables in gitpod, see this [link](https://ww
 
 ### ☁️ AWS EC2 instance (using Cloud Formation)
 
-If you want to run the playground on an EC2 instance, you can use the AWS Cloud Formation [template](https://github.com/vdesabou/kafka-docker-playground/blob/master/cloudformation/kafka-docker-playground.json).
+If you want to run the playground on an EC2 instance, you can use the AWS Cloud Formation [template](https://github.com/vdesabou/kafka-docker-playground/blob/master/cloudformation/kafka-docker-playground.yml).
 
 More details [here](https://github.com/vdesabou/kafka-docker-playground/tree/master/cloudformation).
 
-### 🎩 AWS EC2 Alfred workflow
+### ✨ AWS EC2 playground ec2 command
 
-* ✨ Create and manage AWS EC2 instances to run kafka-docker-playground
+See [playground ec2](/playground%20ec2) CLI command
 
-* 🪄 Open EC2 instances directly in Visual Studio code using [Remote Development](https://code.visualstudio.com/docs/remote/ssh) (over SSH)
+```bash
+playground ec2 --help
+playground ec2
 
-![Example](./images/alfred_example.png)
+  ✨ Create and manage AWS EC2 instances (using Cloud Formation) to run
+  kafka-docker-playground
+  
+  🪄 Open EC2 instances directly in Visual Studio code using Remote Development
+  (over SSH)
 
-❗ You need [Alfred](https://www.alfredapp.com) [Powerpack](https://www.alfredapp.com/shop/) to be able to use that workflow.
+== Usage ==
+  playground ec2 COMMAND
+  playground ec2 [COMMAND] --help | -h
 
-#### 🎯 Commands available
+== Commands ==
+  create      👷 Create kafka-docker-playground EC2 instance using AWS Cloud Formation
+  delete      ❌ Delete an EC2 instance created with Cloud Formation
+  open        👨‍💻 Open an EC2 instance using Visual Studio code
+  list        🔘 List all EC2 instance
+  stop        🔴 Stop an EC2 instance
+  start       🟢 Start an EC2 instance
+  stop-all    🔴 Stop all your EC2 instance(s)
+  start-all   🟢 Start all your EC2 instance(s)
 
-![Example](./images/alfred_commands.png)
-
-👉 [Download workflow](https://github.com/vdesabou/kafka-docker-playground/raw/master/cloudformation/aws-ec2-kafka-docker-playground.alfred5workflow)
-
+== Options ==
+  --help, -h
+    Show this help
+```
 
 ## 🏎️ Start an example
 

@@ -18,16 +18,6 @@ playground ec2 open [OPTIONS]
 
 ## Options
 
-#### *--pem-file PEM-FILE*
-
-🔐 AWS EC2 pem file  
-  
-❕ It must be absolute full path  
-  
-You can also specify it with EC2_CLOUD_FORMATION_PEM_FILE environment variable  
-  
-🎓 Tip: use \<tab\> completion to trigger fzf completion
-
 #### *--instance, -i INSTANCE*
 
 🖥️ EC2 instance (need to use completion to get all required details)

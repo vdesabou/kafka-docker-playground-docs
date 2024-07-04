@@ -1,6 +1,8 @@
 # playground ec2 create
 
-👷 Create kafka-docker-playground EC2 instance using AWS Cloud Formation
+👷 Create kafka-docker-playground EC2 instance using AWS Cloud Formation  
+  
+🔐 AWS EC2 pem file for the ec2 instance will be created and stored in root folder (make sure to do backup). If you already created instance before, you can force the PEM using EC2_CLOUD_FORMATION_PEM_FILE environment variable.
 
 ## Usage
 
@@ -12,23 +14,13 @@ playground ec2 create [OPTIONS]
 
 #### *EC2_CLOUD_FORMATION_PEM_FILE*
 
-🔐 AWS EC2 pem file
+🔐 AWS EC2 pem file (only required if you already created instance before, otherwise pem files are created automatically)
 
 #### *EC2_CLOUD_FORMATION_YML_FILE*
 
 🌀 Cloud Formation yml file
 
 ## Options
-
-#### *--pem-file PEM-FILE*
-
-🔐 AWS EC2 pem file  
-  
-❕ It must be absolute full path  
-  
-You can also specify it with EC2_CLOUD_FORMATION_PEM_FILE environment variable  
-  
-🎓 Tip: use \<tab\> completion to trigger fzf completion
 
 #### *--cloud-formation-yml-file CLOUD-FORMATION-YML-FILE*
 

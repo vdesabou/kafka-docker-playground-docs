@@ -1,13 +1,11 @@
-# playground ec2 open
+# playground ec2 allow-my-ip
 
-👨‍💻 Open an EC2 instance using Visual Studio code  
-  
-🔐 Only your current ip address will be allowed to connect
+🛂 Allow your current ip to connect to ec2 instance via ssh
 
 ## Usage
 
 ```bash
-playground ec2 open [OPTIONS]
+playground ec2 allow-my-ip [OPTIONS]
 ```
 
 ## Options

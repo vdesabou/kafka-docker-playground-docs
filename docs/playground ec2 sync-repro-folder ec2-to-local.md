@@ -1,13 +1,11 @@
-# playground ec2 open
+# playground ec2 sync-repro-folder ec2-to-local
 
-👨‍💻 Open an EC2 instance using Visual Studio code  
-  
-🔐 Only your current ip address will be allowed to connect
+👈 Sync ec2 instance reproduction-models folder to local
 
 ## Usage
 
 ```bash
-playground ec2 open [OPTIONS]
+playground ec2 sync-repro-folder ec2-to-local [OPTIONS]
 ```
 
 ## Options

@@ -1,14 +1,18 @@
-# playground ec2 open
+# playground ec2 sync-repro-folder-to-ec2
 
-👨‍💻 Open an EC2 instance using Visual Studio code  
-  
-🔐 Only your current ip address will be allowed to connect
+🛸 Sync local reproduction-models folder to ec2 instance using rsync
 
 ## Usage
 
 ```bash
-playground ec2 open [OPTIONS]
+playground ec2 sync-repro-folder-to-ec2 [OPTIONS]
 ```
+
+## Dependencies
+
+#### *rsync*
+
+rsync needs to be installed
 
 ## Options
 

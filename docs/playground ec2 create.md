@@ -10,25 +10,7 @@
 playground ec2 create [OPTIONS]
 ```
 
-## Environment Variables
-
-#### *EC2_CLOUD_FORMATION_YML_FILE*
-
-🌀 Cloud Formation yml file
-
 ## Options
-
-#### *--cloud-formation-yml-file CLOUD-FORMATION-YML-FILE*
-
-🌀 Cloud Formation yml file  
-  
-❕ It must be absolute full path  
-  
-If not set default is used https://github.com/vdesabou/kafka-docker-playground/blob/master/cloudformation/kafka-docker-playground.yml  
-  
-You can also specify it with EC2_CLOUD_FORMATION_YML_FILE environment variable  
-  
-🎓 Tip: use \<tab\> completion to trigger fzf completion
 
 #### *--instance-type INSTANCE-TYPE*
 

@@ -14,10 +14,8 @@ playground ec2 delete [OPTIONS]
 
 #### *--instance, -i INSTANCE*
 
-🌀 EC2 instance cloudformation (need to use completion to get all required details)
-
-| Attributes      | &nbsp;
-|-----------------|-------------
-| Required:       | ✓ Yes
+🌀 ec2 instance cloudformation (need to use completion to get all required details)  
+  
+🎓 Tip: If not specified, the command will apply to all ec2 instances
 
 

@@ -227,8 +227,6 @@ visit https://docs.docker.com/get-docker to install
 - [list](playground%20ec2%20list) - 🔘 List all EC2 instance
 - [stop](playground%20ec2%20stop) - 🔴 Stop an EC2 instance
 - [start](playground%20ec2%20start) - 🟢 Start an EC2 instance
-- [stop-all](playground%20ec2%20stop-all) - 🔴 Stop all your EC2 instance(s)
-- [start-all](playground%20ec2%20start-all) - 🟢 Start all your EC2 instance(s)
 - [sync-repro-folder](playground%20ec2%20sync-repro-folder) - ↔️ Synchronize reproduction-models folder bewteen local and ec2 instance
 
 ## Options

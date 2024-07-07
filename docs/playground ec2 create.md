@@ -40,8 +40,8 @@ playground ec2 create [OPTIONS]
 
 #### *--suffix SUFFIX*
 
-📮 suffix to add to instance name kafka-docker-playground-${username}-${suffix}   
+📮 suffix to add to instance name pg-${username}-${suffix}   
   
-If not set, default is kafka-docker-playground-${username}-${current-date}
+if not set, default is pg-${username}-${6-chars-random-string}
 
 

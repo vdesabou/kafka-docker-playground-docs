@@ -39,7 +39,7 @@ Example:
 The badges are:
 
 * ![arm64](https://img.shields.io/badge/arm64-native%20support-green): example works natively.
-* ![arm64](https://img.shields.io/badge/arm64-not%20working-red): example **cannot work at all**. You will need to run it using [Gitpod.io](/how-to-use?id=🪄-gitpodio) for example.
+* ![arm64](https://img.shields.io/badge/arm64-not%20working-red): example **cannot work at all**. You will need to run it using [Gitpod.io](/how-to-use?id=🪄-gitpodio) for example or using AWS EC2 instance, see [playground ec2](/playground%20ec2) CLI command
 * ![arm64](https://img.shields.io/badge/arm64-emulation%20required-orange): example is working but emulation is required. 
 
 Docker Desktop now provides **Rosetta 2** virtualization feature, see detailed steps [here](https://levelup.gitconnected.com/docker-on-apple-silicon-mac-how-to-run-x86-containers-with-rosetta-2-4a679913a0d5) on how to enable it, basically, you need to enable this:

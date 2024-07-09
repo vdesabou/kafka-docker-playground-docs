@@ -316,6 +316,7 @@ List of provided dashboards:
  - Kafka streams RocksDB
  - Oracle CDC source Connector
  - Mongo source and sink Connector
+ - Debezium CDC source Connectors
 
 
 <!-- tabs:start -->

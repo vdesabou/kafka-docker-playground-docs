@@ -377,6 +377,10 @@ docker exec broker kafka-configs --bootstrap-server broker:9092 --alter --add-co
 
 ![oraclecdc](images/oraclecdc.jpg)
 
+#### **Debezium CDC source Connectors**
+
+![debezium](images/debezium.png)
+
 #### **Mongo source and sink Connector**
 
 ![mongo](images/mongo.png)

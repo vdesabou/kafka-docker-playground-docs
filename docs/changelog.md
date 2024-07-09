@@ -2,6 +2,7 @@
 
 ## July 2024
 
+- Add [Debezium CDC source connector metrics](https://debezium.io/documentation/reference/stable/connectors/mysql.html#mysql-monitoring) to JMX Grafana dashboard [#5721](https://github.com/vdesabou/kafka-docker-playground/issues/5721)
 - CLI:
   * 🔥 Added `playground ec2` [command](/playground%20ec2) [#5730](https://github.com/vdesabou/kafka-docker-playground/issues/5730) to create and manage AWS EC2 instances (using Cloud Formation) to run
   kafka-docker-playground. 🪄 Open EC2 instances directly in Visual Studio code using Remote Development (over SSH). This is replacing Alfred workflow which was available earlier.

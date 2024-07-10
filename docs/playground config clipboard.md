@@ -12,7 +12,7 @@ playground config clipboard [ENABLED]
 
 #### *ENABLED*
 
-editor
+
 
 | Attributes      | &nbsp;
 |-----------------|-------------

@@ -3,6 +3,10 @@
 ## September 2024
 
 - Added Fully Managed Datagen Source example [#5876](https://github.com/vdesabou/kafka-docker-playground/issues/5876)
+- Add example for [jsonata](https://yokota.blog/2024/07/15/jsonata-the-missing-declarative-language-for-kafka-connect/) [#5756](https://github.com/vdesabou/kafka-docker-playground/issues/5756)
+- Update playground to be compatible with CLI v4 [#5829](https://github.com/vdesabou/kafka-docker-playground/issues/5829)
+- CLI:
+  * add `--histo` and `--live` option to playground debug heap-dump [#5814](https://github.com/vdesabou/kafka-docker-playground/issues/5814)
 
 
 ## July 2024

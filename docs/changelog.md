@@ -1,5 +1,10 @@
 # 📜 Change Log
 
+## September 2024
+
+- Added Fully Managed Datagen Source example [#5876](https://github.com/vdesabou/kafka-docker-playground/issues/5876)
+
+
 ## July 2024
 
 - Added Fully Managed Amazon DynamoDB CDC Source Connector [#5749](https://github.com/vdesabou/kafka-docker-playground/issues/5749)

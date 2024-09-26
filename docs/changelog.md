@@ -10,6 +10,7 @@
 - Add example for [jsonata](https://yokota.blog/2024/07/15/jsonata-the-missing-declarative-language-for-kafka-connect/) [#5756](https://github.com/vdesabou/kafka-docker-playground/issues/5756)
 - Update playground to be compatible with CLI v4 [#5829](https://github.com/vdesabou/kafka-docker-playground/issues/5829)
 - CLI:
+  * Add option to skip "The current repo version is older than ..." [#5874](https://github.com/vdesabou/kafka-docker-playground/issues/5874) 
   * Provide option to skip killing all the containers for playground run [#5927](https://github.com/vdesabou/kafka-docker-playground/issues/5927)
   * add `--histo` and `--live` option to playground debug heap-dump [#5814](https://github.com/vdesabou/kafka-docker-playground/issues/5814)
 

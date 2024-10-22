@@ -1,5 +1,10 @@
 # 📜 Change Log
 
+## October 2024
+
+- Add custom connector example for Tabular Iceberg sink [#5971](https://github.com/vdesabou/kafka-docker-playground/issues/5971)
+
+
 ## September 2024
 
 - Add Fully Managed Google Cloud Functions Gen 2 Sink Connector[#5869](https://github.com/vdesabou/kafka-docker-playground/issues/5869)

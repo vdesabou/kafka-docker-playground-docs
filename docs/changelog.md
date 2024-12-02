@@ -1,5 +1,10 @@
 # 📜 Change Log
 
+## December 2024
+
+- CLI:
+  * Add schema metadata support to `playground schema register` [#6006](https://github.com/vdesabou/kafka-docker-playground/issues/6006)
+ 
 ## October 2024
 
 - Add custom connector example for Tabular Iceberg sink [#5971](https://github.com/vdesabou/kafka-docker-playground/issues/5971)

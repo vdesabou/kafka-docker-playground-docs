@@ -401,6 +401,24 @@ Then you can use it with:
 docker exec kcat kcat -b broker:9092 -L
 ```
 
+### 🐿️ Enabling Flink
+
+By default, Flink task/jobmanager is not started for every test. 
+
+You can enable Flink for any connector using plaintext deployment by setting environment variable `ENABLE_FLINK=1` in your shell. 
+
+Once enabled, the CLI will ask if you need to download any connectors. Based on the response, you can download one or more connectors from Flinks [maven](https://repo.maven.apache.org/maven2/org/apache/flink/) repository. 
+
+Additonally, you can start Flink in any of the available [deployment modes](https://nightlies.apache.org/flink/flink-docs-master/docs/deployment/overview/#deployment-modes) by navigating to the respective directory:
+
+- `kafka-docker-playground/`
+  - `flink/`
+    - `flink_app_mode/start.sh`
+    - `flink_session_mode/start.sh`
+    - `flink_session_sql_mode/start.sh`
+
+
+🐿️ Flink UI is reacheable using [http://127.0.0.1:8081](http://127.0.0.1:8081) within the flink child directory. If you enable Flink by starting connector deployment, [http://127.0.0.1:18081](http://127.0.0.1:18081) will be used. 
 
 ## 🔢 JMX Metrics
 

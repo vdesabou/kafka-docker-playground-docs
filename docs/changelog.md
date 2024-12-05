@@ -4,6 +4,7 @@
 
 - CLI:
   * Add schema metadata support to `playground schema register` [#6006](https://github.com/vdesabou/kafka-docker-playground/issues/6006)
+  * `playground topic produce` `--tombstone` improvements [#6078](https://github.com/vdesabou/kafka-docker-playground/issues/6078)
  
 ## October 2024
 

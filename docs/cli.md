@@ -118,6 +118,7 @@ visit https://docs.docker.com/get-docker to install
 - [set-compatibility](playground%20schema%20set-compatibility) - 🛡️ Set subject-level compatibility
 - [get-mode](playground%20schema%20get-mode) - 🔏 Get subject-level mode
 - [set-mode](playground%20schema%20set-mode) - 🔏 Set subject-level mode
+- [set-normalize](playground%20schema%20set-normalize) - 🧽 Set normalize at schema registry level
 - [delete](playground%20schema%20delete) - 🧟 Delete schema
 
 ### TCP Proxy commands
@@ -141,6 +142,7 @@ visit https://docs.docker.com/get-docker to install
 - [install-vscode-extension](playground%20tools%20install-vscode-extension) - 🪄 Install a slightly modified version of "Shell Script Command Completion" Visual Studio Code extension (https://marketplace.visualstudio.com/items?itemName=tetradresearch.vscode-h2o)
 - [read-avro-file](playground%20tools%20read-avro-file) - 🔖 Read provided avro file
 - [read-parquet-file](playground%20tools%20read-parquet-file) - 🔖 Read provided parquet file
+- [certs-create](playground%20tools%20certs-create) - 🔐 Generate keys and certificates used for SSL
 
 ### Debug commands
 
@@ -202,7 +204,7 @@ visit https://docs.docker.com/get-docker to install
 - [pause](playground%20connector%20pause) - ⏸️  Pause connector
 - [versions](playground%20connector%20versions) - 🧞 Get current and latest versions available on Confluent Hub for connector(s) used in example
 - [restart](playground%20connector%20restart) - ♻️  Restart connector
-- [stop](playground%20connector%20stop) - 🛑 Stop connector (only available if CP \> 7.5 )
+- [stop](playground%20connector%20stop) - 🛑 Stop connector (only available if CP \> 7.5)
 - [resume](playground%20connector%20resume) - ⏯️  Resume connector
 - [delete](playground%20connector%20delete) - 🗑️  Delete connector
 - [show-lag](playground%20connector%20show-lag) - 🐢 Show lag of sink connector

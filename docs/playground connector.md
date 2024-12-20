@@ -16,7 +16,7 @@ playground connector COMMAND
 - [pause](playground%20connector%20pause) - ⏸️  Pause connector
 - [versions](playground%20connector%20versions) - 🧞 Get current and latest versions available on Confluent Hub for connector(s) used in example
 - [restart](playground%20connector%20restart) - ♻️  Restart connector
-- [stop](playground%20connector%20stop) - 🛑 Stop connector (only available if CP \> 7.5 )
+- [stop](playground%20connector%20stop) - 🛑 Stop connector (only available if CP \> 7.5)
 - [resume](playground%20connector%20resume) - ⏯️  Resume connector
 - [delete](playground%20connector%20delete) - 🗑️  Delete connector
 - [show-lag](playground%20connector%20show-lag) - 🐢 Show lag of sink connector

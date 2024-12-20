@@ -2,7 +2,9 @@
 
 👻 Take a heap dump  
   
-🔖 It will save output to a .hprof file. VisualVM (https://visualvm.github.io/) or MAT (https://www.eclipse.org/mat/) can be used to read the file.
+🔖 It will save output to a .hprof file. VisualVM (https://visualvm.github.io/) or MAT (https://www.eclipse.org/mat/) can be used to read the file.  
+  
+It will run a full gc first. If you don't want this, use 
 
 ## Usage
 
@@ -19,6 +21,14 @@ playground debug heap-dump [OPTIONS]
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Default Value:  | connect
+
+#### *--live*
+
+🧬 dump only live objects; if not specified, all objects in the heap are dumped
+
+#### *--histo*
+
+📊 print histogram of java object heap
 
 ## Examples
 

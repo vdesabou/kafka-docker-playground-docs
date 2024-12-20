@@ -88,6 +88,14 @@ Otherwise, the key will be same for all records.
 |-----------------|-------------
 | Default Value:  | 300000
 
+#### *--max-nb-messages-to-generate MAX-NB-MESSAGES-TO-GENERATE*
+
+🔨 Max number of different messages to generate.  
+  
+   - when protobuf is used, default is 50 as protobuf generation is really slow  
+   - when --record-size is set, default is 100  
+   - otherwise default is 100000
+
 #### *--sleep-time-between-batch SLEEP-TIME-BETWEEN-BATCH*
 
 💤 Sleep time in seconds between batches  
@@ -251,7 +259,7 @@ playground topic produce -t topic-json --nb-messages 10 << 'EOF'
     "email": "faker.internet.exampleEmail()",
     "phone": "faker.phone.imei()",
     "website": "faker.internet.domainName()",
-    "city": "faker.address.city()",
+    "city": "faker.location.city()",
     "company": "faker.company.name()"
 }
 EOF

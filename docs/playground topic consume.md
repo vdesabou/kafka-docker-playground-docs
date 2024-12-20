@@ -20,7 +20,9 @@ playground topic consume [OPTIONS]
 
 #### *--max-messages MAX-MESSAGES*
 
-Max number of messages to display (default is 100)
+Max number of messages to display (default is 100)  
+  
+You can use -1 to display all messages
 
 | Attributes      | &nbsp;
 |-----------------|-------------

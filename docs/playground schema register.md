@@ -40,6 +40,20 @@ playground schema register [OPTIONS]
   
 ❗it will replace any schema which already exists at given id
 
+#### *--metadata-property METADATA-PROPERTY*
+
+🟡 Add metadata properties to schema contract  
+  
+See docs: https://docs.confluent.io/platform/current/schema-registry/fundamentals/data-contracts.html#metadata-properties  
+  
+🎓 Tip: you can pass multiple properties by specifying --metadata-property multiple times  
+  
+Example: --metadata-property "metadata1=value" --metadata-property "metadata2=value"
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Repeatable:     |  ✓ Yes
+
 ## Examples
 
 ```bash
@@ -56,7 +70,7 @@ message Customer {
 }
 EOF
 
-playground schema register --subject test-avro << 'EOF'
+playground schema register --subject test-avro --metadata-property test=test --metadata-property test2=test << 'EOF'
 {
     "type": "record",
     "namespace": "com.github.vdesabou",

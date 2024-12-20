@@ -1,6 +1,6 @@
 # playground connector stop
 
-🛑 Stop connector (only available if CP \> 7.5 )
+🛑 Stop connector (only available if CP \> 7.5)
 
 ## Usage
 

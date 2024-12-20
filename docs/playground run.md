@@ -24,7 +24,7 @@
   --cluster-creds (or CLUSTER_CREDS environment variable): The Kafka api key and secret to use, it should be separated with colon (example: \<API_KEY\>:\<API_KEY_SECRET\>)  
   --cluster-schema-registry-creds (or SCHEMA_REGISTRY_CREDS environment variable) (optional, if not set, new one will be created): The Schema Registry api key and secret to use, it should be separated with colon (example: \<SR_API_KEY\>:\<SR_API_KEY_SECRET\>)  
   
-❗ this command will kill all containers using playground container kill-all
+❗ this command will kill all containers using "playground container kill-all", you can disable this by running "playground config container-kill-all-before-run false"
 
 ## Usage
 
@@ -143,6 +143,16 @@ By default, rest-proxy container is not started for every test
 By default, control-center container is not started for every test  
   
 Control Center is reachable at http://127.0.0.1:9021
+
+#### *--enable-flink*
+
+🐿️ Enable Flink  
+  
+By default, flink is not started for every test  
+  
+Once enabled, the CLI will ask if you need to download any connectors. Based on the response, you can download one or more connectors from Flink maven repository.  
+  
+Flink UI is reacheable using http://127.0.0.1:8081 within the flink child directory. If you enable Flink by starting connector deployment, http://127.0.0.1:18081 will be used.
 
 #### *--enable-conduktor*
 

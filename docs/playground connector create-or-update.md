@@ -66,6 +66,18 @@ This flag allows to skip this automatic configuration (only useful to reproduce 
   
 ⚠️ Only available for ccloud connectors, the connector should not really exists
 
+#### *--initial-state INITIAL-STATE*
+
+🪵 Create connector with specific status (https://cwiki.apache.org/confluence/display/KAFKA/KIP-980%3A+Allow+creating+connectors+in+a+stopped+state)  
+  
+Only available if CP \> 7.7  
+  
+⚠️ not available for ccloud connectors
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Allowed Values: | RUNNING, PAUSED, STOPPED
+
 ## Examples
 
 ```bash

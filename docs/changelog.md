@@ -1,5 +1,12 @@
 # 📜 Change Log
 
+# January 2025
+## 01-2025
+#### Enhancements
+
+- Add CI results when using run command [##5527](https://github.com/vdesabou/kafka-docker-playground/issues/5527)
+
+
 ## December 2024
 
 - CLI:

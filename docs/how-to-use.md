@@ -252,12 +252,6 @@ ls: cannot access '/usr/share/confluent-hub-components/debezium-debezium-connect
 > [!TIP]
 > You can also change connector(s) version(s) while running an example using [playground update-version](/playground%20update-version)
 
-## ⛳ Options
-
-Selecting options is really easy with [playground run](/playground%20run) menu:
-
-![options](./images/options.jpg)
-
 ## 🐳 Overidding Confluent Plaform Docker images
 
 Docker images being used can be overridden by exporting following environment variables:
@@ -270,6 +264,12 @@ Docker images being used can be overridden by exporting following environment va
 * ksqlDb (`CP_KSQL_IMAGE`)
 * ksqlDB CLI (`CP_KSQL_CLI_IMAGE`)
 * rest-proxy (`CP_REST_PROXY_IMAGE`)
+
+## ⛳ Options
+
+Selecting options is really easy with [playground run](/playground%20run) menu:
+
+![options](./images/options.jpg)
 
 ### 🚀 Enabling ksqlDB
 

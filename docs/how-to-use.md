@@ -258,6 +258,19 @@ Selecting options is really easy with [playground run](/playground%20run) menu:
 
 ![options](./images/options.jpg)
 
+## 🐳 Overidding Confluent Plaform Docker images
+
+Docker images being used can be overridden by exporting following environment variables:
+
+* zookeeper (`CP_ZOOKEEPER_IMAGE`)
+* kafka (`CP_KAFKA_IMAGE`)
+* connect (`CP_CONNECT_IMAGE`)
+* schema-registry (`CP_SCHEMA_REGISTRY_IMAGE`)
+* control-center (`CP_CONTROL_CENTER_IMAGE`)
+* ksqlDb (`CP_KSQL_IMAGE`)
+* ksqlDB CLI (`CP_KSQL_CLI_IMAGE`)
+* rest-proxy (`CP_REST_PROXY_IMAGE`)
+
 ### 🚀 Enabling ksqlDB
 
 By default, [`ksqldb-server`](https://github.com/vdesabou/kafka-docker-playground/blob/7098800a582bfb2629005366b514a923d2fa037f/environment/plaintext/docker-compose.yml#L135-L171) and [`ksqldb-cli`](https://github.com/vdesabou/kafka-docker-playground/blob/7098800a582bfb2629005366b514a923d2fa037f/environment/plaintext/docker-compose.yml#L173-L183) containers are not started for every test.

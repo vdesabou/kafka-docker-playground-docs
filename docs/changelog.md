@@ -10,20 +10,6 @@
 - 👾 Add fully managed s3 example with Confluent Cloud Provider Integration [#5952](https://github.com/vdesabou/kafka-docker-playground/issues/5952)
 - 🧠 Add CI results when using playground run command [#5527](https://github.com/vdesabou/kafka-docker-playground/issues/5527)
 
-
-## January 2025
-#### 🌟 Enhancements
-
-- Allow to override all CP images [#6187](https://github.com/vdesabou/kafka-docker-playground/issues/6187)
-- Allow to override CP_CONNECT_IMAGE [#6082](https://github.com/vdesabou/kafka-docker-playground/issues/6082)
-- Add fully managed s3 example with Confluent Cloud Provider Integration [#5952](https://github.com/vdesabou/kafka-docker-playground/issues/5952)
-
-#### 🧠 CLI
-
-- playground topic produce --tombstone improvements [#6078](https://github.com/vdesabou/kafka-docker-playground/issues/6078)
-- topic produce: make nb_max_messages_to_generate configurable [#5976](https://github.com/vdesabou/kafka-docker-playground/issues/5976)
-- Add CI results when using run command [#5527](https://github.com/vdesabou/kafka-docker-playground/issues/5527)
-
 ## December 2024
 
 - CLI:

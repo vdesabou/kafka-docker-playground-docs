@@ -24,6 +24,7 @@ visit https://docs.docker.com/get-docker to install
 
 - [help](playground%20help) - Show help about a command
 - [status](playground%20status) - 🗺️ Show a status
+- [get-ci-result](playground%20get-ci-result) - get ci result for current test
 - [config](playground%20config) - ⚙️ Configure CLI
 
 ### Run commands

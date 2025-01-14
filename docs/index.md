@@ -24,13 +24,13 @@ visit https://docs.docker.com/get-docker to install
 
 - [help](playground%20help) - Show help about a command
 - [status](playground%20status) - 🗺️ Show a status
-- [get-ci-result](playground%20get-ci-result) - get ci result for current test
 - [config](playground%20config) - ⚙️ Configure CLI
 
 ### Run commands
 
 - [run](playground%20run) - 🕹️ Run any example !
 - [re-run](playground%20re-run) - ⚡ Simply re-run last example you ran with \<playground run\>
+- [get-ci-result](playground%20get-ci-result) - 🤖 get CI result for current example
 - [history](playground%20history) - 🏰 Get an history of the examples which were run with run command and run it again
 - [switch-ccloud](playground%20switch-ccloud) - 🌩️  Switch to ccloud environment.
 - [switch-back](playground%20switch-back) - 💺  Switch back from previous environment before switch-ccloud was called.

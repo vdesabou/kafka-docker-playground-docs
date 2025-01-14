@@ -1,6 +1,6 @@
 # playground get-ci-result
 
-get ci result for current test
+🤖 get CI result for current example
 
 ## Usage
 

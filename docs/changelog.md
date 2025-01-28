@@ -21,26 +21,6 @@
 - 🧠 playground connector create-or-update: --initial-state breaking connection.url and query [#6005](https://github.com/vdesabou/kafka-docker-playground/issues/6005)
 
 
-## January 2025
-##### 🌟 Enhancements
-
-- 🧹 Add log.sensitive.data to all Oracle CDC examples [#6206](https://github.com/vdesabou/kafka-docker-playground/issues/6206)
-- 🐳 Allow to override all CP images [#6187](https://github.com/vdesabou/kafka-docker-playground/issues/6187)
-- 🐳 Allow to override CP_CONNECT_IMAGE [#6082](https://github.com/vdesabou/kafka-docker-playground/issues/6082)
-- 🧠 playground topic produce --tombstone improvements [#6078](https://github.com/vdesabou/kafka-docker-playground/issues/6078)
-- 🧠 playground topic produce: make nb_max_messages_to_generate configurable [#5976](https://github.com/vdesabou/kafka-docker-playground/issues/5976)
-- 👾 Add fully managed s3 example with Confluent Cloud Provider Integration [#5952](https://github.com/vdesabou/kafka-docker-playground/issues/5952)
-- 🧠 Add CI results when using playground run command [#5527](https://github.com/vdesabou/kafka-docker-playground/issues/5527)
-- 👾 Make self-managed AWS examples working with short-lived credentials [#4894](https://github.com/vdesabou/kafka-docker-playground/issues/4894)
-
-##### 🐛 Bugs
-
-- 🐛 Conduktor is broken [#6218](https://github.com/vdesabou/kafka-docker-playground/issues/6218)
-- 🧠 flink_connectors variable warnings during playground stop [#6205](https://github.com/vdesabou/kafka-docker-playground/issues/6205)
-- 🧠 issue when playground CLI is not in PATH [#6204](https://github.com/vdesabou/kafka-docker-playground/issues/6204)
-- 🧠 playground connector create-or-update: --initial-state breaking connection.url and query [#6005](https://github.com/vdesabou/kafka-docker-playground/issues/6005)
-
-
 ## December 2024
 
 - CLI:

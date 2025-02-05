@@ -1,5 +1,11 @@
 # 📜 Change Log
 
+## February 2025
+##### 🌟 Enhancements
+
+- 👾 Add missing ActiveMQ fully managed connector example [#6247](https://github.com/vdesabou/kafka-docker-playground/issues/6247)
+
+
 ## January 2025
 ##### 🌟 Enhancements
 

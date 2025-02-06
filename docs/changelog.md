@@ -3,6 +3,18 @@
 ## February 2025
 ##### 🌟 Enhancements
 
+- 🧠 remove SLF4J traces from topic produce [#6254](https://github.com/vdesabou/kafka-docker-playground/issues/6254)
+- 🧠 playground connector restart is now available for fully managed connectors [#6253](https://github.com/vdesabou/kafka-docker-playground/issues/6253)
+- 👾 Add missing ActiveMQ fully managed connector example [#6247](https://github.com/vdesabou/kafka-docker-playground/issues/6247)
+
+##### 🐛 Bugs
+
+- 🐛 flink_connectors variable is not set during playground container recreat [#6255](https://github.com/vdesabou/kafka-docker-playground/issues/6255)
+
+
+## February 2025
+##### 🌟 Enhancements
+
 - 👾 Add missing ActiveMQ fully managed connector example [#6247](https://github.com/vdesabou/kafka-docker-playground/issues/6247)
 
 ##### 🐛 Bugs

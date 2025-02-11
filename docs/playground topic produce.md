@@ -186,6 +186,34 @@ Note: CP 7.2+ is required.
 
 ☑️ Validate schema according to connect sink converter used
 
+#### *--derive-key-schema-as DERIVE-KEY-SCHEMA-AS*
+
+🪄 Use playground schema derive-schema command to deduce schema from key payload  
+  
+Possible values:  
+  
+- AVRO  
+- JSON (json schema)  
+- PROTOBUF
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Allowed Values: | AVRO, JSON, PROTOBUF
+
+#### *--derive-value-schema-as DERIVE-VALUE-SCHEMA-AS*
+
+🪄 Use playground schema derive-schema command to deduce schema from value payload  
+  
+Possible values:  
+  
+- AVRO  
+- JSON (json schema)  
+- PROTOBUF
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Allowed Values: | AVRO, JSON, PROTOBUF
+
 #### *--no-null*
 
 🪹 Never generate null fields even for optional fields  

@@ -18,5 +18,6 @@ playground schema COMMAND
 - [set-mode](playground%20schema%20set-mode) - 🔏 Set subject-level mode
 - [set-normalize](playground%20schema%20set-normalize) - 🧽 Set normalize at schema registry level
 - [delete](playground%20schema%20delete) - 🧟 Delete schema
+- [derive-schema](playground%20schema%20derive-schema) - 🪄 Derive a schema based on payload
 
 

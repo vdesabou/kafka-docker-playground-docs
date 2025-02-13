@@ -18,20 +18,6 @@
 - 🐛 flink_connectors variable is not set during playground container recreat [#6255](https://github.com/vdesabou/kafka-docker-playground/issues/6255)
 
 
-## February 2025
-##### 🌟 Enhancements
-
-- 🧠 Add derive-schema option to playground topic produce [#6269](https://github.com/vdesabou/kafka-docker-playground/issues/6269)
-- 👾 Update default TAG to 7.8.1 [#6268](https://github.com/vdesabou/kafka-docker-playground/issues/6268)
-- 🧠 add playground schema derive-schema command [#6263](https://github.com/vdesabou/kafka-docker-playground/issues/6263)
-- 🧠 remove SLF4J traces from topic produce [#6254](https://github.com/vdesabou/kafka-docker-playground/issues/6254)
-- 🧠 playground connector restart is now available for fully managed connectors [#6253](https://github.com/vdesabou/kafka-docker-playground/issues/6253)
-- 👾 Add missing ActiveMQ fully managed connector example [#6247](https://github.com/vdesabou/kafka-docker-playground/issues/6247)
-
-##### 🐛 Bugs
-
-- 🐛 remove netcat requirement in get_connect_url_and_security() [#6267](https://github.com/vdesabou/kafka-docker-playground/issues/6267)
-- 🐛 flink_connectors variable is not set during playground container recreat [#6255](https://github.com/vdesabou/kafka-docker-playground/issues/6255)
 
 
 ## January 2025

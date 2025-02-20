@@ -18,8 +18,8 @@ playground ec2 open [OPTIONS]
   
 🎓 Tip: If not specified, the command will apply to all ec2 instances
 
-#### *--disable-sync-repro-folder*
+#### *--enable-sync-repro-folder*
 
-🚫 Disable sync reproduction-models folder between local and ec2 instance
+👉 Enable sync reproduction-models folder between local and ec2 instance
 
 

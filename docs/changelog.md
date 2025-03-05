@@ -3,6 +3,19 @@
 ## March 2025
 ##### 🌟 Enhancements
 
+- 👾 Add example for DataDog Logs Sink Connector [#6347](https://github.com/vdesabou/kafka-docker-playground/issues/6347)
+- 🧠 ignore .git folder in playground ec2 local-to-ec2 and ec2-to-local [#6346](https://github.com/vdesabou/kafka-docker-playground/issues/6346)
+- 👾 Remove Azure Data Lake Storage Gen1 [#6345](https://github.com/vdesabou/kafka-docker-playground/issues/6345)
+
+##### 🐛 Bugs
+
+- 🧠 playground topic consume shows SLF4J: Class path contains multiple SLF4J bindings [#6344](https://github.com/vdesabou/kafka-docker-playground/issues/6344)
+- 🐛 Azure Functions requires AZ_USER and AZ_PASS [#6343](https://github.com/vdesabou/kafka-docker-playground/issues/6343)
+
+
+## March 2025
+##### 🌟 Enhancements
+
 - 🧠 ignore .git folder in playground ec2 local-to-ec2 and ec2-to-local [#6346](https://github.com/vdesabou/kafka-docker-playground/issues/6346)
 - 👾 Remove Azure Data Lake Storage Gen1 [#6345](https://github.com/vdesabou/kafka-docker-playground/issues/6345)
 

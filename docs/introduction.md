@@ -26,6 +26,16 @@
 
 <script async id="asciicast-581275" src="https://asciinema.org/a/581275.js" async data-autoplay="true" data-size="big"></script>
 
+## 🎙️ Podcast
+
+<audio controls>
+  <source src="podcast.mp3" type="audio/mpeg">
+Your browser does not support the audio element.
+</audio>
+
+Made with love ♥️ by AI
+
+
 ## 🏁 Getting Started
 
 Check out the **[How to Use](/how-to-use.md)** section, then select an example in the **[Content](/content.md)** section and run it !

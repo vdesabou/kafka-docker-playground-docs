@@ -1,5 +1,5 @@
 # 🐳 kafka-docker-playground
-![success tests](https://img.shields.io/badge/success%20tests-468%2F471-red)![connector tested](https://img.shields.io/badge/connector%20tested-149-green)![cp versions tested](https://img.shields.io/badge/cp%20version%20tested-%207.9.0-green)![last run](https://img.shields.io/badge/last%20run-2025--03--10%2019:03-green)
+![success tests](https://img.shields.io/badge/success%20tests-465%2F471-red)![connector tested](https://img.shields.io/badge/connector%20tested-149-green)![cp versions tested](https://img.shields.io/badge/cp%20version%20tested-%207.9.0-green)![last run](https://img.shields.io/badge/last%20run-2025--03--11%2019:23-green)
 ![GitHub issues by-label](https://img.shields.io/github/issues/vdesabou/kafka-docker-playground/CI%20failing%20🔥)![GitHub issues by-label](https://img.shields.io/github/issues/vdesabou/kafka-docker-playground/enhancement%20✨)
 ![GitHub repo size](https://img.shields.io/github/repo-size/vdesabou/kafka-docker-playground)
 [![Add a star on GitHub](https://img.shields.io/github/stars/vdesabou/kafka-docker-playground?style=social)](https://github.com/vdesabou/kafka-docker-playground)
@@ -25,13 +25,6 @@
 ## 🍿 See CLI in action
 
 <script async id="asciicast-581275" src="https://asciinema.org/a/581275.js" async data-autoplay="true" data-size="big"></script>
-
-## 🎙️ Podcast
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/zV56G1Gz1kI?si=Yn0YKg2Vzs6xnCpP" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-
-Made with love ♥️ by AI
-
 
 ## 🏁 Getting Started
 

@@ -19,12 +19,6 @@
 
 <script async id="asciicast-581275" src="https://asciinema.org/a/581275.js" async data-autoplay="true" data-size="big"></script>
 
-## 🎙️ Podcast
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/zV56G1Gz1kI?si=Yn0YKg2Vzs6xnCpP" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-
-Made with love ♥️ by AI
-
 ## 🏁 Getting Started
 
 Check out the **[How to Use](/how-to-use.md)** section, then select an example in the **[Content](/content.md)** section and run it !

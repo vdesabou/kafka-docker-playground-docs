@@ -216,11 +216,11 @@ Each latest version used is specified on the [Connectors list](/content?id=conne
 
 The playground has 3 different ways to use different connector version when running a connector example:
 
-1. Specify the connector version
+1. Specify the connector version (`--connector-tag` using [playground run](https://kafka-docker-playground.io/#/playground%20run) command)
 
-2. Specify a connector ZIP file
+2. Specify a connector ZIP file (`--connector-zip` using [playground run](https://kafka-docker-playground.io/#/playground%20run) command)
 
-3. Specify a connector JAR file
+3. Specify a connector JAR file (`--connector-jar` using [playground run](https://kafka-docker-playground.io/#/playground%20run) command)
 
 *Example:*
 

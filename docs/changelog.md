@@ -3,6 +3,27 @@
 ## March 2025
 ##### 🌟 Enhancements
 
+- 🧠 automatically set ENABLE_JMX_GRAFANA (--enable-jmx-grafana) when using --enable-sql-datagen [#6400](https://github.com/vdesabou/kafka-docker-playground/issues/6400)
+- 🧠 automatically automatically enabling Grafana and  SQL Datagen injection (when applicable) when repro model name contains perf [#6399](https://github.com/vdesabou/kafka-docker-playground/issues/6399)
+- 🧠 add metadata to  playground  tools read-avro-file and read-parquet-file [#6398](https://github.com/vdesabou/kafka-docker-playground/issues/6398)
+- 🐳 Allow to override all CP images TAG [#6395](https://github.com/vdesabou/kafka-docker-playground/issues/6395)
+- 🧠 playground schema derive-schema: handle non-minified json [#6394](https://github.com/vdesabou/kafka-docker-playground/issues/6394)
+- 🎙️ Add AI generated podcast [#6374](https://github.com/vdesabou/kafka-docker-playground/issues/6374)
+- 👾 Handle AWS_PROFILE in AWS examples [#6372](https://github.com/vdesabou/kafka-docker-playground/issues/6372)
+- 👾 Add example for DataDog Logs Sink Connector [#6347](https://github.com/vdesabou/kafka-docker-playground/issues/6347)
+- 🧠 ignore .git folder in playground ec2 local-to-ec2 and ec2-to-local [#6346](https://github.com/vdesabou/kafka-docker-playground/issues/6346)
+- 👾 Remove Azure Data Lake Storage Gen1 [#6345](https://github.com/vdesabou/kafka-docker-playground/issues/6345)
+- 🔐 Create SQS AWS custom credentials example with 2.x [#5174](https://github.com/vdesabou/kafka-docker-playground/issues/5174)
+
+##### 🐛 Bugs
+
+- 🧠 playground topic consume shows SLF4J: Class path contains multiple SLF4J bindings [#6344](https://github.com/vdesabou/kafka-docker-playground/issues/6344)
+- 🐛 Azure Functions requires AZ_USER and AZ_PASS [#6343](https://github.com/vdesabou/kafka-docker-playground/issues/6343)
+
+
+## March 2025
+##### 🌟 Enhancements
+
 - 🧠 add metadata to  playground  tools read-avro-file and read-parquet-file [#6398](https://github.com/vdesabou/kafka-docker-playground/issues/6398)
 - 🐳 Allow to override all CP images TAG [#6395](https://github.com/vdesabou/kafka-docker-playground/issues/6395)
 - 🧠 playground schema derive-schema: handle non-minified json [#6394](https://github.com/vdesabou/kafka-docker-playground/issues/6394)

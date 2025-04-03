@@ -90,6 +90,7 @@ visit https://docs.docker.com/get-docker to install
 - [history](playground%20history) - 🏰 Get an history of the examples which were run with run command and run it again
 - [switch-ccloud](playground%20switch-ccloud) - 🌩️  Switch to ccloud environment.
 - [switch-back](playground%20switch-back) - 💺  Switch back from previous environment before switch-ccloud was called.
+- [ccloud-costs](playground%20ccloud-costs) - 💰  Retrieve ccloud costs for a range of dates
 - [update-version](playground%20update-version) - ✨ Update current confluent platform or connector(s) with new version(s)
 - [open](playground%20open) - 👐 When --file is not provided, simply open last example you ran with \<playground run\>
 - [stop](playground%20stop) - 🛑 Stop currently running example

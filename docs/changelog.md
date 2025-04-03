@@ -3,6 +3,15 @@
 ## April 2025
 ##### 🌟 Enhancements
 
+- 🧠 Add monthly ccloud costs at the end of playground run when ccloud example is executed [#6410](https://github.com/vdesabou/kafka-docker-playground/issues/6410)
+- 🧠 Add playground ccloud-costs-history [#6409](https://github.com/vdesabou/kafka-docker-playground/issues/6409)
+- 👾 Add JDBC-based fully managed Snowflake Source fully managed example [#6408](https://github.com/vdesabou/kafka-docker-playground/issues/6408)
+- 🧠 Add playground command to get ccloud biling cost [#6406](https://github.com/vdesabou/kafka-docker-playground/issues/6406)
+
+
+## April 2025
+##### 🌟 Enhancements
+
 - 👾 Add JDBC-based fully managed Snowflake Source fully managed example [#6408](https://github.com/vdesabou/kafka-docker-playground/issues/6408)
 - 🧠 Add playground command to get ccloud biling cost [#6406](https://github.com/vdesabou/kafka-docker-playground/issues/6406)
 

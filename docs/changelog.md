@@ -1,5 +1,12 @@
 # 📜 Change Log
 
+## April 2025
+##### 🌟 Enhancements
+
+- 👾 Add JDBC-based fully managed Snowflake Source fully managed example [#6408](https://github.com/vdesabou/kafka-docker-playground/issues/6408)
+- 🧠 Add playground command to get ccloud biling cost [#6406](https://github.com/vdesabou/kafka-docker-playground/issues/6406)
+
+
 ## March 2025
 ##### 🌟 Enhancements
 

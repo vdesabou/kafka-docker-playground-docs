@@ -10,20 +10,11 @@
 - 🧠 Add playground command to get ccloud biling cost [#6406](https://github.com/vdesabou/kafka-docker-playground/issues/6406)
 
 
-## April 2025
-##### 🌟 Enhancements
-
-- 🧠 Add monthly ccloud costs at the end of playground run when ccloud example is executed [#6410](https://github.com/vdesabou/kafka-docker-playground/issues/6410)
-- 🧠 Add playground ccloud-costs-history [#6409](https://github.com/vdesabou/kafka-docker-playground/issues/6409)
-- 👾 Add JDBC-based fully managed Snowflake Source fully managed example [#6408](https://github.com/vdesabou/kafka-docker-playground/issues/6408)
-- 🧠 Add playground command to get ccloud biling cost [#6406](https://github.com/vdesabou/kafka-docker-playground/issues/6406)
-
-
 ## March 2025
 ##### 🌟 Enhancements
 
 - 🧠 automatically set ENABLE_JMX_GRAFANA (--enable-jmx-grafana) when using --enable-sql-datagen [#6400](https://github.com/vdesabou/kafka-docker-playground/issues/6400)
-- 🧠 automatically automatically enabling Grafana and  SQL Datagen injection (when applicable) when repro model name contains perf [#6399](https://github.com/vdesabou/kafka-docker-playground/issues/6399)
+- 🧠 automatically enabling Grafana and  SQL Datagen injection (when applicable) when repro model name contains perf [#6399](https://github.com/vdesabou/kafka-docker-playground/issues/6399)
 - 🧠 add metadata to  playground  tools read-avro-file and read-parquet-file [#6398](https://github.com/vdesabou/kafka-docker-playground/issues/6398)
 - 🐳 Allow to override all CP images TAG [#6395](https://github.com/vdesabou/kafka-docker-playground/issues/6395)
 - 🧠 playground schema derive-schema: handle non-minified json [#6394](https://github.com/vdesabou/kafka-docker-playground/issues/6394)

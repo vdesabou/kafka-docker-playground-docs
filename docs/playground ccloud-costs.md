@@ -36,6 +36,6 @@ Default is 30 days ago
 
 🗓️ end date in format yyyy-mm-dd  
   
-Default is 3 days ago
+  Default is 3 days ago
 
 

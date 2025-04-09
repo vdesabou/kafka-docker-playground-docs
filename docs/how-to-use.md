@@ -9,14 +9,14 @@
 
 * You just need to have [docker](https://docs.docker.com/get-docker/) installed on your machine !
 
-* Install the [🧠 CLI](/cli) by following [Setup](/cli?id=%f0%9f%9a%9c-setup)
+* Install the [🧠 CLI](/cli) by following [Setup](/cli?id=%f0%9f%9a%9c-setup). [fzf](https://github.com/junegunn/fzf) is required when using CLI (see installation [instructions](https://github.com/junegunn/fzf#installation))
 
 * bash version 4 or higher is required. Mac users can upgrade bash with [brew](https://brew.sh/) by running `brew install bash`
 
 * You also need internet connectivity when running connect tests as connectors are downloaded from Confluent Hub on the fly.
 
 > [!NOTE]
-> Every command used in the playground is using Docker, this includes `jq` (except if you have it on your host already), `aws`, `az`, `gcloud`, etc..
+> Every command used in the playground is using Docker, this includes `jq` (except if you have it on your host already), `aws`, `az`, `gcloud`, etc...Only exceptions are `fzf` and `confluent`
 > 
 > The goal is to have a consistent behavior and only depends on Docker.
 

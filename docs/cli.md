@@ -3,6 +3,9 @@
 `playground` CLI is available in `scripts/cli/playground`.
 It makes so much easier to use the playground and reduces a lot the Docker knowledge required !
 
+> [!NOTE]
+> [fzf](https://github.com/junegunn/fzf) is required when using CLI (see installation [instructions](https://github.com/junegunn/fzf#installation))
+
 ## 🚜 Setup
 
 ### 🦶 Setup PATH

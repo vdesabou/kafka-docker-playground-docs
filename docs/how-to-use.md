@@ -11,7 +11,7 @@
 
 * Install the [🧠 CLI](/cli) by following [Setup](/cli?id=%f0%9f%9a%9c-setup). [fzf](https://github.com/junegunn/fzf) is required when using CLI (see installation [instructions](https://github.com/junegunn/fzf#installation))
 
-* bash version 4 or higher is required. Mac users can upgrade bash with [brew](https://brew.sh/) by running `brew install bash`
+* bash version 4 or higher is required. Mac users can upgrade bash with [brew](https://brew.sh/) by running `brew install bash` and then make sure it is in PATH (`export PATH=$PATH:/opt/homebrew/bin:$PATH`)
 
 * You also need internet connectivity when running connect tests as connectors are downloaded from Confluent Hub on the fly.
 

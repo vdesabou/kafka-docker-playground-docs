@@ -16,6 +16,6 @@ playground config COMMAND
 - [open-ccloud-connector-in-browser](playground%20config%20open-ccloud-connector-in-browser) - when running a fully managed connector example, it opens the connector in browser
 - [open-grafana-in-browser](playground%20config%20open-grafana-in-browser) - when running an example with --enable-jmx-grafana flag, it opens grafana in browser
 - [container-kill-all-before-run](playground%20config%20container-kill-all-before-run) - when running an example, always call playground container kill-all first. If not set, it will call playground stop instead.
-- [check-repo-version](playground%20config%20check-repo-version) - when running an example, always check if repo version is older than 3 days, if disabled, it will skip this check.
+- [check-and-update-repo-version](playground%20config%20check-and-update-repo-version) - when running an example, always check if repo version is older than 3 days, if disabled, it will skip this check.
 
 

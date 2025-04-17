@@ -276,6 +276,10 @@ Docker images tags being used can be overridden by exporting following environme
 * ksqlDB CLI (`CP_KSQL_CLI_TAG`)
 * rest-proxy (`CP_REST_PROXY_TAG`)
 
+## 🛰 Kraft mode
+
+[Kraft](https://docs.confluent.io/platform/current/kafka-metadata/kraft.html) is enabled by default when used with CP 8+, but you can also force it by setting environment variable `ENABLE_KRAFT` (minimum CP version supported is 7.4)
+
 ## ⛳ Options
 
 Selecting options is really easy with [playground run](/playground%20run) menu:

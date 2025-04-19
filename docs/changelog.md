@@ -3,6 +3,31 @@
 ## April 2025
 ##### 🌟 Enhancements
 
+- 🧠 add --open option to playground topic consume to dump all topic into a file and open it [#6441](https://github.com/vdesabou/kafka-docker-playground/issues/6441)
+- 🧠 open file in playground run menu (and used with --open option) will also open docker compose file [#6433](https://github.com/vdesabou/kafka-docker-playground/issues/6433)
+- 🧠 add --open-docker-compose option to playground open command [#6432](https://github.com/vdesabou/kafka-docker-playground/issues/6432)
+- 🧠 Add ARM64 information in playground run menu preview and prevent example to be executed if no support [#6429](https://github.com/vdesabou/kafka-docker-playground/issues/6429)
+- 👾 automatically do git pull in check_playground_version() (config check-repo-version) [#6420](https://github.com/vdesabou/kafka-docker-playground/issues/6420)
+- 👾 Rename OmniSci sink connector to HEAVY-AI [#6417](https://github.com/vdesabou/kafka-docker-playground/issues/6417)
+- 🧠 automatically open grafana in browser when --enable-jmx-grafana is used [#6415](https://github.com/vdesabou/kafka-docker-playground/issues/6415)
+- 🧠 Add monthly ccloud costs at the end of playground run when ccloud example is executed [#6410](https://github.com/vdesabou/kafka-docker-playground/issues/6410)
+- 🧠 Add playground ccloud-costs-history [#6409](https://github.com/vdesabou/kafka-docker-playground/issues/6409)
+- 👾 Add JDBC-based fully managed Snowflake Source fully managed example [#6408](https://github.com/vdesabou/kafka-docker-playground/issues/6408)
+- 🧠 Add playground command to get ccloud biling cost [#6406](https://github.com/vdesabou/kafka-docker-playground/issues/6406)
+
+##### 🐛 Bugs
+
+- 🐛 playground topic consume --verbose is not showing command used [#6440](https://github.com/vdesabou/kafka-docker-playground/issues/6440)
+- 🐛 Remove deprecated (removed in CP 8.x) --broker-list from examples [#6439](https://github.com/vdesabou/kafka-docker-playground/issues/6439)
+- 🐛 CP 8.x : error to install tcpdump [#6437](https://github.com/vdesabou/kafka-docker-playground/issues/6437)
+- 🐛 do not set Monitoring Interceptor when ccs is used [#6436](https://github.com/vdesabou/kafka-docker-playground/issues/6436)
+- 🐛 fix broker-list is not a recognized option with CP 8.x [#6435](https://github.com/vdesabou/kafka-docker-playground/issues/6435)
+- 🐛 do not set ConfluentMetricsReporter when ccs is used [#6434](https://github.com/vdesabou/kafka-docker-playground/issues/6434)
+
+
+## April 2025
+##### 🌟 Enhancements
+
 - 🧠 open file in playground run menu (and used with --open option) will also open docker compose file [#6433](https://github.com/vdesabou/kafka-docker-playground/issues/6433)
 - 🧠 add --open-docker-compose option to playground open command [#6432](https://github.com/vdesabou/kafka-docker-playground/issues/6432)
 - 🧠 Add ARM64 information in playground run menu preview and prevent example to be executed if no support [#6429](https://github.com/vdesabou/kafka-docker-playground/issues/6429)

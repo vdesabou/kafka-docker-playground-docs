@@ -48,8 +48,6 @@ visit https://github.com/junegunn/fzf#installation to install
 - ccloud  
 - 2way-ssl  
 - kerberos  
-- kraft-external-plaintext  
-- kraft-plaintext  
 - ldap-authorizer-sasl-plain  
 - ldap-sasl-plain  
 - rbac-sasl-plain  
@@ -64,7 +62,7 @@ This is only supported when example is a connector example
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Default Value:  | plaintext
-| Allowed Values: | ccloud, plaintext, sasl-ssl, sasl-plain, 2way-ssl, sasl-scram, kraft-external-plaintext, kraft-plaintext, kerberos, ssl_kerberos, ldap-authorizer-sasl-plain, ldap-sasl-plain, rbac-sasl-plain
+| Allowed Values: | ccloud, plaintext, sasl-ssl, sasl-plain, 2way-ssl, sasl-scram, kerberos, ssl_kerberos, ldap-authorizer-sasl-plain, ldap-sasl-plain, rbac-sasl-plain
 
 #### *--file, -f FILE*
 
@@ -76,7 +74,7 @@ This is only supported when example is a connector example
 
 #### *--open, -o*
 
-📖 Opening example file with text editor set with playground config editor \<editor\> (default is code)
+📖 Opening example files (including docker-compose file) with text editor set with playground config editor \<editor\> (default is code)
 
 #### *--tag TAG*
 

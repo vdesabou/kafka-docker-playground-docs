@@ -26,4 +26,8 @@ visit https://github.com/junegunn/fzf#installation to install
   
 🎓 Tip: use \<tab\> completion to trigger fzf completion
 
+#### *--open-docker-compose*
+
+🐳 Also open associated docker-compose file for the current example
+
 

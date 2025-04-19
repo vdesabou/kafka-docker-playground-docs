@@ -62,7 +62,7 @@ Tail on logs.
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Conflicts With: | *--min-expected-messages, --max-messages*
+| Conflicts With: | *--min-expected-messages, --max-messages, --open*
 
 #### *--plot-latencies-timestamp-field TIMESTAMP*
 
@@ -87,5 +87,13 @@ Max characters per message to display (default is 3000)
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Default Value:  | 3000
+
+#### *--open, -o*
+
+🔖 Save full dump of topic to a file and open with text editor set with playground config editor \<editor\> (default is code)
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Conflicts With: | *--max-characters, --tail, --min-expected-messages*
 
 

@@ -1,5 +1,11 @@
 # 📜 Change Log
 
+## May 2025
+##### 🌟 Enhancements
+
+- 🧠 Add playground open-changelog command [#6534](https://github.com/vdesabou/kafka-docker-playground/issues/6534)
+
+
 ## April 2025
 ##### 🌟 Enhancements
 

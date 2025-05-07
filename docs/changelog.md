@@ -5,6 +5,17 @@
 
 - 🧠 Add playground open-changelog command [#6534](https://github.com/vdesabou/kafka-docker-playground/issues/6534)
 
+##### 🐛 Bugs
+
+- 🐛 Add --region in aws sqs commands to avoid issues [#6594](https://github.com/vdesabou/kafka-docker-playground/issues/6594)
+- 🐛 remove connect-http-cdc-source as connector plugin is no longer available on hub [#6593](https://github.com/vdesabou/kafka-docker-playground/issues/6593)
+
+
+## May 2025
+##### 🌟 Enhancements
+
+- 🧠 Add playground open-changelog command [#6534](https://github.com/vdesabou/kafka-docker-playground/issues/6534)
+
 
 ## April 2025
 ##### 🌟 Enhancements

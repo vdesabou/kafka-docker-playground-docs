@@ -94,6 +94,7 @@ Otherwise, the key will be same for all records.
   
    - when protobuf is used, default is 50 as protobuf generation is really slow  
    - when --record-size is set, default is 100  
+   --when nb-messages is set to -1, default is 1000  
    - otherwise default is 100000
 
 #### *--sleep-time-between-batch SLEEP-TIME-BETWEEN-BATCH*

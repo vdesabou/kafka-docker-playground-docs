@@ -294,10 +294,11 @@ You can enable this by setting environment variable `ENABLE_KSQLDB=1` in your sh
 
 ### 💠 Enabling Control Center
 
-By default, [`control-center`](https://github.com/vdesabou/kafka-docker-playground/blob/7098800a582bfb2629005366b514a923d2fa037f/environment/plaintext/docker-compose.yml#L185-L221) container is not started for every test. 
-
+By default, [`control-center`](https://github.com/vdesabou/kafka-docker-playground/blob/7098800a582bfb2629005366b514a923d2fa037f/environment/plaintext/docker-compose.yml#L185-L221) container is not started for every test.
 
 You can enable this by setting environment variable `ENABLE_CONTROL_CENTER=1` in your shell.
+
+Control Center "Next Gen" (image `confluentinc/cp-enterprise-control-center-next-gen`) is used by default. If you want to use legacy image, you can enable it by setting environment variable `ENABLE_LEGACY_CONTROL_CENTER=1` in your shell.
 
 Control Center is reachable at http://127.0.0.1:9021
 

@@ -26,53 +26,6 @@
 - 🐛 remove connect-http-cdc-source as connector plugin is no longer available on hub [#6593](https://github.com/vdesabou/kafka-docker-playground/issues/6593)
 
 
-## May 2025
-##### 🌟 Enhancements
-
-- 👾 Add Azure Cosmos DB Sink V2 Connector fully managed example [#6608](https://github.com/vdesabou/kafka-docker-playground/issues/6608)
-- 👾 Add Azure Cosmos DB Source V2 Connector fully managed example [#6607](https://github.com/vdesabou/kafka-docker-playground/issues/6607)
-- 👾 Set CP 7.9.1 as default tag [#6602](https://github.com/vdesabou/kafka-docker-playground/issues/6602)
-- 🧠 Add playground open-changelog command [#6534](https://github.com/vdesabou/kafka-docker-playground/issues/6534)
-
-##### 🐛 Bugs
-
-- 🐛 playground tcp-proxy start issue when used with CONNECTOR_TAG [#6639](https://github.com/vdesabou/kafka-docker-playground/issues/6639)
-- 🐛 playground topic produce too slow when --nb-messages -1 [#6616](https://github.com/vdesabou/kafka-docker-playground/issues/6616)
-- AWS adding tags (confluent specific only) [#6615](https://github.com/vdesabou/kafka-docker-playground/issues/6615)
-- 🧹 remove occurences of confluentinc/cp-base-new and CP_BASE_IMAGE [#6612](https://github.com/vdesabou/kafka-docker-playground/issues/6612)
-- 🐛 function handle_aws_credentials not working anymore with /home/runner/.aws/credentials file [#6606](https://github.com/vdesabou/kafka-docker-playground/issues/6606)
-- 🐛 function maybe_create_image() not working with ubi9 base images when not using MAC OS [#6604](https://github.com/vdesabou/kafka-docker-playground/issues/6604)
-- 🐛 STRING_TOO_LONG for PUSH_TOPICS_NAME [#6603](https://github.com/vdesabou/kafka-docker-playground/issues/6603)
-- 🐛 playground ci-status duplicates when using playground run without full path [#6599](https://github.com/vdesabou/kafka-docker-playground/issues/6599)
-- 🐛 playground run command always succeed even if test fails [#6598](https://github.com/vdesabou/kafka-docker-playground/issues/6598)
-- 🐛 playground run does not show RESULT: FAILURE [#6597](https://github.com/vdesabou/kafka-docker-playground/issues/6597)
-- 🐛 azure functions: Use node version 22 as 18 has reached end-of-life on 2025-04-30 and is no longer supported. [#6595](https://github.com/vdesabou/kafka-docker-playground/issues/6595)
-- 🐛 Add --region in aws sqs commands to avoid issues [#6594](https://github.com/vdesabou/kafka-docker-playground/issues/6594)
-- 🐛 remove connect-http-cdc-source as connector plugin is no longer available on hub [#6593](https://github.com/vdesabou/kafka-docker-playground/issues/6593)
-
-
-## May 2025
-##### 🌟 Enhancements
-
-- 👾 Add Azure Cosmos DB Sink V2 Connector fully managed example [#6608](https://github.com/vdesabou/kafka-docker-playground/issues/6608)
-- 👾 Add Azure Cosmos DB Source V2 Connector fully managed example [#6607](https://github.com/vdesabou/kafka-docker-playground/issues/6607)
-- 👾 Set CP 7.9.1 as default tag [#6602](https://github.com/vdesabou/kafka-docker-playground/issues/6602)
-- 🧠 Add playground open-changelog command [#6534](https://github.com/vdesabou/kafka-docker-playground/issues/6534)
-
-##### 🐛 Bugs
-
-- 🐛 playground topic produce too slow when --nb-messages -1 [#6616](https://github.com/vdesabou/kafka-docker-playground/issues/6616)
-- AWS adding tags (confluent specific only) [#6615](https://github.com/vdesabou/kafka-docker-playground/issues/6615)
-- 🧹 remove occurences of confluentinc/cp-base-new and CP_BASE_IMAGE [#6612](https://github.com/vdesabou/kafka-docker-playground/issues/6612)
-- 🐛 function handle_aws_credentials not working anymore with /home/runner/.aws/credentials file [#6606](https://github.com/vdesabou/kafka-docker-playground/issues/6606)
-- 🐛 function maybe_create_image() not working with ubi9 base images when not using MAC OS [#6604](https://github.com/vdesabou/kafka-docker-playground/issues/6604)
-- 🐛 STRING_TOO_LONG for PUSH_TOPICS_NAME [#6603](https://github.com/vdesabou/kafka-docker-playground/issues/6603)
-- 🐛 playground ci-status duplicates when using playground run without full path [#6599](https://github.com/vdesabou/kafka-docker-playground/issues/6599)
-- 🐛 playground run command always succeed even if test fails [#6598](https://github.com/vdesabou/kafka-docker-playground/issues/6598)
-- 🐛 playground run does not show RESULT: FAILURE [#6597](https://github.com/vdesabou/kafka-docker-playground/issues/6597)
-- 🐛 azure functions: Use node version 22 as 18 has reached end-of-life on 2025-04-30 and is no longer supported. [#6595](https://github.com/vdesabou/kafka-docker-playground/issues/6595)
-- 🐛 Add --region in aws sqs commands to avoid issues [#6594](https://github.com/vdesabou/kafka-docker-playground/issues/6594)
-- 🐛 remove connect-http-cdc-source as connector plugin is no longer available on hub [#6593](https://github.com/vdesabou/kafka-docker-playground/issues/6593)
 
 
 

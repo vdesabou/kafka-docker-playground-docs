@@ -22,20 +22,6 @@ playground schema delete [OPTIONS]
   
 Can only be used when --subject is provided
 
-| Attributes      | &nbsp;
-|-----------------|-------------
-| Conflicts With: | *--id*
-
-#### *--id ID*
-
-🫵 Schema id  
-  
-Can only be used when --subject is provided
-
-| Attributes      | &nbsp;
-|-----------------|-------------
-| Conflicts With: | *--version*
-
 #### *--permanent*
 
 💀 Hard delete (default is soft delete)

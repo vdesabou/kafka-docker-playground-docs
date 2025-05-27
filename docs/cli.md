@@ -171,6 +171,7 @@ visit https://docs.docker.com/get-docker to install
 - [get-ip-addresses](playground%20container%20get-ip-addresses) - 🖥️  Get ip address of running containers
 - [kill-all](playground%20container%20kill-all) - 💀 Kill all containers
 - [logs](playground%20container%20logs) - 🕵️  Tail and follow container logs
+- [display-error-all-containers](playground%20container%20display-error-all-containers) - 🔥 Display all ERROR/FATAL logs in all containers. Useful for quick troubleshooting
 - [ssh](playground%20container%20ssh) - 🛬 SSH into container
 - [change-jdk](playground%20container%20change-jdk) - 🤎 Change java JDK version using Azul JDK (https://www.azul.com/downloads/#downloads-table-zulu)
 - [exec](playground%20container%20exec) - 🪄  Execute command in a container

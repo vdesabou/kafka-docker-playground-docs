@@ -14,42 +14,6 @@
 - 🐛 WARNING: Azure CLI 2.74.0 is the final version available [#6660](https://github.com/vdesabou/kafka-docker-playground/issues/6660)
 
 
-## June 2025
-##### 🌟 Enhancements
-
-- 🧠 Add playground tcp-proxy open-ui [#6662](https://github.com/vdesabou/kafka-docker-playground/issues/6662)
-
-##### 🐛 Bugs
-
-- 🐛 playground schema get broken with CP 8.x [#6672](https://github.com/vdesabou/kafka-docker-playground/issues/6672)
-- 🐛 oracle xstream failing with sed: can't read /etc/yum.repos.d/adoptium.repo [#6671](https://github.com/vdesabou/kafka-docker-playground/issues/6671)
-- 🐛 Set group.coordinator.new.enable=false (CP 7.9.0 and 7.9.1 issue) [#6661](https://github.com/vdesabou/kafka-docker-playground/issues/6661)
-- 🐛 WARNING: Azure CLI 2.74.0 is the final version available [#6660](https://github.com/vdesabou/kafka-docker-playground/issues/6660)
-
-
-## June 2025
-##### 🌟 Enhancements
-
-- 🧠 Add playground tcp-proxy open-ui [#6662](https://github.com/vdesabou/kafka-docker-playground/issues/6662)
-
-##### 🐛 Bugs
-
-- 🐛 oracle xstream failing with sed: can't read /etc/yum.repos.d/adoptium.repo [#6671](https://github.com/vdesabou/kafka-docker-playground/issues/6671)
-- 🐛 Set group.coordinator.new.enable=false (CP 7.9.0 and 7.9.1 issue) [#6661](https://github.com/vdesabou/kafka-docker-playground/issues/6661)
-- 🐛 WARNING: Azure CLI 2.74.0 is the final version available [#6660](https://github.com/vdesabou/kafka-docker-playground/issues/6660)
-
-
-## June 2025
-##### 🌟 Enhancements
-
-- 🧠 Add playground tcp-proxy open-ui [#6662](https://github.com/vdesabou/kafka-docker-playground/issues/6662)
-
-##### 🐛 Bugs
-
-- 🐛 Set group.coordinator.new.enable=false (CP 7.9.0 and 7.9.1 issue) [#6661](https://github.com/vdesabou/kafka-docker-playground/issues/6661)
-- 🐛 WARNING: Azure CLI 2.74.0 is the final version available [#6660](https://github.com/vdesabou/kafka-docker-playground/issues/6660)
-
-
 ## May 2025
 ##### 🌟 Enhancements
 

@@ -24,26 +24,6 @@
 - 🐛 WARNING: Azure CLI 2.74.0 is the final version available [#6660](https://github.com/vdesabou/kafka-docker-playground/issues/6660)
 
 
-## June 2025
-##### 🌟 Enhancements
-
-- 🧠 Add playground connector-plugin display-last-updated in run command output for connector examples [#6827](https://github.com/vdesabou/kafka-docker-playground/issues/6827)
-- 🧠 Add playground connector-plugin display-last-updated command [#6826](https://github.com/vdesabou/kafka-docker-playground/issues/6826)
-- 👾 Handle kraft JMX [#6757](https://github.com/vdesabou/kafka-docker-playground/issues/6757)
-- 👾 Use CP 8.0.0 as default [#6680](https://github.com/vdesabou/kafka-docker-playground/issues/6680)
-- 🧠 Add playground tcp-proxy open-ui [#6662](https://github.com/vdesabou/kafka-docker-playground/issues/6662)
-
-##### 🐛 Bugs
-
-- 🐛 remove jdbc-snowflake-source from CI as broken with CP 8.0 [#6824](https://github.com/vdesabou/kafka-docker-playground/issues/6824)
-- 🐛 MQTT proxy is removed in CP 8.0 [#6823](https://github.com/vdesabou/kafka-docker-playground/issues/6823)
-- 🐛 CP8 BasicAuth broken: replace org.eclipse.jetty.jaas.spi.PropertyFileLoginModule with org.eclipse.jetty.security.jaas.spi.PropertyFileLoginModule [#6760](https://github.com/vdesabou/kafka-docker-playground/issues/6760)
-- 🐛 sql datagen missing in run menu for fully managed examples [#6759](https://github.com/vdesabou/kafka-docker-playground/issues/6759)
-- 🐛 Remove monitoring interceptors when with CP 8+ [#6681](https://github.com/vdesabou/kafka-docker-playground/issues/6681)
-- 🐛 playground schema get broken with CP 8.x [#6672](https://github.com/vdesabou/kafka-docker-playground/issues/6672)
-- 🐛 oracle xstream failing with sed: can't read /etc/yum.repos.d/adoptium.repo [#6671](https://github.com/vdesabou/kafka-docker-playground/issues/6671)
-- 🐛 Set group.coordinator.new.enable=false (CP 7.9.0 and 7.9.1 issue) [#6661](https://github.com/vdesabou/kafka-docker-playground/issues/6661)
-- 🐛 WARNING: Azure CLI 2.74.0 is the final version available [#6660](https://github.com/vdesabou/kafka-docker-playground/issues/6660)
 
 ## May 2025
 ##### 🌟 Enhancements

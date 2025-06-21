@@ -96,6 +96,8 @@ visit https://docs.docker.com/get-docker to install
 - [open](playground%20open) - 👐 When --file is not provided, simply open last example you ran with \<playground run\>
 - [stop](playground%20stop) - 🛑 Stop currently running example
 - [remove-all-docker-images](playground%20remove-all-docker-images) - 🧨 Remove all docker images (including docker volumes)
+- [remove-cp-docker-images](playground%20remove-cp-docker-images) - 🧹 Remove all Confluent Platform docker images related to a version installed locally (a confirmation will be required for every version present)
+- [refresh-cp-docker-images](playground%20refresh-cp-docker-images) - 🔄 Refresh (pull from Docker) all Confluent Platform docker images related to a version installed locally
 - [cleanup-cloud-details](playground%20cleanup-cloud-details) - 🧼 playground is actively caching ccloud details (https://kafka-docker-playground.io/#/how-to-use?id=%f0%9f%8c%a4%ef%b8%8f-confluent-cloud-examples)
 - [open-docs](playground%20open-docs) - 🧑‍🎓 Open Confluent documentation of currently running example
 - [open-changelog](playground%20open-changelog) - 📜 Open playground changelog (https://kafka-docker-playground.io/#/changelog)

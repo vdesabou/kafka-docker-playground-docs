@@ -34,12 +34,14 @@ playground debug jscissors [OPTIONS]
 * EXCEPTION_HEAP: print heap dump when an exception is thrown during method execution  
 * DELAY: print time taken for method execution  
   
+Default values: VALUES, RETURN_VALUE, DELAY and STACK  
+  
 🎓 Tip: you can pass multiple operations by specifying --operation multiple times
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Required:       | ✓ Yes
 | Repeatable:     |  ✓ Yes
+| Default Value:  | ["VALUES", "RETURN_VALUE", "DELAY", "STACK"]
 | Allowed Values: | VALUES, RETURN_VALUE, THREADS, HEAP, STACK, EXCEPTION_HEAP, DELAY
 
 #### *--class CLASS*

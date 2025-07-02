@@ -1,5 +1,11 @@
 # 📜 Change Log
 
+## July 2025
+##### 🌟 Enhancements
+
+- 🗺️Region validation for both Confluent Cloud and Endpoint at the initial stages of connector being launched [#6867](https://github.com/vdesabou/kafka-docker-playground/issues/6867)
+
+
 ## June 2025
 ##### 🌟 Enhancements
 

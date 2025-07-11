@@ -3,6 +3,20 @@
 ## July 2025
 ##### 🌟 Enhancements
 
+- 👾 Add documentation url to playground playground connector-plugin versions output [#6882](https://github.com/vdesabou/kafka-docker-playground/issues/6882)
+- 👾⭐ Add MariaDB CDC Source (Debezium) Fully Managed example [#6879](https://github.com/vdesabou/kafka-docker-playground/issues/6879)
+- 🗺️Region validation for both Confluent Cloud and Endpoint at the initial stages of connector being launched [#6867](https://github.com/vdesabou/kafka-docker-playground/issues/6867)
+- 👾 Use CP 8.0.0 as default [#6680](https://github.com/vdesabou/kafka-docker-playground/issues/6680)
+
+##### 🐛 Bugs
+
+- 🐛 remove from playground topic produce and consume ERROR Reconfiguration failed: No configuration found for... [#6869](https://github.com/vdesabou/kafka-docker-playground/issues/6869)
+- 🐛 check for Supported Connector Versions in Confluent Platform 8.0 is broken with CONNECTOR_ZIP [#6868](https://github.com/vdesabou/kafka-docker-playground/issues/6868)
+
+
+## July 2025
+##### 🌟 Enhancements
+
 - 🗺️Region validation for both Confluent Cloud and Endpoint at the initial stages of connector being launched [#6867](https://github.com/vdesabou/kafka-docker-playground/issues/6867)
 - 👾 Use CP 8.0.0 as default [#6680](https://github.com/vdesabou/kafka-docker-playground/issues/6680)
 

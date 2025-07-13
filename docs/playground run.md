@@ -78,7 +78,19 @@ This is only supported when example is a connector example
 
 #### *--tag TAG*
 
-🎯 Confluent Platform (CP) version to use  
+🎯 Confluent Platform (CP) version to use. Applies to all components (broker, connect, schema registry, ksqlDB, etc...)  
+  
+It sets TAG environment variable  
+  
+Must be greater or equal to 5.3.0  
+  
+🎓 Tip: use \<tab\> completion to trigger fzf completion
+
+#### *--connect-tag CONNECT_TAG*
+
+🔗 Confluent Platform (CP) version to use. Applies to connect only.  
+  
+It sets CP_CONNECT_TAG environment variable  
   
 Must be greater or equal to 5.3.0  
   
@@ -103,7 +115,8 @@ By default, for each connector, the latest available version on Confluent Hub is
 ❕ It must be absolute full path  
   
 🎓 Tip: use \<tab\> completion to trigger fzf completion   
-        use playground config folder_zip_or_jar \<folder1\> \<folder2\>... (default is home folder and current folder is always included) to configure where to search the files
+        use playground config folder_zip_or_jar \<folder1\> \<folder2\>... (default is home folder and current folder is always included) to configure where to search the files  
+        use \<option+enter\> to use the value you typed manually
 
 | Attributes      | &nbsp;
 |-----------------|-------------
@@ -116,7 +129,8 @@ By default, for each connector, the latest available version on Confluent Hub is
 ❕ It must be absolute full path  
   
 🎓 Tip: use \<tab\> completion to trigger fzf completion   
-        use playground config folder_zip_or_jar \<folder1\> \<folder2\>... (default is home folder and current folder is always included) to configure where to search the files
+        use playground config folder_zip_or_jar \<folder1\> \<folder2\>... (default is home folder and current folder is always included) to configure where to search the files  
+        use \<option+enter\> to use the value you typed manually
 
 #### *--enable-ksqldb*
 

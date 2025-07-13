@@ -24,7 +24,8 @@ visit https://github.com/junegunn/fzf#installation to install
   
 ❕ It must be absolute full path  
   
-🎓 Tip: use \<tab\> completion to trigger fzf completion
+🎓 Tip: use \<tab\> completion to trigger fzf completion  
+        use \<option+enter\> to use the value you typed manually
 
 #### *--open-docker-compose*
 

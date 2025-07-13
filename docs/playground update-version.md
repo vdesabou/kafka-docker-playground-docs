@@ -1,6 +1,6 @@
 # playground update-version
 
-✨ Update current confluent platform or connector(s) with new version(s)
+✨ Update current confluent platform components (all with --tag or only connect with --connect-tag) or connector(s) with new version(s)
 
 ## Usage
 
@@ -12,7 +12,19 @@ playground update-version [OPTIONS]
 
 #### *--tag TAG*
 
-🎯 Confluent Platform (CP) version to use  
+🎯 Confluent Platform (CP) version to use. Applies to all components (broker, connect, schema registry, ksqlDB, etc...)  
+  
+It sets TAG environment variable  
+  
+Must be greater or equal to 5.3.0  
+  
+🎓 Tip: use \<tab\> completion to trigger fzf completion
+
+#### *--connect-tag CONNECT_TAG*
+
+🔗 Confluent Platform (CP) version to use. Applies to connect only.  
+  
+It sets CP_CONNECT_TAG environment variable  
   
 Must be greater or equal to 5.3.0  
   
@@ -37,7 +49,8 @@ By default, for each connector, the latest available version on Confluent Hub is
 ❕ It must be absolute full path  
   
 🎓 Tip: use \<tab\> completion to trigger fzf completion   
-        use playground config folder_zip_or_jar \<folder1\> \<folder2\>... (default is home folder and current folder is always included) to configure where to search the files
+        use playground config folder_zip_or_jar \<folder1\> \<folder2\>... (default is home folder and current folder is always included) to configure where to search the files  
+        use \<option+enter\> to use the value you typed manually
 
 | Attributes      | &nbsp;
 |-----------------|-------------
@@ -50,7 +63,8 @@ By default, for each connector, the latest available version on Confluent Hub is
 ❕ It must be absolute full path  
   
 🎓 Tip: use \<tab\> completion to trigger fzf completion   
-        use playground config folder_zip_or_jar \<folder1\> \<folder2\>... (default is home folder and current folder is always included) to configure where to search the files
+        use playground config folder_zip_or_jar \<folder1\> \<folder2\>... (default is home folder and current folder is always included) to configure where to search the files  
+        use \<option+enter\> to use the value you typed manually
 
 ## Examples
 
@@ -60,6 +74,10 @@ playground update-version (interactive mode)
 
 ```bash
 playground update-version --tag 6.2.0 --connector-tag=2.5.12,10.5.7
+```
+
+```bash
+playground update-version --connect-tag 6.2.0 --connector-tag=2.5.12,10.5.7
 ```
 
 

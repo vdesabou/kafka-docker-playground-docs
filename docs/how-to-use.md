@@ -269,7 +269,7 @@ Docker images tags being used can be overridden by exporting following environme
 
 * zookeeper (`CP_ZOOKEEPER_TAG`)
 * kafka (`CP_KAFKA_TAG`)
-* connect (`CP_CONNECT_TAG`)
+* connect (`CP_CONNECT_TAG`) (`--connect-tag` using [playground run](https://kafka-docker-playground.io/#/playground%20run) command)
 * schema-registry (`CP_SCHEMA_REGISTRY_TAG`)
 * control-center (`CP_CONTROL_CENTER_TAG`)
 * ksqlDb (`CP_KSQL_TAG`)

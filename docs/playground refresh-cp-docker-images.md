@@ -1,6 +1,8 @@
 # playground refresh-cp-docker-images
 
-🔄 Refresh (pull from Docker) all Confluent Platform docker images related to a version installed locally
+🔄 Refresh (pull from Docker) all Confluent Platform docker images related to a version installed locally  
+  
+    It also refreshes images for aws, gcp and azure cli
 
 ## Usage
 

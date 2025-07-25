@@ -3,6 +3,27 @@
 ## July 2025
 ##### 🌟 Enhancements
 
+- 🧠 Add fully managed logs to playground connector logs [#6917](https://github.com/vdesabou/kafka-docker-playground/issues/6917)
+- 👾 Add onprem Debezium MariaDB example [#6900](https://github.com/vdesabou/kafka-docker-playground/issues/6900)
+- 👾 Add AWS CloudWatch Logs example with custom aws credentials provider [#6899](https://github.com/vdesabou/kafka-docker-playground/issues/6899)
+- 🧠 display information if tag is already installed when choosing cp version in playground menu [#6898](https://github.com/vdesabou/kafka-docker-playground/issues/6898)
+- 🧠 add --connect-tag to playground update-version [#6897](https://github.com/vdesabou/kafka-docker-playground/issues/6897)
+- 🧠 Add --connect-tag to playground run command [#6896](https://github.com/vdesabou/kafka-docker-playground/issues/6896)
+- 🧠 Allow to enter any input in menu selection using 'option+enter' when selecting zip or jar [#6890](https://github.com/vdesabou/kafka-docker-playground/issues/6890)
+- 🧠 Add documentation url to playground playground connector-plugin versions output [#6882](https://github.com/vdesabou/kafka-docker-playground/issues/6882)
+- 👾⭐ Add MariaDB CDC Source (Debezium) Fully Managed example [#6879](https://github.com/vdesabou/kafka-docker-playground/issues/6879)
+- 🗺️Region validation for both Confluent Cloud and Endpoint at the initial stages of connector being launched [#6867](https://github.com/vdesabou/kafka-docker-playground/issues/6867)
+- 👾 Use CP 8.0.0 as default [#6680](https://github.com/vdesabou/kafka-docker-playground/issues/6680)
+
+##### 🐛 Bugs
+
+- 🐛 remove from playground topic produce and consume ERROR Reconfiguration failed: No configuration found for... [#6869](https://github.com/vdesabou/kafka-docker-playground/issues/6869)
+- 🐛 check for Supported Connector Versions in Confluent Platform 8.0 is broken with CONNECTOR_ZIP [#6868](https://github.com/vdesabou/kafka-docker-playground/issues/6868)
+
+
+## July 2025
+##### 🌟 Enhancements
+
 - 👾 Add onprem Debezium MariaDB example [#6900](https://github.com/vdesabou/kafka-docker-playground/issues/6900)
 - 👾 Add AWS CloudWatch Logs example with custom aws credentials provider [#6899](https://github.com/vdesabou/kafka-docker-playground/issues/6899)
 - 🧠 display information if tag is already installed when choosing cp version in playground menu [#6898](https://github.com/vdesabou/kafka-docker-playground/issues/6898)

@@ -1,5 +1,11 @@
 # 📜 Change Log
 
+## August 2025
+##### 🌟 Enhancements
+
+- 🧠 --key is now optional when using --tombtone  with playground topic produce (generating records with both key and values as NULL) [#6941](https://github.com/vdesabou/kafka-docker-playground/issues/6941)
+
+
 ## July 2025
 ##### 🌟 Enhancements
 

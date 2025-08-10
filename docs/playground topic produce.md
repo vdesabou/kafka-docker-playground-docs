@@ -179,7 +179,8 @@ Used with --forced-value, this is a powerful way to send specific messages.
 
 ⚰️ Generate tombstone (record with null value).   
   
---key must be set when this flag is used.  
+Setting --key is recommended when this flag is used.   
+If not set, the key will also be null, hence generating a null record (both key and value being null)  
   
 Note: CP 7.2+ is required.
 

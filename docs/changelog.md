@@ -3,6 +3,14 @@
 ## August 2025
 ##### 🌟 Enhancements
 
+- 👾⭐ Add Fully Managed Mongo Sink example with MONGODB_SELF_MANAGED [#6947](https://github.com/vdesabou/kafka-docker-playground/issues/6947)
+- 👾⭐ Add Fully Managed Mongo Source example with MONGODB_SELF_MANAGED [#6946](https://github.com/vdesabou/kafka-docker-playground/issues/6946)
+- 🧠 --key is now optional when using --tombtone  with playground topic produce (generating records with both key and values as NULL) [#6941](https://github.com/vdesabou/kafka-docker-playground/issues/6941)
+
+
+## August 2025
+##### 🌟 Enhancements
+
 - 🧠 --key is now optional when using --tombtone  with playground topic produce (generating records with both key and values as NULL) [#6941](https://github.com/vdesabou/kafka-docker-playground/issues/6941)
 
 

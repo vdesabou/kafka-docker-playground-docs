@@ -3,6 +3,16 @@
 ## August 2025
 ##### 🌟 Enhancements
 
+- 👾 Adding cflt tags to lambda functions in lambda sink examples [#6959](https://github.com/vdesabou/kafka-docker-playground/issues/6959)
+- 👾 pre-create table in dynamodb tests [#6954](https://github.com/vdesabou/kafka-docker-playground/issues/6954)
+- 👾⭐ Add Fully Managed Mongo Sink example with MONGODB_SELF_MANAGED [#6947](https://github.com/vdesabou/kafka-docker-playground/issues/6947)
+- 👾⭐ Add Fully Managed Mongo Source example with MONGODB_SELF_MANAGED [#6946](https://github.com/vdesabou/kafka-docker-playground/issues/6946)
+- 🧠 --key is now optional when using --tombtone  with playground topic produce (generating records with both key and values as NULL) [#6941](https://github.com/vdesabou/kafka-docker-playground/issues/6941)
+
+
+## August 2025
+##### 🌟 Enhancements
+
 - 👾 pre-create table in dynamodb tests [#6954](https://github.com/vdesabou/kafka-docker-playground/issues/6954)
 - 👾⭐ Add Fully Managed Mongo Sink example with MONGODB_SELF_MANAGED [#6947](https://github.com/vdesabou/kafka-docker-playground/issues/6947)
 - 👾⭐ Add Fully Managed Mongo Source example with MONGODB_SELF_MANAGED [#6946](https://github.com/vdesabou/kafka-docker-playground/issues/6946)

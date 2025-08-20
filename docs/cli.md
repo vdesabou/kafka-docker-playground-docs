@@ -210,6 +210,7 @@ visit https://docs.docker.com/get-docker to install
 
 - [connector](playground%20connector) - 🔗 Connector commands
 - [status](playground%20connector%20status) - 🧩 Show status of all connectors
+- [oracle-cdc-xstream](playground%20connector%20oracle-cdc-xstream) - 🅾️ Specific Oracle CDC Xstream commands
 - [offsets](playground%20connector%20offsets) - 💈 Handle source and sink connectors offsets
 - [plugins](playground%20connector%20plugins) - 🎨 Show all connector plugins installed. You can also display transforms, converters and predicates using --all flag
 - [pause](playground%20connector%20pause) - ⏸️  Pause connector

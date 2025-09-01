@@ -1,5 +1,11 @@
 # 📜 Change Log
 
+## September 2025
+##### 🌟 Enhancements
+
+- 🔐 Create S3 AWS custom credentials example with 11.x [#6978](https://github.com/vdesabou/kafka-docker-playground/issues/6978)
+
+
 ## August 2025
 ##### 🌟 Enhancements
 

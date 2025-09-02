@@ -3,6 +3,13 @@
 ## September 2025
 ##### 🌟 Enhancements
 
+- 👾 Add oracle-readiness.sql to Oracle CDC 19 cdb and pdb examples [#6980](https://github.com/vdesabou/kafka-docker-playground/issues/6980)
+- 🔐 Create S3 AWS custom credentials example with 11.x [#6978](https://github.com/vdesabou/kafka-docker-playground/issues/6978)
+
+
+## September 2025
+##### 🌟 Enhancements
+
 - 🔐 Create S3 AWS custom credentials example with 11.x [#6978](https://github.com/vdesabou/kafka-docker-playground/issues/6978)
 
 

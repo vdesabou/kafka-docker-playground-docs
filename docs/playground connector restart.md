@@ -20,4 +20,8 @@ playground connector restart [OPTIONS]
   
 🎓 Tip: If not specified, the command will apply to all connectors
 
+#### *--task-id, -t TASK_ID*
+
+🔧 Restart specific task ID only (instead of restarting entire connector)
+
 

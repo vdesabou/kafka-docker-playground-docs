@@ -5,6 +5,21 @@
 
 - 🧠 Add --task-id to playground connector restart [#7008](https://github.com/vdesabou/kafka-docker-playground/issues/7008)
 - 👾 Upgrade Azure ServiceBus client to latest SDK [#7003](https://github.com/vdesabou/kafka-docker-playground/issues/7003)
+- 👾⭐ Add example with playground connector connect-migration-utility migrate [#7002](https://github.com/vdesabou/kafka-docker-playground/issues/7002)
+- 👾 replace gsutil by gloud storage [#6994](https://github.com/vdesabou/kafka-docker-playground/issues/6994)
+- 👾 Add cflt_managed_id tag/label to azure examples [#6993](https://github.com/vdesabou/kafka-docker-playground/issues/6993)
+- 👾 Add cflt_managed_id tag/label to gcp examples [#6991](https://github.com/vdesabou/kafka-docker-playground/issues/6991)
+- 🧠 Add cflt_managed_id tags when using playground ec2 create [#6990](https://github.com/vdesabou/kafka-docker-playground/issues/6990)
+- ⭐🧠 Add playground connector connect-migration-utility commands [#6981](https://github.com/vdesabou/kafka-docker-playground/issues/6981)
+- 👾 Add oracle-readiness.sql to Oracle CDC 19 cdb and pdb examples [#6980](https://github.com/vdesabou/kafka-docker-playground/issues/6980)
+- 🔐 Create S3 Sink AWS custom credentials example with 11.x [#6978](https://github.com/vdesabou/kafka-docker-playground/issues/6978)
+
+
+## September 2025
+##### 🌟 Enhancements
+
+- 🧠 Add --task-id to playground connector restart [#7008](https://github.com/vdesabou/kafka-docker-playground/issues/7008)
+- 👾 Upgrade Azure ServiceBus client to latest SDK [#7003](https://github.com/vdesabou/kafka-docker-playground/issues/7003)
 - 👾 replace gsutil by gloud storage [#6994](https://github.com/vdesabou/kafka-docker-playground/issues/6994)
 - 👾 Add cflt_managed_id tag/label to azure examples [#6993](https://github.com/vdesabou/kafka-docker-playground/issues/6993)
 - 👾 Add cflt_managed_id tag/label to gcp examples [#6991](https://github.com/vdesabou/kafka-docker-playground/issues/6991)

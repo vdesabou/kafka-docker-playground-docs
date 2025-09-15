@@ -56,4 +56,16 @@ playground exec -c connect -d "whoami" --root
 playground exec --container connect --command "whoami" --shell sh
 ```
 
+```bash
+playground exec -c broker -c connect -d "ps aux"
+```
+
+```bash
+playground exec --container schema-registry --container ksqldb-server --command "free -h"
+```
+
+```bash
+playground exec -c connect -c broker -d "netstat -tuln" --root
+```
+
 

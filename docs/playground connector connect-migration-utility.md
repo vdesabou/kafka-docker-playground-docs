@@ -3,6 +3,8 @@
 🧩 Run Kafka Connector Migration Utility (see https://github.com/confluentinc/connect-migration-utility/) on running connect cluster  
   
 The connector example should be ran with --environment flag set to \<ccloud\>  
+  
+See a full example at https://github.com/vdesabou/kafka-docker-playground/blob/master/ccloud/connect-migration-utility/README.md  
 
 
 ## Usage

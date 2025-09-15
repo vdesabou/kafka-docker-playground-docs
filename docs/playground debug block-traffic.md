@@ -52,4 +52,16 @@ playground debug block-traffic --destination google.com --action start
 playground debug block-traffic --container broker --destination zookeeper --action start
 ```
 
+```bash
+playground debug block-traffic -c broker -c connect --destination zookeeper --action start
+```
+
+```bash
+playground debug block-traffic --container schema-registry --destination broker --port 9092 --action start
+```
+
+```bash
+playground debug block-traffic -c connect -c ksqldb-server --destination schema-registry --action stop
+```
+
 

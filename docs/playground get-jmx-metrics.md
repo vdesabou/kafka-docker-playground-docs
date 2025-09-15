@@ -51,4 +51,16 @@ playground get-jmx-metrics --container connect --domain "kafka.connect kafka.con
 playground get-jmx-metrics -c broker
 ```
 
+```bash
+playground get-jmx-metrics -c connect -c broker
+```
+
+```bash
+playground get-jmx-metrics --container schema-registry --container ksqldb-server --open
+```
+
+```bash
+playground get-jmx-metrics -c broker -c connect --domain "kafka.server"
+```
+
 

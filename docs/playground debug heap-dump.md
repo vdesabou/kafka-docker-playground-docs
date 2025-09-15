@@ -43,4 +43,16 @@ playground debug heap-dump
 playground debug heap-dump --container broker
 ```
 
+```bash
+playground debug heap-dump -c connect -c broker
+```
+
+```bash
+playground debug heap-dump --container schema-registry --live
+```
+
+```bash
+playground debug heap-dump -c connect -c broker --histo
+```
+
 

@@ -33,4 +33,12 @@ playground debug thread-dump
 playground debug thread-dump --container broker
 ```
 
+```bash
+playground debug thread-dump -c connect -c broker
+```
+
+```bash
+playground debug thread-dump --container schema-registry --container ksqldb-server
+```
+
 

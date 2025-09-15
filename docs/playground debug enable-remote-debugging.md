@@ -37,4 +37,12 @@ playground debug enable-remote-debugging --container broker
 playground debug enable-remote-debugging -c broker
 ```
 
+```bash
+playground debug enable-remote-debugging -c connect -c broker
+```
+
+```bash
+playground debug enable-remote-debugging --container schema-registry --container ksqldb-server --container control-center
+```
+
 

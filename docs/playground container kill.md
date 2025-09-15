@@ -21,4 +21,22 @@ playground container kill [OPTIONS]
 | Repeatable:     |  ✓ Yes
 | Default Value:  | connect
 
+## Examples
+
+```bash
+playground container kill --container connect
+```
+
+```bash
+playground container kill -c broker
+```
+
+```bash
+playground container kill -c connect -c broker
+```
+
+```bash
+playground container kill --container schema-registry --container ksqldb-server --container control-center
+```
+
 

@@ -60,4 +60,20 @@ playground container logs -c connect --open
 playground container logs -c connect --wait-for-log "StackOverflowError"
 ```
 
+```bash
+playground container logs -c connect -c broker
+```
+
+```bash
+playground container logs --container schema-registry --container ksqldb-server --open
+```
+
+```bash
+playground container logs -c broker -c connect -c schema-registry
+```
+
+```bash
+playground container logs -c connect -c broker --wait-for-log "ERROR" --max-wait 120
+```
+
 

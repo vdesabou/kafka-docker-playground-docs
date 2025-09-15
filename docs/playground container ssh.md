@@ -44,4 +44,12 @@ playground ssh -c connect -s sh
 playground ssh --container connect --shell sh
 ```
 
+```bash
+playground ssh -c broker
+```
+
+```bash
+playground ssh --container schema-registry --shell zsh
+```
+
 

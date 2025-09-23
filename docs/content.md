@@ -413,7 +413,7 @@ Using Multi-Data-Center setup with 🇺🇸 and 🇪🇺 clusters
 
 ## 👾 Other Playgrounds
 
-- 📃 [How to write logs to files when using docker-compose](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/write-logs-to-files) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/2/2-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/17560336101/job/49875571330) 
+- 📃 [How to write logs to files when using docker-compose](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/write-logs-to-files) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/2/3-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/17560336101/job/49875571330) 
 - 📃 [How to write connect logs to a kafka topic](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/write-logs-to-topic) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
 - 📢 [Publish logs to kafka with Elastic Filebeat](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/filebeat-to-kafka) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/17560336101/job/49875571330) 
 - 💠 [.NET](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/client-dotnet) client (producer/consumer) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)

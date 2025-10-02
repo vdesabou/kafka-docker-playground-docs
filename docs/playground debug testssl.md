@@ -1,31 +1,31 @@
 # playground debug testssl
 
-🔐 Testing TLS/SSL encryption using https://testssl.sh/  
-  
-testssl \<URI\>, where \<URI\> is:  
-  
-host|host:port|URL|URL:port   port 443 is default, URL can only contain HTTPS protocol
+🔐 Testing TLS/SSL encryption using https://testssl.sh/
 
 ## Usage
 
 ```bash
-playground debug testssl [ARGUMENTS]
+playground debug testssl [OPTIONS] [--] [TESTSSL ARGUMENTS...]
 ```
 
-## Arguments
+## Options
 
-#### *ARGUMENTS*
+#### *--uri URI*
 
-arguments to pass to testssl, see https://testssl.sh for all options
+host|host:port|URL|URL:port   port 443 is default, URL can only contain HTTPS protocol
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Required:       | ✓ Yes
 
 ## Examples
 
 ```bash
-playground debug testssl https://google.com
+playground debug testssl --uri "https://google.com" --fast
 ```
 
 ```bash
-playground debug testssl pkc-xxxx.us-west-2.aws.confluent.cloud:9092
+playground debug testssl --uri "pkc-xxxx.us-west-2.aws.confluent.cloud:9092"
 ```
 
 

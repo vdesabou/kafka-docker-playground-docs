@@ -1,5 +1,15 @@
 # 📜 Change Log
 
+## October 2025
+##### 🌟 Enhancements
+
+- 👾⭐ Add fully managed MQTT Sink example [#7127](https://github.com/vdesabou/kafka-docker-playground/issues/7127)
+
+##### 🐛 Bugs
+
+- 🐛 playground debug testssl not accepting all arguments [#7131](https://github.com/vdesabou/kafka-docker-playground/issues/7131)
+
+
 ## September 2025
 ##### 🌟 Enhancements
 

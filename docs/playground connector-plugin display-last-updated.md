@@ -28,7 +28,6 @@ Default is 3 days
 
 ```bash
 playground connector-plugin display-last-updated --days 7
-playground connector-plugin display-last-updated --days 7 --vendor confluentinc
 
 ```
 

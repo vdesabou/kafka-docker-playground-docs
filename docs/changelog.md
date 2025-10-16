@@ -20,36 +20,6 @@
 - 🐛 issue with minimal supported connector version when CP 8.0 is not even used [#7215](https://github.com/vdesabou/kafka-docker-playground/issues/7215)
 - 🐛 playground debug testssl not accepting all arguments [#7131](https://github.com/vdesabou/kafka-docker-playground/issues/7131)
 
-
-## October 2025
-##### 🌟 Enhancements
-
-- 👾 Upgrade playground to CP 8.0.2 [#7217](https://github.com/vdesabou/kafka-docker-playground/issues/7217)
-- 🧠⭐🧑‍💻 Add playground connector-plugin sourcecode and playground connector sourcecode commands [#7214](https://github.com/vdesabou/kafka-docker-playground/issues/7214)
-- 👾⭐ Add fully managed MQTT Sink example [#7127](https://github.com/vdesabou/kafka-docker-playground/issues/7127)
-- 👾 Update custom connector examples to use new Custom Connector Plugin CLI (ccpm) interface [#7029](https://github.com/vdesabou/kafka-docker-playground/issues/7029)
-
-##### 🐛 Bugs
-
-- 🐛 connect/connect-ftps-sink/ftps-sink.sh should return 111 exit code [#7226](https://github.com/vdesabou/kafka-docker-playground/issues/7226)
-- 🐛 issue with minimal supported connector version when CP 8.0 is not even used [#7215](https://github.com/vdesabou/kafka-docker-playground/issues/7215)
-- 🐛 playground debug testssl not accepting all arguments [#7131](https://github.com/vdesabou/kafka-docker-playground/issues/7131)
-
-
-## October 2025
-##### 🌟 Enhancements
-
-- 👾 Upgrade playground to CP 8.0.2 [#7217](https://github.com/vdesabou/kafka-docker-playground/issues/7217)
-- 🧠⭐🧑‍💻 Add playground connector-plugin sourcecode and playground connector sourcecode commands [#7214](https://github.com/vdesabou/kafka-docker-playground/issues/7214)
-- 👾⭐ Add fully managed MQTT Sink example [#7127](https://github.com/vdesabou/kafka-docker-playground/issues/7127)
-- 👾 Update custom connector examples to use new Custom Connector Plugin CLI (ccpm) interface [#7029](https://github.com/vdesabou/kafka-docker-playground/issues/7029)
-
-##### 🐛 Bugs
-
-- 🐛 issue with minimal supported connector version when CP 8.0 is not even used [#7215](https://github.com/vdesabou/kafka-docker-playground/issues/7215)
-- 🐛 playground debug testssl not accepting all arguments [#7131](https://github.com/vdesabou/kafka-docker-playground/issues/7131)
-
-
 ## September 2025
 ##### 🌟 Enhancements
 

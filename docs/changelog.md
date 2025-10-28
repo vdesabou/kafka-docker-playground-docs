@@ -3,6 +3,33 @@
 ## October 2025
 ##### 🌟 Enhancements
 
+- 👾 Add onprem HTTP sink v2 (confluent employees only) example [#7306](https://github.com/vdesabou/kafka-docker-playground/issues/7306)
+- 👾 Add onprem HTTP source v2 (confluent employees only) example [#7305](https://github.com/vdesabou/kafka-docker-playground/issues/7305)
+- 👾 Add Dynamodb Sink example with custom credential provider [#7273](https://github.com/vdesabou/kafka-docker-playground/issues/7273)
+- 👾 Update AWS S3 Source to use AWS SDK v2 [#7272](https://github.com/vdesabou/kafka-docker-playground/issues/7272)
+- 👾 Update AWS CloudWatch Logs Source to use AWS SDK v2 [#7271](https://github.com/vdesabou/kafka-docker-playground/issues/7271)
+- 👾 Update AWS Kinesis source to use AWS SDK v2 [#7270](https://github.com/vdesabou/kafka-docker-playground/issues/7270)
+- 👾 Update AWS Lambda sink to use AWS SDK v2 [#7269](https://github.com/vdesabou/kafka-docker-playground/issues/7269)
+- 👾 update playground to CP 8.1.0 [#7230](https://github.com/vdesabou/kafka-docker-playground/issues/7230)
+- 👾 Upgrade playground to CP 8.0.2 [#7217](https://github.com/vdesabou/kafka-docker-playground/issues/7217)
+- 🧠⭐🧑‍💻 Add playground connector-plugin sourcecode and playground connector sourcecode commands [#7214](https://github.com/vdesabou/kafka-docker-playground/issues/7214)
+- 👾⭐ Add fully managed MQTT Sink example [#7127](https://github.com/vdesabou/kafka-docker-playground/issues/7127)
+- 👾 Update custom connector examples to use new Custom Connector Plugin CLI (ccpm) interface [#7029](https://github.com/vdesabou/kafka-docker-playground/issues/7029)
+
+##### 🐛 Bugs
+
+- 🐛 connect/connect-jms-solace-sink false positive [#7291](https://github.com/vdesabou/kafka-docker-playground/issues/7291)
+- 🐛 connect/connect-databricks-delta-lake-sink false positive [#7290](https://github.com/vdesabou/kafka-docker-playground/issues/7290)
+- 🧠 Show skipped test when playground test is run instead of failure [#7289](https://github.com/vdesabou/kafka-docker-playground/issues/7289)
+- 🐛 Tests may fail when run in parallel due to shared resources [#7286](https://github.com/vdesabou/kafka-docker-playground/issues/7286)
+- 🐛 connect/connect-ftps-sink/ftps-sink.sh should return 111 exit code [#7226](https://github.com/vdesabou/kafka-docker-playground/issues/7226)
+- 🐛 issue with minimal supported connector version when CP 8.0 is not even used [#7215](https://github.com/vdesabou/kafka-docker-playground/issues/7215)
+- 🐛 playground debug testssl not accepting all arguments [#7131](https://github.com/vdesabou/kafka-docker-playground/issues/7131)
+
+
+## October 2025
+##### 🌟 Enhancements
+
 - 👾 Add onprem HTTP source v2 (confluent employees only) example [#7306](https://github.com/vdesabou/kafka-docker-playground/issues/7306)
 - 👾 Add Dynamodb Sink example with custom credential provider [#7273](https://github.com/vdesabou/kafka-docker-playground/issues/7273)
 - 👾 Update AWS S3 Source to use AWS SDK v2 [#7272](https://github.com/vdesabou/kafka-docker-playground/issues/7272)

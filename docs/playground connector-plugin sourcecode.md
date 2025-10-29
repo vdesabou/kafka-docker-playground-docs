@@ -33,6 +33,8 @@ playground connector-plugin sourcecode [OPTIONS]
   
 By default, for each connector, the latest available version on Confluent Hub is used (for Confluent employees, it will also get latest versions for fully managed connectors)  
   
+🔢 Confluent employees only: for fully managed connectors, use the cc-connect image version for the pcc. You must have a Confluent Github token set with GITHUB_TOKEN or GH_TOKEN environment variable.  
+  
 🎓 Tip: set to " " in order to select the version dynamically  
   
 🎓 Tip: you can compare different sourcecode versions by specifying --connector-tag two times, in such case it will open github in comparison mode

@@ -25,4 +25,16 @@ playground connector connect-migration-utility migrate [OPTIONS]
 | Default Value:  | create
 | Allowed Values: | stop_create_latest_offset, create, create_latest_offset
 
+#### *--sensitive-property SENSITIVE-PROPERTY*
+
+🔐 Pass sensitive config properties when migrating connector  
+  
+🎓 Tip: you can pass multiple properties by specifying --sensitive-property multiple times  
+  
+Example: --sensitive-property "aws.access.key.id=xxx" --sensitive-property "aws.secret.access.key=xxx"
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Repeatable:     |  ✓ Yes
+
 

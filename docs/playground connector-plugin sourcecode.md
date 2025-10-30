@@ -3,6 +3,8 @@
 🧑‍💻 Open source code url in your browser  
   
 You can compare different sourcecode versions by specifying --connector-tag two times, in such case it will open github in comparison mode  
+  
+🏗️ Compile code and generate zip file(s) by providing --compile flag  
 
 
 ## Usage
@@ -33,7 +35,7 @@ playground connector-plugin sourcecode [OPTIONS]
   
 By default, for each connector, the latest available version on Confluent Hub is used (for Confluent employees, it will also get latest versions for fully managed connectors)  
   
-🔢 Confluent employees only: for fully managed connectors, use the cc-connect image version for the pcc. You must have a Confluent Github token set with GITHUB_TOKEN or GH_TOKEN environment variable.  
+🔢 Confluent employees only: for fully managed connectors, use the cc-connect image version for the pcc. You must have a Confluent Github token set with GITHUB_TOKEN or GH_TOKEN environment variable and also be using Confluent VPN.  
   
 🎓 Tip: set to " " in order to select the version dynamically  
   
@@ -42,6 +44,28 @@ By default, for each connector, the latest available version on Confluent Hub is
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Repeatable:     |  ✓ Yes
+
+#### *--compile*
+
+🏗️ Checkout and compile code  
+  
+You must have git installed.  
+  
+Confluent employees only: make sure to follow "Maven FAQ"
+
+#### *--compile-jdk-version VERSION*
+
+🤎 JDK version to use when compiling  
+It will check in pom.xml for maven-compiler-plugin source/target version or release version and set jdk accordingly  
+Default is 11
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Allowed Values: | 8, 11, 17, 20
+
+#### *--compile-verbose, -v*
+
+🐞 Show output of compilation.
 
 ## Examples
 

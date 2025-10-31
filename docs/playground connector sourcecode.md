@@ -31,6 +31,30 @@ By default, for each connector, the current version is used (for Confluent emplo
 |-----------------|-------------
 | Repeatable:     |  ✓ Yes
 
+#### *--compile*
+
+🏗️ Checkout and compile code, then restart the connector with new compiled code 💫  
+  
+You must have git installed.  
+  
+Confluent employees only: make sure to follow "Maven FAQ"  
+  
+This does not work for fully and custom connectors.
+
+#### *--compile-verbose, -v*
+
+🐞 Show output of compilation.
+
+#### *--compile-jdk-version COMPILE_JDK_VERSION*
+
+🤎 JDK version to use when compiling  
+It will check in pom.xml for maven-compiler-plugin source/target version or release version and set jdk accordingly  
+Default is 11
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Allowed Values: | 8, 11, 17, 20
+
 ## Examples
 
 ```bash

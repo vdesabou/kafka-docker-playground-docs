@@ -53,7 +53,7 @@ You must have git installed.
   
 Confluent employees only: make sure to follow "Maven FAQ"
 
-#### *--compile-jdk-version VERSION*
+#### *--compile-jdk-version COMPILE_JDK_VERSION*
 
 🤎 JDK version to use when compiling  
 It will check in pom.xml for maven-compiler-plugin source/target version or release version and set jdk accordingly  
@@ -81,10 +81,16 @@ playground connector-plugin sourcecode --connector-plugin confluentinc/kafka-con
 playground connector-plugin sourcecode --connector-plugin confluentinc/MqttSource
 
 # comparison mode:
-playground connector sourcecode --connector-tag "10.2.1" --connector-tag "10.2.0"
+playground connector-plugin sourcecode --connector-plugin confluentinc/kafka-connect-hdfs --connector-tag "10.2.1" --connector-tag "10.2.0"
 
 # comparison mode (with versions selection):
-playground connector sourcecode --connector-tag " " --connector-tag " "
+playground connector-plugin sourcecode --connector-plugin confluentinc/kafka-connect-hdfs --connector-tag " " --connector-tag " "
+
+# compile 
+playground connector-plugin sourcecode --connector-plugin confluentinc/kafka-connect-jdbc
+
+# if you're a confluent employee (make sure to set your aws credentials and follow Maven FAQ), it will also work on proprietary connectors and fully managed connectors 
+playground connector-plugin sourcecode --connector-plugin confluentinc/kafka-connect-oracle-xstream-cdc-source --compile --connector-tag "1.2.0" --compile-verbose
 
 ```
 

@@ -35,7 +35,7 @@ playground connector-plugin sourcecode [OPTIONS]
   
 By default, for each connector, the latest available version on Confluent Hub is used (for Confluent employees, it will also get latest versions for fully managed connectors)  
   
-🔢 Confluent employees only: for fully managed connectors, use the cc-connect image version for the pcc. You must have a Confluent Github token set with GITHUB_TOKEN or GH_TOKEN environment variable and also be using Confluent VPN.  
+💌 Confluent employees only: for fully managed connectors, use the cc-connect image version for the pcc. You must have a Confluent Github token set with GITHUB_TOKEN or GH_TOKEN environment variable and also be using Confluent VPN.  
   
 🎓 Tip: set to " " in order to select the version dynamically  
   
@@ -51,7 +51,7 @@ By default, for each connector, the latest available version on Confluent Hub is
   
 You must have git installed.  
   
-Confluent employees only: make sure to follow "Maven FAQ"
+💌 Confluent employees only: make sure to follow "Maven FAQ", you also need to be on Confluent VPN with proper AWS credentials set in order to be able to download proprietary dependencies.
 
 #### *--compile-jdk-version COMPILE_JDK_VERSION*
 
@@ -61,7 +61,7 @@ Default is 11
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Allowed Values: | 8, 11, 17, 20
+| Allowed Values: | 8, 11, 17, 21, 25
 
 #### *--compile-verbose, -v*
 

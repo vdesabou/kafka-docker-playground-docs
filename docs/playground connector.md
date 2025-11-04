@@ -17,6 +17,8 @@ playground connector COMMAND
 - [pause](playground%20connector%20pause) - ⏸️  Pause connector
 - [versions](playground%20connector%20versions) - 🧞 Get current and latest versions available on Confluent Hub for connector(s) used in example
 - [sourcecode](playground%20connector%20sourcecode) - 🧑‍💻 open source code url for connector(s) used in example
+- [enable-remote-debugging](playground%20connector%20enable-remote-debugging) - ✨ Enable java remote debugging for the connector.
+- [disable-remote-debugging](playground%20connector%20disable-remote-debugging) - 🛑 Disable java remote debugging for the connector.
 - [restart](playground%20connector%20restart) - ♻️  Restart connector
 - [stop](playground%20connector%20stop) - 🛑 Stop connector (only available if CP \> 7.5)
 - [resume](playground%20connector%20resume) - ⏯️  Resume connector

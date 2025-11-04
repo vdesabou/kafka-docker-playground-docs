@@ -101,6 +101,7 @@ visit https://docs.docker.com/get-docker to install
 
 - [debug](playground%20debug) - 🐞 Debug commands
 - [enable-remote-debugging](playground%20debug%20enable-remote-debugging) - ✨ Enable java remote debugging for container
+- [disable-remote-debugging](playground%20debug%20disable-remote-debugging) - 🛑 Disable java remote debugging for container
 - [testssl](playground%20debug%20testssl) - 🔐 Testing TLS/SSL encryption using https://testssl.sh/
 - [generate-diagnostics](playground%20debug%20generate-diagnostics) - ⛑️ Generate a diagnostic bundle with Diagnostics Bundle Tool
 - [thread-dump](playground%20debug%20thread-dump) - 🎯 Take a java thread dump
@@ -162,6 +163,8 @@ visit https://docs.docker.com/get-docker to install
 - [pause](playground%20connector%20pause) - ⏸️  Pause connector
 - [versions](playground%20connector%20versions) - 🧞 Get current and latest versions available on Confluent Hub for connector(s) used in example
 - [sourcecode](playground%20connector%20sourcecode) - 🧑‍💻 open source code url for connector(s) used in example
+- [enable-remote-debugging](playground%20connector%20enable-remote-debugging) - ✨ Enable java remote debugging for the connector.
+- [disable-remote-debugging](playground%20connector%20disable-remote-debugging) - 🛑 Disable java remote debugging for the connector.
 - [restart](playground%20connector%20restart) - ♻️  Restart connector
 - [stop](playground%20connector%20stop) - 🛑 Stop connector (only available if CP \> 7.5)
 - [resume](playground%20connector%20resume) - ⏯️  Resume connector

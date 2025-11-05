@@ -1,5 +1,13 @@
 # 📜 Change Log
 
+## November 2025
+##### 🌟 Enhancements
+
+- 👾 Oracle Xstream 1.3.0: add example fpr for one-way and two-way TLS (mutual TLS) using Oracle client wallets. [#7332](https://github.com/vdesabou/kafka-docker-playground/issues/7332)
+- 🧠 Add disable-remote-debugging commands [#7331](https://github.com/vdesabou/kafka-docker-playground/issues/7331)
+- 👾 Add orclcdc\_readiness to xstreams examples [#7328](https://github.com/vdesabou/kafka-docker-playground/issues/7328)
+
+
 ## October 2025
 ##### 🌟 Enhancements
 

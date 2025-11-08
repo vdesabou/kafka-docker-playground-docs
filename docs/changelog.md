@@ -3,7 +3,7 @@
 ## November 2025
 ##### 🌟 Enhancements
 
-- 👾 Oracle Xstream 1.3.0: add example fpr for one-way and two-way TLS (mutual TLS) using Oracle client wallets. [#7332](https://github.com/vdesabou/kafka-docker-playground/issues/7332)
+- 👾 Oracle Xstream 1.3.0: add example for for one-way and two-way TLS (mutual TLS) using Oracle client wallets. [#7332](https://github.com/vdesabou/kafka-docker-playground/issues/7332)
 - 🧠 Add disable-remote-debugging commands [#7331](https://github.com/vdesabou/kafka-docker-playground/issues/7331)
 - 👾 Add orclcdc\_readiness to xstreams examples [#7328](https://github.com/vdesabou/kafka-docker-playground/issues/7328)
 
@@ -12,14 +12,6 @@
 - 🐛 topic produce is slow when --record-size  is set with  and --nb-messages is high [#7346](https://github.com/vdesabou/kafka-docker-playground/issues/7346)
 - 🐛 slow topic produce with --forced-value [#7345](https://github.com/vdesabou/kafka-docker-playground/issues/7345)
 - 🐛 topic produce  Expected record-start. Got VALUE\_STRING [#7344](https://github.com/vdesabou/kafka-docker-playground/issues/7344)
-
-
-## November 2025
-##### 🌟 Enhancements
-
-- 👾 Oracle Xstream 1.3.0: add example fpr for one-way and two-way TLS (mutual TLS) using Oracle client wallets. [#7332](https://github.com/vdesabou/kafka-docker-playground/issues/7332)
-- 🧠 Add disable-remote-debugging commands [#7331](https://github.com/vdesabou/kafka-docker-playground/issues/7331)
-- 👾 Add orclcdc\_readiness to xstreams examples [#7328](https://github.com/vdesabou/kafka-docker-playground/issues/7328)
 
 
 ## October 2025

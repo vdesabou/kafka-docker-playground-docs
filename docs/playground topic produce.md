@@ -22,6 +22,8 @@ playground topic produce [OPTIONS]
   
 * You can also generate json data using json or sql format using syntax from https://github.com/MaterializeInc/datagen  
   
+* You can also generate json data using syntax from https://github.com/vdesabou/avro-random-generator (same as datagen source connector)  
+  
 * Use completion to select predefined schemas (or use your own schema file) 🎓 Tip: use \<tab\> completion to trigger fzf completion  
   
 * Directly set payload ("%g" can be used to generate a counter)  
@@ -46,6 +48,8 @@ Otherwise, the key will be same for all records.
 * Set your own schema (avro, json-schema, protobuf) with stdin (see example section).   
   
 * You can also generate json data using json or sql format using syntax from https://github.com/MaterializeInc/datagen  
+  
+* You can also generate json data using syntax from https://github.com/vdesabou/avro-random-generator (same as datagen source connector)  
   
 * Use completion to select predefined schemas (or use your own schema file) 🎓 Tip: use \<tab\> completion to trigger fzf completion  
   
@@ -189,6 +193,15 @@ Note: CP 7.2+ is required.
 
 ☑️ Validate schema according to connect sink converter used
 
+#### *--quickstart QUICKSTART*
+
+🍟 Name of quickstart(https://github.com/confluentinc/kafka-connect-datagen/tree/master/src/main/resources) to use
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Allowed Values: | clickstream_codes_schema, clickstream_schema, clickstream_users_schema, inventory, orders_schema, ratings_schema, pageviews_schema, stock_trades_schema, users_array_map_schema, users_schema, campaign_finance, credit_cards, device_information, fleet_mgmt_description, fleet_mgmt_location, fleet_mgmt_sensors, gaming_games, gaming_player_activity, gaming_players, insurance_customer_activity, insurance_customers, insurance_offers, payroll_bonus, payroll_employee, payroll_employee_location, pizza_orders, pizza_orders_cancelled, pizza_orders_completed, product, purchase, shoe_clickstream, shoe_customers, shoe_orders, shoes, siem_logs, stores, syslog_logs, transactions
+| Conflicts With: | *--value*
+
 #### *--derive-key-schema-as DERIVE-KEY-SCHEMA-AS*
 
 🪄 Use playground schema derive-schema command to deduce schema from key payload  
@@ -296,6 +309,49 @@ playground topic produce -t topic-json --nb-messages 10 << 'EOF'
     "company": "faker.company.name()"
 }
 EOF
+
+playground topic produce -t topic-datagen-users --nb-messages 10 << 'EOF'
+{
+        "namespace": "ksql",
+        "name": "users",
+        "type": "record",
+        "fields": [
+                {"name": "registertime", "type": {
+                    "type": "long",
+                    "arg.properties": {
+                        "range": {
+                            "min": 1487715775521,
+                            "max": 1519273364600
+                        }
+                    }
+                }},
+                {"name": "userid", "type": {
+                    "type": "string",
+                    "arg.properties": {
+                        "regex": "User_[1-9]"
+                    }
+                }},
+                {"name": "regionid", "type": {
+                    "type": "string",
+                    "arg.properties": {
+                        "regex": "Region_[1-9]"
+                    }
+                }},
+                {"name": "gender", "type": {
+                    "type": "string",
+                    "arg.properties": {
+                        "options": [
+                            "MALE",
+                            "FEMALE",
+                            "OTHER"
+                        ]
+                    }
+                }}
+        ]
+}
+EOF
+
+playground  topic produce -t topic-datagen-json-schema --nb-messages 1 --quickstart purchase --derive-value-schema-as JSON 
 
 playground topic produce -t topic-avro --nb-messages 10 << 'EOF'
 {

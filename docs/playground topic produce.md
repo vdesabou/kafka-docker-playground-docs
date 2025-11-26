@@ -93,6 +93,7 @@ Otherwise, the key will be same for all records.
 🔨 Max number of different messages to generate.  
   
    - when protobuf is used, default is 50 as protobuf generation is really slow  
+   - when json or sql datagen format is used, default is 1000  
    - when --record-size is set, default is 100  
    --when nb-messages is set to -1, default is 1000  
    - otherwise default is 100000

@@ -193,15 +193,6 @@ Note: CP 7.2+ is required.
 
 ☑️ Validate schema according to connect sink converter used
 
-#### *--quickstart QUICKSTART*
-
-🍟 Name of quickstart(https://github.com/confluentinc/kafka-connect-datagen/tree/master/src/main/resources) to use
-
-| Attributes      | &nbsp;
-|-----------------|-------------
-| Allowed Values: | clickstream_codes_schema, clickstream_schema, clickstream_users_schema, inventory, orders_schema, ratings_schema, pageviews_schema, stock_trades_schema, users_array_map_schema, users_schema, campaign_finance, credit_cards, device_information, fleet_mgmt_description, fleet_mgmt_location, fleet_mgmt_sensors, gaming_games, gaming_player_activity, gaming_players, insurance_customer_activity, insurance_customers, insurance_offers, payroll_bonus, payroll_employee, payroll_employee_location, pizza_orders, pizza_orders_cancelled, pizza_orders_completed, product, purchase, shoe_clickstream, shoe_customers, shoe_orders, shoes, siem_logs, stores, syslog_logs, transactions
-| Conflicts With: | *--value*
-
 #### *--derive-key-schema-as DERIVE-KEY-SCHEMA-AS*
 
 🪄 Use playground schema derive-schema command to deduce schema from key payload  
@@ -351,7 +342,7 @@ playground topic produce -t topic-datagen-users --nb-messages 10 << 'EOF'
 }
 EOF
 
-playground  topic produce -t topic-datagen-json-schema --nb-messages 1 --quickstart purchase --derive-value-schema-as JSON 
+playground  topic produce -t topic-datagen-json-schema --nb-messages 1 --value predefined-schemas/datagen/purchase.avro --derive-value-schema-as JSON 
 
 playground topic produce -t topic-avro --nb-messages 10 << 'EOF'
 {
@@ -456,8 +447,8 @@ playground topic produce -t topic-jsql --nb-messages 10 << 'EOF'
 CREATE TABLE "notused"."notused" (
   "id" int PRIMARY KEY,
   "name" varchar COMMENT 'faker.internet.userName()',
-  "merchant_id" int NOT NULL COMMENT 'faker.datatype.number()',
-  "price" int COMMENT 'faker.datatype.number()',
+  "merchant_id" int NOT NULL COMMENT 'faker.number.int()',
+  "price" int COMMENT 'faker.number.int()',
   "status" int COMMENT 'faker.datatype.boolean()',
   "created_at" datetime DEFAULT (now())
 );
@@ -733,9 +724,6 @@ playground topic produce -t topic-avro-example-forced-value --nb-messages 1 --fo
   "type": "record"
 }
 EOF
-
-# json schema references
-playground topic produce --value /path/to/scripts/cli/predefined-schemas/json-schema/schema-reference/customer.json --reference /path/to/scripts/cli/predefined-schemas/json-schema/schema-reference/address.json --reference /path/to/scripts/cli/predefined-schemas/json-schema/schema-reference/email.json --topic customers
 
 # --derive-value-schema-as
 playground topic produce --topic tocpic --derive-value-schema-as PROTOBUF --derive-key-schema-as PROTOBUF --key '{"id": "1"}' << 'EOF'

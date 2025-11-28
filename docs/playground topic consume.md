@@ -96,4 +96,14 @@ Max characters per message to display (default is 3000)
 |-----------------|-------------
 | Conflicts With: | *--max-characters, --tail, --min-expected-messages*
 
+#### *--isolation-level ISOLATION-LEVEL*
+
+🫥 The isolation level to use, see https://docs.confluent.io/platform/current/installation/configuration/consumer-configs.html#isolation-level  
+If not set, default is read_uncommitted
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Default Value:  | read_uncommitted
+| Allowed Values: | read_uncommitted, read_committed
+
 

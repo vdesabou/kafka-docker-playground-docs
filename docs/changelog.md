@@ -8,40 +8,6 @@
 - 👾 Add http source example with cursor pagination [#7392](https://github.com/vdesabou/kafka-docker-playground/issues/7392)
 
 
-## December 2025
-##### 🌟 Enhancements
-
-- 🧠 Add --isolation-level to playground topic consume [#7391](https://github.com/vdesabou/kafka-docker-playground/issues/7391)
-- 👾 Add IBM MQ source example with EOS [#7389](https://github.com/vdesabou/kafka-docker-playground/issues/7389)
-- 👾 IBM MQ examples working with ARM64 with emulation [#7388](https://github.com/vdesabou/kafka-docker-playground/issues/7388)
-- 👾 Add playground topic produce example [#7384](https://github.com/vdesabou/kafka-docker-playground/issues/7384)
-- 👾 Add IBM MQ source example with BytesMessage [#7380](https://github.com/vdesabou/kafka-docker-playground/issues/7380)
-- 🧠⭐ integrate avro-random-generator to playground topic produce [#7377](https://github.com/vdesabou/kafka-docker-playground/issues/7377)
-- 👾⭐ Add fully managed Neo4j Sink Connector example [#7371](https://github.com/vdesabou/kafka-docker-playground/issues/7371)
-- 👾⭐ Add fully managed InfluxDB 3 Sink Connector example [#7370](https://github.com/vdesabou/kafka-docker-playground/issues/7370)
-- 👾 Add Oracle Xstream blocking snapshot example [#7351](https://github.com/vdesabou/kafka-docker-playground/issues/7351)
-- 👾 Oracle Xstream 1.3.0: add example fpr for one-way and two-way TLS (mutual TLS) using Oracle client wallets. [#7332](https://github.com/vdesabou/kafka-docker-playground/issues/7332)
-- 🧠 Add disable-remote-debugging commands [#7331](https://github.com/vdesabou/kafka-docker-playground/issues/7331)
-- 👾 Add orclcdc\_readiness to xstreams examples [#7328](https://github.com/vdesabou/kafka-docker-playground/issues/7328)
-
-##### 🐛 Bugs
-
-- 🐛 playground topic consume hanging on big records [#7385](https://github.com/vdesabou/kafka-docker-playground/issues/7385)
-- Salesforce has now disabled Connected Apps unless you manually enabled them [#7364](https://github.com/vdesabou/kafka-docker-playground/issues/7364)
-- 🐛 cp 8.1: jre instead of jdk: jmap and jstack are no longer available [#7356](https://github.com/vdesabou/kafka-docker-playground/issues/7356)
-- 🐛 topic produce is slow when --record-size  is set with  and --nb-messages is high [#7346](https://github.com/vdesabou/kafka-docker-playground/issues/7346)
-- 🐛 slow topic produce with --forced-value [#7345](https://github.com/vdesabou/kafka-docker-playground/issues/7345)
-- 🐛 topic produce  Expected record-start. Got VALUE\_STRING [#7344](https://github.com/vdesabou/kafka-docker-playground/issues/7344)
-
-
-## December 2025
-##### 🌟 Enhancements
-
-- 👾 Add http source example with simple incrementing [#7400](https://github.com/vdesabou/kafka-docker-playground/issues/7400)
-- 👾 Add http source example with chaining offset [#7393](https://github.com/vdesabou/kafka-docker-playground/issues/7393)
-- 👾 Add http source example with cursor pagination [#7392](https://github.com/vdesabou/kafka-docker-playground/issues/7392)
-
-
 ## November 2025
 ##### 🌟 Enhancements
 

@@ -3,6 +3,14 @@
 ## December 2025
 ##### 🌟 Enhancements
 
+- 👾 Add http source example with simple incrementing [#7400](https://github.com/vdesabou/kafka-docker-playground/issues/7400)
+- 👾 Add http source example with chaining offset [#7393](https://github.com/vdesabou/kafka-docker-playground/issues/7393)
+- 👾 Add http source example with cursor pagination [#7392](https://github.com/vdesabou/kafka-docker-playground/issues/7392)
+
+
+## December 2025
+##### 🌟 Enhancements
+
 - 🧠 Add --isolation-level to playground topic consume [#7391](https://github.com/vdesabou/kafka-docker-playground/issues/7391)
 - 👾 Add IBM MQ source example with EOS [#7389](https://github.com/vdesabou/kafka-docker-playground/issues/7389)
 - 👾 IBM MQ examples working with ARM64 with emulation [#7388](https://github.com/vdesabou/kafka-docker-playground/issues/7388)

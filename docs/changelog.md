@@ -4,6 +4,20 @@
 ##### 🌟 Enhancements
 
 - 👾 Add http source example with simple incrementing [#7400](https://github.com/vdesabou/kafka-docker-playground/issues/7400)
+- 👾 Configure Cluster for Confluent Control Center Client Monitoring [#7399](https://github.com/vdesabou/kafka-docker-playground/issues/7399)
+- 🧠 playground connector create-or-update: offer to update connector config when getting Invalid JSON [#7398](https://github.com/vdesabou/kafka-docker-playground/issues/7398)
+- 👾 Add http source example with chaining offset [#7393](https://github.com/vdesabou/kafka-docker-playground/issues/7393)
+- 👾 Add http source example with cursor pagination [#7392](https://github.com/vdesabou/kafka-docker-playground/issues/7392)
+
+##### 🐛 Bugs
+
+- 🐛 playground topic consume hang when read\_committed is used [#7428](https://github.com/vdesabou/kafka-docker-playground/issues/7428)
+
+
+## December 2025
+##### 🌟 Enhancements
+
+- 👾 Add http source example with simple incrementing [#7400](https://github.com/vdesabou/kafka-docker-playground/issues/7400)
 - 🧠 playground connector create-or-update: offer to update connector config when getting Invalid JSON [#7398](https://github.com/vdesabou/kafka-docker-playground/issues/7398)
 - 👾 Add http source example with chaining offset [#7393](https://github.com/vdesabou/kafka-docker-playground/issues/7393)
 - 👾 Add http source example with cursor pagination [#7392](https://github.com/vdesabou/kafka-docker-playground/issues/7392)

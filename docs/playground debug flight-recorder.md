@@ -27,12 +27,12 @@ playground debug flight-recorder [OPTIONS]
 
 #### *--action ACTION*
 
-🟢 enable or disable
+🟢 start or stop
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Default Value:  | enable
-| Allowed Values: | enable, disable
+| Required:       | ✓ Yes
+| Allowed Values: | start, stop
 
 ## Examples
 

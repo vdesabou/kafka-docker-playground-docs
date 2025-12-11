@@ -5,7 +5,13 @@
 ## Usage
 
 ```bash
-playground topic list
+playground topic list [OPTIONS]
 ```
+
+## Options
+
+#### *--show-internal*
+
+🫥 Display internal topics
 
 

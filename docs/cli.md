@@ -145,6 +145,12 @@ visit https://docs.docker.com/get-docker to install
 - [ccloud-costs](playground%20ccloud-costs) - 💰  Retrieve ccloud costs for a range of dates
 - [ccloud-costs-history](playground%20ccloud-costs-history) - 👛  Retrieve ccloud costs for each month since last year
 
+### Cloud Resources commands
+
+- [cloud-resources](playground%20cloud-resources) - 🔗 Connector commands
+- [aws](playground%20cloud-resources%20aws) - aws commands
+- [azure](playground%20cloud-resources%20azure) - azure commands
+
 ### Run commands
 
 - [run](playground%20run) - 🕹️ Run any example !

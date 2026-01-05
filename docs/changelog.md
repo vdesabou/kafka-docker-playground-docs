@@ -1,6 +1,12 @@
 # 📜 Change Log
 
 ## January 2026
+##### 🐛 Bugs
+
+- 🐛 --cluster-region selection menu is broken as not selecting cloud provider [#7498](https://github.com/vdesabou/kafka-docker-playground/issues/7498)
+
+
+## January 2026
 ##### 🌟 Enhancements
 
 - 🧠 Add aws and azure costs history at the end of the tests [#7480](https://github.com/vdesabou/kafka-docker-playground/issues/7480)

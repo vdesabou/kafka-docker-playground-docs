@@ -9,6 +9,30 @@
 
 - 🐛 --cluster-region selection menu is broken as not selecting cloud provider [#7498](https://github.com/vdesabou/kafka-docker-playground/issues/7498)
 
+## December 2025
+##### 🌟 Enhancements
+
+- 🧠 Add aws and azure costs history at the end of the tests [#7480](https://github.com/vdesabou/kafka-docker-playground/issues/7480)
+- 👾 Add debezium postgres example with TimescaleDB [#7472](https://github.com/vdesabou/kafka-docker-playground/issues/7472)
+- 👾 Add S3 sink example IRSA custom credentials provider example with assume role [#7461](https://github.com/vdesabou/kafka-docker-playground/issues/7461)
+- 🧠 Add --show-internal to playground topic list [#7460](https://github.com/vdesabou/kafka-docker-playground/issues/7460)
+- 👾 Add fully managed Oracle Xstream example with wallet [#7450](https://github.com/vdesabou/kafka-docker-playground/issues/7450)
+- 👾 Make AZURE\_REGION in azure examples configurable via environment variable [#7449](https://github.com/vdesabou/kafka-docker-playground/issues/7449)
+- 🧠 set remote-debugging by default for connect container [#7446](https://github.com/vdesabou/kafka-docker-playground/issues/7446)
+- 👾 Add http source example with simple incrementing [#7400](https://github.com/vdesabou/kafka-docker-playground/issues/7400)
+- 👾 Configure Cluster for Confluent Control Center Client Monitoring [#7399](https://github.com/vdesabou/kafka-docker-playground/issues/7399)
+- 🧠 playground connector create-or-update: offer to update connector config when getting Invalid JSON [#7398](https://github.com/vdesabou/kafka-docker-playground/issues/7398)
+- 👾 Add http source example with chaining offset [#7393](https://github.com/vdesabou/kafka-docker-playground/issues/7393)
+- 👾 Add http source example with cursor pagination [#7392](https://github.com/vdesabou/kafka-docker-playground/issues/7392)
+
+##### 🐛 Bugs
+
+- 🐛 OSX mounting error with VirtioFS [#7430](https://github.com/vdesabou/kafka-docker-playground/issues/7430)
+- 🐛 invalid argument bug with playground re-run [#7429](https://github.com/vdesabou/kafka-docker-playground/issues/7429)
+- 🐛 playground topic consume hang when read\_committed is used [#7428](https://github.com/vdesabou/kafka-docker-playground/issues/7428)
+
+
+
 ## November 2025
 ##### 🌟 Enhancements
 

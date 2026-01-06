@@ -9,12 +9,6 @@
 
 - 🐛 --cluster-region selection menu is broken as not selecting cloud provider [#7498](https://github.com/vdesabou/kafka-docker-playground/issues/7498)
 
-
-## January 2026
-##### 🐛 Bugs
-
-- 🐛 --cluster-region selection menu is broken as not selecting cloud provider [#7498](https://github.com/vdesabou/kafka-docker-playground/issues/7498)
-
 ## November 2025
 ##### 🌟 Enhancements
 

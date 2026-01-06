@@ -1314,33 +1314,13 @@ Here are some tips and tricks to create reproduction models that require high vo
 
 ### 👈 All sink connectors
 
-Injecting lot of records into topic(s) is really easy using [🛠 Bootstrap reproduction model](https://kafka-docker-playground.io/#/reusables?id=%f0%9f%9b%a0-bootstrap-reproduction-model) with [♨️ Java producers](https://kafka-docker-playground.io/#/reusables?id=%e2%99%a8%ef%b8%8f-java-producers) option.
+Injecting lot of records into topic(s) is really easy using [playground topic produce](https://kafka-docker-playground.io/#/playground%20topic%20produce) CLI:
 
-To inject infinite number of requests as fast as possible, use `NB_MESSAGES=-1` and `MESSAGE_BACKOFF=0` and use `-d` to run the injection in the background:
-
-```bash
-docker exec -e NB_MESSAGES=-1 -e MESSAGE_BACKOFF=0 -e TOPIC="test-topic" -d producer-repro-12345 bash -c "java -jar producer-1.0.0-jar-with-dependencies.jar"
-```
-
-If load is not enough, you can start multiple producers in parallel:
+Example:
 
 ```bash
-docker exec -e NB_MESSAGES=-1 -e MESSAGE_BACKOFF=0 -e TOPIC="test-topic" -d producer-repro-12345 bash -c "java -jar producer-1.0.0-jar-with-dependencies.jar"
-docker exec -e NB_MESSAGES=-1 -e MESSAGE_BACKOFF=0 -e TOPIC="test-topic" -d producer-repro-12345 bash -c "java -jar producer-1.0.0-jar-with-dependencies.jar"
-docker exec -e NB_MESSAGES=-1 -e MESSAGE_BACKOFF=0 -e TOPIC="test-topic" -d producer-repro-12345 bash -c "java -jar producer-1.0.0-jar-with-dependencies.jar"
-docker exec -e NB_MESSAGES=-1 -e MESSAGE_BACKOFF=0 -e TOPIC="test-topic" -d producer-repro-12345 bash -c "java -jar producer-1.0.0-jar-with-dependencies.jar"
-docker exec -e NB_MESSAGES=-1 -e MESSAGE_BACKOFF=0 -e TOPIC="test-topic" -d producer-repro-12345 bash -c "java -jar producer-1.0.0-jar-with-dependencies.jar"
-
-docker exec -e NB_MESSAGES=-1 -e MESSAGE_BACKOFF=0 -e TOPIC="test-topic2" -d producer-repro-12345 bash -c "java -jar producer-1.0.0-jar-with-dependencies.jar"
-docker exec -e NB_MESSAGES=-1 -e MESSAGE_BACKOFF=0 -e TOPIC="test-topic2" -d producer-repro-12345 bash -c "java -jar producer-1.0.0-jar-with-dependencies.jar"
-docker exec -e NB_MESSAGES=-1 -e MESSAGE_BACKOFF=0 -e TOPIC="test-topic2" -d producer-repro-12345 bash -c "java -jar producer-1.0.0-jar-with-dependencies.jar"
-docker exec -e NB_MESSAGES=-1 -e MESSAGE_BACKOFF=0 -e TOPIC="test-topic2" -d producer-repro-12345 bash -c "java -jar producer-1.0.0-jar-with-dependencies.jar"
-docker exec -e NB_MESSAGES=-1 -e MESSAGE_BACKOFF=0 -e TOPIC="test-topic2" -d producer-repro-12345 bash -c "java -jar producer-1.0.0-jar-with-dependencies.jar"
-```
-
-### 👉 Oracle
-
-For all Oracle CDC and JDBC source connector with Oracle examples, you can easily inject load in table using, the following steps.
+$ playground topic produce -t mytopic --value @predefined-schemas/avro/customer.avsc --nb-messages -1 --max-nb-messages-per-batch 300000  --sleep-time-between-batch 1  --record-size 1024
+```r all Oracle CDC and JDBC source connector with Oracle examples, you can easily inject load in table using, the following steps.
 
 You can enable this by setting flag `--enable-sql-datagen`, it will start inserting rows at the end of the example for a duration that you can configure:
 

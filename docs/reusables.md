@@ -402,7 +402,15 @@ docker exec connect kafka-json-schema-console-consumer -bootstrap-server broker:
 
 ## 🧙 How to install other connectors
 
-To run an example with additional connector (or SMT that you can get from Confluent Hub), simply add it to the list of `CONNECT_PLUGIN_PATH`:
+Simplest option is to create a reproduction model with `playground repro bootstrap` [command](/playground%20repro%20bootstrap) and then select "🔌 Add connector plugin" (you can call it multiple times to add multiple connector plugins/SMT) 
+
+<img width="774" height="285" alt="CleanShot 2026-01-13 at 14 42 46" src="https://github.com/user-attachments/assets/e1489b80-8d01-48c2-906a-b359230104e8" />
+
+it has interative selection from confluent hub:
+
+<img width="966" height="512" alt="CleanShot 2026-01-13 at 14 43 09" src="https://github.com/user-attachments/assets/a36e909a-4104-47c7-9637-31a902976141" />
+
+It will automatically the plugin(s) to the list of `CONNECT_PLUGIN_PATH`:
 
 Example with S3 source and S3 sink:
 

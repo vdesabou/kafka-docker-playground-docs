@@ -30,6 +30,16 @@ playground repro bootstrap [OPTIONS]
 
 🔧 Add a custom SMT (which is a no-op)
 
+#### *--connector-plugin CONNECTOR-PLUGIN*
+
+🔌 Add Connector plugin to CONNECT_PLUGIN_PATH  
+  
+🎓 Tip: use \<tab\> completion to trigger fzf completion
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Repeatable:     |  ✓ Yes
+
 #### *--pipeline SINK_FILE*
 
 🔖 Sink example file to use for creating a pipeline. multiple --pipeline flags can be used to create a pipeline with multiple sinks.  

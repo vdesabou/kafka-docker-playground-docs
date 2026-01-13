@@ -3,6 +3,17 @@
 ## January 2026
 ##### 🌟 Enhancements
 
+- 👾 Add Fully Managed IBM MQ Sink connector example [#7500](https://github.com/vdesabou/kafka-docker-playground/issues/7500)
+- 🧠 Add playground run menu option ❌🎰🎯 Unset cluster name [#7499](https://github.com/vdesabou/kafka-docker-playground/issues/7499)
+
+##### 🐛 Bugs
+
+- 🐛 --cluster-region selection menu is broken as not selecting cloud provider [#7498](https://github.com/vdesabou/kafka-docker-playground/issues/7498)
+
+
+## January 2026
+##### 🌟 Enhancements
+
 - 🧠 Add playground run menu option ❌🎰🎯 Unset cluster name [#7499](https://github.com/vdesabou/kafka-docker-playground/issues/7499)
 
 ##### 🐛 Bugs

@@ -3,8 +3,10 @@
 ## January 2026
 ##### 🌟 Enhancements
 
+- 🧠 Add option to add connector plugin when using playground repro bootstrap command [#7509](https://github.com/vdesabou/kafka-docker-playground/issues/7509)
 - 👾 Add Fully Managed IBM MQ Sink connector example [#7500](https://github.com/vdesabou/kafka-docker-playground/issues/7500)
 - 🧠 Add playground run menu option ❌🎰🎯 Unset cluster name [#7499](https://github.com/vdesabou/kafka-docker-playground/issues/7499)
+- 🧠🧞‍♂️⭐ Add playground ai command [#7130](https://github.com/vdesabou/kafka-docker-playground/issues/7130)
 
 ##### 🐛 Bugs
 

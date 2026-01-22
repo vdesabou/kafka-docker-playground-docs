@@ -1,6 +1,6 @@
 # playground container kill-all
 
-💀 Kill all containers
+💀 Kill all containers and prune all volumes
 
 ## Usage
 

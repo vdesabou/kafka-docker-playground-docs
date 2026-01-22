@@ -16,7 +16,7 @@ playground container COMMAND
 
 - [recreate](playground%20container%20recreate) - 💫 Recreate container(s)
 - [get-ip-addresses](playground%20container%20get-ip-addresses) - 🖥️  Get ip address of running containers
-- [kill-all](playground%20container%20kill-all) - 💀 Kill all containers
+- [kill-all](playground%20container%20kill-all) - 💀 Kill all containers and prune all volumes
 - [logs](playground%20container%20logs) - 🕵️  Tail and follow container logs
 - [display-error-all-containers](playground%20container%20display-error-all-containers) - 🔥 Display all ERROR/FATAL logs in all containers. Useful for quick troubleshooting
 - [ssh](playground%20container%20ssh) - 🛬 SSH into container

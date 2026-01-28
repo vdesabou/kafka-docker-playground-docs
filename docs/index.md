@@ -184,6 +184,7 @@ visit https://docs.docker.com/get-docker to install
 - [log-level](playground%20connector%20log-level) - 🧬 Set connect log level
 - [logs](playground%20connector%20logs) - 🕵️  Tail and follow connect logs
 - [open-ccloud-connector-in-browser](playground%20connector%20open-ccloud-connector-in-browser) - 🤖 Open Fully Managed connector in browser (Confluent Cloud dashboard)
+- [translate](playground%20connector%20translate) - 💱 Translate Self Managed Connector Plugin Configurations to Fully Managed Connector Plugin Configuration
 - [connect-migration-utility](playground%20connector%20connect-migration-utility) - 🧩 Run Kafka Connector Migration Utility (see https://github.com/confluentinc/connect-migration-utility/) on running connect cluster
 - [create-or-update](playground%20connector%20create-or-update) - 🧑‍🎨  Create or update connector
 - [update](playground%20connector%20update) - 🛠️ Update connector configuration by opening current connector config in text editor set with playground config editor \<editor\> (default is code). Once file is saved, the new configuration is updated.

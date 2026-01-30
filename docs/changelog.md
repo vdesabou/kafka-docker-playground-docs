@@ -20,23 +20,6 @@
 - 🐛 --cluster-region selection menu is broken as not selecting cloud provider [#7498](https://github.com/vdesabou/kafka-docker-playground/issues/7498)
 
 
-## January 2026
-##### 🌟 Enhancements
-
-- 👾 Add FM IBM MQ sink and source with ssl examples [#7538](https://github.com/vdesabou/kafka-docker-playground/issues/7538)
-- 🧠 Add playground connector translate command for Translate Self Managed Connector Plugin Configurations to Fully Managed Connector Plugin Configurations [#7537](https://github.com/vdesabou/kafka-docker-playground/issues/7537)
-- 🧠 playground debug log-level: add support for KIP-976 (Cluster-wide dynamic log adjustment for Kafka Connect) [#7536](https://github.com/vdesabou/kafka-docker-playground/issues/7536)
-- 👾 Add PostgresSource example with SSL [#7534](https://github.com/vdesabou/kafka-docker-playground/issues/7534)
-- 👾 Add PostgresSink example with SSL [#7532](https://github.com/vdesabou/kafka-docker-playground/issues/7532)
-- 👾 pull latest ngrok/ngrok automatically [#7510](https://github.com/vdesabou/kafka-docker-playground/issues/7510)
-- 🧠 Add option to add connector plugin when using playground repro bootstrap command [#7509](https://github.com/vdesabou/kafka-docker-playground/issues/7509)
-- 👾 Add Fully Managed IBM MQ Sink connector example [#7500](https://github.com/vdesabou/kafka-docker-playground/issues/7500)
-- 🧠 Add playground run menu option ❌🎰🎯 Unset cluster name [#7499](https://github.com/vdesabou/kafka-docker-playground/issues/7499)
-- 🧠🧞‍♂️⭐ Add playground ai command [#7130](https://github.com/vdesabou/kafka-docker-playground/issues/7130)
-
-##### 🐛 Bugs
-
-- 🐛 --cluster-region selection menu is broken as not selecting cloud provider [#7498](https://github.com/vdesabou/kafka-docker-playground/issues/7498)
 
 
 

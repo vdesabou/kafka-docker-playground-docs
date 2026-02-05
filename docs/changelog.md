@@ -1,5 +1,11 @@
 # 📜 Change Log
 
+## February 2026
+##### 🌟 Enhancements
+
+- TEST IGNORE [#7545](https://github.com/vdesabou/kafka-docker-playground/issues/7545)
+
+
 ## January 2026
 ##### 🌟 Enhancements
 

@@ -3,8 +3,7 @@
 ## February 2026
 ##### 🌟 Enhancements
 
-- TEST IGNORE 2 [#7546](https://github.com/vdesabou/kafka-docker-playground/issues/7546)
-- TEST IGNORE [#7545](https://github.com/vdesabou/kafka-docker-playground/issues/7545)
+- ⭐ Use MFA for Azure examples (az login) [#7553](https://github.com/vdesabou/kafka-docker-playground/issues/7553)
 
 ## January 2026
 ##### 🌟 Enhancements

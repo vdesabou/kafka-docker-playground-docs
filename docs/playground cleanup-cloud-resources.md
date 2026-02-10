@@ -22,10 +22,6 @@ visit https://docs.confluent.io/confluent-cli/current/overview.html to install
 
 Azure user
 
-#### *AZ_PASS*
-
-Azure password
-
 #### *GCP_PROJECT*
 
 GCP project

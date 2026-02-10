@@ -4,6 +4,7 @@
 ##### 🌟 Enhancements
 
 - ⭐ Use MFA for Azure examples (az login) [#7553](https://github.com/vdesabou/kafka-docker-playground/issues/7553)
+- 👾 Add in grafana specific metrics for Oracle Xstream CDC connector [#7535](https://github.com/vdesabou/kafka-docker-playground/issues/7535)
 
 ## January 2026
 ##### 🌟 Enhancements

@@ -3,6 +3,7 @@
 ## February 2026
 ##### 🌟 Enhancements
 
+- 👾⭐ Add fully-managed Elasticsearch Sink V2 example [#7561](https://github.com/vdesabou/kafka-docker-playground/issues/7561)
 - ⭐ Use MFA for Azure examples (az login) [#7553](https://github.com/vdesabou/kafka-docker-playground/issues/7553)
 - 👾 Add in grafana specific metrics for Oracle Xstream CDC connector [#7535](https://github.com/vdesabou/kafka-docker-playground/issues/7535)
 

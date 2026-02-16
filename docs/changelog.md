@@ -3,6 +3,9 @@
 ## February 2026
 ##### 🌟 Enhancements
 
+- 👾 Add Debezium postgres example with incremental snapshot triggered via signal kafka topic [#7565](https://github.com/vdesabou/kafka-docker-playground/issues/7565)
+- 👾 Add Oracle Xstream example with blocking snapshot triggered via signal kafka topic [#7564](https://github.com/vdesabou/kafka-docker-playground/issues/7564)
+- 👾 Add Debezium sqlserver example with incremental snapshot triggered via signal kafka topic [#7563](https://github.com/vdesabou/kafka-docker-playground/issues/7563)
 - 👾⭐ Add fully-managed Elasticsearch Sink V2 example [#7561](https://github.com/vdesabou/kafka-docker-playground/issues/7561)
 - ⭐ Use MFA for Azure examples (az login) [#7553](https://github.com/vdesabou/kafka-docker-playground/issues/7553)
 - 👾 Add in grafana specific metrics for Oracle Xstream CDC connector [#7535](https://github.com/vdesabou/kafka-docker-playground/issues/7535)

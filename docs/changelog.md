@@ -3,6 +3,7 @@
 ## February 2026
 ##### 🌟 Enhancements
 
+- 👾 Add Debezium mongo example with incremental snapshot triggered via signal kafka topic [#7566](https://github.com/vdesabou/kafka-docker-playground/issues/7566)
 - 👾 Add Debezium postgres example with incremental snapshot triggered via signal kafka topic [#7565](https://github.com/vdesabou/kafka-docker-playground/issues/7565)
 - 👾 Add Oracle Xstream example with blocking snapshot triggered via signal kafka topic [#7564](https://github.com/vdesabou/kafka-docker-playground/issues/7564)
 - 👾 Add Debezium sqlserver example with incremental snapshot triggered via signal kafka topic [#7563](https://github.com/vdesabou/kafka-docker-playground/issues/7563)

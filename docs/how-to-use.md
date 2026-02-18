@@ -344,6 +344,7 @@ List of provided dashboards:
  - Cluster Linking
  - Kafka streams RocksDB
  - Oracle CDC source Connector
+ - Oracle XStream CDC source Connector
  - Mongo source and sink Connector
  - Debezium CDC source Connectors
 
@@ -406,6 +407,10 @@ docker exec broker kafka-configs --bootstrap-server broker:9092 --alter --add-co
 #### **Oracle CDC source Connector**
 
 ![oraclecdc](images/oraclecdc.jpg)
+
+#### **Oracle XStream CDC source Connector**
+
+![oraclexstreamcdc](images/oraclexstreamcdc.jpg)
 
 #### **Debezium CDC source Connectors**
 

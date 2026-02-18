@@ -1,5 +1,5 @@
 # 🐳 kafka-docker-playground
-![success tests](https://img.shields.io/badge/success%20tests-463%2F477-red)![connector tested](https://img.shields.io/badge/connector%20tested-136-green)![cp versions tested](https://img.shields.io/badge/cp%20version%20tested-%208.1.1-green)![last run](https://img.shields.io/badge/last%20run-2026--02--17%2019:27-green)
+![success tests](https://img.shields.io/badge/success%20tests-461%2F477-red)![connector tested](https://img.shields.io/badge/connector%20tested-136-green)![cp versions tested](https://img.shields.io/badge/cp%20version%20tested-%208.1.1-green)![last run](https://img.shields.io/badge/last%20run-2026--02--18%2019:56-green)
 ![GitHub issues by-label](https://img.shields.io/github/issues/vdesabou/kafka-docker-playground/CI%20failing%20🔥)![GitHub issues by-label](https://img.shields.io/github/issues/vdesabou/kafka-docker-playground/enhancement%20✨)
 ![GitHub repo size](https://img.shields.io/github/repo-size/vdesabou/kafka-docker-playground)
 [![Add a star on GitHub](https://img.shields.io/github/stars/vdesabou/kafka-docker-playground?style=social)](https://github.com/vdesabou/kafka-docker-playground)
@@ -8,7 +8,7 @@
 ## ✨ Features
 
 - 🔗 170+ onprem (or self-managed) connectors [examples](/content?id=🔗-connectors)
-- 🌤️ 70+ fully-managed connectors [examples](/content?id=%f0%9f%a4%96-fully-managed-connectors)
+- 🌤️ 100+ fully-managed connectors [examples](/content?id=%f0%9f%a4%96-fully-managed-connectors)
 - 🔐 10+ secured [environments](/content?id=%F0%9F%94%90-environments) (SASL, RBAC, SSL...)
 - ☁️ Confluent Cloud [examples](/content?id=☁%EF%B8%8F-confluent-cloud)
 - 💸 Confluent commercial [features](/content?id=💸-confluent-commercial) (Tiered Storage, Control Center, Audit logs...)

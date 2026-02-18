@@ -189,6 +189,14 @@ If not set, the key will also be null, hence generating a null record (both key 
   
 Note: CP 7.2+ is required.
 
+#### *--schema-id-in-header*
+
+🎯 Include schema ID in kafka header.   
+  
+Uses HeaderSchemaIdSerializer for schema.id.seserializer  
+  
+Note: CP 8.1.1+ is required.
+
 #### *--validate*
 
 ☑️ Validate schema according to connect sink converter used

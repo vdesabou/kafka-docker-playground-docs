@@ -3,6 +3,8 @@
 ## February 2026
 ##### 🌟 Enhancements
 
+- 🧠🤩 Add playground connector display-metrics-api for fully managed connectors [#7597](https://github.com/vdesabou/kafka-docker-playground/issues/7597)
+- 👾 Add http sink example with ElasticSearch v9 example [#7595](https://github.com/vdesabou/kafka-docker-playground/issues/7595)
 - 👾 Add example of source connector using schema id in kafka header [#7582](https://github.com/vdesabou/kafka-docker-playground/issues/7582)
 - 👾 Set default tag to CP 8.1.1 [#7572](https://github.com/vdesabou/kafka-docker-playground/issues/7572)
 - 🧠🤩 Add --schema-id-in-header option to playground topic produce [#7570](https://github.com/vdesabou/kafka-docker-playground/issues/7570)

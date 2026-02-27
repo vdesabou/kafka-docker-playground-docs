@@ -2,7 +2,7 @@
 
 🗜️ Easily select config from all possible configuration parameters of connector  
   
-🎓 Tip: use \<tab\> to select multiple config at once !
+🎓 Tip: use \<tab\> to select multiple config at once, then press \<enter\> to confirm
 
 ## Usage
 

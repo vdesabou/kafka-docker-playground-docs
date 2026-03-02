@@ -295,6 +295,7 @@ visit https://docs.docker.com/get-docker to install
 - [show-config](playground%20connector%20show-config) - 🧰 Show current connector config that was applied
 - [show-config-parameters](playground%20connector%20show-config-parameters) - 🔩 Show all possible configuration parameters of connector
 - [display-metrics-api](playground%20connector%20display-metrics-api) - 〽️ Display metrics api for fully managed connector, see https://api.telemetry.confluent.cloud/docs/descriptors/datasets/cloud
+- [display-metrics-api-with-grafana](playground%20connector%20display-metrics-api-with-grafana) - 📊 Display metrics api for fully managed connector in Grafana dashboard
 - [select-config](playground%20connector%20select-config) - 🗜️ Easily select config from all possible configuration parameters of connector
 - [snippets](playground%20connector%20snippets) - 🔌 useful snippets
 - [open-docs](playground%20connector%20open-docs) - 🧑‍🎓 Open connector documentation of currently running conector(s)

@@ -1,5 +1,11 @@
 # 📜 Change Log
 
+## March 2026
+##### 🌟 Enhancements
+
+- 🧠⭐ Add playground connector display-metrics-api-with-grafana for fully managed connectors [#7601](https://github.com/vdesabou/kafka-docker-playground/issues/7601)
+
+
 ## February 2026
 ##### 🌟 Enhancements
 

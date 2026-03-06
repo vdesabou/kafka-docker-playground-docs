@@ -10,6 +10,19 @@
 
 - 🐛 Fix faker deprecated warnings [#7643](https://github.com/vdesabou/kafka-docker-playground/issues/7643)
 - 🐛 CP 8.2.0: fix deprecated properties in topic produce and consume [#7642](https://github.com/vdesabou/kafka-docker-playground/issues/7642)
+- 🐛 Fix Loading class com.mysql.jdbc.Driver'. This is deprecated [#7596](https://github.com/vdesabou/kafka-docker-playground/issues/7596)
+
+
+## March 2026
+##### 🌟 Enhancements
+
+- 👾 Add example for KIP-1054: Support external schemas in JSONConverter (starting in CP 8.2.0) [#7602](https://github.com/vdesabou/kafka-docker-playground/issues/7602)
+- 🧠⭐ Add playground connector display-metrics-api-with-grafana for fully managed connectors [#7601](https://github.com/vdesabou/kafka-docker-playground/issues/7601)
+
+##### 🐛 Bugs
+
+- 🐛 Fix faker deprecated warnings [#7643](https://github.com/vdesabou/kafka-docker-playground/issues/7643)
+- 🐛 CP 8.2.0: fix deprecated properties in topic produce and consume [#7642](https://github.com/vdesabou/kafka-docker-playground/issues/7642)
 
 ## February 2026
 ##### 🌟 Enhancements

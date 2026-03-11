@@ -76,6 +76,7 @@ visit https://docs.docker.com/get-docker to install
 - [get-mode](playground%20schema%20get-mode) - 🔏 Get subject-level mode
 - [set-mode](playground%20schema%20set-mode) - 🔏 Set subject-level mode
 - [set-normalize](playground%20schema%20set-normalize) - 🧽 Set normalize at schema registry level
+- [validate-new-schemas](playground%20schema%20validate-new-schemas) - 🩺 Validate new schemas (default is true since CP 8.2.0)
 - [delete](playground%20schema%20delete) - 🧟 Delete schema
 - [derive-schema](playground%20schema%20derive-schema) - 🪄 Derive a schema based on payload
 

@@ -16,7 +16,9 @@ playground topic delete [OPTIONS]
 
 #### *--topic, -t TOPIC*
 
-🗳 Topic name
+🗳 Topic name or regex pattern (full match)  
+  
+Examples: my-topic, my-topic-.*
 
 | Attributes      | &nbsp;
 |-----------------|-------------

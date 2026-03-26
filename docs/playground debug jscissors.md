@@ -57,10 +57,13 @@ class name to instrument (it supports regex like oracle.jdbc.*)
 
 #### *--method METHOD*
 
-method name to instrument (it supports regex like .*find.*)
+method name to instrument (it supports regex like .*find.*)  
+  
+🎓 Tip: you can pass multiple methods by specifying --method multiple times
 
 | Attributes      | &nbsp;
 |-----------------|-------------
+| Repeatable:     |  ✓ Yes
 | Default Value:  | .*
 
 #### *--action ACTION*

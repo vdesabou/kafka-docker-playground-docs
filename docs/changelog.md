@@ -1,5 +1,15 @@
 # 📜 Change Log
 
+## April 2026
+##### 🌟 Enhancements
+
+- 👾 Add fully managed IBM MQ sink and source examples with mTLS [#7685](https://github.com/vdesabou/kafka-docker-playground/issues/7685)
+
+##### 🐛 Bugs
+
+- 🪦 Remove End-of-Life Fully-Managed examples [#7694](https://github.com/vdesabou/kafka-docker-playground/issues/7694)
+
+
 ## March 2026
 ##### 🌟 Enhancements
 

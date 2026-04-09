@@ -4,7 +4,7 @@
   
 🔖 It will save output to a .hprof file. VisualVM (https://visualvm.github.io/) or MAT (https://www.eclipse.org/mat/) can be used to read the file.  
   
-It will run a full gc first. If you don't want this, use 
+It will run a full gc first. If you don't want this, use
 
 ## Usage
 

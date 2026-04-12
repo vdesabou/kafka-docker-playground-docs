@@ -3,20 +3,11 @@
 ## April 2026
 ##### 🌟 Enhancements
 
-- 👾 Add example to easily test sink connectors with SMT [#7675](https://github.com/vdesabou/kafka-docker-playground/issues/7675)
-- 👾 Update default CP version to 8.2.0 [#7671](https://github.com/vdesabou/kafka-docker-playground/issues/7671)
-- 🧠 playground topic delete: handle regex for --topic flag [#7659](https://github.com/vdesabou/kafka-docker-playground/issues/7659)
-- 👾 Add Redact Confluent Logs in Confluent Platform example [#7653](https://github.com/vdesabou/kafka-docker-playground/issues/7653)
-- 🧠 Add playground schema validate-new-schemas [#7652](https://github.com/vdesabou/kafka-docker-playground/issues/7652)
-- 👾 Add example for KIP-1054: Support external schemas in JSONConverter (starting in CP 8.2.0) [#7602](https://github.com/vdesabou/kafka-docker-playground/issues/7602)
-- 🧠⭐ Add playground connector display-metrics-api-with-grafana for fully managed connectors [#7601](https://github.com/vdesabou/kafka-docker-playground/issues/7601)
+- 👾 Add fully managed IBM MQ sink and source examples with mTLS [#7685](https://github.com/vdesabou/kafka-docker-playground/issues/7685)
 
 ##### 🐛 Bugs
 
-- 🐛 Fix faker deprecated warnings [#7643](https://github.com/vdesabou/kafka-docker-playground/issues/7643)
-- 🐛 CP 8.2.0: fix deprecated properties in topic produce and consume [#7642](https://github.com/vdesabou/kafka-docker-playground/issues/7642)
-- 🐛 Fix Loading class com.mysql.jdbc.Driver'. This is deprecated [#7596](https://github.com/vdesabou/kafka-docker-playground/issues/7596)
-
+- 🪦 Remove End-of-Life Fully-Managed examples [#7694](https://github.com/vdesabou/kafka-docker-playground/issues/7694)
 
 ## April 2026
 ##### 🌟 Enhancements

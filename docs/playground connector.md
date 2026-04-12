@@ -41,6 +41,7 @@ playground connector COMMAND
 
 - [logs](playground%20connector%20logs) - 🕵️  Tail and follow connect logs
 - [open-ccloud-connector-in-browser](playground%20connector%20open-ccloud-connector-in-browser) - 🤖 Open Fully Managed connector in browser (Confluent Cloud dashboard)
+- [display-leader-name](playground%20connector%20display-leader-name) - 👑 Display Connect Worker leader name using JMX MBean leader-name from kafka.connect:type=connect-worker-rebalance-metrics
 
 ## Examples
 

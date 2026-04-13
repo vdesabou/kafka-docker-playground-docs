@@ -3,6 +3,7 @@
 ## April 2026
 ##### 🌟 Enhancements
 
+- 🧠 add warning for connect workers not running in playground connector status (only when --enable-multiple-connect-workers is used) [#7706](https://github.com/vdesabou/kafka-docker-playground/issues/7706)
 - 🧠 add leader emoji 👑 in playground connector status (only when --enable-multiple-connect-workers is used) [#7705](https://github.com/vdesabou/kafka-docker-playground/issues/7705)
 - 🧠 add playground connector display-leader-name [#7704](https://github.com/vdesabou/kafka-docker-playground/issues/7704)
 - 👾 Add snowflake sink examples with Iceberg [#7700](https://github.com/vdesabou/kafka-docker-playground/issues/7700)

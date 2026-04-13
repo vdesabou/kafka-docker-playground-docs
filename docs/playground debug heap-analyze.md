@@ -16,7 +16,12 @@ playground debug heap-analyze [OPTIONS]
 
 #### *--file, -f FILE*
 
-📁 Path to the .hprof heap dump file to analyze
+🔖 HPROF heap dump file to analyze  
+  
+❕ It must be absolute full path  
+  
+🎓 Tip: use \<tab\> completion to trigger fzf completion  
+        use \<option+enter\> to use the value you typed manually
 
 | Attributes      | &nbsp;
 |-----------------|-------------

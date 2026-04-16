@@ -3,12 +3,18 @@
 ## April 2026
 ##### 🌟 Enhancements
 
+- 🧠 Add emojis in --connector-plugin selection [#7707](https://github.com/vdesabou/kafka-docker-playground/issues/7707)
 - 🧠 add warning for connect workers not running in playground connector status (only when --enable-multiple-connect-workers is used) [#7706](https://github.com/vdesabou/kafka-docker-playground/issues/7706)
 - 🧠 add leader emoji 👑 in playground connector status (only when --enable-multiple-connect-workers is used) [#7705](https://github.com/vdesabou/kafka-docker-playground/issues/7705)
 - 🧠 add playground connector display-leader-name [#7704](https://github.com/vdesabou/kafka-docker-playground/issues/7704)
 - 👾 Add snowflake sink examples with Iceberg [#7700](https://github.com/vdesabou/kafka-docker-playground/issues/7700)
+- 🧠 Add playground debug heap-analyze command [#7699](https://github.com/vdesabou/kafka-docker-playground/issues/7699)
 - 🪦 Remove End-of-Life Fully-Managed examples [#7694](https://github.com/vdesabou/kafka-docker-playground/issues/7694)
 - 👾 Add fully managed IBM MQ sink and source examples with mTLS [#7685](https://github.com/vdesabou/kafka-docker-playground/issues/7685)
+
+##### 🐛 Bugs
+
+- 🐛 wrong minimal supported connector version check when --pipeline is used [#7697](https://github.com/vdesabou/kafka-docker-playground/issues/7697)
 
 ## March 2026
 ##### 🌟 Enhancements

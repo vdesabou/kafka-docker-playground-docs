@@ -3,6 +3,7 @@
 ## April 2026
 ##### 🌟 Enhancements
 
+- 🧠 Add --open option to playground connector-plugin sourcecode to open project in editor [#7719](https://github.com/vdesabou/kafka-docker-playground/issues/7719)
 - 🧠 Add emojis in --connector-plugin selection [#7707](https://github.com/vdesabou/kafka-docker-playground/issues/7707)
 - 🧠 add warning for connect workers not running in playground connector status (only when --enable-multiple-connect-workers is used) [#7706](https://github.com/vdesabou/kafka-docker-playground/issues/7706)
 - 🧠 add leader emoji 👑 in playground connector status (only when --enable-multiple-connect-workers is used) [#7705](https://github.com/vdesabou/kafka-docker-playground/issues/7705)

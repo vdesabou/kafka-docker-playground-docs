@@ -1,6 +1,6 @@
 # playground connector-plugin sourcecode
 
-🧑‍💻 Open source code url in your browser  
+🧑‍💻 Open source code url in your browser (or in your editor when used with --open)  
   
 You can compare different sourcecode versions by specifying --connector-tag two times, in such case it will open github in comparison mode  
   
@@ -67,6 +67,10 @@ Default is 11
 
 🐞 Show output of compilation.
 
+#### *--open, -o*
+
+🔖 Checkout the code and open with text editor set with playground config editor \<editor\> (default is code)
+
 ## Examples
 
 ```bash
@@ -91,6 +95,9 @@ playground connector-plugin sourcecode --connector-plugin confluentinc/kafka-con
 
 # if you're a confluent employee (make sure to set your aws credentials and follow Maven FAQ), it will also work on proprietary connectors and fully managed connectors 
 playground connector-plugin sourcecode --connector-plugin confluentinc/kafka-connect-oracle-xstream-cdc-source --compile --connector-tag "1.2.0" --compile-verbose
+
+# will open repository in your editor
+playground connector-plugin sourcecode --connector-plugin confluentinc/kafka-connect-hdfs --open
 
 ```
 

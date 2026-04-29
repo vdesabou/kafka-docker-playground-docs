@@ -1,7 +1,7 @@
 
 # 🚀 How to use
 
-## 3️⃣ Ways to run
+## 2️⃣ Ways to run
 
 ### 💻️ Locally
 
@@ -54,29 +54,6 @@ git clone --depth 1 https://github.com/vdesabou/kafka-docker-playground.git
 
 > [!TIP]
 > Specifying `--depth 1` only get the latest version of the playground, which reduces a lot the size of the download.
-
-### 🪄 Gitpod.io
-
-You can run the playground directly in your browser (*Cloud IDE*) using [Gitpod.io](https://gitpod.io) workspace by clicking on the link below:
-
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/vdesabou/kafka-docker-playground)
-
-Look at *✨awesome✨* this is 🪄 !
-
-![demo](https://github.com/vdesabou/gifs/raw/master/docs/images/gitpod.gif)
-
-> [!TIP]
-> 50 hours/month can be used as part of the [free](https://www.gitpod.io/pricing) plan.
-
-You can login into Control Center (port `9021`) by clicking on `Open Browser` option in pop-up:
-
-![port](./images/gitpod_port_popup.png)
-
-Or select `Remote Explorer` on the left sidebar and then click on the `Open Browser` option corresponding to the port you want to connect to:
-
-![port](./images/gitpod_port_explorer.png)
-
-You can set your own environment variables in gitpod, see this [link](https://www.gitpod.io/docs/environment-variables#user-specific-environment-variables).
 
 ### ☁️ AWS EC2 instance (using Cloud Formation)
 

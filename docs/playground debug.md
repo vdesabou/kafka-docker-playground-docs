@@ -17,6 +17,7 @@ playground debug COMMAND
 - [thread-dump](playground%20debug%20thread-dump) - 🎯 Take a java thread dump
 - [heap-dump](playground%20debug%20heap-dump) - 👻 Take a heap dump
 - [heap-analyze](playground%20debug%20heap-analyze) - 🔬 Analyze a heap dump file using Eclipse MAT (Memory Analyzer Tool)
+- [gc-analyze](playground%20debug%20gc-analyze) - 📈 Analyze JVM Garbage Collection logs
 - [tcp-dump](playground%20debug%20tcp-dump) - 🕵️‍♂️ Take a tcp dump (sniffing network)
 - [block-traffic](playground%20debug%20block-traffic) - 🚫 Blocking traffic using iptables
 - [java-debug](playground%20debug%20java-debug) - 🤎 JVM arguments for SSL, Kerberos or Class Loading

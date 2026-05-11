@@ -3,7 +3,8 @@
 ## May 2026
 ##### 🌟 Enhancements
 
-- 👾⭐ Add Fully Managed Azure Log Analytics V2 Sink Connector example [#7764](https://github.com/vdesabou/kafka-docker-playground/issues/7764)
+- ⭐👾 Add Fully Managed Azure Log Analytics V2 Sink Connector example [#7764](https://github.com/vdesabou/kafka-docker-playground/issues/7764)
+- 👾 Make custom aws credentials provider configurable when using AWS v2 sdk [#7760](https://github.com/vdesabou/kafka-docker-playground/issues/7760)
 - ⭐👾 Add fully managed Solace Source Connector example [#7759](https://github.com/vdesabou/kafka-docker-playground/issues/7759)
 - ⭐👾 Add fully managed MongoDB CDC Source (Debezium) Connector example (include SSL example) [#7757](https://github.com/vdesabou/kafka-docker-playground/issues/7757)
 

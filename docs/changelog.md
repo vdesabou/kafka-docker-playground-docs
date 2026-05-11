@@ -1,14 +1,11 @@
 # 📜 Change Log
 
 ## May 2026
+##### 🌟 Enhancements
 
-
-##### 🐛 Bugs
-
-- 🔴 mcp-kafka - Disconnected [#7739](https://github.com/vdesabou/kafka-docker-playground/issues/7739)
-- 🐛 dynamodb cdc tables not deleted [#7729](https://github.com/vdesabou/kafka-docker-playground/issues/7729)
-
-
+- 👾⭐ Add Fully Managed Azure Log Analytics V2 Sink Connector example [#7764](https://github.com/vdesabou/kafka-docker-playground/issues/7764)
+- ⭐👾 Add fully managed Solace Source Connector example [#7759](https://github.com/vdesabou/kafka-docker-playground/issues/7759)
+- ⭐👾 Add fully managed MongoDB CDC Source (Debezium) Connector example (include SSL example) [#7757](https://github.com/vdesabou/kafka-docker-playground/issues/7757)
 
 ## April 2026
 ##### 🌟 Enhancements

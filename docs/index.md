@@ -114,6 +114,7 @@ visit https://docs.docker.com/get-docker to install
 - [thread-dump](playground%20debug%20thread-dump) - 🎯 Take a java thread dump
 - [heap-dump](playground%20debug%20heap-dump) - 👻 Take a heap dump
 - [heap-analyze](playground%20debug%20heap-analyze) - 🔬 Analyze a heap dump file using Eclipse MAT (Memory Analyzer Tool)
+- [cfk-bundle-analyze](playground%20debug%20cfk-bundle-analyze) - 📦 Analyze a Confluent for Kubernetes (CFK) support bundle
 - [gc-analyze](playground%20debug%20gc-analyze) - 📈 Analyze JVM Garbage Collection logs
 - [tcp-dump](playground%20debug%20tcp-dump) - 🕵️‍♂️ Take a tcp dump (sniffing network)
 - [block-traffic](playground%20debug%20block-traffic) - 🚫 Blocking traffic using iptables

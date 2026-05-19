@@ -3,6 +3,7 @@
 ## May 2026
 ##### 🌟 Enhancements
 
+- 🧠 Add CFK support bundle analyzer and playground debug cfk-bundle-analyze command [#7790](https://github.com/vdesabou/kafka-docker-playground/issues/7790)
 - ⭐👾 Add Fully Managed IBM Db2 Source (JDBC) Connector example (include SSL example) [#7770](https://github.com/vdesabou/kafka-docker-playground/issues/7770)
 - ⭐👾 Add Fully Managed Azure Log Analytics V2 Sink Connector example [#7764](https://github.com/vdesabou/kafka-docker-playground/issues/7764)
 - 👾 Make custom aws credentials provider configurable when using AWS v2 sdk [#7760](https://github.com/vdesabou/kafka-docker-playground/issues/7760)

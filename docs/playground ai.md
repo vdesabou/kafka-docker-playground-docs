@@ -80,10 +80,6 @@ playground ai [--] [GEMINI CLI ARGUMENTS...]
 
 visit https://github.com/google-gemini/gemini-cli/tree/main?tab=readme-ov-file#-installation to install
 
-#### *kafka-mcp-server*
-
-visit https://docs.tuannvm.com/kafka-mcp-server#installation to install
-
 ## Examples
 
 ```bash

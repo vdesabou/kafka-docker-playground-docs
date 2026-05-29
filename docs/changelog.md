@@ -3,6 +3,7 @@
 ## May 2026
 ##### 🌟 Enhancements
 
+- ⭐👾 Add fully-managed Google Cloud Firestore Sink connector example [#7811](https://github.com/vdesabou/kafka-docker-playground/issues/7811)
 - 👾 Update playground to CP 8.2.1 by default [#7794](https://github.com/vdesabou/kafka-docker-playground/issues/7794)
 - 🧠 Add CFK support bundle analyzer and playground debug cfk-bundle-analyze command [#7790](https://github.com/vdesabou/kafka-docker-playground/issues/7790)
 - ⭐👾 Add Fully Managed IBM Db2 Source (JDBC) Connector example (include SSL example) [#7770](https://github.com/vdesabou/kafka-docker-playground/issues/7770)

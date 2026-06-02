@@ -2,7 +2,7 @@
 
 🧞‍♂️  AI  
   
-It is using Gemini CI (https://google-gemini.github.io/gemini-cli/) in interactive mode.  
+It is using Claude Code (https://code.claude.com/docs/en/quickstart) in interactive mode.  
   
 MCP servers are available:  
   
@@ -16,7 +16,7 @@ MCP servers are available:
   - playground_command_validate:  
       Validate a complete playground command and suggest corrections  
   
-2. mcp-server - Confluent MCP Server (https://github.com/confluentinc/mcp-confluent)  
+2. mcp-server - Confluent MCP Server (see http://docs.confluent.io/cloud/current/ai/ai-tools/open-source-mcp-server.html#quick-start and https://github.com/confluentinc/mcp-confluent)  
   
   Tools:  
   - list-topics: List all topics in the Kafka cluster.  
@@ -27,7 +27,7 @@ MCP servers are available:
   - list-schemas: List all schemas in the Schema Registry.  
   - delete-schema: Delete a schema subject or a specific version from the Schema Registry.  
   
-3. mcp-ccloud - Confluent MCP Server (https://github.com/confluentinc/mcp-confluent)  
+3. mcp-ccloud - Confluent MCP Server (see http://docs.confluent.io/cloud/current/ai/ai-tools/open-source-mcp-server.html#quick-start and https://github.com/confluentinc/mcp-confluent)  
   
   Tools:  
     Environment & Cluster Management  
@@ -76,9 +76,9 @@ playground ai [--] [GEMINI CLI ARGUMENTS...]
 
 ## Dependencies
 
-#### *gemini*
+#### *claude*
 
-visit https://github.com/google-gemini/gemini-cli/tree/main?tab=readme-ov-file#-installation to install
+visit https://code.claude.com/docs/en/quickstart to install
 
 ## Examples
 

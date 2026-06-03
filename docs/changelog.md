@@ -1,7 +1,13 @@
 # 📜 Change Log
 
 ## June 2026
+##### 🌟 Enhancements
 
+- 🧠 Migrate playground ai to claude [#7810](https://github.com/vdesabou/kafka-docker-playground/issues/7810)
+
+##### 🐛 Bugs
+
+- 🐛 license error with self-managed connector with --environment ccloud [#7812](https://github.com/vdesabou/kafka-docker-playground/issues/7812)
 
 ## May 2026
 ##### 🌟 Enhancements

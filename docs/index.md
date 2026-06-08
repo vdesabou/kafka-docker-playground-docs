@@ -79,6 +79,8 @@ visit https://docs.docker.com/get-docker to install
 - [validate-new-schemas](playground%20schema%20validate-new-schemas) - 🩺 Validate new schemas (default is true since CP 8.2.0)
 - [delete](playground%20schema%20delete) - 🧟 Delete schema
 - [derive-schema](playground%20schema%20derive-schema) - 🪄 Derive a schema based on payload
+- [set-alias](playground%20schema%20set-alias) - 🔯 Set a subject alias (see https://docs.confluent.io/platform/8.2/schema-registry/fundamentals/index.html#subject-aliases)
+- [get-alias](playground%20schema%20get-alias) - 🔯 Get subject alias
 
 ### TCP Proxy commands
 

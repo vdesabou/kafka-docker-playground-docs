@@ -3,10 +3,15 @@
 ## June 2026
 ##### 🌟 Enhancements
 
+- 🧠 add playground schema set-alias and get-alias commands [#7824](https://github.com/vdesabou/kafka-docker-playground/issues/7824)
+- 👾 Add How to process DLQ records example [#7823](https://github.com/vdesabou/kafka-docker-playground/issues/7823)
+- ⭐👾 Add self-managed ClickHouse Kafka Connect Sink example [#7822](https://github.com/vdesabou/kafka-docker-playground/issues/7822)
+- ⭐👾 Add fully-managed Salesforce Source V2 connector example [#7820](https://github.com/vdesabou/kafka-docker-playground/issues/7820)
 - 🧠 Migrate playground ai to claude [#7810](https://github.com/vdesabou/kafka-docker-playground/issues/7810)
 
 ##### 🐛 Bugs
 
+- 🐛 playground topic consume –plot-latencies-timestamp-field is broken [#7813](https://github.com/vdesabou/kafka-docker-playground/issues/7813)
 - 🐛 license error with self-managed connector with --environment ccloud [#7812](https://github.com/vdesabou/kafka-docker-playground/issues/7812)
 
 ## May 2026

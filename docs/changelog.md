@@ -3,6 +3,7 @@
 ## June 2026
 ##### 🌟 Enhancements
 
+- 🧠 add --normalize option to playground schema register [#7825](https://github.com/vdesabou/kafka-docker-playground/issues/7825)
 - 🧠 add playground schema set-alias and get-alias commands [#7824](https://github.com/vdesabou/kafka-docker-playground/issues/7824)
 - 👾 Add How to process DLQ records example [#7823](https://github.com/vdesabou/kafka-docker-playground/issues/7823)
 - ⭐👾 Add self-managed ClickHouse Kafka Connect Sink example [#7822](https://github.com/vdesabou/kafka-docker-playground/issues/7822)

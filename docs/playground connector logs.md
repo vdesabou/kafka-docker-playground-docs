@@ -26,7 +26,7 @@ playground connector logs [OPTIONS]
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Conflicts With: | *--wait-for-log*
+| Conflicts With: | *--wait-for-log, --grep*
 
 #### *--wait-for-log, -w LOG*
 
@@ -34,7 +34,7 @@ playground connector logs [OPTIONS]
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Conflicts With: | *--open*
+| Conflicts With: | *--open, --grep*
 
 #### *--verbose, -v*
 

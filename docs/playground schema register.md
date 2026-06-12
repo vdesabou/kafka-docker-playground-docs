@@ -54,6 +54,10 @@ Example: --metadata-property "metadata1=value" --metadata-property "metadata2=va
 |-----------------|-------------
 | Repeatable:     |  ✓ Yes
 
+#### *--normalize*
+
+🫧 Add ?normalize=true at the end of the request to normalize the schema. The default is false.
+
 ## Examples
 
 ```bash

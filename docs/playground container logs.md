@@ -27,7 +27,7 @@ playground container logs [OPTIONS]
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Conflicts With: | *--wait-for-log*
+| Conflicts With: | *--wait-for-log, --grep*
 
 #### *--wait-for-log, -w LOG*
 
@@ -35,7 +35,7 @@ playground container logs [OPTIONS]
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Conflicts With: | *--open*
+| Conflicts With: | *--open, --grep*
 
 #### *--max-wait, -m MAX_WAIT*
 
@@ -44,7 +44,16 @@ playground container logs [OPTIONS]
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Default Value:  | 600
-| Conflicts With: | *--open*
+| Conflicts With: | *--open, --grep*
+
+#### *--grep GREP*
+
+🎯 Grep pattern to filter logs
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Default Value:  | 
+| Conflicts With: | *--open, --wait-for-log*
 
 ## Examples
 
@@ -74,6 +83,10 @@ playground container logs -c broker -c connect -c schema-registry
 
 ```bash
 playground container logs -c connect -c broker --wait-for-log "ERROR" --max-wait 120
+```
+
+```bash
+playground container logs --container connect --grep "ERROR"
 ```
 
 

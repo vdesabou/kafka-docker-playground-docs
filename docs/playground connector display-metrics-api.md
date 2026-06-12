@@ -22,7 +22,7 @@ playground connector display-metrics-api [OPTIONS]
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Conflicts With: | *--wait-for-log*
+| Conflicts With: | *--wait-for-log, --grep*
 
 #### *--verbose, -v*
 

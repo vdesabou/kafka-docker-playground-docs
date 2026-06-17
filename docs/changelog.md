@@ -3,6 +3,7 @@
 ## June 2026
 ##### 🌟 Enhancements
 
+- 🧠 Add --grep option to playground container logs [#7827](https://github.com/vdesabou/kafka-docker-playground/issues/7827)
 - 🧠 Add playground tools redos-check [#7826](https://github.com/vdesabou/kafka-docker-playground/issues/7826)
 - 🧠 add --normalize option to playground schema register [#7825](https://github.com/vdesabou/kafka-docker-playground/issues/7825)
 - 🧠 add playground schema set-alias and get-alias commands [#7824](https://github.com/vdesabou/kafka-docker-playground/issues/7824)

@@ -30,7 +30,7 @@ playground container change-jdk [OPTIONS]
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Required:       | ✓ Yes
-| Allowed Values: | 8, 11, 17, 21, 22
+| Allowed Values: | 8, 11, 17, 21, 22, 25
 
 ## Examples
 

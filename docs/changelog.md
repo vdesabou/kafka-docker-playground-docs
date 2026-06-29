@@ -3,6 +3,7 @@
 ## June 2026
 ##### 🌟 Enhancements
 
+- 🧠 Add jdk 25 to playground container change-jdk command [#7863](https://github.com/vdesabou/kafka-docker-playground/issues/7863)
 - 👾 Update default version to CP 8.3.0 [#7828](https://github.com/vdesabou/kafka-docker-playground/issues/7828)
 - 🧠 Add --grep option to playground container logs [#7827](https://github.com/vdesabou/kafka-docker-playground/issues/7827)
 - 🧠 Add playground tools redos-check [#7826](https://github.com/vdesabou/kafka-docker-playground/issues/7826)

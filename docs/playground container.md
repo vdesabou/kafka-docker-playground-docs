@@ -2,6 +2,10 @@
 
 🐳 Container commands
 
+| Attributes       | &nbsp;
+|------------------|-------------
+| Alias:           | pod
+
 ## Usage
 
 ```bash

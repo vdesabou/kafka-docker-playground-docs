@@ -78,6 +78,14 @@ Only available if CP \> 7.7
 |-----------------|-------------
 | Allowed Values: | RUNNING, PAUSED, STOPPED
 
+#### *--terraform*
+
+🏗️ Deploy connector using Terraform instead of REST API  
+  
+Dynamically converts JSON connector config to Terraform HCL and deploys using terraform apply  
+  
+⚠️ Only available for Confluent Cloud connectors
+
 ## Examples
 
 ```bash

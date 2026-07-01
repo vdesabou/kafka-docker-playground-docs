@@ -1,24 +1,6 @@
 # 📜 Change Log
 
-## July 2026
-##### 🌟 Enhancements
 
-- 🧠 Add playground container cp command [#7937](https://github.com/vdesabou/kafka-docker-playground/issues/7937)
-- 🧠 Add jdk 25 to playground container change-jdk command [#7863](https://github.com/vdesabou/kafka-docker-playground/issues/7863)
-- 👾 Update default version to CP 8.3.0 [#7828](https://github.com/vdesabou/kafka-docker-playground/issues/7828)
-- 🧠 Add --grep option to playground container logs [#7827](https://github.com/vdesabou/kafka-docker-playground/issues/7827)
-- 🧠 Add playground tools redos-check [#7826](https://github.com/vdesabou/kafka-docker-playground/issues/7826)
-- 🧠 add --normalize option to playground schema register [#7825](https://github.com/vdesabou/kafka-docker-playground/issues/7825)
-- 🧠 add playground schema set-alias and get-alias commands [#7824](https://github.com/vdesabou/kafka-docker-playground/issues/7824)
-- 👾 Add How to process DLQ records example [#7823](https://github.com/vdesabou/kafka-docker-playground/issues/7823)
-- ⭐👾 Add self-managed ClickHouse Kafka Connect Sink example [#7822](https://github.com/vdesabou/kafka-docker-playground/issues/7822)
-- ⭐👾 Add fully-managed Salesforce Source V2 connector example [#7820](https://github.com/vdesabou/kafka-docker-playground/issues/7820)
-- 🧠 Migrate playground ai to claude [#7810](https://github.com/vdesabou/kafka-docker-playground/issues/7810)
-
-##### 🐛 Bugs
-
-- 🐛 playground topic consume –plot-latencies-timestamp-field is broken [#7813](https://github.com/vdesabou/kafka-docker-playground/issues/7813)
-- 🐛 license error with self-managed connector with --environment ccloud [#7812](https://github.com/vdesabou/kafka-docker-playground/issues/7812)
 
 ## June 2026
 ##### 🌟 Enhancements

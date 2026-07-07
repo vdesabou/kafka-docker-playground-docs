@@ -131,6 +131,7 @@ visit https://docs.docker.com/get-docker to install
 - [container](playground%20container) - 🐳 Container commands
 - [get-properties](playground%20container%20get-properties) - 📝 Get properties file from a container
 - [recreate](playground%20container%20recreate) - 💫 Recreate container(s)
+- [update](playground%20container%20update) - ✍️ Edit and apply runtime container/pod definition
 - [get-ip-addresses](playground%20container%20get-ip-addresses) - 🖥️  Get ip address of running containers
 - [kill-all](playground%20container%20kill-all) - 💀 Kill all containers and prune all volumes
 - [logs](playground%20container%20logs) - 🕵️  Tail and follow container logs

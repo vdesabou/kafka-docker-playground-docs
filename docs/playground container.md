@@ -19,6 +19,7 @@ playground container COMMAND
 ## Container commands
 
 - [recreate](playground%20container%20recreate) - 💫 Recreate container(s)
+- [update](playground%20container%20update) - ✍️ Edit and apply runtime container/pod definition
 - [get-ip-addresses](playground%20container%20get-ip-addresses) - 🖥️  Get ip address of running containers
 - [kill-all](playground%20container%20kill-all) - 💀 Kill all containers and prune all volumes
 - [logs](playground%20container%20logs) - 🕵️  Tail and follow container logs

@@ -10,9 +10,9 @@ playground container ssh [OPTIONS]
 
 ## Options
 
-#### *--container, -c CONTAINER*
+#### *--container, -c, --pod, -p CONTAINER*
 
-🐳 Container name  
+🐳 container name (or pod name when cfk environment is used)  
   
 🎓 Tip: you can pass multiple containers by specifying --container multiple times
 

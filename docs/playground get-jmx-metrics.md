@@ -18,9 +18,9 @@ visit https://openjdk.org/install/ to install
 
 ## Options
 
-#### *--container, -c CONTAINER*
+#### *--container, -c, --pod, -p CONTAINER*
 
-🐳 Container name  
+🐳 container name (or pod name when cfk environment is used)  
   
 🎓 Tip: you can pass multiple containers by specifying --container multiple times
 

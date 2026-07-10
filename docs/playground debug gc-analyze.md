@@ -25,9 +25,9 @@ playground debug gc-analyze [OPTIONS]
 🎓 Tip: use \<tab\> completion to trigger fzf completion  
         use \<option+enter\> to use the value you typed manually
 
-#### *--container, -c CONTAINER*
+#### *--container, -c, --pod, -p CONTAINER*
 
-🐳 Container name to extract GC log from  
+🐳 Container name (or pod name when cfk environment is used) to extract GC log from  
   
 ❕ Provide either --file or --container, not both  
   

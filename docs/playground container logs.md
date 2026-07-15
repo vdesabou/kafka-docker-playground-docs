@@ -55,6 +55,10 @@ playground container logs [OPTIONS]
 | Default Value:  | 
 | Conflicts With: | *--open, --wait-for-log*
 
+#### *--previous*
+
+🕰️ Show logs from the previous pod instance (only relevant when --environment=cfk is used)
+
 ## Examples
 
 ```bash
@@ -87,6 +91,10 @@ playground container logs -c connect -c broker --wait-for-log "ERROR" --max-wait
 
 ```bash
 playground container logs --container connect --grep "ERROR"
+```
+
+```bash
+playground pod logs --previous
 ```
 
 

@@ -1,6 +1,17 @@
 # 📜 Change Log
 
 ## July 2026
+##### 🌟 Enhancements
+
+- 👾 Add netezza sink example [#8337](https://github.com/vdesabou/kafka-docker-playground/issues/8337)
+- 👾 Remove EOL Oracle CDC and JDBC examples with Oracle 11, 12 and 18 [#8210](https://github.com/vdesabou/kafka-docker-playground/issues/8210)
+- ⭐👾 Add fully-managed Google Cloud Spanner CDC Source (Debezium) connector example [#8097](https://github.com/vdesabou/kafka-docker-playground/issues/8097)
+- ⭐🧠 Add playground `<container/pod>` update command [#8081](https://github.com/vdesabou/kafka-docker-playground/issues/8081)
+- 🧠 rename command display-error-all-containers to display-error-all [#7959](https://github.com/vdesabou/kafka-docker-playground/issues/7959)
+- 🧠 Update playground ec2 create to use ubuntiu 22.04 instead of 20 [#7951](https://github.com/vdesabou/kafka-docker-playground/issues/7951)
+- 🔐 Replace CLOUD\_API\_KEY by CONFLUENT\_CLOUD\_API\_KEY / CLOUD\_API\_SECRET by CONFLUENT\_CLOUD\_API\_SECRET [#7947](https://github.com/vdesabou/kafka-docker-playground/issues/7947)
+- ⭐🧠 Add --terraform option to playground connector create-or-update-connector when using fully managed example [#7938](https://github.com/vdesabou/kafka-docker-playground/issues/7938)
+
 ## June 2026
 ##### 🌟 Enhancements
 

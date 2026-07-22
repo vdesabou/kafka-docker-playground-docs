@@ -118,6 +118,8 @@ Any connector example can be ran with any environment using `environment` option
 
 ![environment](./images/environment.jpg)
 
+This also includes `cfk` environment which automatically run the example with Kubernetes using [k3d](https://k3d.io/stable/) and Confluent for Kubernetes (CFK)
+
 ## 🔗 Connect image used
 
 The Kafka Connect image is either based on [`cp-server-connect-base`](https://hub.docker.com/r/confluentinc/cp-server-connect-base) for version greater than `5.3.0` or [`cp-kafka-connect-base`](https://hub.docker.com/r/confluentinc/cp-kafka-connect-base) otherwise.
@@ -160,7 +162,7 @@ The workflow runs and logs are available [here](https://github.com/vdesabou/kafk
 The CI is defined using [`.github/workflows/ci.yml`](https://github.com/vdesabou/kafka-docker-playground/blob/master/.github/workflows/ci.yml) file (see the list of tests executed [here](https://github.com/vdesabou/kafka-docker-playground/blob/4a96c0f78e7eb93477d483584ecbc97abec50e0c/.github/workflows/ci.yml#L63))
 
 > [!NOTE]
-> CI is executed on Ubuntu 20.04 on Azure, see [documentation](https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners#supported-runners-and-hardware-resources)
+> CI is executed on `ubuntu-latest` on Azure, see [documentation](https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners#supported-runners-and-hardware-resources)
 
 > [!NOTE]
 > A test is executed if:

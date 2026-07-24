@@ -1,5 +1,5 @@
 # 🐳 kafka-docker-playground
-![success tests](https://img.shields.io/badge/success%20tests-813%2F1022-red)![connector tested](https://img.shields.io/badge/connector%20tested-141-green)![cp versions tested](https://img.shields.io/badge/cp%20version%20tested-%208.3.0-green)![last run](https://img.shields.io/badge/last%20run-2026--07--24%2010:49-green)
+![success tests](https://img.shields.io/badge/success%20tests-823%2F1022-red)![connector tested](https://img.shields.io/badge/connector%20tested-141-green)![cp versions tested](https://img.shields.io/badge/cp%20version%20tested-%208.3.0-green)![last run](https://img.shields.io/badge/last%20run-2026--07--24%2012:46-green)
 ![GitHub issues by-label](https://img.shields.io/github/issues/vdesabou/kafka-docker-playground/CI%20failing%20🔥)![GitHub issues by-label](https://img.shields.io/github/issues/vdesabou/kafka-docker-playground/enhancement%20✨)
 ![GitHub repo size](https://img.shields.io/github/repo-size/vdesabou/kafka-docker-playground)
 [![Add a star on GitHub](https://img.shields.io/github/stars/vdesabou/kafka-docker-playground?style=social)](https://github.com/vdesabou/kafka-docker-playground)
@@ -18,7 +18,6 @@
 - 👷‍♂️ Build your own reproduction models with [reusables](/reusables)
 - 🎩 Work remotely with VS Code using [AWS EC2 Alfred workflow](/how-to-use?id=%f0%9f%8e%a9-aws-ec2-alfred-workflow)
 - 🤖 Automated testing using Github Actions [CI](/how-it-works?id=🤖-how-ci-works)
-- ☸️ Run any onprem connector example using Confluent For Kubernetes (CFK) completely transparently using `--environment cfk` CLI option
 - 👾 And even more [playgrounds](/content?id=👾-other-playgrounds)...
 
 ## 🍿 See CLI in action

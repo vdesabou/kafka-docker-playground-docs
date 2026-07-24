@@ -3,6 +3,7 @@
 ## July 2026
 ##### 🌟 Enhancements
 
+- ⭐👾 Add SMT tests covering all Confluent Platform-supported transforms [#8579](https://github.com/vdesabou/kafka-docker-playground/issues/8579)
 - 👾 Add netezza sink example [#8337](https://github.com/vdesabou/kafka-docker-playground/issues/8337)
 - 👾 Remove EOL Oracle CDC and JDBC examples with Oracle 11, 12 and 18 [#8210](https://github.com/vdesabou/kafka-docker-playground/issues/8210)
 - ⭐👾 Add fully-managed Google Cloud Spanner CDC Source (Debezium) connector example [#8097](https://github.com/vdesabou/kafka-docker-playground/issues/8097)

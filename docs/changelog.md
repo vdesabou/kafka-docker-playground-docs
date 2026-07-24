@@ -13,6 +13,7 @@
 - 🧠 Update playground ec2 create to use ubuntiu 22.04 instead of 20 [#7951](https://github.com/vdesabou/kafka-docker-playground/issues/7951)
 - 🔐 Replace CLOUD\_API\_KEY by CONFLUENT\_CLOUD\_API\_KEY / CLOUD\_API\_SECRET by CONFLUENT\_CLOUD\_API\_SECRET [#7947](https://github.com/vdesabou/kafka-docker-playground/issues/7947)
 - ⭐🧠 Add --terraform option to playground connector create-or-update-connector when using fully managed example [#7938](https://github.com/vdesabou/kafka-docker-playground/issues/7938)
+- ⭐✨☸️ Run any onprem connector example using Confluent For Kubernetes (CFK) completely transparently using `--environment cfk` CLI option [#7865](https://github.com/vdesabou/kafka-docker-playground/issues/7865)
 
 ## June 2026
 ##### 🌟 Enhancements

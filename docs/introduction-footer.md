@@ -12,7 +12,6 @@
 - 👷‍♂️ Build your own reproduction models with [reusables](/reusables)
 - 🎩 Work remotely with VS Code using [AWS EC2 Alfred workflow](/how-to-use?id=%f0%9f%8e%a9-aws-ec2-alfred-workflow)
 - 🤖 Automated testing using Github Actions [CI](/how-it-works?id=🤖-how-ci-works)
-- ☸️ Run any onprem connector example using Confluent For Kubernetes (CFK) completely transparently using `--environment cfk` CLI option
 - 👾 And even more [playgrounds](/content?id=👾-other-playgrounds)...
 
 ## 🍿 See CLI in action

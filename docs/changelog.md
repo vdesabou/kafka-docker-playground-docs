@@ -3,6 +3,7 @@
 ## July 2026
 ##### 🌟 Enhancements
 
+- 👾 Salesforce is Retiring the OAuth Username‑Password Flow — All examples (except bulk api source and sink) are now using JWT flow [#8666](https://github.com/vdesabou/kafka-docker-playground/issues/8666)
 - ⭐👾 Add SMT tests covering all Confluent Platform-supported transforms [#8579](https://github.com/vdesabou/kafka-docker-playground/issues/8579)
 - 👾 Add netezza sink example [#8337](https://github.com/vdesabou/kafka-docker-playground/issues/8337)
 - 👾 Remove EOL Oracle CDC and JDBC examples with Oracle 11, 12 and 18 [#8210](https://github.com/vdesabou/kafka-docker-playground/issues/8210)

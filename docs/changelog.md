@@ -5,10 +5,6 @@
 
 - 🐛 fix function version\_gt to handle tags like 8.1.x-7616-ubi9 [#8755](https://github.com/vdesabou/kafka-docker-playground/issues/8755)
 
-
-
-
-
 ## July 2026
 ##### 🌟 Enhancements
 

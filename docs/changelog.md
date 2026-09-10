@@ -1,5 +1,15 @@
 # 📜 Change Log
 
+## September 2026
+##### 🌟 Enhancements
+
+- 🐳 Remove usage of deprecated cp-server-connect-base and cp-kafka-connect-base Docker images [#8817](https://github.com/vdesabou/kafka-docker-playground/issues/8817)
+
+##### 🐛 Bugs
+
+- 🐛 playground topic get-number-records returns 0 when ccloud topic used with transactional producer [#8824](https://github.com/vdesabou/kafka-docker-playground/issues/8824)
+
+
 
 ## August 2026
 ##### 🌟 Enhancements

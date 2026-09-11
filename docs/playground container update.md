@@ -6,6 +6,10 @@ Opens the current docker-compose (non-CFK) or Kubernetes resource YAML (CFK)
 for the target container/pod in your configured editor and applies changes  
 when you save and close the file.
 
+| Attributes       | &nbsp;
+|------------------|-------------
+| Alias:           | edit, alter
+
 ## Usage
 
 ```bash

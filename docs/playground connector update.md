@@ -2,6 +2,10 @@
 
 🛠️ Update connector configuration by opening current connector config in text editor set with playground config editor \<editor\> (default is code). Once file is saved, the new configuration is updated.
 
+| Attributes       | &nbsp;
+|------------------|-------------
+| Alias:           | edit, alter
+
 ## Usage
 
 ```bash

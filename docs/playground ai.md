@@ -6,15 +6,25 @@ It is using Claude Code (https://code.claude.com/docs/en/quickstart) in interact
   
 MCP servers are available:  
   
-1. mcp-playground-cli -   
+1. mcp-playground - Playground MCP Server (see https://github.com/vdesabou/kafka-docker-playground-mcp-server), it exposes the live state of this checkout  
   
   Tools:  
-  - playground_command_help:  
-      Get detailed help for playground commands  
-  - playground_command_suggest:  
-      Get command suggestions and completions for the Kafka Docker Playground CLI  
-  - playground_command_validate:  
-      Validate a complete playground command and suggest corrections  
+  - playground_status:  
+      Docker availability, the example currently running (script, environment, connector type),  
+      every container with its state/health/ports and the recent `playground run` history.  
+  - playground_connectors:  
+      Status of every connector, with the root cause of each FAILED task. Talks to the running  
+      Connect worker (ssl/rbac included) or to the Confluent Cloud Connect API, whichever the  
+      current environment uses.  
+  - playground_logs:  
+      Container logs without flooding the context: de-duplicated errors with collapsed stack  
+      traces (default), tail, or regex search.  
+  - playground_find_example:  
+      Search the ~2500 runnable example scripts by connector class, path, title or body, and get  
+      the exact `playground run -f \<script\>` command back.  
+  - playground_example_details:  
+      One call for everything about an example: source, connector payloads, default environment,  
+      docker-compose overrides, sibling variants and the variables you must export.  
   
 2. mcp-server - Confluent MCP Server (see http://docs.confluent.io/cloud/current/ai/ai-tools/open-source-mcp-server.html#quick-start and https://github.com/confluentinc/mcp-confluent)  
   
@@ -71,7 +81,7 @@ MCP servers are available:
 ## Usage
 
 ```bash
-playground ai [--] [GEMINI CLI ARGUMENTS...]
+playground ai [--] [CLAUDE CLI ARGUMENTS...]
 ```
 
 ## Dependencies
@@ -83,7 +93,11 @@ visit https://code.claude.com/docs/en/quickstart to install
 ## Examples
 
 ```bash
-playground ai --model gemini-1.5-pro-latest --output-format json
+playground ai
+```
+
+```bash
+playground ai --model opus
 ```
 
 

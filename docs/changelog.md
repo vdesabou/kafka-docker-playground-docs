@@ -3,13 +3,15 @@
 ## September 2026
 ##### 🌟 Enhancements
 
+- 🧠⭐🔐 Add playground secrets commands [#8845](https://github.com/vdesabou/kafka-docker-playground/issues/8845)
+- 👾 Upgrade playground to default CP 8.3.2 [#8844](https://github.com/vdesabou/kafka-docker-playground/issues/8844)
+- 🤖 MCP playground 2.0 [#8839](https://github.com/vdesabou/kafka-docker-playground/issues/8839)
+- 🧠 Add "edit" and "alter" aliases to playground container/connector update commands [#8825](https://github.com/vdesabou/kafka-docker-playground/issues/8825)
 - 🐳 Remove usage of deprecated cp-server-connect-base and cp-kafka-connect-base Docker images [#8817](https://github.com/vdesabou/kafka-docker-playground/issues/8817)
 
 ##### 🐛 Bugs
 
 - 🐛 playground topic get-number-records returns 0 when ccloud topic used with transactional producer [#8824](https://github.com/vdesabou/kafka-docker-playground/issues/8824)
-
-
 
 ## August 2026
 ##### 🌟 Enhancements

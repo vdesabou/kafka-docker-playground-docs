@@ -25,6 +25,7 @@ visit https://docs.docker.com/get-docker to install
 - [help](playground%20help) - Show help about a command
 - [status](playground%20status) - 🗺️ Show a status
 - [config](playground%20config) - ⚙️ Configure CLI
+- [secrets](playground%20secrets) - 🔐 Credentials required by examples
 - [ai](playground%20ai) - 🧞‍♂️  AI
 - [ccloud-costs](playground%20ccloud-costs) - 💰  Retrieve ccloud costs for a range of dates
 - [ccloud-costs-history](playground%20ccloud-costs-history) - 👛  Retrieve ccloud costs for each month since last year

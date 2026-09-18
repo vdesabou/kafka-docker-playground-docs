@@ -15,8 +15,7 @@ example at hand declares:
 In ~/.config/kafka-docker-playground, never in the repository, so it  
 survives 'git clean -fdx' and can never be committed by mistake:  
   
-  secrets.ini  0600  credentials, as a reference to the backend  
-                     ('op://...', 'keychain:...'), not as a value  
+  secrets.ini  0600  credentials, as a reference to the backend ('op://...', 'keychain:...'), not as a value  
   env.ini      0644  plain variables, in clear text  
   
 A name containing PASSWORD, PASSPHRASE, SECRET, TOKEN, KEY, CREDS, PWD or  
@@ -28,12 +27,12 @@ LICENSE is treated as a credential, anything else as a plain variable
   
 Where the credential values themselves are kept:  
   
-  keychain     macOS Keychain  
-  secret-tool  freedesktop secret service (GNOME Keyring, KWallet)  
-  pass         the standard unix password manager  
-  op           1Password, through the 'op' CLI  
-  vault        HashiCorp Vault  
-  file         clear text in secrets.ini, no encryption, last resort  
+  - keychain     macOS Keychain  
+  - secret-tool  freedesktop secret service (GNOME Keyring, KWallet)  
+  - pass         the standard unix password manager  
+  - op           1Password, through the 'op' CLI  
+  - vault        HashiCorp Vault  
+  - file         clear text in secrets.ini, no encryption, last resort  
   
 With no configuration, the first available of keychain (macOS), then  
 secret-tool, then pass is used, and file is the fallback. op and vault  
@@ -54,9 +53,9 @@ A profile is an independent set of variables, typically one per customer
 or per support case, so last week's credentials never leak into this  
 week's reproduction model:  
   
-  playground secrets profile customer-123456    🗂️ switch to it  
-  playground secrets profile                    📋 list them, with counts  
-  playground secrets list --profile default     🎯 use one just this once  
+  - playground secrets profile customer-123456    🗂️ switch to it  
+  - playground secrets profile                    📋 list them, with counts  
+  - playground secrets list --profile default     🎯 use one just this once  
   
 Lookup falls back to the 'default' profile, so what is shared between all  
 of them (CONFLUENT_LICENSE, NGROK_AUTH_TOKEN) is stored there once.  
@@ -72,9 +71,9 @@ So 'export FOO=bar' and 'source secret.properties' keep working, and
   
 ⚙️ Configuration  
   
-  playground config set secrets.backend \<backend\>      🏦 see above  
-  playground config set secrets.profile \<name\>         🗂️ active profile  
-  playground config set secrets.op-vault \<vault\>       🔑 1Password vault  
+  - playground config set secrets.backend \<backend\>      🏦 see above  
+  - playground config set secrets.profile \<name\>         🗂️ active profile  
+  - playground config set secrets.op-vault \<vault\>       🔑 1Password vault  
   
 PLAYGROUND_SECRETS_DIR, PLAYGROUND_SECRETS_BACKEND,  
 PLAYGROUND_SECRETS_PROFILE and PLAYGROUND_OP_VAULT override them for a  

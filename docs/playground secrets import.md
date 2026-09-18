@@ -24,6 +24,25 @@ playground secrets import [OPTIONS]
 
 🔥 Securely delete the source file after a successful import
 
+#### *--secret*
+
+🔐 Treat every line as a credential, whatever the variable names are
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Conflicts With: | *--plain*
+
+#### *--plain*
+
+📝 Treat every line as a non sensitive variable  
+  
+That is what a variables.properties file usually is: regions, project  
+ids, account names, URLs.
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Conflicts With: | *--secret*
+
 #### *--profile PROFILE*
 
 🗂️ Secrets profile to use (default is the active one)
@@ -36,6 +55,10 @@ playground secrets import --file ~/secret.properties
 
 ```bash
 playground secrets import --file ~/secret.properties --shred
+```
+
+```bash
+playground secrets import --file ~/variables.properties --plain
 ```
 
 

@@ -22,6 +22,7 @@ playground secrets COMMAND
 - [list](playground%20secrets%20list) - 📋 List stored credentials
 - [link](playground%20secrets%20link) - 🔗 Point a variable at a secret manager, without storing any value
 - [check](playground%20secrets%20check) - ✅ Show what an example needs, and what is missing
+- [env](playground%20secrets%20env) - 🐚 Export what an example needs into the current shell
 - [import](playground%20secrets%20import) - 📥 Import an existing secret.properties / variable.properties file
 - [export](playground%20secrets%20export) - 📤 Write every credential of a profile to a file, in clear text
 - [edit](playground%20secrets%20edit) - ✏️ Open the store in your editor

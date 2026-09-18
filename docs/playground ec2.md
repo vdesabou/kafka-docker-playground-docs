@@ -19,5 +19,6 @@ playground ec2 COMMAND
 - [stop](playground%20ec2%20stop) - 🔴 Stop an EC2 instance
 - [start](playground%20ec2%20start) - 🟢 Start an EC2 instance
 - [sync-repro-folder](playground%20ec2%20sync-repro-folder) - ↔️ Synchronize reproduction-models folder bewteen local and ec2 instance
+- [push-secrets](playground%20ec2%20push-secrets) - 🔐 Send the secrets store to an ec2 instance
 
 

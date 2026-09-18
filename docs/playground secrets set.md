@@ -6,8 +6,8 @@ Without --value the value is prompted without echo, so it never lands in
 the shell history.  
   
 A name that looks like a credential (PASSWORD, SECRET, TOKEN, KEY, CREDS,  
-PWD, PASSPHRASE) goes to the secure backend, anything else is kept as a  
-plain variable. Use --secret or --plain to decide yourself.
+PWD, PASSPHRASE, LICENSE) goes to the secure backend, anything else is  
+kept as a plain variable. Use --secret or --plain to decide yourself.
 
 ## Usage
 

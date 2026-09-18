@@ -147,10 +147,13 @@ visit https://docs.docker.com/get-docker to install
 - [help](playground%20help) - Show help about a command
 - [status](playground%20status) - 🗺️ Show a status
 - [config](playground%20config) - ⚙️ Configure CLI
-- [secrets](playground%20secrets) - 🔐 Credentials required by examples
 - [ai](playground%20ai) - 🧞‍♂️  AI
 - [ccloud-costs](playground%20ccloud-costs) - 💰  Retrieve ccloud costs for a range of dates
 - [ccloud-costs-history](playground%20ccloud-costs-history) - 👛  Retrieve ccloud costs for each month since last year
+
+### Secrets commands
+
+- [secrets](playground%20secrets) - 🔐 Credentials required by examples
 
 ### Cloud Resources commands
 
@@ -334,6 +337,7 @@ visit https://docs.docker.com/get-docker to install
 - [stop](playground%20ec2%20stop) - 🔴 Stop an EC2 instance
 - [start](playground%20ec2%20start) - 🟢 Start an EC2 instance
 - [sync-repro-folder](playground%20ec2%20sync-repro-folder) - ↔️ Synchronize reproduction-models folder bewteen local and ec2 instance
+- [push-secrets](playground%20ec2%20push-secrets) - 🔐 Send the secrets store to an ec2 instance
 
 ## Options
 

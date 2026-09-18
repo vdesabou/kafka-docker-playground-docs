@@ -1,6 +1,11 @@
 # playground container pause
 
-⏸️  Pause a container
+⏸️  Pause a container  
+  
+Freezes the processes without stopping the container: it keeps its  
+connections but stops responding. A good way to simulate a hung  
+broker, an unresponsive database or a GC pause, and to see how the  
+rest of the system reacts.
 
 ## Usage
 

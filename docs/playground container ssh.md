@@ -1,6 +1,10 @@
 # playground container ssh
 
-🛬 SSH into container
+🛬 SSH into container  
+  
+Interactive shell inside the container, as the user the component runs  
+with. Use 'playground container exec' instead when you want to run a  
+single command from a script.
 
 ## Usage
 

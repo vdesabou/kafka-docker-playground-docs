@@ -1,6 +1,10 @@
 # playground connector status
 
-🧩 Show status of all connectors
+🧩 Show status of all connectors  
+  
+The connector state, the state of each task, and for a failed task the  
+full stack trace, which is the thing you actually need. Add --verbose to  
+see the underlying REST call.
 
 ## Usage
 

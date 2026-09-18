@@ -1,6 +1,14 @@
 # playground debug java-debug
 
-🤎 JVM arguments for SSL, Kerberos or Class Loading
+🤎 JVM arguments for SSL, Kerberos or Class Loading  
+  
+Turns on the JVM's own diagnostic traces in a container and restarts it.  
+This is how you find out why a TLS handshake fails, why a Kerberos  
+login is refused, or which jar a class was loaded from when two  
+versions collide.  
+  
+❗ These traces are extremely verbose. Turn them back off with  
+   --action disable once you have what you need.
 
 ## Usage
 

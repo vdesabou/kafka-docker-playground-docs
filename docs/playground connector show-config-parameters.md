@@ -1,6 +1,14 @@
 # playground connector show-config-parameters
 
-🔩 Show all possible configuration parameters of connector
+🔩 Show all possible configuration parameters of connector  
+  
+The full reference of what the plugin accepts, with types, defaults,  
+importance and documentation, read from the plugin itself rather than  
+from the website. Use it to check the exact spelling of a property, or  
+to discover the knob you need.  
+  
+Use --open to read it in your editor, --only-show-json to get it as  
+json.
 
 ## Usage
 

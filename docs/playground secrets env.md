@@ -12,7 +12,9 @@ Handy when copy pasting pieces of an example script into a terminal. With no
 --file it uses the last example ran, like 'playground secrets check'.  
   
 The shell code goes to stdout and everything else to stderr, so nothing  
-unexpected ever gets executed.  
+unexpected ever gets executed. Running it straight in a terminal is  
+refused rather than printing every value on screen, use --force for  
+that.  
   
 🎓 Tip: put a shortcut in your shell profile:  
   

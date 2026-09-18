@@ -1,6 +1,9 @@
 # playground tools read-avro-file
 
-🔖 Read provided avro file
+🔖 Read provided avro file  
+  
+Prints the records as json, along with the writer schema embedded in the  
+file. The way to check what a sink connector actually produced.
 
 ## Usage
 

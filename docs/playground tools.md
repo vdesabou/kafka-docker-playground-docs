@@ -1,6 +1,18 @@
 # playground tools
 
-🧰 Tools commands
+🧰 Tools commands  
+  
+Small utilities that are handy around the playground but are not tied to a  
+running environment:  
+  
+  read-avro-file        dump an avro file as readable json  
+  read-parquet-file     same, for parquet  
+  certs-create          generate a keystore and truststore for a component  
+  redos-check           check a topics.regex for catastrophic backtracking  
+  install-vscode-extension   playground completion inside VS Code  
+  
+🎓 Tip: the file readers are what you use to check what a sink connector  
+really wrote, after pulling the file out with 'playground container cp'.
 
 ## Usage
 

@@ -2,7 +2,21 @@
 
 📤 Produce to a topic  
   
-See video tutorial https://youtu.be/mbzHCewG_XE
+See video tutorial https://youtu.be/mbzHCewG_XE  
+  
+Generates records for you rather than making you write them. Give it  
+a schema, in avro, json schema or protobuf, and it registers the  
+schema and produces --nb-messages records of realistic random data.  
+The topic is created if it does not exist.  
+  
+Three ways to say what to send:  
+  
+  a schema on stdin           generated data matching that schema  
+  --value \<predefined\>        one of the bundled schemas  
+  --forced-value '{...}'      your exact payload, %g being the index  
+  
+🎓 Tip: pipe the schema with a quoted heredoc, \<\< 'EOF', so that the  
+%g placeholders survive the shell.
 
 ## Usage
 
@@ -407,9 +421,9 @@ EOF
 
 playground topic produce -t topic-json-schema --nb-messages 3 << 'EOF'
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
+  "\$schema": "http://json-schema.org/draft-07/schema#",
   "additionalProperties": false,
-  "$id": "http://lh.test/Customer.schema.json",
+  "\$id": "http://lh.test/Customer.schema.json",
   "title": "Customer",
   "description": "Customer description",
   "type": "object",
@@ -564,9 +578,9 @@ EOF
 # validate
 playground topic produce -t topic-json-schema-validate --nb-messages 3 --validate << 'EOF'
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
+  "\$schema": "http://json-schema.org/draft-07/schema#",
   "additionalProperties": false,
-  "$id": "http://lh.test/Customer.schema.json",
+  "\$id": "http://lh.test/Customer.schema.json",
   "title": "Customer",
   "description": "Customer description",
   "type": "object",

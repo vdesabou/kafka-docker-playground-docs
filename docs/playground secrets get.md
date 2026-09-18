@@ -1,6 +1,9 @@
 # playground secrets get
 
-🔍 Show a stored credential (masked unless --reveal is used)
+🔍 Show a stored credential (masked unless --reveal is used)  
+  
+Resolved the same way an example does: an exported environment variable  
+first, then the active profile, then the default one.
 
 ## Usage
 

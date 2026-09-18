@@ -1,6 +1,9 @@
 # playground tools read-parquet-file
 
-🔖 Read provided parquet file
+🔖 Read provided parquet file  
+  
+Prints the rows and the parquet schema, so you can verify what a sink  
+connector wrote without an external tool.
 
 ## Usage
 

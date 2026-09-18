@@ -1,6 +1,13 @@
 # playground cloud-resources aws
 
-aws commands  
+☁️ What is still running in AWS, and what it costs  
+  
+  list            resources created by the playground, still alive  
+  costs           spend over a range of dates, by service  
+  costs-history   spend per month over the last year  
+  
+Uses the credentials and region of your aws CLI. Nothing is deleted  
+here, use 'playground cleanup-cloud-resources' for that.  
 
 
 ## Usage

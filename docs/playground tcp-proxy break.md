@@ -1,7 +1,15 @@
 # playground tcp-proxy break
 
 💔 Break sending the response to the client.  
-Set it to 0% to remove the delay.
+  
+Drops the response part way through, for the given percentage of  
+responses. Unlike close-connection, which kills the connection once,  
+this keeps failing intermittently, which is what you need to reproduce  
+the flaky network a customer is seeing rather than a clean outage.  
+  
+Set it back to 0 to stop breaking responses.  
+  
+The new state is printed afterwards, so you can check it was applied.
 
 ## Usage
 

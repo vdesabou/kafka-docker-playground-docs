@@ -1,6 +1,11 @@
 # playground tools certs-create
 
-🔐 Generate keys and certificates used for SSL
+🔐 Generate keys and certificates used for SSL  
+  
+Creates a certificate authority and, for each container, a keystore and  
+a truststore in --output-folder. This is how the certificates of the  
+ssl environments are produced; regenerate them when they have expired,  
+or to build a set for a container the playground does not know about.
 
 ## Usage
 

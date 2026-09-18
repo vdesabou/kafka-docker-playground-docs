@@ -1,6 +1,10 @@
 # playground topic list
 
-🔘 List topics
+🔘 List topics  
+  
+Add --show-internal to also see the topics Kafka and Connect maintain  
+for themselves, such as the connect configs, offsets and status  
+topics.
 
 ## Usage
 

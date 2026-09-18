@@ -1,6 +1,33 @@
 # playground container
 
-🐳 Container commands
+🐳 Container commands  
+  
+Work on the containers of the running example without having to remember  
+their names, their users or their file layout. The same commands work  
+against Kubernetes pods when the example runs on the cfk environment,  
+which is why 'pod' is an accepted alias.  
+  
+🔍 Look inside  
+  logs                 tail logs, grep them, or block until a line appears  
+  display-error-all    every ERROR and FATAL across all containers  
+  get-properties       the properties file a component actually loaded  
+  get-ip-addresses     addresses on the docker network  
+  exec / ssh           run a command, or get a shell  
+  
+🔁 Act on them  
+  restart / kill / pause / resume  
+  recreate             re-create with the same compose definition  
+  update               edit the compose or Kubernetes definition, apply it  
+  set-environment-variables   add settings, then recreate  
+  cp                   copy files in and out  
+  change-jdk           swap the JDK, to reproduce a JVM-specific issue  
+  kill-all             kill everything and prune volumes  
+  
+Most commands accept --container several times to act on a few containers  
+at once.  
+  
+🎓 Tip: the usual names are broker, connect, schema-registry,  
+control-center, ksqldb-server, plus whatever the example adds.
 
 | Attributes       | &nbsp;
 |------------------|-------------

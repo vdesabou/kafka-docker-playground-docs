@@ -2,6 +2,11 @@
 
 🐢 Show lag of sink connector  
   
+The consumer lag of the sink, refreshed every --interval seconds, so you  
+see whether it is catching up, standing still or falling behind. A lag  
+that does not move while the connector reports RUNNING means the tasks  
+are stuck rather than slow.  
+  
 It will run until all lag becomes 0 (press ctrl-c to exit)  
 
 

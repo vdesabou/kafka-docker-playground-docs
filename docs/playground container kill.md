@@ -1,6 +1,10 @@
 # playground container kill
 
-🔫 Kill a container
+🔫 Kill a container  
+  
+Stops the container abruptly, without letting it shut down cleanly,  
+which is how you simulate a crash. Bring it back with  
+'playground container recreate'.
 
 ## Usage
 

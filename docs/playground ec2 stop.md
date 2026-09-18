@@ -1,6 +1,9 @@
 # playground ec2 stop
 
-🔴 Stop an EC2 instance
+🔴 Stop an EC2 instance  
+  
+Shuts the instance down while keeping its disk, so you stop paying for  
+compute and find your work again on 'playground ec2 start'.
 
 ## Usage
 

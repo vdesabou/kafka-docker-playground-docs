@@ -2,7 +2,12 @@
 
 👐 When --file is not provided, simply open last example you ran with \<playground run\>  
   
-Otherwise, open any file from the playground using --file.
+Otherwise, open any file from the playground using --file.  
+  
+Opens in the editor of your choice: 'playground config editor code'  
+(or vi, nano, sublime, etc). Add --open-docker-compose to also open the  
+docker-compose override file the example uses, which is where the  
+containers around Kafka are defined.
 
 ## Usage
 

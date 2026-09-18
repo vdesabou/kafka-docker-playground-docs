@@ -1,6 +1,17 @@
 # playground schema set-compatibility
 
-🛡️ Set subject-level compatibility
+🛡️ Set subject-level compatibility  
+  
+Overrides the rule for one subject:  
+  
+  BACKWARD     new schema can read data written with the previous one  
+  FORWARD      previous schema can read data written with the new one  
+  FULL         both  
+  NONE         anything is accepted  
+  *_TRANSITIVE checked against all past versions, not just the last  
+  
+Set it to NONE when you deliberately want to register an incompatible  
+schema, typically to reproduce what it does to consumers downstream.
 
 ## Usage
 

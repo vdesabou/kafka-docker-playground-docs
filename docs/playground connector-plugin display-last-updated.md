@@ -1,6 +1,9 @@
 # playground connector-plugin display-last-updated
 
-🆕 List last updated connector plugins from confluent hub https://www.confluent.io/hub/
+🆕 List last updated connector plugins from confluent hub https://www.confluent.io/hub/  
+  
+A quick way to see what has just been released on the Hub, which often  
+explains why an example that passed yesterday behaves differently today.
 
 ## Usage
 

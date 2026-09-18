@@ -1,6 +1,10 @@
 # playground connector open-ccloud-connector-in-browser
 
-🤖 Open Fully Managed connector in browser (Confluent Cloud dashboard)
+🤖 Open Fully Managed connector in browser (Confluent Cloud dashboard)  
+  
+Jumps straight to the connector's page in the Confluent Cloud console,  
+resolving its lcc id for you, so you do not have to hunt through the  
+environment and cluster menus.
 
 ## Usage
 

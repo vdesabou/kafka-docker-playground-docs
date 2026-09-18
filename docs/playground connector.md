@@ -1,6 +1,40 @@
 # playground connector
 
-🔗 Connector commands
+🔗 Connector commands  
+  
+Everything you would otherwise do with curl on the Connect REST API, with  
+the right host, port and credentials already figured out. The same  
+commands work whether the connector is self managed in the connect  
+container or fully managed in Confluent Cloud.  
+  
+🔍 Look at what is running  
+  status                  is it RUNNING, and if not, the full stack trace  
+  show-config             the configuration actually applied  
+  logs                    tail connect logs, filtered and followed  
+  show-lag                consumer lag of a sink, until it reaches zero  
+  offsets get             where the connector is reading or writing  
+  
+🛠️ Change it  
+  create-or-update        create it, or apply a new config, from stdin  
+  update                  edit the running config in your editor  
+  pause / resume / stop / restart / delete  
+  offsets alter / reset   rewind or fast-forward a connector  
+  
+🧑‍🔬 Understand it  
+  show-config-parameters  every parameter the plugin accepts  
+  select-config           pick parameters interactively  
+  versions                installed version vs latest on Confluent Hub  
+  sourcecode              open the source on GitHub, or diff two versions  
+  open-docs               open the Confluent documentation  
+  snippets                ready-to-paste converter and dlq config  
+  
+🐞 Dig deeper  
+  log-level               raise connect log level for this connector  
+  enable-remote-debugging attach a java debugger to the connector code  
+  translate               self managed config to fully managed config  
+  
+Without --connector, commands apply to every connector of the example,  
+which is usually what you want since most examples run only one.
 
 ## Usage
 
@@ -26,11 +60,11 @@ playground connector COMMAND
 - [show-lag](playground%20connector%20show-lag) - 🐢 Show lag of sink connector
 - [show-config](playground%20connector%20show-config) - 🧰 Show current connector config that was applied
 - [show-config-parameters](playground%20connector%20show-config-parameters) - 🔩 Show all possible configuration parameters of connector
-- [display-metrics-api](playground%20connector%20display-metrics-api) - 〽️ Display metrics api for fully managed connector, see https://api.telemetry.confluent.cloud/docs/descriptors/datasets/cloud
+- [display-metrics-api](playground%20connector%20display-metrics-api) - 〽️ Display metrics api for fully managed connector
 - [display-metrics-api-with-grafana](playground%20connector%20display-metrics-api-with-grafana) - 📊 Display metrics api for fully managed connector in Grafana dashboard
 - [select-config](playground%20connector%20select-config) - 🗜️ Easily select config from all possible configuration parameters of connector
 - [snippets](playground%20connector%20snippets) - 🔌 useful snippets
-- [open-docs](playground%20connector%20open-docs) - 🧑‍🎓 Open connector documentation of currently running conector(s)
+- [open-docs](playground%20connector%20open-docs) - 🧑‍🎓 Open connector documentation of currently running connector(s)
 - [log-level](playground%20connector%20log-level) - 🧬 Set connect log level
 - [translate](playground%20connector%20translate) - 💱 Translate Self Managed Connector Plugin Configurations to Fully Managed Connector Plugin Configuration
 - [connect-migration-utility](playground%20connector%20connect-migration-utility) - 🧩 Run Kafka Connector Migration Utility (see https://github.com/confluentinc/connect-migration-utility/) on running connect cluster

@@ -157,9 +157,9 @@ visit https://docs.docker.com/get-docker to install
 
 ### Cloud Resources commands
 
-- [cloud-resources](playground%20cloud-resources) - 🔗 Connector commands
-- [aws](playground%20cloud-resources%20aws) - aws commands
-- [azure](playground%20cloud-resources%20azure) - azure commands
+- [cloud-resources](playground%20cloud-resources) - ☁️ What the playground left behind in your cloud accounts, and what it costs
+- [aws](playground%20cloud-resources%20aws) - ☁️ What is still running in AWS, and what it costs
+- [azure](playground%20cloud-resources%20azure) - ☁️ What is still running in Azure, and what it costs
 
 ### Run commands
 
@@ -205,7 +205,7 @@ visit https://docs.docker.com/get-docker to install
 - [validate-new-schemas](playground%20schema%20validate-new-schemas) - 🩺 Validate new schemas (default is true since CP 8.2.0)
 - [delete](playground%20schema%20delete) - 🧟 Delete schema
 - [derive-schema](playground%20schema%20derive-schema) - 🪄 Derive a schema based on payload
-- [set-alias](playground%20schema%20set-alias) - 🔯 Set a subject alias (see https://docs.confluent.io/platform/8.2/schema-registry/fundamentals/index.html#subject-aliases)
+- [set-alias](playground%20schema%20set-alias) - 🔯 Set a subject alias
 - [get-alias](playground%20schema%20get-alias) - 🔯 Get subject alias
 
 ### TCP Proxy commands
@@ -216,12 +216,12 @@ visit https://docs.docker.com/get-docker to install
 - [delay](playground%20tcp-proxy%20delay) - ⏲️ Add milliseconds delay to service response.
 - [break](playground%20tcp-proxy%20break) - 💔 Break sending the response to the client.
 - [close-connection](playground%20tcp-proxy%20close-connection) - ❌ Close the Zazkia active TCP connections
-- [close-all-connection-with-error](playground%20tcp-proxy%20close-all-connection-with-error) - 🧹 Close all Zazkia TCP connections which are in error state (close all with error button in Zazkia UI)
+- [close-all-connection-with-error](playground%20tcp-proxy%20close-all-connection-with-error) - 🧹 Close all Zazkia TCP connections which are in error state
 - [toggle-accept-connections](playground%20tcp-proxy%20toggle-accept-connections) - 🙅‍♂️ Change whether new connections can be accepted
 - [toggle-reads-client](playground%20tcp-proxy%20toggle-reads-client) - ✅ Change whether reading data from the client is enabled.
 - [toggle-reads-service](playground%20tcp-proxy%20toggle-reads-service) - ✅ Change whether reading data from the service is enabled.
 - [toggle-writes-client](playground%20tcp-proxy%20toggle-writes-client) - ✅ Change whether writing data to the client is enabled.
-- [toggle-writes-service](playground%20tcp-proxy%20toggle-writes-service) - ✅ Change whether reading data to the service is enabled.
+- [toggle-writes-service](playground%20tcp-proxy%20toggle-writes-service) - ✅ Change whether writing data to the service is enabled.
 - [open-ui](playground%20tcp-proxy%20open-ui) - 🌐 Just open Zazkia UI (http://localhost:9191) in your browser
 
 ### Tools commands
@@ -289,7 +289,7 @@ visit https://docs.docker.com/get-docker to install
 ### Connector-Plugin commands
 
 - [connector-plugin](playground%20connector-plugin) - 🔌 Connector-plugin commands
-- [search-jar](playground%20connector-plugin%20search-jar) - ☕ List jars for a connector plugin from confluent hub https://www.confluent.io/hub/ Search for specific class and display method signatures
+- [search-jar](playground%20connector-plugin%20search-jar) - ☕ List jars for a connector plugin from confluent hub https://www.confluent.io/hub/
 - [versions](playground%20connector-plugin%20versions) - 💯 List versions for a connector plugin from confluent hub https://www.confluent.io/hub/
 - [display-last-updated](playground%20connector-plugin%20display-last-updated) - 🆕 List last updated connector plugins from confluent hub https://www.confluent.io/hub/
 - [sourcecode](playground%20connector-plugin%20sourcecode) - 🧑‍💻 Open source code url in your browser (or in your editor when used with --open)
@@ -313,11 +313,11 @@ visit https://docs.docker.com/get-docker to install
 - [show-lag](playground%20connector%20show-lag) - 🐢 Show lag of sink connector
 - [show-config](playground%20connector%20show-config) - 🧰 Show current connector config that was applied
 - [show-config-parameters](playground%20connector%20show-config-parameters) - 🔩 Show all possible configuration parameters of connector
-- [display-metrics-api](playground%20connector%20display-metrics-api) - 〽️ Display metrics api for fully managed connector, see https://api.telemetry.confluent.cloud/docs/descriptors/datasets/cloud
+- [display-metrics-api](playground%20connector%20display-metrics-api) - 〽️ Display metrics api for fully managed connector
 - [display-metrics-api-with-grafana](playground%20connector%20display-metrics-api-with-grafana) - 📊 Display metrics api for fully managed connector in Grafana dashboard
 - [select-config](playground%20connector%20select-config) - 🗜️ Easily select config from all possible configuration parameters of connector
 - [snippets](playground%20connector%20snippets) - 🔌 useful snippets
-- [open-docs](playground%20connector%20open-docs) - 🧑‍🎓 Open connector documentation of currently running conector(s)
+- [open-docs](playground%20connector%20open-docs) - 🧑‍🎓 Open connector documentation of currently running connector(s)
 - [log-level](playground%20connector%20log-level) - 🧬 Set connect log level
 - [logs](playground%20connector%20logs) - 🕵️  Tail and follow connect logs
 - [open-ccloud-connector-in-browser](playground%20connector%20open-ccloud-connector-in-browser) - 🤖 Open Fully Managed connector in browser (Confluent Cloud dashboard)
@@ -336,7 +336,7 @@ visit https://docs.docker.com/get-docker to install
 - [list](playground%20ec2%20list) - 🔘 List all EC2 instance
 - [stop](playground%20ec2%20stop) - 🔴 Stop an EC2 instance
 - [start](playground%20ec2%20start) - 🟢 Start an EC2 instance
-- [sync-repro-folder](playground%20ec2%20sync-repro-folder) - ↔️ Synchronize reproduction-models folder bewteen local and ec2 instance
+- [sync-repro-folder](playground%20ec2%20sync-repro-folder) - ↔️ Synchronize reproduction-models folder between local and ec2 instance
 - [push-secrets](playground%20ec2%20push-secrets) - 🔐 Send the secrets store to an ec2 instance
 
 ## Options

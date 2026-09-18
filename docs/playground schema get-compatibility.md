@@ -1,6 +1,10 @@
 # playground schema get-compatibility
 
-🛡️ Get subject-level compatibility
+🛡️ Get subject-level compatibility  
+  
+The rule that decides whether a new schema version is accepted. When a  
+producer fails with "Schema being registered is incompatible with an  
+earlier schema", this is what rejected it.
 
 ## Usage
 

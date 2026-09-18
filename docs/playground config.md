@@ -1,6 +1,21 @@
 # playground config
 
-⚙️ Configure CLI
+⚙️ Configure CLI  
+  
+Your preferences, kept between sessions:  
+  
+  editor \<name\>                      the editor every command opens files  
+                                     with (code, vi, nano...)  
+  folder_zip_or_jar \<dir\>...         where to look for connector zips and  
+                                     jars, in addition to the current  
+                                     folder  
+  clipboard true|false               copy connector config to the  
+                                     clipboard (macOS only)  
+  container-kill-all-before-run      kill every container before each run,  
+                                     or just stop the example  
+  check-and-update-repo-version      warn when your clone is out of date  
+  open-ccloud-connector-in-browser   open fully managed connectors, and in  
+  open-grafana-in-browser            which browser
 
 ## Usage
 

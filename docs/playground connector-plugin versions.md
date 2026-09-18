@@ -1,6 +1,10 @@
 # playground connector-plugin versions
 
-💯 List versions for a connector plugin from confluent hub https://www.confluent.io/hub/
+💯 List versions for a connector plugin from confluent hub https://www.confluent.io/hub/  
+  
+What to feed to --connector-tag when you want to test another version,  
+and the way to find out which release you are behind on. The list is  
+cached; use --force-refresh after a brand new release.
 
 ## Usage
 

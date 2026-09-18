@@ -2,7 +2,16 @@
 
 ❌ Delete an EC2 instance created with Cloud Formation  
   
-WARNING:  This will delete your cloud formation and associated EC2 instance
+Deletes the Cloud Formation stack, which takes the instance, its volume  
+and its security group with it, then removes the key pair on AWS and the  
+local pem file. This is what stops the billing for good, unlike stop  
+which only pauses it.  
+  
+⚠️ Everything on the instance is lost, including any reproduction model  
+you have not synced back with 'playground ec2 sync-repro-folder'.  
+  
+Without --instance it applies to all your instances, and asks you to  
+confirm first.
 
 ## Usage
 

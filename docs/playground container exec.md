@@ -1,6 +1,11 @@
 # playground container exec
 
-🪄 Execute command in a container
+🪄 Execute command in a container  
+  
+Runs one command and returns, which makes it the form to use inside  
+example scripts. Add --root when the component user is not allowed to  
+do what you are asking, typically to install a package or read a file  
+under /etc.
 
 ## Usage
 

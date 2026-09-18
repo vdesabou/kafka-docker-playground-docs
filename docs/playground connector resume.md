@@ -1,6 +1,9 @@
 # playground connector resume
 
-⏯️  Resume connector
+⏯️  Resume connector  
+  
+Restarts processing after a pause or a stop, from the offsets where the  
+connector left off.
 
 | Attributes       | &nbsp;
 |------------------|-------------

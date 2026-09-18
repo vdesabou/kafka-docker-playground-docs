@@ -1,6 +1,10 @@
 # playground tcp-proxy start
 
-💗 Start the TCP proxy and automatically replace connector config with zazkia hostname and port 49998
+💗 Start the TCP proxy and automatically replace connector config with zazkia hostname and port 49998  
+  
+Starts the proxy in front of --hostname and --port, then rewrites the  
+running connector configuration so its traffic goes through it. Nothing  
+else to change on your side.
 
 ## Usage
 

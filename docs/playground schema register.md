@@ -1,6 +1,21 @@
 # playground schema register
 
-⏺️ Register a schema in specified subject
+⏺️ Register a schema in specified subject  
+  
+Pushes a schema into the registry without producing any data, which is  
+how you set up a subject before a connector starts, or add a new version  
+to check whether it passes the compatibility rules.  
+  
+The format is detected from what you give it, avro, json schema or  
+protobuf all work. Pass it on stdin with a quoted heredoc, or pick one of  
+the bundled schemas with tab completion on --schema.  
+  
+Remember the naming convention: a topic's schemas live under the subjects  
+\<topic\>-key and \<topic\>-value, not under the topic name.  
+  
+☢️ --id forces a specific schema id and overwrites whatever is already  
+registered at that id. It exists to reproduce id collisions, it is not  
+something to use casually.
 
 ## Usage
 

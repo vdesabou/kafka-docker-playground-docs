@@ -2,7 +2,12 @@
 
 📥 Import an existing secret.properties / variable.properties file  
   
-Each KEY=value line is classified and stored in the right place.
+Each KEY=value line is classified and stored in the right place. A  
+leading 'export', comments, blank lines and one level of surrounding  
+quotes are handled; anything that is not an uppercase variable name is  
+skipped and reported.  
+  
+This is the one step migration away from 'source secret.properties'.
 
 ## Usage
 

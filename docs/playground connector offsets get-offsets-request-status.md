@@ -2,7 +2,14 @@
 
 👁️‍🗨️ Get the status of the previous offset request  
   
-⚠️ Available for ccloud source connectors (see https://docs.confluent.io/cloud/current/connectors/offsets.html)  
+On Confluent Cloud, alter and reset only queue a request. This shows  
+whether it was APPLIED or FAILED, and the error when it failed, which  
+is the only place the reason shows up.  
+  
+Only for fully managed and custom connectors, self managed connectors  
+apply the change synchronously.  
+  
+See https://docs.confluent.io/cloud/current/connectors/offsets.html  
 
 
 ## Usage

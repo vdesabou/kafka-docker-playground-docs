@@ -2,7 +2,13 @@
 
 🎯 Take a java thread dump  
   
-🔖 It will save output to a file and open with text editor set with playground config editor \<editor\> (default is code)
+🔖 It will save output to a file and open with text editor set with playground config editor \<editor\> (default is code)  
+  
+The first thing to take when something is stuck: it shows the stack of  
+every thread, and the deadlocks if any.  
+  
+🎓 Tip: take two or three dumps a few seconds apart. Threads that appear  
+in the same place every time are the ones that are really blocked.
 
 ## Usage
 

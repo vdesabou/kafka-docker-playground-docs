@@ -1,6 +1,14 @@
 # playground topic consume
 
-📥 Consume topic from beginning
+📥 Consume topic from beginning  
+  
+Reads from the earliest offset and deserialises records on its own:  
+avro, protobuf, json schema and plain formats are all detected from  
+the payload, so you do not have to pick a console consumer.  
+  
+🎓 Tip: --min-expected-messages turns it into an assertion. It waits  
+up to --timeout for that many records and fails otherwise, which is  
+how examples verify that data actually flowed.
 
 ## Usage
 

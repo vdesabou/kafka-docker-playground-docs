@@ -1,6 +1,10 @@
 # playground switch-back
 
-💺  Switch back from previous environment before switch-ccloud was called.
+💺  Switch back from previous environment before switch-ccloud was called.  
+  
+Restores the environment and connector type that were active before  
+'playground switch-ccloud', so the CLI talks to your local containers  
+again.
 
 ## Usage
 

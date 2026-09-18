@@ -4,6 +4,27 @@
   
 🔥 It start an interactive mode where you'll be fully guided !  
   
+  playground run                       🔍 pick an example, guided  
+  playground run -f \<example.sh\>       🚀 run that one directly  
+  playground re-run                    ⚡ same example, same flags  
+  
+Each run stops what was running, starts the environment the example asks  
+for, brings up its containers, creates the connector and produces data.  
+Credentials the example needs are loaded from 'playground secrets'.  
+  
+🔢 Choosing versions  
+  --tag             Confluent Platform version for every component  
+  --connect-tag     Confluent Platform version for connect only  
+  --connector-tag   connector version from Confluent Hub  
+  --connector-zip   connector from a local zip or a URL  
+  --connector-jar   a single jar, dropped into the existing plugin  
+  
+🧰 Adding to the example  
+  --environment     run a connector example under another security setup  
+  --enable-\<x\>      add control-center, ksqldb, flink, grafana, kcat...  
+  --pipeline        chain a source example into a sink example  
+  --sql-datagen     continuous realistic data instead of a fixed batch  
+  
   
 ⛅ When running Confluent Cloud (ccloud) example:  
   

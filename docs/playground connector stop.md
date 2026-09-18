@@ -1,6 +1,10 @@
 # playground connector stop
 
-🛑 Stop connector (only available if CP \> 7.5)
+🛑 Stop connector (only available if CP \> 7.5)  
+  
+Stronger than pause: the tasks are shut down and unassigned, so the  
+connector consumes no resources at all. This is the state in which  
+offsets can be altered or reset.
 
 ## Usage
 

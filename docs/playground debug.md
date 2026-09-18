@@ -1,6 +1,33 @@
 # playground debug
 
-🐞 Debug commands
+🐞 Debug commands  
+  
+The heavy tooling, made usable: the JDK utilities, tcpdump, iptables and  
+the analysis tools are run inside the right container, installed on the  
+fly when missing, and their output is brought back to your machine.  
+  
+🐌 It hangs, or it is slow  
+  thread-dump         what every thread is doing right now  
+  flight-recorder     record the JVM over a period, open it in JMC  
+  gc-analyze          GC pauses, heap trends and tuning advice  
+  
+💾 It eats memory  
+  heap-dump           take a .hprof, optionally as a histogram  
+  heap-analyze        run Eclipse MAT on it, leak suspects report  
+  
+🌐 It is a network or TLS problem  
+  tcp-dump            capture traffic, open it in Wireshark  
+  testssl             probe a TLS endpoint, locally or in the cloud  
+  block-traffic       cut a route with iptables, to simulate an outage  
+  java-debug          turn on the JVM SSL, Kerberos or class loading traces  
+  
+🔬 It is in the code  
+  log-level set       raise the level of any package, without a restart  
+  enable-remote-debugging   attach your IDE debugger to a container  
+  jscissors           trace method calls, arguments and return values  
+  
+📦 Hand it over  
+  generate-diagnostics   a support bundle for connect or broker
 
 ## Usage
 

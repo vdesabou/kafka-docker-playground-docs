@@ -7,7 +7,14 @@ the shell history.
   
 A name that looks like a credential (PASSWORD, SECRET, TOKEN, KEY, CREDS,  
 PWD, PASSPHRASE, LICENSE) goes to the secure backend, anything else is  
-kept as a plain variable. Use --secret or --plain to decide yourself.
+kept as a plain variable. Use --secret or --plain to decide yourself.  
+  
+Run again on a name already stored to rotate it. The value is then  
+updated where the existing reference points, which is not necessarily  
+the backend currently configured.  
+  
+🎓 Tip: set the config key secrets.github-repo and every value stored  
+here is also pushed to that repository's GitHub Actions secrets.
 
 ## Usage
 

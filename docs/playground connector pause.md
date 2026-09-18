@@ -1,6 +1,10 @@
 # playground connector pause
 
-⏸️  Pause connector
+⏸️  Pause connector  
+  
+Tasks stop processing but stay assigned, and the configuration is kept.  
+Handy to let a backlog build up, or to freeze a connector while you  
+change the system it talks to. Resume with 'playground connector resume'.
 
 ## Usage
 

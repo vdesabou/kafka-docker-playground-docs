@@ -1,6 +1,9 @@
 # playground ec2 sync-repro-folder ec2-to-local
 
-👈 Sync ec2 instance reproduction-models folder to local
+👈 Sync ec2 instance reproduction-models folder to local  
+  
+Brings back the models you wrote on the instance. Run it before  
+'playground ec2 delete', otherwise they go with the instance.
 
 ## Usage
 

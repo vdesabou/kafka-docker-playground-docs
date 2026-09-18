@@ -1,6 +1,14 @@
 # playground debug block-traffic
 
-🚫 Blocking traffic using iptables
+🚫 Blocking traffic using iptables  
+  
+Cuts the route from a container to a destination, so you can see how the  
+system behaves during a network outage: a broker that loses the  
+controller, a connector that can no longer reach its database, a client  
+that cannot resolve the schema registry.  
+  
+Blocking with --action start and restoring with --action stop, so the  
+failure is reversible without restarting anything.
 
 ## Usage
 

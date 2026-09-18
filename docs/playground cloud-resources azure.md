@@ -1,6 +1,13 @@
 # playground cloud-resources azure
 
-azure commands  
+☁️ What is still running in Azure, and what it costs  
+  
+  list            resources created by the playground, still alive  
+  costs           spend over a range of dates  
+  costs-history   spend per month over the last year  
+  
+Uses the subscription your az CLI is logged into. Nothing is deleted  
+here, use 'playground cleanup-cloud-resources' for that.  
 
 
 ## Usage

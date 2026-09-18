@@ -1,7 +1,15 @@
 # playground tcp-proxy delay
 
 ⏲️ Add milliseconds delay to service response.  
-Set it to 0 to remove the delay.
+  
+Slows down every response coming back from the service, without  
+breaking anything. This is how you reproduce a slow database or a slow  
+API: request timeouts, retries, rebalances caused by a task that takes  
+too long to answer.  
+  
+Set it back to 0 to remove the delay.  
+  
+The new state is printed afterwards, so you can check it was applied.
 
 ## Usage
 

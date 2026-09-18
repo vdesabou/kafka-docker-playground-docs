@@ -1,6 +1,23 @@
 # playground update-version
 
-✨ Update current confluent platform components (all with --tag or only connect with --connect-tag) or connector(s) with new version(s)
+✨ Update current confluent platform components (all with --tag or only connect with --connect-tag) or connector(s) with new version(s)  
+  
+Re-runs the example you are currently on with different versions, which is  
+the fastest way to answer "does it still happen on 8.x?" or "is it fixed in  
+connector 10.6.0?".  
+  
+  --tag            🔢 every Confluent Platform component  
+  --connect-tag    🔗 only the connect container, other components untouched  
+  --connector-tag  🧩 the connector, from Confluent Hub  
+  --connector-zip  📦 the connector, from a local zip or a URL  
+  --connector-jar  ☕ a single jar, dropped into the existing plugin  
+  
+With no flag, you are prompted with the versions available. The versions  
+currently running are read from the broker and connect containers, so the  
+example must be up.  
+  
+🎓 Tip: this is a version bisect tool. Keep the example running and call it  
+repeatedly until you find the version where the behaviour changes.
 
 ## Usage
 

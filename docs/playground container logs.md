@@ -1,6 +1,15 @@
 # playground container logs
 
-🕵️  Tail and follow container logs
+🕵️  Tail and follow container logs  
+  
+Three ways to use it:  
+  
+  --grep "ERROR"                    keep only the lines that matter  
+  --open                            read the whole log in your editor  
+  --wait-for-log "Started" -m 120   block until the line shows up  
+  
+The last one is what example scripts use to synchronise on a component  
+being ready, instead of sleeping and hoping.
 
 ## Usage
 

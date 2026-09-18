@@ -1,6 +1,11 @@
 # playground schema derive-schema
 
-🪄 Derive a schema based on payload
+🪄 Derive a schema based on payload  
+  
+Give it one or more json records, on stdin or with --payload, and it  
+works out a schema that covers them all. Much faster than writing an  
+avro schema by hand, and it handles unions when a field has different  
+types across records.
 
 ## Usage
 

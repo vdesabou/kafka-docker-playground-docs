@@ -2,6 +2,11 @@
 
 🕵️  Tail and follow connect logs  
   
+The logs of the worker running your connector. Combine it with  
+'playground connector log-level' to get more than the stack trace, and  
+with --wait-for-log to block until a given line appears, which is how  
+examples assert that something happened.  
+  
 For onprem connectors, this is basically a shortcut for "playground container logs --container connect", --connector flag is not relevant  
   
 For Fully Managed connectors, limitations apply (see https://docs.confluent.io/cloud/current/connectors/logging-cloud-connectors.html#using-ccloud-cli)

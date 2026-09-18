@@ -1,6 +1,9 @@
 # playground repro import
 
-📥 Import tgz file which was created with export command
+📥 Import tgz file which was created with export command  
+  
+Unpacks the models into your reproduction-models folder, from where you  
+can run them with 'playground run'.
 
 ## Usage
 

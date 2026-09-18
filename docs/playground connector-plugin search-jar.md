@@ -1,6 +1,15 @@
 # playground connector-plugin search-jar
 
-☕ List jars for a connector plugin from confluent hub https://www.confluent.io/hub/ Search for specific class and display method signatures
+☕ List jars for a connector plugin from confluent hub https://www.confluent.io/hub/  
+  
+Downloads the plugin and lists the jars it ships. With --class it also  
+finds which jar contains that class and prints its method signatures  
+with javap.  
+  
+That answers the two questions a NoClassDefFoundError or a  
+NoSuchMethodError raises: is the class actually shipped, and does the  
+bundled version have the signature the code is calling. Run it again  
+with another --connector-tag to see when a dependency changed.
 
 ## Usage
 

@@ -2,9 +2,27 @@
 
 👷 Create kafka-docker-playground EC2 instance using AWS Cloud Formation  
   
-🔐 AWS EC2 pem file for the ec2 instance will be created and stored in root folder (make sure to do backup)  
+One command does the whole thing: a Cloud Formation stack, an instance  
+with docker and the playground repository already installed, a key pair,  
+a security group opened to your ip only. Your credentials are pushed to  
+it over ssh, then VS Code opens on it.  
   
-🌍 Region being used will be the one set in your environment (`aws configure get region`) either by AWS_REGION environment variable or ~/.aws/config
+Creation takes a few minutes, and Cloud Formation keeps installing in the  
+background for about ten more. Follow output.log in the root folder of  
+the instance to see where it is.  
+  
+🔐 AWS EC2 pem file for the ec2 instance will be created and stored in the  
+root folder of the repository (make sure to do a backup, it is the only  
+way in).  
+  
+🌍 Region being used will be the one set in your environment  
+(aws configure get region) either by the AWS_REGION environment variable  
+or ~/.aws/config.  
+  
+💰 The instance is billed from now on. Stop it when you pause and delete  
+it when you are done.  
+  
+🐚 Use zsh on the instance to have everything working out of the box.
 
 ## Usage
 
@@ -33,8 +51,11 @@ playground ec2 create [OPTIONS]
 
 #### *--suffix SUFFIX*
 
-📮 suffix to add to instance name pg-${username}-${suffix}   
+📮 suffix to add to instance name, giving pg-\<username\>-\<suffix\>  
   
-if not set, default is pg-${username}-${6-chars-random-string}
+if not set, the name is pg-\<username\>-\<6 random characters\>  
+  
+🎓 Tip: set it to the case number you are working on, so you can tell  
+your instances apart in 'playground ec2 list'.
 
 

@@ -1,6 +1,9 @@
 # playground schema get-mode
 
-🔏 Get subject-level mode
+🔏 Get subject-level mode  
+  
+READWRITE normally; READONLY if registration has been frozen; IMPORT  
+while schemas are being migrated with their original ids and versions.
 
 ## Usage
 

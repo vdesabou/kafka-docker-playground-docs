@@ -1,6 +1,18 @@
 # playground connector create-or-update
 
-🧑‍🎨  Create or update connector
+🧑‍🎨  Create or update connector  
+  
+The command every example uses to deploy its connector. The json config  
+is read from stdin, usually as a heredoc, so it stays readable in the  
+script. If the connector already exists it is updated in place, which  
+makes the command safe to re-run while you iterate on a configuration.  
+  
+The command waits for the connector to be RUNNING and fails with the  
+error if it is not, so a broken config stops the example immediately  
+instead of failing silently later.  
+  
+🎓 Tip: add --validate to have the config checked by the plugin before  
+it is deployed, which reports every invalid property at once.
 
 ## Usage
 

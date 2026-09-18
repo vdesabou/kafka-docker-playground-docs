@@ -1,6 +1,11 @@
 # playground topic create
 
-🆕 Create topic
+🆕 Create topic  
+  
+Only needed when you want something other than the defaults, since  
+'playground topic produce' creates the topic on the fly. Any extra  
+argument is passed through to kafka-topics --create, so --config works  
+as usual.
 
 ## Usage
 

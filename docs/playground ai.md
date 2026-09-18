@@ -2,7 +2,18 @@
 
 🧞‍♂️  AI  
   
+Opens Claude Code in this checkout, already wired to the playground.  
+  
 It is using Claude Code (https://code.claude.com/docs/en/quickstart) in interactive mode.  
+  
+Because of the MCP servers below, it can see what is actually running:  
+which example, which containers, which connectors are failing and why,  
+and it can search the ~2500 example scripts to find the one that already  
+reproduces what you are looking at. So ask it things like "why did my  
+connector fail" or "is there an example doing X", rather than treating it  
+as a generic assistant.  
+  
+Anything you pass after 'playground ai' goes straight to the claude cli.  
   
 MCP servers are available:  
   

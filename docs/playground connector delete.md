@@ -1,6 +1,10 @@
 # playground connector delete
 
-🗑️  Delete connector
+🗑️  Delete connector  
+  
+Removes the connector and its configuration. Its offsets survive in the  
+Kafka internal topics, so re-creating it under the same name resumes  
+where it stopped rather than starting over.
 
 ## Usage
 

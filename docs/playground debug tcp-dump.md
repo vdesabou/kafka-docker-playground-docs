@@ -1,6 +1,13 @@
 # playground debug tcp-dump
 
-🕵️‍♂️ Take a tcp dump (sniffing network)
+🕵️‍♂️ Take a tcp dump (sniffing network)  
+  
+Captures the traffic in or out of a container for --duration seconds and  
+brings the capture file back, ready to open in Wireshark. Narrow it with  
+--port when you know which one you care about.  
+  
+❕ On an encrypted listener you will see the handshake and the failures,  
+   but not the records themselves.
 
 ## Usage
 

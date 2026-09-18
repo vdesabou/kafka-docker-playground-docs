@@ -1,6 +1,9 @@
 # playground ec2 sync-repro-folder local-to-ec2
 
-👉 Sync local reproduction-models folder to ec2 instance
+👉 Sync local reproduction-models folder to ec2 instance  
+  
+Copies your local reproduction-models to the instance, so you can run  
+there a model you started writing on your laptop.
 
 ## Usage
 

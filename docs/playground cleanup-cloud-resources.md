@@ -2,7 +2,17 @@
 
 🧹 Cleanup cloud resources that were created by running examples from the playground  
   
-❗it will remove all resources created by the playground, including topics, connectors, clusters, buckets, redshift cluster, etc...
+❗it will remove all resources created by the playground, including topics, connectors, clusters, buckets, redshift cluster, etc...  
+  
+Examples that talk to a real cloud create real, billable resources, and an  
+interrupted run leaves them behind. This sweeps them, scoped to the ones  
+whose name contains your username, across AWS, GCP, Azure, Confluent Cloud  
+and Salesforce. Restrict the scope with --resource, and run it regularly.  
+  
+You are asked to confirm every deletion, unless --force is given.  
+  
+☢️ Deletions are permanent. Use a dedicated cloud account for the  
+   playground rather than one that also hosts resources you care about.
 
 ## Usage
 

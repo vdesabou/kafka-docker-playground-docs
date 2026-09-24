@@ -3,6 +3,7 @@
 ## September 2026
 ##### 🌟 Enhancements
 
+- 📚 Improve docs for CLI [#8857](https://github.com/vdesabou/kafka-docker-playground/issues/8857)
 - 🧠⭐🔐 Add playground secrets commands [#8845](https://github.com/vdesabou/kafka-docker-playground/issues/8845)
 - 👾 Upgrade playground to default CP 8.3.2 [#8844](https://github.com/vdesabou/kafka-docker-playground/issues/8844)
 - 🤖 MCP playground 2.0 [#8839](https://github.com/vdesabou/kafka-docker-playground/issues/8839)

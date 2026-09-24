@@ -9,6 +9,7 @@ container or fully managed in Confluent Cloud.
   
 🔍 Look at what is running  
   status                  is it RUNNING, and if not, the full stack trace  
+  error-recommendations   suggested fixes for a failed fully managed connector  
   show-config             the configuration actually applied  
   logs                    tail connect logs, filtered and followed  
   show-lag                consumer lag of a sink, until it reaches zero  
@@ -45,6 +46,7 @@ playground connector COMMAND
 ## == Commands ==
 
 - [status](playground%20connector%20status) - 🧩 Show status of all connectors
+- [error-recommendations](playground%20connector%20error-recommendations) - 💡 Show error recommendations for fully managed connectors
 - [oracle-cdc-xstream](playground%20connector%20oracle-cdc-xstream) - 🅾️ Specific Oracle CDC Xstream commands
 - [offsets](playground%20connector%20offsets) - 💈 Handle source and sink connectors offsets
 - [plugins](playground%20connector%20plugins) - 🎨 Show all connector plugins installed. You can also display transforms, converters and predicates using --all flag

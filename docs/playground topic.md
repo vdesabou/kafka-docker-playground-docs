@@ -14,11 +14,13 @@ command works on plaintext, on sasl-ssl and on Confluent Cloud.
 📥 Get data out  
   consume         read from the beginning, deserialising automatically  
   get-number-records   count what is in the topic  
+  get-offsets          earliest and latest offsets per partition  
   display-consumer-offsets   read the internal offsets topic  
   
 🔧 Manage  
   list / describe / alter / delete  
   set-schema-compatibility   compatibility of the topic subjects  
+  tag             stream catalog tags (Confluent Cloud only)  
   
 Serialisation is handled for you: 'produce' registers the schema you give  
 it and 'consume' works out from the payload whether it is avro, protobuf,  
@@ -36,6 +38,7 @@ playground topic COMMAND
 ## Topic commands
 
 - [get-number-records](playground%20topic%20get-number-records) - 💯 Get number of records in a topic
+- [get-offsets](playground%20topic%20get-offsets) - 📍 Get earliest and latest offsets per partition of a topic
 - [display-consumer-offsets](playground%20topic%20display-consumer-offsets) - 📭 Display content of __consumer_offsets topic
 - [list](playground%20topic%20list) - 🔘 List topics
 - [describe](playground%20topic%20describe) - 🔬 Describe topic
@@ -45,5 +48,6 @@ playground topic COMMAND
 - [create](playground%20topic%20create) - 🆕 Create topic
 - [delete](playground%20topic%20delete) - ❌ Delete topic and associated schema/subject if applicable
 - [alter](playground%20topic%20alter) - 🪛 Alter topic config
+- [tag](playground%20topic%20tag) - 🏷️ Stream Catalog tags (Confluent Cloud only)
 
 

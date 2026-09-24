@@ -64,7 +64,12 @@ Secrets coming from `playground.ini`, connector configurations and logs are reda
 
 #### installation for Claude Code
 
-Nothing to do: the repository ships a `.mcp.json` at its root, so the server is offered the first time you run `claude` from the playground directory — accept it once. [playground ai](/playground%20ai) accepts it for you and starts `claude` with the Confluent MCP server as well.
+Nothing to do: the repository ships a `.mcp.json` at its root and a `.claude/settings.json` that enables the server and allows its (read-only) tools. Run `claude` from anywhere in the checkout and trust the workspace when asked the first time — the server then loads automatically.
+
+> [!NOTE]
+> The first start builds the server from GitHub with `npx`, which can take up to a minute; `.claude/settings.json` raises `MCP_TIMEOUT` accordingly. On machines where an enterprise policy restricts MCP servers (`allowManagedMcpServersOnly`), the server is not loaded.
+
+If you used the former `playground ai` command, remove the MCP servers it registered: `claude mcp remove mcp-kafka; claude mcp remove mcp-ccloud`
 
 #### installation for Visual Studio Code (Github Copilot)
 
@@ -147,7 +152,6 @@ visit https://docs.docker.com/get-docker to install
 - [help](playground%20help) - Show help about a command
 - [status](playground%20status) - 🗺️ Show a status
 - [config](playground%20config) - ⚙️ Configure CLI
-- [ai](playground%20ai) - 🧞‍♂️  AI
 - [ccloud-costs](playground%20ccloud-costs) - 💰  Retrieve ccloud costs for a range of dates
 - [ccloud-costs-history](playground%20ccloud-costs-history) - 👛  Retrieve ccloud costs for each month since last year
 
@@ -276,6 +280,7 @@ visit https://docs.docker.com/get-docker to install
 
 - [topic](playground%20topic) - 🗳 Topic commands
 - [get-number-records](playground%20topic%20get-number-records) - 💯 Get number of records in a topic
+- [get-offsets](playground%20topic%20get-offsets) - 📍 Get earliest and latest offsets per partition of a topic
 - [display-consumer-offsets](playground%20topic%20display-consumer-offsets) - 📭 Display content of __consumer_offsets topic
 - [list](playground%20topic%20list) - 🔘 List topics
 - [describe](playground%20topic%20describe) - 🔬 Describe topic
@@ -285,6 +290,10 @@ visit https://docs.docker.com/get-docker to install
 - [create](playground%20topic%20create) - 🆕 Create topic
 - [delete](playground%20topic%20delete) - ❌ Delete topic and associated schema/subject if applicable
 - [alter](playground%20topic%20alter) - 🪛 Alter topic config
+- [tag](playground%20topic%20tag) - 🏷️ Stream Catalog tags (Confluent Cloud only)
+- [consumer-group](playground%20consumer-group) - 👥 Consumer group commands
+- [list](playground%20consumer-group%20list) - 👥 List consumer groups
+- [describe](playground%20consumer-group%20describe) - 🔬 Describe consumer group
 
 ### Connector-Plugin commands
 
@@ -298,6 +307,7 @@ visit https://docs.docker.com/get-docker to install
 
 - [connector](playground%20connector) - 🔗 Connector commands
 - [status](playground%20connector%20status) - 🧩 Show status of all connectors
+- [error-recommendations](playground%20connector%20error-recommendations) - 💡 Show error recommendations for fully managed connectors
 - [oracle-cdc-xstream](playground%20connector%20oracle-cdc-xstream) - 🅾️ Specific Oracle CDC Xstream commands
 - [offsets](playground%20connector%20offsets) - 💈 Handle source and sink connectors offsets
 - [plugins](playground%20connector%20plugins) - 🎨 Show all connector plugins installed. You can also display transforms, converters and predicates using --all flag

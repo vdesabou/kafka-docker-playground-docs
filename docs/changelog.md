@@ -3,6 +3,10 @@
 ## September 2026
 ##### 🌟 Enhancements
 
+- 🧠 Add Stream Catalog tag commands (playground topic tag) [#8877](https://github.com/vdesabou/kafka-docker-playground/issues/8877)
+- 🧠  playground connector error-recommendations command [#8876](https://github.com/vdesabou/kafka-docker-playground/issues/8876)
+- 🧠 Add playground topic get-offsets command [#8875](https://github.com/vdesabou/kafka-docker-playground/issues/8875)
+- 🧠 Add playground consumer-group commands [#8874](https://github.com/vdesabou/kafka-docker-playground/issues/8874)
 - 📚 Improve docs for CLI [#8857](https://github.com/vdesabou/kafka-docker-playground/issues/8857)
 - 🧠⭐🔐 Add playground secrets commands [#8845](https://github.com/vdesabou/kafka-docker-playground/issues/8845)
 - 👾 Upgrade playground to default CP 8.3.2 [#8844](https://github.com/vdesabou/kafka-docker-playground/issues/8844)

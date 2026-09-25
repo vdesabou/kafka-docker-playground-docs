@@ -68,10 +68,81 @@ playground container logs [OPTIONS]
 
 🕰️ Show logs from the previous pod instance (only relevant when --environment=cfk is used)
 
+#### *--since SINCE*
+
+🕐 Only show logs newer than a relative duration (10m, 1h) or a timestamp (2026-09-24T16:00:00)
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Conflicts With: | *--open, --wait-for-log*
+
+#### *--tail LINES*
+
+🔢 Number of lines to show from the end of the logs, or "all"  
+  
+Default is 200, or all when --since, --errors, or --grep with --no-follow is used
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Conflicts With: | *--open, --wait-for-log*
+
+#### *--no-follow*
+
+🛑 Print the logs and exit instead of following them  
+  
+🎓 Tip: use it in scripts and from AI agents, which otherwise never get the command back
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Conflicts With: | *--open, --wait-for-log*
+
+#### *--errors*
+
+🔥 Only show a digest of ERROR/FATAL records, then exit  
+  
+Repeated records are de-duplicated with an occurrence count, stack  
+traces are collapsed to the exception chain ("Caused by:") plus a few  
+frames of the deepest cause. Records logged at INFO/DEBUG/TRACE are  
+never reported, even when their message contains "Error" or "Exception".  
+  
+Scans the whole log unless --since or --tail narrow it.
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Conflicts With: | *--open, --wait-for-log, --grep*
+
+#### *--include-warnings*
+
+🟠 With --errors, also report WARN records
+
+#### *--max-findings MAX_FINDINGS*
+
+✂️ With --errors, maximum number of distinct records to show (default 40)
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Default Value:  | 40
+
 ## Examples
 
 ```bash
 playground container logs --container connect
+```
+
+```bash
+playground container logs -c connect --errors
+```
+
+```bash
+playground container logs -c connect --errors --since 10m --include-warnings
+```
+
+```bash
+playground container logs -c connect --grep "Caused by" --no-follow
+```
+
+```bash
+playground container logs -c connect --no-follow --tail 500
 ```
 
 ```bash

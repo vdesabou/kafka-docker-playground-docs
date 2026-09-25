@@ -44,6 +44,7 @@ visit https://docs.docker.com/get-docker to install
 - [re-run](playground%20re-run) - ⚡ Simply re-run last example you ran with \<playground run\>
 - [get-ci-result](playground%20get-ci-result) - 🤖 get CI result for current example
 - [history](playground%20history) - 🏰 Get an history of the examples which were run with run command and run it again
+- [find-example](playground%20find-example) - 🔎 Find examples matching a free-text query, without the interactive picker
 - [switch-ccloud](playground%20switch-ccloud) - 🌩️  Switch to ccloud environment.
 - [switch-back](playground%20switch-back) - 💺  Switch back from previous environment before switch-ccloud was called.
 - [update-version](playground%20update-version) - ✨ Update current confluent platform components (all with --tag or only connect with --connect-tag) or connector(s) with new version(s)

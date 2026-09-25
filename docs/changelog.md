@@ -3,6 +3,10 @@
 ## September 2026
 ##### 🌟 Enhancements
 
+- 🧠 Improvements to playground container logs [#8882](https://github.com/vdesabou/kafka-docker-playground/issues/8882)
+- 🧠 Add playground find-example command [#8881](https://github.com/vdesabou/kafka-docker-playground/issues/8881)
+- 🤖💀 Get rid of MCP playground [#8880](https://github.com/vdesabou/kafka-docker-playground/issues/8880)
+- 🧠 Remove playground ai command [#8878](https://github.com/vdesabou/kafka-docker-playground/issues/8878)
 - 🧠 Add Stream Catalog tag commands (playground topic tag) [#8877](https://github.com/vdesabou/kafka-docker-playground/issues/8877)
 - 🧠  playground connector error-recommendations command [#8876](https://github.com/vdesabou/kafka-docker-playground/issues/8876)
 - 🧠 Add playground topic get-offsets command [#8875](https://github.com/vdesabou/kafka-docker-playground/issues/8875)
@@ -10,7 +14,6 @@
 - 📚 Improve docs for CLI [#8857](https://github.com/vdesabou/kafka-docker-playground/issues/8857)
 - 🧠⭐🔐 Add playground secrets commands [#8845](https://github.com/vdesabou/kafka-docker-playground/issues/8845)
 - 👾 Upgrade playground to default CP 8.3.2 [#8844](https://github.com/vdesabou/kafka-docker-playground/issues/8844)
-- 🤖 MCP playground 2.0 [#8839](https://github.com/vdesabou/kafka-docker-playground/issues/8839)
 - 🧠 Add "edit" and "alter" aliases to playground container/connector update commands [#8825](https://github.com/vdesabou/kafka-docker-playground/issues/8825)
 - 🐳 Remove usage of deprecated cp-server-connect-base and cp-kafka-connect-base Docker images [#8817](https://github.com/vdesabou/kafka-docker-playground/issues/8817)
 

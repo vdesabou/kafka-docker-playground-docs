@@ -1,10 +1,17 @@
 # 📜 Change Log
 
 ## October 2026
+##### 🌟 Enhancements
 
-
-
-
+- 👾 Add ChromaDB Sink Fully Managed Connector example [#8914](https://github.com/vdesabou/kafka-docker-playground/issues/8914)
+- 👾 Add Google BigQuery Source (JDBC) Fully Managed Connector example [#8913](https://github.com/vdesabou/kafka-docker-playground/issues/8913)
+- 👾 Add Microsoft Dynamics 365 CRM Source Fully Managed Connector example [#8912](https://github.com/vdesabou/kafka-docker-playground/issues/8912)
+- 👾 Add Marketo Sink Connector Fully Managed Connector example [#8911](https://github.com/vdesabou/kafka-docker-playground/issues/8911)
+- 👾 Add DataStax Sink Connector Fully Managed Connector example [#8910](https://github.com/vdesabou/kafka-docker-playground/issues/8910)
+- 👾 Add Azure Data Explorer (Kusto) Database Sink Fully Managed Connector example [#8909](https://github.com/vdesabou/kafka-docker-playground/issues/8909)
+- ☕ Add retries when java components are built to avoid Maven Central rate-limiting (HTTP 429) [#8908](https://github.com/vdesabou/kafka-docker-playground/issues/8908)
+- 🧠 Upgrade to Bashly to 2.0.0 [#8907](https://github.com/vdesabou/kafka-docker-playground/issues/8907)
+- 📡 Add Confluent Telemetry Reporter (proactive support) by default [#8906](https://github.com/vdesabou/kafka-docker-playground/issues/8906)
 
 ## September 2026
 ##### 🌟 Enhancements

@@ -102,6 +102,7 @@ visit https://docs.docker.com/get-docker to install
 
 - [help](playground%20help) - Show help about a command
 - [status](playground%20status) - 🗺️ Show a status
+- [doctor](playground%20doctor) - 🩺 Check that the container engine is ready for the playground
 - [config](playground%20config) - ⚙️ Configure CLI
 - [ccloud-costs](playground%20ccloud-costs) - 💰  Retrieve ccloud costs for a range of dates
 - [ccloud-costs-history](playground%20ccloud-costs-history) - 👛  Retrieve ccloud costs for each month since last year

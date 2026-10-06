@@ -13,6 +13,10 @@
 - 🧠 Upgrade to Bashly to 2.0.0 [#8907](https://github.com/vdesabou/kafka-docker-playground/issues/8907)
 - 📡 Add Confluent Telemetry Reporter (proactive support) by default [#8906](https://github.com/vdesabou/kafka-docker-playground/issues/8906)
 
+##### 🐛 Bugs
+
+- 🐛 SFDC examples: Unique PushTopic names per script and environment [#8930](https://github.com/vdesabou/kafka-docker-playground/issues/8930)
+
 ## September 2026
 ##### 🌟 Enhancements
 

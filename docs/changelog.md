@@ -23,6 +23,9 @@
 
 ##### 🐛 Bugs
 
+- 🐛 Update Change Logs: wait for closed issues before generating release notes, and support workflow\_dispatch [#8948](https://github.com/vdesabou/kafka-docker-playground/pull/8948)
+- 🐛 Update Change Logs workflow does not close milestone issues when run manually (workflow\_dispatch) [#8947](https://github.com/vdesabou/kafka-docker-playground/issues/8947)
+- 🐛 Update Change Logs workflow misses issues that are still open when the milestone is closed [#8946](https://github.com/vdesabou/kafka-docker-playground/issues/8946)
 - 🐛 wait\_for\_ccloud\_connector\_up never restarts a FAILED fully managed connector, transient startup errors stay FAILED until timeout [#8943](https://github.com/vdesabou/kafka-docker-playground/issues/8943)
 - 🐛 snowflake examples failing with "JWT token is invalid" [#8932](https://github.com/vdesabou/kafka-docker-playground/issues/8932)
 - 🐛 clashes between Salesforce tests (audit, sinks excluded) [#8931](https://github.com/vdesabou/kafka-docker-playground/issues/8931)

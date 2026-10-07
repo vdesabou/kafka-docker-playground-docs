@@ -15,6 +15,8 @@
 
 ##### 🐛 Bugs
 
+- 🐛 snowflake examples failing with "JWT token is invalid" [#8932](https://github.com/vdesabou/kafka-docker-playground/issues/8932)
+- 🐛 clashes between Salesforce tests (audit, sinks excluded) [#8931](https://github.com/vdesabou/kafka-docker-playground/issues/8931)
 - 🐛 SFDC examples: Unique PushTopic names per script and environment [#8930](https://github.com/vdesabou/kafka-docker-playground/issues/8930)
 
 ## September 2026

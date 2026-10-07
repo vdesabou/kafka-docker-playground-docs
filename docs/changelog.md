@@ -3,6 +3,14 @@
 ## October 2026
 ##### 🌟 Enhancements
 
+- 🧠 bootstrap\_ccloud\_environment takes \~7s when reusing an existing Confluent Cloud cluster [#8945](https://github.com/vdesabou/kafka-docker-playground/pull/8945)
+- 🧠 bootstrap\_ccloud\_environment takes \~7s when reusing an existing Confluent Cloud cluster [#8944](https://github.com/vdesabou/kafka-docker-playground/issues/8944)
+- 🧹 Delete Confluent Cloud connectors and topics of the last run on playground stop and before the next run [#8942](https://github.com/vdesabou/kafka-docker-playground/issues/8942)
+- 🧹 Show Confluent Cloud leftovers (connectors, topics) at the end of a run and in playground status [#8941](https://github.com/vdesabou/kafka-docker-playground/issues/8941)
+- 🧹 cleanup-cloud-resources: also delete topics created by fully managed source connectors on a shared cluster [#8940](https://github.com/vdesabou/kafka-docker-playground/issues/8940)
+- 🧹 Improve cleanup-cloud-resources to delete topics only created by user [#8939](https://github.com/vdesabou/kafka-docker-playground/issues/8939)
+- 🧹 Delete dlq, error and success topics when a fully managed connector is deleted [#8938](https://github.com/vdesabou/kafka-docker-playground/issues/8938)
+- ⭐ 🦭 Podman support for playground [#8933](https://github.com/vdesabou/kafka-docker-playground/issues/8933)
 - 👾 Add ChromaDB Sink Fully Managed Connector example [#8914](https://github.com/vdesabou/kafka-docker-playground/issues/8914)
 - 👾 Add Google BigQuery Source (JDBC) Fully Managed Connector example [#8913](https://github.com/vdesabou/kafka-docker-playground/issues/8913)
 - 👾 Add Microsoft Dynamics 365 CRM Source Fully Managed Connector example [#8912](https://github.com/vdesabou/kafka-docker-playground/issues/8912)
@@ -15,10 +23,16 @@
 
 ##### 🐛 Bugs
 
+- 🐛 wait\_for\_ccloud\_connector\_up never restarts a FAILED fully managed connector, transient startup errors stay FAILED until timeout [#8943](https://github.com/vdesabou/kafka-docker-playground/issues/8943)
 - 🐛 snowflake examples failing with "JWT token is invalid" [#8932](https://github.com/vdesabou/kafka-docker-playground/issues/8932)
 - 🐛 clashes between Salesforce tests (audit, sinks excluded) [#8931](https://github.com/vdesabou/kafka-docker-playground/issues/8931)
 - 🐛 SFDC examples: Unique PushTopic names per script and environment [#8930](https://github.com/vdesabou/kafka-docker-playground/issues/8930)
 
+##### :heart: Contributors
+
+Thank you to all the contributors who worked on this release:
+
+@vdesabou
 ## September 2026
 ##### 🌟 Enhancements
 

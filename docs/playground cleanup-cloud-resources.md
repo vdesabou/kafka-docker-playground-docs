@@ -9,6 +9,16 @@ interrupted run leaves them behind. This sweeps them, scoped to the ones
 whose name contains your username, across AWS, GCP, Azure, Confluent Cloud  
 and Salesforce. Restrict the scope with --resource, and run it regularly.  
   
+Confluent Cloud: connectors whose name contains your username are deleted,  
+with their dlq, success and error topics. All topics of the cluster are  
+deleted only when the cluster was created by the playground for you  
+(pg-\<user\>-*). On a cluster you provided with CLUSTER_NAME, which may be  
+shared with your team, only the topics recorded as created by your own  
+runs are deleted (local file playground-ccloud-created-topics): topics  
+created with playground topic create / produce, and topics your fully  
+managed source connectors write to, as set in their config (kafka.topic,  
+api1.topics, topic.prefix...).  
+  
 You are asked to confirm every deletion, unless --force is given.  
   
 ☢️ Deletions are permanent. Use a dedicated cloud account for the  

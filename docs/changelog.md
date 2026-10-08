@@ -3,6 +3,7 @@
 ## October 2026
 ##### 🌟 Enhancements
 
+- 🧠 Add playground switch-podman and switch-docker commands [#8977](https://github.com/vdesabou/kafka-docker-playground/issues/8977)
 - 🧠 Confluent Cloud stack creation (environment, cluster, keys) wastes \~95s on fixed sleeps and redundant calls [#8962](https://github.com/vdesabou/kafka-docker-playground/issues/8962)
 - 🧹 Delete Confluent Cloud connectors and topics of the last run on playground stop and before the next run [#8942](https://github.com/vdesabou/kafka-docker-playground/issues/8942)
 - 🧹 Show Confluent Cloud leftovers (connectors, topics) at the end of a run and in playground status [#8941](https://github.com/vdesabou/kafka-docker-playground/issues/8941)

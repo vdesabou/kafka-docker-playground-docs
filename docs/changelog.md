@@ -3,8 +3,7 @@
 ## October 2026
 ##### 🌟 Enhancements
 
-- 🧠 bootstrap\_ccloud\_environment takes \~7s when reusing an existing Confluent Cloud cluster [#8945](https://github.com/vdesabou/kafka-docker-playground/pull/8945)
-- 🧠 bootstrap\_ccloud\_environment takes \~7s when reusing an existing Confluent Cloud cluster [#8944](https://github.com/vdesabou/kafka-docker-playground/issues/8944)
+- 🧠 Confluent Cloud stack creation (environment, cluster, keys) wastes \~95s on fixed sleeps and redundant calls [#8962](https://github.com/vdesabou/kafka-docker-playground/issues/8962)
 - 🧹 Delete Confluent Cloud connectors and topics of the last run on playground stop and before the next run [#8942](https://github.com/vdesabou/kafka-docker-playground/issues/8942)
 - 🧹 Show Confluent Cloud leftovers (connectors, topics) at the end of a run and in playground status [#8941](https://github.com/vdesabou/kafka-docker-playground/issues/8941)
 - 🧹 cleanup-cloud-resources: also delete topics created by fully managed source connectors on a shared cluster [#8940](https://github.com/vdesabou/kafka-docker-playground/issues/8940)
@@ -23,19 +22,10 @@
 
 ##### 🐛 Bugs
 
-- 🐛 Update Change Logs: wait for closed issues before generating release notes, and support workflow\_dispatch [#8948](https://github.com/vdesabou/kafka-docker-playground/pull/8948)
-- 🐛 Update Change Logs workflow does not close milestone issues when run manually (workflow\_dispatch) [#8947](https://github.com/vdesabou/kafka-docker-playground/issues/8947)
-- 🐛 Update Change Logs workflow misses issues that are still open when the milestone is closed [#8946](https://github.com/vdesabou/kafka-docker-playground/issues/8946)
-- 🐛 wait\_for\_ccloud\_connector\_up never restarts a FAILED fully managed connector, transient startup errors stay FAILED until timeout [#8943](https://github.com/vdesabou/kafka-docker-playground/issues/8943)
 - 🐛 snowflake examples failing with "JWT token is invalid" [#8932](https://github.com/vdesabou/kafka-docker-playground/issues/8932)
 - 🐛 clashes between Salesforce tests (audit, sinks excluded) [#8931](https://github.com/vdesabou/kafka-docker-playground/issues/8931)
 - 🐛 SFDC examples: Unique PushTopic names per script and environment [#8930](https://github.com/vdesabou/kafka-docker-playground/issues/8930)
 
-##### :heart: Contributors
-
-Thank you to all the contributors who worked on this release:
-
-@vdesabou
 ## September 2026
 ##### 🌟 Enhancements
 

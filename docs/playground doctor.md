@@ -13,7 +13,7 @@ what to run first when an example fails before a single container starts.
   
 Exits 1 if it found a blocking problem, 0 otherwise.  
   
-👉 Check documentation https://kafka-docker-playground.io/#/podman
+👉 Check documentation https://kafka-docker-playground.io/#/how-to-use?id=%f0%9f%a6%ad-using-podman-instead-of-docker
 
 ## Usage
 

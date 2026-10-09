@@ -50,27 +50,27 @@ playground container exec [OPTIONS]
 ## Examples
 
 ```bash
-playground exec -c connect -d "date"
+playground container exec -c connect --command "date"
 ```
 
 ```bash
-playground exec -c connect -d "whoami" --root
+playground container exec -c connect --command "whoami" --root
 ```
 
 ```bash
-playground exec --container connect --command "whoami" --shell sh
+playground container exec --container connect --command "whoami" --shell sh
 ```
 
 ```bash
-playground exec -c broker -c connect -d "ps aux"
+playground container exec -c broker -c connect --command "ps aux"
 ```
 
 ```bash
-playground exec --container schema-registry --container ksqldb-server --command "free -h"
+playground container exec --container schema-registry --container ksqldb-server --command "free -h"
 ```
 
 ```bash
-playground exec -c connect -c broker -d "netstat -tuln" --root
+playground container exec -c connect -c broker --command "netstat -tuln" --root
 ```
 
 

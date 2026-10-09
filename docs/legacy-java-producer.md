@@ -1,4 +1,4 @@
-# playground repro bootstrap
+# ♨️ Legacy Java producers (deprecated)
 
 ### ♨️ Java producers
 
@@ -23,7 +23,7 @@ Here are the steps to follow:
 
 2. *optional*: use `--producer-schema-key` and/or `--producer-schema-value` flag(s) to specify another schema(s) to use, if you use this option, step 3 below is **not** required as it is done automatically
 
-3. *not required if step 2 was done* Update `producer-repro-12345/src/main/resources/avro/customer.avsc` with your AVRO schema but be careful, you need to keep `Customer` for the name and `com.github.vdesabou` for the namespace:
+3. *not required if step 2 was done* Update `producer-repro-12345/src/main/resources/schema/customer.avsc` with your AVRO schema but be careful, you need to keep `Customer` for the name and `com.github.vdesabou` for the namespace:
 
 ```json
     "name": "Customer",
@@ -56,7 +56,7 @@ For example, for [retries](https://docs.confluent.io/platform/current/installati
       KAFKA_RETRIES: 10
 ```
 
-In case this is an example with [ccloud](https://kafka-docker-playground.io/#/content?id=%e2%98%81%ef%b8%8f-confluent-cloud), the producer will be generated with Confluent Cloud security automatically:
+In case this is an example with [ccloud](/content?id=%e2%98%81%ef%b8%8f-confluent-cloud), the producer will be generated with Confluent Cloud security automatically:
 
 ```yml
     environment:
@@ -107,9 +107,9 @@ Here are the steps to follow:
 
 2. *optional*: use `--producer-schema-key` and/or `--producer-schema-value` flag(s) to specify another schema(s) to use, if you use this option, step 3 below is **not** required as it is done automatically
 
-3. *not required if step 2 was done* Update `producer-repro-12345/src/main/resources/Customer.proto` with your Protobuf schema but be careful, you need to keep `Customer` for the name and `com.github.vdesabou` for the package and `CustomerImpl` for the `java_outer_classname`:
+3. *not required if step 2 was done* Update `producer-repro-12345/src/main/proto/Customer.proto` with your Protobuf schema but be careful, you need to keep `Customer` for the name and `com.github.vdesabou` for the package and `CustomerImpl` for the `java_outer_classname`:
 
-```
+```protobuf
 package com.github.vdesabou;
 option java_outer_classname = "CustomerImpl";
 ```
@@ -142,7 +142,7 @@ For example, for [retries](https://docs.confluent.io/platform/current/installati
       KAFKA_RETRIES: 10
 ```
 
-In case this is an example with [ccloud](https://kafka-docker-playground.io/#/content?id=%e2%98%81%ef%b8%8f-confluent-cloud), the producer will be generated with Confluent Cloud security automatically:
+In case this is an example with [ccloud](/content?id=%e2%98%81%ef%b8%8f-confluent-cloud), the producer will be generated with Confluent Cloud security automatically:
 
 ```yml
     environment:
@@ -256,7 +256,7 @@ For example, for [retries](https://docs.confluent.io/platform/current/installati
       KAFKA_RETRIES: 10
 ```
 
-In case this is an example with [ccloud](https://kafka-docker-playground.io/#/content?id=%e2%98%81%ef%b8%8f-confluent-cloud), the producer will be generated with Confluent Cloud security automatically:
+In case this is an example with [ccloud](/content?id=%e2%98%81%ef%b8%8f-confluent-cloud), the producer will be generated with Confluent Cloud security automatically:
 
 ```yml
     environment:
@@ -305,9 +305,9 @@ playground repro bootstrap -f hdfs2-sink<tab> -d "123456 testing with parquet fo
 
 19:54:45 ℹ️ Examples to consume:
 19:54:45 ℹ️ 1️⃣ Simplest
-docker exec connect kafka-protobuf-console-consumer -bootstrap-server broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --from-beginning --max-messages 1
+docker exec connect kafka-protobuf-console-consumer --bootstrap-server broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --from-beginning --max-messages 1
 19:54:45 ℹ️ 2️⃣ Displaying key:
-docker exec connect kafka-protobuf-console-consumer -bootstrap-server broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --property print.key=true --property key.separator=, --from-beginning --max-messages 1
+docker exec connect kafka-protobuf-console-consumer --bootstrap-server broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --property print.key=true --property key.separator=, --from-beginning --max-messages 1
 19:54:45 ℹ️ ✨ Adding Java protobuf producer in /Users/vsaboulin/Documents/github/kafka-docker-playground/reproduction-models/connect-connect-hdfs2-sink/producer-repro-123456-1
 19:54:45 ℹ️ 📂 The reproduction files are now available in:
 /Users/vsaboulin/Documents/github/kafka-docker-playground/reproduction-models/connect-connect-hdfs2-sink
@@ -317,7 +317,7 @@ This will create the following files:
 
 ![file structure](./images/bootstrap_reproduction_model.jpg)
 
-Then follow instructions in one of [♨️ Java producer](/reusables?id=♨%EF%B8%8F-java-producers) below.
+Then follow the instructions in one of the [♨️ Java producers](/legacy-java-producer?id=♨️-java-producers) tabs above.
 
 ### With multiple Java producers (`--nb-producers`)
 
@@ -358,10 +358,6 @@ One of avro, avro-with-key, protobuf, protobuf-with-key, json-schema, json-schem
 #### *--nb-producers, -n NB-PRODUCERS*
 
 2️⃣ Number of java producers to generate
-
-| Attributes     | &nbsp; |
-| -------------- | ------ |
-| Default Value: |
 
 #### *--producer-schema-key*
 

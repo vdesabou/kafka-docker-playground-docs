@@ -55,13 +55,7 @@ for component in MyCustomSMT-000000
 do
     set +e
     log "🏗 Building jar for ${component}"
-    docker run -i --rm -e KAFKA_CLIENT_TAG=$KAFKA_CLIENT_TAG -e TAG=$TAG_BASE -v "${DIR}/${component}":/usr/src/mymaven -v "$HOME/.m2":/root/.m2 -v "${DIR}/${component}/target:/usr/src/mymaven/target" -w /usr/src/mymaven maven:3.6.1-jdk-11 mvn -Dkafka.tag=$TAG -Dkafka.client.tag=$KAFKA_CLIENT_TAG package > /tmp/result.log 2>&1
-    if [ $? != 0 ]
-    then
-        logerror "ERROR: failed to build java component "
-        tail -500 /tmp/result.log
-        exit 1
-    fi
+    build_java_component_with_retry "${component}" docker run -i --rm -e KAFKA_CLIENT_TAG=$KAFKA_CLIENT_TAG -e TAG=$TAG_BASE -v "${DIR}/${component}":/usr/src/mymaven -v "$HOME/.m2":/root/.m2 -v "$PWD/../../scripts/settings.xml:/tmp/settings.xml" -v "${DIR}/${component}/target:/usr/src/mymaven/target" -w /usr/src/mymaven maven:3.9.11-eclipse-temurin-17 mvn -s /tmp/settings.xml -Dkafka.tag=$TAG -Dkafka.client.tag=$KAFKA_CLIENT_TAG package
     set -e
 done
 ```
@@ -70,12 +64,11 @@ It will copy the jar to the connector lib folder:
 
 ```bash
 log "📂 Copying custom jar to connector folder /usr/share/confluent-hub-components/debezium-debezium-connector-sqlserver/lib/"
-docker cp /home/vsaboulin/kafka-docker-playground/scripts/cli/../../reproduction-models/connect-connect-debezium-sqlserver-source/MyCustomSMT-000000/target/MyCustomSMT-1.0.0-SNAPSHOT-jar-with-dependencies.jar connect:/usr/share/confluent-hub-components/debezium-debezium-connector-sqlserver/lib/
+playground container cp --source /path/to/kafka-docker-playground/reproduction-models/connect-connect-debezium-sqlserver-source/MyCustomSMT-000000/target/MyCustomSMT-1.0.0-SNAPSHOT-jar-with-dependencies.jar --destination connect:/usr/share/confluent-hub-components/debezium-debezium-connector-sqlserver/lib/
 log "📂 Copying custom jar to connector folder /usr/share/confluent-hub-components/confluentinc-connect-transforms/lib/"
-docker cp /home/vsaboulin/kafka-docker-playground/scripts/cli/../../reproduction-models/connect-connect-debezium-sqlserver-source/MyCustomSMT-000000/target/MyCustomSMT-1.0.0-SNAPSHOT-jar-with-dependencies.jar connect:/usr/share/confluent-hub-components/confluentinc-connect-transforms/lib/
+playground container cp --source /path/to/kafka-docker-playground/reproduction-models/connect-connect-debezium-sqlserver-source/MyCustomSMT-000000/target/MyCustomSMT-1.0.0-SNAPSHOT-jar-with-dependencies.jar --destination connect:/usr/share/confluent-hub-components/confluentinc-connect-transforms/lib/
 log "♻️ Restart connect worker to load"
-docker restart connect
-sleep 45
+playground container restart --container connect
 ```
 
 And add the transform config to connector:
@@ -107,7 +100,7 @@ It will automatically:
 
 Just use `playground topic produce` [CLI](/playground%20topic%20produce), it's magic !
 
-It you prefer to use legacy way, see below:
+If you prefer to use legacy way, see below:
 
 ### Deprecated ♨️ Java producers
 
@@ -124,13 +117,13 @@ It you prefer to use legacy way, see below:
 #### **seq**
 
 ```bash
-seq -f "This is a message %g" 10 | docker exec -i broker kafka-console-producer --broker-list broker:9092 --topic a-topic
+seq -f "This is a message %g" 10 | docker exec -i broker kafka-console-producer --bootstrap-server broker:9092 --topic a-topic
 ```
 
 #### **Heredoc**
 
 ```bash
-docker exec -i broker kafka-console-producer --broker-list broker:9092 --topic a-topic << EOF
+docker exec -i broker kafka-console-producer --bootstrap-server broker:9092 --topic a-topic << EOF
 This is my message 1
 This is my message 2
 EOF
@@ -139,7 +132,7 @@ EOF
 #### **Heredoc JSON**
 
 ```bash
-docker exec -i broker kafka-console-producer --broker-list broker:9092 --topic a-topic << EOF
+docker exec -i broker kafka-console-producer --bootstrap-server broker:9092 --topic a-topic << EOF
 {"u_name": "scissors", "u_price": 2.75, "u_quantity": 3}
 {"u_name": "tape", "u_price": 0.99, "u_quantity": 10}
 {"u_name": "notebooks", "u_price": 1.99, "u_quantity": 5}
@@ -149,7 +142,7 @@ EOF
 #### **Key**
 
 ```bash
-docker exec -i broker kafka-console-producer --broker-list broker:9092 --topic a-topic --property parse.key=true --property key.separator=, << EOF
+docker exec -i broker kafka-console-producer --bootstrap-server broker:9092 --topic a-topic --property parse.key=true --property key.separator=, << EOF
 key1,value1
 key1,value2
 key2,value1
@@ -159,7 +152,7 @@ EOF
 #### **Key and JSON**
 
 ```bash
-docker exec -i broker kafka-console-producer --broker-list broker:9092 --topic a-topic --property parse.key=true --property key.separator=, << EOF
+docker exec -i broker kafka-console-producer --bootstrap-server broker:9092 --topic a-topic --property parse.key=true --property key.separator=, << EOF
 key1,{"u_name": "scissors", "u_price": 2.75, "u_quantity": 3}
 key2,{"u_name": "tape", "u_price": 0.99, "u_quantity": 10}
 key3,{"u_name": "notebooks", "u_price": 1.99, "u_quantity": 5}
@@ -169,7 +162,7 @@ EOF
 #### **JSON with schema (and key)**
 
 ```bash
-docker exec -i broker kafka-console-producer --broker-list broker:9092 --topic a-topic --property parse.key=true --property key.separator=, << EOF
+docker exec -i broker kafka-console-producer --bootstrap-server broker:9092 --topic a-topic --property parse.key=true --property key.separator=, << EOF
 1,{"schema":{"type":"struct","fields":[{"type":"string","optional":false,"field":"record"}]},"payload":{"record":"record1"}}
 2,{"schema":{"type":"struct","fields":[{"type":"string","optional":false,"field":"record"}]},"payload":{"record":"record2"}}
 3,{"schema":{"type":"struct","fields":[{"type":"string","optional":false,"field":"record"}]},"payload":{"record":"record3"}}
@@ -184,14 +177,14 @@ EOF
 
 #### **seq**
 
-```
-seq -f "{\"f1\": \"value%g\"}" 10 | docker exec -i connect kafka-avro-console-producer --broker-list broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --property value.schema='{"type":"record","name":"myrecord","fields":[{"name":"f1","type":"string"}]}'
+```bash
+seq -f "{\"f1\": \"value%g\"}" 10 | docker exec -i connect kafka-avro-console-producer --bootstrap-server broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --property value.schema='{"type":"record","name":"myrecord","fields":[{"name":"f1","type":"string"}]}'
 ```
 
 #### **Heredoc**
 
 ```bash
-docker exec -i connect kafka-avro-console-producer --broker-list broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --property value.schema='{"type":"record","name":"myrecord","fields":[{"name":"u_name","type":"string"},
+docker exec -i connect kafka-avro-console-producer --bootstrap-server broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --property value.schema='{"type":"record","name":"myrecord","fields":[{"name":"u_name","type":"string"},
 {"name":"u_price", "type": "float"}, {"name":"u_quantity", "type": "int"}]}' << EOF
 {"u_name": "scissors", "u_price": 2.75, "u_quantity": 3}
 {"u_name": "tape", "u_price": 0.99, "u_quantity": 10}
@@ -202,7 +195,7 @@ EOF
 #### **Key**
 
 ```bash
-docker exec -i connect kafka-avro-console-producer --broker-list broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --property key.schema='{"type":"record","namespace": "io.confluent.connect.avro","name":"myrecordkey","fields":[{"name":"ID","type":"long"}]}' --property value.schema='{"type":"record","name":"myrecordvalue","fields":[{"name":"ID","type":"long"},{"name":"product", "type": "string"}, {"name":"quantity", "type": "int"}, {"name":"price",
+docker exec -i connect kafka-avro-console-producer --bootstrap-server broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --property key.schema='{"type":"record","namespace": "io.confluent.connect.avro","name":"myrecordkey","fields":[{"name":"ID","type":"long"}]}' --property value.schema='{"type":"record","name":"myrecordvalue","fields":[{"name":"ID","type":"long"},{"name":"product", "type": "string"}, {"name":"quantity", "type": "int"}, {"name":"price",
 "type": "float"}]}'  --property parse.key=true --property key.separator="|" << EOF
 {"ID": 111}|{"ID": 111,"product": "foo", "quantity": 100, "price": 50}
 {"ID": 222}|{"ID": 222,"product": "bar", "quantity": 100, "price": 50}
@@ -214,18 +207,17 @@ EOF
 If the key needs to be a string, you can use `key.serializer` to specify it:
 
 ```bash
-docker exec -i connect kafka-avro-console-producer --broker-list broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --property key.serializer=org.apache.kafka.common.serialization.StringSerializer --property value.schema='{"type":"record","name":"myrecordvalue","fields":[{"name":"ID","type":"long"},{"name":"product", "type": "string"}, {"name":"quantity", "type": "int"}, {"name":"price",
+docker exec -i connect kafka-avro-console-producer --bootstrap-server broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --property key.serializer=org.apache.kafka.common.serialization.StringSerializer --property value.schema='{"type":"record","name":"myrecordvalue","fields":[{"name":"ID","type":"long"},{"name":"product", "type": "string"}, {"name":"quantity", "type": "int"}, {"name":"price",
 "type": "float"}]}'  --property parse.key=true --property key.separator="|" << EOF
 111|{"ID": 111,"product": "foo", "quantity": 100, "price": 50}
 222|{"ID": 222,"product": "bar", "quantity": 100, "price": 50}
 EOF
 ```
 
+<!-- tabs:end -->
 
 > [!TIP]
-> If AVRO schema is very complex, it is better to use [♨️ Java producer](/reusables?id=♨%EF%B8%8F-java-producers) above.
-
-<!-- tabs:end -->
+> If AVRO schema is very complex, it is better to use [playground topic produce](/playground%20topic%20produce) with a schema file, for example `playground topic produce -t a-topic --nb-messages 10 --value @schema.avsc`.
 
 ### 🔣 kafka-protobuf-console-producer
 
@@ -233,14 +225,14 @@ EOF
 
 #### **seq**
 
-```
-seq -f "{\"f1\": \"value%g\"}" 10 | docker exec -i connect kafka-protobuf-console-producer --broker-list broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic-proto --property value.schema='syntax = "proto3"; message MyRecord { string f1 = 1; }'
+```bash
+seq -f "{\"f1\": \"value%g\"}" 10 | docker exec -i connect kafka-protobuf-console-producer --bootstrap-server broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic-proto --property value.schema='syntax = "proto3"; message MyRecord { string f1 = 1; }'
 ```
 
 #### **Heredoc**
 
 ```bash
-docker exec -i connect kafka-protobuf-console-producer --broker-list broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --property value.schema='syntax = "proto3"; message MyRecord { string f1 = 1; }' << EOF
+docker exec -i connect kafka-protobuf-console-producer --bootstrap-server broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --property value.schema='syntax = "proto3"; message MyRecord { string f1 = 1; }' << EOF
 {"f1":"value1"}
 {"f1":"value2"}
 {"f1":"value3"}
@@ -250,7 +242,7 @@ EOF
 #### **Key**
 
 ```bash
-docker exec -i connect kafka-protobuf-console-producer --broker-list broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --property key.schema='syntax = "proto3"; message MyRecord { string ID = 1; }' --property value.schema='syntax = "proto3"; message MyRecord { string f1 = 1; }'  --property parse.key=true --property key.separator="|" << EOF
+docker exec -i connect kafka-protobuf-console-producer --bootstrap-server broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --property key.schema='syntax = "proto3"; message MyRecord { string ID = 1; }' --property value.schema='syntax = "proto3"; message MyRecord { string f1 = 1; }'  --property parse.key=true --property key.separator="|" << EOF
 {"ID": 111}|{"f1":"value1"}
 {"ID": 222}|{"f1":"value2"}
 {"ID": 333}|{"f1":"value3"}
@@ -260,7 +252,7 @@ EOF
 <!-- tabs:end -->
 
 > [!TIP]
-> If Protobuf schema is very complex, it is better to use [♨️ Java producer](/reusables?id=♨%EF%B8%8F-java-producers) above.
+> If Protobuf schema is very complex, it is better to use [playground topic produce](/playground%20topic%20produce) with a schema file, for example `playground topic produce -t a-topic --nb-messages 10 --value @schema.proto`.
 
 
 ### 🔣 kafka-json-schema-console-producer
@@ -269,14 +261,14 @@ EOF
 
 #### **seq**
 
-```
-seq -f "{\"f1\": \"value%g\"}" 10 | docker exec -i connect kafka-json-schema-console-producer --broker-list broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --property value.schema='{"type":"object","properties":{"f1":{"type":"string"}}}'
+```bash
+seq -f "{\"f1\": \"value%g\"}" 10 | docker exec -i connect kafka-json-schema-console-producer --bootstrap-server broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --property value.schema='{"type":"object","properties":{"f1":{"type":"string"}}}'
 ```
 
 #### **Heredoc**
 
 ```bash
-docker exec -i connect kafka-json-schema-console-producer --broker-list broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --property value.schema='{"type":"object","properties":{"f1":{"type":"string"}}}' << EOF
+docker exec -i connect kafka-json-schema-console-producer --bootstrap-server broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --property value.schema='{"type":"object","properties":{"f1":{"type":"string"}}}' << EOF
 {"f1":"value1"}
 {"f1":"value2"}
 {"f1":"value3"}
@@ -286,7 +278,7 @@ EOF
 #### **Key**
 
 ```bash
-docker exec -i connect kafka-json-schema-console-producer --broker-list broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --property key.schema='{"additionalProperties":false,"title":"ID","description":"ID description","type":"object","properties":{"ID":{"description":"ID","type":"integer"}},"required":["ID"]}' --property value.schema='{"type":"object","properties":{"f1":{"type":"string"}}}'  --property parse.key=true --property key.separator="|" << EOF
+docker exec -i connect kafka-json-schema-console-producer --bootstrap-server broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --property key.schema='{"additionalProperties":false,"title":"ID","description":"ID description","type":"object","properties":{"ID":{"description":"ID","type":"integer"}},"required":["ID"]}' --property value.schema='{"type":"object","properties":{"f1":{"type":"string"}}}'  --property parse.key=true --property key.separator="|" << EOF
 {"ID": 111}|{"f1": "value1"}
 {"ID": 222}|{"f1": "value2"}
 EOF
@@ -295,7 +287,7 @@ EOF
 <!-- tabs:end -->
 
 > [!TIP]
-> If JSON Schema schema is very complex, it is better to use [♨️ Java producer](/reusables?id=♨%EF%B8%8F-java-producers) above.
+> If JSON Schema schema is very complex, it is better to use [playground topic produce](/playground%20topic%20produce) with a schema file, for example `playground topic produce -t a-topic --nb-messages 10 --value @schema.json`.
 
 ### 🌪 kafka-producer-perf-test
 
@@ -309,7 +301,7 @@ docker exec broker kafka-producer-perf-test --topic a-topic --num-records 200000
 
 Just use `playground topic consume` [CLI](/playground%20topic%20consume), it's magic !
 
-It you prefer to use legacy way, see below:
+If you prefer to use legacy way, see below:
 
 ### 🔤 [kafka-console-consumer](https://docs.confluent.io/platform/current/tutorials/examples/clients/docs/kafka-commands.html#consume-records)
 
@@ -317,7 +309,7 @@ It you prefer to use legacy way, see below:
 
 #### **Simplest**
 
-```
+```bash
 timeout 60 docker exec broker kafka-console-consumer --bootstrap-server broker:9092 --topic a-topic --from-beginning --max-messages 1
 ```
 
@@ -333,7 +325,7 @@ timeout 60 docker exec broker kafka-console-consumer --bootstrap-server broker:9
 
 > [!TIP]
 > Using `timeout` command prevents the command to run forever.
-> It is [ignored](https://github.com/vdesabou/kafka-docker-playground/blob/c65704df7b66a2c47321d04fb75f43a8bbb4fef1/scripts/utils.sh#L650-L658) if not present on your machine.
+> It is [ignored](https://github.com/vdesabou/kafka-docker-playground/blob/master/scripts/cli/src/lib/utils_function.sh) if not present on your machine.
 
 
 ### 🔣 [kafka-avro-console-consumer](https://docs.confluent.io/platform/current/tutorials/examples/clients/docs/kafka-commands.html#consume-avro-records)
@@ -342,14 +334,14 @@ timeout 60 docker exec broker kafka-console-consumer --bootstrap-server broker:9
 
 #### **Simplest**
 
-```
-docker exec connect kafka-avro-console-consumer -bootstrap-server broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --from-beginning --max-messages 1
+```bash
+docker exec connect kafka-avro-console-consumer --bootstrap-server broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --from-beginning --max-messages 1
 ```
 
 #### **Display Key**
 
-```
-docker exec connect kafka-avro-console-consumer -bootstrap-server broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --property print.key=true --property key.separator=, --from-beginning --max-messages 1
+```bash
+docker exec connect kafka-avro-console-consumer --bootstrap-server broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --property print.key=true --property key.separator=, --from-beginning --max-messages 1
 ```
 
 #### **String Key**
@@ -361,20 +353,21 @@ docker exec connect kafka-avro-console-consumer --bootstrap-server broker:9092 -
 ```
 
 <!-- tabs:end -->
+
 ### 🔣 kafka-protobuf-console-consumer
 
 <!-- tabs:start -->
 
 #### **Simplest**
 
-```
-docker exec connect kafka-protobuf-console-consumer -bootstrap-server broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --from-beginning --max-messages 1
+```bash
+docker exec connect kafka-protobuf-console-consumer --bootstrap-server broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --from-beginning --max-messages 1
 ```
 
 #### **Display Key**
 
-```
-docker exec connect kafka-protobuf-console-consumer -bootstrap-server broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --property print.key=true --property key.separator=, --from-beginning --max-messages 1
+```bash
+docker exec connect kafka-protobuf-console-consumer --bootstrap-server broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --property print.key=true --property key.separator=, --from-beginning --max-messages 1
 ```
 
 <!-- tabs:end -->
@@ -388,14 +381,14 @@ docker exec connect kafka-protobuf-console-consumer -bootstrap-server broker:909
 
 #### **Simplest**
 
-```
-docker exec connect kafka-json-schema-console-consumer -bootstrap-server broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --from-beginning --max-messages 1
+```bash
+docker exec connect kafka-json-schema-console-consumer --bootstrap-server broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --from-beginning --max-messages 1
 ```
 
 #### **Display Key**
 
-```
-docker exec connect kafka-json-schema-console-consumer -bootstrap-server broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --property print.key=true --property key.separator=, --from-beginning --max-messages 1
+```bash
+docker exec connect kafka-json-schema-console-consumer --bootstrap-server broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --property print.key=true --property key.separator=, --from-beginning --max-messages 1
 ```
 
 <!-- tabs:end -->
@@ -406,11 +399,11 @@ Simplest option is to create a reproduction model with `playground repro bootstr
 
 <img width="774" height="285" alt="CleanShot 2026-01-13 at 14 42 46" src="https://github.com/user-attachments/assets/e1489b80-8d01-48c2-906a-b359230104e8" />
 
-it has interative selection from confluent hub:
+it has interactive selection from confluent hub:
 
 <img width="966" height="512" alt="CleanShot 2026-01-13 at 14 43 09" src="https://github.com/user-attachments/assets/a36e909a-4104-47c7-9637-31a902976141" />
 
-It will automatically the plugin(s) to the list of `CONNECT_PLUGIN_PATH`:
+It will automatically add the plugin(s) to the list of `CONNECT_PLUGIN_PATH`:
 
 Example with S3 source and S3 sink:
 
@@ -428,6 +421,12 @@ services:
   connect:
     environment:
       CONNECT_PLUGIN_PATH: /usr/share/confluent-hub-components/confluentinc-kafka-connect-s3-source,/usr/share/confluent-hub-components/confluentinc-connect-transforms
+```
+
+It can also be done non-interactively with `--connector-plugin` (repeatable):
+
+```bash
+playground repro bootstrap -f s3-sink<tab> --description "s3 sink with transforms" --connector-plugin confluentinc/connect-transforms
 ```
 
 > [!TIP]
@@ -457,46 +456,20 @@ Here is a full example using [HDFS 2 sink](https://github.com/vdesabou/kafka-doc
 
 3. Switch to the branch corresponding to the connector version you're going to run. 
  
-In my example, the connector version is `10.1.1`, so I'm switching to branch tag `v10.1.1`:
+In this example, the connector version is `10.1.1`, so switch to branch tag `v10.1.1` (use the version you are actually running, see `playground connector versions`):
 
 ![remote_debugging](./images/remote_debugging2.jpg)
 
-4. Execute [🧠 CLI](/cli) with `enable-remote-debugging` command:
+4. Remote debugging is enabled by default on the `connect` container (port `5005`), so there is nothing to do for connectors.
+
+For other containers (for example `broker` or `schema-registry`), use [🧠 CLI](/cli) with `enable-remote-debugging` [command](/playground%20debug%20enable-remote-debugging):
 
 ```bash
-$ playground debug enable-remote-debugging -c connect
-namenode is up-to-date
-zookeeper is up-to-date
-hive-metastore-postgresql is up-to-date
-datanode is up-to-date
-presto-coordinator is up-to-date
-hive-server is up-to-date
-hive-metastore is up-to-date
-broker is up-to-date
-schema-registry is up-to-date
-Recreating connect ... done
-control-center is up-to-date
-15:34:36 ℹ️ If you use Visual Studio Code:
-15:34:36 ℹ️ Edit .vscode/launch.json with
-15:34:36 ℹ️ 
-{
-    "version": "0.2.0",
-    "configurations": [
-    
-        {
-            "type": "java",
-            "name": "Debug connect container",
-            "request": "attach",
-            "hostName": "127.0.0.1",
-            "port": 5005,
-            "timeout": 30000
-        }
-    ]
-}
-
-15:34:36 ℹ️ See https://kafka-docker-playground.io/#/reusables?id=✨-remote-debugging
+$ playground debug enable-remote-debugging -c broker
 ```
-   
+
+It sets `KAFKA_DEBUG` and `JAVA_DEBUG_OPTS` environment variables on the container (using `playground container set-environment-variables`) and displays the configuration to add in `.vscode/launch.json`.
+
 5. [Configure](https://code.visualstudio.com/docs/java/java-debugging#_configure) remote debugging by clicking on menu `Run`->`Add Configuration...`:
 
 ![remote_debugging](./images/remote_debugging1.jpg)
@@ -537,7 +510,7 @@ Note: you can also directly edit file `.vscode/launch.json`:
 
 ![remote_debugging](./images/remote_debugging3.jpg)
 
-5. Go in `Run and Debug` and make sure to select the `Debug Connect container` config:
+6. Go in `Run and Debug` and make sure to select the `Debug connect container` config:
 
 ![remote_debugging](./images/remote_debugging5.jpg)
 
@@ -552,7 +525,7 @@ Note: you can also directly edit file `.vscode/launch.json`:
 9. Process some messages:
 
 ```bash
-seq -f "{\"f1\": \"value%g\"}" 10 | docker exec -i connect kafka-avro-console-producer --broker-list broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic test_hdfs --property value.schema='{"type":"record","name":"myrecord","fields":[{"name":"f1","type":"string"}]}'
+seq -f "{\"f1\": \"value%g\"}" 10 | docker exec -i connect kafka-avro-console-producer --bootstrap-server broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic test_hdfs --property value.schema='{"type":"record","name":"myrecord","fields":[{"name":"f1","type":"string"}]}'
 ```
 
 10. See results 🍿:
@@ -607,14 +580,20 @@ playground connector log-level --level TRACE
 
 ### 🔑 SSL debug
 
+> [!NOTE]
+> The default `connect` service already sets `KAFKA_OPTS: -Ddynamic.worker.config.file=/dev/null` (see [`environment/plaintext/docker-compose.yml`](https://github.com/vdesabou/kafka-docker-playground/blob/master/environment/plaintext/docker-compose.yml)), so keep it when you override `KAFKA_OPTS` in the snippets below.
+
 Add `-Djavax.net.debug=all` in your `docker-compose` file:
 
 *Example:*
 
 ```yml
   connect:
-    KAFKA_OPTS: -Djavax.net.debug=all (or -Djavax.net.debug=ssl:handshake)
+    environment:
+      KAFKA_OPTS: -Ddynamic.worker.config.file=/dev/null -Djavax.net.debug=all
 ```
+
+Use `-Djavax.net.debug=ssl:handshake` instead of `-Djavax.net.debug=all` to only see the handshake.
 
 Or just use [CLI](/playground%20debug%20java-debug) `playground debug java-debug` with `--type ssl_all` or `--type ssl_handshake`.
 
@@ -626,7 +605,8 @@ Add `-Dsun.security.krb5.debug=true` in your `docker-compose` file:
 
 ```yml
   connect:
-    KAFKA_OPTS: -Dsun.security.krb5.debug=true
+    environment:
+      KAFKA_OPTS: -Ddynamic.worker.config.file=/dev/null -Dsun.security.krb5.debug=true
 ```
 
 Or just use [CLI](/playground%20debug%20java-debug) `playground debug java-debug` with `--type kerberos`.
@@ -640,7 +620,7 @@ Add `-verbose:class` in your `docker-compose` file to troubleshoot a `ClassNotFo
 ```yml
   connect:
     environment:
-      KAFKA_OPTS: -verbose:class
+      KAFKA_OPTS: -Ddynamic.worker.config.file=/dev/null -verbose:class
 ```
 
 Or just use [CLI](/playground%20debug%20java-debug) `playground debug java-debug` with `--type class_loading`.
@@ -675,7 +655,7 @@ Example:
     volumes:
       - ../../connect/connect-servicenow-source/nginx-proxy/logging.properties:/tmp/logging.properties
     environment:
-      KAFKA_OPTS: -Djava.util.logging.config.file=/tmp/logging.properties
+      KAFKA_OPTS: -Ddynamic.worker.config.file=/dev/null -Djava.util.logging.config.file=/tmp/logging.properties
 ```
 
 This is how the `logging.properties` looks like:
@@ -689,16 +669,21 @@ com.google.api.client.http.level=ALL
 
 ### 🌍 Debug HTTP sink
 
-This connector use low level [Apache HTTP client](https://hc.apache.org/httpcomponents-client-5.2.x/) library.
+This connector uses low level [Apache HTTP client](https://hc.apache.org/httpcomponents-client-5.2.x/) library.
 
-In order to activate debug logs to see requests/responses, you can use `jcl-over-slf4j-2.0.7.jar` (wget https://repo1.maven.org/maven2/org/slf4j/jcl-over-slf4j/2.0.7/jcl-over-slf4j-2.0.7.jar):
+In order to activate debug logs to see requests/responses, you can add `jcl-over-slf4j-2.0.7.jar` to the connector `lib` folder before starting the environment.
 
-Example:
+Example (from [`http_basic_auth.sh`](https://github.com/vdesabou/kafka-docker-playground/blob/master/connect/connect-http-sink/http_basic_auth.sh)):
 
-```yml
-  connect:
-    volumes:
-      - ../../connect/connect-http-sink/jcl-over-slf4j-2.0.7.jar:/usr/share/confluent-hub-components/confluentinc-kafka-connect-http/lib/jcl-over-slf4j-2.0.7.jar
+```bash
+cd ../../connect/connect-http-sink/
+if [ ! -f jcl-over-slf4j-2.0.7.jar ]
+then
+     wget -q https://repo1.maven.org/maven2/org/slf4j/jcl-over-slf4j/2.0.7/jcl-over-slf4j-2.0.7.jar
+fi
+mkdir -p ../../confluent-hub/confluentinc-kafka-connect-http/lib/
+cp jcl-over-slf4j-2.0.7.jar ../../confluent-hub/confluentinc-kafka-connect-http/lib/jcl-over-slf4j-2.0.7.jar
+cd -
 ```
 
 > [!NOTE]
@@ -758,7 +743,7 @@ Example:
 4. Check TLS traffic in clear text by checking logs of `mitmproxy` container
 
 ```bash
-playgroundd container  logs -c mitmproxy
+playground container logs -c mitmproxy
 
 or
 
@@ -767,68 +752,24 @@ playground container logs --open --container mitmproxy
 
 ### 🕵 TCP Dump
 
-It is sometime necessary to sniff the network in order to better understand what's going on.
+It is sometimes necessary to sniff the network in order to better understand what's going on.
 
-Just use [CLI](/cli?id=%f0%9f%8e%af-thread-dump) `playground debug tcp-dump`.
+Just use [CLI](/playground%20debug%20tcp-dump) `playground debug tcp-dump`.
 
 ```bash
-playground debug tcp-dump --help
-playground debug tcp-dump - 🕵️‍♂️ Take a tcp dump (sniffing network)
-
-== Usage ==
-  playground debug tcp-dump [OPTIONS]
-  playground debug tcp-dump --help | -h
-
-== Options ==
-  --container, -c CONTAINER
-    🐳 Container name
-    Default: connect
-
-  --port PORT
-    Port on which tcp dump should be done, if not set sniffing is done on every
-    port
-
-  --duration DURATION
-    Duration of the dump (default is 30 seconds).
-    Default: 30
-
-  --help, -h
-    Show this help
-
-Examples
-  playground debug tcp-dump --container control-center --port 9021 --duration 60
+playground debug tcp-dump --container control-center --port 9021 --duration 60
 ```
 
 ### 👻 Heap Dump
 
-It is sometime necessary to get a [heap dump](https://www.baeldung.com/java-heap-dump-capture).
+It is sometimes necessary to get a [heap dump](https://www.baeldung.com/java-heap-dump-capture).
 
-Just use [CLI](/cli?id=%f0%9f%8e%af-thread-dump) `playground debug heap-dump`.
+Just use [CLI](/playground%20debug%20heap-dump) `playground debug heap-dump`. It saves output to a `.hprof` file that can be read with [VisualVM](https://visualvm.github.io/) or [MAT](https://www.eclipse.org/mat/), or analyzed with [`playground debug heap-analyze`](/playground%20debug%20heap-analyze).
 
 ```bash
-$ playground debug heap-dump --help  
 playground debug heap-dump
-
-  👻 Take a heap dump
-  
-  🔖 It will save output to a .hprof file. VisualVM (https://visualvm.github.io/)
-  or MAT (https://www.eclipse.org/mat/) can be used to read the file.
-
-== Usage ==
-  playground debug heap-dump [OPTIONS]
-  playground debug heap-dump --help | -h
-
-== Options ==
-  --container, -c CONTAINER
-    🐳 Container name
-    Default: connect
-
-  --help, -h
-    Show this help
-
-Examples
-  playground debug heap-dump
-  playground debug heap-dump --container broker
+playground debug heap-dump -c connect -c broker
+playground debug heap-dump --container schema-registry --live
 ```
 
 You can also set `-XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/tmp` to generate heap dump automatically when hitting OOM:
@@ -844,140 +785,101 @@ Example:
 
 ### 🎯 Thread Dump
 
-It is sometime necessary to get a [Java thread dump](https://www.baeldung.com/java-thread-dump).
+It is sometimes necessary to get a [Java thread dump](https://www.baeldung.com/java-thread-dump).
 
-Just use [CLI](/cli?id=%f0%9f%8e%af-thread-dump) `playground debug thread-dump`.
+Just use [CLI](/playground%20debug%20thread-dump) `playground debug thread-dump`. It saves output to a file and opens it with the editor set with `playground config editor`.
 
 ```bash
-$ playground debug thread-dump --help
 playground debug thread-dump
-
-  🎯 Take a java thread dump
-  
-  🔖 It will save output to a file and open with text editor set with config.ini
-  (default is code)
-
-== Usage ==
-  playground debug thread-dump [OPTIONS]
-  playground debug thread-dump --help | -h
-
-== Options ==
-  --container, -c CONTAINER
-    🐳 Container name
-    Default: connect
-
-  --help, -h
-    Show this help
-
-Examples
-  playground debug thread-dump
-  playground debug thread-dump --container broker
+playground debug thread-dump -c connect -c broker
 ```
 You can use [Thread Dump Analyzer](http://the-babel-tower.github.io/tda.html) for example to analyze results.
 
 ### 🛩️ Flight Recorder
 
-It is sometime necessary to monitor with [Flight Recorder](https://www.baeldung.com/java-flight-recorder-monitoring).
+It is sometimes necessary to monitor with [Flight Recorder](https://www.baeldung.com/java-flight-recorder-monitoring).
 
-Just use [CLI](/cli?id=%f0%9f%8e%af-thread-dump) `playground debug flight-recorder`.
+Just use [CLI](/playground%20debug%20flight-recorder) `playground debug flight-recorder`. Open the `.jfr` file with [JDK Mission Control](https://jdk.java.net/jmc/).
 
 ```bash
-$ playground debug flight-recorder --help 
-playground debug flight-recorder
-
-  🛩️ Record flight recorder
-  
-  Read more about it at https://www.baeldung.com/java-flight-recorder-monitoring
-  
-  Open the jfr file with JDK Mission Control JMC(https://jdk.java.net/jmc/)
-
-== Usage ==
-  playground debug flight-recorder [OPTIONS]
-  playground debug flight-recorder --help | -h
-
-== Options ==
-  --container, -c CONTAINER
-    🐳 Container name
-    Default: connect
-
-  --action ACTION (required)
-    🟢 start or stop
-    Allowed: start, stop
-
-  --help, -h
-    Show this help
-
-Examples
-  playground debug flight-recorder --action start
-  playground debug flight-recorder --action stop
+playground debug flight-recorder --action start
+playground debug flight-recorder --action stop
 ```
+
+### 🧰 More debug commands
+
+| Command | Description |
+|---|---|
+| [`playground debug java-debug`](/playground%20debug%20java-debug) | 🤎 JVM arguments for SSL, Kerberos or Class Loading |
+| [`playground debug generate-diagnostics`](/playground%20debug%20generate-diagnostics) | ⛑️ Generate a diagnostic bundle with Diagnostics Bundle Tool |
+| [`playground debug heap-analyze`](/playground%20debug%20heap-analyze) | 🔬 Analyze a heap dump file using Eclipse MAT |
+| [`playground debug gc-analyze`](/playground%20debug%20gc-analyze) | 📈 Analyze JVM Garbage Collection logs |
+| [`playground debug jscissors`](/playground%20debug%20jscissors) | ✂️ Instrumentation framework to analyse control flow and perform specific logging |
+| [`playground debug testssl`](/playground%20debug%20testssl) | 🔐 Test TLS/SSL encryption using [testssl.sh](https://testssl.sh/) |
+| [`playground debug disable-remote-debugging`](/playground%20debug%20disable-remote-debugging) | Disable java remote debugging for a container |
 
 ## 🚫 Blocking traffic
 
-It is sometime necessary for a reproduction model to simulate network issues like blocking incoming or outgoing traffic.
+It is sometimes necessary for a reproduction model to simulate network issues like blocking incoming or outgoing traffic.
 
-Just use [CLI](/cli?id=%f0%9f%8e%af-thread-dump) `playground debug block-traffic`.
+Just use [CLI](/playground%20debug%20block-traffic) `playground debug block-traffic`.
 
 ```bash
-$ playground debug block-traffic --help
-playground debug block-traffic - 🚫 Blocking traffic using iptables
-
-== Usage ==
-  playground debug block-traffic [OPTIONS]
-  playground debug block-traffic --help | -h
-
-== Options ==
-  --container, -c CONTAINER
-    🐳 Container name
-    Default: connect
-
-  --destination DESTINATION (required)
-    Destination: it could be an ip address, a container name or a hostname
-
-  --port PORT
-    Port on which tcp traffic should be blocked
-
-  --action ACTION (required)
-    🟢 start or stop
-    Allowed: start, stop
-
-  --help, -h
-    Show this help
-
-Examples
-  playground debug block-traffic --destination google.com --action start
-  playground debug block-traffic --container broker --destination zookeeper
-  --action start
+playground debug block-traffic --destination google.com --action start
+playground debug block-traffic --container schema-registry --destination broker --port 9092 --action start
+playground debug block-traffic -c connect -c ksqldb-server --destination schema-registry --action stop
 ```
 
-<!-- ## 🐌 Add latency
+## 🐌 Add latency, packet loss or corruption
 
-It is sometime necessary for a reproduction model to simulate latency between components.
+It is sometimes necessary for a reproduction model to simulate latency, packet loss or packet corruption between components.
 
-The [connect image](/how-it-works?id=🔗-connect-image-used) used by the playground contains [`tc`](https://man7.org/linux/man-pages/man8/tc.8.html) tool, and most importantly contains functions [`add_latency()`](https://github.com/vdesabou/kafka-docker-playground/blob/495578d413ff6b9db1d612ee8b1ebdf695f7ab51/scripts/utils.sh#L1062-L1095), [`get_latency()`](https://github.com/vdesabou/kafka-docker-playground/blob/495578d413ff6b9db1d612ee8b1ebdf695f7ab51/scripts/utils.sh#L1052-L1059)` and `[clear_traffic_control()](https://github.com/vdesabou/kafka-docker-playground/blob/495578d413ff6b9db1d612ee8b1ebdf695f7ab51/scripts/utils.sh#L1039-L1050)`:
+The playground provides functions (in [`scripts/cli/src/lib/utils_function.sh`](https://github.com/vdesabou/kafka-docker-playground/blob/master/scripts/cli/src/lib/utils_function.sh)) based on [`tc`](https://man7.org/linux/man-pages/man8/tc.8.html):
+
+| Function | Usage |
+|---|---|
+| `add_latency` | `add_latency <src_container> <dst_container or ip> <latency>`, e.g. `add_latency connect broker 100ms` |
+| `add_packet_loss` | `add_packet_loss <src_container> <dst_container or ip> <loss>`, e.g. `add_packet_loss connect broker 1%` |
+| `add_packet_corruption` | `add_packet_corruption <src_container> <dst_container or ip> <corruption>`, e.g. `add_packet_corruption connect broker 1%` |
+| `get_latency` | `get_latency <src_container> <dst_container>`: average ping time in ms |
+| `clear_traffic_control` | `clear_traffic_control <src_container>`: removes all `tc` settings |
 
 > [!TIP]
-> A complete example is available [here](https://github.com/vdesabou/kafka-docker-playground/blob/master/connect/connect-servicenow-source/servicenow-source-repro-read-timeout.sh).
+> A complete example is available [here](https://github.com/vdesabou/kafka-docker-playground/blob/master/other/monitoring-sink-latency/start.sh).
 
 *Example:*
 
-Adding latency from `nginx_proxy` to `connect`:
-
 ```bash
-add_latency nginx_proxy connect 25000ms
+latency=$(get_latency connect broker)
+log "Latency from connect to broker BEFORE traffic control: $latency ms"
 
-latency_put=$(get_latency nginx_proxy connect)
-log "Latency from nginx_proxy to connect AFTER traffic control: $latency_put ms"
+add_latency connect broker 100ms
+
+latency=$(get_latency connect broker)
+log "Latency from connect to broker AFTER traffic control: $latency ms"
 
 log "Clear traffic control"
-clear_traffic_control nginx_proxy
+clear_traffic_control connect
 ```
 
-`connect` image has `tc` installed but if you want to use it with broker for example, you need to install it, for example:
+> [!NOTE]
+> The source container needs the `tc` tool (`iproute-tc` package). The `connect` image used by the playground has it installed.
 
-```bash
-docker exec --privileged --user root -i broker bash -c 'yum install -y libmnl && wget http://vault.centos.org/8.1.1911/BaseOS/x86_64/os/Packages/iproute-tc-4.18.0-15.el8.x86_64.rpm && rpm -i --nodeps --nosignature http://vault.centos.org/8.1.1911/BaseOS/x86_64/os/Packages/iproute-tc-4.18.0-15.el8.x86_64.rpm'
-``` -->
+## 🧰 Useful functions for reproduction models
+
+All examples source [`scripts/utils.sh`](https://github.com/vdesabou/kafka-docker-playground/blob/master/scripts/utils.sh), which loads the functions from [`scripts/cli/src/lib/utils_function.sh`](https://github.com/vdesabou/kafka-docker-playground/blob/master/scripts/cli/src/lib/utils_function.sh). The most useful ones:
+
+| Function | Usage |
+|---|---|
+| `wait_for_log` | `wait_for_log "<message>" [container, default connect] [max wait in seconds, default 600]`: wait until a message appears in container logs. Prefer this over `sleep`. CLI equivalent: `playground container logs -c connect --wait-for-log "<message>" --max-wait 120` |
+| `wait_for_datagen_connector_to_inject_data` | `wait_for_datagen_connector_to_inject_data <connector name> <nb tasks>`: wait until a datagen connector has produced its configured number of messages |
+| `retrycmd` | `retrycmd <max attempts> <sleep interval in seconds> <command>`: run a command until it succeeds, e.g. `retrycmd 10 5 check_my_condition` |
+| `block_host` / `remove_partition` | `block_host <container> <ip>...` drops all traffic from a container to the given IPs, `remove_partition <container>...` removes it |
+| `version_gt` | `if version_gt $TAG_BASE "7.9.99"; then ... fi`: compare versions |
+| `connect_cp_version_greater_than_8` | `if connect_cp_version_greater_than_8; then ... fi`: true when the Connect image is CP 8.x or later |
+| `get_3rdparty_file` | `get_3rdparty_file <file>`: download a third-party file (driver, jar...) if it is not already present |
+| `install_connector_with_retry` | `install_connector_with_retry "<install command>"`: install a connector, with retries (`CONNECTOR_INSTALL_MAX_RETRIES`, default 5) |
+| `create_topic` / `delete_topic` | `create_topic <topic>`: create or delete a topic on Confluent Cloud (uses the `confluent` CLI, for `ccloud` examples) |
 
 ## 🏚 Simulate TCP connections problems
 
@@ -985,27 +887,20 @@ docker exec --privileged --user root -i broker bash -c 'yum install -y libmnl &&
 
 Just use [CLI](/playground%20tcp-proxy) `playground tcp-proxy`.
 
-```bash
-$ playground tcp-proxy
- 🏚 Zazkia TCP Proxy commands
+Main commands (see [CLI](/playground%20tcp-proxy) for the full list):
 
-== Usage ==
-  playground tcp-proxy COMMAND
-  playground tcp-proxy [COMMAND] --help | -h
-
-== Commands ==
-  start                             💗 Start the TCP proxy and automatically replace connector config with zazkia hostname and port 49998
-  get-connections                   🧲 Get Zazkia active TCP connections config and stats
-  delay                             ⏲️ Add milliseconds delay to service response.
-  break                             💔 Break sending the response to the client.
-  close-connection                  ❌ Close the Zazkia active TCP connections
-  close-all-connection-with-error   🧹 Close all Zazkia TCP connections which are in error state (close all with error button in Zazkia UI)
-  toggle-accept-connections         🙅‍♂️ Change whether new connections can be accepted
-  toggle-reads-client               ✅ Change whether reading data from the client is enabled.
-  toggle-reads-service              ✅ Change whether reading data from the service is enabled.
-  toggle-writes-client              ✅ Change whether writing data to the client is enabled.
-  toggle-writes-service             ✅ Change whether reading data to the service is enabled.
-```
+| Command | Description |
+|---|---|
+| [`start`](/playground%20tcp-proxy%20start) | 💗 Start the TCP proxy and automatically replace connector config with zazkia hostname and port 49998 |
+| [`open-ui`](/playground%20tcp-proxy%20open-ui) | 🌐 Open the Zazkia UI |
+| [`get-connections`](/playground%20tcp-proxy%20get-connections) | 🧲 Get Zazkia active TCP connections config and stats |
+| [`delay`](/playground%20tcp-proxy%20delay) | ⏲️ Add milliseconds delay to service response |
+| [`break`](/playground%20tcp-proxy%20break) | 💔 Break sending the response to the client |
+| [`close-connection`](/playground%20tcp-proxy%20close-connection) | ❌ Close the Zazkia active TCP connections |
+| [`close-all-connection-with-error`](/playground%20tcp-proxy%20close-all-connection-with-error) | 🧹 Close all Zazkia TCP connections which are in error state |
+| [`toggle-accept-connections`](/playground%20tcp-proxy%20toggle-accept-connections) | 🙅‍♂️ Change whether new connections can be accepted |
+| [`toggle-reads-client`](/playground%20tcp-proxy%20toggle-reads-client) / [`toggle-reads-service`](/playground%20tcp-proxy%20toggle-reads-service) | ✅ Change whether reading data from the client / service is enabled |
+| [`toggle-writes-client`](/playground%20tcp-proxy%20toggle-writes-client) / [`toggle-writes-service`](/playground%20tcp-proxy%20toggle-writes-service) | ✅ Change whether writing data to the client / service is enabled |
 
 ## 🌐 Using HTTPS proxy
 
@@ -1029,9 +924,8 @@ Here are the steps to follow:
 
 > [!TIP]
 > If you need a proxy to reach another docker container, as opposed to a domain, use following example, where `schema-registry` is the name of the container:
-> 
 
-```
+```nginx
 http {
     access_log /var/log/nginx_access.log;
     error_log /var/log/nginx_errors.log;
@@ -1080,16 +974,16 @@ http {
     dns: 0.0.0.0
 ```
 
-5. In you connector configuration, update the proxy configuration parameter with `https://nginx-proxy:8888`.
+5. In your connector configuration, update the proxy configuration parameter with `http://nginx-proxy:8888`.
 
 *Example:*
 
 ```json
-"s3.proxy.url": "https://nginx-proxy:8888"
+"s3.proxy.url": "http://nginx-proxy:8888"
 ```
 
 > [!NOTE]
-> If your proxy requires HTTP2 support, there is a full example available in this example: [GCP Pub/Sub Source connector](https://github.com/vdesabou/kafka-docker-playground/blob/master/connect/connect-gcp-pubsub-source/gcp-pubsub-nginx-proxy.sh)
+> If your proxy requires HTTP2 support, there is a full example available in this example: [GCP Pub/Sub Source connector](https://github.com/vdesabou/kafka-docker-playground/blob/master/connect/connect-gcp-pubsub-source/gcp-pubsub-source-nginx-proxy.sh)
 
 ### 🔐 Proxy with BASIC authentication
 
@@ -1123,7 +1017,7 @@ Proxy details:
 Example with S3 sink:
 
 ```json
-  "s3.proxy.url": "https://squid:8888",
+  "s3.proxy.url": "http://squid:8888",
   "s3.proxy.user": "admin",
   "s3.proxy.password": "1234",
 ```
@@ -1139,7 +1033,7 @@ Example with Salesforce:
 
 ## ♨️ Using specific JDK
 
-It is sometime necessary for an investigation to replace JDK installed on connect image for example.
+It is sometimes necessary for an investigation to replace JDK installed on connect image for example.
 
 Here are some examples:
 
@@ -1274,7 +1168,10 @@ OpenJDK 64-Bit Server VM Zulu21.34+19-CA (build 21.0.3+9-LTS, mixed mode, sharin
 
 Here are the steps to follow:
 
-1. Get the Oracle JDK `.rpm` version link you want to install from the [website](https://www.oracle.com/java/technologies/downloads/). In our example, that will be `jdk-8u201-linux-x64.rpm`
+1. Get the Oracle JDK `.rpm` version link you want to install from the [website](https://www.oracle.com/java/technologies/downloads/). In our example, that will be `jdk-21_linux-x64_bin.rpm`
+
+> [!NOTE]
+> CP 8.x requires Java 17 or later, so pick a JDK 17+ build. CP images are based on UBI minimal, which ships `microdnf` and not `yum`: the `Dockerfile` below installs `yum` first.
 
 2. Add this in your `docker-compose` file:
 
@@ -1291,13 +1188,16 @@ Here are the steps to follow:
 
 3. Create a `Dockerfile` file in `context` directory above (`../../connect/connect-filestream-sink/`).
 
-```yml
+```dockerfile
 ARG CP_CONNECT_IMAGE
 ARG CP_CONNECT_TAG
 FROM ${CP_CONNECT_IMAGE}:${CP_CONNECT_TAG}
-COPY jdk-8u201-linux-x64.rpm /tmp/
+COPY jdk-21_linux-x64_bin.rpm /tmp/
 USER root
-RUN yum -y install /tmp/jdk-8u201-linux-x64.rpm && alternatives --set java /usr/java/jdk1.8.0_201-amd64/jre/bin/java && rm /tmp/jdk-8u201-linux-x64.rpm
+RUN if command -v microdnf >/dev/null 2>&1; then microdnf -y install yum; fi \
+ && yum -y install /tmp/jdk-21_linux-x64_bin.rpm \
+ && alternatives --set java /usr/lib/jvm/jdk-21-oracle-x64/bin/java \
+ && rm /tmp/jdk-21_linux-x64_bin.rpm
 USER appuser
 ```
 
@@ -1308,9 +1208,6 @@ USER appuser
 
 ```bash
 docker exec connect java -version
-java version "1.8.0_201"
-Java(TM) SE Runtime Environment (build 1.8.0_201-b09)
-Java HotSpot(TM) 64-Bit Server VM (build 25.201-b09, mixed mode)
 ```
 
 ## 🏎️ Performance testing
@@ -1328,7 +1225,11 @@ Example:
 
 ```bash
 $ playground topic produce -t mytopic --value @predefined-schemas/avro/customer.avsc --nb-messages -1 --max-nb-messages-per-batch 300000  --sleep-time-between-batch 1  --record-size 1024
-```r all Oracle CDC and JDBC source connector with Oracle examples, you can easily inject load in table using, the following steps.
+```
+
+### 👉 Oracle
+
+For all Oracle CDC and JDBC source connector with Oracle examples, you can easily inject load in table using, the following steps.
 
 You can enable this by setting flag `--enable-sql-datagen`, it will start inserting rows at the end of the example for a duration that you can configure:
 
@@ -1337,68 +1238,70 @@ Example:
 ```bash
 DURATION=10
 log "Injecting data for $DURATION minutes"
-docker exec -d oracle-datagen bash -c "java ${JAVA_OPTS} -jar oracle-datagen-1.0-SNAPSHOT-jar-with-dependencies.jar --host oracle --username C##MYUSER --password mypassword --sidOrServerName sid --sidOrServerNameVal ORCLCDB --maxPoolSize 10 --durationTimeMin $DURATION"
+playground container exec --container sql-datagen --command "bash -c \"java ${JAVA_OPTS} -jar sql-datagen-1.0-SNAPSHOT-jar-with-dependencies.jar --host oracle --username C##MYUSER --password mypassword --sidOrServerName sid --sidOrServerNameVal ORCLCDB --maxPoolSize 10 --durationTimeMin $DURATION\""
 ```
 
+For PDB examples, use `--sidOrServerName service_name --sidOrServerNameVal ORCLPDB1` instead.
+
 > [!TIP]
-> You can increase throughtput with `maxPoolSize`.
+> You can increase throughput with `maxPoolSize`.
 
 ### 👉 Microsoft SQL Server
 
 For all Debezium and JDBC source connector with Microsoft SQL Server examples, you can easily inject load in table using, the following steps.
 
-You can enable this by setting flag `enable-sql-datagen`, it will start inserting rows at the end of the example for a duration that you can configure:
+You can enable this by setting flag `--enable-sql-datagen`, it will start inserting rows at the end of the example for a duration that you can configure:
 
 Example:
 
 ```bash
 DURATION=10
 log "Injecting data for $DURATION minutes"
-docker exec -d sql-datagen bash -c "java ${JAVA_OPTS} -jar sql-datagen-1.0-SNAPSHOT-jar-with-dependencies.jar --username sa --password 'Password!' --connectionUrl 'jdbc:sqlserver://sqlserver:1433;databaseName=testDB;encrypt=false' --maxPoolSize 10 --durationTimeMin $DURATION"
+playground container exec --container sql-datagen --command "bash -c \"java ${JAVA_OPTS} -jar sql-datagen-1.0-SNAPSHOT-jar-with-dependencies.jar --username sa --password 'Password!' --connectionUrl 'jdbc:sqlserver://sqlserver:1433;databaseName=testDB;encrypt=false' --maxPoolSize 10 --durationTimeMin $DURATION\""
 ```
 
 > [!TIP]
-> You can increase throughtput with `maxPoolSize`.
+> You can increase throughput with `maxPoolSize`.
 
 ### 👉 PostgreSQL
 
 For all Debezium and JDBC source connector with PostgreSQL examples, you can easily inject load in table using, the following steps.
 
-You can enable this by setting flag `enable-sql-datagen`, it will start inserting rows at the end of the example for a duration that you can configure:
+You can enable this by setting flag `--enable-sql-datagen`, it will start inserting rows at the end of the example for a duration that you can configure:
 
 Example:
 
 ```bash
 DURATION=10
 log "Injecting data for $DURATION minutes"
-docker exec -d sql-datagen bash -c "java ${JAVA_OPTS} -jar sql-datagen-1.0-SNAPSHOT-jar-with-dependencies.jar --connectionUrl 'jdbc:postgresql://postgres/postgres?user=myuser&password=mypassword&ssl=false' --maxPoolSize 10 --durationTimeMin $DURATION"
+playground container exec --container sql-datagen --command "bash -c \"java ${JAVA_OPTS} -jar sql-datagen-1.0-SNAPSHOT-jar-with-dependencies.jar --connectionUrl 'jdbc:postgresql://postgres/postgres?user=myuser&password=mypassword&ssl=false' --maxPoolSize 10 --durationTimeMin $DURATION\""
 ```
 
 > [!TIP]
-> You can increase throughtput with `maxPoolSize`.
+> You can increase throughput with `maxPoolSize`.
 
 ### 👉 MySQL
 
 For all Debezium and JDBC source connector with MySQL examples, you can easily inject load in table using, the following steps.
 
-You can enable this by setting flag `enable-sql-datagen`, it will start inserting rows at the end of the example for a duration that you can configure:
+You can enable this by setting flag `--enable-sql-datagen`, it will start inserting rows at the end of the example for a duration that you can configure:
 
 Example:
 
 ```bash
 DURATION=10
 log "Injecting data for $DURATION minutes"
-docker exec -d sql-datagen bash -c "java ${JAVA_OPTS} -jar sql-datagen-1.0-SNAPSHOT-jar-with-dependencies.jar --connectionUrl 'jdbc:mysql://mysql:3306/mydb?user=user&password=password&useSSL=false' --maxPoolSize 10 --durationTimeMin $DURATION"
+playground container exec --container sql-datagen --command "bash -c \"java ${JAVA_OPTS} -jar sql-datagen-1.0-SNAPSHOT-jar-with-dependencies.jar --connectionUrl 'jdbc:mysql://mysql:3306/mydb?user=user&password=password&useSSL=false&allowPublicKeyRetrieval=true' --maxPoolSize 10 --durationTimeMin $DURATION\""
 ```
 
 > [!TIP]
-> You can increase throughtput with `maxPoolSize`.
+> You can increase throughput with `maxPoolSize`.
 
 ### 👉 MongoDB
 
 Here is an example that I used to setup a reproduction environment where I inject 250 (`REQ`) req/s on 13 (`NB_COLLECTIONS`) collections. 
 It is sending 50000 (`TOTAL_REQ`) records per collection.
-The size of the record can be ajusted by changing the payload `{ _id : "Document " + j + "_" + i, first_name : 'john', last_name : 'hope', email : 'john@email/com', timestamp: new Date().getTime() }`
+The size of the record can be adjusted by changing the payload `{ _id : "Document " + j + "_" + i, first_name : 'john', last_name : 'hope', email : 'john@email/com', timestamp: new Date().getTime() }`
 
 ```bash
 function inject () {
@@ -1474,7 +1377,7 @@ EOF
 
 In order to generate perf injection, you can use [Solace SDKPerf tool](https://docs.solace.com/API/SDKPerf/SDKPerf.htm), [download](https://solace.com/downloads/?fwp_downloads_types=other) it first.
 
-(optional) Add in your docker-compose file a EQMX MQTT broker:
+(optional) Add in your docker-compose file a EMQX MQTT broker:
 
 ```yml
   emqx:
@@ -1490,7 +1393,7 @@ In order to generate perf injection, you can use [Solace SDKPerf tool](https://d
       - 18083:18083
 ```
 
-Note: EQMX dashboard is available on http://localhost:18083/ (`admin`/`public`)
+Note: EMQX dashboard is available on http://localhost:18083/ (`admin`/`public`)
 
 Send MQTT messages at 3000 messages/sec with QOS 1 (`"mqtt.topics":"test_mqtt"`):
 

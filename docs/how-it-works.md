@@ -6,7 +6,7 @@ Before learning how to create your own examples/reproduction models, here are so
 
 ## 🐳 Docker override
 
-The playground makes extensive use of docker-compose [override](https://docs.docker.com/compose/extends/) (i.e `docker-compose -f docker-compose1.yml -f docker-compose2.yml ...`).
+The playground makes extensive use of Docker Compose [override](https://docs.docker.com/compose/how-tos/multiple-compose-files/merge/) (i.e `docker compose -f docker-compose1.yml -f docker-compose2.yml ...`).
 
 Each test is built based on an [environment](#/content?id=%F0%9F%94%90-environments), [PLAINTEXT](https://github.com/vdesabou/kafka-docker-playground/tree/master/environment/plaintext) being the most common one.
 
@@ -30,7 +30,6 @@ The *local* [`${PWD}/docker-compose.plaintext.yml`](https://github.com/vdesabou/
 
 ```yml
 ---
-version: '3.5'
 services:
   activemq:
     image: rmohr/activemq:5.15.9
@@ -50,11 +49,14 @@ It contains:
 * `activemq` which is a container required for the test.
 * `connect` container, which overrides value `CONNECT_PLUGIN_PATH` from [`environment/plaintext/docker-compose.yml`](https://github.com/vdesabou/kafka-docker-playground/blob/master/environment/plaintext/docker-compose.yml)
 
-PLAINTEXT environment is used thanks to the call to [playground start-environment](/playground%20start-environment), which invokes the docker-compose command in the end like this:
+PLAINTEXT environment is used thanks to the call to `playground start-environment` (an internal command, called by the example when started with [playground run](/playground%20run)), which invokes the docker compose command in the end like this:
 
 ```bash
-docker-compose -f ../../environment/plaintext/docker-compose.yml -f ${PWD}/docker-compose.plaintext.yml up -d
+docker compose -f ../../environment/plaintext/docker-compose.yml -f ${PWD}/docker-compose.plaintext.yml up -d
 ```
+
+> [!NOTE]
+> With CP 8+ (Kraft mode), [`environment/plaintext/docker-compose-kraft.yml`](https://github.com/vdesabou/kafka-docker-playground/blob/master/environment/plaintext/docker-compose-kraft.yml) is also added, which brings the `controller` container.
 
 ### 🔐 Environment SASL/SSL 
 
@@ -67,14 +69,7 @@ Environments are also overriding [PLAINTEXT](https://github.com/vdesabou/kafka-d
   #
   ####
 
-  zookeeper:
-    environment:
-      KAFKA_OPTS: -Djava.security.auth.login.config=/etc/kafka/secrets/zookeeper_jaas.conf
-                  -Dzookeeper.authProvider.1=org.apache.zookeeper.server.auth.SASLAuthenticationProvider
-                  -DrequireClientAuthScheme=sasl
-                  -Dzookeeper.allowSaslFailedClients=false
-    volumes:
-      - ../../environment/sasl-ssl/security:/etc/kafka/secrets
+  <snip> (zookeeper section, only used with CP < 8)
 
   broker:
     volumes:
@@ -114,30 +109,30 @@ As you can see, it only contains what is required to add SASL/SSL to a PLAINTEXT
 
 ### 🔏 Connector using non-plaintext environment
 
-Any connector example can be ran with any environment using `environment` option of [playground run](/playground%20run?id=environment-environment) command.
+Any connector example can be run with any environment using `--environment` option of [playground run](/playground%20run?id=-environment-environment) command.
 
 ![environment](./images/environment.jpg)
 
-This also includes `cfk` environment which automatically run the example with Kubernetes using [k3d](https://k3d.io/stable/) and Confluent for Kubernetes (CFK)
+This also includes `cfk` environment which automatically runs the example with Kubernetes using [k3d](https://k3d.io/stable/) and Confluent for Kubernetes (CFK)
 
 ## 🔗 Connect image used
 
-The Kafka Connect image is either based on [`cp-server-connect-base`](https://hub.docker.com/r/confluentinc/cp-server-connect-base) for version greater than `5.3.0` or [`cp-kafka-connect-base`](https://hub.docker.com/r/confluentinc/cp-kafka-connect-base) otherwise.
+The Kafka Connect image is either [`cp-server-connect`](https://hub.docker.com/r/confluentinc/cp-server-connect) for version greater than `5.3.0` or [`cp-kafka-connect`](https://hub.docker.com/r/confluentinc/cp-kafka-connect) otherwise (it can be overridden with `CP_CONNECT_IMAGE` environment variable).
 
-Several tools are [installed](https://github.com/vdesabou/kafka-docker-playground/blob/5b7a6842e7d9e87242ca0b5948e1a70a7b4b80ce/scripts/utils.sh#L4) automatically on the image such as `openssl`, `tcpdump`, `iptables`, `netcat`, etc..
+Several tools are [installed](https://github.com/vdesabou/kafka-docker-playground/blob/master/scripts/cli/src/lib/utils_function.sh) automatically on the image (see `CONNECT_3RDPARTY_INSTALL`) such as `openssl`, `tcpdump`, `iptables`, `netcat`, `jq`, etc..
 
 If you're missing a tool, you can install it at runtime, some examples:
 
 ```bash
-# directly with rpm
-docker exec -i --user root connect bash -c "curl http://mirror.centos.org/centos/7/os/x86_64/Packages/tree-1.6.0-10.el7.x86_64.rpm -o tree-1.6.0-10.el7.x86_64.rpm && rpm -Uvh tree-1.6.0-10.el7.x86_64.rpm"
-# using yum
-docker exec -i --user root connect bash -c "yum update -y --disablerepo='Confluent*' && yum install findutils -y"
+# recent (UBI minimal based) images, using microdnf
+playground container exec -c connect --command "microdnf install -y tree" --root
+# older images, using yum
+playground container exec -c connect --command "yum install -y --disablerepo='Confluent*' tree" --root
 ```
 
 ## ↔️ Default Connect converter used
 
-All connect example are using the converters defined in Connect Worker properties defined [here](https://github.com/vdesabou/kafka-docker-playground/blob/95f6e1d34d0261c5de76088d88fc6930f8053fd4/environment/plaintext/docker-compose.yml#L197-L199):
+All connect examples use the converters defined in Connect Worker properties defined [here](https://github.com/vdesabou/kafka-docker-playground/blob/master/environment/plaintext/docker-compose.yml):
 
 ```yml
 CONNECT_KEY_CONVERTER: "org.apache.kafka.connect.storage.StringConverter"
@@ -155,14 +150,14 @@ This can, of course, be overridden at connector level.
 
 ## 🤖 How CI works
 
-[Everyday](https://github.com/vdesabou/kafka-docker-playground/blob/4a96c0f78e7eb93477d483584ecbc97abec50e0c/.github/workflows/ci.yml#L8), regression tests are executed using [Github Actions](https://github.com/features/actions). 
+Every day (at 18:17 UTC), regression tests are executed using [Github Actions](https://github.com/features/actions). 
 
 The workflow runs and logs are available [here](https://github.com/vdesabou/kafka-docker-playground/actions).
 
-The CI is defined using [`.github/workflows/ci.yml`](https://github.com/vdesabou/kafka-docker-playground/blob/master/.github/workflows/ci.yml) file (see the list of tests executed [here](https://github.com/vdesabou/kafka-docker-playground/blob/4a96c0f78e7eb93477d483584ecbc97abec50e0c/.github/workflows/ci.yml#L63))
+The CI, including the list of tests executed, is defined in [`.github/workflows/ci.yml`](https://github.com/vdesabou/kafka-docker-playground/blob/master/.github/workflows/ci.yml) file.
 
 > [!NOTE]
-> CI is executed on `ubuntu-latest` on Azure, see [documentation](https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners#supported-runners-and-hardware-resources)
+> CI is executed on `ubuntu-latest` GitHub-hosted runners (`ubuntu-26.04` when running with Podman, which requires Podman 5.0+), see [documentation](https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners#supported-runners-and-hardware-resources)
 
 > [!NOTE]
 > A test is executed if:

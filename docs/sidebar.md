@@ -6,6 +6,7 @@
 - [🎓 How it works](/how-it-works.md)
 - [👷‍♂️ Reusables](/reusables.md)
 - [🧑‍🎓 Academy](/academy.md)
+- [💡 Tips & Tricks](/tips-and-tricks.md)
 
 
 - **Links**
@@ -14,3 +15,4 @@
 - [🔥 Issues](https://github.com/vdesabou/kafka-docker-playground/issues)
 - [💞 Contributing](https://github.com/vdesabou/kafka-docker-playground/blob/master/CONTRIBUTING.md)
 - [📜 Changelog](/changelog.md)
+- [🎙️ Podcast](/podcast.mp3 ':ignore :target=_blank')

@@ -6,10 +6,14 @@ Each example (categorized by difficulty) is composed of:
 
 * 🔥 A small description of the issue.
 * 🤯 A detailed description with all required information.
-* 📍 Series of step to follow. An (optional) solution for each step is provided in following step.
+* 📍 A series of steps to follow. An (optional) solution for each step is provided in the following step.
 * 🌟 Results with a link to the full reproduction model, which can be executed directly using playground.
 
-🧠 The goal is to let users do the reproduction by themselves. This is the only way to learn !
+🧠 The goal is to let users do the reproduction by themselves. This is the only way to learn!
+
+> [!NOTE]
+> The outputs shown on this page were captured with CP 7.5.2 and the connector versions listed in each exercise (this is why the commands use `--tag 7.5.2`).
+> The exercises also work with the default version (CP 8.x, KRaft only, no ZooKeeper), but logs and outputs may differ slightly.
 
 <!-- > [!TIP]
 > This is the counter of ![reproduction models](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/vdesabou/b7d51da11b2e8a7bdd1d2e45d4aaa2e5/raw/badges.json) made with playground so far..
@@ -53,16 +57,16 @@ As you can see, connector is failing (check output of `playground connector stat
 
 ❔Questions:
 
-* Do you know why it is failing ?
-* Do you know how it could have been avoided ?
+* Do you know why it is failing?
+* Do you know how it could have been avoided?
 
 #### **📍 Step 2**
 <!-- select:start -->
-<!-- select-menu-labels: 🙋 See solution for previous step ? -->
+<!-- select-menu-labels: 🙋 See solution for previous step? -->
 #### --No--
 #### --Yes--
 
-> Do you know why it is failing ?
+> Do you know why it is failing?
 
 💡 Explanations:
 
@@ -93,11 +97,11 @@ EOF
 
 So this is not AVRO, it is only sending plain JSON string. That's what we call a *poison pill*.
 
-This is why avro converter fails with `Unknown magic byte` since 4th message does not contain in the first 4 bytes the avro schema id.
+This is why avro converter fails with `Unknown magic byte` since the 4th message does not start with the magic byte `0` followed by the 4-byte schema ID.
 
-> Do you know how it could have been avoided ?
+> Do you know how it could have been avoided?
 
-One way to avoid this situation is to enable Confluent feature [Broker-side Schema ID Validation](https://docs.confluent.io/platform/7.4/schema-registry/schema-validation.html).
+One way to avoid this situation is to enable Confluent feature [Broker-side Schema ID Validation](https://docs.confluent.io/platform/current/schema-registry/schema-validation.html).
 If this is setup, the 4th message would have been rejected by broker validation.
 
 
@@ -164,7 +168,7 @@ Poison pill is at `Partition:0|Offset:3`
 
 #### **📍 Step 3**
 <!-- select:start -->
-<!-- select-menu-labels: 🙋 See solution for previous step ? -->
+<!-- select-menu-labels: 🙋 See solution for previous step? -->
 #### --No--
 #### --Yes--
 
@@ -188,7 +192,7 @@ GROUP                          TOPIC                          PARTITION  NEW-OFF
 connect-filestream-sink        filestream                     0          4  
 ```
 
-All good, do it !
+All good, do it!
 
 ```bash
 docker exec broker kafka-consumer-groups --bootstrap-server broker:9092 --group connect-filestream-sink --to-offset 4 --topic filestream --reset-offsets --execute
@@ -240,7 +244,7 @@ See the difference in behavior.
 
 #### **📍 Step 4**
 <!-- select:start -->
-<!-- select-menu-labels: 🙋 See solution for previous step ? -->
+<!-- select-menu-labels: 🙋 See solution for previous step? -->
 #### --No--
 #### --Yes--
 
@@ -291,12 +295,12 @@ filestream-sink                ✅ RUNNING  0:🟢 RUNNING                 -
 ```
 
 <!-- select:end -->
-🥁 So...did you learn about converter issues (Unknown magic byte) ?
+🥁 So...did you learn about converter issues (Unknown magic byte)?
 
 #### **🎓 Next Steps**
 
-* Read [Kafka Connect Deep Dive – Error Handling and Dead Letter Queues](https://www.confluent.io/en-gb/blog/kafka-connect-deep-dive-error-handling-dead-letter-queues/) and plays with different config parameters.
-* Update example to enable [Broker-side Schema ID Validation](https://docs.confluent.io/platform/7.4/schema-registry/schema-validation.html)
+* Read [Kafka Connect Deep Dive – Error Handling and Dead Letter Queues](https://www.confluent.io/en-gb/blog/kafka-connect-deep-dive-error-handling-dead-letter-queues/) and play with different config parameters.
+* Update example to enable [Broker-side Schema ID Validation](https://docs.confluent.io/platform/current/schema-registry/schema-validation.html)
 
 Tips: you'll need to update docker-compose file to add 
 
@@ -304,7 +308,7 @@ Tips: you'll need to update docker-compose file to add
 
   broker:
     environment:
-      KAFKA_CONFLUENT_SCHEMA_REGISTRY_URL: "https://schema-registry:8081"
+      KAFKA_CONFLUENT_SCHEMA_REGISTRY_URL: "http://schema-registry:8081"
 ```
 
 After doing that, you can call [playground container recreate](/playground%20container%20recreate) to apply modifications and restart broker.
@@ -399,16 +403,16 @@ As you can see, connector is failing (check output of `playground connector stat
 
 ❔Questions:
 
-* Do you know why it is failing ?
-* Do you know how it could have been avoided ?
+* Do you know why it is failing?
+* Do you know how it could have been avoided?
 
 #### **📍 Step 2**
 <!-- select:start -->
-<!-- select-menu-labels: 🙋 See solution for previous step ? -->
+<!-- select-menu-labels: 🙋 See solution for previous step? -->
 #### --No--
 #### --Yes--
 
-> Do you know why it is failing ?
+> Do you know why it is failing?
 
 💡 Explanations:
 
@@ -429,9 +433,9 @@ EOF
 
 The SMT InsertField requires a `STRUCT`, but here StringConverter is used which creates a `STRING` hence the issue.
 
-> Do you know how it could have been avoided ?
+> Do you know how it could have been avoided?
 
-To avoid this situation is to use JsonConverter converter instead with `schemas.enable=false` (since our data in topic is plain JSON)
+To avoid this, use JsonConverter instead with `schemas.enable=false` (since our data in topic is plain JSON)
 
 ```json
 "value.converter":"org.apache.kafka.connect.json.JsonConverter",
@@ -462,7 +466,7 @@ See the difference in behavior.
 
 #### **📍 Step 3**
 <!-- select:start -->
-<!-- select-menu-labels: 🙋 See solution for previous step ? -->
+<!-- select-menu-labels: 🙋 See solution for previous step? -->
 #### --No--
 #### --Yes--
 
@@ -520,7 +524,7 @@ Fix the issue by choosing the right converter
 
 #### **📍 Step 4**
 <!-- select:start -->
-<!-- select-menu-labels: 🙋 See solution for previous step ? -->
+<!-- select-menu-labels: 🙋 See solution for previous step? -->
 #### --No--
 #### --Yes--
 
@@ -572,14 +576,14 @@ Test InsertField SMT with different [properties](https://docs.confluent.io/platf
 
 #### **📍 Step 5**
 <!-- select:start -->
-<!-- select-menu-labels: 🙋 See solution for previous step ? -->
+<!-- select-menu-labels: 🙋 See solution for previous step? -->
 #### --No--
 #### --Yes--
 
 Use the following SMT config (make sure that *JsonConverter* is still being used!):
 
 ```json
-"transforms": "InsertTopic,InsertOffset,InsertPartition,InsertTimestamp"
+"transforms": "InsertTopic,InsertOffset,InsertPartition,InsertTimestamp",
 "transforms.InsertOffset.offset.field": "__kafka_offset",
 "transforms.InsertOffset.type": "org.apache.kafka.connect.transforms.InsertField\$Value",
 "transforms.InsertPartition.partition.field": "__kafka_partition",
@@ -610,11 +614,11 @@ docker exec connect cat /tmp/output.json
 Change format of `__kafka_ts` field to make it human readable, i.e instead of Unix number, use format `yyyy-MM-dd HH:mm:ss.SSS`
 
 > [!TIP] Use [TimestampConverter](https://docs.confluent.io/platform/current/connect/transforms/timestampconverter.html#) SMT to do this conversion
-> Be careful with order of SMTs when you add TimestampConverter !
+> Be careful with order of SMTs when you add TimestampConverter!
 
 #### **📍 Step 6**
 <!-- select:start -->
-<!-- select-menu-labels: 🙋 See solution for previous step ? -->
+<!-- select-menu-labels: 🙋 See solution for previous step? -->
 #### --No--
 #### --Yes--
 
@@ -658,7 +662,7 @@ __kafka_ts=2023-05-22 14:14:27.068
 ```
 
 <!-- select:end -->
-🥁 So...did you learn about SMT issue ?
+🥁 So...did you learn about SMT issue?
 
 
 #### **🎓 Next Steps**
@@ -735,16 +739,16 @@ As you can see, connector is failing (check output of `playground connector stat
 
 ❔Questions:
 
-* Do you know why it is failing ?
-* Do you know how it could have been avoided ?
+* Do you know why it is failing?
+* Do you know how it could have been avoided?
 
 #### **📍 Step 2**
 <!-- select:start -->
-<!-- select-menu-labels: 🙋 See solution for previous step ? -->
+<!-- select-menu-labels: 🙋 See solution for previous step? -->
 #### --No--
 #### --Yes--
 
-> Do you know why it is failing ?
+> Do you know why it is failing?
 
 💡 Explanations:
 
@@ -757,7 +761,7 @@ Despite connector configured with JsonConverter for the value, which was the way
 
 The connector is still failing...
 
-The SMT InsertField requires a `STRUCT`, but here the FileStream connector's logic create the ConnectRecord with a schema which is just a `STRING`, not a `STRUCT`:
+The SMT InsertField requires a `STRUCT`, but here the FileStream connector's logic creates the ConnectRecord with a schema which is just a `STRING`, not a `STRUCT`:
 
 ```log
 [2023-05-22 14:36:19,973] ERROR [filestream-source|task-0] Error encountered in task filestream-source-0. Executing stage 'TRANSFORMATION' with class 'org.apache.kafka.connect.transforms.InsertField$Value', where source record is = SourceRecord{sourcePartition={filename=/tmp/kafka-connect/examples/file.json}, sourceOffset={position=232}} ConnectRecord{topic='filestream', kafkaPartition=null, key=null, keySchema=null, value={"id":1,"first_name":"Jenelle","last_name":"Fick","email":"jfick0@census.gov","gender":"Female","ip_address":"158.201.163.89","last_login":"2019-04-03T05:49:31Z","account_balance":22810.68,"country":"PH","favorite_color":"#5ebf9d"}, valueSchema=Schema{STRING}, timestamp=1684766179966, headers=ConnectHeaders(headers=)}. (org.apache.kafka.connect.runtime.errors.LogReporter:66)
@@ -772,7 +776,7 @@ Note `valueSchema=Schema{STRING}`
 >               "errors.log.include.messages": "true",
 
 
-> Do you know how it could have been avoided ?
+> Do you know how it could have been avoided?
 
 You can't avoid it, the problem here is that connector is only creating ConnectRecord with STRING schema.
 
@@ -783,12 +787,12 @@ As you can see below, for source connector, the SMT is applied after the source 
 Please also note that converter is called after SMT, so for source connector, it is not relevant at all here (as opposed to sink connectors).
 
 <!-- select:end -->
-🥁 So...did you learn about SMT issue and difference between source and sink connectors ?
+🥁 So...did you learn about SMT issue and difference between source and sink connectors?
 
 
 #### **🎓 Next Steps**
 
-* You can run an example with a connector that creates records with STRUCT, for example JDBC source, and then use InsertField and makes sure it works as expected
+* You can run an example with a connector that creates records with STRUCT, for example JDBC source, and then use InsertField and make sure it works as expected
 
 
 <!-- tabs:end -->
@@ -812,7 +816,7 @@ Versions used:
 
 * 🎯 CP: 7.5.2
 
-* 🔗 Filestream source: 7.5.2 (shipped with CP)
+* 🔗 JDBC source (MySQL): latest version at the time
 
 > [!TIP] Make sure to be aware of default converters used at worker level, see [↔️ Default Connect converter used](/how-it-works?id=%e2%86%94%ef%b8%8f-default-connect-converter-used)
 
@@ -858,19 +862,19 @@ As you can see, connector is failing (check output of `playground connector stat
 
 ❔Questions:
 
-* Do you know why it is failing ?
+* Do you know why it is failing?
 
 #### **📍 Step 2**
 <!-- select:start -->
-<!-- select-menu-labels: 🙋 See solution for previous step ? -->
+<!-- select-menu-labels: 🙋 See solution for previous step? -->
 #### --No--
 #### --Yes--
 
-> Do you know why it is failing ?
+> Do you know why it is failing?
 
 💡 Explanations:
 
-Connector is configured with same SMTs as with sink connector example [there](/examples?id=insertfield-smt-dataexception-only-struct-objects-supported-sink-connector).
+Connector is configured with same SMTs as with sink connector example [there](/academy?id=insertfield-smt-dataexception-only-struct-objects-supported-sink-connector).
 
 ```json
 "transforms": "InsertTopic,InsertOffset,InsertPartition,InsertTimestamp,TimestampConverter",
@@ -936,7 +940,7 @@ Remove `InsertOffset` SMT and see if that fixes the problem
 
 #### **📍 Step 3**
 <!-- select:start -->
-<!-- select-menu-labels: 🙋 See solution for previous step ? -->
+<!-- select-menu-labels: 🙋 See solution for previous step? -->
 #### --No--
 #### --Yes--
 
@@ -957,21 +961,21 @@ After removing `InsertOffset`:
 "transforms.TimestampConverter.field": "__kafka_ts"
 ```
 
-The connector is no more failing.
+The connector is no longer failing.
 
 <!-- select:end -->
 
 Check the content of the topic with `playground topic consume`
 
-Does that work as you would expect ?
+Does that work as you would expect?
 
 #### **📍 Step 4**
 <!-- select:start -->
-<!-- select-menu-labels: 🙋 See solution for previous step ? -->
+<!-- select-menu-labels: 🙋 See solution for previous step? -->
 #### --No--
 #### --Yes--
 
-> Does that work as you would expect ?
+> Does that work as you would expect?
 
 Record's value is:
 
@@ -996,11 +1000,11 @@ As you can see below, for source connector, the SMT is applied after the source 
 
 ![SMT](./images/SMT.jpg)
 
-N.B: For `offset` property it fails with `Only SinkRecord supported for [field insertion], found: org.apache.kafka.connect.source.SourceRecord`, which makes sense. Same check for `partition` and `timestamp` could probably be added  (I don't know why it's not the case)
+N.B: For `offset` property it fails with `Only SinkRecord supported for [field insertion], found: org.apache.kafka.connect.source.SourceRecord`, which makes sense. Same check for `partition` and `timestamp` could probably be added, but it is not the case.
 
 <!-- select:end -->
 
-🥁 So...did you learn about why InsertField is not setting some fields with source connectors ?
+🥁 So...did you learn about why InsertField is not setting some fields with source connectors?
 
 
 <!-- tabs:end -->
@@ -1122,11 +1126,11 @@ Caused by: java.lang.StackOverflowError
 * 🛠 [Bootstrap](/reusables?id=%f0%9f%9b%a0-bootstrap-reproduction-model) your reproduction model!
 
 > [!TIP]
-> Do not forget to [🪄 Specify versions](/how-to-use?id=%f0%9f%aa%84-specify-versions) for CP and Connector before running the test !
+> Do not forget to [🪄 Specify versions](/how-to-use?id=%f0%9f%aa%84-specify-versions) for CP and Connector before running the test!
 
 #### **📍 Step 2**
 <!-- select:start -->
-<!-- select-menu-labels: 🙋 See solution for previous step ? -->
+<!-- select-menu-labels: 🙋 See solution for previous step? -->
 #### --No--
 #### --Yes--
 
@@ -1134,7 +1138,13 @@ Caused by: java.lang.StackOverflowError
 🛠 Bootstrap reproduction model was done as following (use tab completion to select the files s3-sink.sh using `fzf`):
 
 ```bash
-playground repro bootstrap --file s3-sink<tab> --description "000001 StackOverflowError with S3 sink connector" --tag 7.5.2 --connector-tag 10.3.3
+playground repro bootstrap --file s3-sink<tab> --description "000001 StackOverflowError with S3 sink connector"
+```
+
+Then run the generated reproduction model with the required versions:
+
+```bash
+playground run -f s3-sink-repro-000001<tab> --tag 7.5.2 --connector-tag 10.3.3
 ```
 
 💡 Explanations:
@@ -1149,7 +1159,7 @@ playground repro bootstrap --file s3-sink<tab> --description "000001 StackOverfl
 
 #### **📍 Step 3**
 <!-- select:start -->
-<!-- select-menu-labels: 🙋 See solution for previous step ? -->
+<!-- select-menu-labels: 🙋 See solution for previous step? -->
 #### --No--
 #### --Yes--
 
@@ -1193,18 +1203,18 @@ EOF
 ```
 
 <!-- select:end -->
-👉 Adapt the example to user details and run it !
+👉 Adapt the example to user details and run it!
 
 #### **📍 Step 4**
 <!-- select:start -->
-<!-- select-menu-labels: 🙋 See solution for previous step ? -->
+<!-- select-menu-labels: 🙋 See solution for previous step? -->
 #### --No--
 #### --Yes--
 
-* The only relevant connector configuration for that use case is the fact that Parquet format is used, so I just replaced `format.class`to use Parquet instead of Avro, i.e:
+* The only relevant connector configuration for that use case is the fact that Parquet format is used, the base example uses Avro format, so `format.class` was replaced to use Parquet instead, i.e.:
 
 ```json
-"format.class": "io.confluent.connect.s3.format.parquet.ParquetFormat"`:
+"format.class": "io.confluent.connect.s3.format.parquet.ParquetFormat"
 ```
 
 * Full connector config:
@@ -1233,14 +1243,18 @@ EOF
 ```
 
 <!-- select:end -->
-🥁 So...did you reproduce ??
+🥁 So...did you reproduce??
 
 #### **🌟 Results**
 
 * Check the connector status
 
 ```bash
-$ 15:18:58 ℹ️ 🧩 Displaying connector(s) status
+playground connector status
+```
+
+```log
+15:18:58 ℹ️ 🧩 Displaying connector(s) status
 Name                           Status       Tasks                          Stack Trace                                       
 -------------------------------------------------------------------------------------------------------------
 s3-sink                        ✅ RUNNING  0:🛑 FAILED                   tasks: org.apache.kafka.connect.errors.ConnectException: Exiting WorkerSinkTask due to unrecoverable exception.
@@ -1297,7 +1311,3 @@ Caused by: java.lang.StackOverflowError
 
 
 <!-- tabs:end -->
-
-## ⭐⭐⭐ Expert
-
-🧑‍🏭 Work in Progress...Come back later !

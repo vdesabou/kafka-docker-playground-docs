@@ -7,16 +7,19 @@
 
 #### ☑️ Prerequisites
 
-* You just need to have [docker](https://docs.docker.com/get-docker/) (or [Podman](/how-to-use?id=%f0%9f%a6%ad-using-podman-instead-of-docker)) installed on your machine !
+* You just need to have [docker](https://docs.docker.com/get-docker/) with the [compose v2 plugin](https://docs.docker.com/compose/install/) (`docker compose` 2.0.0 or greater) installed on your machine, or [Podman](/how-to-use?id=%f0%9f%a6%ad-using-podman-instead-of-docker) 5.0 or greater !
 
 * Install the [🧠 CLI](/cli) by following [Setup](/cli?id=%f0%9f%9a%9c-setup). [fzf](https://github.com/junegunn/fzf) is required when using CLI (see installation [instructions](https://github.com/junegunn/fzf#installation))
 
-* bash version 4 or higher is required. Mac users can upgrade bash with [brew](https://brew.sh/) by running `brew install bash` and then make sure it is in PATH (`export PATH=$PATH:/opt/homebrew/bin:$PATH`)
+* bash version 4 or higher is required. Mac users can upgrade bash with [brew](https://brew.sh/) by running `brew install bash` and then make sure it is in PATH (`export PATH=/opt/homebrew/bin:$PATH`)
 
 * You also need internet connectivity when running connect tests as connectors are downloaded from Confluent Hub on the fly.
 
+> [!TIP]
+> Run [playground doctor](/playground%20doctor) first: it checks that the container engine is reachable, that compose v2 is there and that there is enough memory. It is the one command that still works when the engine is down.
+
 > [!NOTE]
-> Every command used in the playground is using Docker, this includes `jq` (except if you have it on your host already), `aws`, `az`, `gcloud`, etc...Only exceptions are `fzf` and `confluent`
+> Every command used in the playground is using Docker, this includes `jq` (except if you have it on your host already), `aws`, `az`, `gcloud`, etc...Only exceptions are `fzf`, `confluent` and a local Java install for [playground get-jmx-metrics](/playground%20get-jmx-metrics)
 > 
 > The goal is to have a consistent behavior and only depends on Docker.
 
@@ -24,7 +27,7 @@
 > The playground is only tested on macOS (including with [M1 *arm64* chip](/how-to-use?id=%f0%9f%a7%91%f0%9f%92%bb-m1-chip-arm64-mac-support)) and Linux (Ubuntu and Amazon Linux) . It is not tested on Windows, but it should be working with WSL.
 
 > [!ATTENTION]
-> On MacOS, the [Docker memory](https://docs.docker.com/desktop/mac/#resources) should be set to at least 8Gb.
+> On MacOS, the [Docker memory](https://docs.docker.com/desktop/settings-and-maintenance/settings/#resources) should be set to at least 8Gb.
 
 #### 🧑‍💻 M1 chip (ARM64) Mac Support
 
@@ -63,36 +66,11 @@ More details [here](https://github.com/vdesabou/kafka-docker-playground/tree/mas
 
 ### ✨ AWS EC2 playground ec2 command
 
-See [playground ec2](/playground%20ec2) CLI command
+The [playground ec2](/playground%20ec2) CLI command creates and manages AWS EC2 instances (using Cloud Formation) to run kafka-docker-playground, and opens them directly in Visual Studio Code using Remote Development (over SSH).
 
-```bash
-playground ec2 --help
-playground ec2
+It is what you want for an example that needs far more CPU or memory than you have, one that must run for hours, or one that does not work on arm64.
 
-  ✨ Create and manage AWS EC2 instances (using Cloud Formation) to run
-  kafka-docker-playground
-  
-  🪄 Open EC2 instances directly in Visual Studio code using Remote Development
-  (over SSH)
-
-== Usage ==
-  playground ec2 COMMAND
-  playground ec2 [COMMAND] --help | -h
-
-== Commands ==
-  create      👷 Create kafka-docker-playground EC2 instance using AWS Cloud Formation
-  delete      ❌ Delete an EC2 instance created with Cloud Formation
-  open        👨‍💻 Open an EC2 instance using Visual Studio code
-  list        🔘 List all EC2 instance
-  stop        🔴 Stop an EC2 instance
-  start       🟢 Start an EC2 instance
-  stop-all    🔴 Stop all your EC2 instance(s)
-  start-all   🟢 Start all your EC2 instance(s)
-
-== Options ==
-  --help, -h
-    Show this help
-```
+Main subcommands are `create`, `open`, `list`, `status`, `start`, `stop`, `delete`, `allow-my-ip`, `sync-repro-folder` and `push-secrets`: check [playground ec2](/playground%20ec2) for the full reference.
 
 ## 🦭 Using Podman instead of Docker
 
@@ -188,6 +166,15 @@ playground doctor
   label = false
   ```
 
+### 🔀 Switching between Docker and Podman
+
+Once Podman is set up, instead of exporting `DOCKER_HOST`, you can use [playground switch-podman](/playground%20switch-podman): it creates a `podman` docker context, so the switch applies to your current shell and to new ones, with nothing to export (on macOS, the podman machine is started if needed).
+
+[playground switch-docker](/playground%20switch-docker) restores the docker context that was active before. Both commands end with `playground doctor`.
+
+> [!WARNING]
+> Containers are not moved between engines: stop the running example first.
+
 ## 🏎️ Start an example
 
 Check the list of examples in the **[Content](/content.md)** section and simply use [playground run](/playground%20run) CLI command!
@@ -198,14 +185,26 @@ Check the list of examples in the **[Content](/content.md)** section and simply 
 > 
 > Examples:
 > 
-> * [AWS S3 sink connector](https://github.com/vdesabou/kafka-docker-playground/tree/master/connect/connect-aws-s3-sink#aws-setup): file `~/.aws/credentials` or environnement variables `AWS_REGION`, `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` are required.
+> * [AWS S3 sink connector](https://github.com/vdesabou/kafka-docker-playground/tree/master/connect/connect-aws-s3-sink#aws-setup): file `~/.aws/credentials` or environment variables `AWS_REGION`, `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` are required.
 > 
-> * [Zendesk source connector](https://github.com/vdesabou/kafka-docker-playground/tree/master/connect/connect-zendesk-source#how-to-run): arguments `ZENDESK_URL`, `ZENDESK_USERNAME`and `ZENDESK_PASSWORD` are required (you can also pass them as environment variables)
+> * [Zendesk source connector](https://github.com/vdesabou/kafka-docker-playground/tree/master/connect/connect-zendesk-source#how-to-run): arguments `ZENDESK_URL`, `ZENDESK_USERNAME` and `ZENDESK_PASSWORD` are required (you can also pass them as environment variables)
 >
 
 If there are missing environment variables, you'll need to fix it:
 
 [![asciicast](https://asciinema.org/a/643687.svg)](https://asciinema.org/a/643687)
+
+### 🔐 Storing credentials with playground secrets
+
+Instead of exporting variables in every shell, store them once with [playground secrets](/playground%20secrets): `playground run` then loads automatically the ones the example declares.
+
+```bash
+playground secrets set SALESFORCE_PASSWORD    # 🔐 store it, prompted
+playground secrets check -f <example>         # ✅ what is still missing
+playground run -f <example>                   # 🚀 loaded for you
+```
+
+They are stored in `~/.config/kafka-docker-playground` (never in the repository), with credential values kept in a backend such as macOS Keychain, secret-tool, pass, 1Password or HashiCorp Vault (see [playground secrets backend](/playground%20secrets%20backend)).
 
 ## 🌤️ Confluent Cloud examples
 
@@ -219,16 +218,16 @@ By default, a new Confluent Cloud environment with a Cluster will be created.
 
 You can configure the new cluster by using flags with [playground run](/playground%20run) command or just by setting environment variables:
 
-* `–cluster-type` (or `CLUSTER_TYPE`  environment variable): the type of cluster (possible values: `basic`, `standard` and `dedicated`, default `basic`)
-* `–cluster-cloud` (or `CLUSTER_CLOUD` environment variable): The Cloud provider (possible values: `aws`, `gcp` and `azure`, default `aws`)
-* `–cluster-region` (or )`CLUSTER_REGION` environment variable): The Cloud region (use `confluent kafka region list` to get the list, default `eu-west-2` for aws, `westeurope`for azure and `europe-west2` for gcp)
-* `–cluster-environment` (or `ENVIRONMENT` environment variable) (optional): The environment id where want your new cluster (example: `txxxxx`) 
+* `--cluster-type` (or `CLUSTER_TYPE` environment variable): the type of cluster (possible values: `basic`, `standard` and `dedicated`, default `basic`)
+* `--cluster-cloud` (or `CLUSTER_CLOUD` environment variable): The Cloud provider (possible values: `aws`, `gcp` and `azure`, default `aws`)
+* `--cluster-region` (or `CLUSTER_REGION` environment variable): The Cloud region (use `confluent kafka region list` to get the list, default `eu-west-2` for aws, `westeurope` for azure and `europe-west2` for gcp)
+* `--cluster-environment` (or `ENVIRONMENT` environment variable) (optional): The environment id where want your new cluster (example: `txxxxx`) 
 
 In case you want to use your own existing cluster, you need to setup, in addition to previous ones:
 
-* `–cluster-name ` (or `CLUSTER_NAME` environment variable): The cluster name
-* `–cluster-creds` (or `CLUSTER_CREDS` environment variable): The Kafka api key and secret to use, it should be separated with colon (example: `<API_KEY>:<API_KEY_SECRET>`)
-* `–cluster-schema-registry-creds ` (or `SCHEMA_REGISTRY_CREDS` environment variable) (optional, if not set, new one will be created): The Schema Registry api key and secret to use, it should be separated with colon (example: `<SR_API_KEY>:<SR_API_KEY_SECRET>`)
+* `--cluster-name` (or `CLUSTER_NAME` environment variable): The cluster name
+* `--cluster-creds` (or `CLUSTER_CREDS` environment variable): The Kafka api key and secret to use, it should be separated with colon (example: `<API_KEY>:<API_KEY_SECRET>`)
+* `--cluster-schema-registry-creds` (or `SCHEMA_REGISTRY_CREDS` environment variable) (optional, if not set, new one will be created): The Schema Registry api key and secret to use, it should be separated with colon (example: `<SR_API_KEY>:<SR_API_KEY_SECRET>`)
 
 🤖 For [Fully Managed connectors](/content?id=%f0%9f%a4%96-fully-managed-connectors), as examples are [dependent of cloud providers](https://docs.confluent.io/cloud/current/connectors/index.html#cloud-platforms-support), you have the possibility to define specific existing clusters per cloud provider:
 
@@ -269,7 +268,7 @@ For example, if you're running an AZURE Fully Managed connector example and `AZU
 
 ### 🎯 For Confluent Platform (CP)
 
-By default, latest Confluent Platform version is used.
+By default, the latest Confluent Platform version supported by the playground is used (currently CP 8.3.2, which is [KRaft](/how-to-use?id=🛰-kraft-mode) only). Use `--tag` option of [playground run](/playground%20run) (or `TAG` environment variable) to run with another version.
 
 > [!TIP]
 > You can also change cp version while running an example using [playground update-version](/playground%20update-version)
@@ -283,15 +282,15 @@ The only 2 exceptions are:
 * replicator which is using same version as CP (but you can force a version using `REPLICATOR_TAG` environment variable)
 * JDBC which is using same version as CP (but only for CP version lower than 6.x)
 
-Each latest version used is specified on the [Connectors list](/content?id=connectors).
+Each latest version used is specified on the [Connectors list](/content?id=%f0%9f%94%97-connectors).
 
 The playground has 3 different ways to use different connector version when running a connector example:
 
-1. Specify the connector version (`--connector-tag` using [playground run](https://kafka-docker-playground.io/#/playground%20run) command)
+1. Specify the connector version (`--connector-tag` using [playground run](/playground%20run) command)
 
-2. Specify a connector ZIP file (`--connector-zip` using [playground run](https://kafka-docker-playground.io/#/playground%20run) command)
+2. Specify a connector ZIP file (`--connector-zip` using [playground run](/playground%20run) command)
 
-3. Specify a connector JAR file (`--connector-jar` using [playground run](https://kafka-docker-playground.io/#/playground%20run) command)
+3. Specify a connector JAR file (`--connector-jar` using [playground run](/playground%20run) command)
 
 *Example:*
 
@@ -323,11 +322,11 @@ ls: cannot access '/usr/share/confluent-hub-components/debezium-debezium-connect
 > [!TIP]
 > You can also change connector(s) version(s) while running an example using [playground update-version](/playground%20update-version)
 
-## 🐳 Overidding Confluent Plaform Docker images and tags
+## 🐳 Overriding Confluent Platform Docker images and tags
 
 Docker images being used can be overridden by exporting following environment variables:
 
-* zookeeper (`CP_ZOOKEEPER_IMAGE`)
+* zookeeper (`CP_ZOOKEEPER_IMAGE`) (CP < 8 only)
 * kafka (`CP_KAFKA_IMAGE`)
 * connect (`CP_CONNECT_IMAGE`)
 * schema-registry (`CP_SCHEMA_REGISTRY_IMAGE`)
@@ -338,9 +337,9 @@ Docker images being used can be overridden by exporting following environment va
 
 Docker images tags being used can be overridden by exporting following environment variables:
 
-* zookeeper (`CP_ZOOKEEPER_TAG`)
+* zookeeper (`CP_ZOOKEEPER_TAG`) (CP < 8 only)
 * kafka (`CP_KAFKA_TAG`)
-* connect (`CP_CONNECT_TAG`) (`--connect-tag` using [playground run](https://kafka-docker-playground.io/#/playground%20run) command)
+* connect (`CP_CONNECT_TAG`) (`--connect-tag` using [playground run](/playground%20run) command)
 * schema-registry (`CP_SCHEMA_REGISTRY_TAG`)
 * control-center (`CP_CONTROL_CENTER_TAG`)
 * ksqlDb (`CP_KSQL_TAG`)
@@ -351,6 +350,8 @@ Docker images tags being used can be overridden by exporting following environme
 
 [Kraft](https://docs.confluent.io/platform/current/kafka-metadata/kraft.html) is enabled by default when used with CP 8+, but you can also force it by setting environment variable `ENABLE_KRAFT` (minimum CP version supported is 7.4)
 
+In Kraft mode, a `controller` container replaces the `zookeeper` container (its JMX port is `10005`). ZooKeeper is only used with CP < 8 when `ENABLE_KRAFT` is not set.
+
 ## ⛳ Options
 
 Selecting options is really easy with [playground run](/playground%20run) menu:
@@ -359,15 +360,15 @@ Selecting options is really easy with [playground run](/playground%20run) menu:
 
 ### 🚀 Enabling ksqlDB
 
-By default, [`ksqldb-server`](https://github.com/vdesabou/kafka-docker-playground/blob/7098800a582bfb2629005366b514a923d2fa037f/environment/plaintext/docker-compose.yml#L135-L171) and [`ksqldb-cli`](https://github.com/vdesabou/kafka-docker-playground/blob/7098800a582bfb2629005366b514a923d2fa037f/environment/plaintext/docker-compose.yml#L173-L183) containers are not started for every test.
+By default, `ksqldb-server` and `ksqldb-cli` containers (see [`environment/plaintext/docker-compose.yml`](https://github.com/vdesabou/kafka-docker-playground/blob/master/environment/plaintext/docker-compose.yml)) are not started for every test.
 
-You can enable this by setting environment variable `ENABLE_KSQLDB=1` in your shell.
+You can enable this with `--enable-ksqldb` option of [playground run](/playground%20run) or by setting environment variable `ENABLE_KSQLDB=1` in your shell.
 
 ### 💠 Enabling Control Center
 
-By default, [`control-center`](https://github.com/vdesabou/kafka-docker-playground/blob/7098800a582bfb2629005366b514a923d2fa037f/environment/plaintext/docker-compose.yml#L185-L221) container is not started for every test.
+By default, `control-center` container (see [`environment/plaintext/docker-compose.yml`](https://github.com/vdesabou/kafka-docker-playground/blob/master/environment/plaintext/docker-compose.yml)) is not started for every test.
 
-You can enable this by setting environment variable `ENABLE_CONTROL_CENTER=1` in your shell.
+You can enable this with `--enable-control-center` option of [playground run](/playground%20run) or by setting environment variable `ENABLE_CONTROL_CENTER=1` in your shell.
 
 Control Center "Next Gen" (image `confluentinc/cp-enterprise-control-center-next-gen`) is used by default. If you want to use legacy image, you can enable it by setting environment variable `ENABLE_LEGACY_CONTROL_CENTER=1` in your shell.
 
@@ -377,23 +378,37 @@ Control Center is reachable at http://127.0.0.1:9021
 
 By default, [`Conduktor Platform`](https://www.conduktor.io) container is not started for every test. 
 
-You can enable this by setting environment variable `ENABLE_CONDUKTOR=1` in your shell.
+You can enable this with `--enable-conduktor` option of [playground run](/playground%20run) or by setting environment variable `ENABLE_CONDUKTOR=1` in your shell.
 
 Conduktor is reachable at [http://127.0.0.1:8080/console](http://127.0.0.1:8080/console) (`admin`/`admin`).
 
+### 🧲 Enabling REST Proxy
+
+By default, `rest-proxy` container is not started for every test.
+
+You can enable this with `--enable-rest-proxy` option of [playground run](/playground%20run).
+
 ### 3️⃣ Enabling multiple brokers
 
-By default, there is only one kafka node enabled. To enable a three node count, select it in menu.
+By default, there is only one kafka node enabled. To enable three nodes, select it in menu or use `--enable-multiple-brokers` option of [playground run](/playground%20run).
 
 ### 🥉 Enabling multiple connect workers
 
-By default, there is only one connect node enabled. To enable a three connect node count, select it in menu.
+By default, there is only one connect node enabled. To enable three connect nodes, select it in menu or use `--enable-multiple-connect-workers` option of [playground run](/playground%20run).
+
+### 🌪️ Enabling SQL Datagen
+
+For Oracle, MySQL, Postgres and Microsoft SQL Server source connector examples (JDBC and Debezium), `--enable-sql-datagen` option of [playground run](/playground%20run) starts inserting rows at the end of the example.
+
+### 🎯 Starting only some services
+
+Set environment variable `START_SERVICES` with a space-separated list of services (example: `START_SERVICES="broker schema-registry connect"`) to start only those services of the environment.
 
 ### 📊 Enabling JMX Grafana
 
 By default, Grafana dashboard using JMX metrics is not started for every test.
 
-You can enable this by setting environment variable `ENABLE_JMX_GRAFANA=1` in your shell.
+You can enable this with `--enable-jmx-grafana` option of [playground run](/playground%20run) or by setting environment variable `ENABLE_JMX_GRAFANA=1` in your shell.
 
 📊 Grafana is reachable at [http://127.0.0.1:3000](http://127.0.0.1:3000)
 🛡️ Prometheus is reachable at [http://127.0.0.1:9090](http://127.0.0.1:9090)
@@ -403,30 +418,31 @@ You can enable this by setting environment variable `ENABLE_JMX_GRAFANA=1` in yo
 
 List of provided dashboards:
  - Confluent Platform overview
- - Zookeeper cluster
+ - Zookeeper cluster (CP < 8 only)
  - Kafka cluster
  - Kafka topics
  - Kafka quotas
  - Schema Registry cluster
  - Kafka Connect cluster
  - ksqlDB cluster
- - Kafka Clients
- - Kafka lag exporter
- - Cluster Linking
  - Kafka streams RocksDB
+ - Kafka Clients
  - Oracle CDC source Connector
  - Oracle XStream CDC source Connector
- - Mongo source and sink Connector
  - Debezium CDC source Connectors
+ - Mongo source and sink Connector
+ - Kafka lag exporter (no screenshot)
+ - Cluster Linking (no screenshot)
+ - Flink (no screenshot)
 
 
 <!-- tabs:start -->
 
-##### **Confluent Platform overview**
+#### **Confluent Platform overview**
 
 ![Confluent Platform overview](images/confluent-platform-overview.png)
 
-#### **Zookeeper cluster**
+#### **Zookeeper cluster (CP < 8 only)**
 
 ![Zookeeper cluster dashboard](images/zookeeper-cluster.png)
 
@@ -498,7 +514,7 @@ docker exec broker kafka-configs --bootstrap-server broker:9092 --alter --add-co
 
 By default, [edenhill/kcat](https://github.com/edenhill/kcat) is not started for every test. 
 
-You can enable this by setting environment variable `ENABLE_KCAT=1` in your shell.
+You can enable this with `--enable-kcat` option of [playground run](/playground%20run) or by setting environment variable `ENABLE_KCAT=1` in your shell.
 
 Then you can use it with:
 
@@ -510,11 +526,11 @@ docker exec kcat kcat -b broker:9092 -L
 
 By default, Flink task/jobmanager is not started for every test. 
 
-You can enable Flink for any connector using plaintext deployment by setting environment variable `ENABLE_FLINK=1` in your shell. 
+You can enable Flink for any connector using plaintext deployment with `--enable-flink` option of [playground run](/playground%20run) or by setting environment variable `ENABLE_FLINK=1` in your shell. 
 
-Once enabled, the CLI will ask if you need to download any connectors. Based on the response, you can download one or more connectors from Flinks [maven](https://repo.maven.apache.org/maven2/org/apache/flink/) repository. 
+Once enabled, the CLI will ask if you need to download any connectors. Based on the response, you can download one or more connectors from Flink's [maven](https://repo.maven.apache.org/maven2/org/apache/flink/) repository. 
 
-Additonally, you can start Flink in any of the available [deployment modes](https://nightlies.apache.org/flink/flink-docs-master/docs/deployment/overview/#deployment-modes) by navigating to the respective directory:
+Additionally, you can start Flink in any of the available [deployment modes](https://nightlies.apache.org/flink/flink-docs-master/docs/deployment/overview/#deployment-modes) by navigating to the respective directory:
 
 - `kafka-docker-playground/`
   - `flink/`
@@ -523,47 +539,23 @@ Additonally, you can start Flink in any of the available [deployment modes](http
     - `flink_session_sql_mode/start.sh`
 
 
-🐿️ Flink UI is reacheable using [http://127.0.0.1:8081](http://127.0.0.1:8081) within the flink child directory. If you enable Flink by starting connector deployment, [http://127.0.0.1:18081](http://127.0.0.1:18081) will be used. 
+🐿️ Flink UI is reachable using [http://127.0.0.1:8081](http://127.0.0.1:8081) within the flink child directory. If you enable Flink by starting connector deployment, [http://127.0.0.1:18081](http://127.0.0.1:18081) will be used. 
 
 ## 🔢 JMX Metrics
 
 JMX metrics are available locally on those ports:
 
-* zookeeper: `9999`
-* broker: `10000`
+* broker: `10000` (`broker2`: `12000`, `broker3`: `13000` with multiple brokers)
 * schema-registry: `10001`
-* connect: `10002`
+* connect: `10002` (`connect2`: `10022`, `connect3`: `10032` with multiple connect workers)
+* ksqldb-server: `10003`
+* controller: `10005` (Kraft mode)
+* zookeeper: `9999` (CP < 8 only)
 
-In order to easily gather JMX metrics, you can execute [🧠 CLI](/cli) with `get-jmx-metrics` command:
+In order to easily gather JMX metrics, you can use [playground get-jmx-metrics](/playground%20get-jmx-metrics) command. `--container` (`-c`) can be repeated (default is `connect`), `--domain` (`-d`) restricts the list of domains and `--open` (`-o`) saves the output to a file and opens it with your editor:
 
 ```bash
-$ playground get-jmx-metrics
-
-  Get JMX metrics from a component.
-  
-  Check documentation /how-to-use?id=%f0%9f%94%a2-jmx-metrics
-
-Usage:
-  playground get-jmx-metrics [OPTIONS]
-  playground get-jmx-metrics --help | -h
-
-Options:
-  --component, -c COMPONENT
-    Component name.
-    Allowed: zookeeper, broker, connect, schema-registry
-    Default: connect
-
-  --domain, -d DOMAIN
-    Domain name.
-
-  --help, -h
-    Show this help
-
-Examples:
-  playground get-jmx-metrics --component connect
-  playground get-jmx-metrics --component connect --domain "kafka.connect
-  kafka.consumer kafka.producer"
-  playground get-jmx-metrics -c broker
+playground get-jmx-metrics -c connect -c broker --domain "kafka.server"
 ```
 
 Example (without specifying domain):
@@ -597,9 +589,9 @@ $ playground get-jmx-metrics -c connect -d "kafka.connect kafka.consumer kafka.p
 
 ## 📝 See properties file
 
-Because the playground use **[Docker override](/how-it-works?id=🐳-docker-override)**, not all configuration parameters are in same `docker-compose.yml` file.
+Because the playground uses **[Docker override](/how-it-works?id=🐳-docker-override)**, not all configuration parameters are in same `docker-compose.yml` file.
 
-In order to easily see the end result properties file, you can use execute [playground container get-properties](/playground%20container%20get-properties) command
+In order to easily see the end result properties file, you can use [playground container get-properties](/playground%20container%20get-properties) command
 
 *Example:*
 
@@ -641,7 +633,7 @@ value.converter=io.confluent.connect.avro.AvroConverter
 
 Because the playground uses **[Docker override](/how-it-works?id=🐳-docker-override)**, not all configuration parameters are in same `docker-compose.yml` file and also `docker-compose` files in the playground depends on environment variables to be set.
 
-For these reasons, if you want to make a change in one of the `docker-compose` files (without restarting the example from scratch), it is not simply a matter of doing `docker-compose up -d` 😅!
+For these reasons, if you want to make a change in one of the `docker-compose` files (without restarting the example from scratch), it is not simply a matter of doing `docker compose up -d` 😅!
 
 However, when you execute an example, you get in the output the [playground container recreate](/playground%20container%20recreate) in order to easily re-create modified container(s) 🥳.
 
@@ -652,24 +644,10 @@ However, when you execute an example, you get in the output the [playground cont
  run cli command playground container recreate
 ```
 
-So you can modify one of the `docker-compose` files (in that case either [`environment/plaintext/docker-compose.yml`](https://github.com/vdesabou/kafka-docker-playground/blob/master/environment/plaintext/docker-compose.yml) or [`connect/connect-http-sink/docker-compose.plaintext.yml`](https://github.com/vdesabou/kafka-docker-playground/blob/master/connect/connect-http-sink/docker-compose.plaintext.yml)), and then run execute [🧠 CLI](/cli) with `playground container recreate` command:
-
-*Example:*
-
-After editing [`connect/connect-http-sink/docker-compose.plaintext.yml`](https://github.com/vdesabou/kafka-docker-playground/blob/master/connect/connect-http-sink/docker-compose.plaintext.yml) and updated both `connect` and `http-service-no-auth`, the suggested cli command was ran:
+So you can modify one of the `docker-compose` files (in that case either [`environment/plaintext/docker-compose.yml`](https://github.com/vdesabou/kafka-docker-playground/blob/master/environment/plaintext/docker-compose.yml) or [`connect/connect-http-sink/docker-compose.plaintext.yml`](https://github.com/vdesabou/kafka-docker-playground/blob/master/connect/connect-http-sink/docker-compose.plaintext.yml)), and then run [playground container recreate](/playground%20container%20recreate) command:
 
 ```bash
-$ playground container recreate
-http-service-ssl-basic-auth is up-to-date
-http-service-oauth2-auth is up-to-date
-Recreating http-service-no-auth ... 
-zookeeper is up-to-date
-http-service-no-auth-500 is up-to-date
-http-service-mtls-auth is up-to-date
-http-service-basic-auth-204 is up-to-date
-http-service-basic-auth is up-to-date
-broker is up-to-date
-Recreating http-service-no-auth ... done
-Recreating connect              ... done
-control-center is up-to-date
+playground container recreate
 ```
+
+Only the containers whose definition changed (for example `connect` and `http-service-no-auth` after editing [`connect/connect-http-sink/docker-compose.plaintext.yml`](https://github.com/vdesabou/kafka-docker-playground/blob/master/connect/connect-http-sink/docker-compose.plaintext.yml)) are re-created, the others are left running.

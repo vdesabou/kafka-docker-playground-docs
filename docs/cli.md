@@ -126,6 +126,8 @@ visit https://docs.docker.com/get-docker to install
 - [find-example](playground%20find-example) - 🔎 Find examples matching a free-text query, without the interactive picker
 - [switch-ccloud](playground%20switch-ccloud) - 🌩️  Switch to ccloud environment.
 - [switch-back](playground%20switch-back) - 💺  Switch back from previous environment before switch-ccloud was called.
+- [switch-podman](playground%20switch-podman) - 🦭 Switch the container engine to Podman
+- [switch-docker](playground%20switch-docker) - 🐳 Switch the container engine back to Docker
 - [update-version](playground%20update-version) - ✨ Update current confluent platform components (all with --tag or only connect with --connect-tag) or connector(s) with new version(s)
 - [open](playground%20open) - 👐 When --file is not provided, simply open last example you ran with \<playground run\>
 - [stop](playground%20stop) - 🛑 Stop currently running example

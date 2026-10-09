@@ -23,6 +23,8 @@
 
 ##### 🐛 Bugs
 
+- 🐛 Connect REST API calls fail on 409 during a worker rebalance instead of retrying [#9066](https://github.com/vdesabou/kafka-docker-playground/issues/9066)
+- 🐛 playground topic get-number-records fails when connect is disabled: Could not find current CP version from docker ps [#9065](https://github.com/vdesabou/kafka-docker-playground/issues/9065)
 - 🐛 snowflake examples failing with "JWT token is invalid" [#8932](https://github.com/vdesabou/kafka-docker-playground/issues/8932)
 - 🐛 clashes between Salesforce tests (audit, sinks excluded) [#8931](https://github.com/vdesabou/kafka-docker-playground/issues/8931)
 - 🐛 SFDC examples: Unique PushTopic names per script and environment [#8930](https://github.com/vdesabou/kafka-docker-playground/issues/8930)

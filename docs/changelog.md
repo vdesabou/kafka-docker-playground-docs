@@ -23,6 +23,7 @@
 
 ##### 🐛 Bugs
 
+- 🐛 fm-mongodb-sink/source/debezium-mongodb-source crash on CI: mongo:latest pulls MongoDB 8.0 which refuses to start on Linux kernel 6.19+ [#9124](https://github.com/vdesabou/kafka-docker-playground/issues/9124)
 - 🐛 playground topic consume can hang forever: --timeout never applied, ccloud record count overestimated [#9111](https://github.com/vdesabou/kafka-docker-playground/issues/9111)
 - 🐛 zsh users sourcing completions.bash get "bad option: -a" since Bashly 2.0 [#9069](https://github.com/vdesabou/kafka-docker-playground/issues/9069)
 - 🐛 Connect REST API calls fail on 409 during a worker rebalance instead of retrying [#9066](https://github.com/vdesabou/kafka-docker-playground/issues/9066)

@@ -3,6 +3,10 @@
 ## October 2026
 ##### 🌟 Enhancements
 
+- 🧠 Add playground connector diagnose to check status, errors and progress in one call [#9189](https://github.com/vdesabou/kafka-docker-playground/issues/9189)
+- 🧠 Add --checkout-only to playground connector-plugin sourcecode [#9185](https://github.com/vdesabou/kafka-docker-playground/issues/9185)
+- 🧠 Add --json output to playground find-example [#9183](https://github.com/vdesabou/kafka-docker-playground/issues/9183)
+- 🧠 Add playground connector-plugin config-key to explain a connector configuration key [#9181](https://github.com/vdesabou/kafka-docker-playground/issues/9181)
 - 🧠 Add playground debug analyze-logs and repro bootstrap --no-run for agents [#9179](https://github.com/vdesabou/kafka-docker-playground/issues/9179)
 - 🧠 Add playground switch-podman and switch-docker commands [#8977](https://github.com/vdesabou/kafka-docker-playground/issues/8977)
 - 🧠 Confluent Cloud stack creation (environment, cluster, keys) wastes \~95s on fixed sleeps and redundant calls [#8962](https://github.com/vdesabou/kafka-docker-playground/issues/8962)

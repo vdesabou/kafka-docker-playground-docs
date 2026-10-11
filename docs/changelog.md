@@ -3,6 +3,7 @@
 ## October 2026
 ##### 🌟 Enhancements
 
+- 🧠 Add playground debug analyze-logs and repro bootstrap --no-run for agents [#9179](https://github.com/vdesabou/kafka-docker-playground/issues/9179)
 - 🧠 Add playground switch-podman and switch-docker commands [#8977](https://github.com/vdesabou/kafka-docker-playground/issues/8977)
 - 🧠 Confluent Cloud stack creation (environment, cluster, keys) wastes \~95s on fixed sleeps and redundant calls [#8962](https://github.com/vdesabou/kafka-docker-playground/issues/8962)
 - 🧹 Delete Confluent Cloud connectors and topics of the last run on playground stop and before the next run [#8942](https://github.com/vdesabou/kafka-docker-playground/issues/8942)

@@ -218,6 +218,7 @@ visit https://docs.docker.com/get-docker to install
 - [thread-dump](playground%20debug%20thread-dump) - 🎯 Take a java thread dump
 - [heap-dump](playground%20debug%20heap-dump) - 👻 Take a heap dump
 - [heap-analyze](playground%20debug%20heap-analyze) - 🔬 Analyze a heap dump file using Eclipse MAT (Memory Analyzer Tool)
+- [analyze-logs](playground%20debug%20analyze-logs) - 🔥 Show a digest of ERROR/FATAL records found in log files, folders or zip bundles
 - [gc-analyze](playground%20debug%20gc-analyze) - 📈 Analyze JVM Garbage Collection logs
 - [tcp-dump](playground%20debug%20tcp-dump) - 🕵️‍♂️ Take a tcp dump (sniffing network)
 - [block-traffic](playground%20debug%20block-traffic) - 🚫 Blocking traffic using iptables
@@ -272,6 +273,7 @@ visit https://docs.docker.com/get-docker to install
 - [search-jar](playground%20connector-plugin%20search-jar) - ☕ List jars for a connector plugin from confluent hub https://www.confluent.io/hub/
 - [versions](playground%20connector-plugin%20versions) - 💯 List versions for a connector plugin from confluent hub https://www.confluent.io/hub/
 - [display-last-updated](playground%20connector-plugin%20display-last-updated) - 🆕 List last updated connector plugins from confluent hub https://www.confluent.io/hub/
+- [config-key](playground%20connector-plugin%20config-key) - 🔑 Explain a connector configuration key: documentation, type, default, since when, and which examples set it
 - [sourcecode](playground%20connector-plugin%20sourcecode) - 🧑‍💻 Open source code url in your browser (or in your editor when used with --open)
 
 ### Connector commands
@@ -291,6 +293,7 @@ visit https://docs.docker.com/get-docker to install
 - [stop](playground%20connector%20stop) - 🛑 Stop connector (only available if CP \> 7.5)
 - [resume](playground%20connector%20resume) - ⏯️  Resume connector
 - [delete](playground%20connector%20delete) - 🗑️  Delete connector
+- [diagnose](playground%20connector%20diagnose) - 🩺 Diagnose a connector in one call: status, errors and progress
 - [show-lag](playground%20connector%20show-lag) - 🐢 Show lag of sink connector
 - [show-config](playground%20connector%20show-config) - 🧰 Show current connector config that was applied
 - [show-config-parameters](playground%20connector%20show-config-parameters) - 🔩 Show all possible configuration parameters of connector

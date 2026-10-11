@@ -53,6 +53,10 @@ You must have git installed.
   
 💌 Confluent employees only: make sure to follow "Maven FAQ", you also need to be on Confluent VPN with proper AWS credentials set in order to be able to download proprietary dependencies.
 
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Conflicts With: | *--checkout-only*
+
 #### *--compile-jdk-version COMPILE_JDK_VERSION*
 
 🤎 JDK version to use when compiling  
@@ -71,9 +75,30 @@ Default is 11
 
 🔖 Checkout the code and open with text editor set with playground config editor \<editor\> (default is code)
 
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Conflicts With: | *--checkout-only*
+
+#### *--checkout-only*
+
+📂 Checkout the code at the right tag and print the path of the folder, nothing else  
+  
+No browser, no editor, no question: an existing checkout of the same  
+version in /tmp/connector-plugin-sourcecode is reused. The path is  
+the last line of the output.  
+  
+🎓 Tip: use it in scripts and from AI agents, which can then read the code
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Conflicts With: | *--open, --compile*
+
 ## Examples
 
 ```bash
+
+# will checkout the latest version from hub and print the path of the folder
+playground connector-plugin sourcecode --connector-plugin confluentinc/kafka-connect-hdfs --checkout-only
 
 # will open latest version from hub source code
 playground connector-plugin sourcecode --connector-plugin confluentinc/kafka-connect-hdfs

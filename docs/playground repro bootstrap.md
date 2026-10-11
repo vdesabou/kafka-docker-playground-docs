@@ -44,7 +44,7 @@ playground repro bootstrap [OPTIONS]
 
 🔖 Sink example file to use for creating a pipeline. multiple --pipeline flags can be used to create a pipeline with multiple sinks.  
   
-❕ It must be absolute full path.   
+❕ It must be absolute full path.  
   
 🎓 Tip: use \<tab\> completion to trigger fzf completion
 
@@ -53,10 +53,23 @@ playground repro bootstrap [OPTIONS]
 | Repeatable:     |  ✓ Yes
 | Conflicts With: | *--producer*
 
+#### *--no-run*
+
+🛑 Only generate the reproduction model files, then exit  
+  
+Skips opening the generated file in the editor and running it, so  
+the running environment is left untouched.  
+  
+🎓 Tip: use it in scripts and from AI agents, together with --file and --description
+
 ## Examples
 
 ```bash
 playground repro bootstrap (interactive mode)
+```
+
+```bash
+playground repro bootstrap -f "$PWD/connect/connect-http-sink/http_no_auth.sh" -d "123456 dlq not working" --no-run
 ```
 
 

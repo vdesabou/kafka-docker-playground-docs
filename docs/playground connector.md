@@ -59,6 +59,7 @@ playground connector COMMAND
 - [stop](playground%20connector%20stop) - 🛑 Stop connector (only available if CP \> 7.5)
 - [resume](playground%20connector%20resume) - ⏯️  Resume connector
 - [delete](playground%20connector%20delete) - 🗑️  Delete connector
+- [diagnose](playground%20connector%20diagnose) - 🩺 Diagnose a connector in one call: status, errors and progress
 - [show-lag](playground%20connector%20show-lag) - 🐢 Show lag of sink connector
 - [show-config](playground%20connector%20show-config) - 🧰 Show current connector config that was applied
 - [show-config-parameters](playground%20connector%20show-config-parameters) - 🔩 Show all possible configuration parameters of connector

@@ -26,6 +26,9 @@ fly when missing, and their output is brought back to your machine.
   enable-remote-debugging   attach your IDE debugger to a container  
   jscissors           trace method calls, arguments and return values  
   
+🔥 It is in someone else's logs  
+  analyze-logs        error digest of log files, folders or zip bundles  
+  
 📦 Hand it over  
   generate-diagnostics   a support bundle for connect or broker
 
@@ -44,6 +47,7 @@ playground debug COMMAND
 - [thread-dump](playground%20debug%20thread-dump) - 🎯 Take a java thread dump
 - [heap-dump](playground%20debug%20heap-dump) - 👻 Take a heap dump
 - [heap-analyze](playground%20debug%20heap-analyze) - 🔬 Analyze a heap dump file using Eclipse MAT (Memory Analyzer Tool)
+- [analyze-logs](playground%20debug%20analyze-logs) - 🔥 Show a digest of ERROR/FATAL records found in log files, folders or zip bundles
 - [gc-analyze](playground%20debug%20gc-analyze) - 📈 Analyze JVM Garbage Collection logs
 - [tcp-dump](playground%20debug%20tcp-dump) - 🕵️‍♂️ Take a tcp dump (sniffing network)
 - [block-traffic](playground%20debug%20block-traffic) - 🚫 Blocking traffic using iptables

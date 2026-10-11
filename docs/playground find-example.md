@@ -48,6 +48,17 @@ extra words are appended to the query, so quoting it is optional
 |-----------------|-------------
 | Default Value:  | 10
 
+#### *--json*
+
+📗 Print the hits as a JSON array, best first, and nothing else  
+  
+Each hit has script (absolute path), path (relative to the repository),  
+title (README), connector_classes, environment, score and run_command.  
+No hit prints [] and exits with code 1.  
+  
+🎓 Tip: use it in scripts and from AI agents, for example with  
+jq -r '.[0].script'
+
 ## Examples
 
 ```bash
@@ -60,6 +71,10 @@ playground find-example debezium postgres fully managed
 
 ```bash
 playground find-example "oracle cdc ssl" --category connect --limit 3
+```
+
+```bash
+playground find-example "http sink oauth" --json --limit 3 | jq -r '.[].script'
 ```
 
 

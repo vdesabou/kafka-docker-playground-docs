@@ -280,7 +280,7 @@ For example, if you're running an AZURE Fully Managed connector example and `AZU
 
 ### 🎯 For Confluent Platform (CP)
 
-By default, the latest Confluent Platform version supported by the playground is used (currently CP 8.3.2, which is [KRaft](/how-to-use?id=🛰-kraft-mode) only). Use `--tag` option of [playground run](/playground%20run) (or `TAG` environment variable) to run with another version.
+By default, the latest Confluent Platform version supported by the playground is used (currently CP 8.3.2, which is [KRaft](/how-to-use?id=📡-kraft-mode) only). Use `--tag` option of [playground run](/playground%20run) (or `TAG` environment variable) to run with another version.
 
 > [!TIP]
 > You can also change cp version while running an example using [playground update-version](/playground%20update-version)
@@ -368,7 +368,7 @@ Docker images tags being used can be overridden by exporting following environme
 playground run -f datagen-source<tab> --schema-registry-tag 7.9.1
 ```
 
-## 🛰 Kraft mode
+## 📡 Kraft mode
 
 [Kraft](https://docs.confluent.io/platform/current/kafka-metadata/kraft.html) is enabled by default when used with CP 8+. For CP 7.4 to 7.9, you can force it with `--enable-kraft` option of [playground run](/playground%20run) (or by setting environment variable `ENABLE_KRAFT`). It is refused for CP < 7.4, and has no effect with CP 8+.
 
@@ -412,7 +412,7 @@ By default, `rest-proxy` container is not started for every test.
 
 You can enable this with `--enable-rest-proxy` option of [playground run](/playground%20run).
 
-### 3️⃣ Enabling multiple brokers
+### 🔢 Enabling multiple brokers
 
 By default, there is only one kafka node enabled. To enable three nodes, select it in menu or use `--enable-multiple-brokers` option of [playground run](/playground%20run).
 
@@ -422,7 +422,7 @@ By default, there is only one connect node enabled. To enable three connect node
 
 `connect2` and `connect3` get the `connect` configuration of the example: the playground generates a copy of the example's docker-compose override file with them under `/tmp/playground-connect-workers/`, the example's own file is not modified.
 
-### 🌪️ Enabling SQL Datagen
+### 🌀 Enabling SQL Datagen
 
 For Oracle, MySQL, Postgres and Microsoft SQL Server source connector examples (JDBC and Debezium), `--enable-sql-datagen` option of [playground run](/playground%20run) starts inserting rows at the end of the example.
 
@@ -548,7 +548,7 @@ Then you can use it with:
 playground container exec -c kcat --command "kcat -b broker:9092 -L"
 ```
 
-### 🐿️ Enabling Flink
+### 🐹 Enabling Flink
 
 By default, Flink task/jobmanager is not started for every test. 
 
@@ -565,7 +565,7 @@ Additionally, you can start Flink in any of the available [deployment modes](htt
     - `flink_session_sql_mode/start.sh`
 
 
-🐿️ Flink UI is reachable using [http://127.0.0.1:8081](http://127.0.0.1:8081) within the flink child directory. If you enable Flink by starting connector deployment, [http://127.0.0.1:18081](http://127.0.0.1:18081) will be used. 
+🐹 Flink UI is reachable using [http://127.0.0.1:8081](http://127.0.0.1:8081) within the flink child directory. If you enable Flink by starting connector deployment, [http://127.0.0.1:18081](http://127.0.0.1:18081) will be used. 
 
 ## 🔢 JMX Metrics
 

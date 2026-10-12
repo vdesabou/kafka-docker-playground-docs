@@ -107,17 +107,21 @@ If this is setup, the 4th message would have been rejected by broker validation.
 
 <!-- select:end -->
 
-* Skip the 4th message (also called *poison pill*) by resetting consumer offset using `kafka-consumer-groups` CLI 
+* Skip the 4th message (also called *poison pill*) by altering the connector offsets
 
 > [!TIP] If you're Confluent customer, check this [Knowledge Base article](https://support.confluent.io/hc/en-us/articles/360031115091-How-to-skip-messages-in-Kafka-Connect-or-reset-a-connector-to-the-earliest-offset-for-sink-connectors)
 
-Here is an example of how you can use the CLI (in this case it is to reset to earliest, update it to reset to specific offset in order to skip poison pill):
+Here is how you can do it with the CLI:
 
 ```bash
-docker exec broker kafka-consumer-groups --bootstrap-server broker:9092 --group connect-<connector name> --describe
-docker exec broker kafka-consumer-groups --bootstrap-server broker:9092 --group connect-<connector name> --to-earliest --topic a-topic --reset-offsets --dry-run
-docker exec broker kafka-consumer-groups --bootstrap-server broker:9092 --group connect-<connector name> --to-earliest --topic a-topic --reset-offsets --execute
+# committed offset, log end offset and lag of the sink connector consumer group
+playground consumer-group describe --group connect-<connector name>
+# open the current offsets in your editor, then apply what you saved (the connector is stopped and resumed around the change)
+playground connector offsets alter --connector <connector name>
 ```
+
+> [!NOTE]
+> [playground connector offsets alter](/playground%20connector%20offsets%20alter) uses the Kafka Connect offsets API, available with CP 7.6 or later.
 
 > [!TIP] You can check offset and partition using `playground topic consume`
 
@@ -172,34 +176,21 @@ Poison pill is at `Partition:0|Offset:3`
 #### --No--
 #### --Yes--
 
-The output of describe command is:
+Check the consumer group of the connector:
 
 ```bash
-docker exec broker kafka-consumer-groups --bootstrap-server broker:9092 --group connect-filestream-sink --describe
-Consumer group 'connect-filestream-sink' has no active members.
+playground consumer-group describe --group connect-filestream-sink
 ```
 
-This is because the connector task is in FAILED state.
+The committed offset is 3, the poison pill, and the connector task is in FAILED state.
 
-In order to reset offset, the consumer group should not have any active members (in case connector is RUNNING, a common approach is to delete the connector, then reset offset, and then re-create connector), so we're good to proceed with reset offset here.
-
-Reset offset to 4 (dry-run):
+Alter the offsets of the connector:
 
 ```bash
-docker exec broker kafka-consumer-groups --bootstrap-server broker:9092 --group connect-filestream-sink --to-offset 4 --topic filestream --reset-offsets --dry-run
-
-GROUP                          TOPIC                          PARTITION  NEW-OFFSET     
-connect-filestream-sink        filestream                     0          4  
+playground connector offsets alter --connector filestream-sink
 ```
 
-All good, do it!
-
-```bash
-docker exec broker kafka-consumer-groups --bootstrap-server broker:9092 --group connect-filestream-sink --to-offset 4 --topic filestream --reset-offsets --execute
-
-GROUP                          TOPIC                          PARTITION  NEW-OFFSET     
-connect-filestream-sink        filestream                     0          4         
-```
+It opens the current offsets in your editor: set `kafka_offset` to `4` for partition `0` of topic `filestream`, save and close the file. The connector is stopped before the change and resumed after it.
 
 Restart connector now:
 
@@ -216,7 +207,7 @@ playground connector status
 Check data was processed:
 
 ```bash
-docker exec connect cat /tmp/output.json
+playground container exec -c connect --command "cat /tmp/output.json"
 Struct{u_name=bottle,u_price=2.75,u_quantity=3}
 ```
 
@@ -553,7 +544,7 @@ playground connector status
 Check data was processed:
 
 ```bash
-docker exec connect cat /tmp/output.json
+playground container exec -c connect --command "cat /tmp/output.json"
 {trip_cost=29.1, MessageSource=Kafka Connect framework, complaint_type=Dirty car, customer_name=Ed, new_customer=false, number_of_rides=22}
 ```
 
@@ -606,7 +597,7 @@ Check the output of json file:
 
 ```bash
 log "Verify we have received the data in file"
-docker exec connect cat /tmp/output.json
+playground container exec -c connect --command "cat /tmp/output.json"
 {__kafka_topic=filestream, __kafka_partition=0, complaint_type=Dirty car, new_customer=false, __kafka_offset=2, __kafka_ts=1684764616428, trip_cost=29.1, customer_name=Ed, number_of_rides=22}
 ```
 
@@ -651,7 +642,7 @@ Check the output of json file:
 
 ```bash
 log "Verify we have received the data in file"
-docker exec connect cat /tmp/output.json
+playground container exec -c connect --command "cat /tmp/output.json"
 {__kafka_topic=filestream, __kafka_partition=0, complaint_type=Dirty car, new_customer=false, __kafka_offset=3, __kafka_ts=2023-05-22 14:14:27.068, trip_cost=29.1, customer_name=Ed, number_of_rides=22}
 ```
 

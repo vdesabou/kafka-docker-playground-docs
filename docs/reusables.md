@@ -96,299 +96,181 @@ It will automatically:
 
 ## 👉 Producing data
 
-### 🧠 playground topic produce
+Use [playground topic produce](/playground%20topic%20produce): it creates the topic if needed, registers the schema (avro, json schema or protobuf) and generates realistic random data matching it. See the [command page](/playground%20topic%20produce) for all options.
 
-Just use `playground topic produce` [CLI](/playground%20topic%20produce), it's magic !
-
-If you prefer to use legacy way, see below:
-
-### Deprecated ♨️ Java producers
-
-> [!WARNING]
-> Most of times, it's much simpler to use `playground topic produce` [CLI](/playground%20topic%20produce)
-> 
-> Use java producer only if you have very specific requirements such as specifying record timestamp
-> See [here](/legacy-java-producer) for instructions
-
-### 🔤 kafka-console-producer
+> [!TIP]
+> Pipe the schema or the payload with a quoted heredoc, `<< 'EOF'`, so that the `%g` placeholders survive the shell.
 
 <!-- tabs:start -->
 
-#### **seq**
+#### **String**
 
 ```bash
-seq -f "This is a message %g" 10 | docker exec -i broker kafka-console-producer --bootstrap-server broker:9092 --topic a-topic
+playground topic produce -t a-topic --nb-messages 10 --forced-value "This is a message %g"
 ```
 
-#### **Heredoc**
+#### **JSON**
 
 ```bash
-docker exec -i broker kafka-console-producer --bootstrap-server broker:9092 --topic a-topic << EOF
-This is my message 1
-This is my message 2
-EOF
-```
-
-#### **Heredoc JSON**
-
-```bash
-docker exec -i broker kafka-console-producer --bootstrap-server broker:9092 --topic a-topic << EOF
+playground topic produce -t a-topic --nb-messages 3 << 'EOF'
 {"u_name": "scissors", "u_price": 2.75, "u_quantity": 3}
 {"u_name": "tape", "u_price": 0.99, "u_quantity": 10}
 {"u_name": "notebooks", "u_price": 1.99, "u_quantity": 5}
 EOF
 ```
 
-#### **Key**
+#### **Key and headers**
 
 ```bash
-docker exec -i broker kafka-console-producer --bootstrap-server broker:9092 --topic a-topic --property parse.key=true --property key.separator=, << EOF
-key1,value1
-key1,value2
-key2,value1
-EOF
-```
-
-#### **Key and JSON**
-
-```bash
-docker exec -i broker kafka-console-producer --bootstrap-server broker:9092 --topic a-topic --property parse.key=true --property key.separator=, << EOF
-key1,{"u_name": "scissors", "u_price": 2.75, "u_quantity": 3}
-key2,{"u_name": "tape", "u_price": 0.99, "u_quantity": 10}
-key3,{"u_name": "notebooks", "u_price": 1.99, "u_quantity": 5}
-EOF
-```
-
-#### **JSON with schema (and key)**
-
-```bash
-docker exec -i broker kafka-console-producer --bootstrap-server broker:9092 --topic a-topic --property parse.key=true --property key.separator=, << EOF
-1,{"schema":{"type":"struct","fields":[{"type":"string","optional":false,"field":"record"}]},"payload":{"record":"record1"}}
-2,{"schema":{"type":"struct","fields":[{"type":"string","optional":false,"field":"record"}]},"payload":{"record":"record2"}}
-3,{"schema":{"type":"struct","fields":[{"type":"string","optional":false,"field":"record"}]},"payload":{"record":"record3"}}
-EOF
-```
-
-<!-- tabs:end -->
-
-### 🔣 kafka-avro-console-producer
-
-<!-- tabs:start -->
-
-#### **seq**
-
-```bash
-seq -f "{\"f1\": \"value%g\"}" 10 | docker exec -i connect kafka-avro-console-producer --bootstrap-server broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --property value.schema='{"type":"record","name":"myrecord","fields":[{"name":"f1","type":"string"}]}'
-```
-
-#### **Heredoc**
-
-```bash
-docker exec -i connect kafka-avro-console-producer --bootstrap-server broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --property value.schema='{"type":"record","name":"myrecord","fields":[{"name":"u_name","type":"string"},
-{"name":"u_price", "type": "float"}, {"name":"u_quantity", "type": "int"}]}' << EOF
+# key1, key2, etc.. (%g can also be used)
+playground topic produce -t a-topic --nb-messages 3 --key "key1" --headers "header1:value1,header2:value2" << 'EOF'
 {"u_name": "scissors", "u_price": 2.75, "u_quantity": 3}
 {"u_name": "tape", "u_price": 0.99, "u_quantity": 10}
 {"u_name": "notebooks", "u_price": 1.99, "u_quantity": 5}
 EOF
 ```
 
-#### **Key**
+#### **Avro**
 
 ```bash
-docker exec -i connect kafka-avro-console-producer --bootstrap-server broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --property key.schema='{"type":"record","namespace": "io.confluent.connect.avro","name":"myrecordkey","fields":[{"name":"ID","type":"long"}]}' --property value.schema='{"type":"record","name":"myrecordvalue","fields":[{"name":"ID","type":"long"},{"name":"product", "type": "string"}, {"name":"quantity", "type": "int"}, {"name":"price",
-"type": "float"}]}'  --property parse.key=true --property key.separator="|" << EOF
-{"ID": 111}|{"ID": 111,"product": "foo", "quantity": 100, "price": 50}
-{"ID": 222}|{"ID": 222,"product": "bar", "quantity": 100, "price": 50}
+playground topic produce -t a-topic --nb-messages 10 << 'EOF'
+{
+  "type": "record",
+  "name": "myrecord",
+  "fields": [
+    {"name": "u_name", "type": "string"},
+    {"name": "u_price", "type": "float"},
+    {"name": "u_quantity", "type": "int"}
+  ]
+}
 EOF
 ```
 
-#### **String Key**
-
-If the key needs to be a string, you can use `key.serializer` to specify it:
+#### **Avro with key**
 
 ```bash
-docker exec -i connect kafka-avro-console-producer --bootstrap-server broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --property key.serializer=org.apache.kafka.common.serialization.StringSerializer --property value.schema='{"type":"record","name":"myrecordvalue","fields":[{"name":"ID","type":"long"},{"name":"product", "type": "string"}, {"name":"quantity", "type": "int"}, {"name":"price",
-"type": "float"}]}'  --property parse.key=true --property key.separator="|" << EOF
-111|{"ID": 111,"product": "foo", "quantity": 100, "price": 50}
-222|{"ID": 222,"product": "bar", "quantity": 100, "price": 50}
+playground topic produce -t a-topic --nb-messages 10 --key '
+{
+  "type": "record",
+  "name": "myrecordkey",
+  "fields": [
+    {"name": "ID", "type": "long"}
+  ]
+}
+' << 'EOF'
+{
+  "type": "record",
+  "name": "myrecordvalue",
+  "fields": [
+    {"name": "ID", "type": "long"},
+    {"name": "product", "type": "string"},
+    {"name": "quantity", "type": "int"},
+    {"name": "price", "type": "float"}
+  ]
+}
 EOF
+```
+
+#### **Protobuf**
+
+```bash
+playground topic produce -t a-topic --nb-messages 10 << 'EOF'
+syntax = "proto3";
+
+message MyRecord {
+    string f1 = 1;
+}
+EOF
+```
+
+#### **JSON Schema**
+
+```bash
+playground topic produce -t a-topic --nb-messages 10 << 'EOF'
+{
+  "type": "object",
+  "properties": {
+    "f1": {"type": "string"}
+  }
+}
+EOF
+```
+
+#### **Exact payload**
+
+Use `--generate-only` first to get the skeleton of a message, then `--forced-value` to send exactly the record you need:
+
+```bash
+playground topic produce -t a-topic --nb-messages 1 --forced-value '{"f1": "value1"}' << 'EOF'
+{
+  "type": "record",
+  "name": "myrecord",
+  "fields": [
+    {"name": "f1", "type": "string"}
+  ]
+}
+EOF
+```
+
+#### **Schema file**
+
+```bash
+playground topic produce -t a-topic --nb-messages 10 < schema.avsc
+```
+
+#### **Tombstone**
+
+```bash
+playground topic produce -t a-topic --tombstone --key "mykey1"
+```
+
+#### **High volume**
+
+```bash
+playground topic produce -t a-topic --nb-messages 200000 --record-size 1000
 ```
 
 <!-- tabs:end -->
 
-> [!TIP]
-> If AVRO schema is very complex, it is better to use [playground topic produce](/playground%20topic%20produce) with a schema file, for example `playground topic produce -t a-topic --nb-messages 10 --value @schema.avsc`.
-
-### 🔣 kafka-protobuf-console-producer
-
-<!-- tabs:start -->
-
-#### **seq**
-
-```bash
-seq -f "{\"f1\": \"value%g\"}" 10 | docker exec -i connect kafka-protobuf-console-producer --bootstrap-server broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic-proto --property value.schema='syntax = "proto3"; message MyRecord { string f1 = 1; }'
-```
-
-#### **Heredoc**
-
-```bash
-docker exec -i connect kafka-protobuf-console-producer --bootstrap-server broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --property value.schema='syntax = "proto3"; message MyRecord { string f1 = 1; }' << EOF
-{"f1":"value1"}
-{"f1":"value2"}
-{"f1":"value3"}
-EOF
-```
-
-#### **Key**
-
-```bash
-docker exec -i connect kafka-protobuf-console-producer --bootstrap-server broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --property key.schema='syntax = "proto3"; message MyRecord { string ID = 1; }' --property value.schema='syntax = "proto3"; message MyRecord { string f1 = 1; }'  --property parse.key=true --property key.separator="|" << EOF
-{"ID": 111}|{"f1":"value1"}
-{"ID": 222}|{"f1":"value2"}
-{"ID": 333}|{"f1":"value3"}
-EOF
-```
-
-<!-- tabs:end -->
-
-> [!TIP]
-> If Protobuf schema is very complex, it is better to use [playground topic produce](/playground%20topic%20produce) with a schema file, for example `playground topic produce -t a-topic --nb-messages 10 --value @schema.proto`.
-
-
-### 🔣 kafka-json-schema-console-producer
-
-<!-- tabs:start -->
-
-#### **seq**
-
-```bash
-seq -f "{\"f1\": \"value%g\"}" 10 | docker exec -i connect kafka-json-schema-console-producer --bootstrap-server broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --property value.schema='{"type":"object","properties":{"f1":{"type":"string"}}}'
-```
-
-#### **Heredoc**
-
-```bash
-docker exec -i connect kafka-json-schema-console-producer --bootstrap-server broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --property value.schema='{"type":"object","properties":{"f1":{"type":"string"}}}' << EOF
-{"f1":"value1"}
-{"f1":"value2"}
-{"f1":"value3"}
-EOF
-```
-
-#### **Key**
-
-```bash
-docker exec -i connect kafka-json-schema-console-producer --bootstrap-server broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --property key.schema='{"additionalProperties":false,"title":"ID","description":"ID description","type":"object","properties":{"ID":{"description":"ID","type":"integer"}},"required":["ID"]}' --property value.schema='{"type":"object","properties":{"f1":{"type":"string"}}}'  --property parse.key=true --property key.separator="|" << EOF
-{"ID": 111}|{"f1": "value1"}
-{"ID": 222}|{"f1": "value2"}
-EOF
-```
-
-<!-- tabs:end -->
-
-> [!TIP]
-> If JSON Schema schema is very complex, it is better to use [playground topic produce](/playground%20topic%20produce) with a schema file, for example `playground topic produce -t a-topic --nb-messages 10 --value @schema.json`.
-
-### 🌪 kafka-producer-perf-test
-
-```bash
-docker exec broker kafka-producer-perf-test --topic a-topic --num-records 200000 --record-size 1000 --throughput 100000 --producer-props bootstrap.servers=broker:9092
-```
+> [!NOTE]
+> The [Java producers](/legacy-java-producer) are deprecated: use them only if you have very specific requirements, such as setting the record timestamp.
 
 ## 👉 Consuming data
 
-### 🧠 playground topic consume
-
-Just use `playground topic consume` [CLI](/playground%20topic%20consume), it's magic !
-
-If you prefer to use legacy way, see below:
-
-### 🔤 [kafka-console-consumer](https://docs.confluent.io/platform/current/tutorials/examples/clients/docs/kafka-commands.html#consume-records)
+Use [playground topic consume](/playground%20topic%20consume): it reads the topic from the beginning and detects the format (avro, protobuf, json schema or plain) on its own. Every record is displayed with its timestamp, partition, offset, headers, key and schema ID.
 
 <!-- tabs:start -->
 
 #### **Simplest**
 
 ```bash
-timeout 60 docker exec broker kafka-console-consumer --bootstrap-server broker:9092 --topic a-topic --from-beginning --max-messages 1
+playground topic consume --topic a-topic
 ```
 
-#### **Display Key**
+#### **All topics**
 
 ```bash
-timeout 60 docker exec broker kafka-console-consumer --bootstrap-server broker:9092 --topic a-topic --property print.key=true --property key.separator=, --from-beginning --max-messages 1
+playground topic consume
 ```
 
+#### **Assert content**
 
-<!-- tabs:end -->
-
-
-> [!TIP]
-> Using `timeout` command prevents the command to run forever.
-> It is [ignored](https://github.com/vdesabou/kafka-docker-playground/blob/master/scripts/cli/src/lib/utils_function.sh) if not present on your machine.
-
-
-### 🔣 [kafka-avro-console-consumer](https://docs.confluent.io/platform/current/tutorials/examples/clients/docs/kafka-commands.html#consume-avro-records)
-
-<!-- tabs:start -->
-
-#### **Simplest**
+Wait up to `--timeout` seconds for at least 10 records containing `value1`, and fail otherwise (this is how examples verify that data flowed):
 
 ```bash
-docker exec connect kafka-avro-console-consumer --bootstrap-server broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --from-beginning --max-messages 1
+playground topic consume --topic a-topic --min-expected-messages 10 --grep "value1" --timeout 60
 ```
 
-#### **Display Key**
+#### **Tail**
 
 ```bash
-docker exec connect kafka-avro-console-consumer --bootstrap-server broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --property print.key=true --property key.separator=, --from-beginning --max-messages 1
+playground topic consume --topic a-topic --tail
 ```
 
-#### **String Key**
-
-If the key is a string, you can use `key.deserializer` to specify it:
+#### **Open in editor**
 
 ```bash
-docker exec connect kafka-avro-console-consumer --bootstrap-server broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --property print.key=true --property key.deserializer=org.apache.kafka.common.serialization.StringDeserializer --from-beginning --max-messages 1
-```
-
-<!-- tabs:end -->
-
-### 🔣 kafka-protobuf-console-consumer
-
-<!-- tabs:start -->
-
-#### **Simplest**
-
-```bash
-docker exec connect kafka-protobuf-console-consumer --bootstrap-server broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --from-beginning --max-messages 1
-```
-
-#### **Display Key**
-
-```bash
-docker exec connect kafka-protobuf-console-consumer --bootstrap-server broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --property print.key=true --property key.separator=, --from-beginning --max-messages 1
-```
-
-<!-- tabs:end -->
-
-
-
-### 🔣 kafka-json-schema-console-consumer
-
-
-<!-- tabs:start -->
-
-#### **Simplest**
-
-```bash
-docker exec connect kafka-json-schema-console-consumer --bootstrap-server broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --from-beginning --max-messages 1
-```
-
-#### **Display Key**
-
-```bash
-docker exec connect kafka-json-schema-console-consumer --bootstrap-server broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic a-topic --property print.key=true --property key.separator=, --from-beginning --max-messages 1
+playground topic consume --topic a-topic --open
 ```
 
 <!-- tabs:end -->
@@ -525,7 +407,15 @@ Note: you can also directly edit file `.vscode/launch.json`:
 9. Process some messages:
 
 ```bash
-seq -f "{\"f1\": \"value%g\"}" 10 | docker exec -i connect kafka-avro-console-producer --bootstrap-server broker:9092 --property schema.registry.url=http://schema-registry:8081 --topic test_hdfs --property value.schema='{"type":"record","name":"myrecord","fields":[{"name":"f1","type":"string"}]}'
+playground topic produce -t test_hdfs --nb-messages 10 << 'EOF'
+{
+  "type": "record",
+  "name": "myrecord",
+  "fields": [
+    {"name": "f1", "type": "string"}
+  ]
+}
+EOF
 ```
 
 10. See results 🍿:
@@ -734,8 +624,9 @@ curl --request PUT \
 2. Add in your script after all containers are started:
 
 ```bash
-cat $HOME/.mitmproxy/mitmproxy-ca-cert.pem | docker exec -i --privileged --user root connect bash -c "cat >> /etc/ssl/certs/ca-bundle.crt"
-cat $HOME/.mitmproxy/mitmproxy-ca-cert.pem | docker exec -i --privileged --user root connect bash -c "keytool -importcert --cacerts -storepass changeit -noprompt"
+playground container cp --source $HOME/.mitmproxy/mitmproxy-ca-cert.pem --destination connect:/tmp/mitmproxy-ca-cert.pem
+playground container exec -c connect --root --command "cat /tmp/mitmproxy-ca-cert.pem >> /etc/ssl/certs/ca-bundle.crt"
+playground container exec -c connect --root --command "keytool -importcert --cacerts -storepass changeit -noprompt -alias mitmproxy -file /tmp/mitmproxy-ca-cert.pem"
 ```
 
 3. Use mitmproxy proxy in your connector config:
@@ -1213,7 +1104,7 @@ USER appuser
 4. Verify the correct JDK version is installed once your test is started:
 
 ```bash
-docker exec connect java -version
+playground container exec -c connect --command "java -version"
 ```
 
 ## 🏎️ Performance testing
@@ -1311,7 +1202,7 @@ The size of the record can be adjusted by changing the payload `{ _id : "Documen
 
 ```bash
 function inject () {
-docker exec -i mongodb mongosh << EOF
+playground container exec -c mongodb --command "mongosh" << EOF
 use kafka
 var counter = 0;
 var j = 0;

@@ -79,14 +79,14 @@ In case this is an example with [ccloud](/content?id=%e2%98%81%ef%b8%8f-confluen
       KAFKA_SCHEMA_REGISTRY_BASIC_AUTH_USER_INFO: $SCHEMA_REGISTRY_BASIC_AUTH_USER_INFO
 ```
 
-You can also specify environment variables directly when running the producer by using docker exec option `-e`:
+You can also specify environment variables directly when running the producer:
 
 Example:
 
 Send 100 messages to topic called "test-topic":
 
 ```bash
-docker exec -e NB_MESSAGES=100 -e TOPIC="test-topic" producer-repro-12345 bash -c "java -jar producer-1.0.0-jar-with-dependencies.jar"
+playground container exec -c producer-repro-12345 --command "NB_MESSAGES=100 TOPIC=test-topic java -jar producer-1.0.0-jar-with-dependencies.jar"
 ```
 
 #### **Protobuf**
@@ -165,14 +165,14 @@ In case this is an example with [ccloud](/content?id=%e2%98%81%ef%b8%8f-confluen
       KAFKA_SCHEMA_REGISTRY_BASIC_AUTH_USER_INFO: $SCHEMA_REGISTRY_BASIC_AUTH_USER_INFO
 ```
 
-You can also specify environment variables directly when running the producer by using docker exec option `-e`:
+You can also specify environment variables directly when running the producer:
 
 Example:
 
 Send 100 messages to topic called "test-topic":
 
 ```bash
-docker exec -e NB_MESSAGES=100 -e TOPIC="test-topic" producer-repro-12345 bash -c "java -jar producer-1.0.0-jar-with-dependencies.jar"
+playground container exec -c producer-repro-12345 --command "NB_MESSAGES=100 TOPIC=test-topic java -jar producer-1.0.0-jar-with-dependencies.jar"
 ```
 
 #### **JSON Schema**
@@ -279,14 +279,14 @@ In case this is an example with [ccloud](/content?id=%e2%98%81%ef%b8%8f-confluen
       KAFKA_SCHEMA_REGISTRY_BASIC_AUTH_USER_INFO: $SCHEMA_REGISTRY_BASIC_AUTH_USER_INFO
 ```
 
-You can also specify environment variables directly when running the producer by using docker exec option `-e`:
+You can also specify environment variables directly when running the producer:
 
 Example:
 
 Send 100 messages to topic called "test-topic":
 
 ```bash
-docker exec -e NB_MESSAGES=100 -e TOPIC="test-topic" producer-repro-12345 bash -c "java -jar producer-1.0.0-jar-with-dependencies.jar"
+playground container exec -c producer-repro-12345 --command "NB_MESSAGES=100 TOPIC=test-topic java -jar producer-1.0.0-jar-with-dependencies.jar"
 ```
 
 <!-- tabs:end -->
@@ -312,6 +312,9 @@ docker exec connect kafka-protobuf-console-consumer --bootstrap-server broker:90
 19:54:45 ℹ️ 📂 The reproduction files are now available in:
 /Users/vsaboulin/Documents/github/kafka-docker-playground/reproduction-models/connect-connect-hdfs2-sink
 ```
+
+> [!TIP]
+> To consume the topic, use [playground topic consume](/playground%20topic%20consume): `playground topic consume --topic a-topic`
 
 This will create the following files:
 

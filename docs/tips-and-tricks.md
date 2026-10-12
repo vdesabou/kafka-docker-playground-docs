@@ -1,18 +1,12 @@
 # 🎁 Tips & Tricks
 
-Below is a collection of tips and tricks.
+Below is a collection of tips and tricks, all using the [🧠 CLI](/cli).
 
-## 🐳 Docker tips
+## 🐳 Container tips
 
 ### Tail container logs
 
 Example with `connect` container:
-
-```bash
-docker container logs --tail=100 -f connect
-```
-
-or use [🧠 CLI](/cli) with:
 
 ```bash
 playground container logs -c connect
@@ -21,12 +15,6 @@ playground container logs -c connect
 ### Redirect all container logs to a file
 
 Example with `connect` container:
-
-```bash
-docker container logs connect > connect.log 2>&1
-```
-
-or use [🧠 CLI](/cli) with:
 
 ```bash
 playground container logs -c connect --open
@@ -78,50 +66,18 @@ playground container display-error-all
 Example with `connect` container:
 
 ```bash
-docker exec -it connect bash
-```
-
-or use [🧠 CLI](/cli) with:
-
-```bash
 playground container ssh -c connect
 ```
 
-### Kill all docker containers
-
-```bash
-docker rm -f $(docker ps -qa)
-```
-
-or use [🧠 CLI](/cli) with:
+### Kill all containers
 
 ```bash
 playground container kill-all
 ```
 
-### Recover from Docker error `max depth exceeded`
-
-When running an example you get:
-
-```log
-docker: Error response from daemon: max depth exceeded.
-```
-
-This happens from time to time and the only way to resolve this, as far as I know, is to remove all images using:
-
-```bash
-docker image rm $(docker image list | grep -v "oracle/database"  | grep -v "db-prebuilt" | awk 'NR>1 {print $3}') -f
-```
-
 ### Run some commands
 
 Example with `connect` container:
-
-```bash
-docker exec connect bash -c "whoami"
-```
-
-or use [🧠 CLI](/cli) with:
 
 ```bash
 playground container exec -c connect --command "whoami"
@@ -132,22 +88,10 @@ playground container exec -c connect --command "whoami"
 Example with `connect` container:
 
 ```bash
-docker exec --privileged --user root connect bash -c "whoami"
-```
-
-or use [🧠 CLI](/cli) with:
-
-```bash
 playground container exec -c connect --command "whoami" --root
 ```
 
 ### Copy files between local filesystem and container
-
-```bash
-docker cp ./file.txt connect:/tmp/file.txt
-```
-
-or use [🧠 CLI](/cli) with:
 
 ```bash
 playground container cp --source ./file.txt --destination connect:/tmp/file.txt
@@ -165,55 +109,27 @@ playground container change-jdk --container connect --version 21
 ### Get IP address of running containers
 
 ```bash
-docker inspect -f '{{.Name}} - {{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $(docker ps -aq)
-```
-
-Example:
-
-```log
-/control-center - 172.21.0.6
-/connect - 172.21.0.5
-/schema-registry - 172.21.0.4
-/broker - 172.21.0.2
-/controller - 172.21.0.3
-```
-
-or use [🧠 CLI](/cli) with:
-
-```bash
 playground container get-ip-addresses
 ```
 
+## 🗳 Topic tips
+
 ### Get number of records in a topic
-
-```bash
-docker exec -i broker bash << EOF
-kafka-run-class org.apache.kafka.tools.GetOffsetShell --bootstrap-server broker:9092 --topic a-topic --time -1 | awk -F ":" '{sum += \$3} END {print sum}'
-EOF
-```
-
-or use [🧠 CLI](/cli) with:
 
 ```bash
 playground topic get-number-records --topic a-topic
 ```
 
 > [!NOTE]
-> On CP < 7.7, the class is `kafka.tools.GetOffsetShell`. See [playground topic get-number-records](/playground%20topic%20get-number-records) for all options.
+> See [playground topic get-number-records](/playground%20topic%20get-number-records) for all options.
 
-### Check Kafka Connect offsets topic
-
-```bash
-docker exec connect kafka-console-consumer --bootstrap-server broker:9092 --topic connect-offsets --from-beginning --property print.key=true --property print.timestamp=true
-```
-
-or use [🧠 CLI](/cli) with:
+### Check Kafka Connect offsets
 
 ```bash
 playground connector offsets get
 ```
 
-or consume the topic directly:
+or consume the `connect-offsets` topic directly:
 
 ```bash
 playground topic consume --topic connect-offsets

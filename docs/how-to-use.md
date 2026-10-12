@@ -488,7 +488,7 @@ For Kafka to output quota metrics, at least one quota configuration is necessary
 A quota can be configured using:
 
 ```bash
-docker exec broker kafka-configs --bootstrap-server broker:9092 --alter --add-config 'producer_byte_rate=10000,consumer_byte_rate=30000,request_percentage=0.2' --entity-type users --entity-name unknown --entity-type clients --entity-name unknown
+playground container exec -c broker --command "kafka-configs --bootstrap-server broker:9092 --alter --add-config 'producer_byte_rate=10000,consumer_byte_rate=30000,request_percentage=0.2' --entity-type users --entity-name unknown --entity-type clients --entity-name unknown"
 ```
 
 ![Kafka quotas](images/kafka-quotas.png)
@@ -545,7 +545,7 @@ You can enable this with `--enable-kcat` option of [playground run](/playground%
 Then you can use it with:
 
 ```bash
-docker exec kcat kcat -b broker:9092 -L
+playground container exec -c kcat --command "kcat -b broker:9092 -L"
 ```
 
 ### 🐿️ Enabling Flink

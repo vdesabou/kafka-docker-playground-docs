@@ -194,6 +194,18 @@ If there are missing environment variables, you'll need to fix it:
 
 [![asciicast](https://asciinema.org/a/643687.svg)](https://asciinema.org/a/643687)
 
+### 🕹️ The playground run menu
+
+Running [playground run](/playground%20run) without `-f` opens an interactive menu: pick a category and an example, then select options (use `<tab>` to select several at once) before running it.
+
+* on/off options are toggles, `[x]` when enabled: select one again to disable it
+* options that take a value show it once set, for example `🎯 CP version (all components)  --tag  [8.2.0]` (credentials only show `[set]`)
+* only the options that apply to the example are shown (for example no connector version for an example without connector, no 🔐 Environment for an example that starts its own environment)
+* the preview pane shows the flags that will be used, and warns about combinations that would not work: an error (for example legacy Control Center with CP 8, `--enable-kraft` with CP < 7.4) replaces "🚀 Run the example !" until it is fixed, a warning (for example Control Center with a community image) is only displayed. The same check runs before anything is stopped when not using the menu.
+* actions: 🔀 switch to another example in the same folder, keeping the selected options, and 🧪 create a reproduction model from the example (see [playground repro bootstrap](/playground%20repro%20bootstrap))
+
+Esc or Ctrl-C quits without changing anything. The equivalent `playground run -f <example> <flags>` command is saved in the history ([playground history](/playground%20history), [playground re-run](/playground%20re-run)) and, on macOS, copied to the clipboard (disable with `playground config clipboard false`).
+
 ### 🔐 Storing credentials with playground secrets
 
 Instead of exporting variables in every shell, store them once with [playground secrets](/playground%20secrets): `playground run` then loads automatically the ones the example declares.
@@ -324,7 +336,12 @@ ls: cannot access '/usr/share/confluent-hub-components/debezium-debezium-connect
 
 ## 🐳 Overriding Confluent Platform Docker images and tags
 
-Docker images being used can be overridden by exporting following environment variables:
+Community images can be selected with [playground run](/playground%20run) options (or in the menu):
+
+* `--connect-community-image`: connect runs `confluentinc/cp-kafka-connect` instead of `confluentinc/cp-server-connect` (monitoring interceptors are disabled)
+* `--kafka-community-image`: broker and controller run `confluentinc/cp-kafka` instead of `confluentinc/cp-server` (Confluent Metrics Reporter and Telemetry Reporter are disabled)
+
+Docker images being used can also be overridden by exporting following environment variables:
 
 * zookeeper (`CP_ZOOKEEPER_IMAGE`) (CP < 8 only)
 * kafka (`CP_KAFKA_IMAGE`)
@@ -335,20 +352,25 @@ Docker images being used can be overridden by exporting following environment va
 * ksqlDB CLI (`CP_KSQL_CLI_IMAGE`)
 * rest-proxy (`CP_REST_PROXY_IMAGE`)
 
-Docker images tags being used can be overridden by exporting following environment variables:
+Docker images tags being used can be overridden by exporting following environment variables (or with the [playground run](/playground%20run) option, when there is one):
 
 * zookeeper (`CP_ZOOKEEPER_TAG`) (CP < 8 only)
 * kafka (`CP_KAFKA_TAG`)
-* connect (`CP_CONNECT_TAG`) (`--connect-tag` using [playground run](/playground%20run) command)
-* schema-registry (`CP_SCHEMA_REGISTRY_TAG`)
-* control-center (`CP_CONTROL_CENTER_TAG`)
-* ksqlDb (`CP_KSQL_TAG`)
-* ksqlDB CLI (`CP_KSQL_CLI_TAG`)
+* connect (`CP_CONNECT_TAG`, `--connect-tag`)
+* schema-registry (`CP_SCHEMA_REGISTRY_TAG`, `--schema-registry-tag`, not for ccloud examples)
+* control-center (`CP_CONTROL_CENTER_TAG`, `--control-center-tag`): a Control Center Next Gen version (for example `2.6.1`, default `latest`), or a CP version with legacy Control Center
+* ksqlDb (`CP_KSQL_TAG`) and ksqlDB CLI (`CP_KSQL_CLI_TAG`): `--ksqldb-tag` sets both
 * rest-proxy (`CP_REST_PROXY_TAG`)
+
+*Example:* schema registry 7.9.1 with everything else on 8.3.2:
+
+```bash
+playground run -f datagen-source<tab> --schema-registry-tag 7.9.1
+```
 
 ## 🛰 Kraft mode
 
-[Kraft](https://docs.confluent.io/platform/current/kafka-metadata/kraft.html) is enabled by default when used with CP 8+, but you can also force it by setting environment variable `ENABLE_KRAFT` (minimum CP version supported is 7.4)
+[Kraft](https://docs.confluent.io/platform/current/kafka-metadata/kraft.html) is enabled by default when used with CP 8+. For CP 7.4 to 7.9, you can force it with `--enable-kraft` option of [playground run](/playground%20run) (or by setting environment variable `ENABLE_KRAFT`). It is refused for CP < 7.4, and has no effect with CP 8+.
 
 In Kraft mode, a `controller` container replaces the `zookeeper` container (its JMX port is `10005`). ZooKeeper is only used with CP < 8 when `ENABLE_KRAFT` is not set.
 
@@ -370,7 +392,9 @@ By default, `control-center` container (see [`environment/plaintext/docker-compo
 
 You can enable this with `--enable-control-center` option of [playground run](/playground%20run) or by setting environment variable `ENABLE_CONTROL_CENTER=1` in your shell.
 
-Control Center "Next Gen" (image `confluentinc/cp-enterprise-control-center-next-gen`) is used by default. If you want to use legacy image, you can enable it by setting environment variable `ENABLE_LEGACY_CONTROL_CENTER=1` in your shell.
+Control Center "Next Gen" (image `confluentinc/cp-enterprise-control-center-next-gen`) is used by default. If you want to use the legacy image, use `--enable-legacy-control-center` option of [playground run](/playground%20run) (it also enables Control Center), or set environment variable `ENABLE_LEGACY_CONTROL_CENTER=1` in your shell. Legacy Control Center is only available for CP < 8.
+
+Use `--control-center-tag` to select the Control Center version (see [above](/how-to-use?id=🐳-overriding-confluent-platform-docker-images-and-tags)).
 
 Control Center is reachable at http://127.0.0.1:9021
 
@@ -395,6 +419,8 @@ By default, there is only one kafka node enabled. To enable three nodes, select 
 ### 🥉 Enabling multiple connect workers
 
 By default, there is only one connect node enabled. To enable three connect nodes, select it in menu or use `--enable-multiple-connect-workers` option of [playground run](/playground%20run).
+
+`connect2` and `connect3` get the `connect` configuration of the example: the playground generates a copy of the example's docker-compose override file with them under `/tmp/playground-connect-workers/`, the example's own file is not modified.
 
 ### 🌪️ Enabling SQL Datagen
 

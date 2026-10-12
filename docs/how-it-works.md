@@ -109,7 +109,7 @@ As you can see, it only contains what is required to add SASL/SSL to a PLAINTEXT
 
 ### 🔏 Connector using non-plaintext environment
 
-Any connector example can be run with any environment using `--environment` option of [playground run](/playground%20run?id=-environment-environment) command.
+Connector examples can be run with any environment using `--environment` option of [playground run](/playground%20run?id=-environment-environment) command, as long as they start the environment with `--environment "${PLAYGROUND_ENVIRONMENT}"` (a few examples start a specific environment, for example `replicator-sasl-ssl.sh`, and some examples skip `cfk` with `exit 111`). The menu only offers the environments the example supports, and warns about the others.
 
 ![environment](./images/environment.jpg)
 
@@ -117,7 +117,7 @@ This also includes `cfk` environment which automatically runs the example with K
 
 ## 🔗 Connect image used
 
-The Kafka Connect image is either [`cp-server-connect`](https://hub.docker.com/r/confluentinc/cp-server-connect) for version greater than `5.3.0` or [`cp-kafka-connect`](https://hub.docker.com/r/confluentinc/cp-kafka-connect) otherwise (it can be overridden with `CP_CONNECT_IMAGE` environment variable).
+The Kafka Connect image is either [`cp-server-connect`](https://hub.docker.com/r/confluentinc/cp-server-connect) for version greater than `5.3.0` or [`cp-kafka-connect`](https://hub.docker.com/r/confluentinc/cp-kafka-connect) otherwise (it can be overridden with `CP_CONNECT_IMAGE` environment variable, or `--connect-community-image` option of [playground run](/playground%20run) to use `cp-kafka-connect`).
 
 Several tools are [installed](https://github.com/vdesabou/kafka-docker-playground/blob/master/scripts/cli/src/lib/utils_function.sh) automatically on the image (see `CONNECT_3RDPARTY_INSTALL`) such as `openssl`, `tcpdump`, `iptables`, `netcat`, `jq`, etc..
 

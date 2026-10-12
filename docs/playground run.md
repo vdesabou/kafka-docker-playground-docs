@@ -15,6 +15,8 @@ Credentials the example needs are loaded from 'playground secrets'.
 🔢 Choosing versions  
   --tag             Confluent Platform version for every component  
   --connect-tag     Confluent Platform version for connect only  
+  --schema-registry-tag, --ksqldb-tag, --control-center-tag  
+                    version for that component only  
   --connector-tag   connector version from Confluent Hub  
   --connector-zip   connector from a local zip or a URL  
   --connector-jar   a single jar, dropped into the existing plugin  
@@ -22,8 +24,13 @@ Credentials the example needs are loaded from 'playground secrets'.
 🧰 Adding to the example  
   --environment     run a connector example under another security setup  
   --enable-\<x\>      add control-center, ksqldb, flink, grafana, kcat...  
-  --pipeline        chain a source example into a sink example  
-  --sql-datagen     continuous realistic data instead of a fixed batch  
+  --enable-sql-datagen  
+                    continuous realistic data for CDC source examples  
+  --connect-community-image, --kafka-community-image  
+                    use community images instead of enterprise ones  
+  --enable-kraft    KRaft instead of Zookeeper for CP 7.4 to 7.9  
+  --connect-log-level  
+                    log levels set on connect before the connector is created  
   
   
 ⛅ When running Confluent Cloud (ccloud) example:  
@@ -117,6 +124,36 @@ It sets CP_CONNECT_TAG environment variable
 Must be greater or equal to 5.3.0  
   
 🎓 Tip: use \<tab\> completion to trigger fzf completion
+
+#### *--schema-registry-tag SCHEMA_REGISTRY_TAG*
+
+🔰 Confluent Platform (CP) version to use for schema registry only  
+  
+It sets CP_SCHEMA_REGISTRY_TAG environment variable  
+  
+❗ not supported with ccloud examples (schema registry is in Confluent Cloud)  
+  
+🎓 Tip: use \<tab\> completion to trigger fzf completion
+
+#### *--ksqldb-tag KSQLDB_TAG*
+
+🎏 Confluent Platform (CP) version to use for ksqlDB server and CLI only, with --enable-ksqldb  
+  
+It sets CP_KSQL_TAG and CP_KSQL_CLI_TAG environment variables  
+  
+❗ not supported with ccloud examples  
+  
+🎓 Tip: use \<tab\> completion to trigger fzf completion
+
+#### *--control-center-tag CONTROL_CENTER_TAG*
+
+💠 Control Center version to use, with --enable-control-center  
+  
+It sets CP_CONTROL_CENTER_TAG environment variable  
+  
+With Control Center Next Gen (default), this is the version of the confluentinc/cp-enterprise-control-center-next-gen image (for example 2.2.0, default is latest)  
+  
+With --enable-legacy-control-center, this is a CP version (\< 8), by default the one of --tag
 
 #### *--connector-tag CONNECTOR_TAG*
 
@@ -231,6 +268,46 @@ $ docker exec kcat kcat -b broker:9092 -L
 🌪️ Enable SQL Datagen injection  
   
 This only works for Oracle, MySql, Postgres and Microsoft Sql Server source connector examples with JDBC and Debezium
+
+#### *--connect-community-image*
+
+🌱 Use the community connect image (confluentinc/cp-kafka-connect) instead of the enterprise one (confluentinc/cp-server-connect)  
+  
+It sets CP_CONNECT_IMAGE environment variable  
+  
+Monitoring interceptors are disabled, as they are not part of the community image
+
+#### *--kafka-community-image*
+
+🌿 Use the community kafka image (confluentinc/cp-kafka) instead of the enterprise one (confluentinc/cp-server)  
+  
+It sets CP_KAFKA_IMAGE environment variable  
+  
+Confluent Metrics Reporter and Telemetry Reporter are disabled, as they are not part of the community image
+
+#### *--enable-kraft*
+
+🛰️ Start Confluent Platform in KRaft mode  
+  
+It sets ENABLE_KRAFT environment variable  
+  
+Only useful for CP versions from 7.4 to 7.9, where Zookeeper is used by default (KRaft is always used for CP \>= 8)
+
+#### *--enable-legacy-control-center*
+
+👨‍🦳 Use legacy Control Center (confluentinc/cp-enterprise-control-center) instead of Control Center Next Gen  
+  
+It sets ENABLE_LEGACY_CONTROL_CENTER environment variable  
+  
+Legacy Control Center is not available for CP \>= 8. It implies --enable-control-center
+
+#### *--connect-log-level CONNECT-LOG-LEVEL*
+
+🔊 Log level(s) to set on connect, as a comma separated list of \<package\>=\<level\> (level is one of INFO, WARN, DEBUG, TRACE)  
+  
+They are applied with 'playground debug log-level set' as soon as the environment is started and connect is ready, so before the example creates its connector  
+  
+Example: --connect-log-level "io.confluent.connect.s3=TRACE,org.apache.kafka.connect.runtime.WorkerSinkTask=DEBUG"
 
 #### *--cluster-cloud CLUSTER-CLOUD*
 

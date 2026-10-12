@@ -8,8 +8,10 @@ so you do not have to guess where to look.
   
 Each container gets the same digest as 'playground container logs  
 --errors': repeated records are de-duplicated with an occurrence count  
-and stack traces are collapsed to their "Caused by:" chain. The last  
-lines of connect are also shown raw, for failures that log no error.
+and stack traces are collapsed to their "Caused by:" chain. Containers  
+without any finding are only listed in a final one-line summary. The  
+last lines of connect are always shown raw, for failures that log no  
+error.
 
 ## Usage
 

@@ -8,8 +8,10 @@ bundle, a CI artifact, a log file you were sent.
   
 Repeated records are de-duplicated with an occurrence count, stack  
 traces are collapsed to the exception chain ("Caused by:") plus a few  
-frames of the deepest cause. Records logged at INFO/DEBUG/TRACE are  
-never reported.  
+frames of the deepest cause. Only records with an explicit level are  
+reported (" ERROR ", "[ERROR]", level=error, "level":"error"), plus  
+uncaught java exceptions: records logged at INFO/DEBUG/TRACE, and  
+level-less lines that merely contain "error" or "failed", never are.  
   
 📂 Folders are scanned recursively. .zip, .tar, .tar.gz and .tgz files  
 are extracted in a temporary folder, .gz files are decompressed on the  

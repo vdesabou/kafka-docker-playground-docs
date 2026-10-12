@@ -3,6 +3,7 @@
 ## October 2026
 ##### 🌟 Enhancements
 
+- 🧠 Add playground rbac role-binding and acl commands for the rbac-sasl-plain environment [#9242](https://github.com/vdesabou/kafka-docker-playground/issues/9242)
 - 🧠 playground run: --schema-registry-tag, --ksqldb-tag and --control-center-tag [#9235](https://github.com/vdesabou/kafka-docker-playground/issues/9235)
 - 🧠 playground run menu: only offer the environments the example supports [#9231](https://github.com/vdesabou/kafka-docker-playground/issues/9231)
 - 🧠 playground run: warn about known-bad option combinations before anything starts [#9227](https://github.com/vdesabou/kafka-docker-playground/issues/9227)

@@ -40,6 +40,7 @@
 
 ##### 🐛 Bugs
 
+- 🐛 playground run menu: leftover characters ("er") on some terminals because of ZWJ emojis [#9238](https://github.com/vdesabou/kafka-docker-playground/issues/9238)
 - 🐛 playground run --enable-multiple-connect-workers modifies the example's docker-compose file [#9229](https://github.com/vdesabou/kafka-docker-playground/issues/9229)
 - 🐛 playground repro bootstrap: Go back creates the first model, empty description from the run menu [#9223](https://github.com/vdesabou/kafka-docker-playground/issues/9223)
 - 🐛 playground run: quitting the menu opens the last example or leaves run.test\_file on it [#9221](https://github.com/vdesabou/kafka-docker-playground/issues/9221)

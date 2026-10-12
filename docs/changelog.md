@@ -41,6 +41,8 @@
 
 ##### 🐛 Bugs
 
+- 🐛 rbac-with-anonymous-sr: anonymous requests to Schema Registry get 401 Unauthorized [#9251](https://github.com/vdesabou/kafka-docker-playground/issues/9251)
+- 🐛 rbac-sasl-plain: ksqldb-server restarts in a loop (Schema Registry 401 Unauthorized) [#9250](https://github.com/vdesabou/kafka-docker-playground/issues/9250)
 - 🐛 playground run menu: leftover characters ("er") on some terminals because of ZWJ emojis [#9238](https://github.com/vdesabou/kafka-docker-playground/issues/9238)
 - 🐛 playground run --enable-multiple-connect-workers modifies the example's docker-compose file [#9229](https://github.com/vdesabou/kafka-docker-playground/issues/9229)
 - 🐛 playground repro bootstrap: Go back creates the first model, empty description from the run menu [#9223](https://github.com/vdesabou/kafka-docker-playground/issues/9223)

@@ -186,6 +186,13 @@ visit https://docs.docker.com/get-docker to install
 - [list](playground%20consumer-group%20list) - 👥 List consumer groups
 - [describe](playground%20consumer-group%20describe) - 🔬 Describe consumer group
 
+### RBAC commands
+
+- [rbac](playground%20rbac) - 🛡️ RBAC commands (rbac-sasl-plain environment only)
+- [role-binding](playground%20rbac%20role-binding) - 🔐 Role binding commands
+- [user](playground%20rbac%20user) - 🧑 LDAP user commands
+- [acl](playground%20rbac%20acl) - 🚦 ACL commands
+
 ### Connector-Plugin commands
 
 - [connector-plugin](playground%20connector-plugin) - 🔌 Connector-plugin commands

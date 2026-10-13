@@ -3,6 +3,7 @@
 ## October 2026
 ##### 🌟 Enhancements
 
+- 🧠 playground debug cfk cfk-bundle-analyze: work offline, fix detection, sanitizer and tar extraction [#9271](https://github.com/vdesabou/kafka-docker-playground/issues/9271)
 - ⭐👾 Add IBM MQ Source (IBM's own version) connector example [#9269](https://github.com/vdesabou/kafka-docker-playground/issues/9269)
 - ⭐👾 Add IBM MQ Sink (IBM's own version) connector example [#9267](https://github.com/vdesabou/kafka-docker-playground/issues/9267)
 - ⭐ Add cfk-rbac environment: Confluent for Kubernetes with RBAC [#9261](https://github.com/vdesabou/kafka-docker-playground/issues/9261)

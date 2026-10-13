@@ -3,6 +3,7 @@
 ## October 2026
 ##### 🌟 Enhancements
 
+- 🧠 Add playground debug thread-analyze, and take thread dumps with kill -3 (no JDK install, no restart) [#9279](https://github.com/vdesabou/kafka-docker-playground/issues/9279)
 - 🧠 Enable GC logs by default in the playground environments [#9277](https://github.com/vdesabou/kafka-docker-playground/issues/9277)
 - 🧠 playground debug gc-analyze: fix JDK 8 / CMS / GenZGC parsing, rotation and restarts, correct figures, Kafka-aware recommendations [#9275](https://github.com/vdesabou/kafka-docker-playground/issues/9275)
 - 🧠 playground debug heap-analyze: run Eclipse MAT headless (leak suspects, retained sizes, --compare), fail loudly [#9273](https://github.com/vdesabou/kafka-docker-playground/issues/9273)

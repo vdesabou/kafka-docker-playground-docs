@@ -114,22 +114,4 @@ If not set, default is read_uncommitted
 | Default Value:  | read_uncommitted
 | Allowed Values: | read_uncommitted, read_committed
 
-## Examples
-
-```bash
-playground topic consume --topic filestream --min-expected-messages 2 --timeout 30
-```
-
-## Example output
-
-```text
-$ playground topic consume --topic filestream --min-expected-messages 2 --timeout 30
-17:23:00 ℹ️ ✨ Display content of topic filestream, it contains 5 messages
-17:23:00 ℹ️ 🔮🙅 topic is not using any schema for key
-17:23:00 ℹ️ 🔮🙅 topic is not using any schema for value
-CreateTime:2026-10-13 16:28:16.239|Partition:0|Offset:0|Headers:NO_HEADERS|Key:null|Value:{"id":1,"name":"Asha_Fadel50","email":"Euna.Anderson37@example.com","city":"Duluth","company":"Jacobson - Crooks"}
-CreateTime:2026-10-13 16:28:16.243|Partition:0|Offset:1|Headers:NO_HEADERS|Key:null|Value:{"id":2,"name":"Clare50","email":"Pat4@example.net","city":"West Dinoboro","company":"Hodkiewicz, Effertz and Heidenreich"}
-...
-```
-
 

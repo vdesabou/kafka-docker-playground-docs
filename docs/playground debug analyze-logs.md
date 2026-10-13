@@ -62,20 +62,4 @@ playground debug analyze-logs --file kafka-connect-logs-10-09-1200.zip --include
 playground debug analyze-logs -f ./logs -f broker.log.gz --max-findings 10
 ```
 
-## Example output
-
-```text
-$ playground debug analyze-logs -f connect.log
-17:23:19 ℹ️ 🔥 ERROR/FATAL digest for connect.log
-🔎 1 distinct record(s), 2 occurrence(s), in 12 lines
-
-🔴 ERROR x2 (first seen line 2, last seen line 10)
-[2026-10-13 10:00:05,123] ERROR [http-sink|task-0] WorkerSinkTask{id=http-sink-0} Task threw an uncaught and unrecoverable exception. Task is being killed and will not recover until manually restarted (org.apache.kafka.connect.runtime.WorkerTask:234)
-    org.apache.kafka.connect.errors.ConnectException: Exiting WorkerSinkTask due to unrecoverable exception.
-    Caused by: org.apache.kafka.connect.errors.ConnectException: Error while processing HTTP request with Url : http://httpserver:9006/api/messages, Status code : 500
-        at io.confluent.connect.http.writer.HttpWriterImpl.handleErrors(HttpWriterImpl.java:405)
-
-17:23:19 ℹ️ 📊 1 file(s) with findings out of 1 scanned (binary files skipped: 0)
-```
-
 

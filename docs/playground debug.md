@@ -8,9 +8,8 @@ fly when missing, and their output is brought back to your machine.
   
 🐌 It hangs, or it is slow  
   thread-dump         what every thread is doing right now  
-  thread-analyze      deadlocks, lock contention, stuck and CPU-hungry threads  
   flight-recorder     record the JVM over a period, open it in JMC  
-  gc-analyze          GC pauses, failures, live set and leak trend  
+  gc-analyze          GC pauses, heap trends and tuning advice  
   
 💾 It eats memory  
   heap-dump           take a .hprof, optionally as a histogram  
@@ -46,7 +45,6 @@ playground debug COMMAND
 - [testssl](playground%20debug%20testssl) - 🔐 Testing TLS/SSL encryption using https://testssl.sh/
 - [generate-diagnostics](playground%20debug%20generate-diagnostics) - ⛑️ Generate a diagnostic bundle with Diagnostics Bundle Tool
 - [thread-dump](playground%20debug%20thread-dump) - 🎯 Take a java thread dump
-- [thread-analyze](playground%20debug%20thread-analyze) - 🧵 Analyze java thread dumps: deadlocks, lock contention, stuck and CPU-hungry threads
 - [heap-dump](playground%20debug%20heap-dump) - 👻 Take a heap dump
 - [heap-analyze](playground%20debug%20heap-analyze) - 🔬 Analyze a heap dump with Eclipse Memory Analyzer (MAT), run headless in Docker
 - [analyze-logs](playground%20debug%20analyze-logs) - 🔥 Show a digest of ERROR/FATAL records found in log files, folders or zip bundles

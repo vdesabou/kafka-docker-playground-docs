@@ -126,13 +126,4 @@ playground connector-plugin sourcecode --connector-plugin confluentinc/kafka-con
 
 ```
 
-## Example output
-
-```text
-$ playground connector-plugin sourcecode --connector-plugin confluentinc/kafka-connect-s3 --only-show-url
-17:22:31 ℹ️ ✨ --connector-tag was not set, using latest version on hub 12.1.13
-17:22:31 ℹ️ 🧑‍💻🌐 sourcecode for plugin confluentinc/kafka-connect-s3 for 12.1.13 version is available at:
-https://github.com/confluentinc/kafka-connect-storage-cloud/tree/v12.1.13
-```
-
 

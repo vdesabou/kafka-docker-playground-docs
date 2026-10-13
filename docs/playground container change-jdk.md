@@ -35,7 +35,7 @@ playground container change-jdk [OPTIONS]
 ## Examples
 
 ```bash
-playground container change-jdk --container connect --version 17
+playground change-jdk --container connect --version 17
 ```
 
 

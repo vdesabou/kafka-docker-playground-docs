@@ -37,23 +37,23 @@ playground container ssh [OPTIONS]
 ## Examples
 
 ```bash
-playground container ssh -c connect
+playground ssh -c connect
 ```
 
 ```bash
-playground container ssh -c connect -s sh
+playground ssh -c connect -s sh
 ```
 
 ```bash
-playground container ssh --container connect --shell sh
+playground ssh --container connect --shell sh
 ```
 
 ```bash
-playground container ssh -c broker
+playground ssh -c broker
 ```
 
 ```bash
-playground container ssh --container schema-registry --shell zsh
+playground ssh --container schema-registry --shell zsh
 ```
 
 

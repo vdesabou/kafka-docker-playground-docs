@@ -28,12 +28,4 @@ playground consumer-group list
 playground consumer-group list --state
 ```
 
-## Example output
-
-```text
-$ playground consumer-group list
-17:22:17 ℹ️ 👥 Listing consumer groups
-connect-filestream-sink
-```
-
 

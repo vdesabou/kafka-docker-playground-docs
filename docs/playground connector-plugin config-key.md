@@ -69,26 +69,4 @@ playground connector-plugin config-key -k s3.part.size -c S3_SINK
 playground connector-plugin config-key -k errors.tolerance -c jdbc --max-examples 3
 ```
 
-## Example output
-
-```text
-$ playground connector-plugin config-key --key flush.size
-17:22:28 ℹ️ 🔌 12 connector(s) have key flush.size, use --connector-class to see the details of one
-   defaults: null (x7), 1000 (x5)
-
-CONNECTOR                                                                TYPE  DEFAULT  IMPORTANCE
-AzureBlobSink                                                            INT   1000     HIGH
-GcsSink                                                                  INT   1000     HIGH
-io.confluent.connect.gcs.GcsSinkConnector                                INT   null     HIGH
-io.confluent.connect.hdfs.HdfsSinkConnector                              INT   null     HIGH
-io.confluent.connect.s3.S3SinkConnector                                  INT   null     HIGH
-S3_SINK                                                                  INT   1000     HIGH
-...
-
-17:22:30 ℹ️ 🧪 427 line(s) in examples set flush.size, values used (most frequent first):
-   "3"                            x275 e.g. connect/connect-gcp-gcs-source/gcs-source-backup-and-restore.sh:98
-   "1000"                         x63  e.g. ccloud/fm-azure-data-lake-storage-gen2-sink/fully-managed-azure-data-lake-storage-gen2-sink.sh:134
-   "1"                            x14  e.g. connect/connect-ftps-sink/ftps-sink.sh:55
-```
-
 

@@ -15,18 +15,7 @@ playground container get-ip-addresses
 ## Examples
 
 ```bash
-playground container get-ip-addresses
-```
-
-## Example output
-
-```text
-$ playground container get-ip-addresses
-17:22:19 ℹ️ Get IP address of running containers
-/controller - 10.89.0.2
-/broker - 10.89.0.4
-/schema-registry - 10.89.0.6
-/connect - 10.89.0.7
+playground get-ip-address-container
 ```
 
 

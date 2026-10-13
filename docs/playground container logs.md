@@ -179,26 +179,4 @@ playground container logs --container connect --grep "ERROR"
 playground pod logs --previous
 ```
 
-## Example output
-
-```text
-$ playground container logs -c connect --errors
-17:22:10 ℹ️ 🔥 ERROR/FATAL digest for connect logs
-✅ no ERROR/FATAL record found in 12523 lines
-```
-
-```text
-$ playground container logs -c connect --errors --include-warnings --max-findings 2
-17:22:50 ℹ️ 🔥 ERROR/FATAL digest for connect logs
-🔎 7 distinct record(s), 13 occurrence(s), in 12743 lines
-
-🟠 WARN x7 (first seen line 108, last seen line 471)
-[2026-10-13 14:27:56,953] WARN [AdminClient clientId=adminclient-1] Connection to node -1 (broker/10.89.0.4:9092) could not be established. Node may not be available. (org.apache.kafka.clients.NetworkClient:899)
-
-🟠 WARN x1 (first seen line 737, last seen line 737)
-WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
-
-✂️ 5 more distinct record(s) not shown, increase --max-findings or narrow with --since
-```
-
 

@@ -17,43 +17,4 @@ it is also the quickest way to get back your bearings after a break.
 playground status
 ```
 
-## Examples
-
-```bash
-playground status
-```
-
-## Example output
-
-```text
-$ playground status
-17:21:27 ℹ️ 🦭 Container engine: podman
-17:21:27 ℹ️ 🚀 Running example
-connect/connect-filestream-sink/filestream-sink.sh
-17:21:28 ℹ️ 🐳 Containers
-NAMES                STATUS          IMAGE
-controller           Up 53 minutes   confluentinc/cp-server:8.3.2
-broker               Up 53 minutes   confluentinc/cp-server:8.3.2
-schema-registry      Up 53 minutes   confluentinc/cp-schema-registry:8.3.2
-connect              Up 53 minutes   confluentinc/cp-server-connect:8.3.2
-17:21:28 ℹ️ 🎯 Version currently used for confluent platform
-8.3.2
-17:21:29 ℹ️ 🧩 Displaying status for 🌎onprem connector filestream-sink
-Name                           Status       Tasks                                                        Stack Trace
--------------------------------------------------------------------------------------------------------------
-filestream-sink                ✅ RUNNING  0:🟢 RUNNING                 -
--------------------------------------------------------------------------------------------------------------
-17:21:30 ℹ️ 🧰 Current config for 🌎onprem connector filestream-sink
-playground connector create-or-update --connector filestream-sink << EOF
-{
-  "connector.class": "org.apache.kafka.connect.file.FileStreamSinkConnector",
-  "file": "/tmp/output.json",
-  "tasks.max": "1",
-  "topics": "filestream"
-}
-EOF
-17:21:31 ℹ️ 🔘 List of topics (internal topics are excluded)
-filestream
-```
-
 

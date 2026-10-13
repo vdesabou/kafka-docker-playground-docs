@@ -62,31 +62,4 @@ playground connector diagnose --connector http-sink
 playground connector diagnose --connector http-sink --since 10m --max-findings 5
 ```
 
-## Example output
-
-```text
-$ playground connector diagnose
-17:22:06 ℹ️ 🩺 diagnosing 🌎onprem connector filestream-sink
-
-17:22:06 ℹ️ 🗺️  1/4 status
-17:22:07 ℹ️ 🧩 Displaying status for 🌎onprem connector filestream-sink
-Name                           Status       Tasks                                                        Stack Trace
--------------------------------------------------------------------------------------------------------------
-filestream-sink                ✅ RUNNING  0:🟢 RUNNING                 -
--------------------------------------------------------------------------------------------------------------
-
-17:22:07 ℹ️ 🔥 2/4 errors: digest of connect ERROR/FATAL records since 1h (whole worker, not only this connector)
-✅ no ERROR/FATAL record found in 12523 lines
-
-17:22:07 ℹ️ 🐢 3/4 progress: consumer lag of sink filestream-sink
-topic: filestream partition: 0   current-offset: 5          end-offset: 5          lag: 0          [🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹] 100% 🏁
-
-17:22:10 ℹ️ 👉 4/4 next steps
-   🐌 RUNNING but no progress? run this command again, then take a thread dump if lag or offsets do not move
-   playground connector show-config --connector filestream-sink
-   playground container logs -c connect --grep "filestream-sink" --no-follow --tail 200
-   playground debug log-level set --package <connector package> --level TRACE
-   playground debug thread-dump --container connect
-```
-
 

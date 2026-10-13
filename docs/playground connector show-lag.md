@@ -44,18 +44,4 @@ Interval between lag checks (default is 20 seconds).
 |-----------------|-------------
 | Default Value:  | 0
 
-## Examples
-
-```bash
-playground connector show-lag
-```
-
-## Example output
-
-```text
-$ playground connector show-lag
-17:22:14 ℹ️ 🏁 consumer lag for 🌎onprem connector filestream-sink is 0 ! took: 0min 2sec
-topic: filestream partition: 0   current-offset: 5          end-offset: 5          lag: 0          [🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹] 100% 🏁
-```
-
 

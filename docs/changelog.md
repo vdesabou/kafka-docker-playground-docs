@@ -3,6 +3,7 @@
 ## October 2026
 ##### 🌟 Enhancements
 
+- ⭐ Add cfk-rbac environment: Confluent for Kubernetes with RBAC [#9261](https://github.com/vdesabou/kafka-docker-playground/issues/9261)
 - 🧠 Add playground rbac role-binding and acl commands for the rbac-sasl-plain environment [#9242](https://github.com/vdesabou/kafka-docker-playground/issues/9242)
 - 🧠 playground run: --schema-registry-tag, --ksqldb-tag and --control-center-tag [#9235](https://github.com/vdesabou/kafka-docker-playground/issues/9235)
 - 🧠 playground run menu: only offer the environments the example supports [#9231](https://github.com/vdesabou/kafka-docker-playground/issues/9231)

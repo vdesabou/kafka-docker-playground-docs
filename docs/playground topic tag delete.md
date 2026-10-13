@@ -1,7 +1,7 @@
 # playground topic tag delete
 
-❌ Delete a tag definition  
-  
+❌ Delete a tag definition
+
 The tag must not be assigned to any topic anymore.
 
 ## Usage
@@ -12,7 +12,7 @@ playground topic tag delete [OPTIONS]
 
 ## Options
 
-#### *--tag TAG*
+#### `--tag TAG`
 
 🏷️ Tag name
 
@@ -20,7 +20,7 @@ playground topic tag delete [OPTIONS]
 |-----------------|-------------
 | Required:       | ✓ Yes
 
-#### *--verbose, -v*
+#### `--verbose, -v`
 
 🐞 Show command being ran.
 

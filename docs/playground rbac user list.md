@@ -10,7 +10,7 @@ playground rbac user list [OPTIONS]
 
 ## Options
 
-#### *--verbose, -v*
+#### `--verbose, -v`
 
 🐞 Show command being ran.
 

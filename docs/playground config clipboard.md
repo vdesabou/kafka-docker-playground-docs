@@ -10,13 +10,13 @@ playground config clipboard [ENABLED]
 
 ## Arguments
 
-#### *ENABLED*
+#### `ENABLED`
 
 
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Default Value:  | true
+| Default Value:  | `true`
 
 ## Examples
 

@@ -1,13 +1,13 @@
 # playground secrets export
 
-📤 Write every credential of a profile to a file, in clear text  
-  
-❗ Only for the rare case where a tool needs a properties file ❗  
-  
+📤 Write every credential of a profile to a file, in clear text
+
+❗ Only for the rare case where a tool needs a properties file ❗
+
 The file is written with mode 0600, and a path inside the repository is  
-refused: it would be one 'git add -A' away from being committed.  
-  
-🎓 Tip: to feed a shell instead of a file, 'playground secrets env' is  
+refused: it would be one 'git add -A' away from being committed.
+
+🎓 Tip: to feed a shell instead of a file, `playground secrets env` is  
 what you want, it exports without writing anything to disk.
 
 ## Usage
@@ -18,7 +18,7 @@ playground secrets export [OPTIONS]
 
 ## Options
 
-#### *--file FILE*
+#### `--file FILE`
 
 📄 Destination file, outside the repository
 
@@ -26,20 +26,20 @@ playground secrets export [OPTIONS]
 |-----------------|-------------
 | Required:       | ✓ Yes
 
-#### *--yes-i-want-plaintext*
+#### `--yes-i-want-plaintext`
 
 🔓 Required, this writes credentials in clear text
 
-#### *--only ONLY*
+#### `--only ONLY`
 
 🎯 Export only the credentials, only the plain variables, or both
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Default Value:  | all
-| Allowed Values: | secret, plain, all
+| Default Value:  | `all`
+| Allowed Values: | `secret`, `plain`, `all`
 
-#### *--profile PROFILE*
+#### `--profile PROFILE`
 
 🗂️ Secrets profile to use (default is the active one)
 

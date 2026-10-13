@@ -1,7 +1,7 @@
 # playground connector resume
 
-⏯️  Resume connector  
-  
+⏯️  Resume connector
+
 Restarts processing after a pause or a stop, from the offsets where the  
 connector left off.
 
@@ -17,14 +17,14 @@ playground connector resume [OPTIONS]
 
 ## Options
 
-#### *--verbose, -v*
+#### `--verbose, -v`
 
 🐞 Show command being ran.
 
-#### *--connector, -c CONNECTOR*
+#### `--connector, -c CONNECTOR`
 
-🔗 Connector name  
-  
+🔗 Connector name
+
 🎓 Tip: If not specified, the command will apply to all connectors
 
 

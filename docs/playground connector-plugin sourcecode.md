@@ -1,11 +1,10 @@
 # playground connector-plugin sourcecode
 
-🧑‍💻 Open source code url in your browser (or in your editor when used with --open)  
-  
-You can compare different sourcecode versions by specifying --connector-tag two times, in such case it will open github in comparison mode  
-  
-🏗️ Compile code and generate zip file(s) by providing --compile flag  
+🧑‍💻 Open source code url in your browser (or in your editor when used with `--open`)
 
+You can compare different sourcecode versions by specifying `--connector-tag` two times, in such case it will open github in comparison mode
+
+🏗️ Compile code and generate zip file(s) by providing `--compile` flag
 
 ## Usage
 
@@ -15,49 +14,49 @@ playground connector-plugin sourcecode [OPTIONS]
 
 ## Options
 
-#### *--connector-plugin, -c CONNECTOR-PLUGIN*
+#### `--connector-plugin, -c CONNECTOR-PLUGIN`
 
-🔌 Connector plugin name  
-  
-🎓 Tip: use \<tab\> completion to trigger fzf completion
+🔌 Connector plugin name
+
+🎓 Tip: use `<tab>` completion to trigger fzf completion
 
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Required:       | ✓ Yes
 
-#### *--only-show-url*
+#### `--only-show-url`
 
 🌐 Only show url
 
-#### *--connector-tag CONNECTOR_TAG*
+#### `--connector-tag CONNECTOR_TAG`
 
-🔗 Connector version to use  
-  
-By default, for each connector, the latest available version on Confluent Hub is used (for Confluent employees, it will also get latest versions for fully managed connectors)  
-  
-💌 Confluent employees only: for fully managed connectors, use the cc-connect image version for the pcc. You must have a Confluent Github token set with GITHUB_TOKEN or GH_TOKEN environment variable and also be using Confluent VPN.  
-  
-🎓 Tip: set to " " in order to select the version dynamically  
-  
-🎓 Tip: you can compare different sourcecode versions by specifying --connector-tag two times, in such case it will open github in comparison mode
+🔗 Connector version to use
+
+By default, for each connector, the latest available version on Confluent Hub is used (for Confluent employees, it will also get latest versions for fully managed connectors)
+
+💌 Confluent employees only: for fully managed connectors, use the cc-connect image version for the pcc. You must have a Confluent Github token set with `GITHUB_TOKEN` or `GH_TOKEN` environment variable and also be using Confluent VPN.
+
+🎓 Tip: set to " " in order to select the version dynamically
+
+🎓 Tip: you can compare different sourcecode versions by specifying `--connector-tag` two times, in such case it will open github in comparison mode
 
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Repeatable:     |  ✓ Yes
 
-#### *--compile*
+#### `--compile`
 
-🏗️ Checkout and compile code  
-  
-You must have git installed.  
-  
+🏗️ Checkout and compile code
+
+You must have git installed.
+
 💌 Confluent employees only: make sure to follow "Maven FAQ", you also need to be on Confluent VPN with proper AWS credentials set in order to be able to download proprietary dependencies.
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Conflicts With: | *--checkout-only*
+| Conflicts With: | `--checkout-only`
 
-#### *--compile-jdk-version COMPILE_JDK_VERSION*
+#### `--compile-jdk-version COMPILE_JDK_VERSION`
 
 🤎 JDK version to use when compiling  
 It will check in pom.xml for maven-compiler-plugin source/target version or release version and set jdk accordingly  
@@ -65,33 +64,33 @@ Default is 11
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Allowed Values: | 8, 11, 17, 21, 25
+| Allowed Values: | `8`, `11`, `17`, `21`, `25`
 
-#### *--compile-verbose, -v*
+#### `--compile-verbose, -v`
 
 🐞 Show output of compilation.
 
-#### *--open, -o*
+#### `--open, -o`
 
-🔖 Checkout the code and open with text editor set with playground config editor \<editor\> (default is code)
+🔖 Checkout the code and open with text editor set with playground config editor `<editor>` (default is code)
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Conflicts With: | *--checkout-only*
+| Conflicts With: | `--checkout-only`
 
-#### *--checkout-only*
+#### `--checkout-only`
 
-📂 Checkout the code at the right tag and print the path of the folder, nothing else  
-  
+📂 Checkout the code at the right tag and print the path of the folder, nothing else
+
 No browser, no editor, no question: an existing checkout of the same  
 version in /tmp/connector-plugin-sourcecode is reused. The path is  
-the last line of the output.  
-  
+the last line of the output.
+
 🎓 Tip: use it in scripts and from AI agents, which can then read the code
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Conflicts With: | *--open, --compile*
+| Conflicts With: | `--open`, `--compile`
 
 ## Examples
 
@@ -124,6 +123,15 @@ playground connector-plugin sourcecode --connector-plugin confluentinc/kafka-con
 # will open repository in your editor
 playground connector-plugin sourcecode --connector-plugin confluentinc/kafka-connect-hdfs --open
 
+```
+
+## Example output
+
+```text
+$ playground connector-plugin sourcecode --connector-plugin confluentinc/kafka-connect-s3 --only-show-url
+17:22:31 ℹ️ ✨ --connector-tag was not set, using latest version on hub 12.1.13
+17:22:31 ℹ️ 🧑‍💻🌐 sourcecode for plugin confluentinc/kafka-connect-s3 for 12.1.13 version is available at:
+https://github.com/confluentinc/kafka-connect-storage-cloud/tree/v12.1.13
 ```
 
 

@@ -1,22 +1,22 @@
 # playground tcp-proxy
 
-🏚 Zazkia TCP Proxy commands  
-  
-Simulate TCP connection issues (reset,delay,throttle,corrupt) using emicklei/zazkia (https://github.com/emicklei/zazkia) TCP proxy  
-  
+🏚 Zazkia TCP Proxy commands
+
+Simulate TCP connection issues (reset,delay,throttle,corrupt) using emicklei/zazkia (https://github.com/emicklei/zazkia) TCP proxy
+
 Slips a controllable proxy between a connector and the system it talks to,  
 so you can break the connection on purpose and watch what the connector  
-does: does it retry, does it lose records, does it fail the task.  
-  
-  start        put the proxy in the path, rewriting the connector config  
-  delay        add latency to the responses  
-  break        drop a percentage of the responses  
-  close-connection, close-all-connection-with-error  
-  toggle-*     cut reads or writes in one direction only  
-  get-connections   the live connections and their statistics  
-  open-ui      drive all of the above from the Zazkia web UI  
-  
-🎓 Tip: start with 'playground tcp-proxy open-ui' to see what is  
+does: does it retry, does it lose records, does it fail the task.
+
+- **start**: put the proxy in the path, rewriting the connector config
+- **delay**: add latency to the responses
+- **break**: drop a percentage of the responses
+- **close-connection, close-all-connection-with-error**
+- **toggle-\***: cut reads or writes in one direction only
+- **get-connections**: the live connections and their statistics
+- **open-ui**: drive all of the above from the Zazkia web UI
+
+🎓 Tip: start with `playground tcp-proxy open-ui` to see what is  
 happening, then reproduce the same actions from the CLI in a script.
 
 ## Usage
@@ -25,7 +25,7 @@ happening, then reproduce the same actions from the CLI in a script.
 playground tcp-proxy COMMAND
 ```
 
-## == Commands ==
+## Commands
 
 - [start](playground%20tcp-proxy%20start) - 💗 Start the TCP proxy and automatically replace connector config with zazkia hostname and port 49998
 - [get-connections](playground%20tcp-proxy%20get-connections) - 🧲 Get Zazkia active TCP connections config and stats

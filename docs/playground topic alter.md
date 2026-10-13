@@ -1,7 +1,7 @@
 # playground topic alter
 
-🪛 Alter topic config  
-  
+🪛 Alter topic config
+
 Changes topic level settings on a live topic, which is how you  
 reproduce behaviour driven by configuration: a small  
 max.message.bytes to trigger a record too large error, a short  
@@ -15,11 +15,11 @@ playground topic alter [OPTIONS] [--] [ARGUMENTS...]
 
 ## Options
 
-#### *--verbose, -v*
+#### `--verbose, -v`
 
 🐞 Show command being ran.
 
-#### *--topic, -t TOPIC*
+#### `--topic, -t TOPIC`
 
 🗳 Topic name
 

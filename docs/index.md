@@ -1,7 +1,7 @@
 **playground**
 
-🧠 CLI for Kafka Docker Playground 🐳  
-  
+🧠 CLI for Kafka Docker Playground 🐳
+
 👉 Check documentation https://kafka-docker-playground.io/#/cli
 
 | Attributes       | &nbsp;
@@ -20,7 +20,7 @@ playground [OPTIONS] COMMAND
 
 visit https://docs.docker.com/get-docker to install
 
-### == Commands ==
+### Commands
 
 - [help](playground%20help) - Show help about a command
 - [status](playground%20status) - 🗺️ Show a status
@@ -33,7 +33,7 @@ visit https://docs.docker.com/get-docker to install
 
 - [secrets](playground%20secrets) - 🔐 Credentials required by examples
 - [set](playground%20secrets%20set) - 🔐 Store a credential
-- [get](playground%20secrets%20get) - 🔍 Show a stored credential (masked unless --reveal is used)
+- [get](playground%20secrets%20get) - 🔍 Show a stored credential (masked unless `--reveal` is used)
 - [unset](playground%20secrets%20unset) - 🗑️ Remove a stored credential
 - [list](playground%20secrets%20list) - 📋 List stored credentials
 - [link](playground%20secrets%20link) - 🔗 Point a variable at a secret manager, without storing any value
@@ -55,7 +55,7 @@ visit https://docs.docker.com/get-docker to install
 ### Run commands
 
 - [run](playground%20run) - 🕹️ Run any example !
-- [re-run](playground%20re-run) - ⚡ Simply re-run last example you ran with \<playground run\>
+- [re-run](playground%20re-run) - ⚡ Simply re-run last example you ran with `<playground run>`
 - [get-ci-result](playground%20get-ci-result) - 🤖 get CI result for current example
 - [history](playground%20history) - 🏰 Get an history of the examples which were run with run command and run it again
 - [find-example](playground%20find-example) - 🔎 Find examples matching a free-text query, without the interactive picker
@@ -63,8 +63,8 @@ visit https://docs.docker.com/get-docker to install
 - [switch-back](playground%20switch-back) - 💺  Switch back from previous environment before switch-ccloud was called.
 - [switch-podman](playground%20switch-podman) - 🦭 Switch the container engine to Podman
 - [switch-docker](playground%20switch-docker) - 🐳 Switch the container engine back to Docker
-- [update-version](playground%20update-version) - ✨ Update current confluent platform components (all with --tag or only connect with --connect-tag) or connector(s) with new version(s)
-- [open](playground%20open) - 👐 When --file is not provided, simply open last example you ran with \<playground run\>
+- [update-version](playground%20update-version) - ✨ Update current confluent platform components (all with `--tag` or only connect with `--connect-tag`) or connector(s) with new version(s)
+- [open](playground%20open) - 👐 When `--file` is not provided, simply open last example you ran with `<playground run>`
 - [stop](playground%20stop) - 🛑 Stop currently running example
 - [remove-all-docker-images](playground%20remove-all-docker-images) - 🧨 Remove all docker images (including docker volumes)
 - [remove-cp-docker-images](playground%20remove-cp-docker-images) - 🧹 Remove all Confluent Platform docker images related to a version installed locally (a confirmation will be required for every version present)
@@ -79,7 +79,7 @@ visit https://docs.docker.com/get-docker to install
 - [repro](playground%20repro) - 👷‍♂️ Reproduction model commands
 - [export](playground%20repro%20export) - 📤 Export as tgz file uncommitted reproduction models from the folder of current reproduction model
 - [import](playground%20repro%20import) - 📥 Import tgz file which was created with export command
-- [bootstrap](playground%20repro%20bootstrap) - 🛠  Bootstrap reproduction model, just run \<playground repro bootstrap\> !
+- [bootstrap](playground%20repro%20bootstrap) - 🛠  Bootstrap reproduction model, just run `<playground repro bootstrap>` !
 
 ### Kafka commands
 
@@ -89,7 +89,7 @@ visit https://docs.docker.com/get-docker to install
 ### Schema commands
 
 - [schema](playground%20schema) - 🔰 Schema commands
-- [get](playground%20schema%20get) - 🔰 Get all schemas versions for specified subject (if --subject is not specified, all subjects will be used)
+- [get](playground%20schema%20get) - 🔰 Get all schemas versions for specified subject (if `--subject` is not specified, all subjects will be used)
 - [register](playground%20schema%20register) - ⏺️ Register a schema in specified subject
 - [get-compatibility](playground%20schema%20get-compatibility) - 🛡️ Get subject-level compatibility
 - [set-compatibility](playground%20schema%20set-compatibility) - 🛡️ Set subject-level compatibility
@@ -135,6 +135,7 @@ visit https://docs.docker.com/get-docker to install
 - [testssl](playground%20debug%20testssl) - 🔐 Testing TLS/SSL encryption using https://testssl.sh/
 - [generate-diagnostics](playground%20debug%20generate-diagnostics) - ⛑️ Generate a diagnostic bundle with Diagnostics Bundle Tool
 - [thread-dump](playground%20debug%20thread-dump) - 🎯 Take a java thread dump
+- [thread-analyze](playground%20debug%20thread-analyze) - 🧵 Analyze java thread dumps: deadlocks, lock contention, stuck and CPU-hungry threads
 - [heap-dump](playground%20debug%20heap-dump) - 👻 Take a heap dump
 - [heap-analyze](playground%20debug%20heap-analyze) - 🔬 Analyze a heap dump with Eclipse Memory Analyzer (MAT), run headless in Docker
 - [analyze-logs](playground%20debug%20analyze-logs) - 🔥 Show a digest of ERROR/FATAL records found in log files, folders or zip bundles
@@ -200,7 +201,7 @@ visit https://docs.docker.com/get-docker to install
 - [versions](playground%20connector-plugin%20versions) - 💯 List versions for a connector plugin from confluent hub https://www.confluent.io/hub/
 - [display-last-updated](playground%20connector-plugin%20display-last-updated) - 🆕 List last updated connector plugins from confluent hub https://www.confluent.io/hub/
 - [config-key](playground%20connector-plugin%20config-key) - 🔑 Explain a connector configuration key: documentation, type, default, since when, and which examples set it
-- [sourcecode](playground%20connector-plugin%20sourcecode) - 🧑‍💻 Open source code url in your browser (or in your editor when used with --open)
+- [sourcecode](playground%20connector-plugin%20sourcecode) - 🧑‍💻 Open source code url in your browser (or in your editor when used with `--open`)
 
 ### Connector commands
 
@@ -209,7 +210,7 @@ visit https://docs.docker.com/get-docker to install
 - [error-recommendations](playground%20connector%20error-recommendations) - 💡 Show error recommendations for fully managed connectors
 - [oracle-cdc-xstream](playground%20connector%20oracle-cdc-xstream) - 🅾️ Specific Oracle CDC Xstream commands
 - [offsets](playground%20connector%20offsets) - 💈 Handle source and sink connectors offsets
-- [plugins](playground%20connector%20plugins) - 🎨 Show all connector plugins installed. You can also display transforms, converters and predicates using --all flag
+- [plugins](playground%20connector%20plugins) - 🎨 Show all connector plugins installed. You can also display transforms, converters and predicates using `--all` flag
 - [pause](playground%20connector%20pause) - ⏸️  Pause connector
 - [versions](playground%20connector%20versions) - 🧞 Get current and latest versions available on Confluent Hub for connector(s) used in example
 - [sourcecode](playground%20connector%20sourcecode) - 🧑‍💻 open source code url for connector(s) used in example
@@ -235,7 +236,7 @@ visit https://docs.docker.com/get-docker to install
 - [translate](playground%20connector%20translate) - 💱 Translate Self Managed Connector Plugin Configurations to Fully Managed Connector Plugin Configuration
 - [connect-migration-utility](playground%20connector%20connect-migration-utility) - 🧩 Run Kafka Connector Migration Utility (see https://github.com/confluentinc/connect-migration-utility/) on running connect cluster
 - [create-or-update](playground%20connector%20create-or-update) - 🧑‍🎨  Create or update connector
-- [update](playground%20connector%20update) - 🛠️ Update connector configuration by opening current connector config in text editor set with playground config editor \<editor\> (default is code). Once file is saved, the new configuration is updated.
+- [update](playground%20connector%20update) - 🛠️ Update connector configuration by opening current connector config in text editor set with playground config editor `<editor>` (default is code). Once file is saved, the new configuration is updated.
 
 ### EC2 commands
 
@@ -251,21 +252,20 @@ visit https://docs.docker.com/get-docker to install
 
 ## Options
 
-#### *--vvv, -v*
+#### `--vvv, -v`
 
-🐛 set verbose output (set -x)  
-  
-❗ it can print sensitive information ❗  
+🐛 set verbose output (set -x)
 
+❗ it can print sensitive information ❗
 
-#### *--output-level, -o LEVEL*
+#### `--output-level, -o LEVEL`
 
-❕Log level used by all commands  
-  
+❕Log level used by all commands
+
 Default is INFO (all INFO, WARN and ERROR will be printed in command output)
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Allowed Values: | INFO, WARN, ERROR
+| Allowed Values: | `INFO`, `WARN`, `ERROR`
 
 

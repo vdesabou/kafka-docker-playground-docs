@@ -1,6 +1,6 @@
 # playground schema get
 
-🔰 Get all schemas versions for specified subject (if --subject is not specified, all subjects will be used)
+🔰 Get all schemas versions for specified subject (if `--subject` is not specified, all subjects will be used)
 
 ## Usage
 
@@ -10,33 +10,33 @@ playground schema get [OPTIONS]
 
 ## Options
 
-#### *--subject SUBJECT*
+#### `--subject SUBJECT`
 
 📛 Subject name
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Conflicts With: | *id*
+| Conflicts With: | `id`
 
-#### *--id ID*
+#### `--id ID`
 
 💯 Schema id
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Conflicts With: | *subject, deleted*
+| Conflicts With: | `subject`, `deleted`
 
-#### *--verbose, -v*
+#### `--verbose, -v`
 
 🐞 Show command being ran.
 
-#### *--deleted*
+#### `--deleted`
 
 🧟 Include soft deleted subjects
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Conflicts With: | *id*
+| Conflicts With: | `id`
 
 ## Examples
 

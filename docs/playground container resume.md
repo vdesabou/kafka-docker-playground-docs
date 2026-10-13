@@ -1,8 +1,8 @@
 # playground container resume
 
-⏯️  Resume a container  
-  
-Unfreezes a container paused with 'playground container pause'.
+⏯️  Resume a container
+
+Unfreezes a container paused with `playground container pause`.
 
 | Attributes       | &nbsp;
 |------------------|-------------
@@ -16,15 +16,15 @@ playground container resume [OPTIONS]
 
 ## Options
 
-#### *--container, -c, --pod, -p CONTAINER*
+#### `--container, -c, --pod, -p CONTAINER`
 
-🐳 container name (or pod name when cfk environment is used)  
-  
-🎓 Tip: you can pass multiple containers by specifying --container multiple times
+🐳 container name (or pod name when cfk environment is used)
+
+🎓 Tip: you can pass multiple containers by specifying `--container` multiple times
 
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Repeatable:     |  ✓ Yes
-| Default Value:  | connect
+| Default Value:  | `connect`
 
 

@@ -1,14 +1,14 @@
 # playground debug java-debug
 
-🤎 JVM arguments for SSL, Kerberos or Class Loading  
-  
+🤎 JVM arguments for SSL, Kerberos or Class Loading
+
 Turns on the JVM's own diagnostic traces in a container and restarts it.  
 This is how you find out why a TLS handshake fails, why a Kerberos  
 login is refused, or which jar a class was loaded from when two  
-versions collide.  
-  
+versions collide.
+
 ❗ These traces are extremely verbose. Turn them back off with  
-   --action disable once you have what you need.
+`--action` disable once you have what you need.
 
 ## Usage
 
@@ -18,37 +18,37 @@ playground debug java-debug [OPTIONS]
 
 ## Options
 
-#### *--container, -c, --pod, -p CONTAINER*
+#### `--container, -c, --pod, -p CONTAINER`
 
-🐳 container name (or pod name when cfk environment is used)  
-  
-🎓 Tip: you can pass multiple containers by specifying --container multiple times
+🐳 container name (or pod name when cfk environment is used)
+
+🎓 Tip: you can pass multiple containers by specifying `--container` multiple times
 
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Repeatable:     |  ✓ Yes
-| Default Value:  | connect
+| Default Value:  | `connect`
 
-#### *--type TYPE*
+#### `--type TYPE`
 
-- ssl_all: Enable all SSL debugging, i.e -Djavax.net.debug=all  
-- ssl_handshake: Enable SSL handshake debugging, i.e -Djavax.net.debug=ssl:handshake  
-- class_loading: Enable class loading debugging, i.e -verbose:class  
+- ssl_all: Enable all SSL debugging, i.e -Djavax.net.debug=all
+- ssl_handshake: Enable SSL handshake debugging, i.e -Djavax.net.debug=ssl:handshake
+- class_loading: Enable class loading debugging, i.e -verbose:class
 - kerberos: Enable Kerberos debugging, i.e -Dsun.security.krb5.debug=true
 
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Required:       | ✓ Yes
-| Allowed Values: | ssl_all, ssl_handshake, class_loading, kerberos
+| Allowed Values: | `ssl_all`, `ssl_handshake`, `class_loading`, `kerberos`
 
-#### *--action ACTION*
+#### `--action ACTION`
 
 🟢 enable or disable
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Default Value:  | enable
-| Allowed Values: | enable, disable
+| Default Value:  | `enable`
+| Allowed Values: | `enable`, `disable`
 
 ## Examples
 

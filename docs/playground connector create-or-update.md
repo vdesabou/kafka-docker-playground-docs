@@ -1,17 +1,17 @@
 # playground connector create-or-update
 
-🧑‍🎨  Create or update connector  
-  
+🧑‍🎨  Create or update connector
+
 The command every example uses to deploy its connector. The json config  
 is read from stdin, usually as a heredoc, so it stays readable in the  
 script. If the connector already exists it is updated in place, which  
-makes the command safe to re-run while you iterate on a configuration.  
-  
+makes the command safe to re-run while you iterate on a configuration.
+
 The command waits for the connector to be RUNNING and fails with the  
 error if it is not, so a broken config stops the example immediately  
-instead of failing silently later.  
-  
-🎓 Tip: add --validate to have the config checked by the plugin before  
+instead of failing silently later.
+
+🎓 Tip: add `--validate` to have the config checked by the plugin before  
 it is deployed, which reports every invalid property at once.
 
 ## Usage
@@ -22,21 +22,21 @@ playground connector create-or-update [JSON] [OPTIONS]
 
 ## Arguments
 
-#### *JSON*
+#### `JSON`
 
 json (reads from stdin if empty)
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Default Value:  | -
+| Default Value:  | `-`
 
 ## Options
 
-#### *--verbose, -v*
+#### `--verbose, -v`
 
 🐞 Show command being ran.
 
-#### *--connector, -c CONNECTOR*
+#### `--connector, -c CONNECTOR`
 
 🔗 Connector name
 
@@ -44,58 +44,58 @@ json (reads from stdin if empty)
 |-----------------|-------------
 | Required:       | ✓ Yes
 
-#### *--level, -l LEVEL*
+#### `--level, -l LEVEL`
 
-❕Log level  
-  
+❕Log level
+
 ⚠️ Not available for ccloud connectors
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Allowed Values: | INFO, WARN, DEBUG, TRACE
+| Allowed Values: | `INFO`, `WARN`, `DEBUG`, `TRACE`
 
-#### *--package, -p PACKAGE*
+#### `--package, -p PACKAGE`
 
 Package name
 
-#### *--wait-for-zero-lag*
+#### `--wait-for-zero-lag`
 
 😴 Wait until lag becomes 0
 
-#### *--validate*
+#### `--validate`
 
 ✅ Validate config using PUT /connector-plugins/(string:name)/config/validate (https://docs.confluent.io/platform/current/connect/references/restapi.html#put--connector-plugins-(string-name)-config-validate)
 
-#### *--skip-automatic-connector-config*
+#### `--skip-automatic-connector-config`
 
-🤖 If example is run (playground run) with --environment flag, automatic configuration to adapt to the environment is added.   
-  
+🤖 If example is run (playground run) with `--environment` flag, automatic configuration to adapt to the environment is added.
+
 This flag allows to skip this automatic configuration (only useful to reproduce issues)
 
-#### *--offsets OFFSETS*
+#### `--offsets OFFSETS`
 
-📍 Create connector with offsets (https://docs.confluent.io/cloud/current/connectors/offsets.html#create-connectors-with-offsets)  
-  
+📍 Create connector with offsets (https://docs.confluent.io/cloud/current/connectors/offsets.html#create-connectors-with-offsets)
+
 ⚠️ Only available for ccloud connectors, the connector should not really exists
 
-#### *--initial-state INITIAL-STATE*
+#### `--initial-state INITIAL-STATE`
 
-🪵 Create connector with specific status (https://cwiki.apache.org/confluence/display/KAFKA/KIP-980%3A+Allow+creating+connectors+in+a+stopped+state)  
-  
-Only available if CP \> 7.7  
-  
+🪵 Create connector with specific status (https://cwiki.apache.org/confluence/display/KAFKA/KIP-980%3A+Allow+creating+connectors+in+a+stopped+state)
+
+Only available if CP \> 7.7
+
 ⚠️ not available for ccloud connectors
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Allowed Values: | RUNNING, PAUSED, STOPPED
+| Allowed Values: | `RUNNING`, `PAUSED`, `STOPPED`
 
-#### *--terraform*
+#### `--terraform`
 
-🏗️ Deploy connector using Terraform instead of REST API  
-  
-Dynamically converts JSON connector config to Terraform HCL and deploys using terraform apply  
-  
+🏗️ Deploy connector using Terraform instead of REST API
+
+Dynamically converts JSON connector config to Terraform HCL and deploys using terraform apply
+
 ⚠️ Only available for Confluent Cloud connectors
 
 ## Examples

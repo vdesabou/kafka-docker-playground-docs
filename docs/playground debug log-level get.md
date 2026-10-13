@@ -1,8 +1,8 @@
 # playground debug log-level get
 
-Get log levels  
-  
-With no --package, every logger with an explicit level is listed.
+Get log levels
+
+With no `--package`, every logger with an explicit level is listed.
 
 ## Usage
 
@@ -12,7 +12,7 @@ playground debug log-level get [OPTIONS]
 
 ## Options
 
-#### *--package, -p PACKAGE*
+#### `--package, -p PACKAGE`
 
 Package name
 

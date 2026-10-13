@@ -1,9 +1,9 @@
 # playground container ssh
 
-🛬 SSH into container  
-  
+🛬 SSH into container
+
 Interactive shell inside the container, as the user the component runs  
-with. Use 'playground container exec' instead when you want to run a  
+with. Use `playground container exec` instead when you want to run a  
 single command from a script.
 
 ## Usage
@@ -14,46 +14,46 @@ playground container ssh [OPTIONS]
 
 ## Options
 
-#### *--container, -c, --pod, -p CONTAINER*
+#### `--container, -c, --pod, -p CONTAINER`
 
-🐳 container name (or pod name when cfk environment is used)  
-  
-🎓 Tip: you can pass multiple containers by specifying --container multiple times
+🐳 container name (or pod name when cfk environment is used)
+
+🎓 Tip: you can pass multiple containers by specifying `--container` multiple times
 
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Repeatable:     |  ✓ Yes
-| Default Value:  | connect
+| Default Value:  | `connect`
 
-#### *--shell, -s SHELL*
+#### `--shell, -s SHELL`
 
 💾 Shell to use (default is bash)
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Default Value:  | bash
-| Allowed Values: | bash, sh, ksh, zsh
+| Default Value:  | `bash`
+| Allowed Values: | `bash`, `sh`, `ksh`, `zsh`
 
 ## Examples
 
 ```bash
-playground ssh -c connect
+playground container ssh -c connect
 ```
 
 ```bash
-playground ssh -c connect -s sh
+playground container ssh -c connect -s sh
 ```
 
 ```bash
-playground ssh --container connect --shell sh
+playground container ssh --container connect --shell sh
 ```
 
 ```bash
-playground ssh -c broker
+playground container ssh -c broker
 ```
 
 ```bash
-playground ssh --container schema-registry --shell zsh
+playground container ssh --container schema-registry --shell zsh
 ```
 
 

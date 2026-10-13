@@ -10,7 +10,7 @@ playground config editor EDITOR
 
 ## Arguments
 
-#### *EDITOR*
+#### `EDITOR`
 
 editor
 

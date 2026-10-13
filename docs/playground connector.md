@@ -1,40 +1,44 @@
 # playground connector
 
-🔗 Connector commands  
-  
+🔗 Connector commands
+
 Everything you would otherwise do with curl on the Connect REST API, with  
 the right host, port and credentials already figured out. The same  
 commands work whether the connector is self managed in the connect  
-container or fully managed in Confluent Cloud.  
-  
-🔍 Look at what is running  
-  status                  is it RUNNING, and if not, the full stack trace  
-  error-recommendations   suggested fixes for a failed fully managed connector  
-  show-config             the configuration actually applied  
-  logs                    tail connect logs, filtered and followed  
-  show-lag                consumer lag of a sink, until it reaches zero  
-  offsets get             where the connector is reading or writing  
-  
-🛠️ Change it  
-  create-or-update        create it, or apply a new config, from stdin  
-  update                  edit the running config in your editor  
-  pause / resume / stop / restart / delete  
-  offsets alter / reset   rewind or fast-forward a connector  
-  
-🧑‍🔬 Understand it  
-  show-config-parameters  every parameter the plugin accepts  
-  select-config           pick parameters interactively  
-  versions                installed version vs latest on Confluent Hub  
-  sourcecode              open the source on GitHub, or diff two versions  
-  open-docs               open the Confluent documentation  
-  snippets                ready-to-paste converter and dlq config  
-  
-🐞 Dig deeper  
-  log-level               raise connect log level for this connector  
-  enable-remote-debugging attach a java debugger to the connector code  
-  translate               self managed config to fully managed config  
-  
-Without --connector, commands apply to every connector of the example,  
+container or fully managed in Confluent Cloud.
+
+**🔍 Look at what is running**
+
+- **status**: is it RUNNING, and if not, the full stack trace
+- **error-recommendations**: suggested fixes for a failed fully managed connector
+- **show-config**: the configuration actually applied
+- **logs**: tail connect logs, filtered and followed
+- **show-lag**: consumer lag of a sink, until it reaches zero
+- **offsets get**: where the connector is reading or writing
+
+**🛠️ Change it**
+
+- **create-or-update**: create it, or apply a new config, from stdin
+- **update**: edit the running config in your editor
+- **pause / resume / stop / restart / delete**
+- **offsets alter / reset**: rewind or fast-forward a connector
+
+**🧑‍🔬 Understand it**
+
+- **show-config-parameters**: every parameter the plugin accepts
+- **select-config**: pick parameters interactively
+- **versions**: installed version vs latest on Confluent Hub
+- **sourcecode**: open the source on GitHub, or diff two versions
+- **open-docs**: open the Confluent documentation
+- **snippets**: ready-to-paste converter and dlq config
+
+**🐞 Dig deeper**
+
+- **log-level**: raise connect log level for this connector
+- **enable-remote-debugging attach a java debugger to the connector code**
+- **translate**: self managed config to fully managed config
+
+Without `--connector`, commands apply to every connector of the example,  
 which is usually what you want since most examples run only one.
 
 ## Usage
@@ -43,13 +47,13 @@ which is usually what you want since most examples run only one.
 playground connector COMMAND
 ```
 
-## == Commands ==
+## Commands
 
 - [status](playground%20connector%20status) - 🧩 Show status of all connectors
 - [error-recommendations](playground%20connector%20error-recommendations) - 💡 Show error recommendations for fully managed connectors
 - [oracle-cdc-xstream](playground%20connector%20oracle-cdc-xstream) - 🅾️ Specific Oracle CDC Xstream commands
 - [offsets](playground%20connector%20offsets) - 💈 Handle source and sink connectors offsets
-- [plugins](playground%20connector%20plugins) - 🎨 Show all connector plugins installed. You can also display transforms, converters and predicates using --all flag
+- [plugins](playground%20connector%20plugins) - 🎨 Show all connector plugins installed. You can also display transforms, converters and predicates using `--all` flag
 - [pause](playground%20connector%20pause) - ⏸️  Pause connector
 - [versions](playground%20connector%20versions) - 🧞 Get current and latest versions available on Confluent Hub for connector(s) used in example
 - [sourcecode](playground%20connector%20sourcecode) - 🧑‍💻 open source code url for connector(s) used in example
@@ -72,7 +76,7 @@ playground connector COMMAND
 - [translate](playground%20connector%20translate) - 💱 Translate Self Managed Connector Plugin Configurations to Fully Managed Connector Plugin Configuration
 - [connect-migration-utility](playground%20connector%20connect-migration-utility) - 🧩 Run Kafka Connector Migration Utility (see https://github.com/confluentinc/connect-migration-utility/) on running connect cluster
 - [create-or-update](playground%20connector%20create-or-update) - 🧑‍🎨  Create or update connector
-- [update](playground%20connector%20update) - 🛠️ Update connector configuration by opening current connector config in text editor set with playground config editor \<editor\> (default is code). Once file is saved, the new configuration is updated.
+- [update](playground%20connector%20update) - 🛠️ Update connector configuration by opening current connector config in text editor set with playground config editor `<editor>` (default is code). Once file is saved, the new configuration is updated.
 
 ## Connect commands
 

@@ -1,8 +1,8 @@
 # playground rbac acl delete
 
-🗑️ Delete ACLs, one per --operation  
-  
-Same flags as 'playground rbac acl create'.
+🗑️ Delete ACLs, one per `--operation`
+
+Same flags as `playground rbac acl create`.
 
 ## Usage
 
@@ -12,15 +12,15 @@ playground rbac acl delete [OPTIONS]
 
 ## Options
 
-#### *--principal, -p PRINCIPAL*
+#### `--principal, -p PRINCIPAL`
 
-🧑 Principal, User:\<name\> or Group:\<name\> (a bare name means User:\<name\>)
+🧑 Principal, User:`<name>` or Group:`<name>` (a bare name means User:`<name>`)
 
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Required:       | ✓ Yes
 
-#### *--operation, -o OPERATION*
+#### `--operation, -o OPERATION`
 
 ⚙️ Operation, can be set several times
 
@@ -28,36 +28,36 @@ playground rbac acl delete [OPTIONS]
 |-----------------|-------------
 | Required:       | ✓ Yes
 | Repeatable:     |  ✓ Yes
-| Allowed Values: | ALL, READ, WRITE, CREATE, DELETE, ALTER, DESCRIBE, CLUSTER_ACTION, DESCRIBE_CONFIGS, ALTER_CONFIGS, IDEMPOTENT_WRITE
+| Allowed Values: | `ALL`, `READ`, `WRITE`, `CREATE`, `DELETE`, `ALTER`, `DESCRIBE`, `CLUSTER_ACTION`, `DESCRIBE_CONFIGS`, `ALTER_CONFIGS`, `IDEMPOTENT_WRITE`
 
-#### *--resource RESOURCE*
+#### `--resource RESOURCE`
 
-📦 Resource, \<ResourceType\>:\<name\> with ResourceType one of Topic, Group,  
+📦 Resource, `<ResourceType>:<name>` with ResourceType one of Topic, Group,  
 Cluster, TransactionalId, DelegationToken. Use Cluster:kafka-cluster for the cluster.
 
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Required:       | ✓ Yes
 
-#### *--prefix*
+#### `--prefix`
 
 🔤 The resource name is a prefix (PREFIXED pattern) instead of a literal name
 
-#### *--deny*
+#### `--deny`
 
 ⛔ DENY instead of ALLOW
 
-#### *--host HOST*
+#### `--host HOST`
 
-🖥️ Host the ACL applies to  
-  
-ℹ️ If not set, all hosts (*)
+🖥️ Host the ACL applies to
 
-#### *--kafka-acls*
+ℹ️ If not set, all hosts (\*)
+
+#### `--kafka-acls`
 
 🧰 Use regular Kafka ACLs (kafka-acls) instead of MDS centralized ACLs
 
-#### *--verbose, -v*
+#### `--verbose, -v`
 
 🐞 Show command being ran.
 

@@ -10,7 +10,7 @@ playground open-changelog [OPTIONS]
 
 ## Options
 
-#### *--only-show-url*
+#### `--only-show-url`
 
 🌐 Only show url
 

@@ -1,11 +1,11 @@
 # playground secrets unset
 
-🗑️ Remove a stored credential  
-  
+🗑️ Remove a stored credential
+
 The value goes too, not only the reference: the keychain entry is  
-deleted, the 1Password item is archived.  
-  
-A secret pointed at with 'playground secrets link' is left untouched,  
+deleted, the 1Password item is archived.
+
+A secret pointed at with `playground secrets link` is left untouched,  
 since it belongs to you and not to the playground.
 
 | Attributes       | &nbsp;
@@ -20,7 +20,7 @@ playground secrets unset NAME [OPTIONS]
 
 ## Arguments
 
-#### *NAME*
+#### `NAME`
 
 🔑 Environment variable name
 
@@ -30,7 +30,7 @@ playground secrets unset NAME [OPTIONS]
 
 ## Options
 
-#### *--profile PROFILE*
+#### `--profile PROFILE`
 
 🗂️ Secrets profile to use (default is the active one)
 

@@ -10,7 +10,7 @@ playground topic tag search [OPTIONS]
 
 ## Options
 
-#### *--tag TAG*
+#### `--tag TAG`
 
 🏷️ Tag name
 
@@ -18,7 +18,7 @@ playground topic tag search [OPTIONS]
 |-----------------|-------------
 | Required:       | ✓ Yes
 
-#### *--verbose, -v*
+#### `--verbose, -v`
 
 🐞 Show command being ran.
 

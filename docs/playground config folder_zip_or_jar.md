@@ -1,8 +1,8 @@
 # playground config folder_zip_or_jar
 
 📂 list of folders where to search for zip or jar  
-current folder is always included  
-  
+current folder is always included
+
 default is ~ (home dir)
 
 ## Usage
@@ -13,7 +13,7 @@ playground config folder_zip_or_jar FOLDER...
 
 ## Arguments
 
-#### *FOLDER*
+#### `FOLDER`
 
 folder
 

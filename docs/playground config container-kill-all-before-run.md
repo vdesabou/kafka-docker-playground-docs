@@ -1,7 +1,6 @@
 # playground config container-kill-all-before-run
 
-when running an example, always call playground container kill-all first. If set to false, it will call playground stop instead.  
-
+when running an example, always call playground container kill-all first. If set to false, it will call playground stop instead.
 
 ## Usage
 
@@ -11,13 +10,13 @@ playground config container-kill-all-before-run [ENABLED]
 
 ## Arguments
 
-#### *ENABLED*
+#### `ENABLED`
 
 
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Default Value:  | false
+| Default Value:  | `false`
 
 ## Examples
 

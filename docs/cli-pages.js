@@ -111,6 +111,7 @@ window.KDP_CLI_PAGES = [
   "/playground%20debug%20log-level",
   "/playground%20debug%20tcp-dump",
   "/playground%20debug%20testssl",
+  "/playground%20debug%20thread-analyze",
   "/playground%20debug%20thread-dump",
   "/playground%20debug",
   "/playground%20doctor",

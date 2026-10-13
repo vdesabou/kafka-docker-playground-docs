@@ -1,58 +1,55 @@
 # playground run
 
-🕹️ Run any example !  
-  
-🔥 It start an interactive mode where you'll be fully guided !  
-  
-  playground run                       🔍 pick an example, guided  
-  playground run -f \<example.sh\>       🚀 run that one directly  
-  playground re-run                    ⚡ same example, same flags  
-  
+🕹️ Run any example !
+
+🔥 It start an interactive mode where you'll be fully guided !
+
+- `playground run`: 🔍 pick an example, guided
+- `playground run -f <example.sh>`: 🚀 run that one directly
+- `playground re-run`: ⚡ same example, same flags
+
 Each run stops what was running, starts the environment the example asks  
 for, brings up its containers, creates the connector and produces data.  
-Credentials the example needs are loaded from 'playground secrets'.  
-  
-🔢 Choosing versions  
-  --tag             Confluent Platform version for every component  
-  --connect-tag     Confluent Platform version for connect only  
-  --schema-registry-tag, --ksqldb-tag, --control-center-tag  
-                    version for that component only  
-  --connector-tag   connector version from Confluent Hub  
-  --connector-zip   connector from a local zip or a URL  
-  --connector-jar   a single jar, dropped into the existing plugin  
-  
-🧰 Adding to the example  
-  --environment     run a connector example under another security setup  
-  --enable-\<x\>      add control-center, ksqldb, flink, grafana, kcat...  
-  --enable-sql-datagen  
-                    continuous realistic data for CDC source examples  
-  --connect-community-image, --kafka-community-image  
-                    use community images instead of enterprise ones  
-  --enable-kraft    KRaft instead of Zookeeper for CP 7.4 to 7.9  
-  --connect-log-level  
-                    log levels set on connect before the connector is created  
-  
-  
-⛅ When running Confluent Cloud (ccloud) example:  
-  
-  All you have to do is to be already logged in with confluent CLI.  
-  
-  By default, a new Confluent Cloud environment with a Cluster will be created.  
-  
-  You can configure the new cluster by setting:  
-  
-  --cluster-type (or CLUSTER_TYPE environment variable): The type of cluster (possible values: basic, standard and dedicated, default basic)  
-  --cluster-cloud (or CLUSTER_CLOUD environment variable): The Cloud provider (possible values: aws, gcp and azure, default aws)  
-  --cluster-region (or CLUSTER_REGION environment variable): The Cloud region (use confluent kafka region list to get the list, default eu-west-2 for aws, westeurope for azure and europe-west2 for gcp)  
-  --cluster-environment (or ENVIRONMENT environment variable) (optional): The environment id where want your new cluster (example: txxxxx)   
-  
-  In case you want to use your own existing cluster, you need to setup, in addition to previous ones:  
-  
-  --cluster-name (or CLUSTER_NAME environment variable): The cluster name  
-  --cluster-creds (or CLUSTER_CREDS environment variable): The Kafka api key and secret to use, it should be separated with colon (example: \<API_KEY\>:\<API_KEY_SECRET\>)  
-  --cluster-schema-registry-creds (or SCHEMA_REGISTRY_CREDS environment variable) (optional, if not set, new one will be created): The Schema Registry api key and secret to use, it should be separated with colon (example: \<SR_API_KEY\>:\<SR_API_KEY_SECRET\>)  
-  
-❗ this command will kill all containers using "playground container kill-all", you can disable this by running "playground config container-kill-all-before-run false"
+Credentials the example needs are loaded from `playground secrets`.
+
+**🔢 Choosing versions**
+
+- `--tag`: Confluent Platform version for every component
+- `--connect-tag`: Confluent Platform version for connect only
+- `--schema-registry-tag`, `--ksqldb-tag`, `--control-center-tag`: version for that component only
+- `--connector-tag`: connector version from Confluent Hub
+- `--connector-zip`: connector from a local zip or a URL
+- `--connector-jar`: a single jar, dropped into the existing plugin
+
+**🧰 Adding to the example**
+
+- `--environment`: run a connector example under another security setup
+- `--enable-<x>`: add control-center, ksqldb, flink, grafana, kcat...
+- `--enable-sql-datagen`: continuous realistic data for CDC source examples
+- `--connect-community-image`, `--kafka-community-image`: use community images instead of enterprise ones
+- `--enable-kraft`: KRaft instead of Zookeeper for CP 7.4 to 7.9
+- `--connect-log-level`: log levels set on connect before the connector is created
+
+⛅ When running Confluent Cloud (ccloud) example:
+
+All you have to do is to be already logged in with confluent CLI.
+
+By default, a new Confluent Cloud environment with a Cluster will be created.
+
+You can configure the new cluster by setting:
+
+- `--cluster-type` (or `CLUSTER_TYPE` environment variable): The type of cluster (possible values: basic, standard and dedicated, default basic)
+- `--cluster-cloud` (or `CLUSTER_CLOUD` environment variable): The Cloud provider (possible values: aws, gcp and azure, default aws)
+- `--cluster-region` (or `CLUSTER_REGION` environment variable): The Cloud region (use confluent kafka region list to get the list, default eu-west-2 for aws, westeurope for azure and europe-west2 for gcp)
+- `--cluster-environment` (or ENVIRONMENT environment variable) (optional): The environment id where want your new cluster (example: txxxxx)
+
+In case you want to use your own existing cluster, you need to setup, in addition to previous ones:
+
+- `--cluster-name` (or `CLUSTER_NAME` environment variable): The cluster name
+- `--cluster-creds` (or `CLUSTER_CREDS` environment variable): The Kafka api key and secret to use, it should be separated with colon (example: `<API_KEY>:<API_KEY_SECRET>`)
+- `--cluster-schema-registry-creds` (or `SCHEMA_REGISTRY_CREDS` environment variable) (optional, if not set, new one will be created): The Schema Registry api key and secret to use, it should be separated with colon (example: `<SR_API_KEY>:<SR_API_KEY_SECRET>`)
+
+❗ this command will kill all containers using `playground container kill-all`, you can disable this by running `playground config container-kill-all-before-run false`
 
 ## Usage
 
@@ -68,310 +65,310 @@ visit https://github.com/junegunn/fzf#installation to install
 
 ## Options
 
-#### *--environment ENVIRONMENT*
+#### `--environment ENVIRONMENT`
 
-🔐 The environment to start when running a connector example   
-  
-- plaintext  
-- ccloud  
-- cfk  
-- cfk-rbac  
-- 2way-ssl  
-- kerberos  
-- ldap-authorizer-sasl-plain  
-- ldap-sasl-plain  
-- rbac-sasl-plain  
-- sasl-plain  
-- sasl-scram  
-- sasl-ssl  
-- ssl_kerberos  
-  
+🔐 The environment to start when running a connector example
+
+- plaintext
+- ccloud
+- cfk
+- cfk-rbac
+- 2way-ssl
+- kerberos
+- ldap-authorizer-sasl-plain
+- ldap-sasl-plain
+- rbac-sasl-plain
+- sasl-plain
+- sasl-scram
+- sasl-ssl
+- ssl_kerberos
+
 Default is plaintext.  
 This is only supported when example is a connector example
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Default Value:  | plaintext
-| Allowed Values: | ccloud, cfk, cfk-rbac, plaintext, sasl-ssl, sasl-plain, 2way-ssl, sasl-scram, kerberos, ssl_kerberos, ldap-authorizer-sasl-plain, ldap-sasl-plain, rbac-sasl-plain
+| Default Value:  | `plaintext`
+| Allowed Values: | `ccloud`, `cfk`, `cfk-rbac`, `plaintext`, `sasl-ssl`, `sasl-plain`, `2way-ssl`, `sasl-scram`, `kerberos`, `ssl_kerberos`, `ldap-authorizer-sasl-plain`, `ldap-sasl-plain`, `rbac-sasl-plain`
 
-#### *--file, -f FILE*
+#### `--file, -f FILE`
 
-🔖 Example file to run  
-  
-❕ It must be absolute full path  
-  
-🎓 Tip: use \<tab\> completion to trigger fzf completion
+🔖 Example file to run
 
-#### *--open, -o*
+❕ It must be absolute full path
 
-📖 Opening example files (including docker-compose file) with text editor set with playground config editor \<editor\> (default is code)
+🎓 Tip: use `<tab>` completion to trigger fzf completion
 
-#### *--tag TAG*
+#### `--open, -o`
 
-🎯 Confluent Platform (CP) version to use. Applies to all components (broker, connect, schema registry, ksqlDB, etc...)  
-  
-It sets TAG environment variable  
-  
-Must be greater or equal to 5.3.0  
-  
-🎓 Tip: use \<tab\> completion to trigger fzf completion
+📖 Opening example files (including docker-compose file) with text editor set with playground config editor `<editor>` (default is code)
 
-#### *--connect-tag CONNECT_TAG*
+#### `--tag TAG`
 
-🔗 Confluent Platform (CP) version to use. Applies to connect only.  
-  
-It sets CP_CONNECT_TAG environment variable  
-  
-Must be greater or equal to 5.3.0  
-  
-🎓 Tip: use \<tab\> completion to trigger fzf completion
+🎯 Confluent Platform (CP) version to use. Applies to all components (broker, connect, schema registry, ksqlDB, etc...)
 
-#### *--schema-registry-tag SCHEMA_REGISTRY_TAG*
+It sets TAG environment variable
 
-🔰 Confluent Platform (CP) version to use for schema registry only  
-  
-It sets CP_SCHEMA_REGISTRY_TAG environment variable  
-  
-❗ not supported with ccloud examples (schema registry is in Confluent Cloud)  
-  
-🎓 Tip: use \<tab\> completion to trigger fzf completion
+Must be greater or equal to 5.3.0
 
-#### *--ksqldb-tag KSQLDB_TAG*
+🎓 Tip: use `<tab>` completion to trigger fzf completion
 
-🎏 Confluent Platform (CP) version to use for ksqlDB server and CLI only, with --enable-ksqldb  
-  
-It sets CP_KSQL_TAG and CP_KSQL_CLI_TAG environment variables  
-  
-❗ not supported with ccloud examples  
-  
-🎓 Tip: use \<tab\> completion to trigger fzf completion
+#### `--connect-tag CONNECT_TAG`
 
-#### *--control-center-tag CONTROL_CENTER_TAG*
+🔗 Confluent Platform (CP) version to use. Applies to connect only.
 
-💠 Control Center version to use, with --enable-control-center  
-  
-It sets CP_CONTROL_CENTER_TAG environment variable  
-  
-With Control Center Next Gen (default), this is the version of the confluentinc/cp-enterprise-control-center-next-gen image (for example 2.2.0, default is latest)  
-  
-With --enable-legacy-control-center, this is a CP version (\< 8), by default the one of --tag
+It sets `CP_CONNECT_TAG` environment variable
 
-#### *--connector-tag CONNECTOR_TAG*
+Must be greater or equal to 5.3.0
 
-🔗 Connector version to use  
-  
-By default, for each connector, the latest available version on Confluent Hub is used  
-  
+🎓 Tip: use `<tab>` completion to trigger fzf completion
+
+#### `--schema-registry-tag SCHEMA_REGISTRY_TAG`
+
+🔰 Confluent Platform (CP) version to use for schema registry only
+
+It sets `CP_SCHEMA_REGISTRY_TAG` environment variable
+
+❗ not supported with ccloud examples (schema registry is in Confluent Cloud)
+
+🎓 Tip: use `<tab>` completion to trigger fzf completion
+
+#### `--ksqldb-tag KSQLDB_TAG`
+
+🎏 Confluent Platform (CP) version to use for ksqlDB server and CLI only, with `--enable-ksqldb`
+
+It sets `CP_KSQL_TAG` and `CP_KSQL_CLI_TAG` environment variables
+
+❗ not supported with ccloud examples
+
+🎓 Tip: use `<tab>` completion to trigger fzf completion
+
+#### `--control-center-tag CONTROL_CENTER_TAG`
+
+💠 Control Center version to use, with `--enable-control-center`
+
+It sets `CP_CONTROL_CENTER_TAG` environment variable
+
+With Control Center Next Gen (default), this is the version of the confluentinc/cp-enterprise-control-center-next-gen image (for example 2.2.0, default is latest)
+
+With `--enable-legacy-control-center`, this is a CP version (\< 8), by default the one of `--tag`
+
+#### `--connector-tag CONNECTOR_TAG`
+
+🔗 Connector version to use
+
+By default, for each connector, the latest available version on Confluent Hub is used
+
 🎓 Tip: set to " " in order to select the version dynamically
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Conflicts With: | *--connector-zip*
+| Conflicts With: | `--connector-zip`
 
-#### *--connector-zip CONNECTOR_ZIP*
+#### `--connector-zip CONNECTOR_ZIP`
 
-🤐 Connector zip to use  
-  
-❕ It must be absolute full path  
-  
-🎓 Tip: use \<tab\> completion to trigger fzf completion   
-        use playground config folder_zip_or_jar \<folder1\> \<folder2\>... (default is home folder and current folder is always included) to configure where to search the files  
-        use \<option+enter\> to use the value you typed manually
+🤐 Connector zip to use
+
+❕ It must be absolute full path
+
+🎓 Tip: use `<tab>` completion to trigger fzf completion  
+use playground config folder_zip_or_jar `<folder1>` `<folder2>`... (default is home folder and current folder is always included) to configure where to search the files  
+use `<option+enter>` to use the value you typed manually
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Conflicts With: | *--connector-tag*
+| Conflicts With: | `--connector-tag`
 
-#### *--connector-jar CONNECTOR_JAR*
+#### `--connector-jar CONNECTOR_JAR`
 
-🤎 Connector jar to use  
-  
-❕ It must be absolute full path  
-  
-🎓 Tip: use \<tab\> completion to trigger fzf completion   
-        use playground config folder_zip_or_jar \<folder1\> \<folder2\>... (default is home folder and current folder is always included) to configure where to search the files  
-        use \<option+enter\> to use the value you typed manually
+🤎 Connector jar to use
 
-#### *--enable-ksqldb*
+❕ It must be absolute full path
 
-🚀 Enable ksqlDB   
-  
-❗ not supported with ccloud examples  
-  
+🎓 Tip: use `<tab>` completion to trigger fzf completion  
+use playground config folder_zip_or_jar `<folder1>` `<folder2>`... (default is home folder and current folder is always included) to configure where to search the files  
+use `<option+enter>` to use the value you typed manually
+
+#### `--enable-ksqldb`
+
+🚀 Enable ksqlDB
+
+❗ not supported with ccloud examples
+
 By default, ksqldb-server and ksqldb-cli containers are not started for every test
 
-#### *--enable-rest-proxy*
+#### `--enable-rest-proxy`
 
-🧲 Enable Rest Proxy  
-  
-❗ not supported with ccloud examples  
-  
+🧲 Enable Rest Proxy
+
+❗ not supported with ccloud examples
+
 By default, rest-proxy container is not started for every test
 
-#### *--enable-control-center*
+#### `--enable-control-center`
 
-💠 Enable Control Center  
-  
-By default, control-center container is not started for every test  
-  
+💠 Enable Control Center
+
+By default, control-center container is not started for every test
+
 Control Center is reachable at http://127.0.0.1:9021
 
-#### *--enable-flink*
+#### `--enable-flink`
 
-🐿️ Enable Flink  
-  
-By default, flink is not started for every test  
-  
-Once enabled, the CLI will ask if you need to download any connectors. Based on the response, you can download one or more connectors from Flink maven repository.  
-  
+🐿️ Enable Flink
+
+By default, flink is not started for every test
+
+Once enabled, the CLI will ask if you need to download any connectors. Based on the response, you can download one or more connectors from Flink maven repository.
+
 Flink UI is reacheable using http://127.0.0.1:8081 within the flink child directory. If you enable Flink by starting connector deployment, http://127.0.0.1:18081 will be used.
 
-#### *--enable-conduktor*
+#### `--enable-conduktor`
 
-🐺 Enable Conduktor Platform  
-  
-By default, Conduktor Platform container is not started for every test  
-  
+🐺 Enable Conduktor Platform
+
+By default, Conduktor Platform container is not started for every test
+
 Conduktor is reachable at http://127.0.0.1:8080/console (admin/admin)
 
-#### *--enable-multiple-brokers*
+#### `--enable-multiple-brokers`
 
-3️⃣ Enable multiple brokers  
-  
+3️⃣ Enable multiple brokers
+
 By default, there is only one broker node enabled
 
-#### *--enable-multiple-connect-workers*
+#### `--enable-multiple-connect-workers`
 
-🥉 Enable multiple connect worker node  
-  
+🥉 Enable multiple connect worker node
+
 By default, there is only one connect worker node enabled
 
-#### *--enable-jmx-grafana*
+#### `--enable-jmx-grafana`
 
-Enable Grafana, Prometheus and Pyroscope  
-  
-📊 Grafana is reachable at http://127.0.0.1:3000 (login/password is admin/password)  
-  
-🛡️ Prometheus is reachable at http://127.0.0.1:9090  
-  
+Enable Grafana, Prometheus and Pyroscope
+
+📊 Grafana is reachable at http://127.0.0.1:3000 (login/password is admin/password)
+
+🛡️ Prometheus is reachable at http://127.0.0.1:9090
+
 📛 Pyroscope is reachable at http://127.0.0.1:4040
 
-#### *--enable-kcat*
+#### `--enable-kcat`
 
-🐈‍⬛ Enable kcat  
-  
-You can use it with:  
-  
-$ docker exec kcat kcat -b broker:9092 -L
+🐈‍⬛ Enable kcat
 
-#### *--enable-sql-datagen*
+You can use it with:
 
-🌪️ Enable SQL Datagen injection  
-  
+`$ docker exec kcat kcat -b broker:9092 -L`
+
+#### `--enable-sql-datagen`
+
+🌪️ Enable SQL Datagen injection
+
 This only works for Oracle, MySql, Postgres and Microsoft Sql Server source connector examples with JDBC and Debezium
 
-#### *--connect-community-image*
+#### `--connect-community-image`
 
-🌱 Use the community connect image (confluentinc/cp-kafka-connect) instead of the enterprise one (confluentinc/cp-server-connect)  
-  
-It sets CP_CONNECT_IMAGE environment variable  
-  
+🌱 Use the community connect image (confluentinc/cp-kafka-connect) instead of the enterprise one (confluentinc/cp-server-connect)
+
+It sets `CP_CONNECT_IMAGE` environment variable
+
 Monitoring interceptors are disabled, as they are not part of the community image
 
-#### *--kafka-community-image*
+#### `--kafka-community-image`
 
-🌿 Use the community kafka image (confluentinc/cp-kafka) instead of the enterprise one (confluentinc/cp-server)  
-  
-It sets CP_KAFKA_IMAGE environment variable  
-  
+🌿 Use the community kafka image (confluentinc/cp-kafka) instead of the enterprise one (confluentinc/cp-server)
+
+It sets `CP_KAFKA_IMAGE` environment variable
+
 Confluent Metrics Reporter and Telemetry Reporter are disabled, as they are not part of the community image
 
-#### *--enable-kraft*
+#### `--enable-kraft`
 
-🛰️ Start Confluent Platform in KRaft mode  
-  
-It sets ENABLE_KRAFT environment variable  
-  
+🛰️ Start Confluent Platform in KRaft mode
+
+It sets `ENABLE_KRAFT` environment variable
+
 Only useful for CP versions from 7.4 to 7.9, where Zookeeper is used by default (KRaft is always used for CP \>= 8)
 
-#### *--enable-legacy-control-center*
+#### `--enable-legacy-control-center`
 
-👨‍🦳 Use legacy Control Center (confluentinc/cp-enterprise-control-center) instead of Control Center Next Gen  
-  
-It sets ENABLE_LEGACY_CONTROL_CENTER environment variable  
-  
-Legacy Control Center is not available for CP \>= 8. It implies --enable-control-center
+👨‍🦳 Use legacy Control Center (confluentinc/cp-enterprise-control-center) instead of Control Center Next Gen
 
-#### *--connect-log-level CONNECT-LOG-LEVEL*
+It sets `ENABLE_LEGACY_CONTROL_CENTER` environment variable
 
-🔊 Log level(s) to set on connect, as a comma separated list of \<package\>=\<level\> (level is one of INFO, WARN, DEBUG, TRACE)  
-  
-They are applied with 'playground debug log-level set' as soon as the environment is started and connect is ready, so before the example creates its connector  
-  
-Example: --connect-log-level "io.confluent.connect.s3=TRACE,org.apache.kafka.connect.runtime.WorkerSinkTask=DEBUG"
+Legacy Control Center is not available for CP \>= 8. It implies `--enable-control-center`
 
-#### *--cluster-cloud CLUSTER-CLOUD*
+#### `--connect-log-level CONNECT-LOG-LEVEL`
 
-🌤 The cloud provider: aws, gcp or azure. Default is aws  
-  
-🎓 Tip: you can also use CLUSTER_CLOUD environment variable
+🔊 Log level(s) to set on connect, as a comma separated list of `<package>`=`<level>` (level is one of INFO, WARN, DEBUG, TRACE)
 
-| Attributes      | &nbsp;
-|-----------------|-------------
-| Allowed Values: | aws, gcp, azure
+They are applied with `playground debug log-level set` as soon as the environment is started and connect is ready, so before the example creates its connector
 
-#### *--cluster-type CLUSTER-TYPE*
+Example: `--connect-log-level` "io.confluent.connect.s3=TRACE,org.apache.kafka.connect.runtime.WorkerSinkTask=DEBUG"
 
-🔋 The cluster type: basic, standard or dedicated. Default is basic  
-  
-🎓 Tip: you can also use CLUSTER_TYPE environment variable
+#### `--cluster-cloud CLUSTER-CLOUD`
+
+🌤 The cloud provider: aws, gcp or azure. Default is aws
+
+🎓 Tip: you can also use `CLUSTER_CLOUD` environment variable
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Allowed Values: | basic, standard, dedicated
+| Allowed Values: | `aws`, `gcp`, `azure`
 
-#### *--cluster-region CLUSTER-REGION*
+#### `--cluster-type CLUSTER-TYPE`
 
-🗺 The Cloud region.   
-  
-🎓 Tip: you can also use CLUSTER_REGION environment variable  
-🎓 Tip: use \<tab\> completion to trigger fzf completion
+🔋 The cluster type: basic, standard or dedicated. Default is basic
 
-#### *--cluster-environment CLUSTER-ENVIRONMENT*
+🎓 Tip: you can also use `CLUSTER_TYPE` environment variable
 
-🌐 The environment id where want your new cluster (example: txxxxx)  
-  
-ℹ️ Optional, if not set, new environment will be created  
-  
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Allowed Values: | `basic`, `standard`, `dedicated`
+
+#### `--cluster-region CLUSTER-REGION`
+
+🗺 The Cloud region.
+
+🎓 Tip: you can also use `CLUSTER_REGION` environment variable  
+🎓 Tip: use `<tab>` completion to trigger fzf completion
+
+#### `--cluster-environment CLUSTER-ENVIRONMENT`
+
+🌐 The environment id where want your new cluster (example: txxxxx)
+
+ℹ️ Optional, if not set, new environment will be created
+
 🎓 Tip: you can also use ENVIRONMENT environment variable  
-🎓 Tip: use \<tab\> completion to trigger fzf completion
+🎓 Tip: use `<tab>` completion to trigger fzf completion
 
-#### *--cluster-name CLUSTER-NAME*
+#### `--cluster-name CLUSTER-NAME`
 
-🎰 The cluster name.   
-  
-❣️ Only required if you want to use your own existing cluster  
-  
-🎓 Tip: you can also use CLUSTER_NAME environment variable  
-🎓 Tip: use \<tab\> completion to trigger fzf completion
+🎰 The cluster name.
 
-#### *--cluster-creds CLUSTER-CREDS*
+❣️ Only required if you want to use your own existing cluster
 
-🔒 The Kafka api key and secret to use, it should be separated with colon (example: \<API_KEY\>:\<API_KEY_SECRET\>)  
-  
-❣️ Only required if you want to use your own existing cluster  
-  
-🎓 Tip: you can also use CLUSTER_CREDS environment variable
+🎓 Tip: you can also use `CLUSTER_NAME` environment variable  
+🎓 Tip: use `<tab>` completion to trigger fzf completion
 
-#### *--cluster-schema-registry-creds CLUSTER-SCHEMA-REGISTRY-CREDS*
+#### `--cluster-creds CLUSTER-CREDS`
 
-🔒 The Schema Registry api key and secret to use, it should be separated with colon (example: \<SR_API_KEY\>:\<SR_API_KEY_SECRET\>)  
-  
-ℹ️ Optional, if not set, new credentials will be created  
-  
-❣️ Only required if you want to use your own existing cluster  
-  
-🎓 Tip: you can also use SCHEMA_REGISTRY_CREDS environment variable
+🔒 The Kafka api key and secret to use, it should be separated with colon (example: `<API_KEY>:<API_KEY_SECRET>`)
+
+❣️ Only required if you want to use your own existing cluster
+
+🎓 Tip: you can also use `CLUSTER_CREDS` environment variable
+
+#### `--cluster-schema-registry-creds CLUSTER-SCHEMA-REGISTRY-CREDS`
+
+🔒 The Schema Registry api key and secret to use, it should be separated with colon (example: `<SR_API_KEY>:<SR_API_KEY_SECRET>`)
+
+ℹ️ Optional, if not set, new credentials will be created
+
+❣️ Only required if you want to use your own existing cluster
+
+🎓 Tip: you can also use `SCHEMA_REGISTRY_CREDS` environment variable
 
 ## Examples
 

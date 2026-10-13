@@ -1,17 +1,17 @@
 # playground switch-ccloud
 
-🌩️  Switch to ccloud environment.  
-  
-It will bootstrap ccloud environment based on your previously ran ccloud example.  
-  
+🌩️  Switch to ccloud environment.
+
+It will bootstrap ccloud environment based on your previously ran ccloud example.
+
 Points the CLI at the Confluent Cloud cluster of your last ccloud run, so  
-that 'playground topic', 'playground connector' and 'playground schema'  
+that `playground topic`, `playground connector` and `playground schema`  
 talk to Confluent Cloud instead of the local containers. Nothing is  
-created or destroyed, and no container is started or stopped.  
-  
+created or destroyed, and no container is started or stopped.
+
 ❕ Requires that you ran a ccloud example at least once, so that the  
-   environment, cluster and credentials are cached in playground.ini.  
-   The environment you were on is remembered for 'playground switch-back'.
+environment, cluster and credentials are cached in playground.ini.  
+The environment you were on is remembered for `playground switch-back`.
 
 ## Usage
 

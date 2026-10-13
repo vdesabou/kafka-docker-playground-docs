@@ -1,13 +1,13 @@
 # playground container logs
 
-🕵️  Tail and follow container logs  
-  
-Three ways to use it:  
-  
-  --grep "ERROR"                    keep only the lines that matter  
-  --open                            read the whole log in your editor  
-  --wait-for-log "Started" -m 120   block until the line shows up  
-  
+🕵️  Tail and follow container logs
+
+Three ways to use it:
+
+- `--grep "ERROR"`: keep only the lines that matter
+- `--open`: read the whole log in your editor
+- `--wait-for-log "Started" -m 120`: block until the line shows up
+
 The last one is what example scripts use to synchronise on a component  
 being ready, instead of sleeping and hoping.
 
@@ -19,111 +19,111 @@ playground container logs [OPTIONS]
 
 ## Options
 
-#### *--container, -c, --pod, -p CONTAINER*
+#### `--container, -c, --pod, -p CONTAINER`
 
-🐳 container name (or pod name when cfk environment is used)  
-  
-🎓 Tip: you can pass multiple containers by specifying --container multiple times
+🐳 container name (or pod name when cfk environment is used)
+
+🎓 Tip: you can pass multiple containers by specifying `--container` multiple times
 
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Repeatable:     |  ✓ Yes
-| Default Value:  | connect
+| Default Value:  | `connect`
 
-#### *--open, -o*
+#### `--open, -o`
 
-🔖 Save output to a file and open with text editor set with playground config editor \<editor\> (default is code)
+🔖 Save output to a file and open with text editor set with playground config editor `<editor>` (default is code)
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Conflicts With: | *--wait-for-log, --grep*
+| Conflicts With: | `--wait-for-log`, `--grep`
 
-#### *--wait-for-log, -w LOG*
+#### `--wait-for-log, -w LOG`
 
 😴 Wait until log appears
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Conflicts With: | *--open, --grep*
+| Conflicts With: | `--open`, `--grep`
 
-#### *--max-wait, -m MAX_WAIT*
+#### `--max-wait, -m MAX_WAIT`
 
-⏳ Max time in seconds to wait when using --wait-for-log (default 600s)
+⏳ Max time in seconds to wait when using `--wait-for-log` (default 600s)
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Default Value:  | 600
-| Conflicts With: | *--open, --grep*
+| Default Value:  | `600`
+| Conflicts With: | `--open`, `--grep`
 
-#### *--grep GREP*
+#### `--grep GREP`
 
 🎯 Grep pattern to filter logs
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Default Value:  | 
-| Conflicts With: | *--open, --wait-for-log*
+| Default Value:  | ``
+| Conflicts With: | `--open`, `--wait-for-log`
 
-#### *--previous*
+#### `--previous`
 
-🕰️ Show logs from the previous pod instance (only relevant when --environment=cfk is used)
+🕰️ Show logs from the previous pod instance (only relevant when `--environment`=cfk is used)
 
-#### *--since SINCE*
+#### `--since SINCE`
 
 🕐 Only show logs newer than a relative duration (10m, 1h) or a timestamp (2026-09-24T16:00:00)
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Conflicts With: | *--open, --wait-for-log*
+| Conflicts With: | `--open`, `--wait-for-log`
 
-#### *--tail LINES*
+#### `--tail LINES`
 
-🔢 Number of lines to show from the end of the logs, or "all"  
-  
-Default is 200, or all when --since, --errors, or --grep with --no-follow is used
+🔢 Number of lines to show from the end of the logs, or "all"
+
+Default is 200, or all when `--since`, `--errors`, or `--grep` with `--no-follow` is used
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Conflicts With: | *--open, --wait-for-log*
+| Conflicts With: | `--open`, `--wait-for-log`
 
-#### *--no-follow*
+#### `--no-follow`
 
-🛑 Print the logs and exit instead of following them  
-  
+🛑 Print the logs and exit instead of following them
+
 🎓 Tip: use it in scripts and from AI agents, which otherwise never get the command back
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Conflicts With: | *--open, --wait-for-log*
+| Conflicts With: | `--open`, `--wait-for-log`
 
-#### *--errors*
+#### `--errors`
 
-🔥 Only show a digest of ERROR/FATAL records, then exit  
-  
+🔥 Only show a digest of ERROR/FATAL records, then exit
+
 Repeated records are de-duplicated with an occurrence count, stack  
 traces are collapsed to the exception chain ("Caused by:") plus a few  
 frames of the deepest cause. Only records with an explicit level are  
 reported (" ERROR ", "[ERROR]", level=error, "level":"error"), plus  
 uncaught java exceptions: records logged at INFO/DEBUG/TRACE, and  
-level-less lines that merely contain "error" or "failed", never are.  
-  
-Scans the whole log unless --since or --tail narrow it.
+level-less lines that merely contain "error" or "failed", never are.
+
+Scans the whole log unless `--since` or `--tail` narrow it.
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Conflicts With: | *--open, --wait-for-log, --grep*
+| Conflicts With: | `--open`, `--wait-for-log`, `--grep`
 
-#### *--include-warnings*
+#### `--include-warnings`
 
-🟠 With --errors, also report WARN records
+🟠 With `--errors`, also report WARN records
 
-#### *--max-findings MAX_FINDINGS*
+#### `--max-findings MAX_FINDINGS`
 
-✂️ With --errors, maximum number of distinct records to show (default 40)
+✂️ With `--errors`, maximum number of distinct records to show (default 40)
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Default Value:  | 40
+| Default Value:  | `40`
 
 ## Examples
 
@@ -177,6 +177,28 @@ playground container logs --container connect --grep "ERROR"
 
 ```bash
 playground pod logs --previous
+```
+
+## Example output
+
+```text
+$ playground container logs -c connect --errors
+17:22:10 ℹ️ 🔥 ERROR/FATAL digest for connect logs
+✅ no ERROR/FATAL record found in 12523 lines
+```
+
+```text
+$ playground container logs -c connect --errors --include-warnings --max-findings 2
+17:22:50 ℹ️ 🔥 ERROR/FATAL digest for connect logs
+🔎 7 distinct record(s), 13 occurrence(s), in 12743 lines
+
+🟠 WARN x7 (first seen line 108, last seen line 471)
+[2026-10-13 14:27:56,953] WARN [AdminClient clientId=adminclient-1] Connection to node -1 (broker/10.89.0.4:9092) could not be established. Node may not be available. (org.apache.kafka.clients.NetworkClient:899)
+
+🟠 WARN x1 (first seen line 737, last seen line 737)
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+
+✂️ 5 more distinct record(s) not shown, increase --max-findings or narrow with --since
 ```
 
 

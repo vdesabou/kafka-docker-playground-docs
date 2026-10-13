@@ -1,19 +1,19 @@
 # playground topic tag
 
-🏷️ Stream Catalog tags (Confluent Cloud only)  
-  
+🏷️ Stream Catalog tags (Confluent Cloud only)
+
 Tag definitions live in the Stream Catalog of the environment, served  
 by the Schema Registry endpoint. Create a tag once, then assign it to  
-topics and search topics by tag.  
-  
-  list     tag definitions  
-  create   create a tag definition  
-  delete   delete a tag definition  
-  add      assign a tag to a topic  
-  remove   remove a tag from a topic  
-  show     tags assigned to a topic  
-  search   topics having a tag  
-  
+topics and search topics by tag.
+
+- **list**: tag definitions
+- **create**: create a tag definition
+- **delete**: delete a tag definition
+- **add**: assign a tag to a topic
+- **remove**: remove a tag from a topic
+- **show**: tags assigned to a topic
+- **search**: topics having a tag
+
 🎓 Tip: a newly created topic can take a minute to show up in the  
 Stream Catalog before a tag can be assigned to it.
 
@@ -23,7 +23,7 @@ Stream Catalog before a tag can be assigned to it.
 playground topic tag COMMAND
 ```
 
-## == Commands ==
+## Commands
 
 - [list](playground%20topic%20tag%20list) - 🏷️ List tag definitions
 - [create](playground%20topic%20tag%20create) - 🆕 Create a tag definition

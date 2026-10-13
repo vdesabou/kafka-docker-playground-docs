@@ -1,9 +1,9 @@
 # playground container exec
 
-🪄 Execute command in a container  
-  
+🪄 Execute command in a container
+
 Runs one command and returns, which makes it the form to use inside  
-example scripts. Add --root when the component user is not allowed to  
+example scripts. Add `--root` when the component user is not allowed to  
 do what you are asking, typically to install a package or read a file  
 under /etc.
 
@@ -15,18 +15,18 @@ playground container exec [OPTIONS]
 
 ## Options
 
-#### *--container, -c, --pod, -p CONTAINER*
+#### `--container, -c, --pod, -p CONTAINER`
 
-🐳 container name (or pod name when cfk environment is used)  
-  
-🎓 Tip: you can pass multiple containers by specifying --container multiple times
+🐳 container name (or pod name when cfk environment is used)
+
+🎓 Tip: you can pass multiple containers by specifying `--container` multiple times
 
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Repeatable:     |  ✓ Yes
-| Default Value:  | connect
+| Default Value:  | `connect`
 
-#### *--command COMMAND*
+#### `--command COMMAND`
 
 📲 Command to execute
 
@@ -34,18 +34,18 @@ playground container exec [OPTIONS]
 |-----------------|-------------
 | Required:       | ✓ Yes
 
-#### *--root*
+#### `--root`
 
 👑 Run command as root
 
-#### *--shell SHELL*
+#### `--shell SHELL`
 
 💾 Shell to use (default is bash)
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Default Value:  | bash
-| Allowed Values: | bash, sh, ksh, zsh
+| Default Value:  | `bash`
+| Allowed Values: | `bash`, `sh`, `ksh`, `zsh`
 
 ## Examples
 

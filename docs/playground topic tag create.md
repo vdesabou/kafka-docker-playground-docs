@@ -10,7 +10,7 @@ playground topic tag create [OPTIONS]
 
 ## Options
 
-#### *--tag TAG*
+#### `--tag TAG`
 
 🏷️ Tag name (letters, digits and underscores, starting with a letter)
 
@@ -18,15 +18,15 @@ playground topic tag create [OPTIONS]
 |-----------------|-------------
 | Required:       | ✓ Yes
 
-#### *--description DESCRIPTION*
+#### `--description DESCRIPTION`
 
 📝 Tag description
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Default Value:  | 
+| Default Value:  | ``
 
-#### *--verbose, -v*
+#### `--verbose, -v`
 
 🐞 Show command being ran.
 

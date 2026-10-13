@@ -10,7 +10,7 @@ playground debug testssl [OPTIONS] [--] [TESTSSL ARGUMENTS...]
 
 ## Options
 
-#### *--uri URI*
+#### `--uri URI`
 
 host|host:port|URL|URL:port   port 443 is default, URL can only contain HTTPS protocol
 

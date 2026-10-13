@@ -1,9 +1,9 @@
 # playground rbac user add
 
-➕ Add an LDAP user  
-  
+➕ Add an LDAP user
+
 The user can connect right away. MDS picks up new group  
-memberships (for Group:\<name\> role bindings) within its LDAP  
+memberships (for Group:`<name>` role bindings) within its LDAP  
 refresh interval (60 seconds by default).
 
 ## Usage
@@ -14,29 +14,29 @@ playground rbac user add [OPTIONS]
 
 ## Options
 
-#### *--user, -u USER*
+#### `--user, -u USER`
 
-🧑 User name (principal User:\<user\>)
+🧑 User name (principal User:`<user>`)
 
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Required:       | ✓ Yes
 
-#### *--password PASSWORD*
+#### `--password PASSWORD`
 
-🔑 Password  
-  
-ℹ️ If not set, \<user\>-secret
+🔑 Password
 
-#### *--group, -g GROUP*
+ℹ️ If not set, `<user>`-secret
 
-👥 Group to add the user to (principal Group:\<group\>), created if it does not exist. Can be set several times.
+#### `--group, -g GROUP`
+
+👥 Group to add the user to (principal Group:`<group>`), created if it does not exist. Can be set several times.
 
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Repeatable:     |  ✓ Yes
 
-#### *--verbose, -v*
+#### `--verbose, -v`
 
 🐞 Show command being ran.
 

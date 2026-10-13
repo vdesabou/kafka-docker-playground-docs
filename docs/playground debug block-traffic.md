@@ -1,13 +1,13 @@
 # playground debug block-traffic
 
-🚫 Blocking traffic using iptables  
-  
+🚫 Blocking traffic using iptables
+
 Cuts the route from a container to a destination, so you can see how the  
 system behaves during a network outage: a broker that loses the  
 controller, a connector that can no longer reach its database, a client  
-that cannot resolve the schema registry.  
-  
-Blocking with --action start and restoring with --action stop, so the  
+that cannot resolve the schema registry.
+
+Blocking with `--action` start and restoring with `--action` stop, so the  
 failure is reversible without restarting anything.
 
 ## Usage
@@ -18,18 +18,18 @@ playground debug block-traffic [OPTIONS]
 
 ## Options
 
-#### *--container, -c, --pod, -p CONTAINER*
+#### `--container, -c, --pod, -p CONTAINER`
 
-🐳 container name (or pod name when cfk environment is used)  
-  
-🎓 Tip: you can pass multiple containers by specifying --container multiple times
+🐳 container name (or pod name when cfk environment is used)
+
+🎓 Tip: you can pass multiple containers by specifying `--container` multiple times
 
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Repeatable:     |  ✓ Yes
-| Default Value:  | connect
+| Default Value:  | `connect`
 
-#### *--destination DESTINATION*
+#### `--destination DESTINATION`
 
 Destination: it could be an ip address, a container name or a hostname
 
@@ -37,18 +37,18 @@ Destination: it could be an ip address, a container name or a hostname
 |-----------------|-------------
 | Required:       | ✓ Yes
 
-#### *--port PORT*
+#### `--port PORT`
 
 Port on which tcp traffic should be blocked
 
-#### *--action ACTION*
+#### `--action ACTION`
 
 🟢 start or stop
 
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Required:       | ✓ Yes
-| Allowed Values: | start, stop
+| Allowed Values: | `start`, `stop`
 
 ## Examples
 

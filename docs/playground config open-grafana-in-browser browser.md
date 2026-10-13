@@ -10,13 +10,13 @@ playground config open-grafana-in-browser browser [BROWSER]
 
 ## Arguments
 
-#### *BROWSER*
+#### `BROWSER`
 
 
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Default Value:  | 
+| Default Value:  | ``
 
 ## Examples
 

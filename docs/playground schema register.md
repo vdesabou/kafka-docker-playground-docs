@@ -1,19 +1,19 @@
 # playground schema register
 
-⏺️ Register a schema in specified subject  
-  
+⏺️ Register a schema in specified subject
+
 Pushes a schema into the registry without producing any data, which is  
 how you set up a subject before a connector starts, or add a new version  
-to check whether it passes the compatibility rules.  
-  
+to check whether it passes the compatibility rules.
+
 The format is detected from what you give it, avro, json schema or  
 protobuf all work. Pass it on stdin with a quoted heredoc, or pick one of  
-the bundled schemas with tab completion on --schema.  
-  
+the bundled schemas with tab completion on `--schema`.
+
 Remember the naming convention: a topic's schemas live under the subjects  
-\<topic\>-key and \<topic\>-value, not under the topic name.  
-  
-☢️ --id forces a specific schema id and overwrites whatever is already  
+`<topic>`-key and `<topic>`-value, not under the topic name.
+
+☢️ `--id` forces a specific schema id and overwrites whatever is already  
 registered at that id. It exists to reproduce id collisions, it is not  
 something to use casually.
 
@@ -25,7 +25,7 @@ playground schema register [OPTIONS]
 
 ## Options
 
-#### *--subject SUBJECT*
+#### `--subject SUBJECT`
 
 📛 Subject name
 
@@ -33,43 +33,43 @@ playground schema register [OPTIONS]
 |-----------------|-------------
 | Required:       | ✓ Yes
 
-#### *--verbose, -v*
+#### `--verbose, -v`
 
 🐞 Show command being ran.
 
-#### *--schema SCHEMA*
+#### `--schema SCHEMA`
 
-🔥 You can either:  
-  
-* Set your own schema (avro, json-schema, protobuf) with stdin (see example section).   
-  
-* Use completion to select predefined schemas (or use your own schema file) 🎓 Tip: use \<tab\> completion to trigger fzf completion
+🔥 You can either:
+
+- Set your own schema (avro, json-schema, protobuf) with stdin (see example section).
+
+- Use completion to select predefined schemas (or use your own schema file) 🎓 Tip: use `<tab>` completion to trigger fzf completion
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Default Value:  | -
+| Default Value:  | `-`
 
-#### *--id ID*
+#### `--id ID`
 
-☢️ Force schema id  
-  
+☢️ Force schema id
+
 ❗it will replace any schema which already exists at given id
 
-#### *--metadata-property METADATA-PROPERTY*
+#### `--metadata-property METADATA-PROPERTY`
 
-🟡 Add metadata properties to schema contract  
-  
-See docs: https://docs.confluent.io/platform/current/schema-registry/fundamentals/data-contracts.html#metadata-properties  
-  
-🎓 Tip: you can pass multiple properties by specifying --metadata-property multiple times  
-  
-Example: --metadata-property "metadata1=value" --metadata-property "metadata2=value"
+🟡 Add metadata properties to schema contract
+
+See docs: https://docs.confluent.io/platform/current/schema-registry/fundamentals/data-contracts.html#metadata-properties
+
+🎓 Tip: you can pass multiple properties by specifying `--metadata-property` multiple times
+
+Example: `--metadata-property` "metadata1=value" `--metadata-property` "metadata2=value"
 
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Repeatable:     |  ✓ Yes
 
-#### *--normalize*
+#### `--normalize`
 
 🫧 Add ?normalize=true at the end of the request to normalize the schema. The default is false.
 

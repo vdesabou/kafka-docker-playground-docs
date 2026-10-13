@@ -10,7 +10,7 @@ playground topic tag remove [OPTIONS]
 
 ## Options
 
-#### *--topic, -t TOPIC*
+#### `--topic, -t TOPIC`
 
 🗳 Topic name
 
@@ -18,7 +18,7 @@ playground topic tag remove [OPTIONS]
 |-----------------|-------------
 | Required:       | ✓ Yes
 
-#### *--tag TAG*
+#### `--tag TAG`
 
 🏷️ Tag name
 
@@ -26,7 +26,7 @@ playground topic tag remove [OPTIONS]
 |-----------------|-------------
 | Required:       | ✓ Yes
 
-#### *--verbose, -v*
+#### `--verbose, -v`
 
 🐞 Show command being ran.
 

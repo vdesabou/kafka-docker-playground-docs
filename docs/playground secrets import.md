@@ -1,12 +1,12 @@
 # playground secrets import
 
-📥 Import an existing secret.properties / variable.properties file  
-  
+📥 Import an existing secret.properties / variable.properties file
+
 Each KEY=value line is classified and stored in the right place. A  
 leading 'export', comments, blank lines and one level of surrounding  
 quotes are handled; anything that is not an uppercase variable name is  
-skipped and reported.  
-  
+skipped and reported.
+
 This is the one step migration away from 'source secret.properties'.
 
 ## Usage
@@ -17,7 +17,7 @@ playground secrets import [OPTIONS]
 
 ## Options
 
-#### *--file FILE*
+#### `--file FILE`
 
 📄 File to import
 
@@ -25,30 +25,30 @@ playground secrets import [OPTIONS]
 |-----------------|-------------
 | Required:       | ✓ Yes
 
-#### *--shred*
+#### `--shred`
 
 🔥 Securely delete the source file after a successful import
 
-#### *--secret*
+#### `--secret`
 
 🔐 Treat every line as a credential, whatever the variable names are
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Conflicts With: | *--plain*
+| Conflicts With: | `--plain`
 
-#### *--plain*
+#### `--plain`
 
-📝 Treat every line as a non sensitive variable  
-  
+📝 Treat every line as a non sensitive variable
+
 That is what a variables.properties file usually is: regions, project  
 ids, account names, URLs.
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Conflicts With: | *--secret*
+| Conflicts With: | `--secret`
 
-#### *--profile PROFILE*
+#### `--profile PROFILE`
 
 🗂️ Secrets profile to use (default is the active one)
 

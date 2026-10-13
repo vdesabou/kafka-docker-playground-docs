@@ -1,7 +1,7 @@
 # playground rbac user delete
 
-🗑️ Delete an LDAP user, and remove it from its groups  
-  
+🗑️ Delete an LDAP user, and remove it from its groups
+
 Its role bindings and ACLs are not deleted.
 
 ## Usage
@@ -12,15 +12,15 @@ playground rbac user delete [OPTIONS]
 
 ## Options
 
-#### *--user, -u USER*
+#### `--user, -u USER`
 
-🧑 User name (principal User:\<user\>)
+🧑 User name (principal User:`<user>`)
 
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Required:       | ✓ Yes
 
-#### *--verbose, -v*
+#### `--verbose, -v`
 
 🐞 Show command being ran.
 

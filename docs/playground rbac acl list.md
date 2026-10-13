@@ -1,7 +1,7 @@
 # playground rbac acl list
 
-📋 List ACLs  
-  
+📋 List ACLs
+
 Lists both MDS centralized ACLs and regular Kafka ACLs.
 
 ## Usage
@@ -12,13 +12,13 @@ playground rbac acl list [OPTIONS]
 
 ## Options
 
-#### *--principal, -p PRINCIPAL*
+#### `--principal, -p PRINCIPAL`
 
-🧑 Principal, User:\<name\> or Group:\<name\> (a bare name means User:\<name\>)  
-  
+🧑 Principal, User:`<name>` or Group:`<name>` (a bare name means User:`<name>`)
+
 ℹ️ If not set, role bindings of all principals are listed
 
-#### *--verbose, -v*
+#### `--verbose, -v`
 
 🐞 Show command being ran.
 

@@ -1,18 +1,18 @@
 # playground secrets set
 
-🔐 Store a credential  
-  
-Without --value the value is prompted without echo, so it never lands in  
-the shell history.  
-  
+🔐 Store a credential
+
+Without `--value` the value is prompted without echo, so it never lands in  
+the shell history.
+
 A name that looks like a credential (PASSWORD, SECRET, TOKEN, KEY, CREDS,  
 PWD, PASSPHRASE, LICENSE) goes to the secure backend, anything else is  
-kept as a plain variable. Use --secret or --plain to decide yourself.  
-  
+kept as a plain variable. Use `--secret` or `--plain` to decide yourself.
+
 Run again on a name already stored to rotate it. The value is then  
 updated where the existing reference points, which is not necessarily  
-the backend currently configured.  
-  
+the backend currently configured.
+
 🎓 Tip: set the config key secrets.github-repo and every value stored  
 here is also pushed to that repository's GitHub Actions secrets.
 
@@ -24,7 +24,7 @@ playground secrets set NAME [OPTIONS]
 
 ## Arguments
 
-#### *NAME*
+#### `NAME`
 
 🔑 Environment variable name
 
@@ -34,35 +34,35 @@ playground secrets set NAME [OPTIONS]
 
 ## Options
 
-#### *--value VALUE*
+#### `--value VALUE`
 
-🔓 Value to store  
-  
+🔓 Value to store
+
 ❗ it will be visible in your shell history, prefer the prompt ❗
 
-#### *--secret*
+#### `--secret`
 
-🔐 Treat the value as a credential, whatever the variable name is  
-  
+🔐 Treat the value as a credential, whatever the variable name is
+
 It goes to the secure backend (keychain, 1Password, pass…) instead of  
 being kept in clear text.
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Conflicts With: | *--plain*
+| Conflicts With: | `--plain`
 
-#### *--plain*
+#### `--plain`
 
-📝 Treat the value as a non sensitive variable  
-  
+📝 Treat the value as a non sensitive variable
+
 It is kept in clear text in env.ini, which is handy for a URL, an  
 account name or a project id.
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Conflicts With: | *--secret*
+| Conflicts With: | `--secret`
 
-#### *--profile PROFILE*
+#### `--profile PROFILE`
 
 🗂️ Secrets profile to use (default is the active one)
 

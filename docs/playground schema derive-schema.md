@@ -1,8 +1,8 @@
 # playground schema derive-schema
 
-🪄 Derive a schema based on payload  
-  
-Give it one or more json records, on stdin or with --payload, and it  
+🪄 Derive a schema based on payload
+
+Give it one or more json records, on stdin or with `--payload`, and it  
 works out a schema that covers them all. Much faster than writing an  
 avro schema by hand, and it handles unions when a field has different  
 types across records.
@@ -15,28 +15,28 @@ playground schema derive-schema [OPTIONS]
 
 ## Options
 
-#### *--payload PAYLOAD*
+#### `--payload PAYLOAD`
 
 📦 Payload to derive schema from
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Default Value:  | -
+| Default Value:  | `-`
 
-#### *--schema-type SCHEMA-TYPE*
+#### `--schema-type SCHEMA-TYPE`
 
-🧩 Schema Registry schema "type":  
-  
-- AVRO  
-- JSON (json schema)  
-- PROTOBUF  
-  
+🧩 Schema Registry schema "type":
+
+- AVRO
+- JSON (json schema)
+- PROTOBUF
+
 Default is AVRO
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Default Value:  | AVRO
-| Allowed Values: | AVRO, JSON, PROTOBUF
+| Default Value:  | `AVRO`
+| Allowed Values: | `AVRO`, `JSON`, `PROTOBUF`
 
 ## Examples
 

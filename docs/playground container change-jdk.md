@@ -1,7 +1,7 @@
 # playground container change-jdk
 
-🤎 Change java JDK version using Azul JDK (https://www.azul.com/downloads/#downloads-table-zulu)  
-  
+🤎 Change java JDK version using Azul JDK (https://www.azul.com/downloads/#downloads-table-zulu)
+
 PS: It works for UBI8 docker images only
 
 ## Usage
@@ -12,30 +12,30 @@ playground container change-jdk [OPTIONS]
 
 ## Options
 
-#### *--container, -c, --pod, -p CONTAINER*
+#### `--container, -c, --pod, -p CONTAINER`
 
-🐳 container name (or pod name when cfk environment is used)  
-  
-🎓 Tip: you can pass multiple containers by specifying --container multiple times
+🐳 container name (or pod name when cfk environment is used)
+
+🎓 Tip: you can pass multiple containers by specifying `--container` multiple times
 
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Repeatable:     |  ✓ Yes
-| Default Value:  | connect
+| Default Value:  | `connect`
 
-#### *--version VERSION*
+#### `--version VERSION`
 
 🤎 JDK version to use
 
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Required:       | ✓ Yes
-| Allowed Values: | 8, 11, 17, 21, 22, 25
+| Allowed Values: | `8`, `11`, `17`, `21`, `22`, `25`
 
 ## Examples
 
 ```bash
-playground change-jdk --container connect --version 17
+playground container change-jdk --container connect --version 17
 ```
 
 

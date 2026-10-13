@@ -1,10 +1,10 @@
 # playground container set-environment-variables
 
-📦  Set environment variable(s) for a container  
-  
-🎓 Tip: you can pass multiple environment variables by specifying --env multiple times  
-  
-Example: --env "KAFKA_OPTS: -verbose:class" --env "CONNECT_LOG4J_LOGGERS: org.apache.zookeeper=ERROR,org.I0Itec.zkclient=ERROR,org.reflections=ERROR,org.apache.kafka.connect.runtime.rest.RestServer=ERROR"
+📦  Set environment variable(s) for a container
+
+🎓 Tip: you can pass multiple environment variables by specifying `--env` multiple times
+
+Example: `--env` "`KAFKA_OPTS`: -verbose:class" `--env` "`CONNECT_LOG4J_LOGGERS`: org.apache.zookeeper=ERROR,org.I0Itec.zkclient=ERROR,org.reflections=ERROR,org.apache.kafka.connect.runtime.rest.RestServer=ERROR"
 
 ## Usage
 
@@ -14,34 +14,34 @@ playground container set-environment-variables [OPTIONS]
 
 ## Options
 
-#### *--container, -c, --pod, -p CONTAINER*
+#### `--container, -c, --pod, -p CONTAINER`
 
-🐳 container name (or pod name when cfk environment is used)  
-  
-🎓 Tip: you can pass multiple containers by specifying --container multiple times
+🐳 container name (or pod name when cfk environment is used)
 
-| Attributes      | &nbsp;
-|-----------------|-------------
-| Repeatable:     |  ✓ Yes
-| Default Value:  | connect
-
-#### *--env ENV*
-
-📦 Environment variables to set  
-  
-🎓 Tip: you can pass multiple environment variables by specifying --env multiple times
+🎓 Tip: you can pass multiple containers by specifying `--container` multiple times
 
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Repeatable:     |  ✓ Yes
-| Conflicts With: | *--restore-original-values*
+| Default Value:  | `connect`
 
-#### *--restore-original-values*
+#### `--env ENV`
+
+📦 Environment variables to set
+
+🎓 Tip: you can pass multiple environment variables by specifying `--env` multiple times
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Repeatable:     |  ✓ Yes
+| Conflicts With: | `--restore-original-values`
+
+#### `--restore-original-values`
 
 🧽 Restore back original values before any changes was made
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Conflicts With: | *--env*
+| Conflicts With: | `--env`
 
 

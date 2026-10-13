@@ -1,7 +1,7 @@
 # playground container cp
 
-🪄 Copy files between local filesystem and container  
-  
+🪄 Copy files between local filesystem and container
+
 Works in both directions, using the container:path notation. Typically  
 used to drop a jar, a certificate or a test file into a component, or  
 to pull out a file the connector has written.
@@ -14,7 +14,7 @@ playground container cp [OPTIONS]
 
 ## Options
 
-#### *--source SOURCE*
+#### `--source SOURCE`
 
 📥 Source path (local path or container:path)
 
@@ -22,7 +22,7 @@ playground container cp [OPTIONS]
 |-----------------|-------------
 | Required:       | ✓ Yes
 
-#### *--destination DESTINATION*
+#### `--destination DESTINATION`
 
 📤 Destination path (local path or container:path)
 

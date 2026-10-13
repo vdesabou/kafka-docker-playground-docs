@@ -1,9 +1,9 @@
 # playground debug heap-dump
 
-👻 Take a heap dump  
-  
-🔖 It will save output to a .hprof file. VisualVM (https://visualvm.github.io/) or MAT (https://www.eclipse.org/mat/) can be used to read the file.  
-  
+👻 Take a heap dump
+
+🔖 It will save output to a .hprof file. VisualVM (https://visualvm.github.io/) or MAT (https://www.eclipse.org/mat/) can be used to read the file.
+
 It will run a full gc first. If you don't want this, use
 
 ## Usage
@@ -14,22 +14,22 @@ playground debug heap-dump [OPTIONS]
 
 ## Options
 
-#### *--container, -c, --pod, -p CONTAINER*
+#### `--container, -c, --pod, -p CONTAINER`
 
-🐳 container name (or pod name when cfk environment is used)  
-  
-🎓 Tip: you can pass multiple containers by specifying --container multiple times
+🐳 container name (or pod name when cfk environment is used)
+
+🎓 Tip: you can pass multiple containers by specifying `--container` multiple times
 
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Repeatable:     |  ✓ Yes
-| Default Value:  | connect
+| Default Value:  | `connect`
 
-#### *--live*
+#### `--live`
 
 🧬 dump only live objects; if not specified, all objects in the heap are dumped
 
-#### *--histo*
+#### `--histo`
 
 📊 print histogram of java object heap
 

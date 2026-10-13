@@ -1,20 +1,20 @@
 # playground topic produce
 
-📤 Produce to a topic  
-  
-See video tutorial https://youtu.be/mbzHCewG_XE  
-  
+📤 Produce to a topic
+
+See video tutorial https://youtu.be/mbzHCewG_XE
+
 Generates records for you rather than making you write them. Give it  
 a schema, in avro, json schema or protobuf, and it registers the  
-schema and produces --nb-messages records of realistic random data.  
-The topic is created if it does not exist.  
-  
-Three ways to say what to send:  
-  
-  a schema on stdin           generated data matching that schema  
-  --value \<predefined\>        one of the bundled schemas  
-  --forced-value '{...}'      your exact payload, %g being the index  
-  
+schema and produces `--nb-messages` records of realistic random data.  
+The topic is created if it does not exist.
+
+Three ways to say what to send:
+
+- **a schema on stdin**: generated data matching that schema
+- `--value <predefined>`: one of the bundled schemas
+- `--forced-value '{...}'`: your exact payload, %g being the index
+
 🎓 Tip: pipe the schema with a quoted heredoc, \<\< 'EOF', so that the  
 %g placeholders survive the shell.
 
@@ -26,58 +26,58 @@ playground topic produce [OPTIONS]
 
 ## Options
 
-#### *--key KEY*
+#### `--key KEY`
 
-🗝️ Key to use. If not set, no key is used.  
-  
-🔥 You can either:  
-  
-* Set your own schema (avro, json-schema, protobuf) within single quotes (see examples)   
-  
-* You can also generate json data using json or sql format using syntax from https://github.com/MaterializeInc/datagen  
-  
-* You can also generate json data using syntax from https://github.com/vdesabou/avro-random-generator (same as datagen source connector)  
-  
-* Use completion to select predefined schemas (or use your own schema file) 🎓 Tip: use \<tab\> completion to trigger fzf completion  
-  
-* Directly set payload ("%g" can be used to generate a counter)  
-  
-In case of 'raw' data (i.e not using schema):  
-  
-If the key contain a number, it will be used as starting point and incremented for each record.   
-  
+🗝️ Key to use. If not set, no key is used.
+
+🔥 You can either:
+
+- Set your own schema (avro, json-schema, protobuf) within single quotes (see examples)
+
+- You can also generate json data using json or sql format using syntax from https://github.com/MaterializeInc/datagen
+
+- You can also generate json data using syntax from https://github.com/vdesabou/avro-random-generator (same as datagen source connector)
+
+- Use completion to select predefined schemas (or use your own schema file) 🎓 Tip: use `<tab>` completion to trigger fzf completion
+
+- Directly set payload ("%g" can be used to generate a counter)
+
+In case of 'raw' data (i.e not using schema):
+
+If the key contain a number, it will be used as starting point and incremented for each record.
+
 Example: key1 will start with key1, then key2, etc..  
-Example: mykey-10-suffix will start with mykey-10-suffix then mykey-11-suffix, etc..  
-  
-"%g" can also be used to generate a counter  
-  
-Example: key%g will start with key1, then key2, etc..  
-  
+Example: mykey-10-suffix will start with mykey-10-suffix then mykey-11-suffix, etc..
+
+"%g" can also be used to generate a counter
+
+Example: key%g will start with key1, then key2, etc..
+
 Otherwise, the key will be same for all records.
 
-#### *--value VALUE*
+#### `--value VALUE`
 
-🔥 You can either:  
-  
-* Set your own schema (avro, json-schema, protobuf) with stdin (see example section).   
-  
-* You can also generate json data using json or sql format using syntax from https://github.com/MaterializeInc/datagen  
-  
-* You can also generate json data using syntax from https://github.com/vdesabou/avro-random-generator (same as datagen source connector)  
-  
-* Use completion to select predefined schemas (or use your own schema file) 🎓 Tip: use \<tab\> completion to trigger fzf completion  
-  
-* Directly set payload ("%g" can be used to generate a counter)
+🔥 You can either:
+
+- Set your own schema (avro, json-schema, protobuf) with stdin (see example section).
+
+- You can also generate json data using json or sql format using syntax from https://github.com/MaterializeInc/datagen
+
+- You can also generate json data using syntax from https://github.com/vdesabou/avro-random-generator (same as datagen source connector)
+
+- Use completion to select predefined schemas (or use your own schema file) 🎓 Tip: use `<tab>` completion to trigger fzf completion
+
+- Directly set payload ("%g" can be used to generate a counter)
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Default Value:  | -
+| Default Value:  | `-`
 
-#### *--verbose, -v*
+#### `--verbose, -v`
 
 🐞 Show command being ran.
 
-#### *--topic, -t TOPIC*
+#### `--topic, -t TOPIC`
 
 🗳 Topic name
 
@@ -85,216 +85,217 @@ Otherwise, the key will be same for all records.
 |-----------------|-------------
 | Required:       | ✓ Yes
 
-#### *--nb-messages NB-MESSAGES*
+#### `--nb-messages NB-MESSAGES`
 
-💯 Number of messages to produce (default is 1)  
-     
-🎓  - if \> \<value of --max-nb-messages-per-batch\> (default 300000), messages will be sent in batches of \<value of --max-nb-messages-per-batch\> (default 300000) records  
-    - if you set it to -1, an infinite number of records will also be sent in batches
+💯 Number of messages to produce (default is 1)
 
-| Attributes      | &nbsp;
-|-----------------|-------------
-| Default Value:  | 1
+🎓  - if \> `<value of --max-nb-messages-per-batch>` (default 300000), messages will be sent in batches of `<value of --max-nb-messages-per-batch>` (default 300000) records
 
-#### *--max-nb-messages-per-batch MAX-NB-MESSAGES-PER-BATCH*
-
-🔼 Max number of messages to send per batch when --nb-messages \> --max-nb-messages-per-batch  
-   if --nb-messages is set to -1, this is the number of messages sent per batch  
-   default is 300000
+- if you set it to -1, an infinite number of records will also be sent in batches
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Default Value:  | 300000
+| Default Value:  | `1`
 
-#### *--max-nb-messages-to-generate MAX-NB-MESSAGES-TO-GENERATE*
+#### `--max-nb-messages-per-batch MAX-NB-MESSAGES-PER-BATCH`
 
-🔨 Max number of different messages to generate.  
-  
-   - when protobuf is used, default is 50 as protobuf generation is really slow  
-   - when json or sql datagen format is used, default is 1000  
-   - when --record-size is set, default is 100  
-   --when nb-messages is set to -1, default is 1000  
-   - otherwise default is 100000
+🔼 Max number of messages to send per batch when `--nb-messages` \> `--max-nb-messages-per-batch`  
+if `--nb-messages` is set to -1, this is the number of messages sent per batch  
+default is 300000
 
-#### *--sleep-time-between-batch SLEEP-TIME-BETWEEN-BATCH*
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Default Value:  | `300000`
+
+#### `--max-nb-messages-to-generate MAX-NB-MESSAGES-TO-GENERATE`
+
+🔨 Max number of different messages to generate.
+
+- when protobuf is used, default is 50 as protobuf generation is really slow
+- when json or sql datagen format is used, default is 1000
+- when `--record-size` is set, default is 100
+- `--when` nb-messages is set to -1, default is 1000
+- otherwise default is 100000
+
+#### `--sleep-time-between-batch SLEEP-TIME-BETWEEN-BATCH`
 
 💤 Sleep time in seconds between batches  
-   default is 0
+default is 0
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Default Value:  | 0
+| Default Value:  | `0`
 
-#### *--nb-partitions NB-PARTITIONS*
+#### `--nb-partitions NB-PARTITIONS`
 
-🔢 Number of partitions for the topic. (default is 1)  
-  
+🔢 Number of partitions for the topic. (default is 1)
+
 ❌ Important: If topic is existing, it will be re-created before producing to topic.
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Default Value:  | 1
+| Default Value:  | `1`
 
-#### *--compression-codec COMPRESSION-CODEC*
+#### `--compression-codec COMPRESSION-CODEC`
 
 🤐 The compression codec: either 'gzip', 'snappy', 'lz4', or 'zstd'  
 If not set, there is no compression
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Allowed Values: | gzip, snappy, lz4, zstd
+| Allowed Values: | `gzip`, `snappy`, `lz4`, `zstd`
 
-#### *--compatibility COMPATIBILITY*
+#### `--compatibility COMPATIBILITY`
 
 Schema Registry compatibility rule
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Allowed Values: | BACKWARD, BACKWARD_TRANSITIVE, FORWARD, FORWARD_TRANSITIVE, FULL, FULL_TRANSITIVE, NONE
+| Allowed Values: | `BACKWARD`, `BACKWARD_TRANSITIVE`, `FORWARD`, `FORWARD_TRANSITIVE`, `FULL`, `FULL_TRANSITIVE`, `NONE`
 
-#### *--key-subject-name-strategy KEY-SUBJECT-NAME-STRATEGY*
+#### `--key-subject-name-strategy KEY-SUBJECT-NAME-STRATEGY`
 
 Key Subject Name Strategy
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Allowed Values: | TopicNameStrategy, RecordNameStrategy, TopicRecordNameStrategy
+| Allowed Values: | `TopicNameStrategy`, `RecordNameStrategy`, `TopicRecordNameStrategy`
 
-#### *--value-subject-name-strategy VALUE-SUBJECT-NAME-STRATEGY*
+#### `--value-subject-name-strategy VALUE-SUBJECT-NAME-STRATEGY`
 
 Value Subject Name Strategy
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Allowed Values: | TopicNameStrategy, RecordNameStrategy, TopicRecordNameStrategy
+| Allowed Values: | `TopicNameStrategy`, `RecordNameStrategy`, `TopicRecordNameStrategy`
 
-#### *--headers HEADERS*
+#### `--headers HEADERS`
 
-🚏 Headers to use for all records. If not set, no header is used.  
-  
-Example: --headers "header1:value1,header2:value2"  
-  
+🚏 Headers to use for all records. If not set, no header is used.
+
+Example: `--headers` "header1:value1,header2:value2"
+
 Note: CP 7.2+ is required.
 
-#### *--forced-key FORCED-KEY*
+#### `--forced-key FORCED-KEY`
 
-☢️ Key to use for all records.   
-  
-🎓 Tip: use --generate-only first with avro, json-schema or protobuf to get skeleton of messages and then use --forced-key to send the message you need. 
+☢️ Key to use for all records.
 
-#### *--forced-value FORCED-VALUE*
+🎓 Tip: use `--generate-only` first with avro, json-schema or protobuf to get skeleton of messages and then use `--forced-key` to send the message you need.
 
-☢️ Value to use for all records.   
-  
-🎓 Tip: use --generate-only first with avro, json-schema or protobuf to get skeleton of messages and then use --forced-value to send the message you need. 
+#### `--forced-value FORCED-VALUE`
 
-#### *--generate-only*
+☢️ Value to use for all records.
 
-🚪 Only generate messages without sending to kafka topic.  
-  
-Used with --forced-value, this is a powerful way to send specific messages.
+🎓 Tip: use `--generate-only` first with avro, json-schema or protobuf to get skeleton of messages and then use `--forced-value` to send the message you need.
 
-#### *--tombstone*
+#### `--generate-only`
 
-⚰️ Generate tombstone (record with null value).   
-  
-Setting --key is recommended when this flag is used.   
-If not set, the key will also be null, hence generating a null record (both key and value being null)  
-  
+🚪 Only generate messages without sending to kafka topic.
+
+Used with `--forced-value`, this is a powerful way to send specific messages.
+
+#### `--tombstone`
+
+⚰️ Generate tombstone (record with null value).
+
+Setting `--key` is recommended when this flag is used.  
+If not set, the key will also be null, hence generating a null record (both key and value being null)
+
 Note: CP 7.2+ is required.
 
-#### *--schema-id-in-header*
+#### `--schema-id-in-header`
 
-🎯 Include schema ID in kafka header.   
-  
-Uses HeaderSchemaIdSerializer for schema.id.seserializer  
-  
+🎯 Include schema ID in kafka header.
+
+Uses HeaderSchemaIdSerializer for schema.id.seserializer
+
 Note: CP 8.1.1+ is required.
 
-#### *--validate*
+#### `--validate`
 
 ☑️ Validate schema according to connect sink converter used
 
-#### *--derive-key-schema-as DERIVE-KEY-SCHEMA-AS*
+#### `--derive-key-schema-as DERIVE-KEY-SCHEMA-AS`
 
-🪄 Use playground schema derive-schema command to deduce schema from key payload  
-  
-Possible values:  
-  
-- AVRO  
-- JSON (json schema)  
+🪄 Use playground schema derive-schema command to deduce schema from key payload
+
+Possible values:
+
+- AVRO
+- JSON (json schema)
 - PROTOBUF
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Allowed Values: | AVRO, JSON, PROTOBUF
+| Allowed Values: | `AVRO`, `JSON`, `PROTOBUF`
 
-#### *--derive-value-schema-as DERIVE-VALUE-SCHEMA-AS*
+#### `--derive-value-schema-as DERIVE-VALUE-SCHEMA-AS`
 
-🪄 Use playground schema derive-schema command to deduce schema from value payload  
-  
-Possible values:  
-  
-- AVRO  
-- JSON (json schema)  
+🪄 Use playground schema derive-schema command to deduce schema from value payload
+
+Possible values:
+
+- AVRO
+- JSON (json schema)
 - PROTOBUF
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Allowed Values: | AVRO, JSON, PROTOBUF
+| Allowed Values: | `AVRO`, `JSON`, `PROTOBUF`
 
-#### *--no-null*
+#### `--no-null`
 
-🪹 Never generate null fields even for optional fields  
-  
+🪹 Never generate null fields even for optional fields
+
 N.B: only work with avro and json-schema
 
-#### *--consume*
+#### `--consume`
 
 📥 After producing, directly consume topic.
 
-#### *--delete-topic*
+#### `--delete-topic`
 
 ❌ Delete topic and associated schema/subject if applicable before producing data.
 
-#### *--validate-config VALIDATE-CONFIG*
+#### `--validate-config VALIDATE-CONFIG`
 
-🔩 Converter configuration parameters to use   
-  
-See docs: https://docs.confluent.io/platform/current/schema-registry/connect.html#using-kconnect-long-with-sr  
-  
-🎓 Tip: you can pass multiple parameters by specifying --validate-config multiple times
+🔩 Converter configuration parameters to use
 
-| Attributes      | &nbsp;
-|-----------------|-------------
-| Repeatable:     |  ✓ Yes
-| Allowed Values: | scrub.invalid.names=true, enhanced.avro.schema.support=true, connect.meta.data=false, object.additional.properties=false, use.optional.for.nonrequired=true, ignore.default.for.nullables=true, generalized.sum.type.support=true, enhanced.protobuf.schema.support=true, generate.index.for.unions=false, int.for.enums=true, optional.for.nullables=true, generate.struct.for.nulls=true, wrapper.for.nullables=true, wrapper.for.raw.primitives=false
+See docs: https://docs.confluent.io/platform/current/schema-registry/connect.html#using-kconnect-long-with-sr
 
-#### *--producer-property PRODUCER-PROPERTY*
-
-🔩 Producer configuration parameters to use   
-  
-See docs: https://docs.confluent.io/platform/current/installation/configuration/producer-configs.html#cp-config-producer  
-  
-🎓 Tip: you can pass multiple parameters by specifying --producer-property multiple times  
-  
-Example: --producer-property "max.request.size=990485760" --producer-property "client.id=myid"
+🎓 Tip: you can pass multiple parameters by specifying `--validate-config` multiple times
 
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Repeatable:     |  ✓ Yes
+| Allowed Values: | `scrub.invalid.names=true`, `enhanced.avro.schema.support=true`, `connect.meta.data=false`, `object.additional.properties=false`, `use.optional.for.nonrequired=true`, `ignore.default.for.nullables=true`, `generalized.sum.type.support=true`, `enhanced.protobuf.schema.support=true`, `generate.index.for.unions=false`, `int.for.enums=true`, `optional.for.nullables=true`, `generate.struct.for.nulls=true`, `wrapper.for.nullables=true`, `wrapper.for.raw.primitives=false`
 
-#### *--record-size RECORD-SIZE*
+#### `--producer-property PRODUCER-PROPERTY`
 
-🏋️ Record size in bytes, eg. 1048576 for 1MB  
-  
-📢 If size is \> 1Mb, --producer-property max.request.size and topic max.message.bytes will be automatically set to support the record size.  
-  
-Note that --no-null will be used when this option is set
+🔩 Producer configuration parameters to use
+
+See docs: https://docs.confluent.io/platform/current/installation/configuration/producer-configs.html#cp-config-producer
+
+🎓 Tip: you can pass multiple parameters by specifying `--producer-property` multiple times
+
+Example: `--producer-property` "max.request.size=990485760" `--producer-property` "client.id=myid"
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Default Value:  | 0
+| Repeatable:     |  ✓ Yes
+
+#### `--record-size RECORD-SIZE`
+
+🏋️ Record size in bytes, eg. 1048576 for 1MB
+
+📢 If size is \> 1Mb, `--producer-property` max.request.size and topic max.message.bytes will be automatically set to support the record size.
+
+Note that `--no-null` will be used when this option is set
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Default Value:  | `0`
 
 ## Examples
 
@@ -421,9 +422,9 @@ EOF
 
 playground topic produce -t topic-json-schema --nb-messages 3 << 'EOF'
 {
-  "\$schema": "http://json-schema.org/draft-07/schema#",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "additionalProperties": false,
-  "\$id": "http://lh.test/Customer.schema.json",
+  "$id": "http://lh.test/Customer.schema.json",
   "title": "Customer",
   "description": "Customer description",
   "type": "object",
@@ -578,9 +579,9 @@ EOF
 # validate
 playground topic produce -t topic-json-schema-validate --nb-messages 3 --validate << 'EOF'
 {
-  "\$schema": "http://json-schema.org/draft-07/schema#",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "additionalProperties": false,
-  "\$id": "http://lh.test/Customer.schema.json",
+  "$id": "http://lh.test/Customer.schema.json",
   "title": "Customer",
   "description": "Customer description",
   "type": "object",

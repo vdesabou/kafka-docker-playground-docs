@@ -10,7 +10,7 @@ playground topic tag show [OPTIONS]
 
 ## Options
 
-#### *--topic, -t TOPIC*
+#### `--topic, -t TOPIC`
 
 🗳 Topic name
 
@@ -18,7 +18,7 @@ playground topic tag show [OPTIONS]
 |-----------------|-------------
 | Required:       | ✓ Yes
 
-#### *--verbose, -v*
+#### `--verbose, -v`
 
 🐞 Show command being ran.
 

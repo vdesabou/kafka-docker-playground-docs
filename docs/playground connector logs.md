@@ -1,14 +1,14 @@
 # playground connector logs
 
-🕵️  Tail and follow connect logs  
-  
+🕵️  Tail and follow connect logs
+
 The logs of the worker running your connector. Combine it with  
-'playground connector log-level' to get more than the stack trace, and  
-with --wait-for-log to block until a given line appears, which is how  
-examples assert that something happened.  
-  
-For onprem connectors, this is basically a shortcut for "playground container logs --container connect", --connector flag is not relevant  
-  
+`playground connector log-level` to get more than the stack trace, and  
+with `--wait-for-log` to block until a given line appears, which is how  
+examples assert that something happened.
+
+For onprem connectors, this is basically a shortcut for `playground container logs --container connect`, `--connector` flag is not relevant
+
 For Fully Managed connectors, limitations apply (see https://docs.confluent.io/cloud/current/connectors/logging-cloud-connectors.html#using-ccloud-cli)
 
 ## Usage
@@ -19,29 +19,29 @@ playground connector logs [OPTIONS]
 
 ## Options
 
-#### *--connector, -c CONNECTOR*
+#### `--connector, -c CONNECTOR`
 
-🔗 Connector name  
-  
+🔗 Connector name
+
 🎓 Tip: If not specified, the command will apply to all connectors
 
-#### *--open, -o*
+#### `--open, -o`
 
-🔖 Save output to a file and open with text editor set with playground config editor \<editor\> (default is code)
+🔖 Save output to a file and open with text editor set with playground config editor `<editor>` (default is code)
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Conflicts With: | *--wait-for-log, --grep*
+| Conflicts With: | `--wait-for-log`, `--grep`
 
-#### *--wait-for-log, -w LOG*
+#### `--wait-for-log, -w LOG`
 
 😴 Wait until log appears
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Conflicts With: | *--open, --grep*
+| Conflicts With: | `--open`, `--grep`
 
-#### *--verbose, -v*
+#### `--verbose, -v`
 
 🐞 Show command being ran.
 

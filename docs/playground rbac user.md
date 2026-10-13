@@ -1,7 +1,7 @@
 # playground rbac user
 
-🧑 LDAP user commands  
-  
+🧑 LDAP user commands
+
 Users live in the openldap container. They authenticate on the broker  
 with SASL/PLAIN (their LDAP password) and log in to MDS, Control  
 Center, Schema Registry and Connect REST API with basic auth.  

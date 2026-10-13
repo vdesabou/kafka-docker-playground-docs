@@ -1,7 +1,6 @@
 # playground config check-and-update-repo-version
 
-when running an example, always check if repo version is older than 3 days, if disabled, it will skip this check.  
-
+when running an example, always check if repo version is older than 3 days, if disabled, it will skip this check.
 
 ## Usage
 
@@ -11,13 +10,13 @@ playground config check-and-update-repo-version [ENABLED]
 
 ## Arguments
 
-#### *ENABLED*
+#### `ENABLED`
 
 
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Default Value:  | true
+| Default Value:  | `true`
 
 ## Examples
 

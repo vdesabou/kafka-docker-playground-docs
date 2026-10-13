@@ -10,13 +10,13 @@ playground config open-grafana-in-browser automatically [AUTOMATICALLY]
 
 ## Arguments
 
-#### *AUTOMATICALLY*
+#### `AUTOMATICALLY`
 
 
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Default Value:  | true
+| Default Value:  | `true`
 
 ## Examples
 

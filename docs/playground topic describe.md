@@ -1,7 +1,7 @@
 # playground topic describe
 
-🔬 Describe topic  
-  
+🔬 Describe topic
+
 Partitions, replicas, in-sync replicas and the configuration overrides  
 set on the topic. Where to look when records go to an unexpected  
 partition, or when a topic is not retaining what you expected.
@@ -14,12 +14,27 @@ playground topic describe [OPTIONS]
 
 ## Options
 
-#### *--topic, -t TOPIC*
+#### `--topic, -t TOPIC`
 
 🗳 Topic name
 
-#### *--verbose, -v*
+#### `--verbose, -v`
 
 🐞 Show command being ran.
+
+## Examples
+
+```bash
+playground topic describe --topic filestream
+```
+
+## Example output
+
+```text
+$ playground topic describe --topic filestream
+17:22:51 ℹ️ 🔎 Describing topic filestream
+Topic: filestream  TopicId: ZTSM7bjsQxq2aigCM3C-8w  PartitionCount: 1  ReplicationFactor: 1  Configs: min.insync.replicas=1
+    Topic: filestream  Partition: 0  Leader: 1  Replicas: 1  Isr: 1  Offline:   Elr:   LastKnownElr:
+```
 
 

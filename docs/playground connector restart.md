@@ -1,9 +1,9 @@
 # playground connector restart
 
-♻️  Restart connector  
-  
+♻️  Restart connector
+
 The usual way to recover a connector whose tasks are FAILED after you  
-fixed the cause. Use --task-id to restart a single failed task and leave  
+fixed the cause. Use `--task-id` to restart a single failed task and leave  
 the healthy ones alone.
 
 ## Usage
@@ -14,17 +14,17 @@ playground connector restart [OPTIONS]
 
 ## Options
 
-#### *--verbose, -v*
+#### `--verbose, -v`
 
 🐞 Show command being ran.
 
-#### *--connector, -c CONNECTOR*
+#### `--connector, -c CONNECTOR`
 
-🔗 Connector name  
-  
+🔗 Connector name
+
 🎓 Tip: If not specified, the command will apply to all connectors
 
-#### *--task-id, -t TASK_ID*
+#### `--task-id, -t TASK_ID`
 
 🔧 Restart specific task ID only (instead of restarting entire connector)
 

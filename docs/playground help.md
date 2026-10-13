@@ -10,7 +10,7 @@ playground help [COMMAND]
 
 ## Arguments
 
-#### *COMMAND*
+#### `COMMAND`
 
 🆘 Help command
 

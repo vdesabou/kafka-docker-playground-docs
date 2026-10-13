@@ -1,10 +1,10 @@
 # playground topic create
 
-🆕 Create topic  
-  
+🆕 Create topic
+
 Only needed when you want something other than the defaults, since  
-'playground topic produce' creates the topic on the fly. Any extra  
-argument is passed through to kafka-topics --create, so --config works  
+`playground topic produce` creates the topic on the fly. Any extra  
+argument is passed through to kafka-topics `--create`, so `--config` works  
 as usual.
 
 ## Usage
@@ -15,11 +15,11 @@ playground topic create [OPTIONS] [--] [ARGUMENTS...]
 
 ## Options
 
-#### *--verbose, -v*
+#### `--verbose, -v`
 
 🐞 Show command being ran.
 
-#### *--topic, -t TOPIC*
+#### `--topic, -t TOPIC`
 
 🗳 Topic name
 
@@ -27,13 +27,13 @@ playground topic create [OPTIONS] [--] [ARGUMENTS...]
 |-----------------|-------------
 | Required:       | ✓ Yes
 
-#### *--nb-partitions NB-PARTITIONS*
+#### `--nb-partitions NB-PARTITIONS`
 
 Number of partitions for the topic. (default is 1)
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Default Value:  | 1
+| Default Value:  | `1`
 
 ## Examples
 

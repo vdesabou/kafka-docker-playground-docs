@@ -1,11 +1,11 @@
 # playground debug log-level
 
-🧬 Set log level for any package  
-  
+🧬 Set log level for any package
+
 Changes the level of any logger on the running connect worker, straight  
 away and without a restart, so you do not have to edit log4j properties  
-and rebuild the container.  
-  
+and rebuild the container.
+
 🎓 Tip: raise only the package you suspect, for instance  
 io.confluent.connect.s3 or org.apache.kafka.clients.consumer, rather  
 than the root logger, or the useful lines will be lost in the noise.
@@ -16,7 +16,7 @@ than the root logger, or the useful lines will be lost in the noise.
 playground debug log-level COMMAND
 ```
 
-## == Commands ==
+## Commands
 
 - [get](playground%20debug%20log-level%20get) - Get log levels
 - [set](playground%20debug%20log-level%20set) - Set log level for specific logger

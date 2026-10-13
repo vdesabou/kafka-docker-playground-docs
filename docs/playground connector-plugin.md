@@ -1,16 +1,16 @@
 # playground connector-plugin
 
-🔌 Connector-plugin commands  
-  
+🔌 Connector-plugin commands
+
 Questions about connector plugins on Confluent Hub, answered without a  
-running environment:  
-  
-  versions              every released version of a plugin  
-  display-last-updated  what was published recently, by vendor  
-  search-jar            which jars ship in it, and which class is where  
-  config-key            what a config key does, its default, since when, who sets it  
-  sourcecode            open the source on GitHub  
-  
+running environment:
+
+- **versions**: every released version of a plugin
+- **display-last-updated**: what was published recently, by vendor
+- **search-jar**: which jars ship in it, and which class is where
+- **config-key**: what a config key does, its default, since when, who sets it
+- **sourcecode**: open the source on GitHub
+
 🎓 Tip: search-jar answers "is this class really in the plugin, and with  
 which signature", which is the question behind most NoSuchMethodError and  
 ClassNotFoundException reports.
@@ -21,12 +21,12 @@ ClassNotFoundException reports.
 playground connector-plugin COMMAND
 ```
 
-## == Commands ==
+## Commands
 
 - [search-jar](playground%20connector-plugin%20search-jar) - ☕ List jars for a connector plugin from confluent hub https://www.confluent.io/hub/
 - [versions](playground%20connector-plugin%20versions) - 💯 List versions for a connector plugin from confluent hub https://www.confluent.io/hub/
 - [display-last-updated](playground%20connector-plugin%20display-last-updated) - 🆕 List last updated connector plugins from confluent hub https://www.confluent.io/hub/
 - [config-key](playground%20connector-plugin%20config-key) - 🔑 Explain a connector configuration key: documentation, type, default, since when, and which examples set it
-- [sourcecode](playground%20connector-plugin%20sourcecode) - 🧑‍💻 Open source code url in your browser (or in your editor when used with --open)
+- [sourcecode](playground%20connector-plugin%20sourcecode) - 🧑‍💻 Open source code url in your browser (or in your editor when used with `--open`)
 
 

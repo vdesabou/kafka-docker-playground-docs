@@ -10,7 +10,7 @@ playground topic tag list [OPTIONS]
 
 ## Options
 
-#### *--verbose, -v*
+#### `--verbose, -v`
 
 🐞 Show command being ran.
 

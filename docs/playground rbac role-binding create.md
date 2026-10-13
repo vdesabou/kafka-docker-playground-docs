@@ -1,13 +1,13 @@
 # playground rbac role-binding create
 
-🔐 Create a role binding  
-  
-Without --resource, the role is bound on the whole cluster  
+🔐 Create a role binding
+
+Without `--resource`, the role is bound on the whole cluster  
 (SystemAdmin, ClusterAdmin, SecurityAdmin, UserAdmin, AuditAdmin,  
-Operator). With --resource, it is bound on that resource  
-(ResourceOwner, DeveloperRead, DeveloperWrite, DeveloperManage).  
-  
-The scope is deduced from the resource type when --scope is not set:  
+Operator). With `--resource`, it is bound on that resource  
+(ResourceOwner, DeveloperRead, DeveloperWrite, DeveloperManage).
+
+The scope is deduced from the resource type when `--scope` is not set:  
 Subject is schema-registry, Connector is connect, KsqlCluster is  
 ksqldb, anything else is kafka.
 
@@ -19,50 +19,50 @@ playground rbac role-binding create [OPTIONS]
 
 ## Options
 
-#### *--principal, -p PRINCIPAL*
+#### `--principal, -p PRINCIPAL`
 
-🧑 Principal, User:\<name\> or Group:\<name\> (a bare name means User:\<name\>)  
-  
-❕ Required, unless --file is set
+🧑 Principal, User:`<name>` or Group:`<name>` (a bare name means User:`<name>`)
 
-#### *--role, -r ROLE*
+❕ Required, unless `--file` is set
 
-🎩 Role name  
-  
-❕ Required, unless --file is set
+#### `--role, -r ROLE`
+
+🎩 Role name
+
+❕ Required, unless `--file` is set
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Allowed Values: | ResourceOwner, DeveloperRead, DeveloperWrite, DeveloperManage, SystemAdmin, ClusterAdmin, SecurityAdmin, UserAdmin, AuditAdmin, Operator
+| Allowed Values: | `ResourceOwner`, `DeveloperRead`, `DeveloperWrite`, `DeveloperManage`, `SystemAdmin`, `ClusterAdmin`, `SecurityAdmin`, `UserAdmin`, `AuditAdmin`, `Operator`
 
-#### *--resource RESOURCE*
+#### `--resource RESOURCE`
 
-📦 Resource, \<ResourceType\>:\<name\>, for example Topic:orders, Group:my-app,  
-Subject:orders-value, Connector:my-sink, TransactionalId:my-tx, Cluster:kafka-cluster  
-  
+📦 Resource, `<ResourceType>:<name>`, for example Topic:orders, Group:my-app,  
+Subject:orders-value, Connector:my-sink, TransactionalId:my-tx, Cluster:kafka-cluster
+
 ℹ️ If not set, the role is bound on the whole cluster
 
-#### *--prefix*
+#### `--prefix`
 
 🔤 The resource name is a prefix (PREFIXED pattern) instead of a literal name
 
-#### *--scope SCOPE*
+#### `--scope SCOPE`
 
-🎯 Cluster the role binding applies to  
-  
+🎯 Cluster the role binding applies to
+
 ℹ️ If not set, it is deduced from the resource type (kafka when there is no resource)
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Allowed Values: | kafka, schema-registry, connect, ksqldb
+| Allowed Values: | `kafka`, `schema-registry`, `connect`, `ksqldb`
 
-#### *--file FILE*
+#### `--file FILE`
 
-📄 Create all the role bindings of a file, one per line: \<principal\> \<role\> \<resource or -\> [prefix] [scope=\<scope\>]  
-  
+📄 Create all the role bindings of a file, one per line: `<principal>` `<role>` `<resource or ->` [prefix] [scope=`<scope>`]
+
 See environment/rbac-sasl-plain/role-bindings.txt (the default role bindings) for the format.
 
-#### *--verbose, -v*
+#### `--verbose, -v`
 
 🐞 Show command being ran.
 

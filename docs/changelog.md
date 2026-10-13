@@ -3,6 +3,7 @@
 ## October 2026
 ##### 🌟 Enhancements
 
+- 🧠 playground debug gc-analyze: fix JDK 8 / CMS / GenZGC parsing, rotation and restarts, correct figures, Kafka-aware recommendations [#9275](https://github.com/vdesabou/kafka-docker-playground/issues/9275)
 - 🧠 playground debug heap-analyze: run Eclipse MAT headless (leak suspects, retained sizes, --compare), fail loudly [#9273](https://github.com/vdesabou/kafka-docker-playground/issues/9273)
 - 🧠 playground debug cfk cfk-bundle-analyze: work offline, fix detection, sanitizer and tar extraction [#9271](https://github.com/vdesabou/kafka-docker-playground/issues/9271)
 - ⭐👾 Add IBM MQ Source (IBM's own version) connector example [#9269](https://github.com/vdesabou/kafka-docker-playground/issues/9269)

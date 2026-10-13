@@ -421,9 +421,9 @@ EOF
 
 playground topic produce -t topic-json-schema --nb-messages 3 << 'EOF'
 {
-  "\$schema": "http://json-schema.org/draft-07/schema#",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "additionalProperties": false,
-  "\$id": "http://lh.test/Customer.schema.json",
+  "$id": "http://lh.test/Customer.schema.json",
   "title": "Customer",
   "description": "Customer description",
   "type": "object",
@@ -578,9 +578,9 @@ EOF
 # validate
 playground topic produce -t topic-json-schema-validate --nb-messages 3 --validate << 'EOF'
 {
-  "\$schema": "http://json-schema.org/draft-07/schema#",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "additionalProperties": false,
-  "\$id": "http://lh.test/Customer.schema.json",
+  "$id": "http://lh.test/Customer.schema.json",
   "title": "Customer",
   "description": "Customer description",
   "type": "object",

@@ -2,11 +2,15 @@
 
 📈 Analyze JVM Garbage Collection logs  
   
-📊 Parses GC logs from a local file or running container and generates a detailed analysis with pause time statistics, heap trends, GC cause breakdown, and concrete tuning recommendations.  
+📊 Parses GC logs from local files / folders or a running container: pause statistics, Full GC and evacuation / concurrent mode failures, live set, heap floor trend (leak), allocation stalls, GC causes, and recommendations backed by a finding (Kafka-aware: compared with Kafka's own G1 settings).  
   
-🔖 Supports JDK 7–21+ and all major collectors: G1GC, CMS, ZGC, Generational ZGC, Shenandoah, ParallelGC, SerialGC  
+🔖 Supports JDK 7–21+ and all major collectors: G1GC, CMS, ZGC, Generational ZGC, Shenandoah, ParallelGC, SerialGC, in legacy (-XX:+PrintGCDetails) and unified (-Xlog:gc*) formats, any decoration  
   
-🔖 Use --html to generate a self-contained HTML dashboard with interactive Chart.js charts
+🔄 Pass every rotated file (kafkaServer-gc.log, .log.0…, .gz) or their folder: files are ordered by timestamp and split by JVM restart, the latest run is analyzed (--run to pick another)  
+  
+🔖 Exit code is 0 when the analysis completed, 2 when no GC event was found  
+  
+🔖 Use --html to generate a self-contained HTML dashboard (inline SVG charts, no external resource)
 
 ## Usage
 
@@ -18,25 +22,31 @@ playground debug gc-analyze [OPTIONS]
 
 #### *--file, -f FILE*
 
-🗒️  GC log file to analyze  
+🗒️  GC log file or folder to analyze (repeat --file for the rotated files of the same JVM)  
   
 ❕ Provide either --file or --container, not both  
   
 🎓 Tip: use \<tab\> completion to trigger fzf completion  
         use \<option+enter\> to use the value you typed manually
 
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Repeatable:     |  ✓ Yes
+
 #### *--container, -c, --pod, -p CONTAINER*
 
-🐳 Container name (or pod name when cfk environment is used) to extract GC log from  
+🐳 Container name (or pod name when cfk environment is used) to extract the GC log from  
   
 ❕ Provide either --file or --container, not both  
   
-🔖 The GC log path is auto-detected from the container's Java process flags.  
-     Falls back to searching common log locations (/tmp, /var/log, /opt).
+🔖 The GC log path is read from the java command line (-Xlog:gc*:file=… or -Xloggc:…), and its rotated files are copied too.  
+     Falls back to searching common log locations (/var/log, /tmp, /opt).  
+     The playground environments write a GC log for ZooKeeper, brokers, controllers, Schema Registry,  
+     Connect (-loggc, /var/log/kafka/\<name\>-gc.log) and ksqlDB.
 
 #### *--output-dir, -o OUTPUT_DIR*
 
-📂 Output directory for the HTML report (default: ./gc-analysis-output)
+📂 Output directory for the HTML report and the GC logs copied from a container (default: ./gc-analysis-output)
 
 | Attributes      | &nbsp;
 |-----------------|-------------
@@ -44,15 +54,18 @@ playground debug gc-analyze [OPTIONS]
 
 #### *--html*
 
-🌐 Generate a self-contained HTML report with interactive charts  
+🌐 Generate a self-contained HTML report (inline SVG charts, works offline)  
   
-📊 Report includes: pause timeline, heap evolution, pause distribution,  
-   GC type breakdown, KPI cards, detected JVM parameters, tuning flags,  
-   and color-coded recommendations
+📊 Report includes: pause timeline, heap before / after GC, pause distribution,  
+   GC types, KPI cards, JVM runs, recommendations with the flag to set
 
 #### *--json*
 
-🗂️  Output raw JSON stats (skips text report and HTML)
+🗂️  Output JSON stats (skips text report and HTML)
+
+#### *--run RUN*
+
+🔄 JVM run to analyze when the log spans restarts (default: the latest, see the "JVM runs" table)
 
 #### *--top-pauses TOP_PAUSES*
 
@@ -73,11 +86,19 @@ playground debug gc-analyze --file /var/log/kafka/kafkaServer-gc.log --html
 ```
 
 ```bash
+playground debug gc-analyze --file kafkaServer-gc.log --file kafkaServer-gc.log.0 --file kafkaServer-gc.log.1
+```
+
+```bash
+playground debug gc-analyze --file ./customer-logs/broker-1/
+```
+
+```bash
 playground debug gc-analyze --container broker
 ```
 
 ```bash
-playground debug gc-analyze --container connect --html --output-dir ./gc-reports
+playground debug gc-analyze --container broker --html --output-dir ./gc-reports
 ```
 
 ```bash
@@ -85,7 +106,7 @@ playground debug gc-analyze -f kafkaServer-gc.log --json
 ```
 
 ```bash
-playground debug gc-analyze -f kafkaServer-gc.log --html --top-pauses 20
+playground debug gc-analyze -f kafkaServer-gc.log --run 1 --top-pauses 20
 ```
 
 

@@ -77,4 +77,32 @@ playground find-example "oracle cdc ssl" --category connect --limit 3
 playground find-example "http sink oauth" --json --limit 3 | jq -r '.[].script'
 ```
 
+## Example output
+
+```text
+$ playground find-example "oracle cdc ssl" --limit 2
+17:22:22 ℹ️ 🔎 examples matching "oracle cdc ssl", best first
+playground run -f ~/kafka-docker-playground/connect/connect-cdc-xstream-oracle19-source/cdc-xstream-oracle19-ssl.sh
+    Oracle XStream CDC Source (Oracle 19c) Source connector · io.confluent.connect.oracle.xstream.cdc.OracleXStreamSourceConnector · plaintext
+playground run -f ~/kafka-docker-playground/connect/connect-cdc-oracle19-source/cdc-oracle19-cdb-table-ssl.sh
+    Oracle CDC Source (Oracle 19c) Source connector · io.confluent.connect.oracle.cdc.OracleCdcSourceConnector · plaintext
+```
+
+```text
+$ playground find-example "s3 sink" --limit 1 --json
+[
+  {
+    "script": "~/kafka-docker-playground/connect/connect-aws-s3-sink/s3-sink.sh",
+    "path": "connect/connect-aws-s3-sink/s3-sink.sh",
+    "title": "S3 Sink connector",
+    "connector_classes": [
+      "io.confluent.connect.s3.S3SinkConnector"
+    ],
+    "environment": "plaintext",
+    "score": 41.8,
+    "run_command": "playground run -f ~/kafka-docker-playground/connect/connect-aws-s3-sink/s3-sink.sh"
+  }
+]
+```
+
 

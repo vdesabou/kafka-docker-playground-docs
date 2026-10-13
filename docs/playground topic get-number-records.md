@@ -21,11 +21,19 @@ playground topic get-number-records [OPTIONS]
 ## Examples
 
 ```bash
-playground get-number-records --topic a-topic
+playground topic get-number-records --topic a-topic
 ```
 
 ```bash
-playground get-number-records -t a-topic
+playground topic get-number-records -t a-topic
+```
+
+## Example output
+
+```text
+$ playground topic get-number-records --topic filestream
+17:22:53 ℹ️ 💯 Get number of records in topic filestream
+5
 ```
 
 

@@ -29,4 +29,14 @@ playground topic get-offsets [OPTIONS]
 playground topic get-offsets --topic a-topic
 ```
 
+## Example output
+
+```text
+$ playground topic get-offsets --topic filestream
+17:22:55 ℹ️ 📍 Earliest and latest offsets per partition of topic filestream
+PARTITION  EARLIEST        LATEST          RECORDS
+0          0               5               5
+TOTAL                                      5
+```
+
 

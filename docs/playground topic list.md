@@ -18,4 +18,18 @@ playground topic list [OPTIONS]
 
 🫥 Display internal topics
 
+## Examples
+
+```bash
+playground topic list
+```
+
+## Example output
+
+```text
+$ playground topic list
+17:22:16 ℹ️ 🔘 List of topics (internal topics are excluded)
+filestream
+```
+
 

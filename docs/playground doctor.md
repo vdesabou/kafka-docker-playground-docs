@@ -27,4 +27,22 @@ playground doctor
 playground doctor
 ```
 
+## Example output
+
+```text
+$ playground doctor
+17:23:04 ℹ️ 🩺 Checking the container engine
+17:23:04 ℹ️ ✅ 'docker' CLI found: Docker version 29.8.1, build 4a63305
+17:23:04 ℹ️ 🦭 engine detected: podman
+17:23:05 ℹ️ ✅ engine is reachable
+17:23:05 ℹ️ ✅ 'docker compose' is 5.5.1
+17:23:05 ℹ️ ✅ engine memory is 11GB
+17:23:05 ℹ️ ✅ podman 6.1.3
+17:23:06 ℹ️ ✅ podman is running rootful
+17:23:06 ℹ️ ✅ docker.io is in the podman search registries
+17:23:06 ℹ️ ✅ the podman machine shares ~
+
+17:23:06 ℹ️ 🩺 all good, the podman engine is ready for the playground
+```
+
 

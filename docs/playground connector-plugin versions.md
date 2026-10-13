@@ -43,4 +43,15 @@ playground connector-plugin versions --connector-plugin confluentinc/kafka-conne
 
 ```
 
+## Example output
+
+```text
+$ playground connector-plugin versions --connector-plugin confluentinc/kafka-connect-http --last 3
+17:23:19 ℹ️ 💯 Listing last 3 versions for connector plugin confluentinc/kafka-connect-http
+🔢 v1.7.12 - 📅 release date: 2026-01-29 (256 days ago)
+🔢 v1.7.13 - 📅 release date: 2026-05-05 (160 days ago)
+🔢 v1.7.14 - 📅 release date: 2026-10-01 (11 days ago)
+🌐 documentation: https://docs.confluent.io/kafka-connect-http/current/index.html
+```
+
 

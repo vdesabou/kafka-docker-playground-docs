@@ -30,4 +30,30 @@ playground connector offsets get [OPTIONS]
   
 🎓 Tip: If not specified, the command will apply to all connectors
 
+## Examples
+
+```bash
+playground connector offsets get
+```
+
+## Example output
+
+```text
+$ playground connector offsets get
+17:22:15 ℹ️ 🏹 Getting offsets for 🌎onprem  connector filestream-sink
+{
+  "offsets": [
+    {
+      "partition": {
+        "kafka_partition": 0,
+        "kafka_topic": "filestream"
+      },
+      "offset": {
+        "kafka_offset": 5
+      }
+    }
+  ]
+}
+```
+
 

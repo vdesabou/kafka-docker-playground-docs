@@ -2,13 +2,17 @@
 
 📦 Analyze a Confluent for Kubernetes (CFK) support bundle  
   
-🔍 Scans pod describes, events, component CRs, and logs for ~30 issue categories (pod failures, TLS, auth, MDS/RBAC, license, KRaft, replication, storage, scheduling, …) and prints concrete remediation steps per category.  
+🔍 Checks Warning events, pods (phase, waiting reasons, restarts, OOMKilled), every platform.confluent.io custom resource (phase/state, ready replicas, False conditions, failed connector tasks) and the ERROR/FATAL records of every log (rotated and .gz included, with their Caused by chain and an occurrence count), sorts them into ~30 categories (pod failures, TLS, auth, MDS/RBAC, license, KRaft, replication, storage, scheduling, …) and prints concrete remediation steps per category.  
   
-🔒 Sanitization (IPs / hostnames / emails / secrets) is ON by default — pass --no-sanitize only for internal/test bundles.  
+✅ Works offline on any bundle produced by kubectl confluent support-bundle (or playground debug cfk generate-bundle): no cfk environment needed.  
+  
+🔒 Sanitization (secrets / IPs / hostnames / emails / LDAP DNs) is ON by default. It is best effort: review the output before sharing it. Pass --no-sanitize only for internal/test bundles.  
   
 🔖 Accepts a directory or a .tar / .tar.gz / .tgz / .zip archive.  
   
-🔖 Use --json to emit machine-readable output for downstream tooling.
+🔖 Use --json to emit machine-readable output for downstream tooling.  
+  
+🔖 Exit code is 0 when the analysis completed (whatever was found, read the summary), 64 for an invalid, unsafe or empty bundle.
 
 ## Usage
 
@@ -52,6 +56,10 @@ playground debug cfk cfk-bundle-analyze [OPTIONS]
 |-----------------|-------------
 | Default Value:  | 5
 
+#### *--include-warnings*
+
+⚠️  Also report WARN log records that match no known category (WARN records matching a known category are always reported)
+
 #### *--html*
 
 🌐 Generate a self-contained HTML report and open it in the default browser  
@@ -90,6 +98,10 @@ playground debug cfk cfk-bundle-analyze -b ./bundle.tgz --html
 
 ```bash
 playground debug cfk cfk-bundle-analyze -b ./bundle.tgz --html --output-dir ./reports
+```
+
+```bash
+playground debug cfk cfk-bundle-analyze -b ./bundle.tgz --include-warnings
 ```
 
 

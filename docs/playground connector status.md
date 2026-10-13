@@ -24,4 +24,21 @@ playground connector status [OPTIONS]
   
 🎓 Tip: If not specified, the command will apply to all connectors
 
+## Examples
+
+```bash
+playground connector status
+```
+
+## Example output
+
+```text
+$ playground connector status
+17:22:05 ℹ️ 🧩 Displaying status for 🌎onprem connector filestream-sink
+Name                           Status       Tasks                                                        Stack Trace
+-------------------------------------------------------------------------------------------------------------
+filestream-sink                ✅ RUNNING  0:🟢 RUNNING                 -
+-------------------------------------------------------------------------------------------------------------
+```
+
 

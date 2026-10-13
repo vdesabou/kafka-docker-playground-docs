@@ -76,4 +76,35 @@ playground get-ci-result --test other/connect-secret-registry --logs
 playground get-ci-result --test connect/connect-mqtt-sink --environment cfk --podman --logs
 ```
 
+## Example output
+
+```text
+$ playground get-ci-result --test connect/connect-http-sink
+17:23:20 ℹ️ 🤖CI status: 🟢 ok
+🔗test url: https://github.com/vdesabou/kafka-docker-playground/actions/runs/37858925089/job/113589742349
+```
+
+```text
+$ playground get-ci-result --test connect/connect-replicator --logs --max-findings 2
+17:24:15 ℹ️ 🔥 latest failure reported in https://github.com/vdesabou/kafka-docker-playground/issues/9054
+   🔥 CP 8.3.2 🔢 Connector v7.3.2 (📅 release date 2023-02-25) 🕐 2026-10-13 00:45
+   🔗 https://github.com/vdesabou/kafka-docker-playground/actions/runs/38328314041/job/115072055973
+   🕐 run of 2026-10-13T00:39:22Z on commit 141b0aa0d
+
+17:24:17 ℹ️ 🔥 replicator-2way-ssl.sh failed, last lines before the failure:
+   00:45:48 ❗ ❌ topic test-topic-ssl-duplicate does not exist, retrying in 1 second (elapsed time: 59 seconds), waiting max for 60 seconds
+   00:45:50 ❗ ❌ topic test-topic-ssl-duplicate does not exist !
+   00:45:50 🔥 ####################################################
+
+17:24:17 ℹ️ 🔎 ERROR/FATAL digest of replicator-2way-ssl.sh in the CI job
+🔎 4 distinct record(s), 4 occurrence(s), in 797 lines
+
+🔴 ERROR x1 (first seen line 717, last seen line 717)
+[2026-10-13 00:44:31,858] ERROR [duplicate-topic-ssl|task-0] Failed to start task duplicate-topic-ssl-0 (org.apache.kafka.connect.runtime.Worker:1005)
+        org.apache.kafka.common.KafkaException: Failed to construct kafka producer
+        at org.apache.kafka.common.config.AbstractConfig.getConfiguredInstance(AbstractConfig.java:429)
+
+✂️ 2 more distinct record(s) not shown, increase --max-findings
+```
+
 

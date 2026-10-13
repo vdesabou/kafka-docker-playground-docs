@@ -47,4 +47,15 @@ playground consumer-group describe --group my-app --members
 playground consumer-group describe --group my-app --state
 ```
 
+## Example output
+
+```text
+$ playground consumer-group describe --group connect-filestream-sink
+17:23:03 ℹ️ 🔬 Describing consumer group connect-filestream-sink
+
+GROUP                   TOPIC           PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID                                                               HOST            CLIENT-ID
+connect-filestream-sink filestream      0          5               5               0               connector-consumer-filestream-sink-0-01fb326c-c344-4c45-ba76-b8c048b539f4 /10.89.0.7      connector-consumer-filestream-sink-0
+17:23:04 ℹ️ 🏁 Total lag for consumer group connect-filestream-sink: 0
+```
+
 

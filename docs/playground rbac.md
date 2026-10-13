@@ -1,10 +1,11 @@
 # playground rbac
 
-🛡️ RBAC commands (rbac-sasl-plain environment only)  
+🛡️ RBAC commands (rbac-sasl-plain and cfk-rbac environments only)  
   
-Change permissions of the running rbac-sasl-plain environment without  
-opening a shell in a container: the commands call the MDS REST API  
-(http://localhost:8091) as superUser.  
+Change permissions of the running rbac-sasl-plain or cfk-rbac environment  
+without opening a shell in a container: the commands call the MDS REST API  
+(http://localhost:8091, a port-forward to the kafka service on cfk-rbac) as  
+superUser.  
   
   role-binding   create, delete and list role bindings  
   user           add, delete and list LDAP users and their groups  

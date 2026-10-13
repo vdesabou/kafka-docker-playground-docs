@@ -45,10 +45,10 @@ playground connector sourcecode
 playground connector sourcecode --connector-tag " "
 
 # comparison mode:
-playground connector --connector-tag "10.2.1" --connector-tag "10.2.0"
+playground connector sourcecode --connector-tag "10.2.1" --connector-tag "10.2.0"
 
 # comparison mode (with versions selection):
-playground connector --connector-tag " " --connector-tag " "
+playground connector sourcecode --connector-tag " " --connector-tag " "
 
 ```
 

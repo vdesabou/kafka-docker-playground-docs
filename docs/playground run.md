@@ -75,6 +75,7 @@ visit https://github.com/junegunn/fzf#installation to install
 - plaintext  
 - ccloud  
 - cfk  
+- cfk-rbac  
 - 2way-ssl  
 - kerberos  
 - ldap-authorizer-sasl-plain  
@@ -91,7 +92,7 @@ This is only supported when example is a connector example
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Default Value:  | plaintext
-| Allowed Values: | ccloud, cfk, plaintext, sasl-ssl, sasl-plain, 2way-ssl, sasl-scram, kerberos, ssl_kerberos, ldap-authorizer-sasl-plain, ldap-sasl-plain, rbac-sasl-plain
+| Allowed Values: | ccloud, cfk, cfk-rbac, plaintext, sasl-ssl, sasl-plain, 2way-ssl, sasl-scram, kerberos, ssl_kerberos, ldap-authorizer-sasl-plain, ldap-sasl-plain, rbac-sasl-plain
 
 #### *--file, -f FILE*
 

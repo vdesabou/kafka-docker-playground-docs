@@ -216,8 +216,9 @@ visit https://docs.docker.com/get-docker to install
 - [testssl](playground%20debug%20testssl) - 🔐 Testing TLS/SSL encryption using https://testssl.sh/
 - [generate-diagnostics](playground%20debug%20generate-diagnostics) - ⛑️ Generate a diagnostic bundle with Diagnostics Bundle Tool
 - [thread-dump](playground%20debug%20thread-dump) - 🎯 Take a java thread dump
+- [thread-analyze](playground%20debug%20thread-analyze) - 🧵 Analyze java thread dumps: deadlocks, lock contention, stuck and CPU-hungry threads
 - [heap-dump](playground%20debug%20heap-dump) - 👻 Take a heap dump
-- [heap-analyze](playground%20debug%20heap-analyze) - 🔬 Analyze a heap dump file using Eclipse MAT (Memory Analyzer Tool)
+- [heap-analyze](playground%20debug%20heap-analyze) - 🔬 Analyze a heap dump with Eclipse Memory Analyzer (MAT), run headless in Docker
 - [analyze-logs](playground%20debug%20analyze-logs) - 🔥 Show a digest of ERROR/FATAL records found in log files, folders or zip bundles
 - [gc-analyze](playground%20debug%20gc-analyze) - 📈 Analyze JVM Garbage Collection logs
 - [tcp-dump](playground%20debug%20tcp-dump) - 🕵️‍♂️ Take a tcp dump (sniffing network)
@@ -269,7 +270,7 @@ visit https://docs.docker.com/get-docker to install
 
 ### RBAC commands
 
-- [rbac](playground%20rbac) - 🛡️ RBAC commands (rbac-sasl-plain environment only)
+- [rbac](playground%20rbac) - 🛡️ RBAC commands (rbac-sasl-plain and cfk-rbac environments only)
 - [role-binding](playground%20rbac%20role-binding) - 🔐 Role binding commands
 - [user](playground%20rbac%20user) - 🧑 LDAP user commands
 - [acl](playground%20rbac%20acl) - 🚦 ACL commands

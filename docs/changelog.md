@@ -3,6 +3,7 @@
 ## October 2026
 ##### 🌟 Enhancements
 
+- ⭐👾 Add IBM MQ Source (IBM's own version) connector example [#9269](https://github.com/vdesabou/kafka-docker-playground/issues/9269)
 - ⭐👾 Add IBM MQ Sink (IBM's own version) connector example [#9267](https://github.com/vdesabou/kafka-docker-playground/issues/9267)
 - ⭐ Add cfk-rbac environment: Confluent for Kubernetes with RBAC [#9261](https://github.com/vdesabou/kafka-docker-playground/issues/9261)
 - 🧠 Add playground rbac role-binding and acl commands for the rbac-sasl-plain environment [#9242](https://github.com/vdesabou/kafka-docker-playground/issues/9242)

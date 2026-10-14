@@ -106,6 +106,32 @@ outbound server attached…).
 
 To see what it works with without a report: `playground analyze oracle-xstream-report --sample synthetic_failures`.
 
+## 🔒 Internal skills (Confluent employees only)
+
+> [!WARNING]
+> This section is **only for Confluent employees**. The skills below are not in the public repository: they live in the
+> private `confluentinc/kafka-docker-playground-internal` repository (the `reproduction-models` submodule) because they
+> rely on Confluent internal systems. Installing them requires access to that repository.
+
+They are packaged as the `kdp-support` [Claude Code plugin](https://docs.claude.com/en/docs/claude-code/plugins):
+
+| Skill | Use it to | Call it |
+|---|---|---|
+| `kdp-case` | investigate a support case end to end: ticket context, customer log bundles, fully managed connector checks (read-only), connector code at the exact version, known issues, a minimal reproduction model, and a note with root cause, evidence and a draft customer reply | `/kdp-case <ticket number>`, "investigate ticket 368735" |
+| `kdp-kb-review` | review a knowledge-base article or draft claim by claim against the connector code, docs and release notes, and propose a corrected article | `/kdp-kb-review <KB url \| file>`, `/kdp-kb-review --find "<error message>"` |
+
+Install it once in Claude Code:
+
+```text
+/plugin marketplace add confluentinc/kafka-docker-playground-internal
+/plugin install kdp-support@kafka-docker-playground-internal
+```
+
+Then start Claude Code from the root of your clone, with the submodule checked out
+(`git submodule update --init reproduction-models`). Get new versions with
+`/plugin marketplace update kafka-docker-playground-internal`. Prerequisites, usage and how to contribute are in the
+plugin README, at `reproduction-models/claude-plugins/kdp-support/README.md`.
+
 ## 🥇 Agent-friendly commands
 
 `CLAUDE.md` tells Claude to use these before grepping the repository or reading raw logs. They are just as useful by hand:
@@ -143,7 +169,8 @@ A skill is a folder with a `SKILL.md` (a `name`, a `description` saying when to 
 
 - `.claude/skills/` of the repository, to share it with everyone (open a PR), or
 - `~/.claude/skills/` for a personal one, for instance one that uses tools of your company that should not be in a public
-  repository.
+  repository. To share such a skill with your colleagues, package it as a plugin in a private repository, like the
+  [internal skills](/claude-code?id=%f0%9f%94%92-internal-skills-confluent-employees-only) above.
 
 See [Claude Code skills](https://docs.claude.com/en/docs/claude-code/skills) for the format. The `playground-cli` and
 `kdp-pr-review` skills are good examples to start from.

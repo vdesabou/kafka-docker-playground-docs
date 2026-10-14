@@ -1,4 +1,4 @@
-# playground debug cfk cfk-bundle-analyze
+# playground analyze cfk-bundle
 
 📦 Analyze a Confluent for Kubernetes (CFK) support bundle
 
@@ -12,12 +12,14 @@
 
 🔖 Use `--json` to emit machine-readable output for downstream tooling.
 
+🧪 With `--sample`, it analyzes the samples shipped in cfk-analysis/samples: a quick way to see what it reports.
+
 🔖 Exit code is 0 when the analysis completed (whatever was found, read the summary), 64 for an invalid, unsafe or empty bundle.
 
 ## Usage
 
 ```bash
-playground debug cfk cfk-bundle-analyze [OPTIONS]
+playground analyze cfk-bundle [OPTIONS]
 ```
 
 ## Options
@@ -26,9 +28,15 @@ playground debug cfk cfk-bundle-analyze [OPTIONS]
 
 🗂️  Path to the CFK support bundle (directory or .tar/.tar.gz/.tgz/.zip)
 
+#### `--sample, -s SAMPLE`
+
+🧪 Sample of cfk-analysis/samples
+
+- **synthetic**: CFK bundle: kafka-2 crash-looping on an expired certificate, pending volume, OOMKilled Connect pod, failed connector task, Schema Registry authentication failure, operator reconcile errors
+
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Required:       | ✓ Yes
+| Allowed Values: | `synthetic`
 
 #### `--json`
 
@@ -77,31 +85,35 @@ playground debug cfk cfk-bundle-analyze [OPTIONS]
 ## Examples
 
 ```bash
-playground debug cfk cfk-bundle-analyze --bundle ./customer-bundle.tar.gz
+playground analyze cfk-bundle --sample synthetic
 ```
 
 ```bash
-playground debug cfk cfk-bundle-analyze --bundle ./extracted-bundle/
+playground analyze cfk-bundle --sample synthetic --html
 ```
 
 ```bash
-playground debug cfk cfk-bundle-analyze --bundle ./bundle.zip --severity high
+playground analyze cfk-bundle --bundle ./customer-bundle.tar.gz
 ```
 
 ```bash
-playground debug cfk cfk-bundle-analyze --bundle ./bundle.tar.gz --json > report.json
+playground analyze cfk-bundle --bundle ./extracted-bundle/
 ```
 
 ```bash
-playground debug cfk cfk-bundle-analyze -b ./bundle.tgz --html
+playground analyze cfk-bundle --bundle ./bundle.zip --severity high
 ```
 
 ```bash
-playground debug cfk cfk-bundle-analyze -b ./bundle.tgz --html --output-dir ./reports
+playground analyze cfk-bundle --bundle ./bundle.tar.gz --json > report.json
 ```
 
 ```bash
-playground debug cfk cfk-bundle-analyze -b ./bundle.tgz --include-warnings
+playground analyze cfk-bundle -b ./bundle.tgz --html --output-dir ./reports
+```
+
+```bash
+playground analyze cfk-bundle -b ./bundle.tgz --include-warnings
 ```
 
 

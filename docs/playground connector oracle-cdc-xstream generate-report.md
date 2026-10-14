@@ -6,6 +6,9 @@ Runs the diagnostics script Confluent support asks for, and opens the
 result. This is the file to attach to a case rather than pasting  
 individual query outputs.
 
+🔎 `playground analyze oracle-xstream-report -c oracle` generates it and  
+analyzes it in one go.
+
 See https://docs.confluent.io/kafka-connectors/oracle-xstream-cdc-source/current/troubleshooting.html#connector-diagnostics-script
 
 ## Usage

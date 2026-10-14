@@ -1,4 +1,4 @@
-# playground debug heap-analyze
+# playground analyze heap-dump
 
 🔬 Analyze a heap dump with Eclipse Memory Analyzer (MAT), run headless in Docker
 
@@ -8,12 +8,14 @@
 
 🐳 MAT needs roughly as much memory as the used heap of the dump (1 to 1.5x the .hprof size): give Docker enough memory or use `--max-memory`
 
+🧪 With `--sample`, it analyzes the samples shipped in tools/heap-analyzer/samples: a quick way to see what it reports.
+
 🔖 Exit code is 0 when the analysis completed, non-zero when MAT could not parse the dump (truncated file, out of memory): never a "healthy" verdict on a failed parse
 
 ## Usage
 
 ```bash
-playground debug heap-analyze [OPTIONS]
+playground analyze heap-dump [OPTIONS]
 ```
 
 ## Options
@@ -25,9 +27,16 @@ playground debug heap-analyze [OPTIONS]
 🎓 Tip: use `<tab>` completion to trigger fzf completion  
 use `<option+enter>` to use the value you typed manually
 
+#### `--sample, -s SAMPLE`
+
+🧪 Sample of tools/heap-analyzer/samples
+
+- **leak**: heap dump of a JVM with a session cache that is never evicted (MAT leak suspect)
+- **leak_growth**: two dumps of that JVM a few seconds apart: the later one is compared with the earlier one
+
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Required:       | ✓ Yes
+| Allowed Values: | `leak`, `leak_growth`
 
 #### `--output-dir, -o OUTPUT_DIR`
 
@@ -62,23 +71,31 @@ use `<option+enter>` to use the value you typed manually
 ## Examples
 
 ```bash
-playground debug heap-analyze --file heap-dump-connect-2026-04-08.hprof
+playground analyze heap-dump --sample leak
 ```
 
 ```bash
-playground debug heap-analyze -f heap-dump-broker.hprof --output-dir ./analysis
+playground analyze heap-dump --sample leak_growth
 ```
 
 ```bash
-playground debug heap-analyze -f heap-dump-connect.hprof --report-type leaks
+playground analyze heap-dump --file heap-dump-connect-2026-04-08.hprof
 ```
 
 ```bash
-playground debug heap-analyze -f heap-dump-connect-1.hprof --compare heap-dump-connect-2.hprof
+playground analyze heap-dump -f heap-dump-broker.hprof --output-dir ./analysis
 ```
 
 ```bash
-playground debug heap-analyze -f big-heap-dump.hprof --max-memory 12g
+playground analyze heap-dump -f heap-dump-connect.hprof --report-type leaks
+```
+
+```bash
+playground analyze heap-dump -f heap-1.hprof --compare heap-2.hprof
+```
+
+```bash
+playground analyze heap-dump -f big-heap-dump.hprof --max-memory 12g
 ```
 
 

@@ -1,4 +1,4 @@
-# playground debug analyze-logs
+# playground analyze logs
 
 🔥 Show a digest of ERROR/FATAL records found in log files, folders or zip bundles
 
@@ -20,7 +20,7 @@ fly, binary files are skipped. Only files with findings are shown.
 ## Usage
 
 ```bash
-playground debug analyze-logs [OPTIONS]
+playground analyze logs [OPTIONS]
 ```
 
 ## Options
@@ -33,8 +33,19 @@ playground debug analyze-logs [OPTIONS]
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Required:       | ✓ Yes
 | Repeatable:     |  ✓ Yes
+
+#### `--sample, -s SAMPLE`
+
+🧪 Sample of tools/log-analyzer/samples
+
+- **connect_task_failure**: Connect worker log: Oracle XStream connector with a wrong password, an unknown outbound server, and a task failing after the outbound server was stopped
+- **support_bundle**: .zip with that log and a gzipped broker log
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Repeatable:     |  ✓ Yes
+| Allowed Values: | `connect_task_failure`, `support_bundle`
 
 #### `--include-warnings`
 
@@ -51,21 +62,29 @@ playground debug analyze-logs [OPTIONS]
 ## Examples
 
 ```bash
-playground debug analyze-logs --file connect.log
+playground analyze logs --sample connect_task_failure
 ```
 
 ```bash
-playground debug analyze-logs --file kafka-connect-logs-10-09-1200.zip --include-warnings
+playground analyze logs --sample support_bundle --include-warnings
 ```
 
 ```bash
-playground debug analyze-logs -f ./logs -f broker.log.gz --max-findings 10
+playground analyze logs --file connect.log
+```
+
+```bash
+playground analyze logs --file connect-logs.zip --include-warnings
+```
+
+```bash
+playground analyze logs -f ./logs -f broker.log.gz --max-findings 10
 ```
 
 ## Example output
 
 ```text
-$ playground debug analyze-logs -f connect.log
+$ playground analyze logs -f connect.log
 17:23:19 ℹ️ 🔥 ERROR/FATAL digest for connect.log
 🔎 1 distinct record(s), 2 occurrence(s), in 12 lines
 

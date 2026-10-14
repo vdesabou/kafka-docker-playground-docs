@@ -661,7 +661,7 @@ playground debug tcp-dump --container control-center --port 9021 --duration 60
 
 It is sometimes necessary to get a [heap dump](https://www.baeldung.com/java-heap-dump-capture).
 
-Just use [CLI](/playground%20debug%20heap-dump) `playground debug heap-dump`. It saves output to a `.hprof` file that can be read with [VisualVM](https://visualvm.github.io/) or [MAT](https://www.eclipse.org/mat/), or analyzed with [`playground debug heap-analyze`](/playground%20debug%20heap-analyze).
+Just use [CLI](/playground%20debug%20heap-dump) `playground debug heap-dump`. It saves output to a `.hprof` file that can be read with [VisualVM](https://visualvm.github.io/) or [MAT](https://www.eclipse.org/mat/), or analyzed with [`playground analyze heap-dump`](/playground%20analyze%20heap-dump) (Eclipse MAT leak suspects, see [Analyze what you collected](/reusables?id=%f0%9f%94%8e-analyze-what-you-collected)).
 
 ```bash
 playground debug heap-dump
@@ -690,7 +690,7 @@ Just use [CLI](/playground%20debug%20thread-dump) `playground debug thread-dump`
 playground debug thread-dump
 playground debug thread-dump -c connect -c broker
 ```
-You can use [Thread Dump Analyzer](http://the-babel-tower.github.io/tda.html) for example to analyze results.
+Analyze the dumps with [`playground analyze thread-dump`](/playground%20analyze%20thread-dump): deadlocks, lock contention, stuck and CPU-hungry threads (it can also take the dumps itself with `--container`).
 
 ### 🛩️ Flight Recorder
 
@@ -709,11 +709,34 @@ playground debug flight-recorder --action stop
 |---|---|
 | [`playground debug java-debug`](/playground%20debug%20java-debug) | 🤎 JVM arguments for SSL, Kerberos or Class Loading |
 | [`playground debug generate-diagnostics`](/playground%20debug%20generate-diagnostics) | ⛑️ Generate a diagnostic bundle with Diagnostics Bundle Tool |
-| [`playground debug heap-analyze`](/playground%20debug%20heap-analyze) | 🔬 Analyze a heap dump file using Eclipse MAT |
-| [`playground debug gc-analyze`](/playground%20debug%20gc-analyze) | 📈 Analyze JVM Garbage Collection logs |
 | [`playground debug jscissors`](/playground%20debug%20jscissors) | ✂️ Instrumentation framework to analyse control flow and perform specific logging |
 | [`playground debug testssl`](/playground%20debug%20testssl) | 🔐 Test TLS/SSL encryption using [testssl.sh](https://testssl.sh/) |
 | [`playground debug disable-remote-debugging`](/playground%20debug%20disable-remote-debugging) | Disable java remote debugging for a container |
+
+## 🔎 Analyze what you collected
+
+The [`playground analyze`](/playground%20analyze) commands turn a dump, a log, a bundle or a report (yours, or one a
+customer sent) into findings: what is wrong, with the evidence, and what to do. They all work offline, and
+**`--sample <name>`** runs them on the samples shipped with the playground, to see what they report before using them on
+real data.
+
+| Command | Analyzes | Try it |
+|---|---|---|
+| [`playground analyze thread-dump`](/playground%20analyze%20thread-dump) | 🧵 thread dumps: deadlocks, lock contention, stuck and CPU-hungry threads | `--sample deadlock_jdk21` |
+| [`playground analyze gc-logs`](/playground%20analyze%20gc-logs) | 📈 GC logs: pauses, failures, live set, leak trend | `--sample jdk21_g1_kafka_real` |
+| [`playground analyze heap-dump`](/playground%20analyze%20heap-dump) | 🔬 heap dumps with Eclipse MAT: leak suspects, retained sizes, growth between two dumps | `--sample leak_growth` |
+| [`playground analyze logs`](/playground%20analyze%20logs) | 🔥 ERROR/FATAL digest of log files, folders, zip / tar bundles | `--sample support_bundle` |
+| [`playground analyze oracle-xstream-report`](/playground%20analyze%20oracle-xstream-report) | 🅾️ Oracle XStream CDC diagnostics reports (`orclcdc_diag.sql`) | `--sample synthetic_failures` |
+| [`playground analyze cfk-bundle`](/playground%20analyze%20cfk-bundle) | 📦 CFK support bundles: pods, events, custom resources, logs | `--sample synthetic` |
+
+```bash
+playground analyze thread-dump --sample deadlock_jdk21
+playground analyze thread-dump --container connect --html          # 3 dumps of the running connect worker
+playground analyze logs --file ./customer-logs.zip
+playground analyze heap-dump --file heap-dump-connect-2026-10-14.hprof
+```
+
+Most of them also accept `--json` (for scripts and agents) and `--html` (a self-contained page to share in a case).
 
 ## 🚫 Blocking traffic
 

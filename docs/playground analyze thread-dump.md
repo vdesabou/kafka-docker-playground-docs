@@ -1,4 +1,4 @@
-# playground debug thread-analyze
+# playground analyze thread-dump
 
 🧵 Analyze java thread dumps: deadlocks, lock contention, stuck and CPU-hungry threads
 
@@ -8,12 +8,14 @@
 
 🔖 Use `--html` to generate a self-contained HTML report
 
+🧪 With `--sample`, it analyzes the samples shipped in tools/thread-analyzer/samples: a quick way to see what it reports.
+
 🔖 Exit code is 0 when the analysis completed, 2 when no thread dump was found
 
 ## Usage
 
 ```bash
-playground debug thread-analyze [OPTIONS]
+playground analyze thread-dump [OPTIONS]
 ```
 
 ## Options
@@ -22,7 +24,7 @@ playground debug thread-analyze [OPTIONS]
 
 🗒️  Thread dump file or folder (repeat `--file` for several dumps of the same JVM)
 
-❕ Provide either `--file` or `--container`, not both
+❕ Provide only one of `--file`, `--container` and `--sample`
 
 🎓 Tip: use `<tab>` completion to trigger fzf completion  
 use `<option+enter>` to use the value you typed manually
@@ -30,6 +32,19 @@ use `<option+enter>` to use the value you typed manually
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Repeatable:     |  ✓ Yes
+
+#### `--sample, -s SAMPLE`
+
+🧪 Sample of tools/thread-analyzer/samples
+
+- **deadlock_jdk21**: 3 jstack -l dumps of one JDK 21 JVM, 3 s apart: deadlock, blocked threads, CPU-hot thread, stuck task, leaking pool
+- **deadlock_jdk8**: the same scenario, one dump, JDK 8
+- **healthy_connect**: 3 kill -3 dumps of a healthy CP 8.3.2 Connect worker, from its container logs
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Repeatable:     |  ✓ Yes
+| Allowed Values: | `deadlock_jdk21`, `deadlock_jdk8`, `healthy_connect`
 
 #### `--container, -c, --pod, -p CONTAINER`
 
@@ -78,27 +93,35 @@ use `<option+enter>` to use the value you typed manually
 ## Examples
 
 ```bash
-playground debug thread-analyze
+playground analyze thread-dump --sample deadlock_jdk21
 ```
 
 ```bash
-playground debug thread-analyze --container broker --count 5 --interval 2 --html
+playground analyze thread-dump --sample deadlock_jdk21 --html
 ```
 
 ```bash
-playground debug thread-analyze --file thread-dump-connect-2026-10-13.log
+playground analyze thread-dump
 ```
 
 ```bash
-playground debug thread-analyze -f dump1.txt -f dump2.txt -f dump3.txt --html
+playground analyze thread-dump -c broker --count 5 --interval 2 --html
 ```
 
 ```bash
-playground debug thread-analyze -f ./customer-logs/connect-stdout.log
+playground analyze thread-dump --file thread-dump-connect-2026-10-13.log
 ```
 
 ```bash
-playground debug thread-analyze -c connect --json
+playground analyze thread-dump -f dump1.txt -f dump2.txt -f dump3.txt
+```
+
+```bash
+playground analyze thread-dump -f ./customer-logs/connect-stdout.log
+```
+
+```bash
+playground analyze thread-dump -c connect --json
 ```
 
 

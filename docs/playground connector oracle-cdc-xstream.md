@@ -10,7 +10,8 @@ the Oracle side, and the connect logs say nothing about it.
 - **debug**: query the XStream views from the Oracle container
 - **generate-report**: run the official diagnostics script
 
-Only available when an oracle container is running.
+Only available when an oracle container is running. To analyze a report  
+(also one sent by a customer), use `playground analyze oracle-xstream-report`.
 
 ## Usage
 

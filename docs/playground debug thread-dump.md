@@ -10,7 +10,7 @@ every thread, and the deadlocks if any.
 🔖 It sends kill -3 to the JVM, which prints the dump to the container logs: no JDK is needed in the image and the container is not restarted. It falls back to jstack -l when the dump does not reach the logs.
 
 🎓 Tip: take two or three dumps a few seconds apart. Threads that appear  
-in the same place every time are the ones that are really blocked. playground debug thread-analyze does it and analyzes them.
+in the same place every time are the ones that are really blocked. playground analyze thread-dump does it and analyzes them.
 
 ## Usage
 

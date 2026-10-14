@@ -1,4 +1,4 @@
-# playground debug gc-analyze
+# playground analyze gc-logs
 
 📈 Analyze JVM Garbage Collection logs
 
@@ -8,6 +8,8 @@
 
 🔄 Pass every rotated file (kafkaServer-gc.log, .log.0…, .gz) or their folder: files are ordered by timestamp and split by JVM restart, the latest run is analyzed (`--run` to pick another)
 
+🧪 With `--sample`, it analyzes the samples shipped in gc-analysis/samples: a quick way to see what it reports.
+
 🔖 Exit code is 0 when the analysis completed, 2 when no GC event was found
 
 🔖 Use `--html` to generate a self-contained HTML dashboard (inline SVG charts, no external resource)
@@ -15,7 +17,7 @@
 ## Usage
 
 ```bash
-playground debug gc-analyze [OPTIONS]
+playground analyze gc-logs [OPTIONS]
 ```
 
 ## Options
@@ -24,7 +26,7 @@ playground debug gc-analyze [OPTIONS]
 
 🗒️  GC log file or folder to analyze (repeat `--file` for the rotated files of the same JVM)
 
-❕ Provide either `--file` or `--container`, not both
+❕ Provide only one of `--file`, `--container` and `--sample`
 
 🎓 Tip: use `<tab>` completion to trigger fzf completion  
 use `<option+enter>` to use the value you typed manually
@@ -33,11 +35,23 @@ use `<option+enter>` to use the value you typed manually
 |-----------------|-------------
 | Repeatable:     |  ✓ Yes
 
+#### `--sample, -s SAMPLE`
+
+🧪 Sample of gc-analysis/samples (repeat `--sample` to analyze several)
+
+GC logs of JDK 7 to 21 and every collector, named `<jdk>`_`<collector>`[_real]  
+(_real: taken from a real Kafka / Connect JVM)
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Repeatable:     |  ✓ Yes
+| Allowed Values: | `jdk7_parallel`, `jdk8_cms`, `jdk8_cms_cmf_real`, `jdk8_g1gc`, `jdk8_g1gc_details_real`, `jdk11_zgc`, `jdk17_g1gc`, `jdk17_shenandoah`, `jdk21_g1_kafka_real`, `jdk21_genzgc`, `jdk21_genzgc_real`
+
 #### `--container, -c, --pod, -p CONTAINER`
 
 🐳 Container name (or pod name when cfk environment is used) to extract the GC log from
 
-❕ Provide either `--file` or `--container`, not both
+❕ Provide only one of `--file`, `--container` and `--sample`
 
 🔖 The GC log path is read from the java command line (`-Xlog:gc*:file=`… or `-Xloggc:`…), and its rotated files are copied too.  
 Falls back to searching common log locations (/var/log, /tmp, /opt).  
@@ -78,35 +92,43 @@ GC types, KPI cards, JVM runs, recommendations with the flag to set
 ## Examples
 
 ```bash
-playground debug gc-analyze --file gc.log
+playground analyze gc-logs --sample jdk21_g1_kafka_real
 ```
 
 ```bash
-playground debug gc-analyze --file /var/log/kafka/kafkaServer-gc.log --html
+playground analyze gc-logs --sample jdk8_cms_cmf_real --html
 ```
 
 ```bash
-playground debug gc-analyze --file kafkaServer-gc.log --file kafkaServer-gc.log.0 --file kafkaServer-gc.log.1
+playground analyze gc-logs --file gc.log
 ```
 
 ```bash
-playground debug gc-analyze --file ./customer-logs/broker-1/
+playground analyze gc-logs --file /var/log/kafka/kafkaServer-gc.log --html
 ```
 
 ```bash
-playground debug gc-analyze --container broker
+playground analyze gc-logs -f gc.log -f gc.log.0 -f gc.log.1
 ```
 
 ```bash
-playground debug gc-analyze --container broker --html --output-dir ./gc-reports
+playground analyze gc-logs --file ./customer-logs/broker-1/
 ```
 
 ```bash
-playground debug gc-analyze -f kafkaServer-gc.log --json
+playground analyze gc-logs --container broker
 ```
 
 ```bash
-playground debug gc-analyze -f kafkaServer-gc.log --run 1 --top-pauses 20
+playground analyze gc-logs --container broker --html --output-dir ./gc-reports
+```
+
+```bash
+playground analyze gc-logs -f kafkaServer-gc.log --json
+```
+
+```bash
+playground analyze gc-logs -f kafkaServer-gc.log --run 1 --top-pauses 20
 ```
 
 

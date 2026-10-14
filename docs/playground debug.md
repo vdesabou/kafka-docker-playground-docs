@@ -9,14 +9,11 @@ fly when missing, and their output is brought back to your machine.
 **🐌 It hangs, or it is slow**
 
 - **thread-dump**: what every thread is doing right now
-- **thread-analyze**: deadlocks, lock contention, stuck and CPU-hungry threads
 - **flight-recorder**: record the JVM over a period, open it in JMC
-- **gc-analyze**: GC pauses, failures, live set and leak trend
 
 **💾 It eats memory**
 
 - **heap-dump**: take a .hprof, optionally as a histogram
-- **heap-analyze**: run Eclipse MAT on it, leak suspects report
 
 **🌐 It is a network or TLS problem**
 
@@ -31,13 +28,12 @@ fly when missing, and their output is brought back to your machine.
 - **enable-remote-debugging**: attach your IDE debugger to a container
 - **jscissors**: trace method calls, arguments and return values
 
-**🔥 It is in someone else's logs**
-
-- **analyze-logs**: error digest of log files, folders or zip bundles
-
 **📦 Hand it over**
 
 - **generate-diagnostics**: a support bundle for connect or broker
+
+🔎 To analyze what you collected (thread dumps, GC logs, heap dumps,  
+logs, Oracle XStream reports, CFK bundles): playground analyze
 
 ## Usage
 
@@ -52,11 +48,7 @@ playground debug COMMAND
 - [testssl](playground%20debug%20testssl) - 🔐 Testing TLS/SSL encryption using https://testssl.sh/
 - [generate-diagnostics](playground%20debug%20generate-diagnostics) - ⛑️ Generate a diagnostic bundle with Diagnostics Bundle Tool
 - [thread-dump](playground%20debug%20thread-dump) - 🎯 Take a java thread dump
-- [thread-analyze](playground%20debug%20thread-analyze) - 🧵 Analyze java thread dumps: deadlocks, lock contention, stuck and CPU-hungry threads
 - [heap-dump](playground%20debug%20heap-dump) - 👻 Take a heap dump
-- [heap-analyze](playground%20debug%20heap-analyze) - 🔬 Analyze a heap dump with Eclipse Memory Analyzer (MAT), run headless in Docker
-- [analyze-logs](playground%20debug%20analyze-logs) - 🔥 Show a digest of ERROR/FATAL records found in log files, folders or zip bundles
-- [gc-analyze](playground%20debug%20gc-analyze) - 📈 Analyze JVM Garbage Collection logs
 - [tcp-dump](playground%20debug%20tcp-dump) - 🕵️‍♂️ Take a tcp dump (sniffing network)
 - [block-traffic](playground%20debug%20block-traffic) - 🚫 Blocking traffic using iptables
 - [java-debug](playground%20debug%20java-debug) - 🤎 JVM arguments for SSL, Kerberos or Class Loading
@@ -67,7 +59,6 @@ playground debug COMMAND
 ## Debug commands
 
 - [cfk](playground%20debug%20cfk) - 🧱 CFK debug sub-commands
-- [cfk-bundle-analyze](playground%20debug%20cfk%20cfk-bundle-analyze) - 📦 Analyze a Confluent for Kubernetes (CFK) support bundle
 - [generate-bundle](playground%20debug%20cfk%20generate-bundle) - ⛑️ Generate a Support bundle
 
 

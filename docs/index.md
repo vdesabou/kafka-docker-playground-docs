@@ -127,6 +127,16 @@ visit https://docs.docker.com/get-docker to install
 - [certs-create](playground%20tools%20certs-create) - 🔐 Generate keys and certificates used for SSL
 - [redos-check](playground%20tools%20redos-check) - 🪖 Check topics.regex for ReDos vulnerabilities using recheck (https://github.com/makenowjust-labs/recheck)
 
+### Analyze commands
+
+- [analyze](playground%20analyze) - 🔎 Analyze commands
+- [thread-dump](playground%20analyze%20thread-dump) - 🧵 Analyze java thread dumps: deadlocks, lock contention, stuck and CPU-hungry threads
+- [heap-dump](playground%20analyze%20heap-dump) - 🔬 Analyze a heap dump with Eclipse Memory Analyzer (MAT), run headless in Docker
+- [logs](playground%20analyze%20logs) - 🔥 Show a digest of ERROR/FATAL records found in log files, folders or zip bundles
+- [gc-logs](playground%20analyze%20gc-logs) - 📈 Analyze JVM Garbage Collection logs
+- [oracle-xstream-report](playground%20analyze%20oracle-xstream-report) - 🅾️ Analyze Oracle XStream CDC diagnostics reports (orclcdc_diag.sql)
+- [cfk-bundle](playground%20analyze%20cfk-bundle) - 📦 Analyze a Confluent for Kubernetes (CFK) support bundle
+
 ### Debug commands
 
 - [debug](playground%20debug) - 🐞 Debug commands
@@ -135,11 +145,7 @@ visit https://docs.docker.com/get-docker to install
 - [testssl](playground%20debug%20testssl) - 🔐 Testing TLS/SSL encryption using https://testssl.sh/
 - [generate-diagnostics](playground%20debug%20generate-diagnostics) - ⛑️ Generate a diagnostic bundle with Diagnostics Bundle Tool
 - [thread-dump](playground%20debug%20thread-dump) - 🎯 Take a java thread dump
-- [thread-analyze](playground%20debug%20thread-analyze) - 🧵 Analyze java thread dumps: deadlocks, lock contention, stuck and CPU-hungry threads
 - [heap-dump](playground%20debug%20heap-dump) - 👻 Take a heap dump
-- [heap-analyze](playground%20debug%20heap-analyze) - 🔬 Analyze a heap dump with Eclipse Memory Analyzer (MAT), run headless in Docker
-- [analyze-logs](playground%20debug%20analyze-logs) - 🔥 Show a digest of ERROR/FATAL records found in log files, folders or zip bundles
-- [gc-analyze](playground%20debug%20gc-analyze) - 📈 Analyze JVM Garbage Collection logs
 - [tcp-dump](playground%20debug%20tcp-dump) - 🕵️‍♂️ Take a tcp dump (sniffing network)
 - [block-traffic](playground%20debug%20block-traffic) - 🚫 Blocking traffic using iptables
 - [java-debug](playground%20debug%20java-debug) - 🤎 JVM arguments for SSL, Kerberos or Class Loading

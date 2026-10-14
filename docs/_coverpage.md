@@ -9,6 +9,7 @@
 [👾 Content](/content.md)
 [🚀 How to Use](/how-to-use.md)
 [🧠 CLI](/cli.md)
+[🤖 Claude Code](/claude-code.md)
 [🎓 How it works](/how-it-works.md)
 [👷‍♂️ Reusables](/reusables.md)
 [🧑‍🎓 Academy](/academy.md)

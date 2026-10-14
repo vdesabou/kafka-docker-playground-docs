@@ -3,6 +3,7 @@
 ## October 2026
 ##### 🌟 Enhancements
 
+- 📝 Document the Claude Code setup and skills [#9294](https://github.com/vdesabou/kafka-docker-playground/issues/9294)
 - 🧠 Move the analysis commands to playground analyze and add --sample to all of them [#9292](https://github.com/vdesabou/kafka-docker-playground/issues/9292)
 - 🧠 Add playground debug oracle-xstream-analyze to analyze Oracle XStream diagnostics reports [#9290](https://github.com/vdesabou/kafka-docker-playground/issues/9290)
 - 🧹 Rewrite connect/ and ccloud/ example READMEs to a common template [#9286](https://github.com/vdesabou/kafka-docker-playground/issues/9286)

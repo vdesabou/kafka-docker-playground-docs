@@ -731,12 +731,13 @@ real data.
 
 ```bash
 playground analyze thread-dump --sample deadlock_jdk21
-playground analyze thread-dump --container connect --html          # 3 dumps of the running connect worker
+playground analyze thread-dump --container connect                 # 3 dumps of the running connect worker
 playground analyze logs --file ./customer-logs.zip
 playground analyze heap-dump --file heap-dump-connect-2026-10-14.hprof
 ```
 
-Most of them also accept `--json` (for scripts and agents) and `--html` (a self-contained page to share in a case).
+Besides the text digest, they write a self-contained HTML report to share in a case (opened in your browser), and most
+of them accept `--json` for scripts and agents.
 
 ## 🚫 Blocking traffic
 

@@ -40,3 +40,10 @@ figure.thumbnails img {
         }
     }
 }
+
+/* CLI reference pages: option and argument headings are rendered as code (`--tag TAG`), keep them heading-sized */
+.markdown-section h4 code {
+    font-size: 1.05em;
+    font-weight: 600;
+    padding: 0.2em 0.5em;
+}

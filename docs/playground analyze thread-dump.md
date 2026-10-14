@@ -6,7 +6,7 @@
 
 🐳 With `--container` (default: connect), it takes `--count` dumps `--interval` seconds apart with kill -3: the JVM prints them to the container logs, no JDK is needed in the image.
 
-🔖 Use `--html` to generate a self-contained HTML report
+🌐 Also writes a self-contained HTML report (inline SVG charts, works offline) in `--output-dir`, opened in the browser in an interactive terminal
 
 🧪 With `--sample`, it analyzes the samples shipped in tools/thread-analyzer/samples: a quick way to see what it reports.
 
@@ -74,13 +74,9 @@ use `<option+enter>` to use the value you typed manually
 |-----------------|-------------
 | Default Value:  | `./thread-analysis-output`
 
-#### `--html`
-
-🌐 Generate a self-contained HTML report (inline SVG charts, works offline)
-
 #### `--json`
 
-🗂️  Output JSON (skips the text report and the HTML)
+🗂️  Output JSON (no text report, no HTML report)
 
 #### `--top TOP`
 
@@ -97,15 +93,11 @@ playground analyze thread-dump --sample deadlock_jdk21
 ```
 
 ```bash
-playground analyze thread-dump --sample deadlock_jdk21 --html
-```
-
-```bash
 playground analyze thread-dump
 ```
 
 ```bash
-playground analyze thread-dump -c broker --count 5 --interval 2 --html
+playground analyze thread-dump -c broker --count 5 --interval 2
 ```
 
 ```bash

@@ -12,7 +12,7 @@
 
 🔖 Exit code is 0 when the analysis completed, 2 when no GC event was found
 
-🔖 Use `--html` to generate a self-contained HTML dashboard (inline SVG charts, no external resource)
+🌐 Also writes a self-contained HTML dashboard (pause timeline, heap before / after GC, pause distribution, KPI cards, recommendations; no external resource) in `--output-dir`, opened in the browser in an interactive terminal
 
 ## Usage
 
@@ -66,16 +66,9 @@ Connect (-loggc, /var/log/kafka/`<name>`-gc.log) and ksqlDB.
 |-----------------|-------------
 | Default Value:  | `./gc-analysis-output`
 
-#### `--html`
-
-🌐 Generate a self-contained HTML report (inline SVG charts, works offline)
-
-📊 Report includes: pause timeline, heap before / after GC, pause distribution,  
-GC types, KPI cards, JVM runs, recommendations with the flag to set
-
 #### `--json`
 
-🗂️  Output JSON stats (skips text report and HTML)
+🗂️  Output JSON stats (no text report, no HTML report)
 
 #### `--run RUN`
 
@@ -96,7 +89,7 @@ playground analyze gc-logs --sample jdk21_g1_kafka_real
 ```
 
 ```bash
-playground analyze gc-logs --sample jdk8_cms_cmf_real --html
+playground analyze gc-logs --sample jdk8_cms_cmf_real
 ```
 
 ```bash
@@ -104,7 +97,7 @@ playground analyze gc-logs --file gc.log
 ```
 
 ```bash
-playground analyze gc-logs --file /var/log/kafka/kafkaServer-gc.log --html
+playground analyze gc-logs --file /var/log/kafka/kafkaServer-gc.log
 ```
 
 ```bash
@@ -120,7 +113,7 @@ playground analyze gc-logs --container broker
 ```
 
 ```bash
-playground analyze gc-logs --container broker --html --output-dir ./gc-reports
+playground analyze gc-logs --container broker --output-dir ./gc-reports
 ```
 
 ```bash

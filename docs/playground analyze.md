@@ -5,8 +5,9 @@
 Turn what you collected into findings: each command reads a file (a  
 dump, a log, a bundle, a report, yours or one a customer sent) or takes  
 it from a running container, and prints a digest with what is wrong and  
-what to do. They all work offline, and `--sample` runs them on the samples  
-shipped with the playground, to see what they report.
+what to do, plus an HTML report to share (opened in your browser). They  
+all work offline, and `--sample` runs them on the samples shipped with the  
+playground, to see what they report.
 
 - **thread-dump**: deadlocks, lock contention, stuck threads
 - **gc-logs**: GC pauses, failures, live set, leak trend

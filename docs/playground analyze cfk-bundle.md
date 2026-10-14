@@ -12,6 +12,8 @@
 
 🔖 Use `--json` to emit machine-readable output for downstream tooling.
 
+🌐 Also writes a self-contained HTML report in `--output-dir`, opened in the browser in an interactive terminal.
+
 🧪 With `--sample`, it analyzes the samples shipped in cfk-analysis/samples: a quick way to see what it reports.
 
 🔖 Exit code is 0 when the analysis completed (whatever was found, read the summary), 64 for an invalid, unsafe or empty bundle.
@@ -68,15 +70,9 @@ playground analyze cfk-bundle [OPTIONS]
 
 ⚠️  Also report WARN log records that match no known category (WARN records matching a known category are always reported)
 
-#### `--html`
-
-🌐 Generate a self-contained HTML report and open it in the default browser
-
-❕ No external CDN/network needed — single offline-viewable file you can share.
-
 #### `--output-dir DIR`
 
-📁 Directory for the HTML report (default: ./cfk-reports). Only used with `--html`.
+📁 Directory for the HTML report (default: ./cfk-reports)
 
 | Attributes      | &nbsp;
 |-----------------|-------------
@@ -86,10 +82,6 @@ playground analyze cfk-bundle [OPTIONS]
 
 ```bash
 playground analyze cfk-bundle --sample synthetic
-```
-
-```bash
-playground analyze cfk-bundle --sample synthetic --html
 ```
 
 ```bash
@@ -109,7 +101,7 @@ playground analyze cfk-bundle --bundle ./bundle.tar.gz --json > report.json
 ```
 
 ```bash
-playground analyze cfk-bundle -b ./bundle.tgz --html --output-dir ./reports
+playground analyze cfk-bundle -b ./bundle.tgz --output-dir ./reports
 ```
 
 ```bash

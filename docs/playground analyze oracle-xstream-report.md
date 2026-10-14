@@ -10,7 +10,7 @@
 
 🧪 With `--sample`, it analyzes the reports shipped in tools/xstream-analyzer/samples: a quick way to see what it reports without an Oracle database.
 
-🔖 Use `--html` to generate a self-contained HTML report, to share in a case
+🌐 Also writes a self-contained HTML report (findings, prerequisites, components, streams pool advice chart, deltas between reports) in `--output-dir`, to share in a case; opened in the browser in an interactive terminal
 
 🔖 Exit code is 0 when the analysis completed, 2 when the file is not an orclcdc_diag report
 
@@ -64,10 +64,6 @@ use `<option+enter>` to use the value you typed manually
 |-----------------|-------------
 | Default Value:  | `./xstream-analysis-output`
 
-#### `--html`
-
-🌐 Generate a self-contained HTML report (findings, prerequisites, components, streams pool advice chart, deltas between reports)
-
 #### `--json`
 
 🗂️  Output JSON (findings, prerequisites, summary per component, deltas between reports)
@@ -87,10 +83,6 @@ playground analyze oracle-xstream-report --sample synthetic_failures
 ```
 
 ```bash
-playground analyze oracle-xstream-report --sample synthetic_failures --html
-```
-
-```bash
 playground analyze oracle-xstream-report -s large_transaction -s detached
 ```
 
@@ -103,7 +95,7 @@ playground analyze oracle-xstream-report -f orclcdc_diag_20261013_0912.html
 ```
 
 ```bash
-playground analyze oracle-xstream-report -f day1.html -f day2.html --html
+playground analyze oracle-xstream-report -f day1.html -f day2.html
 ```
 
 ```bash

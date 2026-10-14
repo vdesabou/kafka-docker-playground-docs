@@ -13,13 +13,14 @@ Pages are Markdown files rendered with Docsify: append `.md` to a page path to g
 - [How to Use](https://kafka-docker-playground.io/how-to-use.md): prerequisites, running examples, specifying CP/connector versions, options (ksqlDB, Control Center, Grafana...)
 - [CLI](https://kafka-docker-playground.io/cli.md): setup of the `playground` CLI and command reference
 - [How it works](https://kafka-docker-playground.io/how-it-works.md): environments, docker compose overrides, CI
-- [Reusables](https://kafka-docker-playground.io/reusables.md): building custom examples and reproduction models (`playground repro bootstrap`), producing data, debugging snippets
+- [Reusables](https://kafka-docker-playground.io/reusables.md): building custom examples and reproduction models (`playground repro bootstrap`), producing and consuming data, debugging tools (remote debugging, TCP/heap/thread dumps, flight recorder), analyzing what you collected (`playground analyze`), network fault injection, HTTPS proxy, specific JDKs, performance testing
 - [Academy](https://kafka-docker-playground.io/academy.md): step by step exercises on real-world connector issues
 - [Tips & Tricks](https://kafka-docker-playground.io/tips-and-tricks.md): useful docker and playground commands
+- [Claude Code](https://kafka-docker-playground.io/claude-code.md): using the repository with Claude Code (`CLAUDE.md` project guide, skills, agent-friendly CLI commands, permissions)
 
 ## CLI reference
 
-Each command has its own page named after the command, e.g. [playground run](https://kafka-docker-playground.io/playground%20run.md), [playground connector](https://kafka-docker-playground.io/playground%20connector.md), [playground topic](https://kafka-docker-playground.io/playground%20topic.md), [playground container](https://kafka-docker-playground.io/playground%20container.md), [playground debug](https://kafka-docker-playground.io/playground%20debug.md), [playground repro](https://kafka-docker-playground.io/playground%20repro.md), [playground schema](https://kafka-docker-playground.io/playground%20schema.md), [playground secrets](https://kafka-docker-playground.io/playground%20secrets.md), [playground ec2](https://kafka-docker-playground.io/playground%20ec2.md). The full list is in [index.md](https://kafka-docker-playground.io/index.md).
+Each command has its own page named after the command, e.g. [playground run](https://kafka-docker-playground.io/playground%20run.md), [playground connector](https://kafka-docker-playground.io/playground%20connector.md), [playground topic](https://kafka-docker-playground.io/playground%20topic.md), [playground container](https://kafka-docker-playground.io/playground%20container.md), [playground debug](https://kafka-docker-playground.io/playground%20debug.md), [playground analyze](https://kafka-docker-playground.io/playground%20analyze.md), [playground doctor](https://kafka-docker-playground.io/playground%20doctor.md), [playground repro](https://kafka-docker-playground.io/playground%20repro.md), [playground schema](https://kafka-docker-playground.io/playground%20schema.md), [playground secrets](https://kafka-docker-playground.io/playground%20secrets.md), [playground ec2](https://kafka-docker-playground.io/playground%20ec2.md). The full list is in [index.md](https://kafka-docker-playground.io/index.md).
 
 ## Optional
 

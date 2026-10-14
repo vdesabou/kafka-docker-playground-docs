@@ -649,9 +649,12 @@ playground container logs --open --container mitmproxy
 
 ### 🕵 TCP Dump
 
-It is sometimes necessary to sniff the network in order to better understand what's going on.
+When logs are not enough to understand a connectivity problem (connection resets, timeouts, TLS handshake failures, a client talking to the wrong host or port, unexpected retries…), capturing the network traffic of a container shows exactly what goes over the wire.
 
-Just use [CLI](/playground%20debug%20tcp-dump) `playground debug tcp-dump`.
+Just use [CLI](/playground%20debug%20tcp-dump) `playground debug tcp-dump`. It installs `tcpdump` in the container if needed, captures the traffic for `--duration` seconds (default 30, all ports unless `--port` is set), copies the resulting `.pcap` file to the current directory and opens it with [Wireshark](https://www.wireshark.org/) if it is installed. Start it, then reproduce the issue while the capture is running.
+
+> [!NOTE]
+> On an encrypted listener (SSL, SASL_SSL) you will see the TCP connections and the TLS handshake, but not the content of the requests. To read HTTPS traffic in clear text, use [mitmproxy](/reusables?id=%f0%9f%95%b5%ef%b8%8f%e2%80%8d%e2%99%82%ef%b8%8f-see-tls-traffic-with-mitmproxy) instead.
 
 ```bash
 playground debug tcp-dump --container control-center --port 9021 --duration 60
@@ -659,7 +662,7 @@ playground debug tcp-dump --container control-center --port 9021 --duration 60
 
 ### 👻 Heap Dump
 
-It is sometimes necessary to get a [heap dump](https://www.baeldung.com/java-heap-dump-capture).
+A [heap dump](https://www.baeldung.com/java-heap-dump-capture) is a snapshot of all the objects in the JVM memory. Take one when a component uses more and more memory, spends its time in garbage collection or fails with `java.lang.OutOfMemoryError`, to find which objects (and which connector, task or client) hold the memory.
 
 Just use [CLI](/playground%20debug%20heap-dump) `playground debug heap-dump`. It saves output to a `.hprof` file that can be read with [VisualVM](https://visualvm.github.io/) or [MAT](https://www.eclipse.org/mat/), or analyzed with [`playground analyze heap-dump`](/playground%20analyze%20heap-dump) (Eclipse MAT leak suspects, see [Analyze what you collected](/reusables?id=%f0%9f%94%8e-analyze-what-you-collected)).
 
@@ -682,7 +685,7 @@ Example:
 
 ### 🎯 Thread Dump
 
-It is sometimes necessary to get a [Java thread dump](https://www.baeldung.com/java-thread-dump).
+A [Java thread dump](https://www.baeldung.com/java-thread-dump) shows what every thread of the JVM is doing at that moment, with its stack trace and the locks it holds or waits for. Take one when a connector or task looks stuck (no progress, no error in the logs), when a rebalance or shutdown never completes, or when a container uses a lot of CPU. Take several a few seconds apart: a thread that stays on the same stack is the one to look at.
 
 Just use [CLI](/playground%20debug%20thread-dump) `playground debug thread-dump`. It saves output to a file and opens it with the editor set with `playground config editor`.
 
@@ -694,9 +697,12 @@ Analyze the dumps with [`playground analyze thread-dump`](/playground%20analyze%
 
 ### 🛩️ Flight Recorder
 
-It is sometimes necessary to monitor with [Flight Recorder](https://www.baeldung.com/java-flight-recorder-monitoring).
+[Java Flight Recorder](https://www.baeldung.com/java-flight-recorder-monitoring) (JFR) records what happens in the JVM over a period of time with a low overhead: CPU usage per method, memory allocations, garbage collections, lock contention, file and socket I/O. Use it for performance problems (slow throughput, latency spikes, high CPU) where a single thread or heap dump is not enough.
 
-Just use [CLI](/playground%20debug%20flight-recorder) `playground debug flight-recorder`. Open the `.jfr` file with [JDK Mission Control](https://jdk.java.net/jmc/).
+Just use [CLI](/playground%20debug%20flight-recorder) `playground debug flight-recorder`: start the recording, reproduce the issue, then stop it. Stopping copies the `.jfr` file to the current directory; open it with [JDK Mission Control](https://jdk.java.net/jmc/).
+
+> [!NOTE]
+> The command needs `jcmd`: if the image only has a JRE, it installs JDK 17 with `playground container change-jdk`, which restarts the container.
 
 ```bash
 playground debug flight-recorder --action start
@@ -741,9 +747,9 @@ of them accept `--json` for scripts and agents.
 
 ## 🚫 Blocking traffic
 
-It is sometimes necessary for a reproduction model to simulate network issues like blocking incoming or outgoing traffic.
+To reproduce what happens when a component cannot reach another one (a broker, Schema Registry, a database or an external API going down, a firewall dropping packets), a reproduction model can block the traffic between containers or to an external host, then unblock it to check how the connector or client recovers.
 
-Just use [CLI](/playground%20debug%20block-traffic) `playground debug block-traffic`.
+Just use [CLI](/playground%20debug%20block-traffic) `playground debug block-traffic`. It uses `iptables` (installed in the container if needed) to drop the traffic from one or more containers to a destination (container name, host name or IP address), optionally on a single `--port`. Run it again with `--action stop` to restore the traffic.
 
 ```bash
 playground debug block-traffic --destination google.com --action start
@@ -753,7 +759,7 @@ playground debug block-traffic -c connect -c ksqldb-server --destination schema-
 
 ## 🐌 Add latency, packet loss or corruption
 
-It is sometimes necessary for a reproduction model to simulate latency, packet loss or packet corruption between components.
+Some issues only happen on a slow or unreliable network: request timeouts, retries, rebalances, producer or consumer errors. A reproduction model can simulate them by adding latency, packet loss or packet corruption between two containers.
 
 The playground provides functions (in [`scripts/cli/src/lib/utils_function.sh`](https://github.com/vdesabou/kafka-docker-playground/blob/master/scripts/cli/src/lib/utils_function.sh)) based on [`tc`](https://man7.org/linux/man-pages/man8/tc.8.html):
 
@@ -954,7 +960,7 @@ Example with Salesforce:
 
 ## ♨️ Using specific JDK
 
-It is sometimes necessary for an investigation to replace JDK installed on connect image for example.
+Some issues depend on the Java version or vendor (TLS protocols and cipher suites, a JVM bug, a library that needs a more recent Java, a difference seen only with the customer's JDK). To reproduce them, you can replace the JDK installed in a container image (connect, broker, control-center…) with another version or vendor.
 
 Here are some examples:
 

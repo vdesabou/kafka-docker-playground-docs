@@ -113,24 +113,28 @@ To see what it works with without a report: `playground analyze oracle-xstream-r
 > private `confluentinc/kafka-docker-playground-internal` repository (the `reproduction-models` submodule) because they
 > rely on Confluent internal systems. Installing them requires access to that repository.
 
-They are packaged as the `kdp-support` [Claude Code plugin](https://docs.claude.com/en/docs/claude-code/plugins):
+They are packaged as the `kdp-support` [Claude Code plugin](https://docs.claude.com/en/docs/claude-code/plugins) in that repository:
 
 | Skill | Use it to | Call it |
 |---|---|---|
 | `kdp-case` | investigate a support case end to end: ticket context, customer log bundles, fully managed connector checks (read-only), connector code at the exact version, known issues, a minimal reproduction model, and a note with root cause, evidence and a draft customer reply | `/kdp-case <ticket number>`, "investigate ticket 368735" |
 | `kdp-kb-review` | review a knowledge-base article or draft claim by claim against the connector code, docs and release notes, and propose a corrected article | `/kdp-kb-review <KB url \| file>`, `/kdp-kb-review --find "<error message>"` |
 
-Install it once in Claude Code:
+The Confluent Claude Code policy only allows approved plugin marketplaces (`/plugin marketplace add` fails with
+`blocked by enterprise policy`), so link the skills into your personal skills folder instead, once, from the root of
+your clone:
 
-```text
-/plugin marketplace add confluentinc/kafka-docker-playground-internal
-/plugin install kdp-support@kafka-docker-playground-internal
+```bash
+git submodule update --init --remote reproduction-models
+mkdir -p ~/.claude/skills
+for s in kdp-case kdp-kb-review; do
+  ln -sfn "$PWD/reproduction-models/claude-plugins/kdp-support/skills/$s" ~/.claude/skills/$s
+done
 ```
 
-Then start Claude Code from the root of your clone, with the submodule checked out
-(`git submodule update --init reproduction-models`). Get new versions with
-`/plugin marketplace update kafka-docker-playground-internal`. Prerequisites, usage and how to contribute are in the
-plugin README, at `reproduction-models/claude-plugins/kdp-support/README.md`.
+Then start a new Claude Code session from the root of your clone. The links point at your submodule checkout, so
+`git submodule update --remote reproduction-models` is all it takes to get new versions. Prerequisites, usage, uninstall
+and how to contribute are in the plugin README, at `reproduction-models/claude-plugins/kdp-support/README.md`.
 
 ## 🥇 Agent-friendly commands
 

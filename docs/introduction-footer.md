@@ -8,7 +8,6 @@
 - ♻️ Cluster Linking, Replicator and MirrorMaker 2 [examples](/content?id=🌍-multi-data-center-deployments)
 - 🎯 Run examples with any Confluent Platform or connector [versions](/how-to-use?id=🪄-specify-versions)
 - 🧠 Easily run commands with playground [CLI](/cli)
-- 🤖 Use it with [Claude Code](/claude-code): project guide, skills to add examples, review PRs, change the CLI or analyze Oracle XStream reports
 - 🎓 Learn how the playground [works](/how-it-works)
 - 👷‍♂️ Build your own reproduction models with [reusables](/reusables)
 - 🎩 Work remotely with VS Code on AWS EC2 instances using [playground ec2](/playground%20ec2) commands

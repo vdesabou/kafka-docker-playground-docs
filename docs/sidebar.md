@@ -7,6 +7,7 @@
 - [👷‍♂️ Reusables](/reusables.md)
 - [🧑‍🎓 Academy](/academy.md)
 - [💡 Tips & Tricks](/tips-and-tricks.md)
+- [🤖 Claude Code](/claude-code.md)
 
 
 - **Links**

@@ -3,6 +3,7 @@
 ## October 2026
 ##### 🌟 Enhancements
 
+- 🧠 Move the analysis commands to playground analyze and add --sample to all of them [#9292](https://github.com/vdesabou/kafka-docker-playground/issues/9292)
 - 🧠 Add playground debug oracle-xstream-analyze to analyze Oracle XStream diagnostics reports [#9290](https://github.com/vdesabou/kafka-docker-playground/issues/9290)
 - 🧹 Rewrite connect/ and ccloud/ example READMEs to a common template [#9286](https://github.com/vdesabou/kafka-docker-playground/issues/9286)
 - 🧠 Add playground debug thread-analyze, and take thread dumps with kill -3 (no JDK install, no restart) [#9279](https://github.com/vdesabou/kafka-docker-playground/issues/9279)

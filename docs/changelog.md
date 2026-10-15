@@ -3,6 +3,7 @@
 ## October 2026
 ##### 🌟 Enhancements
 
+- 🧠 Add playground connector wait, topic wait-for-records and create-or-update --wait [#9339](https://github.com/vdesabou/kafka-docker-playground/issues/9339)
 - 🧠 Add playground topic get-size command (and topic list --sort-by-size) [#9327](https://github.com/vdesabou/kafka-docker-playground/issues/9327)
 - 📝 Document the Claude Code setup and skills [#9294](https://github.com/vdesabou/kafka-docker-playground/issues/9294)
 - 🧠 Move the analysis commands to playground analyze and add --sample to all of them [#9292](https://github.com/vdesabou/kafka-docker-playground/issues/9292)

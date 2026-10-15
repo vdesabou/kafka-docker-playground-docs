@@ -231,6 +231,7 @@ visit https://docs.docker.com/get-docker to install
 - [delete](playground%20connector%20delete) - 🗑️  Delete connector
 - [diagnose](playground%20connector%20diagnose) - 🩺 Diagnose a connector in one call: status, errors and progress
 - [show-lag](playground%20connector%20show-lag) - 🐢 Show lag of sink connector
+- [benchmark](playground%20connector%20benchmark) - 🏎️ Benchmark the throughput of a connector
 - [show-config](playground%20connector%20show-config) - 🧰 Show current connector config that was applied
 - [show-config-parameters](playground%20connector%20show-config-parameters) - 🔩 Show all possible configuration parameters of connector
 - [display-metrics-api](playground%20connector%20display-metrics-api) - 〽️ Display metrics api for fully managed connector

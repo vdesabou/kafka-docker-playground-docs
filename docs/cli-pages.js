@@ -33,6 +33,7 @@ window.KDP_CLI_PAGES = [
   "/playground%20config%20open-grafana-in-browser%20browser",
   "/playground%20config%20open-grafana-in-browser",
   "/playground%20config",
+  "/playground%20connector%20benchmark",
   "/playground%20connector%20connect-migration-utility%20discovery",
   "/playground%20connector%20connect-migration-utility%20migrate",
   "/playground%20connector%20connect-migration-utility",

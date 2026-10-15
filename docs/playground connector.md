@@ -15,6 +15,7 @@ container or fully managed in Confluent Cloud.
 - **show-config**: the configuration actually applied
 - **logs**: tail connect logs, filtered and followed
 - **show-lag**: consumer lag of a sink, until it reaches zero
+- **benchmark**: records per second, compared with the previous run
 - **offsets get**: where the connector is reading or writing
 
 **🛠️ Change it**
@@ -67,6 +68,7 @@ playground connector COMMAND
 - [delete](playground%20connector%20delete) - 🗑️  Delete connector
 - [diagnose](playground%20connector%20diagnose) - 🩺 Diagnose a connector in one call: status, errors and progress
 - [show-lag](playground%20connector%20show-lag) - 🐢 Show lag of sink connector
+- [benchmark](playground%20connector%20benchmark) - 🏎️ Benchmark the throughput of a connector
 - [show-config](playground%20connector%20show-config) - 🧰 Show current connector config that was applied
 - [show-config-parameters](playground%20connector%20show-config-parameters) - 🔩 Show all possible configuration parameters of connector
 - [display-metrics-api](playground%20connector%20display-metrics-api) - 〽️ Display metrics api for fully managed connector

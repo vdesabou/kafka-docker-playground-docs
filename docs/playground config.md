@@ -13,6 +13,9 @@ Your preferences, kept between sessions:
 - **open-ccloud-connector-in-browser**: open fully managed connectors, and in
 - **open-grafana-in-browser**: which browser
 
+🎓 Tip: all of them can also be changed from the '⚙️ CLI preferences'  
+entry of the `playground run` menu.
+
 ## Usage
 
 ```bash

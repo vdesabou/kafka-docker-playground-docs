@@ -3,6 +3,7 @@
 ## October 2026
 ##### 🌟 Enhancements
 
+- 🤩✨🧠 Add playground connector benchmark [#9347](https://github.com/vdesabou/kafka-docker-playground/issues/9347)
 - 🧠 Add a CLI preferences submenu to the playground run menu [#9341](https://github.com/vdesabou/kafka-docker-playground/issues/9341)
 - 🧠 Add playground connector wait, topic wait-for-records and create-or-update --wait [#9339](https://github.com/vdesabou/kafka-docker-playground/issues/9339)
 - 🧠 Add playground topic get-size command (and topic list --sort-by-size) [#9327](https://github.com/vdesabou/kafka-docker-playground/issues/9327)

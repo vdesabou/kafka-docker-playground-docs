@@ -1167,7 +1167,11 @@ playground connector benchmark --mode steady --duration 5m
 The load comes from the example:
 
 * **sink connectors**: the `playground topic produce` of the example script that feeds the connector is replayed with `--nb-messages <n>` (same schema, key and headers), so it works with almost every sink example
-* **source connectors**: `benchmark-load.bash` next to the example script, shipped with the JDBC and Debezium PostgreSQL, Debezium MySQL, JDBC and Debezium SQL Server, Oracle CDC, Oracle XStream, Debezium Oracle and JDBC Oracle examples. It loads rows in the `CUSTOMERS` table (`dbo.customers` for SQL Server), in one transaction (`--shape bulk`), one transaction per row (`--shape small-txn`) or as updates (`--shape update`, refused for a JDBC source in `incrementing` mode, which does not capture updates)
+* **source connectors**: `benchmark-load.bash` next to the example script, called with `--check` first so that an unsupported combination fails before the connector is paused:
+  * JDBC and Debezium PostgreSQL, Debezium MySQL, JDBC and Debezium SQL Server, Oracle CDC, Oracle XStream, Debezium Oracle and JDBC Oracle: rows in the `CUSTOMERS` table (`dbo.customers` for SQL Server), in one transaction (`--shape bulk`), one transaction per row (`--shape small-txn`) or as updates (`--shape update`, refused for a JDBC source in `incrementing` mode, which does not capture updates)
+  * MongoDB: documents in the collection of the connector, with the shape of an existing document so that the schema inferred by the connector stays compatible (`bulk`: insertMany, `small-txn`: insertOne, `update`)
+  * IBM MQ: messages put in the queue of the connector with `amqsput` (the max depth of the queue is raised first)
+  * MQTT: messages published with `mosquitto_pub`, **steady mode only**: a paused MQTT source stays subscribed, so the messages published while it is paused go to its in-memory buffer or are dropped by the broker
 * or your own command with `--load-command` (drain) / `--stream-load-command` (steady), for example in a reproduction model (see below)
 
 #### Your own load
@@ -1203,6 +1207,7 @@ A benchmark is only meaningful when the connector is what limits the throughput.
 | the connect worker is CPU bound / spent X% of the time in gc pauses | ≥ 90% of the CPUs available to the worker, or > 10% of the time in GC pauses: the result reflects the docker host or the heap size (`KAFKA_HEAP_OPTS`) |
 | the records are not spread across the tasks | an idle task, or one task doing most of the work: `tasks.max` greater than the number of partitions, key skew, or a connector that does not parallelize this load |
 | N records went to the dead letter queue / were dropped by errors.tolerance=all | failing records are counted in the throughput |
+| the load generated N records but the connector processed only M | steady mode: a backlog builds up in the source system, or a publish/subscribe broker (MQTT) drops the messages it cannot deliver |
 
 At the end, it prints a summary (throughput with p50 / p95 / min per sample, put or poll batch time, running ratio, connect CPU), writes the samples (csv) and the result (json, also with `--json`) to `--output-dir`, and opens an HTML report with the charts. Each result is appended to a `benchmark-history` file, and compared with the previous benchmark of the same connector in the same example, mode and shape.
 

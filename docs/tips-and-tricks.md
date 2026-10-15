@@ -45,6 +45,25 @@ Get a de-duplicated digest of ERROR/FATAL records:
 playground container logs -c connect --errors --since 10m
 ```
 
+### Wait for a connector or for records
+
+Instead of a fixed `sleep` after creating a connector, wait until the connector and all its tasks are RUNNING. It fails right away, with the stack trace, if a task is FAILED:
+
+```bash
+playground connector create-or-update --connector my-connector --wait << EOF
+{ ... }
+EOF
+
+# or, on an existing connector (--state RUNNING|PAUSED|STOPPED|FAILED)
+playground connector wait --connector my-connector --max-wait 120
+```
+
+To wait until a source connector has produced data:
+
+```bash
+playground topic wait-for-records --topic my-topic --min-expected-messages 10 --max-wait 120
+```
+
 ### Wait for a log line
 
 Instead of using `sleep`, block until a log line shows up (useful in reproduction models):

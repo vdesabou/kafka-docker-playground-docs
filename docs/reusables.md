@@ -1145,6 +1145,36 @@ Here are some tips and tricks to create reproduction models that require high vo
 > [!TIP]
 > It is highly recommended to enable [JMX Grafana](https://kafka-docker-playground.io/#/how-to-use?id=%f0%9f%93%8a-enabling-jmx-grafana) when you're doing performance testing, to see CPU/Memory and all JMX metrics.
 
+### ⏱️ Benchmark a connector
+
+[playground connector benchmark](https://kafka-docker-playground.io/#/playground%20connector%20benchmark) measures the throughput of a running self managed connector, so that you can compare two runs: another `--connector-tag`, another config, another number of tasks, or the numbers of a customer.
+
+By default (`--mode drain`), it pauses the connector, loads a backlog of `--nb-records`, resumes the connector and measures the time it takes to process it. This is the most reproducible number, since it does not depend on how fast the load is generated. `--mode steady` measures the throughput during `--duration` while a load runs in the background.
+
+```bash
+# sink: the 'playground topic produce' of the example script is replayed with 3M records
+playground connector benchmark --nb-records 3000000
+
+# source: rows inserted in the source database by the benchmark-load.bash of the example
+playground connector benchmark --nb-records 1000000 --shape bulk
+playground connector benchmark --nb-records 100000 --shape small-txn
+playground connector benchmark --nb-records 1000000 --shape update
+
+# throughput during 5 minutes, with a load running in the background
+playground connector benchmark --mode steady --duration 5m
+```
+
+The load comes from the example:
+
+* **sink connectors**: the `playground topic produce` of the example script that feeds the connector is replayed with `--nb-messages <n>` (same schema, key and headers), so it works with almost every sink example
+* **source connectors**: `benchmark-load.bash` next to the example script, shipped with the JDBC and Debezium PostgreSQL, Debezium MySQL, Oracle CDC, Oracle XStream, Debezium Oracle and JDBC Oracle examples. It loads rows in the `CUSTOMERS` table, in one transaction (`--shape bulk`), one transaction per row (`--shape small-txn`) or as updates (`--shape update`)
+* or your own command with `--load-command` (drain) / `--stream-load-command` (steady), for example in a reproduction model
+
+At the end, it prints a summary (throughput with p50 / p95 / min per sample, put or poll batch time, running ratio, connect CPU), writes the samples (csv) and the result (json, also with `--json`) to `--output-dir`, and opens an HTML report with the charts. Each result is appended to a `benchmark-history` file, and compared with the previous benchmark of the same connector in the same example, mode and shape.
+
+> [!NOTE]
+> Everything runs on one docker host: the numbers are relative, compare runs on the same machine only. When the backlog is processed before the first sample, the throughput is only a lower bound (`≥`): increase `--nb-records` 10x. Fully managed connectors and the cfk environment are not supported yet.
+
 ### 👈 All sink connectors
 
 Injecting lot of records into topic(s) is really easy using [playground topic produce](https://kafka-docker-playground.io/#/playground%20topic%20produce) CLI:

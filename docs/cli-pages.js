@@ -219,6 +219,7 @@ window.KDP_CLI_PAGES = [
   "/playground%20topic%20display-consumer-offsets",
   "/playground%20topic%20get-number-records",
   "/playground%20topic%20get-offsets",
+  "/playground%20topic%20get-size",
   "/playground%20topic%20list",
   "/playground%20topic%20produce",
   "/playground%20topic%20set-schema-compatibility",

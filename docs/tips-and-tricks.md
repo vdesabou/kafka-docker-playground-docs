@@ -123,6 +123,19 @@ playground topic get-number-records --topic a-topic
 > [!NOTE]
 > See [playground topic get-number-records](/playground%20topic%20get-number-records) for all options.
 
+### Find which topics take the most disk space
+
+```bash
+playground topic get-size
+playground topic get-size --show-internal
+playground topic list --sort-by-size
+```
+
+Shows the size and number of partitions of each topic, largest first. With ccloud environment, sizes come from the Metrics API (`retained_bytes`), which lags a few minutes behind and requires `CONFLUENT_CLOUD_API_KEY` and `CONFLUENT_CLOUD_API_SECRET`.
+
+> [!NOTE]
+> See [playground topic get-size](/playground%20topic%20get-size) for all options.
+
 ### Check Kafka Connect offsets
 
 ```bash

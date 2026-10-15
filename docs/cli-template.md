@@ -110,7 +110,7 @@ Then use Github Copilot to ask for `playground` commands, example:
 
 ### ⚙️ Config
 
-CLI can be configured using [playground config](/playground%20config) 
+CLI can be configured using [playground config](/playground%20config), or from the ⚙️ CLI preferences entry of the [playground run menu](/how-to-use?id=%e2%9a%99%ef%b8%8f-cli-preferences), which shows the current value of every preference.
 
 ## ✨ Command Reference
 

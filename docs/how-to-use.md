@@ -202,9 +202,23 @@ Running [playground run](/playground%20run) without `-f` opens an interactive me
 * options that take a value show it once set, for example `🎯 CP version (all components)  --tag  [8.2.0]` (credentials only show `[set]`)
 * only the options that apply to the example are shown (for example no connector version for an example without connector, no 🔐 Environment for an example that starts its own environment)
 * the preview pane shows the flags that will be used, and warns about combinations that would not work: an error (for example legacy Control Center with CP 8, `--enable-kraft` with CP < 7.4) replaces "🚀 Run the example !" until it is fixed, a warning (for example Control Center with a community image) is only displayed. The same check runs before anything is stopped when not using the menu.
-* actions: 🔀 switch to another example in the same folder, keeping the selected options, and 🧪 create a reproduction model from the example (see [playground repro bootstrap](/playground%20repro%20bootstrap))
+* actions: 🔀 switch to another example in the same folder, keeping the selected options, 🧪 create a reproduction model from the example (see [playground repro bootstrap](/playground%20repro%20bootstrap)), and ⚙️ change the CLI preferences (see below)
 
 Esc or Ctrl-C quits without changing anything. The equivalent `playground run -f <example> <flags>` command is saved in the history ([playground history](/playground%20history), [playground re-run](/playground%20re-run)) and, on macOS, copied to the clipboard (disable with `playground config clipboard false`).
+
+#### ⚙️ CLI preferences
+
+The **⚙️ CLI preferences (playground config)** action opens a submenu with every [playground config](/playground%20config) preference and its current value (`default: …` when it was never set):
+
+![playground run menu: CLI preferences entry](./images/run_menu_config_entry.png)
+
+![playground run menu: CLI preferences submenu](./images/run_menu_config_preferences.png)
+
+* editor used to open files, folders searched for connector zip or jar, copy of the connector config to the clipboard (macOS only)
+* kill all containers before each run, deletion of the Confluent Cloud resources left by the last run (`ask`, `true` or `false`), check that the repository is up to date
+* whether fully managed connectors and Grafana are opened in the browser, and in which browser
+
+Pick a preference, then its new value: `true`/`false`, or a list of suggestions for the editor and the browser (type another one and use `<option+enter>`). The change is saved right away, exactly as the matching `playground config` command would, and the submenu stays open until 🔙 Back to the example menu.
 
 ### 🔐 Storing credentials with playground secrets
 

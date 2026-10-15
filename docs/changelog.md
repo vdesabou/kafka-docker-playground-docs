@@ -3,6 +3,7 @@
 ## October 2026
 ##### 🌟 Enhancements
 
+- 🧠 connect-testing-smt-filestream-sink: show all the ways to use playground connector smt test, plus --no-open and --smt-jar with dependencies [#9360](https://github.com/vdesabou/kafka-docker-playground/issues/9360)
 - ✨⭐🧠 playground connector smt test: run a transform chain on a record, step by step, with an HTML report [#9358](https://github.com/vdesabou/kafka-docker-playground/issues/9358)
 - 🤩✨🧠 Add playground connector benchmark [#9347](https://github.com/vdesabou/kafka-docker-playground/issues/9347)
 - 🧠 Add a CLI preferences submenu to the playground run menu [#9341](https://github.com/vdesabou/kafka-docker-playground/issues/9341)

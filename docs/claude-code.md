@@ -149,6 +149,7 @@ and how to contribute are in the plugin README, at `reproduction-models/claude-p
 | what is failing in these logs / this bundle? | [`playground analyze logs -f <file\|folder\|zip>`](/playground%20analyze%20logs) |
 | stuck, slow, GC, heap? | [`playground analyze thread-dump`](/playground%20analyze%20thread-dump), [`gc-logs`](/playground%20analyze%20gc-logs), [`heap-dump`](/playground%20analyze%20heap-dump) |
 | is this example red in CI too? | [`playground get-ci-result --test <dir> --logs`](/playground%20get-ci-result) |
+| what does this transform chain (SMT) do to a record? why does it fail? | [`playground connector smt test --connector <c>`](/playground%20connector%20smt%20test) |
 | where is the source code of connector X, version Y? | [`playground connector-plugin sourcecode --only-show-url`](/playground%20connector-plugin%20sourcecode) |
 | scaffold a reproduction model | [`playground repro bootstrap -f <example> -d "<description>" --no-run`](/playground%20repro%20bootstrap) |
 

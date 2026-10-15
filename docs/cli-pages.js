@@ -72,6 +72,7 @@ window.KDP_CLI_PAGES = [
   "/playground%20connector%20translate",
   "/playground%20connector%20update",
   "/playground%20connector%20versions",
+  "/playground%20connector%20wait",
   "/playground%20connector-plugin%20config-key",
   "/playground%20connector-plugin%20display-last-updated",
   "/playground%20connector-plugin%20search-jar",
@@ -231,6 +232,7 @@ window.KDP_CLI_PAGES = [
   "/playground%20topic%20tag%20search",
   "/playground%20topic%20tag%20show",
   "/playground%20topic%20tag",
+  "/playground%20topic%20wait-for-records",
   "/playground%20topic",
   "/playground%20update-version",
 ];

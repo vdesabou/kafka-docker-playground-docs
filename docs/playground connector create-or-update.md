@@ -7,8 +7,9 @@ is read from stdin, usually as a heredoc, so it stays readable in the
 script. If the connector already exists it is updated in place, which  
 makes the command safe to re-run while you iterate on a configuration.
 
-The command waits for the connector to be RUNNING and fails with the  
-error if it is not, so a broken config stops the example immediately  
+The command then displays the connector status. Add `--wait` to wait for  
+the connector and all its tasks to be RUNNING and fail with the error  
+if they are not, so a broken config stops the example immediately  
 instead of failing silently later.
 
 🎓 Tip: add `--validate` to have the config checked by the plugin before  
@@ -62,6 +63,18 @@ Package name
 
 😴 Wait until lag becomes 0
 
+#### `--wait`
+
+⏳ Wait until the connector and all its tasks are RUNNING (or in `--initial-state`), and fail otherwise
+
+Same as running `playground connector wait` right after the command. It fails right away if the connector or one of its tasks is FAILED.
+
+With fully managed connectors, it waits for the connector to be provisioned and restarts it if it fails while being provisioned (same as wait_for_ccloud_connector_up in example scripts).
+
+#### `--max-wait MAX_WAIT`
+
+⏳ Max time in seconds to wait with `--wait` (default is 120, or 600 for fully managed connectors)
+
 #### `--validate`
 
 ✅ Validate config using PUT /connector-plugins/(string:name)/config/validate (https://docs.confluent.io/platform/current/connect/references/restapi.html#put--connector-plugins-(string-name)-config-validate)
@@ -101,7 +114,7 @@ Dynamically converts JSON connector config to Terraform HCL and deploys using te
 ## Examples
 
 ```bash
-playground connector create-or-update -c filestream-sink << EOF
+playground connector create-or-update -c filestream-sink --wait << EOF
 {
     "tasks.max": "1",
     "connector.class": "org.apache.kafka.connect.file.FileStreamSinkConnector",

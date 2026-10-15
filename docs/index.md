@@ -178,6 +178,7 @@ visit https://docs.docker.com/get-docker to install
 
 - [topic](playground%20topic) - 🗳 Topic commands
 - [get-number-records](playground%20topic%20get-number-records) - 💯 Get number of records in a topic
+- [wait-for-records](playground%20topic%20wait-for-records) - ⏳ Wait for a topic to contain a minimum number of records
 - [get-offsets](playground%20topic%20get-offsets) - 📍 Get earliest and latest offsets per partition of a topic
 - [display-consumer-offsets](playground%20topic%20display-consumer-offsets) - 📭 Display content of __consumer_offsets topic
 - [list](playground%20topic%20list) - 🔘 List topics
@@ -214,6 +215,7 @@ visit https://docs.docker.com/get-docker to install
 
 - [connector](playground%20connector) - 🔗 Connector commands
 - [status](playground%20connector%20status) - 🧩 Show status of all connectors
+- [wait](playground%20connector%20wait) - ⏳ Wait for connectors to reach a state
 - [error-recommendations](playground%20connector%20error-recommendations) - 💡 Show error recommendations for fully managed connectors
 - [oracle-cdc-xstream](playground%20connector%20oracle-cdc-xstream) - 🅾️ Specific Oracle CDC Xstream commands
 - [offsets](playground%20connector%20offsets) - 💈 Handle source and sink connectors offsets

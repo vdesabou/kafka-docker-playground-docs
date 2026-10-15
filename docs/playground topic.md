@@ -16,6 +16,7 @@ command works on plaintext, on sasl-ssl and on Confluent Cloud.
 
 - **consume**: read from the beginning, deserialising automatically
 - **get-number-records**: count what is in the topic
+- **wait-for-records**: wait until the topic contains N records
 - **get-offsets**: earliest and latest offsets per partition
 - **display-consumer-offsets**: read the internal offsets topic
 
@@ -41,6 +42,7 @@ playground topic COMMAND
 ## Topic commands
 
 - [get-number-records](playground%20topic%20get-number-records) - 💯 Get number of records in a topic
+- [wait-for-records](playground%20topic%20wait-for-records) - ⏳ Wait for a topic to contain a minimum number of records
 - [get-offsets](playground%20topic%20get-offsets) - 📍 Get earliest and latest offsets per partition of a topic
 - [display-consumer-offsets](playground%20topic%20display-consumer-offsets) - 📭 Display content of __consumer_offsets topic
 - [list](playground%20topic%20list) - 🔘 List topics

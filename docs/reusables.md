@@ -1172,18 +1172,23 @@ The load comes from the example:
   * MongoDB: documents in the collection of the connector, with the shape of an existing document so that the schema inferred by the connector stays compatible (`bulk`: insertMany, `small-txn`: insertOne, `update`)
   * IBM MQ: messages put in the queue of the connector with `amqsput` (the max depth of the queue is raised first)
   * MQTT: messages published with `mosquitto_pub`, **steady mode only**: a paused MQTT source stays subscribed, so the messages published while it is paused go to its in-memory buffer or are dropped by the broker
+  * IBM MQ (Confluent and ibm-messaging connectors): messages put in the queue with `amqsput`
+  * ActiveMQ, WebLogic, TIBCO EMS (and their JMS source variants): messages sent with `BenchmarkJmsProducer` (`tools/benchmark-jms`), a small JMS producer run with the client jars of the broker and the JNDI settings of the connector (`--shape bulk`: transactions of 1000 messages, `--shape small-txn`: one send per message). A topic destination is measured with `--mode steady` only
+  * RabbitMQ: messages published with the `producer.py` of the example
+  * Solace (and JMS Solace): messages sent through the REST messaging port of the broker
+  * Splunk: events sent to the HTTP event collector of the connector, **steady mode only** (the connector keeps the events received while it is paused in memory)
 * or your own command with `--load-command` (drain) / `--stream-load-command` (steady), for example in a reproduction model (see below)
 
 #### Your own load
 
-Both commands run with `bash -c`, from the current directory. Give the schema of the records on stdin (`--value @file` only looks in the predefined schemas of the CLI).
+Both commands run with `bash -c`, from the current directory. The examples below use a predefined schema of the CLI (`--value @predefined-schemas/avro/customer.avsc`): use the schema of the records your connector expects.
 
 **Drain** (`--load-command`): the command runs while the connector is paused, creates the records and returns. `--nb-records` is the number of records the connector should then process, unless the command prints a line `BENCHMARK_RECORDS=<n>`:
 
 ```bash
-# sink: 1M records in the topic of the connector, with the schema of its records
+# sink: 1M records in the topic of the connector
 playground connector benchmark --nb-records 1000000 \
-  --load-command "playground topic produce -t my-topic --nb-messages 1000000 < my-schema.avsc"
+  --load-command "playground topic produce -t my-topic --nb-messages 1000000 --value @predefined-schemas/avro/customer.avsc"
 
 # source: your own script, which inserts the rows and prints BENCHMARK_RECORDS=<n>
 playground connector benchmark --load-command "./load-my-table.sh 500000"
@@ -1193,7 +1198,7 @@ playground connector benchmark --load-command "./load-my-table.sh 500000"
 
 ```bash
 playground connector benchmark --mode steady --duration 2m \
-  --stream-load-command 'while [ ! -f "$BENCHMARK_STOP_FILE" ]; do playground topic produce -t my-topic --nb-messages 10000 < my-schema.avsc; echo "BENCHMARK_BATCH=10000 $(date +%s)"; done'
+  --stream-load-command 'while [ ! -f "$BENCHMARK_STOP_FILE" ]; do playground topic produce -t my-topic --nb-messages 10000 --value @predefined-schemas/avro/customer.avsc; echo "BENCHMARK_BATCH=10000 $(date +%s)"; done'
 ```
 
 #### Is the connector the bottleneck?
@@ -1210,6 +1215,19 @@ A benchmark is only meaningful when the connector is what limits the throughput.
 | the load generated N records but the connector processed only M | steady mode: a backlog builds up in the source system, or a publish/subscribe broker (MQTT) drops the messages it cannot deliver |
 
 At the end, it prints a summary (throughput with p50 / p95 / min per sample, put or poll batch time, running ratio, connect CPU), writes the samples (csv) and the result (json, also with `--json`) to `--output-dir`, and opens an HTML report with the charts. Each result is appended to a `benchmark-history` file, and compared with the previous benchmark of the same connector in the same example, mode and shape.
+
+#### Compare connector versions
+
+`--connector-tag` (repeat the flag) benchmarks several versions of the connector plugin one after the other. For each version: [playground update-version](https://kafka-docker-playground.io/#/playground%20update-version) `--connector-tag` (only the connect container is restarted, the connector and its offsets are kept), a check that the connector runs the requested version, an untimed warm-up drain (the worker JVM was restarted), then the benchmark. The original version is restored at the end, and the summary and the report compare the versions (one color per version, mean / min / max, delta with the first version). `--rounds 2` alternates the versions (A B A B), which shows a drift from one run to the next:
+
+```bash
+playground connector benchmark --nb-records 5000000 --connector-tag 10.9.7 --connector-tag 10.9.9 --rounds 2
+```
+
+> [!WARNING]
+> A downgrade or a major version change can be incompatible with the offsets or the config of the connector: the comparison stops at the first FAILED state.
+
+Each result also records the setup it ran on, shown in the **Setup** section of the report: host (OS, CPU model, CPUs, memory), container engine and the resources given to it, connect image and whether it runs **emulated** (an amd64 image on an arm64 host is much slower), connect JVM and maximum heap, number of workers and brokers, environment, connector plugin version, and the connector configuration with secrets masked. The summary warns when the previous run was on a different setup, and the history chart shows runs of another setup faded. The report also links to the example on GitHub, at the commit it ran with and on the default branch (repro models link to the private repository of the `reproduction-models` submodule), and to the documentation of the connector (from the manifest of its plugin).
 
 > [!NOTE]
 > Everything runs on one docker host: the numbers are relative, compare runs on the same machine only. When the backlog is processed before the first sample, the throughput is only a lower bound (`≥`): increase `--nb-records` 10x. Fully managed connectors and the cfk environment are not supported yet.

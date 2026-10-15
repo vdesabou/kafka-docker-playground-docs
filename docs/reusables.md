@@ -359,6 +359,8 @@ The terminal shows one block per step (✅ applied, ⏭️ skipped by its predic
 * the error and its stack trace for a failing step
 * a final record card: what the sink connector receives, or what the source connector sends to Kafka
 
+![playground connector smt test report](./images/report-smt-test.jpg)
+
 With `--json`, the steps are printed as JSON for scripts. The command exits with `1` when a transform fails (a dropped record is not an error):
 
 ```bash
@@ -373,6 +375,8 @@ playground connector smt test --json --config @transforms.json --record @record.
 ```bash
 playground connector smt test --connector filestream-sink --from-topic filestream --offset 0 --cp-version 7.9.0 --cp-version 8.3.2
 ```
+
+![playground connector smt test report comparing CP versions](./images/report-smt-test-cp-versions.jpg)
 
 ### SMTs that are not in the worker
 
@@ -861,6 +865,52 @@ playground analyze heap-dump --file heap-dump-connect-2026-10-14.hprof
 Besides the text digest, they write a self-contained HTML report to share in a case (opened in your browser), and most
 of them accept `--json` for scripts and agents.
 
+The reports of the samples:
+
+<!-- tabs:start -->
+
+#### **🧵 thread-dump**
+
+```bash
+playground analyze thread-dump --sample deadlock_jdk21
+```
+
+![playground analyze thread-dump report](./images/report-thread-dump.jpg)
+
+#### **📈 gc-logs**
+
+```bash
+playground analyze gc-logs --sample jdk21_g1_kafka_real
+```
+
+![playground analyze gc-logs report](./images/report-gc-logs.jpg)
+
+#### **🔬 heap-dump**
+
+```bash
+playground analyze heap-dump --sample leak_growth
+```
+
+![playground analyze heap-dump report](./images/report-heap-dump.jpg)
+
+#### **🅾️ oracle-xstream-report**
+
+```bash
+playground analyze oracle-xstream-report --sample synthetic_failures
+```
+
+![playground analyze oracle-xstream-report report](./images/report-oracle-xstream-report.jpg)
+
+#### **📦 cfk-bundle**
+
+```bash
+playground analyze cfk-bundle --sample synthetic
+```
+
+![playground analyze cfk-bundle report](./images/report-cfk-bundle.jpg)
+
+<!-- tabs:end -->
+
 ## 🚫 Blocking traffic
 
 To reproduce what happens when a component cannot reach another one (a broker, Schema Registry, a database or an external API going down, a firewall dropping packets), a reproduction model can block the traffic between containers or to an external host, then unblock it to check how the connector or client recovers.
@@ -1332,6 +1382,8 @@ A benchmark is only meaningful when the connector is what limits the throughput.
 
 At the end, it prints a summary (throughput with p50 / p95 / min per sample, put or poll batch time, running ratio, connect CPU), writes the samples (csv) and the result (json, also with `--json`) to `--output-dir`, and opens an HTML report with the charts. Each result is appended to a `benchmark-history` file, and compared with the previous benchmark of the same connector in the same example, mode and shape.
 
+![playground connector benchmark report](./images/report-benchmark.jpg)
+
 #### Compare connector versions
 
 `--connector-tag` (repeat the flag) benchmarks several versions of the connector plugin one after the other. For each version: [playground update-version](https://kafka-docker-playground.io/#/playground%20update-version) `--connector-tag` (only the connect container is restarted, the connector and its offsets are kept), a check that the connector runs the requested version, an untimed warm-up drain (the worker JVM was restarted), then the benchmark. The original version is restored at the end, and the summary and the report compare the versions (one color per version, mean / min / max, delta with the first version). `--rounds 2` alternates the versions (A B A B), which shows a drift from one run to the next:
@@ -1339,6 +1391,8 @@ At the end, it prints a summary (throughput with p50 / p95 / min per sample, put
 ```bash
 playground connector benchmark --nb-records 5000000 --connector-tag 10.9.7 --connector-tag 10.9.9 --rounds 2
 ```
+
+![playground connector benchmark report comparing connector versions](./images/report-benchmark-versions.jpg)
 
 > [!WARNING]
 > A downgrade or a major version change can be incompatible with the offsets or the config of the connector: the comparison stops at the first FAILED state.

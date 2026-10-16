@@ -1547,6 +1547,22 @@ The connect workers are recorded with [Java Flight Recorder](/reusables?id=%f0%9
 
 The `.jfr` files are kept in `--output-dir`, to open with JDK Mission Control or `playground analyze flight-recorder -f`. The recording costs a few % of throughput: `--no-flight-recorder` disables it, and the summary warns when the previous run was not recorded the same way.
 
+#### 📊 Grafana
+
+When the example runs with [Grafana](/how-to-use?id=%f0%9f%93%8a-enabling-jmx-grafana) (`--enable-jmx-grafana`, also enabled by `--enable-sql-datagen`), the benchmark marks the measure on the dashboards, so that you see the broker side, the JVM and the connector dashboards during the run:
+
+* a region annotation over the window of the measure, with the throughput (`🏎️ benchmark of postgres-source (10.9.9): drain of 3000000 records, 225563.9 records/s`, tags `playground-benchmark`, the connector and its version), on the **Kafka Connect cluster** dashboard, the dashboard of the connector when there is one (**Debezium**, **Oracle CDC**, **Oracle XStream CDC**, **Mongo**), and the **Kafka cluster** dashboard. With `--connector-tag`, each version annotates its own run
+* links to those dashboards at the time of the run in the summary and in the header of the HTML report (`📊 Grafana: Kafka Connect cluster · Kafka cluster`)
+
+```
+   grafana                http://localhost:3000/d/AEaSQ97mz?orgId=1&from=1792145306949&to=1792145491358
+                          measure annotated on 2 dashboard(s): Kafka Connect cluster, Kafka cluster
+```
+
+![a playground connector benchmark annotated on the Kafka Connect cluster dashboard](./images/grafana-benchmark-annotation.jpg)
+
+The benchmark does not start Grafana: start the example with it. Prometheus scrapes every 15 s, so a measure needs to last at least 45 s to show on the dashboards; the summary warns when it is shorter (`grafana has only N sample(s) during it`): increase `--nb-records`, or use `--mode steady --duration 2m`. The JMX exporter and the Grafana containers use some CPU: the summary also warns when the previous run was not measured the same way.
+
 > [!NOTE]
 > Everything runs on one docker host: the numbers are relative, compare runs on the same machine only. When the backlog is processed before the first sample, the throughput is only a lower bound (`≥`): increase `--nb-records` 10x. Fully managed connectors and the cfk environment are not supported yet.
 

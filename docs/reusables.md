@@ -1374,6 +1374,10 @@ playground connector benchmark --nb-records 3000000
 playground connector benchmark --nb-records 1000000 --shape bulk
 playground connector benchmark --nb-records 100000 --shape small-txn
 playground connector benchmark --nb-records 1000000 --shape update
+playground connector benchmark --nb-records 1000000 --shape delete
+
+# insert, update, then delete the same rows: one drain per phase, compared
+playground connector benchmark --nb-records 2000000 --shape bulk,update,delete
 
 # throughput during 5 minutes, with a load running in the background
 playground connector benchmark --mode steady --duration 5m
@@ -1388,7 +1392,7 @@ The load comes from the example:
 
 * **sink connectors**: the `playground topic produce` of the example script that feeds the connector is replayed with `--nb-messages <n>` (same schema, key and headers), so it works with almost every sink example
 * **source connectors**: `benchmark-load.bash` next to the example script, called with `--check` first so that an unsupported combination fails before the connector is paused:
-  * JDBC and Debezium PostgreSQL, Debezium MySQL, JDBC and Debezium SQL Server, Oracle CDC, Oracle XStream, Debezium Oracle and JDBC Oracle: rows in the `CUSTOMERS` table (`dbo.customers` for SQL Server), in one transaction (`--shape bulk`), one transaction per row (`--shape small-txn`) or as updates (`--shape update`, refused for a JDBC source in `incrementing` mode, which does not capture updates)
+  * JDBC and Debezium PostgreSQL, Debezium MySQL, JDBC and Debezium SQL Server, Oracle CDC, Oracle XStream, Debezium Oracle and JDBC Oracle: rows in the `CUSTOMERS` table (`dbo.customers` for SQL Server), in one transaction (`--shape bulk`), one transaction per row (`--shape small-txn`) as updates (`--shape update`, refused for a JDBC source in `incrementing` mode, which does not capture updates), or as deletes (`--shape delete`, refused for a JDBC source, which does not capture deletes)
   * MongoDB: documents in the collection of the connector, with the shape of an existing document so that the schema inferred by the connector stays compatible (`bulk`: insertMany, `small-txn`: insertOne, `update`)
   * IBM MQ: messages put in the queue of the connector with `amqsput` (the max depth of the queue is raised first)
   * MQTT: messages published with `mosquitto_pub`, **steady mode only**: a paused MQTT source stays subscribed, so the messages published while it is paused go to its in-memory buffer or are dropped by the broker
@@ -1534,7 +1538,7 @@ What the benchmark expects from the script:
 
 | | |
 |---|---|
-| arguments | `--records <n> --mode preload\|stream --shape bulk\|small-txn\|update`, parsed by `benchmark_load_args`, and `--check` first, before the connector is paused: exit with an error for a combination the load cannot do |
+| arguments | `--records <n> --mode preload\|stream --shape bulk\|small-txn\|update\|delete`, parsed by `benchmark_load_args`, and `--check` first, before the connector is paused: exit with an error for a combination the load cannot do |
 | drain (`preload`) | load the rows and return, printing `BENCHMARK_RECORDS=<n>`: the number of records the connector should write (2 per row for Oracle CDC with a redo log topic, for example) |
 | steady (`stream`) | repeat batches until the file `$BENCHMARK_STOP_FILE` exists, printing `BENCHMARK_BATCH=<records> <epoch>` after each batch: `benchmark_stream_batches <records> <command>` does both, and never stops a batch in the middle |
 | environment | `BENCHMARK_TEST_FILE` (the script that was run: when several reproduction models share the folder, branch on it), `BENCHMARK_CONNECTOR`, `BENCHMARK_CONNECTOR_CONFIG` (a json file with the connector config) |
@@ -1558,6 +1562,33 @@ A benchmark is only meaningful when the connector is what limits the throughput.
 At the end, it prints a summary (throughput with p50 / p95 / min per sample, put or poll batch time, running ratio, connect CPU), writes the samples (csv) and the result (json, also with `--json`) to `--output-dir`, and opens an HTML report with the charts. Each result is appended to a `benchmark-history` file, and compared with the previous benchmark of the same connector in the same example, mode and shape.
 
 ![playground connector benchmark report](./images/report-benchmark.jpg)
+
+#### Insert, update, then delete the same rows
+
+A CDC connector does not handle every change at the same cost: an update carries the before and after images of the row, a delete can also give a tombstone. `--shape` takes a list of shapes: one drain per shape, on the same rows, and the summary and the report compare the phases:
+
+```bash
+playground connector benchmark --nb-records 2000000 --shape bulk,update,delete
+```
+
+```
+   phase  shape   records  seconds  records/s
+   1      bulk    2000000  19.1     104712
+   2      update  2000000  13.8     144927.5
+   3      delete  4000000  19.2     208333.3
+```
+
+With Debezium PostgreSQL above, the delete phase has twice as many records: each deleted row gives a delete event and a tombstone. The benchmark reads it from the connector config, so that it waits for the right number of records:
+
+| Connector | Records per deleted row |
+|---|---|
+| Debezium (PostgreSQL, MySQL, SQL Server, Oracle), Oracle XStream | 2 by default: the delete event and a tombstone (`tombstones.on.delete=true`); 1 with `tombstones.on.delete=false` |
+| Oracle CDC | 1, plus a tombstone with `emit.tombstone.on.delete=true` (default `false`) |
+| JDBC source | `--shape delete` is refused: a query-based connector does not see deletes |
+
+![playground connector benchmark report comparing the phases of a sequence](./images/report-benchmark-sequence.jpg)
+
+The report shows one bar per phase, the fastest phase, and with the flight recorder, where the time goes by phase (for example, less waiting and more CPU during the updates). A sequence is a series of drains of the load of a source connector: not with `--connector-tag`, `--mode steady` or a sink connector. `--shape delete` alone deletes rows that a previous run inserted (drain only).
 
 #### Compare connector versions
 

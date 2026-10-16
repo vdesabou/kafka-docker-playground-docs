@@ -819,15 +819,28 @@ Analyze the dumps with [`playground analyze thread-dump`](/playground%20analyze%
 
 [Java Flight Recorder](https://www.baeldung.com/java-flight-recorder-monitoring) (JFR) records what happens in the JVM over a period of time with a low overhead: CPU usage per method, memory allocations, garbage collections, lock contention, file and socket I/O. Use it for performance problems (slow throughput, latency spikes, high CPU) where a single thread or heap dump is not enough.
 
-Just use [CLI](/playground%20debug%20flight-recorder) `playground debug flight-recorder`: start the recording, reproduce the issue, then stop it. Stopping copies the `.jfr` file to the current directory; open it with [JDK Mission Control](https://jdk.java.net/jmc/).
-
-> [!NOTE]
-> The command needs `jcmd`: if the image only has a JRE, it installs JDK 17 with `playground container change-jdk`, which restarts the container.
+Just use [CLI](/playground%20debug%20flight-recorder) `playground debug flight-recorder`: start the recording, reproduce the issue, then stop it. Stopping copies the `.jfr` file to the current directory (or `--output-dir`) and analyzes it with [`playground analyze flight-recorder`](/playground%20analyze%20flight-recorder): where the time of the connector tasks goes, with findings (see [Analyze what you collected](/reusables?id=%f0%9f%94%8e-analyze-what-you-collected)). Open the `.jfr` with [JDK Mission Control](https://jdk.java.net/jmc/) for the details.
 
 ```bash
 playground debug flight-recorder --action start
-playground debug flight-recorder --action stop
+# reproduce the issue
+playground debug flight-recorder --action status
+playground debug flight-recorder --action stop                     # copies the .jfr and analyzes it (--no-analyze to skip)
+playground debug flight-recorder -c connect -c connect2 --action start --settings profile
 ```
+
+The recording is driven over JMX (`FlightRecorderMXBean`): the Confluent images ship a JRE without `jcmd`, and nothing is installed or restarted. `jcmd` is only used for containers without a JMX port (cfk pods), when the image has it.
+
+`--settings` chooses what is recorded:
+
+| Settings | Records | Overhead |
+|---|---|---|
+| `playground` (default) | what `playground analyze flight-recorder` needs: CPU per thread every second, execution and native samples, socket, file, lock and park events of 1 ms or more, allocation samples, GC, exceptions | low |
+| `profile` / `default` | the settings shipped with the JDK | about 2% / 1% |
+| `all` | every event, with no threshold, for a deep dive in JDK Mission Control | high |
+
+> [!TIP]
+> To record for a fixed time and analyze in one command: `playground analyze flight-recorder -c connect --duration 2m`. During a benchmark, [playground connector benchmark](/reusables?id=%e2%8f%b1%ef%b8%8f-benchmark-a-connector) records the workers on its own.
 
 ### 🧰 More debug commands
 
@@ -854,12 +867,14 @@ real data.
 | [`playground analyze logs`](/playground%20analyze%20logs) | 🔥 ERROR/FATAL digest of log files, folders, zip / tar bundles | `--sample support_bundle` |
 | [`playground analyze oracle-xstream-report`](/playground%20analyze%20oracle-xstream-report) | 🅾️ Oracle XStream CDC diagnostics reports (`orclcdc_diag.sql`) | `--sample synthetic_failures` |
 | [`playground analyze cfk-bundle`](/playground%20analyze%20cfk-bundle) | 📦 CFK support bundles: pods, events, custom resources, logs | `--sample synthetic` |
+| [`playground analyze flight-recorder`](/playground%20analyze%20flight-recorder) | 🛩️ Java Flight Recorder recordings: where the time of the connector tasks goes (network I/O by remote, Kafka client, locks, CPU by layer, hot methods) | `--sample jdbc_postgres_sink` |
 
 ```bash
 playground analyze thread-dump --sample deadlock_jdk21
 playground analyze thread-dump --container connect                 # 3 dumps of the running connect worker
 playground analyze logs --file ./customer-logs.zip
 playground analyze heap-dump --file heap-dump-connect-2026-10-14.hprof
+playground analyze flight-recorder --container connect --duration 60s --connector my-sink   # records connect over JMX, then analyzes
 ```
 
 Besides the text digest, they write a self-contained HTML report to share in a case (opened in your browser), and most
@@ -909,7 +924,33 @@ playground analyze cfk-bundle --sample synthetic
 
 ![playground analyze cfk-bundle report](./images/report-cfk-bundle.jpg)
 
+#### **🛩️ flight-recorder**
+
+```bash
+playground analyze flight-recorder --sample jdbc_postgres_sink
+```
+
+![playground analyze flight-recorder report](./images/report-flight-recorder.jpg)
+
 <!-- tabs:end -->
+
+#### 🛩️ What `analyze flight-recorder` reports
+
+It reads `.jfr` files of JDK 11+ JVMs with the flight recorder API of the JDK, run in an `eclipse-temurin:25-jdk`
+container (pulled the first time), and looks at the Kafka Connect task threads (`task-thread-*`, `--connector` for one
+connector, `--threads` for any regex; every thread when none matches):
+
+| Section | Content |
+|---|---|
+| Findings | one sentence, a number and a next step: the tasks wait on a remote system, on the Kafka consumer fetch or the producer, on a lock, sleep; they are CPU bound; conversion, logging or SMTs take the CPU; the JVM was still compiling code (JIT); allocation, exceptions, long GC pauses |
+| Task thread time, by state | share of the recording each task thread spent running, blocked on network I/O, in the Kafka client, on locks, waiting, on file I/O |
+| CPU of the task threads, by layer | execution samples classified by their first frame outside the JDK: connector, converters (serialization), SMTs, Kafka client, connect framework, libraries (drivers, SDKs), logging, JDK |
+| Hot methods | the methods the task threads run, with a link to the source of the connector when its manifest has one |
+| Network I/O, allocation, locks and waits, busiest threads | by remote host, class, site and thread |
+
+Recordings made with the `playground` settings (benchmark, `debug flight-recorder`, `analyze flight-recorder
+--container`) give the most details; a recording made with the JDK settings works too, with throttled socket events and
+10 or 20 ms thresholds.
 
 ## 🚫 Blocking traffic
 
@@ -1394,10 +1435,30 @@ playground connector benchmark --nb-records 5000000 --connector-tag 10.9.7 --con
 
 ![playground connector benchmark report comparing connector versions](./images/report-benchmark-versions.jpg)
 
+With the flight recorder (see below), the comparison report also shows where the time goes for each version: CPU by
+layer and task time by state, with the change in points, and a finding that names what changed when a version is 5% or
+more slower or faster.
+
+![playground connector benchmark report comparing where the time goes by version](./images/report-benchmark-versions-flight-recorder.jpg)
+
 > [!WARNING]
 > A downgrade or a major version change can be incompatible with the offsets or the config of the connector: the comparison stops at the first FAILED state.
 
 Each result also records the setup it ran on, shown in the **Setup** section of the report: host (OS, CPU model, CPUs, memory), container engine and the resources given to it, connect image and whether it runs **emulated** (an amd64 image on an arm64 host is much slower), connect JVM and maximum heap, number of workers and brokers, environment, connector plugin version, and the connector configuration with secrets masked. The summary warns when the previous run was on a different setup, and the history chart shows runs of another setup faded. The report also links to the example on GitHub, at the commit it ran with and on the default branch (repro models link to the private repository of the `reproduction-models` submodule), and to the documentation of the connector (from the manifest of its plugin).
+
+#### 🛩️ Where the time goes
+
+The connect workers are recorded with [Java Flight Recorder](/reusables?id=%f0%9f%9b%a9%ef%b8%8f-flight-recorder) during the measure (the drain, or the steady measure after the warm-up). The recording runs over JMX: the Confluent images have no `jcmd`, and nothing is restarted. The summary lists the findings, and the report gets a **Where the time goes** section, the same analysis as [`playground analyze flight-recorder`](/playground%20analyze%20flight-recorder): is it the connector, the system behind it, Kafka, a lock? Which part of the pipeline uses the CPU?
+
+```
+   flight recorder        🔴 The tasks wait on postgres:5432.
+                          ℹ️  Most of the CPU goes to conversion.
+                          ℹ️  Allocation is high.
+```
+
+![playground connector benchmark report: where the time goes](./images/report-benchmark-flight-recorder.jpg)
+
+The `.jfr` files are kept in `--output-dir`, to open with JDK Mission Control or `playground analyze flight-recorder -f`. The recording costs a few % of throughput: `--no-flight-recorder` disables it, and the summary warns when the previous run was not recorded the same way.
 
 > [!NOTE]
 > Everything runs on one docker host: the numbers are relative, compare runs on the same machine only. When the backlog is processed before the first sample, the throughput is only a lower bound (`≥`): increase `--nb-records` 10x. Fully managed connectors and the cfk environment are not supported yet.

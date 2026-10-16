@@ -148,6 +148,7 @@ and how to contribute are in the plugin README, at `reproduction-models/claude-p
 | why did it fail? | [`playground container logs -c connect --errors`](/playground%20container%20logs) |
 | what is failing in these logs / this bundle? | [`playground analyze logs -f <file\|folder\|zip>`](/playground%20analyze%20logs) |
 | stuck, slow, GC, heap? | [`playground analyze thread-dump`](/playground%20analyze%20thread-dump), [`gc-logs`](/playground%20analyze%20gc-logs), [`heap-dump`](/playground%20analyze%20heap-dump) |
+| where does the time of the connector tasks go? | [`playground analyze flight-recorder -c connect --duration 60s`](/playground%20analyze%20flight-recorder) |
 | is this example red in CI too? | [`playground get-ci-result --test <dir> --logs`](/playground%20get-ci-result) |
 | what does this transform chain (SMT) do to a record? why does it fail? | [`playground connector smt test --connector <c>`](/playground%20connector%20smt%20test) |
 | where is the source code of connector X, version Y? | [`playground connector-plugin sourcecode --only-show-url`](/playground%20connector-plugin%20sourcecode) |

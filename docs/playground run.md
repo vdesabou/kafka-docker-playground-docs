@@ -271,7 +271,8 @@ the connector. Works with the JDBC, Debezium, Oracle CDC and XStream source exam
 PostgreSQL, SQL Server), self-managed and fully managed, and with their reproduction models.
 
 `SQL_DATAGEN_DURATION` (minutes, default 10) and `SQL_DATAGEN_SESSIONS` (default 5) change the duration and the number of  
-parallel sessions.
+parallel sessions, `BENCHMARK_LOAD_SCRIPT` another load script than benchmark-load.bash (see playground connector  
+benchmark).
 
 #### `--connect-community-image`
 

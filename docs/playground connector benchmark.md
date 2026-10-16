@@ -32,11 +32,18 @@ produces its data works without anything else
 script, called with `--records` `<n>` `--mode` preload|stream `--shape`  
 bulk|small-txn|update (rows in the CUSTOMERS table for the  
 postgres, mysql, oracle and sql server examples, documents for  
-mongodb, messages for ibm mq and mqtt, see the README of the  
-example). It is called with `--check` first, so that an unsupported  
+mongodb, messages for ibm mq and mqtt, json files for the  
+generalized s3, gcs and azure blob storage sources, see the README  
+of the example). It is called with `--check` first, so that an unsupported  
 combination fails before the connector is paused
 
 - or `--load-command` / `--stream-load-command`, which take precedence
+
+`BENCHMARK_LOAD_SCRIPT`=`<file>` uses another load script than  
+benchmark-load.bash: a file name in the folder of the example (or an  
+absolute path), e.g. one per reproduction model named after its ticket  
+(`BENCHMARK_LOAD_SCRIPT`=benchmark-load-123456.bash). It takes the same  
+arguments, and `--enable-sql-datagen` uses it too.
 
 Throughput is read from the connect JMX metrics of the tasks  
 (sink-record-read-total: records read from kafka, including the ones  
@@ -119,11 +126,13 @@ playground connector benchmark [OPTIONS]
 - bulk: one transaction with all the records
 - small-txn: one transaction per record
 - update: updates existing records
+- delete: deletes existing records (drain only; not for a JDBC source, which does not capture deletes; with Debezium or XStream, each deleted row also gives a tombstone, unless tombstones.on.delete=false)
+
+A sequence of shapes, e.g. bulk,update,delete, runs one drain per shape on the same rows (insert, update, then delete them) and compares the phases in the summary and the report. Drain of a source connector only.
 
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Default Value:  | `bulk`
-| Allowed Values: | `bulk`, `small-txn`, `update`
 
 #### `--record-size RECORD-SIZE`
 
@@ -291,6 +300,10 @@ playground connector benchmark --nb-records 1000000 --no-flight-recorder
 
 ```bash
 playground connector benchmark --nb-records 1000000 --shape small-txn --sessions 5
+```
+
+```bash
+playground connector benchmark --nb-records 500000 --shape bulk,update,delete
 ```
 
 

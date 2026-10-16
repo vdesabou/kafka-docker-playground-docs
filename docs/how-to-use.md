@@ -454,8 +454,11 @@ By default, Grafana dashboard using JMX metrics is not started for every test.
 You can enable this with `--enable-jmx-grafana` option of [playground run](/playground%20run) or by setting environment variable `ENABLE_JMX_GRAFANA=1` in your shell.
 
 📊 Grafana is reachable at [http://127.0.0.1:3000](http://127.0.0.1:3000)
-🛡️ Prometheus is reachable at [http://127.0.0.1:9090](http://127.0.0.1:9090)
+🛡️ Prometheus is reachable at [http://127.0.0.1:9090](http://127.0.0.1:9090) (it scrapes the JMX exporters every 15 s)
 📛 [Pyroscope](https://pyroscope.io/docs/) is reachable at [http://127.0.0.1:4040](http://127.0.0.1:4040)
+
+> [!TIP]
+> [playground connector benchmark](/reusables?id=%f0%9f%93%8a-grafana) annotates its measure on the Kafka Connect, connector and Kafka cluster dashboards, and links to them at the time of the run.
 
 #### Grafana dashboards
 

@@ -9,7 +9,7 @@ fly when missing, and their output is brought back to your machine.
 **🐌 It hangs, or it is slow**
 
 - **thread-dump**: what every thread is doing right now
-- **flight-recorder**: record the JVM over a period, open it in JMC
+- **flight-recorder**: record the JVM from start to stop, then analyze it
 
 **💾 It eats memory**
 
@@ -33,7 +33,7 @@ fly when missing, and their output is brought back to your machine.
 - **generate-diagnostics**: a support bundle for connect or broker
 
 🔎 To analyze what you collected (thread dumps, GC logs, heap dumps,  
-logs, Oracle XStream reports, CFK bundles): playground analyze
+logs, Oracle XStream reports, CFK bundles, flight recordings): playground analyze
 
 ## Usage
 
@@ -53,7 +53,7 @@ playground debug COMMAND
 - [block-traffic](playground%20debug%20block-traffic) - 🚫 Blocking traffic using iptables
 - [java-debug](playground%20debug%20java-debug) - 🤎 JVM arguments for SSL, Kerberos or Class Loading
 - [jscissors](playground%20debug%20jscissors) - ✂️ jscissors is an instrumentation framework and can help to analyse control flow and perform some specific logging
-- [flight-recorder](playground%20debug%20flight-recorder) - 🛩️ Record flight recorder
+- [flight-recorder](playground%20debug%20flight-recorder) - 🛩️ Record a JVM with Java Flight Recorder, from `--action` start to `--action` stop
 - [log-level](playground%20debug%20log-level) - 🧬 Set log level for any package
 
 ## Debug commands

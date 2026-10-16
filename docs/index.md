@@ -136,6 +136,7 @@ visit https://docs.docker.com/get-docker to install
 - [gc-logs](playground%20analyze%20gc-logs) - 📈 Analyze JVM Garbage Collection logs
 - [oracle-xstream-report](playground%20analyze%20oracle-xstream-report) - 🅾️ Analyze Oracle XStream CDC diagnostics reports (orclcdc_diag.sql)
 - [cfk-bundle](playground%20analyze%20cfk-bundle) - 📦 Analyze a Confluent for Kubernetes (CFK) support bundle
+- [flight-recorder](playground%20analyze%20flight-recorder) - 🛩️ Analyze a Java Flight Recorder recording: where the time of the connector tasks goes
 
 ### Debug commands
 
@@ -150,7 +151,7 @@ visit https://docs.docker.com/get-docker to install
 - [block-traffic](playground%20debug%20block-traffic) - 🚫 Blocking traffic using iptables
 - [java-debug](playground%20debug%20java-debug) - 🤎 JVM arguments for SSL, Kerberos or Class Loading
 - [jscissors](playground%20debug%20jscissors) - ✂️ jscissors is an instrumentation framework and can help to analyse control flow and perform some specific logging
-- [flight-recorder](playground%20debug%20flight-recorder) - 🛩️ Record flight recorder
+- [flight-recorder](playground%20debug%20flight-recorder) - 🛩️ Record a JVM with Java Flight Recorder, from `--action` start to `--action` stop
 - [log-level](playground%20debug%20log-level) - 🧬 Set log level for any package
 - [cfk](playground%20debug%20cfk) - 🧱 CFK debug sub-commands
 

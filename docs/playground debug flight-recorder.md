@@ -1,10 +1,22 @@
 # playground debug flight-recorder
 
-🛩️ Record flight recorder
+🛩️ Record a JVM with Java Flight Recorder, from `--action` start to `--action` stop
 
-Read more about it at https://www.baeldung.com/java-flight-recorder-monitoring
+For a window of any length, in a script or by hand: start, reproduce the problem, stop. `--action` stop copies the  
+.jfr to `--output-dir` and analyzes it with playground analyze flight-recorder (where the time of the connector tasks  
+goes: states, CPU by layer, hot methods, allocation, locks, GC, findings), unless `--no-analyze`. Open it with JDK  
+Mission Control (https://jdk.java.net/jmc/) for the details. To record for a fixed time and analyze in one  
+command: playground analyze flight-recorder -c `<container>` `--duration` 2m.
 
-Open the jfr file with JDK Mission Control JMC(https://jdk.java.net/jmc/)
+🔌 The recording is driven over JMX (FlightRecorderMXBean) when the container has a JMX port (`KAFKA_JMX_PORT`, `SCHEMA_REGISTRY_JMX_PORT`...), as in the  
+playground environments: the cp images ship a JRE without jcmd, and nothing is installed or restarted. Otherwise  
+(cfk pods), jcmd is used when the image has it.
+
+⚙️ `--settings` playground (default) records what the analysis needs with a low overhead  
+(tools/jfr-analyzer/playground.jfc); profile and default are the settings of the JDK; all records every event  
+with no threshold (scripts/cli/all.jfc), for a deep dive in JDK Mission Control, with a high overhead.
+
+🔖 The recording of each container is kept in playground.ini (flight_recorder.`<container>`), `--action` status shows it.
 
 ## Usage
 
@@ -27,12 +39,38 @@ playground debug flight-recorder [OPTIONS]
 
 #### `--action ACTION`
 
-🟢 start or stop
+🟢 start, stop (copy the recording and analyze it) or status
 
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Required:       | ✓ Yes
-| Allowed Values: | `start`, `stop`
+| Allowed Values: | `start`, `stop`, `status`
+
+#### `--settings SETTINGS`
+
+⚙️ Settings of the recording, used by `--action` start (default: playground)
+
+- `playground`: what playground analyze flight-recorder needs, low overhead (tools/jfr-analyzer/playground.jfc)
+- **profile**: settings of the JDK for profiling, about 2% overhead
+- **default**: settings of the JDK for continuous recording, about 1% overhead
+- **all**: every event, no threshold (scripts/cli/all.jfc): high overhead, for JDK Mission Control
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Default Value:  | `playground`
+| Allowed Values: | `playground`, `profile`, `default`, `all`
+
+#### `--output-dir, -o OUTPUT_DIR`
+
+📂 Folder for the .jfr and the HTML report of the analysis, used by `--action` stop (default: current folder)
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Default Value:  | `.`
+
+#### `--no-analyze`
+
+🙈 With `--action` stop, only copy the recording, do not analyze it
 
 ## Examples
 
@@ -42,6 +80,18 @@ playground debug flight-recorder --action start
 
 ```bash
 playground debug flight-recorder --action stop
+```
+
+```bash
+playground debug flight-recorder --action status
+```
+
+```bash
+playground debug flight-recorder -c connect -c connect2 --action start --settings profile
+```
+
+```bash
+playground debug flight-recorder --action stop --output-dir /tmp/jfr --no-analyze
 ```
 
 

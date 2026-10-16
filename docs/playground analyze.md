@@ -15,6 +15,7 @@ playground, to see what they report.
 - **logs**: ERROR/FATAL digest of logs, folders, zips
 - **oracle-xstream-report**: Oracle XStream diagnostics (orclcdc_diag)
 - **cfk-bundle**: CFK support bundle: pods, events, CRs, logs
+- **flight-recorder**: JFR: where the time of the connector tasks goes
 
 To collect them: playground debug thread-dump, heap-dump, flight-recorder,  
 playground connector oracle-cdc-xstream generate-report,  
@@ -38,5 +39,6 @@ playground analyze COMMAND
 - [gc-logs](playground%20analyze%20gc-logs) - 📈 Analyze JVM Garbage Collection logs
 - [oracle-xstream-report](playground%20analyze%20oracle-xstream-report) - 🅾️ Analyze Oracle XStream CDC diagnostics reports (orclcdc_diag.sql)
 - [cfk-bundle](playground%20analyze%20cfk-bundle) - 📦 Analyze a Confluent for Kubernetes (CFK) support bundle
+- [flight-recorder](playground%20analyze%20flight-recorder) - 🛩️ Analyze a Java Flight Recorder recording: where the time of the connector tasks goes
 
 

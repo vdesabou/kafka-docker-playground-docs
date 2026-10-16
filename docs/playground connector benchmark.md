@@ -53,6 +53,19 @@ heap, number of workers and brokers, environment, connector config with
 secrets masked): the report shows it, and the summary warns when the  
 previous run was on a different setup.
 
+🛩️ The connect workers are recorded with Java Flight Recorder during  
+the measure (over JMX: the cp images have no jcmd, nothing is  
+restarted), and the report and the summary say where the time of the  
+task threads went: running, blocked on the system behind the  
+connector, in the Kafka client, locks, waits; the CPU by layer  
+(connector, converters, SMTs, Kafka client, libraries, logging), hot  
+methods, allocation, GC, exceptions, with findings and next steps.  
+With `--connector-tag`, the versions are compared the same way. The  
+recording costs a few % of throughput: `--no-flight-recorder` disables  
+it, and the summary warns when the previous run was not recorded the  
+same way. The .jfr files are kept in `--output-dir` (JDK Mission  
+Control, or playground analyze flight-recorder).
+
 ⚠️ Not available for fully managed connectors and the cfk environment yet.
 
 ## Usage
@@ -213,6 +226,12 @@ Example: `--connector-tag` 10.8.4 `--connector-tag` 10.9.9
 
 🙈 Do not append the result to the benchmark-history file
 
+#### `--no-flight-recorder`
+
+🛩️ Do not record the connect workers with Java Flight Recorder during the measure (no "where the time goes" section in the report)
+
+The recording costs a few % of throughput: compare runs recorded the same way.
+
 #### `--json`
 
 📄 Print the result as json instead of the summary
@@ -245,6 +264,10 @@ playground connector benchmark --load-command "./my-load.sh" --json
 
 ```bash
 playground connector benchmark --nb-records 1000000 --connector-tag 10.8.4 --connector-tag 10.9.9 --rounds 2
+```
+
+```bash
+playground connector benchmark --nb-records 1000000 --no-flight-recorder
 ```
 
 

@@ -1559,6 +1559,8 @@ When the example runs with [Grafana](/how-to-use?id=%f0%9f%93%8a-enabling-jmx-gr
                           measure annotated on 2 dashboard(s): Kafka Connect cluster, Kafka cluster
 ```
 
+![a playground connector benchmark annotated on the Kafka Connect cluster dashboard](./images/grafana-benchmark-annotation.jpg)
+
 The benchmark does not start Grafana: start the example with it. Prometheus scrapes every 15 s, so a measure needs to last at least 45 s to show on the dashboards; the summary warns when it is shorter (`grafana has only N sample(s) during it`): increase `--nb-records`, or use `--mode steady --duration 2m`. The JMX exporter and the Grafana containers use some CPU: the summary also warns when the previous run was not measured the same way.
 
 > [!NOTE]

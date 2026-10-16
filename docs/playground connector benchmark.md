@@ -66,6 +66,15 @@ it, and the summary warns when the previous run was not recorded the
 same way. The .jfr files are kept in `--output-dir` (JDK Mission  
 Control, or playground analyze flight-recorder).
 
+📊 When Grafana runs (example started with `--enable-jmx-grafana`,  
+or `--enable-sql-datagen`), the measure is annotated on the Kafka  
+Connect, connector (Debezium, Oracle CDC, XStream, MongoDB) and  
+Kafka cluster dashboards, and the summary and the report link to  
+them at the time of the run (each version is annotated with  
+`--connector-tag`). Grafana is not started by the benchmark: its  
+JMX exporter and containers use CPU, and the summary warns when  
+the previous run was not measured the same way.
+
 ⚠️ Not available for fully managed connectors and the cfk environment yet.
 
 ## Usage
@@ -226,6 +235,16 @@ Example: `--connector-tag` 10.8.4 `--connector-tag` 10.9.9
 
 🙈 Do not append the result to the benchmark-history file
 
+#### `--sessions SESSIONS`
+
+🧵 Run the benchmark-load.bash of the example in `<sessions>` parallel sessions (default is 1)
+
+A drain splits `--nb-records` between them, steady mode gives each session batches of `--nb-records`. Concurrent transactions are what a busy database looks like to a CDC connector (interleaved transactions in the redo log or the WAL, several open transactions). Only with the benchmark-load.bash of the example, not with `--load-command`.
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Default Value:  | `1`
+
 #### `--no-flight-recorder`
 
 🛩️ Do not record the connect workers with Java Flight Recorder during the measure (no "where the time goes" section in the report)
@@ -268,6 +287,10 @@ playground connector benchmark --nb-records 1000000 --connector-tag 10.8.4 --con
 
 ```bash
 playground connector benchmark --nb-records 1000000 --no-flight-recorder
+```
+
+```bash
+playground connector benchmark --nb-records 1000000 --shape small-txn --sessions 5
 ```
 
 

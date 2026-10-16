@@ -265,7 +265,13 @@ You can use it with:
 
 🌪️ Enable SQL Datagen injection
 
-This only works for Oracle, MySql, Postgres and Microsoft Sql Server source connector examples with JDBC and Debezium
+Once the example succeeded, rows are injected with the benchmark-load.bash next to the example script (the load of  
+playground connector benchmark): one row per transaction, in parallel sessions, for a few minutes, while Grafana shows  
+the connector. Works with the JDBC, Debezium, Oracle CDC and XStream source examples (Oracle, MySQL, MariaDB,  
+PostgreSQL, SQL Server), self-managed and fully managed, and with their reproduction models.
+
+`SQL_DATAGEN_DURATION` (minutes, default 10) and `SQL_DATAGEN_SESSIONS` (default 5) change the duration and the number of  
+parallel sessions.
 
 #### `--connect-community-image`
 

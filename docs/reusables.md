@@ -878,7 +878,9 @@ playground analyze flight-recorder --container connect --duration 60s --connecto
 ```
 
 Besides the text digest, they write a self-contained HTML report to share in a case (opened in your browser), and most
-of them accept `--json` for scripts and agents.
+of them accept `--json` for scripts and agents. Each report starts with a one-line verdict (🚨 critical findings and
+where to start, ⚠️ things to look at, or ✅ nothing alarming), followed by the findings with their severity (🔴 critical,
+🟠 high, 🟡 medium, 🟢 low, ℹ️ info).
 
 The reports of the samples:
 

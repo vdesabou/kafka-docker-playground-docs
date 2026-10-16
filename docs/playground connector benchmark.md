@@ -47,6 +47,12 @@ end in an interactive terminal) and appended to the benchmark-history
 file, and the summary compares them with the previous benchmark of the  
 same connector in the same example (or with `--compare` `<result json>`).
 
+Each result records the setup it ran on (host cpu and memory, container  
+engine resources, connect image and whether it is emulated, jvm and  
+heap, number of workers and brokers, environment, connector config with  
+secrets masked): the report shows it, and the summary warns when the  
+previous run was on a different setup.
+
 ⚠️ Not available for fully managed connectors and the cfk environment yet.
 
 ## Usage
@@ -113,8 +119,8 @@ It runs with bash -c, from the current directory, while the connector is paused.
 
 Examples:
 
-# sink: 1M records in the topic of the connector, with the schema of its records on stdin  
-`--nb-records` 1000000 `--load-command` `playground topic produce -t my-topic --nb-messages 1000000 < my-schema.avsc`
+# sink: 1M records in the topic of the connector (use the schema of its records)  
+`--nb-records` 1000000 `--load-command` `playground topic produce -t my-topic --nb-messages 1000000 --value @predefined-schemas/avro/customer.avsc`
 
 # source: your own script, which inserts the rows and prints `BENCHMARK_RECORDS`=`<n>`  
 `--load-command` "./load-my-table.sh 500000"
@@ -127,7 +133,7 @@ It runs in the background with bash -c, from the current directory. At the end o
 
 Example, batches of 10000 records in the topic of the connector until the end of the measure:
 
-- `--stream-load-command` 'while [ ! -f "\`$BENCHMARK_STOP_FILE`" ]; do playground topic produce -t my-topic `--nb-messages` 10000 \< my-schema.avsc; echo "`BENCHMARK_BATCH`=10000 \$(date +%s)"; done'
+- `--stream-load-command` 'while [ ! -f "\`$BENCHMARK_STOP_FILE`" ]; do playground topic produce -t my-topic `--nb-messages` 10000 `--value` @predefined-schemas/avro/customer.avsc; echo "`BENCHMARK_BATCH`=10000 \$(date +%s)"; done'
 
 #### `--topic, -t TOPIC`
 
@@ -169,6 +175,28 @@ Example, batches of 10000 records in the topic of the connector until the end of
 |-----------------|-------------
 | Default Value:  | `30m`
 
+#### `--connector-tag CONNECTOR-TAG`
+
+🧩 Benchmark these versions of the connector plugin one after the other (repeat the flag), and compare them
+
+For each version: playground update-version `--connector-tag` (only the connect container is restarted, the connector and its offsets are kept), check that the connector runs the requested version, an untimed warm-up drain (the worker jvm was restarted), then the benchmark. The original version is restored at the end, and the summary and the report compare the versions.
+
+Example: `--connector-tag` 10.8.4 `--connector-tag` 10.9.9
+
+⚠️ A downgrade or a major version change can be incompatible with the offsets or the config of the connector: the benchmark stops at the first FAILED state.
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Repeatable:     |  ✓ Yes
+
+#### `--rounds ROUNDS`
+
+🔁 With `--connector-tag`, number of rounds over the versions (default is 1): 2 alternates them (A B A B), which shows a drift from one run to the next
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Default Value:  | `1`
+
 #### `--output-dir OUTPUT-DIR`
 
 📂 Folder for the samples csv, the result json and the html report (default is /tmp/playground-benchmark)
@@ -204,15 +232,19 @@ playground connector benchmark --mode steady --duration 2m --warmup 20s
 ```
 
 ```bash
-playground connector benchmark --nb-records 1000000 --load-command "playground topic produce -t my-topic --nb-messages 1000000 < my-schema.avsc"
+playground connector benchmark --nb-records 1000000 --load-command "playground topic produce -t my-topic --nb-messages 1000000 --value @predefined-schemas/avro/customer.avsc"
 ```
 
 ```bash
-playground connector benchmark --mode steady --duration 2m --stream-load-command 'while [ ! -f "$BENCHMARK_STOP_FILE" ]; do playground topic produce -t my-topic --nb-messages 10000 < my-schema.avsc; echo "BENCHMARK_BATCH=10000 $(date +%s)"; done'
+playground connector benchmark --mode steady --duration 2m --stream-load-command 'while [ ! -f "$BENCHMARK_STOP_FILE" ]; do playground topic produce -t my-topic --nb-messages 10000 --value @predefined-schemas/avro/customer.avsc; echo "BENCHMARK_BATCH=10000 $(date +%s)"; done'
 ```
 
 ```bash
 playground connector benchmark --load-command "./my-load.sh" --json
+```
+
+```bash
+playground connector benchmark --nb-records 1000000 --connector-tag 10.8.4 --connector-tag 10.9.9 --rounds 2
 ```
 
 

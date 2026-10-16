@@ -17,6 +17,7 @@ container or fully managed in Confluent Cloud.
 - **show-lag**: consumer lag of a sink, until it reaches zero
 - **benchmark**: records per second, compared with the previous run
 - **offsets get**: where the connector is reading or writing
+- **smt test**: what a transform chain does to a record, step by step
 
 **🛠️ Change it**
 
@@ -55,6 +56,7 @@ playground connector COMMAND
 - [wait](playground%20connector%20wait) - ⏳ Wait for connectors to reach a state
 - [error-recommendations](playground%20connector%20error-recommendations) - 💡 Show error recommendations for fully managed connectors
 - [oracle-cdc-xstream](playground%20connector%20oracle-cdc-xstream) - 🅾️ Specific Oracle CDC Xstream commands
+- [smt](playground%20connector%20smt) - 🧪 Single message transforms (SMT)
 - [offsets](playground%20connector%20offsets) - 💈 Handle source and sink connectors offsets
 - [plugins](playground%20connector%20plugins) - 🎨 Show all connector plugins installed. You can also display transforms, converters and predicates using `--all` flag
 - [pause](playground%20connector%20pause) - ⏸️  Pause connector

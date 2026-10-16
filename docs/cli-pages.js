@@ -66,6 +66,8 @@ window.KDP_CLI_PAGES = [
   "/playground%20connector%20show-config-parameters",
   "/playground%20connector%20show-config",
   "/playground%20connector%20show-lag",
+  "/playground%20connector%20smt%20test",
+  "/playground%20connector%20smt",
   "/playground%20connector%20snippets",
   "/playground%20connector%20sourcecode",
   "/playground%20connector%20status",

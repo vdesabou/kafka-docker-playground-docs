@@ -1349,10 +1349,16 @@ playground container exec -c connect --command "java -version"
 
 ## 🏎️ Performance testing
 
-Here are some tips and tricks to create reproduction models that require high volume of data.
+[playground connector benchmark](https://kafka-docker-playground.io/#/playground%20connector%20benchmark) is the way to do performance testing with the playground. On a running self managed example or reproduction model, it loads the data, measures the throughput of the connector, tells whether the connector is really the bottleneck, records where its time goes, compares with the previous run or with other versions of the connector, and writes an HTML report to share.
 
-> [!TIP]
-> It is highly recommended to enable [JMX Grafana](https://kafka-docker-playground.io/#/how-to-use?id=%f0%9f%93%8a-enabling-jmx-grafana) when you're doing performance testing, to see CPU/Memory and all JMX metrics.
+| I want to | Use |
+|---|---|
+| measure a connector | `playground connector benchmark`: the load comes with the example (the `playground topic produce` of a sink example is replayed, a source example has a `benchmark-load.bash`) |
+| compare connector versions | `playground connector benchmark --connector-tag A --connector-tag B` |
+| use my own data | [your own load](/reusables?id=your-own-load) (`--load-command`, or a load script, like the Salesforce source example below) |
+| load a table of my own in a reproduction model | [a table of your own](/reusables?id=a-table-of-your-own-reproduction-models) (`BENCHMARK_LOAD_SCRIPT`) |
+| see the broker, the JVM, the connector dashboards | start the example with [JMX Grafana](https://kafka-docker-playground.io/#/how-to-use?id=%f0%9f%93%8a-enabling-jmx-grafana) (`--enable-jmx-grafana`): the benchmark [annotates its measure](/reusables?id=%f0%9f%93%8a-grafana) |
+| keep a database busy while I watch | [`--enable-sql-datagen`](/reusables?id=%f0%9f%8c%aa%ef%b8%8f-databases-keep-a-load-running-with-enable-sql-datagen) |
 
 ### ⏱️ Benchmark a connector
 
@@ -1391,6 +1397,7 @@ The load comes from the example:
   * RabbitMQ: messages published with the `producer.py` of the example
   * Solace (and JMS Solace): messages sent through the REST messaging port of the broker
   * Splunk: events sent to the HTTP event collector of the connector, **steady mode only** (the connector keeps the events received while it is paused in memory)
+  * Salesforce Bulk API source: Leads created in Salesforce with one Bulk API job (`--shape bulk` drain only, see [the example below](/reusables?id=a-real-life-example-the-salesforce-bulk-api-source))
 * or your own command with `--load-command` (drain) / `--stream-load-command` (steady), for example in a reproduction model (see below)
 
 #### Your own load
@@ -1415,20 +1422,67 @@ playground connector benchmark --mode steady --duration 2m \
   --stream-load-command 'while [ ! -f "$BENCHMARK_STOP_FILE" ]; do playground topic produce -t my-topic --nb-messages 10000 --value @predefined-schemas/avro/customer.avsc; echo "BENCHMARK_BATCH=10000 $(date +%s)"; done'
 ```
 
+##### A real-life example: the Salesforce Bulk API source
+
+The [Salesforce Bulk API source example](https://github.com/vdesabou/kafka-docker-playground/tree/master/connect/connect-salesforce-bulkapi-source) reads Leads from a Salesforce org. To benchmark it, the load must create Leads **in Salesforce**, so that the connector picks them up like in production. Creating them one by one (`sfdx data:create:record`) would take one API call per Lead: [its `benchmark-load.bash`](https://github.com/vdesabou/kafka-docker-playground/blob/master/connect/connect-salesforce-bulkapi-source/benchmark-load.bash) creates them with **one Bulk API job**:
+
+```bash
+# the Salesforce user of the connector: the connect REST API shows it (only passwords are masked),
+# and the sfdx-cli container of the example is already logged in with it
+username=$(benchmark_connector_config_value salesforce.username)
+
+# <records> Leads in one Bulk API job: an upsert on Id with an empty Id inserts every row
+awk -v n="$records" -v run="$(date +%s)" 'BEGIN {
+  print "Id,FirstName,LastName,Company"
+  for (i = 1; i <= n; i++) printf ",Lead%d,benchmark-%s-%d,playground-benchmark\n", i, run, i
+}' | playground container exec --container sfdx-cli --command "cat > /tmp/benchmark-leads.csv"
+playground container exec --container sfdx-cli --command "sfdx force:data:bulk:upsert --target-org '$username' -s Lead -f /tmp/benchmark-leads.csv -i Id -w 30 --json"
+
+# one record per Lead in the topic of the connector
+echo "BENCHMARK_RECORDS=$records"
+```
+
+It also deletes the Leads of the previous runs first (a developer org holds about 2500 Leads, 5 MB of data storage), and refuses anything else than a drain with `--shape bulk` in its `--check`. Then:
+
+```bash
+playground run -f connect/connect-salesforce-bulkapi-source/salesforce-bulkapi-source.sh
+playground connector benchmark --connector salesforce-bulkapi-source --nb-records 1000
+```
+
+On a developer org, the 1000 Leads were created in 25 s (one Bulk API job), and the connector wrote them to `sfdc-bulkapi-leads` in 13 s, about 76 records/s. They arrived in bursts, each time a Bulk API query job of the connector completed: with a few thousand Leads, this mostly measures the latency of the query jobs of the org, which is exactly what a customer sees too.
+
+The same pattern works for any source system: create the data **at the source** with its own bulk tools, wait for nothing (the connector is paused), print `BENCHMARK_RECORDS=<n>`.
+
 #### A table of your own (reproduction models)
 
-The loads shipped with the examples always write the `CUSTOMERS` table of the example (`dbo.customers` for SQL Server). When a reproduction model reads another table, the one of the customer for example, give it its own `benchmark-load.bash`. The benchmark looks for that file **next to the script that was run**, so it applies to that reproduction model only, and the summary and the report work as with the examples: `--check` before the connector is paused, the drain, steady mode, the warnings.
+The loads shipped with the examples always write the `CUSTOMERS` table of the example (`dbo.customers` for SQL Server). When a reproduction model reads another table, the one of the customer for example, give it a load script of its own, **named after its ticket**, next to the reproduction model script, and select it with `BENCHMARK_LOAD_SCRIPT`:
 
-`playground repro bootstrap` links the `benchmark-load.bash` of the example into the folder of the reproduction model, so the `CUSTOMERS` load works out of the box. To load another table, **replace the link with a file of your own** (`rm benchmark-load.bash` first: editing through the link would change the example). The same file is then used by `--enable-sql-datagen`.
+```bash
+BENCHMARK_LOAD_SCRIPT=benchmark-load-123456.bash playground connector benchmark --nb-records 500000
+```
+
+`BENCHMARK_LOAD_SCRIPT` is a file name in the folder of the script that was run (or an absolute path): several reproduction models of the same folder can each have their load. Without it, the benchmark uses the `benchmark-load.bash` of the folder. `--enable-sql-datagen` uses it too, and the summary and the report work as with the examples: `--check` before the connector is paused, the drain, steady mode, the warnings, plus a warning when the previous run used another load script.
+
+The public example [`connect/connect-jdbc-postgresql-source/postgres-orders.sh`](https://github.com/vdesabou/kafka-docker-playground/blob/master/connect/connect-jdbc-postgresql-source/postgres-orders.sh) does exactly that: it creates an `orders` table with a JDBC source connector on it, next to `postgres.sh` and the `CUSTOMERS` load of the folder, and its load is [`benchmark-load-orders.bash`](https://github.com/vdesabou/kafka-docker-playground/blob/master/connect/connect-jdbc-postgresql-source/benchmark-load-orders.bash):
+
+```bash
+playground run -f connect/connect-jdbc-postgresql-source/postgres-orders.sh
+BENCHMARK_LOAD_SCRIPT=benchmark-load-orders.bash playground connector benchmark --nb-records 1000000
+BENCHMARK_LOAD_SCRIPT=benchmark-load-orders.bash playground connector benchmark --nb-records 100000 --shape small-txn --sessions 4
+BENCHMARK_LOAD_SCRIPT=benchmark-load-orders.bash playground connector benchmark --mode steady --duration 2m --nb-records 2000   # batches of 2000 rows
+```
+
+`playground repro bootstrap` links the `benchmark-load.bash` of the example into the folder of the reproduction model, so the `CUSTOMERS` load works out of the box. Don't edit it: it is a link to the file of the example. Write `benchmark-load-<ticket>.bash` instead.
 
 > [!NOTE]
 > Reproduction models created before the link existed have no load: link the one of their example (`ln -s ../../connect/<example>/benchmark-load.bash .` in their folder), or write their own.
 
-`reproduction-models/connect-connect-jdbc-postgresql-source/benchmark-load.bash`, for an `orders` table read by a JDBC source connector:
+The load script of `postgres-orders.sh`, a template for yours (copy it as `benchmark-load-<ticket>.bash` and change the table, the SQL and the client):
 
 ```bash
 #!/bin/bash
-# load for 'playground connector benchmark': rows in the orders table of this reproduction model
+# load for 'playground connector benchmark' (BENCHMARK_LOAD_SCRIPT=benchmark-load-orders.bash) and --enable-sql-datagen:
+# rows in the orders table of postgres-orders.sh, a table of your own (see "A table of your own" in the documentation)
 set -e
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 # only the functions: sourcing scripts/utils.sh would record this script as the example being run
@@ -1443,7 +1497,8 @@ if [ -n "$BENCHMARK_LOAD_CHECK" ]
 then
   if [ "$BENCHMARK_LOAD_SHAPE" == "update" ]
   then
-    logerror "❌ this load only inserts rows: use --shape bulk or small-txn"
+    # the connector of postgres-orders.sh is in incrementing mode: it only captures new rows
+    logerror "❌ this load only inserts rows (the connector is in incrementing mode): use --shape bulk or small-txn"
     exit 1
   fi
   exit 0
@@ -1473,14 +1528,6 @@ else
   load_batch
   echo "BENCHMARK_RECORDS=$records"
 fi
-```
-
-Then run the reproduction model and benchmark it as usual:
-
-```bash
-playground connector benchmark --connector orders-source --nb-records 500000
-playground connector benchmark --connector orders-source --nb-records 100000 --shape small-txn
-playground connector benchmark --connector orders-source --mode steady --duration 2m --nb-records 2000   # batches of 2000 rows
 ```
 
 What the benchmark expects from the script:
@@ -1566,16 +1613,6 @@ The benchmark does not start Grafana: start the example with it. Prometheus scra
 > [!NOTE]
 > Everything runs on one docker host: the numbers are relative, compare runs on the same machine only. When the backlog is processed before the first sample, the throughput is only a lower bound (`≥`): increase `--nb-records` 10x. Fully managed connectors and the cfk environment are not supported yet.
 
-### 👈 All sink connectors
-
-Injecting lot of records into topic(s) is really easy using [playground topic produce](https://kafka-docker-playground.io/#/playground%20topic%20produce) CLI:
-
-Example:
-
-```bash
-$ playground topic produce -t mytopic --value @predefined-schemas/avro/customer.avsc --nb-messages -1 --max-nb-messages-per-batch 300000  --sleep-time-between-batch 1  --record-size 1024
-```
-
 ### 🌪️ Databases: keep a load running with `--enable-sql-datagen`
 
 For the JDBC, Debezium, Oracle CDC and XStream source examples (Oracle, MySQL, MariaDB, PostgreSQL, SQL Server, self-managed and fully managed), `--enable-sql-datagen` keeps rows coming into the database once the example is done, while you watch the connector (Grafana is enabled with it):
@@ -1599,130 +1636,3 @@ A reproduction model gets the load of its example from `playground repro bootstr
 > [!TIP]
 > To measure the connector rather than keep it busy, use [playground connector benchmark](/reusables?id=%e2%8f%b1%ef%b8%8f-benchmark-a-connector): same loads, with `--sessions` for parallel sessions.
 
-### 👉 MongoDB
-
-Here is an example that I used to setup a reproduction environment where I inject 250 (`REQ`) req/s on 13 (`NB_COLLECTIONS`) collections. 
-It is sending 50000 (`TOTAL_REQ`) records per collection.
-The size of the record can be adjusted by changing the payload `{ _id : "Document " + j + "_" + i, first_name : 'john', last_name : 'hope', email : 'john@email/com', timestamp: new Date().getTime() }`
-
-```bash
-function inject () {
-playground container exec -c mongodb --command "mongosh" << EOF
-use kafka
-var counter = 0;
-var j = 0;
-while(counter < $TOTAL_REQ) {
-var bulk = db.collection$i.initializeUnorderedBulkOp();
-for (var i = 0; i < $REQ; i++) {
-    bulk.insert({ _id : "Document " + j + "_" + i, first_name : 'john', last_name : 'hope', email : 'john@email/com', timestamp: new Date().getTime() });
-}
-bulk.execute();
-j++;
-counter+=$REQ;
-sleep(1000);
-}
-EOF
-date > end_collection$i.txt
-}
-
-REQ=250
-NB_COLLECTIONS=13
-TOTAL_REQ=50000
-for((i=1;i<=$NB_COLLECTIONS;i++)); do
-  log "Inserting $TOTAL_REQ documents ($REQ req/second) on collection$i"
-  inject > /dev/null 2>&1 &
-done
-
-log "Wait for $TOTAL_REQ records to be processed"
-playground topic consume --topic myprefix.kafka.collection1 --min-expected-messages $TOTAL_REQ --timeout 80000
-
-log "mongo injection ended at"
-cat end_collection1.txt
-```
-
-Then you can use [MongoDB source](https://github.com/vdesabou/kafka-docker-playground/tree/master/connect/connect-mongodb-source) connector:
-
-```bash
-playground connector create-or-update --connector mongodb-source << EOF
-{
-  "connector.class" : "com.mongodb.kafka.connect.MongoSourceConnector",
-  "tasks.max" : "1",
-  "connection.uri" : "mongodb://myuser:mypassword@mongodb:27017",
-  "database": "kafka",
-  "mongo.errors.log.enable": "true",
-  "topic.prefix":"myprefix",
-
-  "output.format.key":"json",
-  "output.format.value":"json",
-  "output.json.formatter":"com.mongodb.kafka.connect.source.json.formatter.SimplifiedJson",
-  "output.schema.infer.value":"false",
-  "value.converter": "org.apache.kafka.connect.storage.StringConverter",
-
-  "poll.await.time.ms": "10000",
-  "poll.max.batch.size": "50",
-
-  "batch.size":"50",
-  "publish.full.document.only":"true",
-  "change.stream.full.document":"updateLookup",
-
-  "heartbeat.interval.ms": "5000",
-
-  "_producer.override.linger.ms":"500",
-  "_producer.override.batch.size":"2000000",
-  "producer.override.client.id":"mongo-producer",
-  "_producer.override.compression.type": "lz4"
-}
-EOF
-```
-
-### 👉 MQTT
-
-In order to generate perf injection, you can use [Solace SDKPerf tool](https://docs.solace.com/API/SDKPerf/SDKPerf.htm), [download](https://solace.com/downloads/?fwp_downloads_types=other) it first.
-
-(optional) Add in your docker-compose file a EMQX MQTT broker:
-
-```yml
-  emqx:
-    image: emqx/emqx:latest
-    hostname: emqx
-    container_name: emqx
-    environment:
-    - "EMQX_NAME=emqx"
-    - "EMQX_HOST=emqx"
-    - "MQTT_SESSION_MAX_INFLIGHT=64" 
-    ports:
-      - 1883:1883
-      - 18083:18083
-```
-
-Note: EMQX dashboard is available on http://localhost:18083/ (`admin`/`public`)
-
-Send MQTT messages at 3000 messages/sec with QOS 1 (`"mqtt.topics":"test_mqtt"`):
-
-```bash
-./sdkperf-mqtt-8.4.10.6/sdkperf_mqtt.sh -cip=localhost:1883 -ptl=test_mqtt -msa=100 -mn=5000000 -mr=3000 -mpq=1
-```
-
-Then you can use [MQTT source](https://github.com/vdesabou/kafka-docker-playground/tree/master/connect/connect-mqtt-source) connector:
-
-```bash
-log "Creating MQTT Source connector"
-curl -X PUT \
-     -H "Content-Type: application/json" \
-     --data '{
-               "connector.class": "io.confluent.connect.mqtt.MqttSourceConnector",
-               "tasks.max": "1",
-               "mqtt.server.uri": "tcp://emqx:1883",
-               "mqtt.topics":"test_mqtt",
-               "kafka.topic":"mqtt-source-1",
-               "mqtt.qos": "1",
-               "confluent.license": "",
-               "confluent.topic.bootstrap.servers": "broker:9092",
-               "confluent.topic.replication.factor": "1",
-
-               "records.buffer.queue.size": "10000",
-               "records.buffer.queue.max.batch.size": "100",
-               "records.buffer.queue.empty.timeout": "10" 
-          }' \
-     http://localhost:8083/connectors/source-mqtt/config | jq .
-```

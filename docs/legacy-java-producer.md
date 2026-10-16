@@ -9,7 +9,7 @@
 > [!WARNING]
 > Most of times, it's much simpler to use `playground topic produce` [CLI](/playground%20topic%20produce)
 > 
-> Use java producer only if you have very specific requirements such as specifying record timestamp, use key with schema or to do [perf testing](/reusables?id=%f0%9f%91%88-all-sink-connectors)
+> Use java producer only if you have very specific requirements such as specifying record timestamp, use key with schema or to do [perf testing](/reusables?id=%e2%8f%b1%ef%b8%8f-benchmark-a-connector)
 
 
 If you want to send a complex AVRO message, the easiest way is to use an Avro JAVA producer which creates a Specific Record using Maven plugin and populate it using [j-easy/easy-random](https://github.com/j-easy/easy-random).
@@ -94,7 +94,7 @@ playground container exec -c producer-repro-12345 --command "NB_MESSAGES=100 TOP
 > [!WARNING]
 > Most of times, it's much simpler to use `playground topic produce` [CLI](/playground%20topic%20produce)
 > 
-> Use java producer only if you have very specific requirements such as specifying record timestamp, use key with schema or to do [perf testing](/reusables?id=%f0%9f%91%88-all-sink-connectors)
+> Use java producer only if you have very specific requirements such as specifying record timestamp, use key with schema or to do [perf testing](/reusables?id=%e2%8f%b1%ef%b8%8f-benchmark-a-connector)
 
 If you want to send a complex Protobuf message, the easiest way is to use an Protobuf JAVA producer which creates a Protobuf Record using Maven [plugin](https://github.com/os72/protoc-jar-maven-plugin) and populate it using [j-easy/easy-random](https://github.com/j-easy/easy-random).
 
@@ -180,7 +180,7 @@ playground container exec -c producer-repro-12345 --command "NB_MESSAGES=100 TOP
 > [!WARNING]
 > Most of times, it's much simpler to use `playground topic produce` [CLI](/playground%20topic%20produce)
 > 
-> Use java producer only if you have very specific requirements such as specifying record timestamp, use key with schema or to do [perf testing](/reusables?id=%f0%9f%91%88-all-sink-connectors)
+> Use java producer only if you have very specific requirements such as specifying record timestamp, use key with schema or to do [perf testing](/reusables?id=%e2%8f%b1%ef%b8%8f-benchmark-a-connector)
 
 If you want to send a complex JSON Schema message, the easiest way is to use an JSON Schema JAVA producer which creates a JSON Schema Record using Maven [plugin](https://github.com/joelittlejohn/jsonschema2pojo) and populate it using [j-easy/easy-random](https://github.com/j-easy/easy-random).
 

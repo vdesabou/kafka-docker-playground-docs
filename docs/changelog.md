@@ -3,6 +3,7 @@
 ## October 2026
 ##### 🌟 Enhancements
 
+- 🧠 playground connector benchmark: annotate the measure on the Grafana dashboards and link to them, Prometheus scrapes every 15s [#9376](https://github.com/vdesabou/kafka-docker-playground/issues/9376)
 - 🧠 --enable-sql-datagen uses the benchmark-load.bash of the example (no more Java datagen), playground connector benchmark --sessions, MySQL examples on CUSTOMERS [#9374](https://github.com/vdesabou/kafka-docker-playground/issues/9374)
 - 🧠 playground debug flight-recorder: record over JMX instead of jcmd (no change-jdk), playground settings by default, analyze on stop [#9368](https://github.com/vdesabou/kafka-docker-playground/issues/9368)
 - 🧠 playground connector benchmark: record the workers with Java Flight Recorder and show where the time goes, new playground analyze flight-recorder [#9366](https://github.com/vdesabou/kafka-docker-playground/issues/9366)

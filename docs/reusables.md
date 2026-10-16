@@ -1371,7 +1371,12 @@ playground connector benchmark --nb-records 1000000 --shape update
 
 # throughput during 5 minutes, with a load running in the background
 playground connector benchmark --mode steady --duration 5m
+
+# source: the load in 5 parallel sessions (concurrent transactions)
+playground connector benchmark --nb-records 1000000 --shape small-txn --sessions 5
 ```
+
+`--sessions <n>` runs the `benchmark-load.bash` of the example in `n` parallel sessions: a drain splits `--nb-records` between them, steady mode gives each session batches of `--nb-records`. Concurrent transactions are what a busy database looks like to a CDC connector (interleaved transactions in the redo log or the WAL, several open transactions).
 
 The load comes from the example:
 
@@ -1409,6 +1414,86 @@ playground connector benchmark --load-command "./load-my-table.sh 500000"
 playground connector benchmark --mode steady --duration 2m \
   --stream-load-command 'while [ ! -f "$BENCHMARK_STOP_FILE" ]; do playground topic produce -t my-topic --nb-messages 10000 --value @predefined-schemas/avro/customer.avsc; echo "BENCHMARK_BATCH=10000 $(date +%s)"; done'
 ```
+
+#### A table of your own (reproduction models)
+
+The loads shipped with the examples always write the `CUSTOMERS` table of the example (`dbo.customers` for SQL Server). When a reproduction model reads another table, the one of the customer for example, give it its own `benchmark-load.bash`. The benchmark looks for that file **next to the script that was run**, so it applies to that reproduction model only, and the summary and the report work as with the examples: `--check` before the connector is paused, the drain, steady mode, the warnings.
+
+`playground repro bootstrap` links the `benchmark-load.bash` of the example into the folder of the reproduction model, so the `CUSTOMERS` load works out of the box. To load another table, **replace the link with a file of your own** (`rm benchmark-load.bash` first: editing through the link would change the example). The same file is then used by `--enable-sql-datagen`.
+
+> [!NOTE]
+> Reproduction models created before the link existed have no load: link the one of their example (`ln -s ../../connect/<example>/benchmark-load.bash .` in their folder), or write their own.
+
+`reproduction-models/connect-connect-jdbc-postgresql-source/benchmark-load.bash`, for an `orders` table read by a JDBC source connector:
+
+```bash
+#!/bin/bash
+# load for 'playground connector benchmark': rows in the orders table of this reproduction model
+set -e
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
+# only the functions: sourcing scripts/utils.sh would record this script as the example being run
+source ${DIR}/../../scripts/cli/src/lib/utils_function.sh
+
+# --records <n> --mode preload|stream --shape bulk|small-txn|update [--check]
+benchmark_load_args "$@"
+records="$BENCHMARK_LOAD_RECORDS"
+
+# --check: called before the connector is paused, refuse what this load cannot do
+if [ -n "$BENCHMARK_LOAD_CHECK" ]
+then
+  if [ "$BENCHMARK_LOAD_SHAPE" == "update" ]
+  then
+    logerror "❌ this load only inserts rows: use --shape bulk or small-txn"
+    exit 1
+  fi
+  exit 0
+fi
+
+case "$BENCHMARK_LOAD_SHAPE" in
+  bulk)
+    # one transaction with all the rows
+    sql="INSERT INTO orders (customer_id, product, quantity, price) SELECT i % 1000, 'product ' || (i % 50), 1 + i % 5, round((random() * 100)::numeric, 2) FROM generate_series(1, $records) AS i;"
+  ;;
+  small-txn)
+    # one transaction per row
+    sql="DO \$\$ BEGIN FOR i IN 1..$records LOOP INSERT INTO orders (customer_id, product, quantity, price) VALUES (i % 1000, 'product ' || (i % 50), 1 + i % 5, round((random() * 100)::numeric, 2)); COMMIT; END LOOP; END \$\$;"
+  ;;
+esac
+
+function load_batch () {
+  echo "$sql" | playground container exec --container postgres --command "psql -U myuser -d postgres" > /dev/null
+}
+
+if [ "$BENCHMARK_LOAD_MODE" == "stream" ]
+then
+  # steady mode: batches of <records> rows until the benchmark creates $BENCHMARK_STOP_FILE
+  benchmark_stream_batches "$records" load_batch
+else
+  # drain: load the backlog, and tell the benchmark how many records the connector should write
+  load_batch
+  echo "BENCHMARK_RECORDS=$records"
+fi
+```
+
+Then run the reproduction model and benchmark it as usual:
+
+```bash
+playground connector benchmark --connector orders-source --nb-records 500000
+playground connector benchmark --connector orders-source --nb-records 100000 --shape small-txn
+playground connector benchmark --connector orders-source --mode steady --duration 2m --nb-records 2000   # batches of 2000 rows
+```
+
+What the benchmark expects from the script:
+
+| | |
+|---|---|
+| arguments | `--records <n> --mode preload\|stream --shape bulk\|small-txn\|update`, parsed by `benchmark_load_args`, and `--check` first, before the connector is paused: exit with an error for a combination the load cannot do |
+| drain (`preload`) | load the rows and return, printing `BENCHMARK_RECORDS=<n>`: the number of records the connector should write (2 per row for Oracle CDC with a redo log topic, for example) |
+| steady (`stream`) | repeat batches until the file `$BENCHMARK_STOP_FILE` exists, printing `BENCHMARK_BATCH=<records> <epoch>` after each batch: `benchmark_stream_batches <records> <command>` does both, and never stops a batch in the middle |
+| environment | `BENCHMARK_TEST_FILE` (the script that was run: when several reproduction models share the folder, branch on it), `BENCHMARK_CONNECTOR`, `BENCHMARK_CONNECTOR_CONFIG` (a json file with the connector config) |
+| source | `scripts/cli/src/lib/utils_function.sh`, not `scripts/utils.sh`, which would record the load script as the example being run |
+
+The same works with MySQL (`mysql -u ... -p...`), Oracle (`sqlplus`, see `benchmark_oracle_client_from_example`) or SQL Server (`sqlcmd`): only the SQL and the client change. For a one-off measure, `--load-command "./load-orders.sh 500000"` (see above) is enough.
 
 #### Is the connector the bottleneck?
 
@@ -1475,75 +1560,28 @@ Example:
 $ playground topic produce -t mytopic --value @predefined-schemas/avro/customer.avsc --nb-messages -1 --max-nb-messages-per-batch 300000  --sleep-time-between-batch 1  --record-size 1024
 ```
 
-### 👉 Oracle
+### 🌪️ Databases: keep a load running with `--enable-sql-datagen`
 
-For all Oracle CDC and JDBC source connector with Oracle examples, you can easily inject load in table using, the following steps.
-
-You can enable this by setting flag `--enable-sql-datagen`, it will start inserting rows at the end of the example for a duration that you can configure:
-
-Example:
+For the JDBC, Debezium, Oracle CDC and XStream source examples (Oracle, MySQL, MariaDB, PostgreSQL, SQL Server, self-managed and fully managed), `--enable-sql-datagen` keeps rows coming into the database once the example is done, while you watch the connector (Grafana is enabled with it):
 
 ```bash
-DURATION=10
-log "Injecting data for $DURATION minutes"
-playground container exec --container sql-datagen --command "bash -c \"java ${JAVA_OPTS} -jar sql-datagen-1.0-SNAPSHOT-jar-with-dependencies.jar --host oracle --username C##MYUSER --password mypassword --sidOrServerName sid --sidOrServerNameVal ORCLCDB --maxPoolSize 10 --durationTimeMin $DURATION\""
+playground run -f postgres.sh --enable-sql-datagen
+SQL_DATAGEN_DURATION=30 SQL_DATAGEN_SESSIONS=10 playground run -f cdc-oracle19-pdb-table.sh --enable-sql-datagen
 ```
 
-For PDB examples, use `--sidOrServerName service_name --sidOrServerNameVal ORCLPDB1` instead.
+After the example succeeded, `playground run` starts the `benchmark-load.bash` of the example (the load of [playground connector benchmark](/reusables?id=%e2%8f%b1%ef%b8%8f-benchmark-a-connector), on the table its connector reads: `CUSTOMERS` for most examples) in stream mode, one row per transaction, in `SQL_DATAGEN_SESSIONS` parallel sessions (default 5: concurrent transactions, as on a busy database), for `SQL_DATAGEN_DURATION` minutes (default 10). It logs the rows inserted every 30 seconds, then stops the sessions at the end of their current batch:
 
-> [!TIP]
-> You can increase throughput with `maxPoolSize`.
-
-### 👉 Microsoft SQL Server
-
-For all Debezium and JDBC source connector with Microsoft SQL Server examples, you can easily inject load in table using, the following steps.
-
-You can enable this by setting flag `--enable-sql-datagen`, it will start inserting rows at the end of the example for a duration that you can configure:
-
-Example:
-
-```bash
-DURATION=10
-log "Injecting data for $DURATION minutes"
-playground container exec --container sql-datagen --command "bash -c \"java ${JAVA_OPTS} -jar sql-datagen-1.0-SNAPSHOT-jar-with-dependencies.jar --username sa --password 'Password!' --connectionUrl 'jdbc:sqlserver://sqlserver:1433;databaseName=testDB;encrypt=false' --maxPoolSize 10 --durationTimeMin $DURATION\""
+```
+🌪️ injecting rows with benchmark-load.bash for 1 minute(s): 5 session(s), one row per transaction
+🌪️ 29500 rows inserted in 31s (951 rows/s)
+🌪️ 63000 rows inserted in 61s (1032 rows/s)
+🌪️ done: 63600 rows inserted in 61s by 5 session(s)
 ```
 
-> [!TIP]
-> You can increase throughput with `maxPoolSize`.
-
-### 👉 PostgreSQL
-
-For all Debezium and JDBC source connector with PostgreSQL examples, you can easily inject load in table using, the following steps.
-
-You can enable this by setting flag `--enable-sql-datagen`, it will start inserting rows at the end of the example for a duration that you can configure:
-
-Example:
-
-```bash
-DURATION=10
-log "Injecting data for $DURATION minutes"
-playground container exec --container sql-datagen --command "bash -c \"java ${JAVA_OPTS} -jar sql-datagen-1.0-SNAPSHOT-jar-with-dependencies.jar --connectionUrl 'jdbc:postgresql://postgres/postgres?user=myuser&password=mypassword&ssl=false' --maxPoolSize 10 --durationTimeMin $DURATION\""
-```
+A reproduction model gets the load of its example from `playground repro bootstrap`, and can use a table of its own: see [A table of your own](/reusables?id=a-table-of-your-own-reproduction-models).
 
 > [!TIP]
-> You can increase throughput with `maxPoolSize`.
-
-### 👉 MySQL
-
-For all Debezium and JDBC source connector with MySQL examples, you can easily inject load in table using, the following steps.
-
-You can enable this by setting flag `--enable-sql-datagen`, it will start inserting rows at the end of the example for a duration that you can configure:
-
-Example:
-
-```bash
-DURATION=10
-log "Injecting data for $DURATION minutes"
-playground container exec --container sql-datagen --command "bash -c \"java ${JAVA_OPTS} -jar sql-datagen-1.0-SNAPSHOT-jar-with-dependencies.jar --connectionUrl 'jdbc:mysql://mysql:3306/mydb?user=user&password=password&useSSL=false&allowPublicKeyRetrieval=true' --maxPoolSize 10 --durationTimeMin $DURATION\""
-```
-
-> [!TIP]
-> You can increase throughput with `maxPoolSize`.
+> To measure the connector rather than keep it busy, use [playground connector benchmark](/reusables?id=%e2%8f%b1%ef%b8%8f-benchmark-a-connector): same loads, with `--sessions` for parallel sessions.
 
 ### 👉 MongoDB
 

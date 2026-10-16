@@ -441,7 +441,7 @@ By default, there is only one connect node enabled. To enable three connect node
 
 ### 🌀 Enabling SQL Datagen
 
-For Oracle, MySQL, Postgres and Microsoft SQL Server source connector examples (JDBC and Debezium), `--enable-sql-datagen` option of [playground run](/playground%20run) starts inserting rows at the end of the example.
+For the JDBC, Debezium, Oracle CDC and XStream source examples (Oracle, MySQL, MariaDB, PostgreSQL, SQL Server, self-managed and fully managed), the `--enable-sql-datagen` option of [playground run](/playground%20run) keeps inserting rows once the example is done: the `benchmark-load.bash` of the example, one row per transaction, in 5 parallel sessions, for 10 minutes (`SQL_DATAGEN_SESSIONS`, `SQL_DATAGEN_DURATION`). See [Databases: keep a load running](/reusables?id=%f0%9f%8c%aa%ef%b8%8f-databases-keep-a-load-running-with-enable-sql-datagen).
 
 ### 🎯 Starting only some services
 

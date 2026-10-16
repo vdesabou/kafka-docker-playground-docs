@@ -3,6 +3,7 @@
 ## October 2026
 ##### 🌟 Enhancements
 
+- 🧠 playground debug flight-recorder: record over JMX instead of jcmd (no change-jdk), playground settings by default, analyze on stop [#9368](https://github.com/vdesabou/kafka-docker-playground/issues/9368)
 - 🧠 playground connector benchmark: record the workers with Java Flight Recorder and show where the time goes, new playground analyze flight-recorder [#9366](https://github.com/vdesabou/kafka-docker-playground/issues/9366)
 - 🧠 connect-testing-smt-filestream-sink: show all the ways to use playground connector smt test, plus --no-open and --smt-jar with dependencies [#9360](https://github.com/vdesabou/kafka-docker-playground/issues/9360)
 - ✨⭐🧠 playground connector smt test: run a transform chain on a record, step by step, with an HTML report [#9358](https://github.com/vdesabou/kafka-docker-playground/issues/9358)

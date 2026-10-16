@@ -78,8 +78,9 @@ The playground can run on [Podman](https://podman.io) instead of Docker, with no
 the examples.
 
 It always drives the container engine through the `docker` CLI and the `docker compose` plugin. With
-Podman you keep both, and point them at the **rootful Podman socket** with `DOCKER_HOST`. The
-playground detects it and adapts on its own:
+Podman you keep both, and point them at the **rootful Podman socket** with
+[playground switch-podman](/playground%20switch-podman) (or `DOCKER_HOST`). The playground detects it
+and adapts on its own:
 
 - image builds use Podman's own builder (`DOCKER_BUILDKIT=0` is set automatically), so images patched
   locally, like the connect image with its extra tools, are used and kept
@@ -114,9 +115,7 @@ $ playground doctor
 podman machine init --rootful --cpus 4 --memory 12288 --disk-size 100
 podman machine start
 
-export DOCKER_HOST="unix://$(podman machine inspect --format '{{.ConnectionInfo.PodmanSocket.Path}}')"
-
-playground doctor
+playground switch-podman    # points docker and docker compose at the podman socket, ends with playground doctor
 ```
 
 - The playground needs at least 8GB of memory.
@@ -124,6 +123,8 @@ playground doctor
   `/var/folders`, which is what the playground mounts from, and any `-v` replaces them.
 - An existing machine can be switched to rootful with
   `podman machine stop && podman machine set --rootful && podman machine start`.
+- Instead of `playground switch-podman`, you can also
+  `export DOCKER_HOST="unix://$(podman machine inspect --format '{{.ConnectionInfo.PodmanSocket.Path}}')"`.
 
 ### 🐧 Setup on Linux
 
@@ -146,13 +147,12 @@ sudo systemctl stop podman.service
 sudo systemctl enable --now podman.socket
 sudo systemctl restart podman.socket
 
-export DOCKER_HOST="unix:///run/podman-api/podman.sock"
-
-playground doctor
+playground switch-podman    # points docker and docker compose at the podman socket, ends with playground doctor
 ```
 
 - The socket is moved out of `/run/podman`, which Podman creates as `0700 root`: a socket in there
   stays unreachable for a regular user whatever its own permissions.
+- Instead of `playground switch-podman`, you can also `export DOCKER_HOST="unix:///run/podman-api/podman.sock"`.
 - Use the **real compose v2 plugin**, not `podman-compose`. `podman-compose` is a separate
   reimplementation with only partial support for `profiles:` and `build:`, which the playground relies
   on heavily.
@@ -168,12 +168,15 @@ playground doctor
 
 ### 🔀 Switching between Docker and Podman
 
-Once Podman is set up, instead of exporting `DOCKER_HOST`, you can use [playground switch-podman](/playground%20switch-podman): it creates a `podman` docker context, so the switch applies to your current shell and to new ones, with nothing to export (on macOS, the podman machine is started if needed).
+[playground switch-podman](/playground%20switch-podman) creates a `podman` docker context, so the switch applies to your current shell and to new ones, with nothing to export (on macOS, the podman machine is started if needed).
 
 [playground switch-docker](/playground%20switch-docker) restores the docker context that was active before. Both commands end with `playground doctor`.
 
 > [!WARNING]
 > Containers are not moved between engines: stop the running example first.
+
+> [!NOTE]
+> An exported `DOCKER_HOST` takes precedence over the docker context: while it is set, `playground switch-docker` and `playground switch-podman` have no effect. Run `unset DOCKER_HOST` (and remove it from your shell profile) to use them. `playground doctor` shows `🔌 DOCKER_HOST is …` when it is set.
 
 ## 🏎️ Start an example
 

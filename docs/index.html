@@ -120,6 +120,50 @@
             var url = 'https://github.com/vdesabou/kafka-docker-playground-docs/edit/main/docs/' + encodeURI(file);
             return '<div style="overflow: auto"><p style="float: right"><a style="text-decoration: underline" target="_blank" rel="noopener" href="' + url + '">Edit on github</a></p></div>' + html;
           });
+        },
+        // Links to a section (?id=...): docsify scrolls once, right after rendering, but the images and videos above
+        // the section load afterwards and push it down (2455px for the benchmark section of reusables). Keep the
+        // section at the top while the page grows, until the reader scrolls or 10s have passed.
+        function (hook, vm) {
+          var stopPrevious = function () {};
+          hook.doneEach(function () {
+            // docsify reuses .markdown-section: stop the alignment started for the previous page
+            stopPrevious();
+            var id = vm.route.query.id;
+            var content = document.querySelector('.markdown-section');
+            if (!id || !content || !window.ResizeObserver) {
+              return;
+            }
+            var stopped = false, timer = null, observer = null;
+            var userEvents = ['wheel', 'touchstart', 'keydown', 'mousedown'];
+            function stop() {
+              stopped = true;
+              observer && observer.disconnect();
+              userEvents.forEach(function (e) { window.removeEventListener(e, stop); });
+            }
+            function align() {
+              // getElementById: the ids contain emojis, no CSS escaping needed
+              var target = document.getElementById(id);
+              if (!stopped && target) {
+                window.scrollTo(0, Math.round(target.getBoundingClientRect().top + window.pageYOffset - (vm.config.topMargin || 0)));
+              }
+            }
+            stopPrevious = stop;
+            userEvents.forEach(function (e) { window.addEventListener(e, stop, { passive: true }); });
+            // after the 500ms scroll animation of docsify, whose end position is computed when it starts
+            setTimeout(function () {
+              if (stopped) {
+                return;
+              }
+              align();
+              observer = new ResizeObserver(function () {
+                clearTimeout(timer);
+                timer = setTimeout(align, 100);
+              });
+              observer.observe(content);
+            }, 600);
+            setTimeout(stop, 10000);
+          });
         }
       ]
     }

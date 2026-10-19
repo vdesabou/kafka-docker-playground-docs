@@ -47,3 +47,52 @@ figure.thumbnails img {
     font-weight: 600;
     padding: 0.2em 0.5em;
 }
+
+/* reports gallery (reports.md) */
+.report-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(22em, 1fr));
+    gap: 1.5em;
+    margin: 1.5em 0;
+}
+
+.report-card {
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 6px;
+    overflow: hidden;
+    background: rgba(255,255,255,0.03);
+}
+
+.report-card > a > img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 14 / 9;
+    object-fit: cover;
+    object-position: top;
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+    transition: opacity 0.2s;
+}
+
+.report-card > a:hover > img {
+    opacity: 0.85;
+}
+
+.report-card .report-body {
+    padding: 0.8em 1em 1em;
+}
+
+.report-card h3 {
+    margin: 0 0 0.4em;
+    font-size: 1.1em;
+}
+
+.report-card p {
+    margin: 0 0 0.6em;
+    font-size: 0.9em;
+}
+
+.markdown-section .report-card code {
+    font-size: 0.8em;
+    white-space: normal !important; /* the theme sets nowrap on inline code */
+    overflow-wrap: anywhere;
+}

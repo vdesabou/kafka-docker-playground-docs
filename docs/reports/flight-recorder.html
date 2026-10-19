@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flight recording analysis</title><style>
+.viz-root {
+  color-scheme: light;
+  --page: #f9f9f7; --surface-1: #fcfcfb; --text-primary: #0b0b0b; --text-secondary: #52514e; --text-muted: #898781;
+  --grid: #e1e0d9; --axis: #c3c2b7; --border: rgba(11,11,11,0.10); --series-1: #2a78d6;
+  --series-2: #eb6834; --series-3: #1baf7a; --series-4: #eda100; --series-5: #e87ba4; --series-6: #008300; --series-7: #6250d6; --series-8: #e34948;
+  --good: #0ca30c; --good-text: #006300; --critical: #d03b3b; --warning: #fab219;
+}
+@media (prefers-color-scheme: dark) {
+  :root:where(:not([data-theme="light"])) .viz-root {
+    color-scheme: dark;
+    --page: #0d0d0d; --surface-1: #1a1a19; --text-primary: #f0efec; --text-secondary: #c3c2b7; --text-muted: #898781;
+    --grid: #2c2c2a; --axis: #383835; --border: rgba(255,255,255,0.10); --series-1: #3987e5;
+    --series-2: #d95926; --series-3: #199e70; --series-4: #c98500; --series-5: #d55181; --series-6: #008300; --series-7: #9085e9; --series-8: #e66767;
+    --good-text: #0ca30c;
+  }
+}
+:root[data-theme="dark"] .viz-root {
+  color-scheme: dark;
+  --page: #0d0d0d; --surface-1: #1a1a19; --text-primary: #f0efec; --text-secondary: #c3c2b7; --text-muted: #898781;
+  --grid: #2c2c2a; --axis: #383835; --border: rgba(255,255,255,0.10); --series-1: #3987e5;
+  --series-2: #d95926; --series-3: #199e70; --series-4: #c98500; --series-5: #d55181; --series-6: #008300; --series-7: #9085e9; --series-8: #e66767;
+  --good-text: #0ca30c;
+}
+* { box-sizing: border-box; }
+body { margin: 0; }
+.viz-root { background: var(--page); color: var(--text-primary); min-height: 100vh;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif; padding: 28px 32px 48px; }
+header { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
+h1 { font-size: 1.35rem; margin: 0 0 4px; font-weight: 600; }
+h2 { font-size: 1rem; margin: 0 0 2px; font-weight: 600; }
+.sub { color: var(--text-secondary); font-size: .875rem; margin: 0; }
+a { color: var(--series-1); }
+.theme-toggle { white-space: nowrap; flex-shrink: 0; font: inherit; font-size: .8rem; color: var(--text-secondary); background: var(--surface-1);
+  border: 1px solid var(--border); border-radius: 6px; padding: 4px 10px; cursor: pointer; }
+.card { background: var(--surface-1); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; position: relative; }
+.card .sub { margin-bottom: 8px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(520px, 1fr)); gap: 16px; }
+svg { display: block; width: 100%; height: auto; overflow: visible; }
+svg text { font-family: inherit; }
+.tooltip { position: absolute; pointer-events: none; background: var(--surface-1); border: 1px solid var(--border);
+  border-radius: 6px; padding: 6px 9px; font-size: .78rem; box-shadow: 0 2px 8px rgba(0,0,0,.12); display: none; white-space: nowrap; z-index: 2; }
+.legend { display: flex; gap: 16px; flex-wrap: wrap; font-size: .8rem; color: var(--text-secondary); margin: 2px 0 6px; }
+.legend span::before { content: ""; display: inline-block; width: 10px; height: 10px; border-radius: 2px; background: var(--c); margin-right: 6px; vertical-align: -1px; }
+table { border-collapse: collapse; width: 100%; font-size: .82rem; font-variant-numeric: tabular-nums; }
+th, td { text-align: left; padding: 5px 10px; border-bottom: 1px solid var(--grid); }
+th { color: var(--text-secondary); font-weight: 500; }
+td.num, th.num { text-align: right; }
+details { margin-top: 12px; } summary { cursor: pointer; font-weight: 600; font-size: .9rem; padding: 6px 0; }
+.full { grid-column: 1 / -1; }
+.empty { color: var(--text-muted); font-size: .875rem; padding: 24px 0; }
+footer { color: var(--text-muted); font-size: .78rem; margin-top: 24px; }
+
+.jfr-section { margin-top: 26px; }
+.jfr-section > h2 { font-size: 1.15rem; margin: 0 0 4px; }
+.jfr-findings { list-style: none; margin: 14px 0 18px; padding: 0; display: grid; gap: 8px; }
+.jfr-findings li { background: var(--surface-1); border: 1px solid var(--border); border-left: 4px solid var(--sev); border-radius: 8px;
+  padding: 10px 14px; font-size: .875rem; line-height: 1.45; }
+.jfr-findings .title { font-weight: 600; margin-right: 6px; }
+.jfr-findings .next { color: var(--text-secondary); display: block; margin-top: 3px; }
+.jfr-section code { font-family: 'SFMono-Regular', Consolas, Menlo, monospace; font-size: .78rem; }
+.jfr-section .muted { color: var(--text-muted); }
+.jfr-verdict { margin: 18px 0 0; padding: 12px 16px; border-left: 4px solid var(--sev); font-size: 1rem; font-weight: 500; }
+.jfr-section td code { word-break: break-all; }
+</style></head>
+<body><div class="viz-root">
+<header><div><h1>🛩️ Flight recording analysis</h1><p class="sub">jdbc_postgres_sink.jfr · OpenJDK 64-Bit Server VM (25.0.4.1+1-LTS) · io.confluent.connect.jdbc.JdbcSinkConnector</p></div>
+<button class="theme-toggle" id="theme-toggle" type="button">Toggle theme</button></header>
+<div class="card jfr-verdict" style="--sev: var(--critical)">🚨 1 critical finding: start with “The tasks wait on postgres:5432”.</div>
+<section class="jfr-section"><h2>🔎 Where the time goes</h2><p class="sub">Java Flight Recorder, 14 s · task threads <code>task-thread-postgres-sink-0</code></p><ul class="jfr-findings"><li style="--sev: var(--critical)"><span class="title">🔴 The tasks wait on postgres:5432.</span>The task threads spent 54% of the recording blocked on network I/O, 54% on postgres:5432 (5% in 133 calls of 1 ms or more, 5.2 ms on average; 49% in shorter calls seen by the native samples), and were running only 36% of the time.<span class="next">→ The system behind the connector (or the network to it) is the limit, not the connector code: look at its latency and load, at how the connector batches its calls, and at tasks.max.</span></li><li style="--sev: var(--axis)"><span class="title">ℹ️ Most of the CPU goes to conversion.</span>62% of the task-thread CPU samples are in converters and serializers, against 11% in the connector itself.<span class="next">→ Expected with large or nested records. If the CPU is the limit, compare with another converter or a smaller schema before tuning the connector.</span></li><li style="--sev: var(--axis)"><span class="title">ℹ️ Allocation is high.</span>The task threads allocate 876.2 MB/s, 28% of it as java.lang.Object[], mostly from AvroData.toConnectData.<span class="next">→ This is what keeps the GC busy: check the GC pauses before comparing runs, and KAFKA_HEAP_OPTS if they grow.</span></li></ul><div class="grid"><div class="card"><h2>🧵 Task thread time, by state</h2><p class="sub">Share of the recording each task thread spent running, blocked or waiting (calls of 1 ms or more; the rest is split by native samples)</p><div class="legend"><span style="--c: var(--series-1)">Running (CPU)</span><span style="--c: var(--series-2)">Blocked on network I/O</span><span style="--c: var(--series-3)">Kafka client (poll, send)</span></div><svg viewBox="0 0 640 62" role="img" aria-label="Task thread time by state"><line x1="150.0" x2="150.0" y1="2" y2="34" stroke="var(--grid)"/><text x="150.0" y="48" fill="var(--text-muted)" font-size="11" text-anchor="middle">0%</text><line x1="270.5" x2="270.5" y1="2" y2="34" stroke="var(--grid)"/><text x="270.5" y="48" fill="var(--text-muted)" font-size="11" text-anchor="middle">25%</text><line x1="391.0" x2="391.0" y1="2" y2="34" stroke="var(--grid)"/><text x="391.0" y="48" fill="var(--text-muted)" font-size="11" text-anchor="middle">50%</text><line x1="511.5" x2="511.5" y1="2" y2="34" stroke="var(--grid)"/><text x="511.5" y="48" fill="var(--text-muted)" font-size="11" text-anchor="middle">75%</text><line x1="632.0" x2="632.0" y1="2" y2="34" stroke="var(--grid)"/><text x="632.0" y="48" fill="var(--text-muted)" font-size="11" text-anchor="middle">100%</text><text x="142" y="22.0" fill="var(--text-secondary)" font-size="12" text-anchor="end">postgres-sink-0</text><rect x="150.0" y="6" width="171.5" height="24" rx="3" fill="var(--series-1)" data-tip="task-thread-postgres-sink-0 · Running (CPU): 36%" tabindex="0"/><text x="235.8" y="22.0" fill="#fff" font-size="11" font-weight="600" text-anchor="middle" pointer-events="none">36%</text><rect x="323.5" y="6" width="258.9" height="24" rx="0" fill="var(--series-2)" data-tip="task-thread-postgres-sink-0 · Blocked on network I/O: 54% (postgres:5432 54%)" tabindex="0"/><text x="453.0" y="22.0" fill="#fff" font-size="11" font-weight="600" text-anchor="middle" pointer-events="none">54%</text><rect x="584.4" y="6" width="45.6" height="24" rx="3" fill="var(--series-3)" data-tip="task-thread-postgres-sink-0 · Kafka client (poll, send): 10%" tabindex="0"/><text x="607.2" y="22.0" fill="#fff" font-size="11" font-weight="600" text-anchor="middle" pointer-events="none">10%</text></svg><details><summary>Table</summary><table><tr><th>Thread</th><th class=num>Running (CPU)</th><th class=num>Blocked on network I/O</th><th class=num>Kafka client (poll, send)</th><th class=num>Lock contention</th><th class=num>Waiting (sleep, park, wait)</th><th class=num>File I/O</th><th class=num>Not attributed</th></tr><tr><td>task-thread-postgres-sink-0</td><td class=num>36%</td><td class=num>54%</td><td class=num>10%</td><td class=num>0%</td><td class=num>0%</td><td class=num>0%</td><td class=num>0%</td></tr></table></details><div class="tooltip"></div></div><div class="card"><h2>🔥 CPU of the task threads, by layer</h2><p class="sub">398 execution samples, each classified by its first frame outside the JDK</p><svg viewBox="0 0 640 196" role="img" aria-label="CPU of the task threads by layer"><line x1="190.0" x2="190.0" y1="0" y2="171" stroke="var(--grid)"/><text x="190.0" y="183" fill="var(--text-muted)" font-size="11" text-anchor="middle">0%</text><line x1="304.3" x2="304.3" y1="0" y2="171" stroke="var(--grid)"/><text x="304.3" y="183" fill="var(--text-muted)" font-size="11" text-anchor="middle">20%</text><line x1="418.6" x2="418.6" y1="0" y2="171" stroke="var(--grid)"/><text x="418.6" y="183" fill="var(--text-muted)" font-size="11" text-anchor="middle">40%</text><line x1="532.9" x2="532.9" y1="0" y2="171" stroke="var(--grid)"/><text x="532.9" y="183" fill="var(--text-muted)" font-size="11" text-anchor="middle">60%</text><text x="182" y="18.0" fill="var(--text-secondary)" font-size="12" text-anchor="end">Converters (serialization)</text><path d="M190,4 h350.6 a4,4 0 0 1 4,4 v12 a4,4 0 0 1 -4,4 h-350.6 z" fill="var(--series-1)" data-tip="Converters (serialization): 62% of the CPU samples (io.confluent.kafka.schemaregistry 33%, io.confluent.kafka.serializers 21%, io.confluent.connect.avro 8%)" tabindex="0"/><text x="550.6" y="18.0" fill="var(--text-primary)" font-size="12">62%</text><text x="182" y="47.0" fill="var(--text-secondary)" font-size="12" text-anchor="end">Connector</text><path d="M190,33 h59.2 a4,4 0 0 1 4,4 v12 a4,4 0 0 1 -4,4 h-59.2 z" fill="var(--series-1)" data-tip="Connector: 11% of the CPU samples (io.confluent.connect.jdbc 11%)" tabindex="0"/><text x="259.2" y="47.0" fill="var(--text-primary)" font-size="12">11%</text><text x="182" y="76.0" fill="var(--text-secondary)" font-size="12" text-anchor="end">Kafka client</text><path d="M190,62 h56.3 a4,4 0 0 1 4,4 v12 a4,4 0 0 1 -4,4 h-56.3 z" fill="var(--series-1)" data-tip="Kafka client: 11% of the CPU samples (org.apache.kafka.clients 10%, org.apache.kafka.common 1%)" tabindex="0"/><text x="256.3" y="76.0" fill="var(--text-primary)" font-size="12">11%</text><text x="182" y="105.0" fill="var(--text-secondary)" font-size="12" text-anchor="end">Libraries (drivers, SDKs)</text><path d="M190,91 h54.9 a4,4 0 0 1 4,4 v12 a4,4 0 0 1 -4,4 h-54.9 z" fill="var(--series-1)" data-tip="Libraries (drivers, SDKs): 10% of the CPU samples (org.postgresql 10%)" tabindex="0"/><text x="254.9" y="105.0" fill="var(--text-primary)" font-size="12">10%</text><text x="182" y="134.0" fill="var(--text-secondary)" font-size="12" text-anchor="end">Connect framework</text><path d="M190,120 h29.0 a4,4 0 0 1 4,4 v12 a4,4 0 0 1 -4,4 h-29.0 z" fill="var(--series-1)" data-tip="Connect framework: 6% of the CPU samples (org.apache.kafka.connect 6%)" tabindex="0"/><text x="229.0" y="134.0" fill="var(--text-primary)" font-size="12">6%</text><text x="182" y="163.0" fill="var(--text-secondary)" font-size="12" text-anchor="end">Logging</text><path d="M190,149 h0.7 a0.7178750897343862,0.7178750897343862 0 0 1 0.7178750897343862,0.7178750897343862 v18.564249820531227 a0.7178750897343862,0.7178750897343862 0 0 1 -0.7178750897343862,0.7178750897343862 h-0.7 z" fill="var(--series-1)" data-tip="Logging: 0% of the CPU samples (org.apache.logging.log4j 0%)" tabindex="0"/><text x="197.4" y="163.0" fill="var(--text-primary)" font-size="12">0%</text></svg><details><summary>Table</summary><table><tr><th>Layer</th><th>Top packages</th><th class=num>CPU samples</th></tr><tr><td>Converters (serialization)</td><td>io.confluent.kafka.schemaregistry 33%, io.confluent.kafka.serializers 21%, io.confluent.connect.avro 8%</td><td class=num>62%</td></tr><tr><td>Connector</td><td>io.confluent.connect.jdbc 11%</td><td class=num>11%</td></tr><tr><td>Kafka client</td><td>org.apache.kafka.clients 10%, org.apache.kafka.common 1%</td><td class=num>11%</td></tr><tr><td>Libraries (drivers, SDKs)</td><td>org.postgresql 10%</td><td class=num>10%</td></tr><tr><td>Connect framework</td><td>org.apache.kafka.connect 6%</td><td class=num>6%</td></tr><tr><td>Logging</td><td>org.apache.logging.log4j 0%</td><td class=num>0%</td></tr></table></details><div class="tooltip"></div></div><div class="card full"><h2>🧩 Hot methods (task threads)</h2><p class="sub">First frame outside the JDK of the execution samples, and the JDK method running in it</p><table><tr><th>Method</th><th>Layer</th><th class=num>CPU samples</th></tr><tr><td><code>io.confluent.kafka.schemaregistry.client.CachedSchemaRegistryClient.parseSchemaOrElseThrow</code> <span class="muted">in ConcurrentLinkedQueue.offer</span></td><td>Converters (serialization)</td><td class=num>8%</td></tr><tr><td><code>io.confluent.kafka.serializers.AbstractKafkaAvroDeserializer$DeserializationContext.read</code> <span class="muted">in Parser.advance</span></td><td>Converters (serialization)</td><td class=num>7%</td></tr><tr><td><code>io.confluent.connect.avro.AvroData.toConnectData</code> <span class="muted">in HashMap.getNode</span></td><td>Converters (serialization)</td><td class=num>7%</td></tr><tr><td><code>io.confluent.kafka.schemaregistry.client.CachedSchemaRegistryClient.getSchemaEntityBySubjectAndId</code> <span class="muted">in ConcurrentLinkedQueue.offer</span></td><td>Converters (serialization)</td><td class=num>7%</td></tr><tr><td><code>io.confluent.kafka.serializers.schema.id.DualSchemaIdDeserializer.deserialize</code> <span class="muted">in ByteBuffer.wrap</span></td><td>Converters (serialization)</td><td class=num>5%</td></tr><tr><td><code>org.apache.kafka.clients.consumer.internals.CompletedFetch.nextFetchedRecord</code></td><td>Kafka client</td><td class=num>4%</td></tr><tr><td><code>io.confluent.kafka.schemaregistry.client.CachedSchemaRegistryClient.getVersion</code> <span class="muted">in LocalCache$AccessQueue.offer</span></td><td>Converters (serialization)</td><td class=num>3%</td></tr><tr><td><code>io.confluent.kafka.serializers.subject.AssociatedNameStrategy.subjectName</code> <span class="muted">in ConcurrentLinkedQueue.offer</span></td><td>Converters (serialization)</td><td class=num>3%</td></tr><tr><td><code>org.apache.kafka.connect.storage.KafkaStatusBackingStore.getTopic</code> <span class="muted">in ConcurrentHashMap.get</span></td><td>Connect framework</td><td class=num>3%</td></tr><tr><td><code>io.confluent.kafka.schemaregistry.avro.AvroSchema.hashCode</code></td><td>Converters (serialization)</td><td class=num>3%</td></tr></table></div><div class="card"><h2>🌐 Network I/O of the task threads</h2><p class="sub">Socket reads and writes of 1 ms or more (events), and shorter calls seen by the native samples, by remote</p><table><tr><th>Remote</th><th class=num>Calls ≥ 1 ms</th><th class=num>Avg ms</th><th class=num>Total s</th><th class=num>Task time</th><th class=num>Shorter calls</th></tr><tr><td><code>postgres:5432</code></td><td class=num>133</td><td class=num>5.2</td><td class=num>0.7</td><td class=num>5%</td><td class=num>49%</td></tr><tr><td><code>broker:9092</code> <span class="muted">broker</span></td><td class=num>1</td><td class=num>2.0</td><td class=num>0.0</td><td class=num>0%</td><td class=num>0%</td></tr></table></div><div class="card"><h2>💾 Allocation by class</h2><p class="sub">Task threads, 876.2 MB/s in total (877.1 MB/s for the whole JVM)</p><table><tr><th>Class</th><th class=num>MB/s</th><th class=num>Share</th></tr><tr><td><code>java.lang.Object[]</code></td><td class=num>245</td><td class=num>28%</td></tr><tr><td><code>java.util.concurrent.ConcurrentLinkedQueue$Node</code></td><td class=num>83</td><td class=num>9%</td></tr><tr><td><code>byte[]</code></td><td class=num>79</td><td class=num>9%</td></tr><tr><td><code>java.lang.String</code></td><td class=num>34</td><td class=num>4%</td></tr><tr><td><code>org.apache.avro.util.Utf8</code></td><td class=num>32</td><td class=num>4%</td></tr><tr><td><code>io.confluent.kafka.schemaregistry.client.CachedSchemaRegistryClient$$Lambda.0x000003fe01875000</code></td><td class=num>28</td><td class=num>3%</td></tr></table></div><div class="card"><h2>🔥 Busiest threads of the JVM</h2><p class="sub">CPU cores used, average over the recording</p><table><tr><th>Thread</th><th class=num>Cores</th></tr><tr><td>task-thread-postgres-sink-0 <span class="muted">task</span></td><td class=num>0.36</td></tr><tr><td>kafka-admin-client-thread | connect-adminclient-producer</td><td class=num>0.09</td></tr><tr><td>C2 CompilerThread0</td><td class=num>0.07</td></tr><tr><td>C2 CompilerThread1</td><td class=num>0.07</td></tr><tr><td>kafka-producer-network-thread | connect-adminclient-producer</td><td class=num>0.05</td></tr><tr><td>C2 CompilerThread3</td><td class=num>0.04</td></tr><tr><td>C2 CompilerThread2</td><td class=num>0.04</td></tr><tr><td>C2 CompilerThread4</td><td class=num>0.02</td></tr></table></div><div class="card"><h2>✅ Other signals</h2><p class="sub">Checked and found normal</p><table><tr><th>Signal</th><th>Value</th></tr><tr><td>✅ Kafka client</td><td>10% of the task time in the Kafka client (poll, send)</td></tr><tr><td>✅ Lock contention</td><td>0% of the task time</td></tr><tr><td>✅ Exceptions thrown</td><td>1 per second</td></tr><tr><td>✅ GC pauses</td><td>95 collections, longest 12 ms, p99 7 ms</td></tr></table></div></div></section>
+<footer>🛠️ Generated by playground analyze flight-recorder. Open the recording in JDK Mission Control (https://jdk.java.net/jmc/) for the details.</footer>
+</div>
+<script>
+document.getElementById("theme-toggle").addEventListener("click", () => {
+  const root = document.documentElement;
+  const dark = root.dataset.theme ? root.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+  root.dataset.theme = dark ? "light" : "dark";
+});
+</script>
+
+<script>
+(function () {
+  document.querySelectorAll(".jfr-section .card").forEach(card => {
+    const tt = card.querySelector(".tooltip");
+    if (!tt) return;
+    card.querySelectorAll("[data-tip]").forEach(el => {
+      const show = e => {
+        const r = card.getBoundingClientRect();
+        tt.textContent = el.dataset.tip; tt.style.display = "block";
+        const x = (e.clientX !== undefined ? e.clientX : el.getBoundingClientRect().left) - r.left + 12;
+        const y = (e.clientY !== undefined ? e.clientY : el.getBoundingClientRect().top) - r.top + 12;
+        tt.style.left = Math.min(x, r.width - tt.offsetWidth - 8) + "px"; tt.style.top = y + "px";
+      };
+      el.addEventListener("pointermove", show); el.addEventListener("focus", show);
+      el.addEventListener("pointerleave", () => tt.style.display = "none"); el.addEventListener("blur", () => tt.style.display = "none");
+    });
+  });
+})();
+</script>
+
+</body></html>

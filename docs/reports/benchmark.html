@@ -1,0 +1,464 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Benchmark of postgres-sink</title>
+<style>
+.viz-root {
+  color-scheme: light;
+  --page: #f9f9f7; --surface-1: #fcfcfb; --text-primary: #0b0b0b; --text-secondary: #52514e; --text-muted: #898781;
+  --grid: #e1e0d9; --axis: #c3c2b7; --border: rgba(11,11,11,0.10); --series-1: #2a78d6;
+  --series-2: #eb6834; --series-3: #1baf7a; --series-4: #eda100; --series-5: #e87ba4; --series-6: #008300; --series-7: #6250d6; --series-8: #e34948;
+  --good: #0ca30c; --good-text: #006300; --critical: #d03b3b; --warning: #fab219;
+}
+@media (prefers-color-scheme: dark) {
+  :root:where(:not([data-theme="light"])) .viz-root {
+    color-scheme: dark;
+    --page: #0d0d0d; --surface-1: #1a1a19; --text-primary: #f0efec; --text-secondary: #c3c2b7; --text-muted: #898781;
+    --grid: #2c2c2a; --axis: #383835; --border: rgba(255,255,255,0.10); --series-1: #3987e5;
+    --series-2: #d95926; --series-3: #199e70; --series-4: #c98500; --series-5: #d55181; --series-6: #008300; --series-7: #9085e9; --series-8: #e66767;
+    --good-text: #0ca30c;
+  }
+}
+:root[data-theme="dark"] .viz-root {
+  color-scheme: dark;
+  --page: #0d0d0d; --surface-1: #1a1a19; --text-primary: #f0efec; --text-secondary: #c3c2b7; --text-muted: #898781;
+  --grid: #2c2c2a; --axis: #383835; --border: rgba(255,255,255,0.10); --series-1: #3987e5;
+    --series-2: #d95926; --series-3: #199e70; --series-4: #c98500; --series-5: #d55181; --series-6: #008300; --series-7: #9085e9; --series-8: #e66767;
+  --good-text: #0ca30c;
+}
+* { box-sizing: border-box; }
+body { margin: 0; }
+.viz-root { background: var(--page); color: var(--text-primary); min-height: 100vh;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif; padding: 28px 32px 48px; }
+header { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
+h1 { font-size: 1.35rem; margin: 0 0 4px; font-weight: 600; }
+h2 { font-size: 1rem; margin: 0 0 2px; font-weight: 600; }
+.sub { color: var(--text-secondary); font-size: .875rem; margin: 0; }
+a { color: var(--series-1); }
+.theme-toggle { white-space: nowrap; flex-shrink: 0; font: inherit; font-size: .8rem; color: var(--text-secondary); background: var(--surface-1);
+  border: 1px solid var(--border); border-radius: 6px; padding: 4px 10px; cursor: pointer; }
+.tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 12px; margin: 22px 0; }
+.tile, .card { background: var(--surface-1); border: 1px solid var(--border); border-radius: 10px; }
+.tile { padding: 14px 16px; }
+.tile .label { color: var(--text-secondary); font-size: .8rem; }
+.tile .value { font-size: 1.6rem; font-weight: 600; margin-top: 4px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.tile .unit { font-size: .85rem; font-weight: 400; color: var(--text-secondary); }
+.tile .note { color: var(--text-muted); font-size: .78rem; margin-top: 4px; }
+.delta-good { color: var(--good-text); } .delta-bad { color: var(--critical); }
+.verdict { margin: 0 0 22px; padding: 12px 16px; border-left: 4px solid var(--sev); font-size: 1rem; font-weight: 500; }
+.warnings { margin: 0 0 22px; padding: 12px 16px; list-style: none; }
+.warnings li { font-size: .875rem; color: var(--text-primary); padding: 3px 0; }
+.warnings li::before { content: "⚠️ "; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(520px, 1fr)); gap: 16px; }
+.card { padding: 16px 18px; position: relative; }
+.card .sub { margin-bottom: 8px; }
+svg { display: block; width: 100%; height: auto; overflow: visible; }
+svg text { font-family: inherit; }
+.tooltip { position: absolute; pointer-events: none; background: var(--surface-1); border: 1px solid var(--border);
+  border-radius: 6px; padding: 6px 9px; font-size: .78rem; box-shadow: 0 2px 8px rgba(0,0,0,.12); display: none;
+  white-space: nowrap; z-index: 2; }
+.tooltip strong { font-size: .9rem; font-variant-numeric: tabular-nums; }
+.legend { display: flex; gap: 16px; flex-wrap: wrap; font-size: .8rem; color: var(--text-secondary); margin: 2px 0 6px; }
+.legend span::before { content: ""; display: inline-block; width: 10px; height: 10px; border-radius: 2px; background: var(--c); margin-right: 6px; vertical-align: -1px; }
+.tooltip .key { display: inline-block; width: 12px; height: 2px; background: var(--series-1); vertical-align: middle; margin-right: 6px; }
+.tooltip .muted { color: var(--text-secondary); }
+table { border-collapse: collapse; width: 100%; font-size: .82rem; font-variant-numeric: tabular-nums; }
+th, td { text-align: left; padding: 5px 10px; border-bottom: 1px solid var(--grid); }
+th { color: var(--text-secondary); font-weight: 500; }
+td.num, th.num { text-align: right; }
+pre { margin: 0; font-family: 'SFMono-Regular', Consolas, Menlo, monospace; font-size: .8rem; white-space: pre-wrap; word-break: break-all; }
+details { margin-top: 16px; } summary { cursor: pointer; font-weight: 600; font-size: .95rem; padding: 6px 0; }
+.full { grid-column: 1 / -1; }
+.empty { color: var(--text-muted); font-size: .875rem; padding: 24px 0; }
+footer { color: var(--text-muted); font-size: .78rem; margin-top: 24px; }
+
+.jfr-section { margin-top: 26px; }
+.jfr-section > h2 { font-size: 1.15rem; margin: 0 0 4px; }
+.jfr-findings { list-style: none; margin: 14px 0 18px; padding: 0; display: grid; gap: 8px; }
+.jfr-findings li { background: var(--surface-1); border: 1px solid var(--border); border-left: 4px solid var(--sev); border-radius: 8px;
+  padding: 10px 14px; font-size: .875rem; line-height: 1.45; }
+.jfr-findings .title { font-weight: 600; margin-right: 6px; }
+.jfr-findings .next { color: var(--text-secondary); display: block; margin-top: 3px; }
+.jfr-section code { font-family: 'SFMono-Regular', Consolas, Menlo, monospace; font-size: .78rem; }
+.jfr-section .muted { color: var(--text-muted); }
+.jfr-verdict { margin: 18px 0 0; padding: 12px 16px; border-left: 4px solid var(--sev); font-size: 1rem; font-weight: 500; }
+.jfr-section td code { word-break: break-all; }
+
+</style>
+</head>
+<body>
+<div class="viz-root">
+<header>
+  <div>
+    <h1>🏎️ Benchmark of postgres-sink</h1>
+    <p class="sub">connector versions 10.8.4, 10.9.9 · io.confluent.connect.jdbc.JdbcSinkConnector · 10.9.9 · CP 8.3.2 · drain of 6,000,000 records · shape bulk · 2026-10-16 07:59:37 UTC</p>
+    <p class="sub" id="example-link"></p>
+  </div>
+  <button class="theme-toggle" id="theme-toggle" type="button">Toggle theme</button>
+</header>
+<div class="tiles" id="tiles"></div>
+<div class="card verdict" style="--sev: var(--good)">🏆 10.9.9 is the fastest (240,964 records/s, +22% vs 10.8.4)</div>
+
+<div class="grid">
+  <section class="card"><h2>🚀 Throughput</h2><p class="sub">records per second, per sample</p><div id="chart-rate"></div></section>
+  <section class="card"><h2>🔥 Connect CPU</h2><p class="sub">% of one core, average of the workers running the tasks</p><div id="chart-cpu"></div></section>
+  <section class="card"><h2>⏱️ Put batch time</h2><p class="sub">average per task, ms</p><div id="chart-batch"></div></section>
+  <section class="card"><h2>📜 Comparable runs</h2><p class="sub">records per second, same example, connector, mode and shape (benchmark-history); faded bars and * : another setup</p><div id="chart-history"></div></section>
+</div>
+<section class="jfr-section"><h2>🆚 Where the time goes, by version</h2><p class="sub">Flight recordings of the measured runs, averaged over the rounds of each version</p><ul class="jfr-findings"><li style="--sev: var(--axis)"><span class="title">ℹ️ 10.9.9 is 22% faster: the difference is in libraries (drivers, SDKs).</span>10.9.9 processes 22% more records per second than 10.8.4 (240,964 vs 196,721). Libraries (drivers, SDKs) went from 26% to 8% of the task-thread CPU samples. Hot method that changed the most: org.postgresql.core.v3.QueryExecutorImpl.sendBind (9% → 0%).<span class="next">→ Look at the changes between the two versions in that area.</span></li></ul><div class="grid"><div class="card"><h2>🔥 CPU of the task threads, by layer</h2><p class="sub">Share of the execution samples of each version</p><table><tr><th>Layer</th><th class=num>10.8.4</th><th class=num>10.9.9</th><th class=num>Δ 10.9.9 vs 10.8.4</th></tr><tr><td>Connector</td><td class=num>8%</td><td class=num>15%</td><td class=num><strong>+6 pts</strong></td></tr><tr><td>Converters (serialization)</td><td class=num>56%</td><td class=num>62%</td><td class=num><strong>+6 pts</strong></td></tr><tr><td>Kafka client</td><td class=num>5%</td><td class=num>8%</td><td class=num><strong>+3 pts</strong></td></tr><tr><td>Connect framework</td><td class=num>4%</td><td class=num>7%</td><td class=num><strong>+3 pts</strong></td></tr><tr><td>Libraries (drivers, SDKs)</td><td class=num>26%</td><td class=num>8%</td><td class=num><strong>-19 pts</strong></td></tr><tr><td>Logging</td><td class=num>0%</td><td class=num>1%</td><td class=num><strong>+0 pts</strong></td></tr></table></div><div class="card"><h2>🧵 Task thread time, by state</h2><p class="sub">Mean of the task threads of each version</p><table><tr><th>State</th><th class=num>10.8.4</th><th class=num>10.9.9</th><th class=num>Δ 10.9.9 vs 10.8.4</th></tr><tr><td>Running (CPU)</td><td class=num>38%</td><td class=num>40%</td><td class=num><strong>+2 pts</strong></td></tr><tr><td>Blocked on network I/O</td><td class=num>45%</td><td class=num>55%</td><td class=num><strong>+10 pts</strong></td></tr><tr><td>Kafka client (poll, send)</td><td class=num>17%</td><td class=num>5%</td><td class=num><strong>-12 pts</strong></td></tr><tr><td>Lock contention</td><td class=num>0%</td><td class=num>0%</td><td class=num><strong>0 pts</strong></td></tr><tr><td>Waiting (sleep, park, wait)</td><td class=num>0%</td><td class=num>0%</td><td class=num><strong>0 pts</strong></td></tr><tr><td>File I/O</td><td class=num>0%</td><td class=num>0%</td><td class=num><strong>0 pts</strong></td></tr><tr><td>Not attributed</td><td class=num>0%</td><td class=num>0%</td><td class=num><strong>0 pts</strong></td></tr></table></div></div></section>
+<details open id="versions-section" hidden><summary>🆚 Connector versions</summary><div class="card"><table id="versions-table"></table></div></details>
+<details open><summary>📋 Run details</summary><div class="card"><table id="details"></table></div></details>
+<details open><summary>🖥️ Setup</summary><div class="card"><table id="setup"></table></div></details>
+<details><summary>⚙️ Connector configuration (secrets masked)</summary><div class="card"><pre id="connector-config"></pre></div></details>
+<details><summary>📜 Comparable runs (table)</summary><div class="card"><table id="history-table"></table></div></details>
+<details><summary>📋 Samples (table)</summary><div class="card"><table id="samples-table"></table></div></details>
+<footer>🛠️ Results are relative to the docker host they ran on: compare runs on the same machine only. Generated by playground connector benchmark.</footer>
+</div>
+<script type="application/json" id="data">{"result": {"date": "2026-10-16T07:59:37Z", "test_file": "connect/connect-jdbc-postgresql-sink/postgres-sink.sh", "connector": "postgres-sink", "connector_class": "io.confluent.connect.jdbc.JdbcSinkConnector", "plugin_version": "10.9.9", "cp_tag": "8.3.2", "type": "sink", "mode": "drain", "shape": "bulk", "tasks": 1, "records": 6000000, "seconds": 24.9, "records_per_second": 240963.9, "lower_bound": false, "rate_p50": "246298.8", "rate_p95": "257519.4", "rate_min": "213290.6", "batch_avg_ms": "1.5", "running_ratio": "0.38", "cpu_percent_of_one_core_avg": "61", "cpu_percent_of_one_core_max": "72", "load_seconds": "64.1", "topic_records_delta": "-", "gc_percent": "0.7", "cpu_percent_of_available_avg": "3", "pause_ratio": "0.62", "dlq_records": "0", "skipped_records": "0", "task_shares": "-", "samples_csv": "/tmp/playground-benchmark/postgres-sink-20261016-095759.csv", "setup": {"host": {"os": "macOS 27.0.1", "arch": "arm64", "cpu_model": "Apple M5 Max", "cpus": 18, "memory_bytes": 38654705664}, "engine": {"name": "docker", "version": "29.8.2", "os": "Docker Desktop", "cpus": 18, "memory_bytes": 25157324800}, "connect": {"image": "confluentinc/cp-server-connect:8.3.2", "image_arch": "arm64", "emulated": false, "heap_opts": "", "heap_max_bytes": 2147483648, "jvm_version": "25.0.4.1+1-LTS", "jvm_cpus": 18, "workers": 1}, "kafka": {"environment": "plaintext", "brokers": 1, "kraft": true}, "playground": {"test_file": "connect/connect-jdbc-postgresql-sink/postgres-sink.sh", "commit": "cdea5f0ff", "dirty": false, "repo_url": "https://github.com/vdesabou/kafka-docker-playground", "repo_path": "connect/connect-jdbc-postgresql-sink/postgres-sink.sh", "repo_commit": "cdea5f0ffcbe476ccf0333054bf5a90e50b085be", "repo_dirty": false}, "connector": {"documentation_url": "https://docs.confluent.io/kafka-connect-jdbc/current/", "source_url": "https://github.com/confluentinc/kafka-connect-jdbc", "plugin_dir": "/usr/share/confluent-hub-components/confluentinc-kafka-connect-jdbc"}, "connector_config": {"connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector", "tasks.max": "1", "topics": "orders", "name": "postgres-sink", "auto.create": "true", "connection.url": "jdbc:postgresql://postgres/postgres?user=myuser&password=mypassword&ssl=false", "__internal.config.version": "3bb3a9676f5ff13fef3386a3cae60bf883efc8c35e539d4856871d22147c6868"}}, "flight_recorder": {"enabled": true, "files": ["/tmp/playground-benchmark/postgres-sink-20261016-095759-connect.jfr"], "analysis": "postgres-sink-20261016-095759-jfr.json", "findings": [{"severity": "critical", "title": "The tasks wait on postgres:5432."}, {"severity": "info", "title": "Most of the CPU goes to conversion."}, {"severity": "info", "title": "Allocation is high."}]}, "round": 1}, "samples": [{"time": "09:59:15", "elapsed": 7.8, "records": 2259275.0, "rate": 213290.6, "batch": 1.6, "ratio": 0.34, "cpu": 72.0, "lag": 5999500.0}, {"time": "09:59:21", "elapsed": 13.5, "records": 3672439.0, "rate": 246298.8, "batch": 1.5, "ratio": 0.37, "cpu": 62.0, "lag": 5999500.0}, {"time": "09:59:27", "elapsed": 19.2, "records": 5137723.0, "rate": 258701.9, "batch": 1.5, "ratio": 0.39, "cpu": 56.0, "lag": 5999500.0}, {"time": "09:59:32", "elapsed": 24.9, "records": 6600000.0, "rate": 257519.4, "batch": 1.4, "ratio": 0.41, "cpu": 55.0, "lag": 5999500.0}], "history": [{"date": "2026-10-16T07:56:47Z", "test_file": "connect/connect-jdbc-postgresql-sink/postgres-sink.sh", "connector": "postgres-sink", "connector_class": "io.confluent.connect.jdbc.JdbcSinkConnector", "plugin_version": "10.8.4", "cp_tag": "8.3.2", "type": "sink", "mode": "drain", "shape": "bulk", "tasks": 1, "records": 6000000, "seconds": 30.5, "records_per_second": 196721.3, "lower_bound": false, "rate_p50": "235047.3", "rate_p95": "235053.3", "rate_min": "38995.9", "batch_avg_ms": "1.5", "running_ratio": "0.39", "cpu_percent_of_one_core_avg": "55", "cpu_percent_of_one_core_max": "75", "load_seconds": "64.1", "topic_records_delta": "-", "gc_percent": "0.6", "cpu_percent_of_available_avg": "3", "pause_ratio": "0.61", "dlq_records": "0", "skipped_records": "0", "task_shares": "-", "samples_csv": "/tmp/playground-benchmark/postgres-sink-20261016-095503.csv", "setup": {"host": {"os": "macOS 27.0.1", "arch": "arm64", "cpu_model": "Apple M5 Max", "cpus": 18, "memory_bytes": 38654705664}, "engine": {"name": "docker", "version": "29.8.2", "os": "Docker Desktop", "cpus": 18, "memory_bytes": 25157324800}, "connect": {"image": "confluentinc/cp-server-connect:8.3.2", "image_arch": "arm64", "emulated": false, "heap_opts": "", "heap_max_bytes": 2147483648, "jvm_version": "25.0.4.1+1-LTS", "jvm_cpus": 18, "workers": 1}, "kafka": {"environment": "plaintext", "brokers": 1, "kraft": true}, "playground": {"test_file": "connect/connect-jdbc-postgresql-sink/postgres-sink.sh", "commit": "cdea5f0ff", "dirty": false, "repo_url": "https://github.com/vdesabou/kafka-docker-playground", "repo_path": "connect/connect-jdbc-postgresql-sink/postgres-sink.sh", "repo_commit": "cdea5f0ffcbe476ccf0333054bf5a90e50b085be", "repo_dirty": false}, "connector": {"documentation_url": "https://docs.confluent.io/kafka-connect-jdbc/current/", "source_url": "https://github.com/confluentinc/kafka-connect-jdbc", "plugin_dir": "/usr/share/confluent-hub-components/confluentinc-kafka-connect-jdbc"}, "connector_config": {"connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector", "tasks.max": "1", "topics": "orders", "name": "postgres-sink", "auto.create": "true", "connection.url": "jdbc:postgresql://postgres/postgres?user=myuser&password=mypassword&ssl=false", "__internal.config.version": "3bb3a9676f5ff13fef3386a3cae60bf883efc8c35e539d4856871d22147c6868"}}, "flight_recorder": {"enabled": true, "files": ["/tmp/playground-benchmark/postgres-sink-20261016-095503-connect.jfr"], "analysis": "postgres-sink-20261016-095503-jfr.json", "findings": [{"severity": "critical", "title": "The tasks wait on postgres:5432."}, {"severity": "info", "title": "Most of the CPU goes to conversion."}, {"severity": "info", "title": "Allocation is high."}]}, "round": 1}, {"date": "2026-10-16T07:59:37Z", "test_file": "connect/connect-jdbc-postgresql-sink/postgres-sink.sh", "connector": "postgres-sink", "connector_class": "io.confluent.connect.jdbc.JdbcSinkConnector", "plugin_version": "10.9.9", "cp_tag": "8.3.2", "type": "sink", "mode": "drain", "shape": "bulk", "tasks": 1, "records": 6000000, "seconds": 24.9, "records_per_second": 240963.9, "lower_bound": false, "rate_p50": "246298.8", "rate_p95": "257519.4", "rate_min": "213290.6", "batch_avg_ms": "1.5", "running_ratio": "0.38", "cpu_percent_of_one_core_avg": "61", "cpu_percent_of_one_core_max": "72", "load_seconds": "64.1", "topic_records_delta": "-", "gc_percent": "0.7", "cpu_percent_of_available_avg": "3", "pause_ratio": "0.62", "dlq_records": "0", "skipped_records": "0", "task_shares": "-", "samples_csv": "/tmp/playground-benchmark/postgres-sink-20261016-095759.csv", "setup": {"host": {"os": "macOS 27.0.1", "arch": "arm64", "cpu_model": "Apple M5 Max", "cpus": 18, "memory_bytes": 38654705664}, "engine": {"name": "docker", "version": "29.8.2", "os": "Docker Desktop", "cpus": 18, "memory_bytes": 25157324800}, "connect": {"image": "confluentinc/cp-server-connect:8.3.2", "image_arch": "arm64", "emulated": false, "heap_opts": "", "heap_max_bytes": 2147483648, "jvm_version": "25.0.4.1+1-LTS", "jvm_cpus": 18, "workers": 1}, "kafka": {"environment": "plaintext", "brokers": 1, "kraft": true}, "playground": {"test_file": "connect/connect-jdbc-postgresql-sink/postgres-sink.sh", "commit": "cdea5f0ff", "dirty": false, "repo_url": "https://github.com/vdesabou/kafka-docker-playground", "repo_path": "connect/connect-jdbc-postgresql-sink/postgres-sink.sh", "repo_commit": "cdea5f0ffcbe476ccf0333054bf5a90e50b085be", "repo_dirty": false}, "connector": {"documentation_url": "https://docs.confluent.io/kafka-connect-jdbc/current/", "source_url": "https://github.com/confluentinc/kafka-connect-jdbc", "plugin_dir": "/usr/share/confluent-hub-components/confluentinc-kafka-connect-jdbc"}, "connector_config": {"connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector", "tasks.max": "1", "topics": "orders", "name": "postgres-sink", "auto.create": "true", "connection.url": "jdbc:postgresql://postgres/postgres?user=myuser&password=mypassword&ssl=false", "__internal.config.version": "3bb3a9676f5ff13fef3386a3cae60bf883efc8c35e539d4856871d22147c6868"}}, "flight_recorder": {"enabled": true, "files": ["/tmp/playground-benchmark/postgres-sink-20261016-095759-connect.jfr"], "analysis": "postgres-sink-20261016-095759-jfr.json", "findings": [{"severity": "critical", "title": "The tasks wait on postgres:5432."}, {"severity": "info", "title": "Most of the CPU goes to conversion."}, {"severity": "info", "title": "Allocation is high."}]}, "round": 1}], "versions": [{"version": "10.8.4", "rates": [196721.3], "lower_bounds": 0, "runs": 1, "mean": 196721.3, "min": 196721.3, "max": 196721.3, "delta": 0.0}, {"version": "10.9.9", "rates": [240963.9], "lower_bounds": 0, "runs": 1, "mean": 240963.9, "min": 240963.9, "max": 240963.9, "delta": 22.489989645249402}]}</script>
+<script>
+(function () {
+  const data = JSON.parse(document.getElementById("data").textContent);
+  const r = data.result, samples = data.samples, history = data.history, versions = data.versions || [];
+  const comparison = versions.length > 0;
+  const root = document.documentElement;
+  document.getElementById("theme-toggle").addEventListener("click", () => {
+    const dark = root.dataset.theme ? root.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+    root.dataset.theme = dark ? "light" : "dark";
+  });
+
+  const nf = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
+  const nf1 = new Intl.NumberFormat("en-US", { maximumFractionDigits: 1 });
+  const el = (tag, attrs, text) => {
+    const e = document.createElement(tag);
+    for (const [k, v] of Object.entries(attrs || {})) e.setAttribute(k, v);
+    if (text !== undefined) e.textContent = text;
+    return e;
+  };
+  const svgEl = (tag, attrs) => {
+    const e = document.createElementNS("http://www.w3.org/2000/svg", tag);
+    for (const [k, v] of Object.entries(attrs || {})) e.setAttribute(k, v);
+    return e;
+  };
+  // round axis: a 1/2/5 x 10^n step giving at most 5 intervals, and the max as a multiple of it
+  const niceScale = (v) => {
+    if (!(v > 0)) return { max: 1, step: 0.25 };
+    const raw = v / 5, p = Math.pow(10, Math.floor(Math.log10(raw))), n = raw / p;
+    const step = (n <= 1 ? 1 : n <= 2 ? 2 : n <= 5 ? 5 : 10) * p;
+    return { max: Math.ceil(v / step - 1e-9) * step, step };
+  };
+  const compact = (v) => v >= 1e6 ? nf1.format(v / 1e6) + "M" : v >= 1e3 ? nf1.format(v / 1e3) + "k" : nf1.format(v);
+
+  // setup of a run: what changes the throughput, to tell comparable runs apart
+  const gib = b => b ? Math.floor(b / 1073741824) + " GiB" : "?";
+  const setupKey = st => st ? JSON.stringify([st.host && st.host.cpu_model, st.host && st.host.cpus, st.engine && st.engine.cpus,
+    st.engine && st.engine.memory_bytes, st.connect && st.connect.image, st.connect && st.connect.emulated,
+    st.connect && st.connect.heap_max_bytes, st.connect && st.connect.workers, st.kafka && st.kafka.brokers, st.kafka && st.kafka.environment]) : null;
+  const setupShort = st => st && st.host ? st.host.cpu_model + ", " + st.engine.name + " " + st.engine.cpus + " cpus / " + gib(st.engine.memory_bytes) +
+    (st.connect && st.connect.emulated ? ", emulated" : "") : "unknown";
+  const currentSetup = setupKey(r.setup);
+  const sameSetup = h => !currentSetup || !h.setup || setupKey(h.setup) === currentSetup;
+
+  // tiles
+  const tiles = document.getElementById("tiles");
+  function tile(label, value, unit, note, cls) {
+    const t = el("div", { class: "tile" });
+    t.appendChild(el("div", { class: "label" }, label));
+    const v = el("div", { class: "value" + (cls ? " " + cls : "") }, value);
+    if (unit) { v.appendChild(document.createTextNode(" ")); v.appendChild(el("span", { class: "unit" }, unit)); }
+    t.appendChild(v);
+    if (note) t.appendChild(el("div", { class: "note" }, note));
+    tiles.appendChild(t);
+  }
+  tile(comparison ? "🚀 Last run (" + r.plugin_version + ")" : "🚀 Throughput", (r.lower_bound ? "≥ " : "") + nf.format(r.records_per_second), "records/s",
+       r.rate_p50 !== "-" ? "p50 " + compact(+r.rate_p50) + " · p95 " + compact(+r.rate_p95) + " · min " + compact(+r.rate_min) : "");
+  tile("⏱️ Duration", nf1.format(r.seconds), "s", r.mode === "drain" ? "time to process the backlog" : "measure, after the warm-up");
+  tile("🧾 Records", nf.format(r.records), "", r.mode === "drain" ? "backlog, loaded in " + r.load_seconds + " s" : "processed during the measure");
+  const previous = history.length > 1 ? history[history.length - 2] : null;
+  const versionColor = version => "var(--series-" + (versions.findIndex(v => v.version === version) % 8 + 1) + ")";
+  if (comparison) {
+    const measured = versions.filter(v => v.mean !== null);
+    if (measured.length) {
+      const best = measured.reduce((a, b) => (b.mean > a.mean ? b : a));
+      const d = best.delta;
+      tile("🏆 Best version", best.version, "", nf.format(best.mean) + " records/s (mean of " + best.rates.length + " run(s))" +
+           (d !== null && Math.abs(d) >= 1 ? ", " + (d > 0 ? "+" : "") + nf.format(d) + "% vs " + measured[0].version : ""));
+    } else {
+      tile("🏆 Best version", "–", "", "only lower bounds: increase --nb-records");
+    }
+  } else if (previous && previous.records_per_second > 0) {
+    const delta = (r.records_per_second - previous.records_per_second) / previous.records_per_second * 100;
+    const same = Math.abs(delta) < 5;
+    tile("📜 Vs previous run", (same ? "≈ " + (delta >= 0 ? "+" : "") : delta > 0 ? "▲ +" : "▼ ") + nf.format(delta) + "%",
+         same ? "within ±5%" : delta > 0 ? "faster" : "slower",
+         nf.format(previous.records_per_second) + " records/s on " + previous.date.replace("T", " ").replace("Z", " UTC"),
+         same ? "" : delta > 0 ? "delta-good" : "delta-bad");
+  } else {
+    tile("📜 Vs previous run", "–", "", "🆕 no comparable run in benchmark-history yet");
+  }
+
+  // charts
+  const W = 560, H = 250, L = 58, R = 16, T = 14, B = 34;
+  function yGrid(svg, ys, yfmt) {
+    for (let v = 0; v <= ys.max + 1e-9; v += ys.step) {
+      const y = T + (H - T - B) * (1 - v / ys.max);
+      svg.appendChild(svgEl("line", { x1: L, x2: W - R, y1: y, y2: y, stroke: v ? "var(--grid)" : "var(--axis)", "stroke-width": 1 }));
+      const t = svgEl("text", { x: L - 8, y: y + 4, "text-anchor": "end", "font-size": 11, fill: "var(--text-muted)" });
+      t.textContent = yfmt(v);
+      svg.appendChild(t);
+    }
+  }
+  function axes(svg, xs, ys, xlabel, yfmt) {
+    yGrid(svg, ys, yfmt);
+    for (let v = 0; v <= xs.max + 1e-9; v += xs.step) {
+      const x = L + (W - L - R) * v / xs.max;
+      const t = svgEl("text", { x, y: H - B + 18, "text-anchor": "middle", "font-size": 11, fill: "var(--text-muted)" });
+      t.textContent = nf1.format(v) + (v + xs.step > xs.max + 1e-9 ? " " + xlabel : "");
+      svg.appendChild(t);
+    }
+  }
+  function lineChart(id, key, unitLabel, yfmt, reference) {
+    const host = document.getElementById(id);
+    const pts = samples.filter(s => s[key] !== null && s.elapsed !== null);
+    if (pts.length === 0) { host.appendChild(el("div", { class: "empty" }, "🤷 no sample for this metric")); return; }
+    const xs = niceScale(Math.max(...pts.map(p => p.elapsed)));
+    const ys = niceScale(Math.max(...pts.map(p => p[key]), reference ? reference.value : 0));
+    const xmax = xs.max, ymax = ys.max;
+    const sx = x => L + (W - L - R) * x / xmax, sy = y => T + (H - T - B) * (1 - y / ymax);
+    const svg = svgEl("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": unitLabel + " over time" });
+    axes(svg, xs, ys, "s", yfmt);
+    if (reference && reference.value > 0) {
+      const y = sy(reference.value);
+      svg.appendChild(svgEl("line", { x1: L, x2: W - R, y1: y, y2: y, stroke: "var(--text-secondary)", "stroke-width": 1, "stroke-dasharray": "4 4" }));
+      const t = svgEl("text", { x: W - R, y: y - 6, "text-anchor": "end", "font-size": 11, fill: "var(--text-secondary)" });
+      t.textContent = reference.label;
+      svg.appendChild(t);
+    }
+    svg.appendChild(svgEl("path", { d: pts.map((p, i) => (i ? "L" : "M") + sx(p.elapsed).toFixed(1) + "," + sy(p[key]).toFixed(1)).join(""),
+      fill: "none", stroke: "var(--series-1)", "stroke-width": 2, "stroke-linejoin": "round", "stroke-linecap": "round" }));
+    if (pts.length <= 40) {
+      for (const p of pts) svg.appendChild(svgEl("circle", { cx: sx(p.elapsed), cy: sy(p[key]), r: 4, fill: "var(--series-1)", stroke: "var(--surface-1)", "stroke-width": 2 }));
+    }
+    const cross = svgEl("line", { y1: T, y2: H - B, stroke: "var(--text-muted)", "stroke-width": 1, visibility: "hidden" });
+    svg.appendChild(cross);
+    const hit = svgEl("rect", { x: L, y: T, width: W - L - R, height: H - T - B, fill: "transparent" });
+    svg.appendChild(hit);
+    host.appendChild(svg);
+    const tip = el("div", { class: "tooltip" });
+    host.parentElement.appendChild(tip);
+    function show(evt) {
+      const box = svg.getBoundingClientRect(), scale = W / box.width;
+      const x = (evt.clientX - box.left) * scale;
+      let best = pts[0];
+      for (const p of pts) if (Math.abs(sx(p.elapsed) - x) < Math.abs(sx(best.elapsed) - x)) best = p;
+      cross.setAttribute("x1", sx(best.elapsed)); cross.setAttribute("x2", sx(best.elapsed)); cross.setAttribute("visibility", "visible");
+      tip.replaceChildren();
+      tip.appendChild(el("span", { class: "key" }));
+      tip.appendChild(el("strong", {}, nf1.format(best[key])));
+      tip.appendChild(document.createTextNode(" " + unitLabel));
+      tip.appendChild(el("br"));
+      tip.appendChild(el("span", { class: "muted" }, nf1.format(best.elapsed) + " s · " + best.time));
+      tip.style.display = "block";
+      const host_box = host.parentElement.getBoundingClientRect();
+      const px = box.left - host_box.left + sx(best.elapsed) / scale;
+      tip.style.left = Math.min(px + 12, host_box.width - tip.offsetWidth - 8) + "px";
+      tip.style.top = (box.top - host_box.top + sy(best[key]) / scale - tip.offsetHeight - 10) + "px";
+    }
+    hit.addEventListener("pointermove", show);
+    hit.addEventListener("pointerleave", () => { tip.style.display = "none"; cross.setAttribute("visibility", "hidden"); });
+  }
+  lineChart("chart-rate", "rate", "records/s", compact,
+            { value: r.records_per_second, label: (r.lower_bound ? "≥ " : "") + "average " + compact(r.records_per_second) });
+  lineChart("chart-cpu", "cpu", "% of one core", v => nf.format(v) + "%");
+  lineChart("chart-batch", "batch", "ms", v => nf1.format(v));
+
+  // history bars
+  (function () {
+    const host = document.getElementById("chart-history");
+    if (history.length === 0) { host.appendChild(el("div", { class: "empty" }, "🆕 no comparable run yet")); return; }
+    const ys = niceScale(Math.max(...history.map(h => h.records_per_second)));
+    const ymax = ys.max;
+    const n = history.length, slot = (W - L - R) / n, bw = Math.min(56, slot - 2);
+    const sy = y => T + (H - T - B) * (1 - y / ymax);
+    const svg = svgEl("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": "throughput of the comparable runs" });
+    yGrid(svg, ys, compact);
+    const tip = el("div", { class: "tooltip" });
+    host.parentElement.appendChild(tip);
+    history.forEach((h, i) => {
+      const x = L + slot * i + (slot - bw) / 2, y = sy(h.records_per_second), base = sy(0), rad = Math.min(4, bw / 2);
+      const bar = svgEl("path", {
+        d: `M${x},${base}V${y + rad}Q${x},${y} ${x + rad},${y}H${x + bw - rad}Q${x + bw},${y} ${x + bw},${y + rad}V${base}Z`,
+        fill: comparison ? versionColor(h.plugin_version) : "var(--series-1)", tabindex: 0,
+        "fill-opacity": (comparison && h.lower_bound) || !sameSetup(h) ? 0.35 : 1
+      });
+      svg.appendChild(bar);
+      const current = !comparison && i === n - 1;
+      if (current || comparison || n <= 8) {
+        const t = svgEl("text", { x: x + bw / 2, y: y - 6, "text-anchor": "middle", "font-size": 11, fill: "var(--text-secondary)" });
+        t.textContent = compact(h.records_per_second);
+        svg.appendChild(t);
+      }
+      const lab = svgEl("text", { x: x + bw / 2, y: H - B + 16, "text-anchor": "middle", "font-size": 10.5,
+        fill: current ? "var(--text-primary)" : "var(--text-muted)", "font-weight": current ? 600 : 400 });
+      lab.textContent = comparison ? h.plugin_version + (h.round > 1 || versions.some(v => v.runs > 1) ? " · r" + h.round : "") : current ? "this run" : (h.date || "").slice(5, 16).replace("T", " ") + (sameSetup(h) ? "" : " *");
+      svg.appendChild(lab);
+      const showTip = () => {
+        tip.replaceChildren();
+        tip.appendChild(el("strong", {}, (h.lower_bound ? "≥ " : "") + nf.format(h.records_per_second)));
+        tip.appendChild(document.createTextNode(" records/s" + (comparison ? " · version " + h.plugin_version + ", round " + h.round : "") +
+          (h.lower_bound ? " (lower bound, not in the mean)" : "")));
+        tip.appendChild(el("br"));
+        tip.appendChild(el("span", { class: "muted" }, (h.date || "").replace("T", " ").replace("Z", " UTC")));
+        tip.appendChild(el("br"));
+        tip.appendChild(el("span", { class: "muted" }, h.plugin_version + " · CP " + h.cp_tag + " · " + h.tasks + " task(s) · " + nf.format(h.records) + " records"));
+        tip.appendChild(el("br"));
+        tip.appendChild(el("span", { class: "muted" }, (sameSetup(h) ? "" : "other setup: ") + setupShort(h.setup)));
+        tip.style.display = "block";
+        const sbox = svg.getBoundingClientRect(), hbox = host.parentElement.getBoundingClientRect(), scale = W / sbox.width;
+        tip.style.left = Math.max(8, Math.min(sbox.left - hbox.left + (x + bw / 2) / scale - tip.offsetWidth / 2, hbox.width - tip.offsetWidth - 8)) + "px";
+        tip.style.top = (sbox.top - hbox.top + y / scale - tip.offsetHeight - 10) + "px";
+      };
+      bar.addEventListener("pointerenter", showTip); bar.addEventListener("focus", showTip);
+      bar.addEventListener("pointerleave", () => tip.style.display = "none"); bar.addEventListener("blur", () => tip.style.display = "none");
+    });
+    host.appendChild(svg);
+  })();
+
+  // tables
+  function fillTable(id, header, rows) {
+    const table = document.getElementById(id);
+    const tr = el("tr");
+    header.forEach(([h, num]) => tr.appendChild(el("th", num ? { class: "num" } : {}, h)));
+    table.appendChild(tr);
+    rows.forEach(row => {
+      const tr = el("tr");
+      row.forEach((c, i) => tr.appendChild(el("td", header[i][1] ? { class: "num" } : {}, c === null || c === undefined ? "-" : String(c))));
+      table.appendChild(tr);
+    });
+  }
+  fillTable("details", [["Property"], ["Value"]], [
+    ["connector", r.connector + " (" + r.type + ", " + r.tasks + " task(s))"],
+    ["connector class", r.connector_class], ["plugin version", r.plugin_version], ["CP version", r.cp_tag],
+    ["example", r.test_file], ["mode", r.mode], ["shape", r.shape],
+    ["records", nf.format(r.records)], ["duration", r.seconds + " s"],
+    ["throughput", (r.lower_bound ? "≥ " : "") + nf1.format(r.records_per_second) + " records/s"],
+    ["batch avg", r.batch_avg_ms + " ms"], ["running ratio avg", r.running_ratio],
+    ["connect cpu avg / max", r.cpu_percent_of_one_core_avg + "% / " + r.cpu_percent_of_one_core_max + "% of one core" +
+      (r.cpu_percent_of_available_avg !== undefined ? " (" + r.cpu_percent_of_available_avg + "% of the cpus available)" : "")],
+    ["gc pauses", r.gc_percent === undefined || r.gc_percent === "-" ? "-" : r.gc_percent + "% of the time"],
+    ["records per task", r.task_shares],
+    ["dlq / dropped records", r.dlq_records === undefined ? "-" : r.dlq_records + " sent to the dlq, " + r.skipped_records + " dropped without dlq"],
+    ["load", r.load_seconds === "-" ? "-" : r.load_seconds + " s"],
+    ["records in topics", r.topic_records_delta === "-" ? "-" : "+" + nf.format(+r.topic_records_delta)],
+    ["date", r.date], ["samples", r.samples_csv]
+  ]);
+  fillTable("history-table", [["date"], ["records/s", 1], ["records", 1], ["seconds", 1], ["plugin"], ["CP"], ["tasks", 1], ["setup"]],
+    history.slice().reverse().map(h => [h.date, nf1.format(h.records_per_second), nf.format(h.records), h.seconds, h.plugin_version, h.cp_tag, h.tasks,
+      (sameSetup(h) ? "" : "≠ ") + setupShort(h.setup)]));
+  if (comparison) {
+    document.getElementById("versions-section").hidden = false;
+    const f1 = x => x === null ? "-" : nf1.format(x);
+    fillTable("versions-table", [["version"], ["runs", 1], ["lower bounds", 1], ["records/s (mean)", 1], ["min", 1], ["max", 1], ["vs first version", 1]],
+      versions.map(v => [v.version, v.runs, v.lower_bounds, f1(v.mean), f1(v.min), f1(v.max),
+        v.delta === null ? "-" : (v.delta > 0 ? "+" : "") + nf.format(v.delta) + "%"]));
+    document.querySelector("#chart-history").previousElementSibling.textContent = "records per second of each run, in run order; faded: lower bound, not in the mean";
+    const legend = el("div", { class: "legend" });
+    versions.forEach(v => { const item = el("span", {}, v.version); item.style.setProperty("--c", versionColor(v.version)); legend.appendChild(item); });
+    document.querySelector("#chart-history").before(legend);
+    document.querySelector("#chart-history").parentElement.querySelector("h2").textContent = "🆚 Connector versions";
+  }
+  // links to the example on github, at the commit it ran with and on the default branch
+  function exampleLinks(st) {
+    const pg = (st && st.playground) || {};
+    if (!pg.repo_url || !pg.repo_path || !pg.repo_url.startsWith("https://github.com/")) return null;
+    const span = el("span");
+    const link = (text, href) => { const a = el("a", { href: href, target: "_blank", rel: "noopener" }, text); span.appendChild(a); };
+    span.appendChild(el("code", {}, pg.repo_path));
+    span.appendChild(document.createTextNode(" · "));
+    if (pg.repo_commit) {
+      link("at commit " + pg.repo_commit.slice(0, 10), pg.repo_url + "/blob/" + pg.repo_commit + "/" + pg.repo_path);
+      span.appendChild(document.createTextNode(" · "));
+    }
+    link("latest version", pg.repo_url + "/blob/HEAD/" + pg.repo_path);
+    span.appendChild(document.createTextNode(" · "));
+    link("folder", pg.repo_url + "/tree/HEAD/" + pg.repo_path.slice(0, pg.repo_path.lastIndexOf("/")));
+    if (pg.repo_dirty) span.appendChild(document.createTextNode(" (ran with local changes: the commit link may differ from what ran)"));
+    return span;
+  }
+  // link to the documentation of the connector (documentation_url of the plugin manifest)
+  function documentationLink(st) {
+    const url = st && st.connector && st.connector.documentation_url;
+    if (!url || !/^https?:/.test(url)) return null;
+    return el("a", { href: url, target: "_blank", rel: "noopener" }, "connector documentation");
+  }
+  const headerLinks = exampleLinks(r.setup);
+  if (headerLinks) document.getElementById("example-link").appendChild(headerLinks);
+  const headerDoc = documentationLink(r.setup);
+  if (headerDoc) {
+    const line = document.getElementById("example-link");
+    if (line.childNodes.length) line.appendChild(document.createTextNode(" · "));
+    line.appendChild(headerDoc);
+  }
+
+  // setup of this run
+  const st = r.setup || {};
+  const o = (v, unit) => v === undefined || v === null || v === "" ? "-" : v + (unit || "");
+  if (st.host) {
+    fillTable("setup", [["Component"], ["Details"]], [
+      ["host", o(st.host.os) + " " + o(st.host.arch) + ", " + o(st.host.cpu_model) + ", " + o(st.host.cpus) + " cpus, " + gib(st.host.memory_bytes)],
+      ["container engine", o(st.engine.name) + " " + o(st.engine.version) + " (" + o(st.engine.os) + "), " + o(st.engine.cpus) + " cpus, " + gib(st.engine.memory_bytes)],
+      ["connect image", o(st.connect.image) + " (" + o(st.connect.image_arch) + (st.connect.emulated ? ", EMULATED on " + st.host.arch : ", native") + ")"],
+      ["connect workers", o(st.connect.workers)],
+      ["connect jvm", o(st.connect.jvm_version) + ", " + o(st.connect.jvm_cpus) + " cpus available, heap max " + gib(st.connect.heap_max_bytes) +
+        (st.connect.heap_opts ? " (KAFKA_HEAP_OPTS " + st.connect.heap_opts + ")" : "")],
+      ["kafka", o(st.kafka.brokers) + " broker(s), " + (st.kafka.kraft ? "kraft" : "zookeeper") + ", environment " + o(st.kafka.environment) + ", CP " + o(r.cp_tag)],
+      ["connector", o(r.connector_class) + " " + o(r.plugin_version) + ", " + o(r.tasks) + " task(s)"],
+      ["playground", o(st.playground.test_file) + " at commit " + o(st.playground.commit) + (st.playground.dirty ? " (with local changes)" : "")]
+    ]);
+    const rows = document.querySelectorAll("#setup tr");
+    const links = exampleLinks(st);
+    if (links) {
+      const last = rows[rows.length - 1].children[1];
+      last.textContent = "";
+      last.appendChild(links);
+    }
+    const doc = documentationLink(st);
+    if (doc) {
+      // the "connector" row is the second to last
+      const cell = rows[rows.length - 2].children[1];
+      cell.appendChild(document.createTextNode(" · "));
+      cell.appendChild(doc);
+    }
+    document.getElementById("connector-config").textContent = JSON.stringify(st.connector_config || {}, null, 2);
+  } else {
+    fillTable("setup", [["Component"], ["Details"]], [["setup", "not recorded for this run"]]);
+    document.getElementById("connector-config").textContent = "not recorded for this run";
+  }
+  fillTable("samples-table", [["time"], ["elapsed s", 1], ["records", 1], ["records/s", 1], ["batch ms", 1], ["running ratio", 1], ["cpu %", 1], ["consumer lag max", 1]],
+    samples.map(s => [s.time, s.elapsed, s.records === null ? null : nf.format(s.records), s.rate === null ? null : nf1.format(s.rate), s.batch, s.ratio, s.cpu, s.lag === null ? null : nf.format(s.lag)]));
+})();
+</script>
+
+<script>
+(function () {
+  document.querySelectorAll(".jfr-section .card").forEach(card => {
+    const tt = card.querySelector(".tooltip");
+    if (!tt) return;
+    card.querySelectorAll("[data-tip]").forEach(el => {
+      const show = e => {
+        const r = card.getBoundingClientRect();
+        tt.textContent = el.dataset.tip; tt.style.display = "block";
+        const x = (e.clientX !== undefined ? e.clientX : el.getBoundingClientRect().left) - r.left + 12;
+        const y = (e.clientY !== undefined ? e.clientY : el.getBoundingClientRect().top) - r.top + 12;
+        tt.style.left = Math.min(x, r.width - tt.offsetWidth - 8) + "px"; tt.style.top = y + "px";
+      };
+      el.addEventListener("pointermove", show); el.addEventListener("focus", show);
+      el.addEventListener("pointerleave", () => tt.style.display = "none"); el.addEventListener("blur", () => tt.style.display = "none");
+    });
+  });
+})();
+</script>
+
+</body>
+</html>

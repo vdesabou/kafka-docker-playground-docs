@@ -5,6 +5,10 @@ agentic coding tool: you describe what you want ("reproduce this connector issue
 example for the fully managed X connector", "what is wrong in this customer log bundle?") and Claude runs the playground for
 you, following the same conventions as the maintainers.
 
+Here, asked why a connector stopped writing, Claude checks it with the playground CLI and explains the root cause and the fix, without changing anything:
+
+<video src="videos/claude-code.mp4" autoplay loop muted playsinline controls width="100%"></video>
+
 What makes it work:
 
 | Piece | Where | What it does |

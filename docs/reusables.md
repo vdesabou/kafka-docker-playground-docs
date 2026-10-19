@@ -10,7 +10,9 @@ Examples:
 
 ### Basic
 
-<script async id="asciicast-646555" src="https://asciinema.org/a/646555.js"></script>
+Without `-f`, the command is interactive. With `-f` (absolute path of the example to start from) and `-d` (description, start it with the case number if there is one), it only generates the files:
+
+<video src="videos/repro-bootstrap.mp4" autoplay loop muted playsinline controls width="100%"></video>
 
 ### Deprecated: Java producer (`--producer`)
 
@@ -88,7 +90,7 @@ All the steps to create a pipeline, i.e an example with source and sink connecto
 
 Example:
 
-<script async id="asciicast-646556" src="https://asciinema.org/a/646556.js"></script>
+<video src="videos/repro-pipeline.mp4" autoplay loop muted playsinline controls width="100%"></video>
 
 It will automatically:
 
@@ -1364,6 +1366,8 @@ playground container exec -c connect --command "java -version"
 ### ⏱️ Benchmark a connector
 
 [playground connector benchmark](https://kafka-docker-playground.io/#/playground%20connector%20benchmark) measures the throughput of a running connector, self managed or fully managed, so that you can compare two runs: another `--connector-tag`, another config, another number of tasks, or the numbers of a customer.
+
+<video src="videos/benchmark.mp4" autoplay loop muted playsinline controls width="100%"></video>
 
 By default (`--mode drain`), it pauses the connector, loads a backlog of `--nb-records`, resumes the connector and measures the time it takes to process it. This is the most reproducible number, since it does not depend on how fast the load is generated. `--mode steady` measures the throughput during `--duration` while a load runs in the background.
 

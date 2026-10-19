@@ -193,13 +193,15 @@ Check the list of examples in the **[Content](/content.md)** section and simply 
 > * [Zendesk source connector](https://github.com/vdesabou/kafka-docker-playground/tree/master/connect/connect-zendesk-source#how-to-run): arguments `ZENDESK_URL`, `ZENDESK_USERNAME` and `ZENDESK_PASSWORD` are required (you can also pass them as environment variables)
 >
 
-If there are missing environment variables, you'll need to fix it:
+If there are missing environment variables, you'll need to fix it: [playground secrets check](/playground%20secrets%20check) tells you which ones, and [playground secrets set](/playground%20secrets%20set) stores them once for all your runs (see [below](/how-to-use?id=🔐-storing-credentials-with-playground-secrets)):
 
-[![asciicast](https://asciinema.org/a/643687.svg)](https://asciinema.org/a/643687)
+<video src="videos/secrets.mp4" autoplay loop muted playsinline controls width="100%"></video>
 
 ### 🕹️ The playground run menu
 
 Running [playground run](/playground%20run) without `-f` opens an interactive menu: pick a category and an example, then select options (use `<tab>` to select several at once) before running it.
+
+<video src="videos/run-menu.mp4" autoplay loop muted playsinline controls width="100%"></video>
 
 * on/off options are toggles, `[x]` when enabled: select one again to disable it
 * options that take a value show it once set, for example `🎯 CP version (all components)  --tag  [8.2.0]` (credentials only show `[set]`)
@@ -237,9 +239,9 @@ They are stored in `~/.config/kafka-docker-playground` (never in the repository)
 
 ## 🌤️ Confluent Cloud examples
 
-Simply use [playground run](/playground%20run) command !
+Simply use [playground run](/playground%20run) command ! Below, the menu shows the Confluent Cloud options of a fully managed connector example (it quits before running it):
 
-[![asciicast](https://asciinema.org/a/643690.svg)](https://asciinema.org/a/643690)
+<video src="videos/ccloud-run-menu.mp4" autoplay loop muted playsinline controls width="100%"></video>
 
 All you have to do is to be already logged in with [confluent CLI](https://docs.confluent.io/confluent-cli/current/overview.html#confluent-cli-overview).
 

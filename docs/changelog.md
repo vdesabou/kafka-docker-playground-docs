@@ -3,6 +3,7 @@
 ## October 2026
 ##### 🌟 Enhancements
 
+- 🧠 playground connector benchmark: fully managed connectors [#9401](https://github.com/vdesabou/kafka-docker-playground/issues/9401)
 - 🧠 playground connector benchmark: load for 11 more source examples (spool dir, FilePulse, FileStream, FTPS, HDFS 2, TimescaleDB, CockroachDB, SingleStore, Debezium MongoDB, Lenses ActiveMQ, CloudWatch Logs) [#9399](https://github.com/vdesabou/kafka-docker-playground/issues/9399)
 - 🧠 playground connector benchmark: load for the SQS, Kinesis, Pub/Sub, SFTP and HDFS 3 source examples [#9395](https://github.com/vdesabou/kafka-docker-playground/issues/9395)
 - 🧠 playground connector benchmark: annotate the measure on the Grafana dashboards and link to them, Prometheus scrapes every 15s [#9376](https://github.com/vdesabou/kafka-docker-playground/issues/9376)

@@ -1349,7 +1349,7 @@ playground container exec -c connect --command "java -version"
 
 ## 🏎️ Performance testing
 
-[playground connector benchmark](https://kafka-docker-playground.io/#/playground%20connector%20benchmark) is the way to do performance testing with the playground. On a running self managed example or reproduction model, it loads the data, measures the throughput of the connector, tells whether the connector is really the bottleneck, records where its time goes, compares with the previous run or with other versions of the connector, and writes an HTML report to share.
+[playground connector benchmark](https://kafka-docker-playground.io/#/playground%20connector%20benchmark) is the way to do performance testing with the playground. On a running example or reproduction model, self managed or [fully managed](/reusables?id=%e2%98%81%ef%b8%8f-fully-managed-connectors), it loads the data, measures the throughput of the connector, tells whether the connector is really the bottleneck, records where its time goes, compares with the previous run or with other versions of the connector, and writes an HTML report to share.
 
 | I want to | Use |
 |---|---|
@@ -1358,11 +1358,12 @@ playground container exec -c connect --command "java -version"
 | use my own data | [your own load](/reusables?id=your-own-load) (`--load-command`, or a load script, like the Salesforce source example below) |
 | load a table of my own in a reproduction model | [a table of your own](/reusables?id=a-table-of-your-own-reproduction-models) (`BENCHMARK_LOAD_SCRIPT`) |
 | see the broker, the JVM, the connector dashboards | start the example with [JMX Grafana](https://kafka-docker-playground.io/#/how-to-use?id=%f0%9f%93%8a-enabling-jmx-grafana) (`--enable-jmx-grafana`): the benchmark [annotates its measure](/reusables?id=%f0%9f%93%8a-grafana) |
+| benchmark a fully managed connector | run its `ccloud/fm-*` example, keep the connector, then `playground connector benchmark`: see [fully managed connectors](/reusables?id=%e2%98%81%ef%b8%8f-fully-managed-connectors) |
 | keep a database busy while I watch | [`--enable-sql-datagen`](/reusables?id=%f0%9f%8c%aa%ef%b8%8f-databases-keep-a-load-running-with-enable-sql-datagen) |
 
 ### ⏱️ Benchmark a connector
 
-[playground connector benchmark](https://kafka-docker-playground.io/#/playground%20connector%20benchmark) measures the throughput of a running self managed connector, so that you can compare two runs: another `--connector-tag`, another config, another number of tasks, or the numbers of a customer.
+[playground connector benchmark](https://kafka-docker-playground.io/#/playground%20connector%20benchmark) measures the throughput of a running connector, self managed or fully managed, so that you can compare two runs: another `--connector-tag`, another config, another number of tasks, or the numbers of a customer.
 
 By default (`--mode drain`), it pauses the connector, loads a backlog of `--nb-records`, resumes the connector and measures the time it takes to process it. This is the most reproducible number, since it does not depend on how fast the load is generated. `--mode steady` measures the throughput during `--duration` while a load runs in the background.
 
@@ -1643,8 +1644,48 @@ When the example runs with [Grafana](/how-to-use?id=%f0%9f%93%8a-enabling-jmx-gr
 
 The benchmark does not start Grafana: start the example with it. Prometheus scrapes every 15 s, so a measure needs to last at least 45 s to show on the dashboards; the summary warns when it is shorter (`grafana has only N sample(s) during it`): increase `--nb-records`, or use `--mode steady --duration 2m`. The JMX exporter and the Grafana containers use some CPU: the summary also warns when the previous run was not measured the same way.
 
+#### ☁️ Fully managed connectors
+
+The benchmark also measures the fully managed connectors of the `ccloud/fm-*` examples. Run the example and answer `n` when it asks to delete the connector, then run the benchmark as usual:
+
+```bash
+# source: rows in the CUSTOMERS table of the local Postgres, read by the connector through ngrok
+playground run -f ccloud/fm-jdbc-postgresql-source/fully-managed-jdbc-postgres-source.sh
+playground connector benchmark --nb-records 500000
+
+# sink: the 'playground topic produce' of the example is replayed; 1M records for about 10 offset commits
+playground run -f ccloud/fm-jdbc-postgresql-sink/fully-managed-jdbc-postgres-sink.sh
+playground connector benchmark --nb-records 1000000 --max-wait 1800
+```
+
+The load is the same as for the self managed examples. The 26 `ccloud/fm-*-source` examples that have a self managed equivalent with a benchmark load ship its `benchmark-load.bash`: same local database or broker, reached by the connector through ngrok. A sink replays the `playground topic produce` of its example.
+
+Confluent Cloud gives no JMX, so the records are counted differently:
+
+| | Sources | Sinks |
+|---|---|---|
+| progress during the measure | end offsets of the topics of the connector, every `--interval` (`kafka.topic`, `topic.prefix`, the topics consumed by the example; `--topic` to choose them) | offsets committed by the consumer group of the connector (`connect-<lcc id>`) |
+| resolution | per sample (5 s) | one step per offset commit, about every minute |
+| start of a drain | the first records seen after the resume: Confluent Cloud takes 10 to 20 s to restart the tasks | same |
+
+After the measure, the benchmark reads the per minute metrics of the connector in the [Confluent Cloud Metrics API](https://docs.confluent.io/cloud/current/monitoring/metrics-api.html) (`sent_records` / `received_records`). They are exact counts, published about 30 s into each minute. The median of the full minutes of the measure gives the steady throughput, which does not depend on when a sink commits its offsets; a drain needs 3 minutes or more to have a full minute. The put batch time, the batch size and the dead letter queue records come from the same API, and the report shows the records per minute instead of the CPU chart:
+
+```text
+🏁 benchmark of 🌤️🤖fully managed connector PostgresSink_vsaboulin (sink, 1 task(s), PostgresSink fully managed, CP ccloud)
+   mode                   drain of 971000 records (shape bulk, loaded in 23.9s)
+   duration               534.6s
+   throughput             1816.3 records/s   (per offset commit, every ~59s: p50 1944.5  p95 2238.5  min 102.8)
+   metrics api            2008.3 records/s steady (median of 8 full minute(s) of received_records)
+   put batch avg          258.6 ms (450.0 records per batch)
+```
+
+For a sink, the end of a drain is only seen at the offset commit that follows it, so the main throughput is conservative by up to one commit interval: the `metrics api` line is the closer figure. A drain that sees less than 5 commits is reported as a lower bound (`≥`), and the summary gives the `--nb-records` of a drain of 10 commits.
+
 > [!NOTE]
-> Everything runs on one docker host: the numbers are relative, compare runs on the same machine only. When the backlog is processed before the first sample, the throughput is only a lower bound (`≥`): increase `--nb-records` 10x. Fully managed connectors and the cfk environment are not supported yet.
+> There is no running ratio, cpu, gc, flight recorder nor `--connector-tag` for a fully managed connector: Confluent Cloud runs it, in the version it chooses. The throughput includes the network between the docker host and Confluent Cloud (ngrok tunnel). The Metrics API uses the Cloud API key (`CONFLUENT_CLOUD_API_KEY`) and does not answer for a deleted connector: benchmark before deleting it.
+
+> [!NOTE]
+> Everything runs on one docker host: the numbers are relative, compare runs on the same machine only. When the backlog is processed before the first sample, the throughput is only a lower bound (`≥`): increase `--nb-records` 10x. The cfk environment is not supported yet.
 
 ### 🌪️ Databases: keep a load running with `--enable-sql-datagen`
 

@@ -27,10 +27,6 @@ playground connector display-metrics-api [OPTIONS]
 
 🔖 Save output to a file and open with text editor set with playground config editor `<editor>` (default is code)
 
-| Attributes      | &nbsp;
-|-----------------|-------------
-| Conflicts With: | `--wait-for-log`, `--grep`
-
 #### `--verbose, -v`
 
 🐞 Show command being ran.

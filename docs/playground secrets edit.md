@@ -16,6 +16,12 @@ vi.
 playground secrets edit [OPTIONS]
 ```
 
+## Environment Variables
+
+#### `EDITOR`
+
+✏️ Editor used when the config key editor is not set (default vi)
+
 ## Options
 
 #### `--plain`

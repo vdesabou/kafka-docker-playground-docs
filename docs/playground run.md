@@ -26,6 +26,7 @@ Credentials the example needs are loaded from `playground secrets`.
 - `--environment`: run a connector example under another security setup
 - `--enable-<x>`: add control-center, ksqldb, flink, grafana, kcat...
 - `--enable-sql-datagen`: continuous realistic data for CDC source examples
+- `--benchmark`: benchmark the connector once the example succeeded
 - `--connect-community-image`, `--kafka-community-image`: use community images instead of enterprise ones
 - `--enable-kraft`: KRaft instead of Zookeeper for CP 7.4 to 7.9
 - `--connect-log-level`: log levels set on connect before the connector is created
@@ -62,6 +63,28 @@ playground run [OPTIONS]
 #### *fzf*
 
 visit https://github.com/junegunn/fzf#installation to install
+
+## Environment Variables
+
+#### `PLAYGROUND_ENVIRONMENT`
+
+🔐 Environment used when `--environment` is not set (plaintext by default in the examples)
+
+#### `SQL_DATAGEN_DURATION`
+
+⏱️ With `--enable-sql-datagen`, duration of the injection in minutes (default 10)
+
+#### `SQL_DATAGEN_SESSIONS`
+
+🔀 With `--enable-sql-datagen`, number of parallel sessions (default 5)
+
+#### `BENCHMARK_LOAD_SCRIPT`
+
+📜 With `--enable-sql-datagen` or `--benchmark`, load script to use instead of benchmark-load.bash (file of the example folder, or absolute path)
+
+#### `BENCHMARK_ARGS`
+
+🏎️ With `--benchmark`, extra flags for playground connector benchmark (e.g. "`--mode` steady `--duration` 5m")
 
 ## Options
 
@@ -273,6 +296,21 @@ PostgreSQL, SQL Server), self-managed and fully managed, and with their reproduc
 `SQL_DATAGEN_DURATION` (minutes, default 10) and `SQL_DATAGEN_SESSIONS` (default 5) change the duration and the number of  
 parallel sessions, `BENCHMARK_LOAD_SCRIPT` another load script than benchmark-load.bash (see playground connector  
 benchmark).
+
+#### `--benchmark`
+
+🏎️ Benchmark the connector once the example succeeded
+
+Runs playground connector benchmark on the connector of the example: a  
+drain of the load of a source (benchmark-load.bash next to the example  
+script) or of the records produced by a sink example, then the  
+throughput, the HTML report and where the task time went. Self-managed  
+and fully managed connectors, not with the cfk environment.
+
+`BENCHMARK_ARGS` adds flags to playground connector benchmark (e.g.  
+`BENCHMARK_ARGS`="`--mode` steady `--duration` 5m"), and `BENCHMARK_LOAD_SCRIPT`  
+selects another load script than benchmark-load.bash. If the benchmark  
+fails, the command exits with its exit code.
 
 #### `--connect-community-image`
 

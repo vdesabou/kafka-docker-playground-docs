@@ -12,6 +12,16 @@ You can compare different sourcecode versions by specifying `--connector-tag` tw
 playground connector-plugin sourcecode [OPTIONS]
 ```
 
+## Environment Variables
+
+#### `GH_TOKEN`
+
+🔑 GitHub token, needed for fully managed connectors (cc-docker-connect is private)
+
+#### `GITHUB_TOKEN`
+
+🔑 GitHub token, used when `GH_TOKEN` is not set
+
 ## Options
 
 #### `--connector-plugin, -c CONNECTOR-PLUGIN`

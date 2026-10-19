@@ -36,7 +36,7 @@ playground container logs [OPTIONS]
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Conflicts With: | `--wait-for-log`, `--grep`
+| Conflicts With: | `--wait-for-log`, `--grep`, `--errors`
 
 #### `--wait-for-log, -w LOG`
 
@@ -44,7 +44,7 @@ playground container logs [OPTIONS]
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Conflicts With: | `--open`, `--grep`
+| Conflicts With: | `--open`, `--grep`, `--errors`
 
 #### `--max-wait, -m MAX_WAIT`
 
@@ -62,7 +62,7 @@ playground container logs [OPTIONS]
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Default Value:  | ``
-| Conflicts With: | `--open`, `--wait-for-log`
+| Conflicts With: | `--open`, `--wait-for-log`, `--errors`
 
 #### `--previous`
 

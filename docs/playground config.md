@@ -24,6 +24,9 @@ playground config COMMAND
 
 ## Commands
 
+- [show](playground%20config%20show) - Show the entire playground_config.ini file
+- [get](playground%20config%20get) - Read a value from the playground_config.ini file
+- [set](playground%20config%20set) - Save a value in the playground_config.ini file
 - [editor](playground%20config%20editor) - editor to use to open files
 - [folder_zip_or_jar](playground%20config%20folder_zip_or_jar) - 📂 list of folders where to search for zip or jar
 - [clipboard](playground%20config%20clipboard) - copy to clipboard connector config (only working on MacOS)

@@ -8,6 +8,9 @@ another batch size, another number of tasks. Everything runs on one
 docker host, so the numbers are relative: compare runs on the same  
 machine only.
 
+🎓 Tip: playground run `--benchmark` runs it right after the example (also  
+a toggle in the playground run menu).
+
 `--mode` drain (default) pauses the connector, loads a backlog of  
 `--nb-records`, resumes the connector and measures the time it takes to  
 process the backlog. This is the most reproducible number, since it does  
@@ -32,9 +35,11 @@ produces its data works without anything else
 script, called with `--records` `<n>` `--mode` preload|stream `--shape`  
 bulk|small-txn|update (rows in the CUSTOMERS table for the  
 postgres, mysql, oracle and sql server examples, documents for  
-mongodb, messages for ibm mq and mqtt, json files for the  
-generalized s3, gcs and azure blob storage sources, see the README  
-of the example). It is called with `--check` first, so that an unsupported  
+mongodb, messages for ibm mq, mqtt, activemq, sqs, kinesis,  
+pub/sub and cloudwatch logs, files for spool dir, filepulse,  
+filestream, sftp, ftps, hdfs 2 / 3 and the generalized s3, gcs and  
+azure blob storage sources, see the README of the example). It is  
+called with `--check` first, so that an unsupported  
 combination fails before the connector is paused
 
 - or `--load-command` / `--stream-load-command`, which take precedence
@@ -82,13 +87,54 @@ them at the time of the run (each version is annotated with
 JMX exporter and containers use CPU, and the summary warns when  
 the previous run was not measured the same way.
 
-⚠️ Not available for fully managed connectors and the cfk environment yet.
+☁️ Fully managed source connectors (ccloud/fm-\*-source examples that  
+ship a benchmark-load.bash, the one of the equivalent self managed  
+example: same local database or broker, reached by the connector  
+through ngrok): the records are counted from the end offsets of the  
+topics of the connector every `--interval` (its kafka.topic or  
+topic.prefix, and the topics consumed by the example script,  
+`--topic` to choose them), since Confluent Cloud gives no JMX: no batch  
+time, running ratio, cpu, gc, flight recorder nor `--connector-tag`.  
+A drain starts measuring at the first records seen after the resume  
+(Confluent Cloud takes a few seconds to restart the tasks, and its  
+status lags behind them), so the records seen by that first sample  
+are not measured. The throughput includes the network between the  
+docker host and Confluent Cloud. Run the example and answer n when it asks to  
+delete the connector, then run the benchmark.
+
+☁️ Fully managed sink connectors: the load is the replay of the  
+`playground topic produce` of the example, like for a self managed  
+sink, and the records are counted from the offsets committed by the  
+consumer group of the connector (connect-`<lcc id>`). Confluent Cloud  
+commits them about every minute, so the end of a drain is known  
+within one commit interval: a drain that sees less than 5 commits  
+is reported as a lower bound, and the summary gives the  
+`--nb-records` of a drain of 10 commits (within ~10%, usually 1M  
+records or more).
+
+📈 After the measure of a fully managed connector, the benchmark  
+reads its per minute metrics in the Confluent Cloud Metrics API  
+(sent_records / received_records, exact counts published about 30s  
+into each minute): the steady throughput is the median of the full  
+minutes of the measure (a drain of 3 minutes or more has one), which  
+does not depend on when a sink commits its offsets, and the put batch  
+time, batch size and dlq records fill the rows that JMX gives for a  
+self managed connector. The Metrics API uses the Cloud API key  
+(`CONFLUENT_CLOUD_API_KEY`) and does not answer for a deleted connector.
+
+⚠️ Not available with the cfk environment yet.
 
 ## Usage
 
 ```bash
 playground connector benchmark [OPTIONS]
 ```
+
+## Environment Variables
+
+#### `BENCHMARK_LOAD_SCRIPT`
+
+📜 Load script to use instead of benchmark-load.bash: a file of the example folder, or an absolute path
 
 ## Options
 

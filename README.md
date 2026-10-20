@@ -28,7 +28,7 @@ KDP_DIR=/Users/Shared/kafka-docker-playground scripts/generate-cli-videos.sh dia
 ## Preview locally
 
 ```bash
-npm i -g docsify-cli
+npx docsify-cli serve ./docs
 docsify serve ./docs
 ```
 

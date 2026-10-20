@@ -72,6 +72,8 @@ Digest thread dumps, GC logs, heap dumps, flight recordings, CFK bundles or Orac
 
 <!-- tabs:end -->
 
+🎬 Want the explanation too? The **[Bite size sessions](/sessions.md)** are 2–3 minute narrated walkthroughs of one command, from the symptom to the HTML report.
+
 ## 🏁 Getting Started
 
 Check out the **[How to Use](/how-to-use.md)** section, then select an example in the **[Content](/content.md)** section and run it !

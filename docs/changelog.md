@@ -3,6 +3,7 @@
 ## October 2026
 ##### 🌟 Enhancements
 
+- ✨🧠 Run fully managed connector examples with a service account [#9425](https://github.com/vdesabou/kafka-docker-playground/issues/9425)
 - 🧠 playground run --benchmark: benchmark the connector once the example succeeded (also in the run menu) [#9405](https://github.com/vdesabou/kafka-docker-playground/issues/9405)
 - 🧠 playground connector benchmark: fully managed connectors [#9401](https://github.com/vdesabou/kafka-docker-playground/issues/9401)
 - 🧠 playground connector benchmark: load for 11 more source examples (spool dir, FilePulse, FileStream, FTPS, HDFS 2, TimescaleDB, CockroachDB, SingleStore, Debezium MongoDB, Lenses ActiveMQ, CloudWatch Logs) [#9399](https://github.com/vdesabou/kafka-docker-playground/issues/9399)

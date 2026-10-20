@@ -3,6 +3,7 @@
 ## October 2026
 ##### 🌟 Enhancements
 
+- 🧠 Bite size sessions: narrated terminal videos that end on the HTML report [#9437](https://github.com/vdesabou/kafka-docker-playground/issues/9437)
 - 🧠 playground topic dlq inspect and replay [#9433](https://github.com/vdesabou/kafka-docker-playground/issues/9433)
 - 🧠 playground connector validate and connector diff [#9432](https://github.com/vdesabou/kafka-docker-playground/issues/9432)
 - 🧠 playground consumer-group reset-offsets and delete [#9431](https://github.com/vdesabou/kafka-docker-playground/issues/9431)

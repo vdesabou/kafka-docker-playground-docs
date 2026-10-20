@@ -291,6 +291,10 @@ AZURE_CLUSTER_CREDS
 
 For example, if you're running an AZURE Fully Managed connector example and `AZURE_CLUSTER_NAME` is set, then this cluster will be used even if you have `CLUSTER_NAME` set.
 
+### 👤 Fully managed connectors with a service account
+
+Add `--ccloud-service-account` (or tick *👤 Connector service account* in the run menu) to run the fully managed connectors of an example with a [service account](https://docs.confluent.io/cloud/current/connectors/service-account.html) (`kafka.auth.mode=SERVICE_ACCOUNT`) and the ACLs of the documentation, instead of an API key. Then remove or deny ACLs with `playground rbac acl --connector <connector>` to reproduce authorization errors: see [Fully managed connectors with a service account](/reusables?id=%f0%9f%91%a4-fully-managed-connectors-with-a-service-account).
+
 ## 🪄 Specify versions
 
 [playground run](/playground%20run) command allows you to do that very easily !

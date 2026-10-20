@@ -114,6 +114,8 @@ Ask [Claude Code](/claude-code) in plain language: it checks the connector with 
 
 <!-- tabs:end -->
 
+🎬 Want the explanation too? The **[Bite size sessions](/sessions.md)** are 2–3 minute narrated walkthroughs of one command, from the symptom to the HTML report.
+
 ## 🏁 Getting Started
 
 Check out the **[How to Use](/how-to-use.md)** section, then select an example in the **[Content](/content.md)** section and run it !

@@ -39,7 +39,15 @@ work_dir=/tmp/kdp-video
 rm -rf "$work_dir"
 export VHS_BIN_DIR="$work_dir/bin"
 mkdir -p "$VHS_BIN_DIR"
-trap 'rm -rf "$work_dir"' EXIT
+# the playground config changed below is restored at the end
+previous_clipboard=$("$KDP_DIR/scripts/cli/playground" config get clipboard 2> /dev/null || true)
+previous_check_repo_version=$("$KDP_DIR/scripts/cli/playground" config get check-and-update-repo-version 2> /dev/null || true)
+restore_config() {
+  [ -n "$previous_clipboard" ] && "$KDP_DIR/scripts/cli/playground" config set clipboard "$previous_clipboard" > /dev/null 2>&1
+  [ -n "$previous_check_repo_version" ] && "$KDP_DIR/scripts/cli/playground" config set check-and-update-repo-version "$previous_check_repo_version" > /dev/null 2>&1
+  rm -rf "$work_dir"
+}
+trap restore_config EXIT
 for cmd in open xdg-open
 do
   printf '#!/bin/sh\nexit 0\n' > "$VHS_BIN_DIR/$cmd"

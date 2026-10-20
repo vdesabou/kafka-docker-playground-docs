@@ -25,10 +25,11 @@ KDP_DIR=/Users/Shared/kafka-docker-playground scripts/generate-cli-videos.sh    
 KDP_DIR=/Users/Shared/kafka-docker-playground scripts/generate-cli-videos.sh diagnose   # one clip
 ```
 
-The videos of the hand-written `sessions.md` page (🎬 Bite size sessions: `docs/videos/session-*.mp4`, posters in `images/sessions/`) are recorded the same way from the `tapes/session-*.tape` tapes by `scripts/generate-session-videos.sh`, which also adds a scroll through the HTML report the tape generated. A new session is a tape, an entry in the `session_settings` function of the script (report path, scroll steps, poster second) and a section of `sessions.md`:
+The videos of the hand-written `sessions.md` page (🎬 Bite size sessions: `docs/videos/session-*.mp4`, posters in `images/sessions/`) are recorded the same way from the `tapes/session-*.tape` tapes by `scripts/generate-session-videos.sh`, which also adds a scroll through the HTML report the tape generated. A new session is a tape, an entry in the `session_settings` function of the script (report path, scroll steps, page height, docker, and an off-camera setup function when it needs a running example) and a section of `sessions.md`. The poster is taken 6 s before the end of the terminal part, where the comments sum up the session:
 
 ```bash
-KDP_DIR=/Users/Shared/kafka-docker-playground scripts/generate-session-videos.sh thread-dump
+KDP_DIR=/Users/Shared/kafka-docker-playground scripts/generate-session-videos.sh               # all the sessions, about 40 min
+KDP_DIR=/Users/Shared/kafka-docker-playground scripts/generate-session-videos.sh gc-logs       # one session
 ```
 
 ## Preview locally

@@ -81,6 +81,30 @@ main { max-width: 1180px; margin: 0 auto; padding: 32px 40px 80px 40px; }
   font-family: inherit;
 }
 .search:focus { outline: 2px solid #2563eb; outline-offset: -1px; border-color: transparent; }
+.controls.components { margin-top: -12px; }
+.controls.instances { margin-top: -12px; }
+.controls .label { font-size: 12px; color: #6b7280; font-weight: 600; }
+.component-btn, .instance-btn {
+  background: white;
+  border: 1px solid #d1d5db;
+  border-radius: 999px;
+  padding: 4px 12px;
+  font-size: 12.5px;
+  cursor: pointer;
+  color: #374151;
+}
+.component-btn:hover, .instance-btn:hover { border-color: #6b7280; }
+.component-btn.active, .instance-btn.active { background: #1e3a8a; color: white; border-color: #1e3a8a; }
+.component-btn .n, .instance-btn .n { opacity: 0.7; margin-left: 4px; }
+.component-tag {
+  font-size: 11px;
+  background: #eef2ff;
+  color: #3730a3;
+  padding: 2px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+.no-match { display: none; }
 .category {
   background: white;
   border: 1px solid #e5e7eb;
@@ -125,6 +149,22 @@ main { max-width: 1180px; margin: 0 auto; padding: 32px 40px 80px 40px; }
   padding: 2px 8px;
   border-radius: 999px;
 }
+.panel {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  padding: 12px 20px;
+}
+.panel > summary { cursor: pointer; font-weight: 600; font-size: 15px; }
+.panel .label { font-weight: 400; color: #6b7280; font-size: 12px; margin-left: 8px; }
+.panel .facts { margin: 10px 0; font-size: 14px; }
+table.env { border-collapse: collapse; width: 100%; margin: 8px 0; font-size: 12.5px; }
+table.env th { text-align: left; color: #6b7280; font-weight: 600; border-bottom: 1px solid #e5e7eb; padding: 4px 8px; }
+table.env td { border-bottom: 1px solid #f3f4f6; padding: 4px 8px; vertical-align: top; word-break: break-all; }
+table.env td.nowrap { white-space: nowrap; word-break: normal; }
+.affected { margin-top: 4px; font-size: 12.5px; }
+.affected > summary { cursor: pointer; color: #4b5563; }
 .recommendation {
   padding: 16px 20px 4px 20px;
   background: #f8fafc;
@@ -203,9 +243,9 @@ footer a { color: #6b7280; }
   <header>
     <h1>📦 CFK Bundle Analysis Report</h1>
     <div class="meta">
-      Generated 2026-10-19 13:53:09
-      &nbsp;·&nbsp; Files analyzed: 9
-      &nbsp;·&nbsp; 5 pods, 3 CFK CRs, 4 events, 4 log files (28 lines)
+      Generated 2026-10-20 08:44:22
+      &nbsp;·&nbsp; Files analyzed: 10
+      &nbsp;·&nbsp; 5 pods, 3 CFK CRs, 4 events, 5 log files (50 lines)
       &nbsp;·&nbsp; Time: 0.01s
       &nbsp;·&nbsp; Bundle: cfk-support-bundle-synthetic.tar.gz
     </div>
@@ -214,13 +254,23 @@ footer a { color: #6b7280; }
     <div class="verdict critical">🚨 4 critical findings, 6 high: start with Pod Failures.</div>
     
     <div class="summary">
-      <div class="card"><div class="label">🔎 Total issues</div><div class="value">19</div></div>
-      <div class="card critical"><div class="label">🔴 Critical</div><div class="value">4</div></div>
-      <div class="card high"><div class="label">🟠 High</div><div class="value">6</div></div>
-      <div class="card medium"><div class="label">🟡 Medium</div><div class="value">9</div></div>
-      <div class="card low"><div class="label">🟢 Low</div><div class="value">0</div></div>
+      <div class="card" data-count="total"><div class="label">🔎 Total issues</div><div class="value">19</div></div>
+      <div class="card critical" data-count="critical"><div class="label">🔴 Critical</div><div class="value">4</div></div>
+      <div class="card high" data-count="high"><div class="label">🟠 High</div><div class="value">6</div></div>
+      <div class="card medium" data-count="medium"><div class="label">🟡 Medium</div><div class="value">9</div></div>
+      <div class="card low" data-count="low"><div class="label">🟢 Low</div><div class="value">0</div></div>
     </div>
     
+    
+        <details class="panel" open>
+          <summary>🧭 Environment</summary>
+          <div class="facts">☸️ Kubernetes <strong>v1.33.4</strong> &nbsp;·&nbsp; 🤖 CFK operator <strong>3.1.0</strong> (image tag 0.1351.24)</div>
+          <table class="env"><tr><th>Component</th><th>Application image</th><th>Init image</th></tr><tr><td>connect</td><td><code>confluentinc/cp-server-connect:8.1.0</code></td><td><code>confluentinc/confluent-init-container:3.1.0</code></td></tr><tr><td>kafka</td><td><code>confluentinc/cp-server:8.1.0</code></td><td><code>confluentinc/confluent-init-container:3.1.0</code></td></tr><tr><td>schemaregistry</td><td><code>confluentinc/cp-schema-registry:8.1.0</code></td><td><code>confluentinc/confluent-init-container:3.1.0</code></td></tr></table>
+        </details>
+        <details class="panel" open>
+          <summary>🕒 Recent changes <span class="label">newest first, 3 of 3: managedFields of the CRs / StatefulSets, pod (re)starts</span></summary>
+          <table class="env"><tr><th>Time (UTC)</th><th>Object</th><th>Change</th></tr><tr><td class="nowrap">2026-10-14T09:05:00Z</td><td>Pod/kafka-2</td><td>container kafka terminated: Error exitCode=1 (restarts=42)</td></tr><tr><td class="nowrap">2026-10-14T09:05:00Z</td><td>Pod/connect-0</td><td>container connect terminated: OOMKilled exitCode=137 (restarts=6)</td></tr><tr><td class="nowrap">2026-10-13T18:42:10Z</td><td>Kafka/kafka</td><td>Update by kubectl-edit: spec.podTemplate, spec.tls</td></tr></table>
+        </details>
     
     <div class="controls">
       <button class="filter-btn active" data-filter="all">📋 All</button>
@@ -228,8 +278,9 @@ footer a { color: #6b7280; }
       <button class="filter-btn" data-filter="high">🟠 High</button>
       <button class="filter-btn" data-filter="medium">🟡 Medium</button>
       <button class="filter-btn" data-filter="low">🟢 Low</button>
-      <input id="search" class="search" type="search" placeholder="Search messages, files, categories…" />
+      <input id="search" class="search" type="search" placeholder="Search messages, files, categories, pods…" />
     </div>
+    <div class="controls components"><span class="label">Component</span><button class="component-btn active" data-component="all">🧩 All components<span class="n">19</span></button><button class="component-btn" data-component="kafka">📨 Kafka<span class="n">10</span></button><button class="component-btn" data-component="connect">🔌 Connect<span class="n">6</span></button><button class="component-btn" data-component="schemaregistry">📜 Schema Registry<span class="n">2</span></button><button class="component-btn" data-component="operator">⚙️ Operator<span class="n">1</span></button></div><div class="controls instances" style="display:none"><span class="label">Instance</span><button class="instance-btn active" data-instance="all">All instances</button><button class="instance-btn" data-component="connect" data-instance="connect" style="display:none">connect<span class="n">5</span></button><button class="instance-btn" data-component="connect" data-instance="orders-sink" style="display:none">orders-sink<span class="n">1</span></button><button class="instance-btn" data-component="kafka" data-instance="kafka" style="display:none">kafka<span class="n">10</span></button><button class="instance-btn" data-component="schemaregistry" data-instance="schemaregistry" style="display:none">schemaregistry<span class="n">2</span></button></div>
     
     
             <details class="category" data-severity="critical" open>
@@ -245,9 +296,10 @@ footer a { color: #6b7280; }
               </div>
               <div class="issues">
                 
-                <div class="issue" data-severity="critical">
+                <div class="issue" data-severity="critical" data-component="kafka" data-instance="kafka">
                   <div class="head">
                     <span class="severity-pill" style="background:#fef2f2;color:#b91c1c">🔴 critical</span>
+                    <span class="component-tag">📨 Kafka · kafka</span>
                     <span class="location">confluent/cluster-resources/events.yaml &nbsp;×42</span>
                   </div>
                   <div class="message">BackOff: Back-off restarting failed container kafka in pod kafka-2_confluent (Pod/kafka-2)</div>
@@ -266,36 +318,40 @@ lastTimestamp: &#x27;2026-10-14T09:12:31Z&#x27;
 </pre></details>
                 </div>
                 
-                <div class="issue" data-severity="critical">
+                <div class="issue" data-severity="critical" data-component="kafka" data-instance="kafka">
                   <div class="head">
                     <span class="severity-pill" style="background:#fef2f2;color:#b91c1c">🔴 critical</span>
+                    <span class="component-tag">📨 Kafka · kafka</span>
                     <span class="location">confluent/cluster-resources/pods.yaml</span>
                   </div>
                   <div class="message">Container kafka-2/kafka waiting: CrashLoopBackOff - back-off 5m0s restarting failed container</div>
                   
                 </div>
                 
-                <div class="issue" data-severity="high">
+                <div class="issue" data-severity="high" data-component="kafka" data-instance="kafka">
                   <div class="head">
                     <span class="severity-pill" style="background:#fff7ed;color:#c2410c">🟠 high</span>
+                    <span class="component-tag">📨 Kafka · kafka</span>
                     <span class="location">confluent/cluster-resources/pods.yaml</span>
                   </div>
                   <div class="message">Container kafka-2/kafka restarted 42 times</div>
                   
                 </div>
                 
-                <div class="issue" data-severity="medium">
+                <div class="issue" data-severity="medium" data-component="kafka" data-instance="kafka">
                   <div class="head">
                     <span class="severity-pill" style="background:#fefce8;color:#a16207">🟡 medium</span>
+                    <span class="component-tag">📨 Kafka · kafka</span>
                     <span class="location">confluent/cluster-resources/pods.yaml</span>
                   </div>
                   <div class="message">Container kafka-2/kafka previously terminated: Error exitCode=1 (restarts=42)</div>
                   
                 </div>
                 
-                <div class="issue" data-severity="medium">
+                <div class="issue" data-severity="medium" data-component="connect" data-instance="connect">
                   <div class="head">
                     <span class="severity-pill" style="background:#fefce8;color:#a16207">🟡 medium</span>
+                    <span class="component-tag">🔌 Connect · connect</span>
                     <span class="location">confluent/cluster-resources/pods.yaml</span>
                   </div>
                   <div class="message">Container connect-0/connect restarted 6 times</div>
@@ -318,18 +374,20 @@ lastTimestamp: &#x27;2026-10-14T09:12:31Z&#x27;
               </div>
               <div class="issues">
                 
-                <div class="issue" data-severity="critical">
+                <div class="issue" data-severity="critical" data-component="connect" data-instance="connect">
                   <div class="head">
                     <span class="severity-pill" style="background:#fef2f2;color:#b91c1c">🔴 critical</span>
+                    <span class="component-tag">🔌 Connect · connect</span>
                     <span class="location">confluent/cluster-resources/pods.yaml</span>
                   </div>
                   <div class="message">Container connect-0/connect was OOMKilled (lastState, exitCode=137, restarts=6)</div>
                   
                 </div>
                 
-                <div class="issue" data-severity="critical">
+                <div class="issue" data-severity="critical" data-component="connect" data-instance="connect">
                   <div class="head">
                     <span class="severity-pill" style="background:#fef2f2;color:#b91c1c">🔴 critical</span>
+                    <span class="component-tag">🔌 Connect · connect</span>
                     <span class="location">confluent/connect/logs/connect-0.log:7</span>
                   </div>
                   <div class="message">Oom Killed: [2026-10-14 09:04:59,002] ERROR [orders-sink|task-1] java.lang.OutOfMemoryError: Java heap space (org.apache.kafka.connect.runtime.WorkerTask)<br>&nbsp;&nbsp;↳ Caused by: java.lang.OutOfMemoryError: Java heap space</div>
@@ -356,9 +414,10 @@ java.lang.OutOfMemoryError: Java heap space
               </div>
               <div class="issues">
                 
-                <div class="issue" data-severity="high">
+                <div class="issue" data-severity="high" data-component="schemaregistry" data-instance="schemaregistry">
                   <div class="head">
                     <span class="severity-pill" style="background:#fff7ed;color:#c2410c">🟠 high</span>
+                    <span class="component-tag">📜 Schema Registry · schemaregistry</span>
                     <span class="location">confluent/cluster-resources/events.yaml &nbsp;×18</span>
                   </div>
                   <div class="message">Unhealthy: Readiness probe failed: HTTP probe failed with statuscode: 503 (Pod/schemaregistry-0)</div>
@@ -393,9 +452,10 @@ lastTimestamp: &#x27;2026-10-14T09:10:44Z&#x27;
               </div>
               <div class="issues">
                 
-                <div class="issue" data-severity="high">
+                <div class="issue" data-severity="high" data-component="kafka" data-instance="kafka">
                   <div class="head">
                     <span class="severity-pill" style="background:#fff7ed;color:#c2410c">🟠 high</span>
+                    <span class="component-tag">📨 Kafka · kafka</span>
                     <span class="location">confluent/kafka/logs/kafka-2.log:2 &nbsp;×2</span>
                   </div>
                   <div class="message">Tls Handshake: [2026-10-14 09:12:24,902] ERROR [Controller id=2] Failed to connect to the quorum, retrying (org.apache.kafka.raft.KafkaRaftClient)<br>&nbsp;&nbsp;↳ Caused by: javax.net.ssl.SSLHandshakeException: PKIX path validation failed: java.security.cert.CertPathValidatorException: validity check failed<br>&nbsp;&nbsp;↳ Caused by: java.security.cert.CertificateExpiredException: NotAfter: Mon Oct 13 23:59:59 UTC 2026</div>
@@ -405,9 +465,10 @@ javax.net.ssl.SSLHandshakeException: PKIX path validation failed: java.security.
 	at java.base/sun.security.ssl.Alert.createSSLException(Alert.java:130)</pre></details>
                 </div>
                 
-                <div class="issue" data-severity="high">
+                <div class="issue" data-severity="high" data-component="kafka" data-instance="kafka">
                   <div class="head">
                     <span class="severity-pill" style="background:#fff7ed;color:#c2410c">🟠 high</span>
+                    <span class="component-tag">📨 Kafka · kafka</span>
                     <span class="location">confluent/kafka/logs/kafka-2.log:11</span>
                   </div>
                   <div class="message">Tls Handshake: [2026-10-14 09:12:31,010] FATAL [KafkaRaftServer nodeId=2] Fatal error during broker startup. Prepare to shutdown (kafka.server.BrokerServer)<br>&nbsp;&nbsp;↳ Caused by: org.apache.kafka.common.errors.SslAuthenticationException: SSL handshake failed</div>
@@ -433,18 +494,20 @@ org.apache.kafka.common.errors.SslAuthenticationException: SSL handshake failed<
               </div>
               <div class="issues">
                 
-                <div class="issue" data-severity="high">
+                <div class="issue" data-severity="high" data-component="connect" data-instance="orders-sink">
                   <div class="head">
                     <span class="severity-pill" style="background:#fff7ed;color:#c2410c">🟠 high</span>
+                    <span class="component-tag">🔌 Connect · orders-sink</span>
                     <span class="location">confluent/connect/connector-orders-sink.yaml</span>
                   </div>
                   <div class="message">Connector/orders-sink has failed tasks: {&quot;1&quot;: {&quot;id&quot;: 1, &quot;state&quot;: &quot;FAILED&quot;, &quot;workerId&quot;: &quot;connect-0.connect.confluent.svc.cluster.local:8083&quot;, &quot;trace&quot;: &quot;org.apache.kafka.connect.errors.ConnectException: Exiting WorkerSinkTask due to unrecoverable exception.&quot;}}</div>
                   
                 </div>
                 
-                <div class="issue" data-severity="medium">
+                <div class="issue" data-severity="medium" data-component="connect" data-instance="connect">
                   <div class="head">
                     <span class="severity-pill" style="background:#fefce8;color:#a16207">🟡 medium</span>
+                    <span class="component-tag">🔌 Connect · connect</span>
                     <span class="location">confluent/connect/logs/connect-0.log:2</span>
                   </div>
                   <div class="message">Connect Error: [2026-10-14 09:04:58,771] ERROR [orders-sink|task-1] WorkerSinkTask{id=orders-sink-1} Task threw an uncaught and unrecoverable exception. Task is being killed and will not recover until manually restarted (org.apache.kafka.connect.runtime.WorkerTask)<br>&nbsp;&nbsp;↳ Caused by: org.apache.kafka.connect.errors.ConnectException: Exiting WorkerSinkTask due to unrecoverable exception.<br>&nbsp;&nbsp;↳ Caused by: java.sql.SQLException: Exception chain:</div>
@@ -470,9 +533,10 @@ org.apache.kafka.connect.errors.ConnectException: Exiting WorkerSinkTask due to 
               </div>
               <div class="issues">
                 
-                <div class="issue" data-severity="high">
+                <div class="issue" data-severity="high" data-component="schemaregistry" data-instance="schemaregistry">
                   <div class="head">
                     <span class="severity-pill" style="background:#fff7ed;color:#c2410c">🟠 high</span>
+                    <span class="component-tag">📜 Schema Registry · schemaregistry</span>
                     <span class="location">confluent/schemaregistry/logs/schemaregistry-0.log:2</span>
                   </div>
                   <div class="message">Authentication Failed: [2026-10-14 09:10:44,113] ERROR Error starting the schema registry (io.confluent.kafka.schemaregistry.rest.SchemaRegistryRestApplication)<br>&nbsp;&nbsp;↳ Caused by: io.confluent.kafka.schemaregistry.exceptions.SchemaRegistryInitializationException: Error initializing kafka store while initializing schema registry<br>&nbsp;&nbsp;↳ Caused by: org.apache.kafka.common.errors.SaslAuthenticationException: Authentication failed during authentication due to invalid credentials with SASL mechanism PLAIN</div>
@@ -498,9 +562,10 @@ Caused by: org.apache.kafka.common.errors.SaslAuthenticationException: Authentic
               </div>
               <div class="issues">
                 
-                <div class="issue" data-severity="medium">
+                <div class="issue" data-severity="medium" data-component="kafka" data-instance="kafka">
                   <div class="head">
                     <span class="severity-pill" style="background:#fefce8;color:#a16207">🟡 medium</span>
+                    <span class="component-tag">📨 Kafka · kafka</span>
                     <span class="location">confluent/cluster-resources/events.yaml &nbsp;×7</span>
                   </div>
                   <div class="message">FailedScheduling: 0/3 nodes are available: pod has unbound immediate PersistentVolumeClaims. preemption: 0/3 nodes are available: 3 Preemption is not helpful for scheduling. PersistentVolumeClaim data0-kafka-2 pending (Pod/kafka-2)</div>
@@ -537,9 +602,10 @@ lastTimestamp: &#x27;2026-10-14T08:20:02Z&#x27;
               </div>
               <div class="issues">
                 
-                <div class="issue" data-severity="medium">
+                <div class="issue" data-severity="medium" data-component="operator" data-instance="">
                   <div class="head">
                     <span class="severity-pill" style="background:#fefce8;color:#a16207">🟡 medium</span>
+                    <span class="component-tag">⚙️ Operator</span>
                     <span class="location">operator/confluent-operator-7d9c8b6f5-x2x7k.log:2 &nbsp;×2</span>
                   </div>
                   <div class="message">Operator Error: {&quot;level&quot;:&quot;error&quot;,&quot;ts&quot;:&quot;2026-10-14T09:00:03Z&quot;,&quot;logger&quot;:&quot;kafka&quot;,&quot;msg&quot;:&quot;Reconciler error&quot;,&quot;name&quot;:&quot;kafka&quot;,&quot;namespace&quot;:&quot;confluent&quot;,&quot;error&quot;:&quot;failed to reconcile statefulset kafka: 2/3 replicas ready, pod kafka-2 in CrashLoopBackOff&quot;}</div>
@@ -564,9 +630,10 @@ lastTimestamp: &#x27;2026-10-14T08:20:02Z&#x27;
               </div>
               <div class="issues">
                 
-                <div class="issue" data-severity="medium">
+                <div class="issue" data-severity="medium" data-component="connect" data-instance="connect">
                   <div class="head">
                     <span class="severity-pill" style="background:#fefce8;color:#a16207">🟡 medium</span>
+                    <span class="component-tag">🔌 Connect · connect</span>
                     <span class="location">confluent/connect/logs/connect-0.log:6</span>
                   </div>
                   <div class="message">Error: java.sql.BatchUpdateException: Batch entry 0 INSERT INTO &quot;orders&quot; (&quot;id&quot;,&quot;amount&quot;) VALUES (1042,NULL) was aborted: ERROR: null value in column &quot;amount&quot; violates not-null constraint</div>
@@ -593,9 +660,10 @@ java.lang.OutOfMemoryError: Java heap space</pre></details>
               </div>
               <div class="issues">
                 
-                <div class="issue" data-severity="medium">
+                <div class="issue" data-severity="medium" data-component="kafka" data-instance="kafka">
                   <div class="head">
                     <span class="severity-pill" style="background:#fefce8;color:#a16207">🟡 medium</span>
+                    <span class="component-tag">📨 Kafka · kafka</span>
                     <span class="location">confluent/kafka/kafka.yaml</span>
                   </div>
                   <div class="message">Kafka/kafka status.phase is PROVISIONING</div>
@@ -608,21 +676,28 @@ conditions:
   reason: StatefulSetNotReady
   message: &#x27;statefulset kafka: 2/3 replicas ready&#x27;
   lastTransitionTime: &#x27;2026-10-14T08:01:00Z&#x27;
+- type: platform.confluent.io/garbage-collecting
+  status: &#x27;False&#x27;
+  reason: Garbage Collection not triggered
+  message: Cluster is not being garbage collected
+  lastTransitionTime: &#x27;2026-10-01T08:00:00Z&#x27;
 </pre></details>
                 </div>
                 
-                <div class="issue" data-severity="medium">
+                <div class="issue" data-severity="medium" data-component="kafka" data-instance="kafka">
                   <div class="head">
                     <span class="severity-pill" style="background:#fefce8;color:#a16207">🟡 medium</span>
+                    <span class="component-tag">📨 Kafka · kafka</span>
                     <span class="location">confluent/kafka/kafka.yaml</span>
                   </div>
                   <div class="message">Kafka/kafka has 2/3 ready replicas</div>
                   
                 </div>
                 
-                <div class="issue" data-severity="medium">
+                <div class="issue" data-severity="medium" data-component="kafka" data-instance="kafka">
                   <div class="head">
                     <span class="severity-pill" style="background:#fefce8;color:#a16207">🟡 medium</span>
+                    <span class="component-tag">📨 Kafka · kafka</span>
                     <span class="location">confluent/kafka/kafka.yaml</span>
                   </div>
                   <div class="message">Kafka/kafka condition platform.confluent.io/statefulset-ready is False: StatefulSetNotReady statefulset kafka: 2/3 replicas ready</div>
@@ -631,7 +706,7 @@ conditions:
                 
               </div>
             </details>
-            
+            <div class="no-issues no-match">No issue matches these filters.</div>
   </main>
   <footer>
     🛠️ Generated by <strong>playground analyze cfk-bundle</strong>
@@ -639,40 +714,82 @@ conditions:
   </footer>
   <script>
 const filterButtons = document.querySelectorAll('.filter-btn');
+const componentButtons = document.querySelectorAll('.component-btn');
+const instanceButtons = document.querySelectorAll('.instance-btn');
+const instanceBar = document.querySelector('.controls.instances');
 const categories = document.querySelectorAll('.category');
 const searchInput = document.getElementById('search');
+const noMatch = document.querySelector('.no-match');
 
 let currentFilter = 'all';
+let currentComponent = 'all';
+let currentInstance = 'all';
 let currentSearch = '';
 
 function applyFilters() {
+  const counts = { total: 0, critical: 0, high: 0, medium: 0, low: 0 };
   categories.forEach(cat => {
-    const sev = cat.dataset.severity;
-    const text = cat.textContent.toLowerCase();
-
-    const severityMatch =
-      currentFilter === 'all' ||
-      cat.querySelectorAll(`.issue[data-severity="${currentFilter}"]`).length > 0;
-
-    const searchMatch = !currentSearch || text.includes(currentSearch);
-
-    cat.style.display = (severityMatch && searchMatch) ? '' : 'none';
-
-    if (currentFilter !== 'all') {
-      cat.querySelectorAll('.issue').forEach(issue => {
-        issue.style.display = (issue.dataset.severity === currentFilter) ? '' : 'none';
-      });
-    } else {
-      cat.querySelectorAll('.issue').forEach(issue => { issue.style.display = ''; });
-    }
+    const title = cat.querySelector('summary .title').textContent.toLowerCase();
+    let visible = 0;
+    cat.querySelectorAll('.issue').forEach(issue => {
+      const inScope =
+        (currentComponent === 'all' || issue.dataset.component === currentComponent) &&
+        (currentInstance === 'all' || issue.dataset.instance === currentInstance) &&
+        (!currentSearch || title.includes(currentSearch) || issue.textContent.toLowerCase().includes(currentSearch));
+      const show = inScope && (currentFilter === 'all' || issue.dataset.severity === currentFilter);
+      issue.style.display = show ? '' : 'none';
+      if (show) visible++;
+      // the summary cards count every severity of the selected component / instance / search
+      if (inScope) {
+        counts.total++;
+        counts[issue.dataset.severity]++;
+      }
+    });
+    cat.style.display = visible ? '' : 'none';
+    cat.querySelector('summary .count').textContent = visible;
   });
+  document.querySelectorAll('.card[data-count]').forEach(card => {
+    card.querySelector('.value').textContent = counts[card.dataset.count];
+  });
+  const anyVisible = [...categories].some(cat => cat.style.display !== 'none');
+  if (noMatch) noMatch.style.display = anyVisible ? 'none' : 'block';
+}
+
+function activate(buttons, btn) {
+  buttons.forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
 }
 
 filterButtons.forEach(btn => {
   btn.addEventListener('click', () => {
-    filterButtons.forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
+    activate(filterButtons, btn);
     currentFilter = btn.dataset.filter;
+    applyFilters();
+  });
+});
+
+componentButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    activate(componentButtons, btn);
+    currentComponent = btn.dataset.component;
+    currentInstance = 'all';
+    // instance chips of the selected component only, when it has more than one instance
+    let shown = 0;
+    instanceButtons.forEach(b => {
+      const mine = b.dataset.instance === 'all' || b.dataset.component === currentComponent;
+      b.style.display = mine ? '' : 'none';
+      b.classList.toggle('active', b.dataset.instance === 'all');
+      if (mine && b.dataset.instance !== 'all') shown++;
+    });
+    if (instanceBar) instanceBar.style.display = (currentComponent !== 'all' && shown > 1) ? '' : 'none';
+    applyFilters();
+  });
+});
+
+instanceButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    activate(instanceButtons, btn);
+    currentInstance = btn.dataset.instance;
     applyFilters();
   });
 });

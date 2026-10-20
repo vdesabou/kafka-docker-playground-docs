@@ -5,6 +5,7 @@
 
 - 🧠 playground topic dlq inspect and replay [#9433](https://github.com/vdesabou/kafka-docker-playground/issues/9433)
 - 🧠 playground connector validate and connector diff [#9432](https://github.com/vdesabou/kafka-docker-playground/issues/9432)
+- 🧠 playground consumer-group reset-offsets and delete [#9431](https://github.com/vdesabou/kafka-docker-playground/issues/9431)
 - ✨🧠 Run fully managed connector examples with a service account [#9425](https://github.com/vdesabou/kafka-docker-playground/issues/9425)
 - 🧠 playground run --benchmark: benchmark the connector once the example succeeded (also in the run menu) [#9405](https://github.com/vdesabou/kafka-docker-playground/issues/9405)
 - 🧠 playground connector benchmark: fully managed connectors [#9401](https://github.com/vdesabou/kafka-docker-playground/issues/9401)

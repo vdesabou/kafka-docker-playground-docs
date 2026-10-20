@@ -956,6 +956,79 @@ Recordings made with the `playground` settings (benchmark, `debug flight-recorde
 --container`) give the most details; a recording made with the JDK settings works too, with throttled socket events and
 10 or 20 ms thresholds.
 
+## 👤 Fully managed connectors with a service account
+
+By default the fully managed connector examples (`ccloud/fm-*`) use `"kafka.auth.mode": "KAFKA_API_KEY"`, with an API key that can do anything on the cluster. Customers often run them with a [service account](https://docs.confluent.io/cloud/current/connectors/service-account.html) and the least ACLs instead, and that is where a missing ACL or a missing Assigner role shows up.
+
+The `--ccloud-service-account` option of [playground run](/playground%20run) (also a toggle in the run menu) runs any fully managed or custom connector example that way, without changing the example:
+
+```bash
+playground run -f ccloud/fm-datagen-source/fully-managed-datagen-source.sh --ccloud-service-account
+```
+
+For each connector, [playground connector create-or-update](/playground%20connector%20create-or-update):
+
+* creates a service account `pg-<user>-conn-<connector>-<n>`
+* creates the ACLs listed in the documentation, derived from the connector config: `DESCRIBE` on the cluster, the topics of a sink and its `connect-lcc-` consumer group, the dead letter queue, the success and error topics (HTTP, Lambda, Azure Functions…), the output topics or topic prefix of a source, and the internal topics of the JDBC, Debezium (legacy and v2), Oracle CDC and XStream connectors, plus the exactly-once ones when it is enabled
+* grants the Assigner role on the service account to the owner of `CONFLUENT_CLOUD_API_KEY` (the principal creating the connector must hold it)
+* replaces `kafka.api.key` / `kafka.api.secret` with `"kafka.auth.mode": "SERVICE_ACCOUNT"` and `"kafka.service.account.id"`
+
+Each `confluent` command is logged, ready to be copied, for example:
+
+```
+💻 confluent kafka acl create --service-account sa-o2k1pno --operations create,write --allow --topic datagen_pageviews --environment env-519yzz --cluster lkc-ng7qn3
+```
+
+The service account and its ACLs are deleted with the connector (`playground connector delete`, the cleanup at the end of the run, [playground cleanup-cloud-resources](/playground%20cleanup-cloud-resources)).
+
+| Option (run menu entry) | What it does |
+| --- | --- |
+| `--ccloud-service-account-acls docs` (🚦 Service account ACLs) | the ACLs of the documentation (default) |
+| `--ccloud-service-account-acls full` | every operation on every topic, group and transactional id: for a connector whose internal topics are not known, or to check that the ACLs are the problem |
+| `--ccloud-service-account-acls none` | no ACL at all, add them one by one |
+| `--ccloud-service-account-id sa-xxxxx` (🪪 Existing service account) | use an existing service account (for example one set up like the customer's), as is: no ACL created nor deleted |
+| `PG_CCLOUD_SERVICE_ACCOUNT_ACL_EXCLUDE="<regex>"` | do not create the ACLs matching the regex, matched on `<OPERATION> <ResourceType>:<name> [prefix]` (e.g. `"READ Group:"`) |
+
+### 🚦 Reproduce an authorization error
+
+Once the connector runs, [playground rbac acl](/playground%20rbac%20acl) changes the ACLs of its service account: on a Confluent Cloud run it manages the ACLs of the Confluent Cloud cluster, and `--connector` uses the service account of the connector as principal. Delete an ACL, or add a `--deny` one (deleting it restores the setup), then restart the connector:
+
+```bash
+playground rbac acl list   --connector DatagenSource_$USER
+playground rbac acl delete --connector DatagenSource_$USER --operation WRITE --resource Topic:datagen_pageviews
+playground rbac acl create --connector DatagenSource_$USER --operation DESCRIBE --resource Cluster:kafka-cluster --deny
+playground connector restart --connector DatagenSource_$USER
+```
+
+The connector fails like the customer's:
+
+```
+DatagenSource_vsaboulin        ❌ FAILED   0:💪 USER_ACTIONABLE_ERROR   connector: Your kafka API key does not have the permissions required to access the configured topic
+kafka.topic: Missing write permission on topic(s) "datagen_pageviews".
+```
+
+[playground connector diagnose](/playground%20connector%20diagnose) compares the ACLs of the service account with the ones of the documentation, and gives the commands to fix them:
+
+```
+🚦 service account sa-o2k1pno: ACLs of the documentation (https://docs.confluent.io/cloud/current/connectors/service-account.html)
+❌ missing: WRITE Topic:datagen_pageviews
+⛔ denied: DESCRIBE Cluster:kafka-cluster
+   🔧 to create the missing ACLs:
+   playground rbac acl create --connector DatagenSource_vsaboulin --operation WRITE --resource Topic:datagen_pageviews
+   🔧 to delete the DENY ACLs:
+   playground rbac acl delete --connector DatagenSource_vsaboulin --deny --operation DESCRIBE --resource Cluster:kafka-cluster
+```
+
+> An ACL change takes up to a minute to be applied in Confluent Cloud: if the connector still fails right after a fix, restart it again. Resources are `Topic:<name>`, `Group:<name>`, `TransactionalId:<name>` (add `--prefix` for a prefix) and `Cluster:kafka-cluster`.
+
+In a reproduction model, set the variables after the `source ${DIR}/../../scripts/utils.sh` line, so that the model always runs with the customer's setup:
+
+```bash
+export PG_CCLOUD_SERVICE_ACCOUNT=true
+# the customer did not grant the schema history consumer group
+export PG_CCLOUD_SERVICE_ACCOUNT_ACL_EXCLUDE="READ Group:.*-schemahistory"
+```
+
 ## 🚫 Blocking traffic
 
 To reproduce what happens when a component cannot reach another one (a broker, Schema Registry, a database or an external API going down, a firewall dropping packets), a reproduction model can block the traffic between containers or to an external host, then unblock it to check how the connector or client recovers.

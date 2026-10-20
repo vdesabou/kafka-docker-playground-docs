@@ -3,7 +3,7 @@
 #
 # usage: scripts/generate-cli-videos.sh [tape name...]      (default: all the tapes)
 #
-# requirements: vhs (brew install vhs, it pulls ttyd and ffmpeg), docker for the benchmark, diagnose and claude-code tapes,
+# requirements: vhs (brew install vhs, it pulls ttyd and ffmpeg), docker for the benchmark, show-lag, topic, logs, validate-diff, diagnose and claude-code tapes,
 # claude (logged in) for the claude-code tape
 #
 # The clips show the paths of the clone: record from a clone at a neutral path, without the private
@@ -11,7 +11,7 @@
 #   git -C ../kafka-docker-playground worktree add --detach /Users/Shared/kafka-docker-playground master
 #   KDP_DIR=/Users/Shared/kafka-docker-playground scripts/generate-cli-videos.sh
 #
-# ⚠️ the benchmark, diagnose and claude-code tapes run an example: it stops the environment that is running in that clone
+# ⚠️ the benchmark, show-lag, topic, logs, validate-diff, diagnose and claude-code tapes run an example: it stops the environment that is running in that clone
 set -e
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 cd "$DIR/.."
@@ -60,7 +60,7 @@ mkdir -p "$PLAYGROUND_SECRETS_DIR"
 tapes=("$@")
 if [ ${#tapes[@]} -eq 0 ]
 then
-  tapes=(find-example run-menu ccloud-run-menu secrets repro-bootstrap repro-pipeline analyze benchmark diagnose claude-code)
+  tapes=(find-example run-menu ccloud-run-menu secrets sourcecode repro-bootstrap repro-pipeline analyze benchmark show-lag topic logs validate-diff diagnose claude-code)
 fi
 
 mkdir -p docs/videos
@@ -70,7 +70,7 @@ do
   # the first start of ttyd sometimes fails (net::ERR_CONNECTION_REFUSED): retry once
   # an empty HOME (no ~/.aws/credentials... nor your home path in a clip), except for the tapes that need docker or claude
   vhs_home="$work_dir/home"
-  if [[ "$tape" =~ ^(benchmark|diagnose|claude-code)$ ]]
+  if [[ "$tape" =~ ^(benchmark|show-lag|topic|logs|validate-diff|diagnose|claude-code)$ ]]
   then
     vhs_home="$HOME"
   fi
@@ -81,7 +81,7 @@ do
   "${vhs_env[@]}" vhs "tapes/$tape.tape" > /dev/null || "${vhs_env[@]}" vhs "tapes/$tape.tape" > /dev/null
 done
 
-if [[ " ${tapes[*]} " =~ " "(benchmark|diagnose|claude-code)" " ]]
+if [[ " ${tapes[*]} " =~ " "(benchmark|show-lag|topic|logs|validate-diff|diagnose|claude-code)" " ]]
 then
   echo "🛑 stopping the example"
   playground stop > /dev/null 2>&1 || true

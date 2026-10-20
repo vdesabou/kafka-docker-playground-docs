@@ -9,6 +9,8 @@ Confluent Cloud.
 
 - **list**: consumer groups, optionally with their state
 - **describe**: committed offsets and lag, or `--state`, or `--members`
+- **reset-offsets**: rewind or fast-forward a group (earliest, latest, datetime...)
+- **delete**: delete a group, or its offsets for one topic
 
 🎓 Tip: for a sink connector, `playground connector show-lag` follows the  
 lag until it reaches 0.
@@ -23,5 +25,7 @@ playground consumer-group COMMAND
 
 - [list](playground%20consumer-group%20list) - 👥 List consumer groups
 - [describe](playground%20consumer-group%20describe) - 🔬 Describe consumer group
+- [reset-offsets](playground%20consumer-group%20reset-offsets) - ⏪ Reset the committed offsets of a consumer group
+- [delete](playground%20consumer-group%20delete) - 🗑️ Delete a consumer group, or its offsets for one topic
 
 

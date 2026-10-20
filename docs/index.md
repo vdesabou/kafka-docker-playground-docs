@@ -239,6 +239,8 @@ visit https://docs.docker.com/get-docker to install
 - [consumer-group](playground%20consumer-group) - 👥 Consumer group commands
 - [list](playground%20consumer-group%20list) - 👥 List consumer groups
 - [describe](playground%20consumer-group%20describe) - 🔬 Describe consumer group
+- [reset-offsets](playground%20consumer-group%20reset-offsets) - ⏪ Reset the committed offsets of a consumer group
+- [delete](playground%20consumer-group%20delete) - 🗑️ Delete a consumer group, or its offsets for one topic
 
 ### RBAC commands
 

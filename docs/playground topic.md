@@ -23,6 +23,7 @@ command works on plaintext, on sasl-ssl and on Confluent Cloud.
 **🔧 Manage**
 
 - **list / describe / alter / delete**
+- **dlq inspect / replay**: dead letter queue grouped by error, and replay
 - **set-schema-compatibility**: compatibility of the topic subjects
 - **tag**: stream catalog tags (Confluent Cloud only)
 
@@ -54,6 +55,9 @@ playground topic COMMAND
 - [create](playground%20topic%20create) - 🆕 Create topic
 - [delete](playground%20topic%20delete) - ❌ Delete topic and associated schema/subject if applicable
 - [alter](playground%20topic%20alter) - 🪛 Alter topic config
+- [dlq](playground%20topic%20dlq) - 📬 Dead letter queue commands
+- [inspect](playground%20topic%20dlq%20inspect) - 🩺 Show what is in a dead letter queue, grouped by error
+- [replay](playground%20topic%20dlq%20replay) - 🔁 Produce the records of a dead letter queue again
 - [tag](playground%20topic%20tag) - 🏷️ Stream Catalog tags (Confluent Cloud only)
 
 

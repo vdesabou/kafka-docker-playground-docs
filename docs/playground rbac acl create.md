@@ -14,9 +14,15 @@ playground rbac acl create [OPTIONS]
 
 🧑 Principal, User:`<name>` or Group:`<name>` (a bare name means User:`<name>`)
 
-| Attributes      | &nbsp;
-|-----------------|-------------
-| Required:       | ✓ Yes
+⛅ On Confluent Cloud, User:sa-xxxxx (service account) or User:u-xxxxx (user)
+
+❕ Required, unless `--connector` is set
+
+#### `--connector, -c CONNECTOR`
+
+🔗 Use the service account of this fully managed connector (kafka.service.account.id) as principal
+
+⛅ Confluent Cloud only, see playground run `--ccloud-service-account`
 
 #### `--operation, -o OPERATION`
 
@@ -71,6 +77,10 @@ playground rbac acl create --principal User:charlie --operation READ --resource 
 
 ```bash
 playground rbac acl create --principal User:charlie --operation READ --resource Topic:orders --kafka-acls
+```
+
+```bash
+playground rbac acl create --connector HttpSink_$USER --operation READ --resource Topic:http-topic --deny
 ```
 
 

@@ -21,6 +21,24 @@ it is deployed, which reports every invalid property at once.
 playground connector create-or-update [JSON] [OPTIONS]
 ```
 
+## Environment Variables
+
+#### `PG_CCLOUD_SERVICE_ACCOUNT`
+
+👤 true: create fully managed connectors with a service account and the ACLs of the documentation (set by playground run `--ccloud-service-account`)
+
+#### `PG_CCLOUD_SERVICE_ACCOUNT_ACLS`
+
+🚦 With `PG_CCLOUD_SERVICE_ACCOUNT`, ACLs of the service account: docs (default), full or none
+
+#### `PG_CCLOUD_SERVICE_ACCOUNT_ID`
+
+👤 With `PG_CCLOUD_SERVICE_ACCOUNT`, existing service account to use as is, instead of creating one
+
+#### `PG_CCLOUD_SERVICE_ACCOUNT_ACL_EXCLUDE`
+
+🙈 With `PG_CCLOUD_SERVICE_ACCOUNT`, regex of the ACLs not to create, matched on `<OPERATION>` `<ResourceType>:<name>` [prefix]
+
 ## Arguments
 
 #### `JSON`

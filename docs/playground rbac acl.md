@@ -7,6 +7,13 @@ _confluent-metadata-auth topic and enforced by the CONFLUENT access rule
 provider). With `--kafka-acls`, they are regular Kafka ACLs created with  
 kafka-acls (`ZK_ACL` or `KRAFT_ACL` access rule provider).
 
+⛅ On a Confluent Cloud run, they are the ACLs of the Confluent Cloud  
+cluster (confluent kafka acl). `--connector` then uses the service  
+account of a fully managed connector created with  
+`playground run --ccloud-service-account as principal, to reproduce`  
+authorization errors: delete or deny one of its ACLs, then restart the  
+connector.
+
 ## Usage
 
 ```bash

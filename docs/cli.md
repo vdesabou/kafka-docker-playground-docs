@@ -315,6 +315,7 @@ visit https://docs.docker.com/get-docker to install
 - [create](playground%20topic%20create) - 🆕 Create topic
 - [delete](playground%20topic%20delete) - ❌ Delete topic and associated schema/subject if applicable
 - [alter](playground%20topic%20alter) - 🪛 Alter topic config
+- [dlq](playground%20topic%20dlq) - 📬 Dead letter queue commands
 - [tag](playground%20topic%20tag) - 🏷️ Stream Catalog tags (Confluent Cloud only)
 - [consumer-group](playground%20consumer-group) - 👥 Consumer group commands
 - [list](playground%20consumer-group%20list) - 👥 List consumer groups
@@ -322,7 +323,7 @@ visit https://docs.docker.com/get-docker to install
 
 ### RBAC commands
 
-- [rbac](playground%20rbac) - 🛡️ RBAC commands (rbac-sasl-plain and cfk-rbac environments only)
+- [rbac](playground%20rbac) - 🛡️ RBAC commands (rbac-sasl-plain and cfk-rbac environments, plus Confluent Cloud ACLs)
 - [role-binding](playground%20rbac%20role-binding) - 🔐 Role binding commands
 - [user](playground%20rbac%20user) - 🧑 LDAP user commands
 - [acl](playground%20rbac%20acl) - 🚦 ACL commands
@@ -341,6 +342,8 @@ visit https://docs.docker.com/get-docker to install
 - [connector](playground%20connector) - 🔗 Connector commands
 - [status](playground%20connector%20status) - 🧩 Show status of all connectors
 - [wait](playground%20connector%20wait) - ⏳ Wait for connectors to reach a state
+- [validate](playground%20connector%20validate) - ✅ Validate a connector config without creating the connector
+- [diff](playground%20connector%20diff) - 🔀 Diff the config of a running connector with another config
 - [error-recommendations](playground%20connector%20error-recommendations) - 💡 Show error recommendations for fully managed connectors
 - [oracle-cdc-xstream](playground%20connector%20oracle-cdc-xstream) - 🅾️ Specific Oracle CDC Xstream commands
 - [smt](playground%20connector%20smt) - 🧪 Single message transforms (SMT)

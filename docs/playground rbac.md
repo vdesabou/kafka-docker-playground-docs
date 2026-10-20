@@ -1,6 +1,6 @@
 # playground rbac
 
-🛡️ RBAC commands (rbac-sasl-plain and cfk-rbac environments only)
+🛡️ RBAC commands (rbac-sasl-plain and cfk-rbac environments, plus Confluent Cloud ACLs)
 
 Change permissions of the running rbac-sasl-plain or cfk-rbac environment  
 without opening a shell in a container: the commands call the MDS REST API  
@@ -9,7 +9,7 @@ superUser.
 
 - **role-binding**: create, delete and list role bindings
 - **user**: add, delete and list LDAP users and their groups
-- **acl**: create, delete and list ACLs (MDS centralized ACLs, or regular Kafka ACLs with `--kafka-acls`)
+- **acl**: create, delete and list ACLs (MDS centralized ACLs, or regular Kafka ACLs with `--kafka-acls`). On a Confluent Cloud run, ACLs of the Confluent Cloud cluster
 
 🎓 Tip: principals are User:`<name>` or Group:`<name>`, a bare name means User:`<name>`.
 

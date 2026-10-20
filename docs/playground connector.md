@@ -13,6 +13,7 @@ container or fully managed in Confluent Cloud.
 - **wait**: wait until it is RUNNING (or another state)
 - **error-recommendations**: suggested fixes for a failed fully managed connector
 - **show-config**: the configuration actually applied
+- **diff**: running config vs a file, another connector or the defaults
 - **logs**: tail connect logs, filtered and followed
 - **show-lag**: consumer lag of a sink, until it reaches zero
 - **benchmark**: records per second, compared with the previous run
@@ -22,6 +23,7 @@ container or fully managed in Confluent Cloud.
 **🛠️ Change it**
 
 - **create-or-update**: create it, or apply a new config, from stdin
+- **validate**: check a config with the plugin, without creating it
 - **update**: edit the running config in your editor
 - **pause / resume / stop / restart / delete**
 - **offsets alter / reset**: rewind or fast-forward a connector
@@ -54,6 +56,8 @@ playground connector COMMAND
 
 - [status](playground%20connector%20status) - 🧩 Show status of all connectors
 - [wait](playground%20connector%20wait) - ⏳ Wait for connectors to reach a state
+- [validate](playground%20connector%20validate) - ✅ Validate a connector config without creating the connector
+- [diff](playground%20connector%20diff) - 🔀 Diff the config of a running connector with another config
 - [error-recommendations](playground%20connector%20error-recommendations) - 💡 Show error recommendations for fully managed connectors
 - [oracle-cdc-xstream](playground%20connector%20oracle-cdc-xstream) - 🅾️ Specific Oracle CDC Xstream commands
 - [smt](playground%20connector%20smt) - 🧪 Single message transforms (SMT)

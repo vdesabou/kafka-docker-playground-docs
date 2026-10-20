@@ -86,6 +86,10 @@ visit https://github.com/junegunn/fzf#installation to install
 
 🏎️ With `--benchmark`, extra flags for playground connector benchmark (e.g. "`--mode` steady `--duration` 5m")
 
+#### `PG_CCLOUD_SERVICE_ACCOUNT_ACL_EXCLUDE`
+
+🙈 With `--ccloud-service-account`, regex of the ACLs not to create, matched on `<OPERATION>` `<ResourceType>:<name>` [prefix] (e.g. "READ Group:")
+
 ## Options
 
 #### `--environment ENVIRONMENT`
@@ -414,6 +418,44 @@ Example: `--connect-log-level` "io.confluent.connect.s3=TRACE,org.apache.kafka.c
 ❣️ Only required if you want to use your own existing cluster
 
 🎓 Tip: you can also use `SCHEMA_REGISTRY_CREDS` environment variable
+
+#### `--ccloud-service-account`
+
+👤 Run the fully managed connectors with a service account (kafka.auth.mode=`SERVICE_ACCOUNT`)
+
+Instead of the API key of the example, each fully managed or custom  
+connector gets its own service account, with the ACLs listed in  
+https://docs.confluent.io/cloud/current/connectors/service-account.html  
+(derived from the connector config), and the owner of  
+`CONFLUENT_CLOUD_API_KEY` gets the Assigner role on it. The example is  
+not changed.
+
+The service accounts and their ACLs are deleted with the connectors  
+(playground connector delete, end-of-run cleanup, playground  
+cleanup-cloud-resources).
+
+🎓 Tip: to reproduce an authorization error, delete or deny an ACL with  
+`playground rbac acl delete|create --connector <connector> [--deny],`  
+restart the connector and run playground connector diagnose.  
+`PG_CCLOUD_SERVICE_ACCOUNT_ACL_EXCLUDE` skips ACLs when they are created.
+
+#### `--ccloud-service-account-acls PROFILE`
+
+🚦 ACLs of the service accounts created by `--ccloud-service-account` (implies it)
+
+- **docs**: the ACLs of the documentation, derived from the connector config (default)
+- **full**: every operation on every topic, group and transactional id (same as the API key of the example)
+- **none**: no ACL, add them with playground rbac acl create `--connector` `<connector>`
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Allowed Values: | `docs`, `full`, `none`
+
+#### `--ccloud-service-account-id SERVICE-ACCOUNT`
+
+👤 Use this existing service account (sa-xxxxx) for the fully managed connectors, as is (implies `--ccloud-service-account`)
+
+No ACL is created nor deleted, and the service account is kept.
 
 ## Examples
 

@@ -16,9 +16,15 @@ playground rbac acl delete [OPTIONS]
 
 🧑 Principal, User:`<name>` or Group:`<name>` (a bare name means User:`<name>`)
 
-| Attributes      | &nbsp;
-|-----------------|-------------
-| Required:       | ✓ Yes
+⛅ On Confluent Cloud, User:sa-xxxxx (service account) or User:u-xxxxx (user)
+
+❕ Required, unless `--connector` is set
+
+#### `--connector, -c CONNECTOR`
+
+🔗 Use the service account of this fully managed connector (kafka.service.account.id) as principal
+
+⛅ Confluent Cloud only, see playground run `--ccloud-service-account`
 
 #### `--operation, -o OPERATION`
 
@@ -65,6 +71,10 @@ Cluster, TransactionalId, DelegationToken. Use Cluster:kafka-cluster for the clu
 
 ```bash
 playground rbac acl delete --principal User:charlie --operation WRITE --resource Topic:orders
+```
+
+```bash
+playground rbac acl delete --connector HttpSink_$USER --operation READ --resource Group:connect-lcc- --prefix
 ```
 
 

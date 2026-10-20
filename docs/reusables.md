@@ -989,6 +989,16 @@ The service account and its ACLs are deleted with the connector (`playground con
 | `--ccloud-service-account-id sa-xxxxx` (🪪 Existing service account) | use an existing service account (for example one set up like the customer's), as is: no ACL created nor deleted |
 | `PG_CCLOUD_SERVICE_ACCOUNT_ACL_EXCLUDE="<regex>"` | do not create the ACLs matching the regex, matched on `<OPERATION> <ResourceType>:<name> [prefix]` (e.g. `"READ Group:"`) |
 
+In the run menu, tick *👤 Connector service account* in the options:
+
+![playground run menu: Connector service account toggle](./images/run_menu_ccloud_service_account.png)
+
+Two entries then appear in the confluent cloud section, to pick the ACLs and an existing service account:
+
+![playground run menu: service account entries](./images/run_menu_ccloud_service_account_entries.png)
+
+![playground run menu: service account ACLs](./images/run_menu_ccloud_service_account_acls.png)
+
 ### 🚦 Reproduce an authorization error
 
 Once the connector runs, [playground rbac acl](/playground%20rbac%20acl) changes the ACLs of its service account: on a Confluent Cloud run it manages the ACLs of the Confluent Cloud cluster, and `--connector` uses the service account of the connector as principal. Delete an ACL, or add a `--deny` one (deleting it restores the setup), then restart the connector:

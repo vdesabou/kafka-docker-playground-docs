@@ -1170,9 +1170,51 @@ playground debug block-traffic -c connect -c ksqldb-server --destination schema-
 
 ## 🐌 Add latency, packet loss or corruption
 
-Some issues only happen on a slow or unreliable network: request timeouts, retries, rebalances, producer or consumer errors. A reproduction model can simulate them by adding latency, packet loss or packet corruption between two containers.
+Some issues only happen on a slow or unreliable network: request timeouts, retries, rebalances, producer or consumer errors. A reproduction model, or you on a running environment, can simulate them by making the traffic of a container slow or lossy, then putting it back to normal to check how the connector or client recovers.
 
-The playground provides functions (in [`scripts/cli/src/lib/utils_function.sh`](https://github.com/vdesabou/kafka-docker-playground/blob/master/scripts/cli/src/lib/utils_function.sh)) based on [`tc`](https://man7.org/linux/man-pages/man8/tc.8.html):
+Just use [CLI](/playground%20debug%20degrade-traffic) `playground debug degrade-traffic`. It applies [`tc netem`](https://man7.org/linux/man-pages/man8/tc-netem.8.html) to the traffic from one or more containers, to a destination (container name, host name or IP address, optionally a single `--port`), or to all their traffic when there is no `--destination`. Several effects can be combined in one call:
+
+| Flag | Effect | Example |
+| --- | --- | --- |
+| `--latency` | added latency | `100ms`, `1s` |
+| `--jitter` | random variation of the latency (needs `--latency`) | `20ms` |
+| `--loss` | packets dropped | `1%` |
+| `--corruption` | packets corrupted | `1%` |
+| `--duplicate` | packets duplicated | `1%` |
+| `--rate` | bandwidth limit | `1mbit`, `500kbit` |
+
+```bash
+# 100ms (± 20ms) from connect to the broker
+playground debug degrade-traffic --container connect --destination broker --latency 100ms --jitter 20ms --action start
+
+# latency and packet loss, on two containers, only for the traffic to port 9092 of the broker
+playground debug degrade-traffic -c connect -c ksqldb-server --destination broker --port 9092 --latency 50ms --loss 1% --action start
+
+# a bandwidth limit on all the traffic of connect
+playground debug degrade-traffic -c connect --rate 1mbit --action start
+
+# what is applied, and the round trip measured from connect
+playground debug degrade-traffic -c connect --destination broker --action status
+
+# back to normal
+playground debug degrade-traffic -c connect --action stop
+```
+
+After `start`, `stop` and `status`, the command measures the effect from the container: the average of 4 pings, or the time of a TCP connection when `--port` is set (only that TCP traffic is degraded, not ping):
+
+```text
+🐌 Applying 100ms ± 10ms latency on container connect to broker (172.27.0.2)
+⏱️ round trip from connect to broker: 101.563 ms (average of 4 pings)
+```
+
+`tc` runs from the [`nicolaka/netshoot`](https://github.com/nicolaka/netshoot) image (pulled the first time) in the network namespace of the container, or in an ephemeral container of the pod with the `cfk` environment. Nothing is installed in the container, so this works with any image: connect, broker, Schema Registry, databases…
+
+> [!NOTE]
+> * `tc` only slows down the packets a container **sends**: with `--latency 100ms` from connect to the broker, the round trip between them grows by 100ms. To degrade the other direction as well, run the command on the destination too.
+> * A new `--action start` replaces what was applied before on the container: to combine effects, pass them all in one call.
+> * A restart of the container (e.g. `playground container restart`) removes the degradation.
+
+In a reproduction model, the functions of [`scripts/cli/src/lib/utils_function.sh`](https://github.com/vdesabou/kafka-docker-playground/blob/master/scripts/cli/src/lib/utils_function.sh) are shortcuts for the most common cases:
 
 | Function | Usage |
 |---|---|
@@ -1180,10 +1222,7 @@ The playground provides functions (in [`scripts/cli/src/lib/utils_function.sh`](
 | `add_packet_loss` | `add_packet_loss <src_container> <dst_container or ip> <loss>`, e.g. `add_packet_loss connect broker 1%` |
 | `add_packet_corruption` | `add_packet_corruption <src_container> <dst_container or ip> <corruption>`, e.g. `add_packet_corruption connect broker 1%` |
 | `get_latency` | `get_latency <src_container> <dst_container>`: average ping time in ms |
-| `clear_traffic_control` | `clear_traffic_control <src_container>`: removes all `tc` settings |
-
-> [!TIP]
-> A complete example is available [here](https://github.com/vdesabou/kafka-docker-playground/blob/master/other/monitoring-sink-latency/start.sh).
+| `clear_traffic_control` | `clear_traffic_control <src_container>`: back to normal |
 
 *Example:*
 
@@ -1200,8 +1239,8 @@ log "Clear traffic control"
 clear_traffic_control connect
 ```
 
-> [!NOTE]
-> The source container needs the `tc` tool (`iproute-tc` package). The `connect` image used by the playground has it installed.
+> [!TIP]
+> A complete example is available [here](https://github.com/vdesabou/kafka-docker-playground/blob/master/other/monitoring-sink-latency/start.sh).
 
 ## 🧰 Useful functions for reproduction models
 

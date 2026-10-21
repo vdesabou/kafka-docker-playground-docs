@@ -73,6 +73,9 @@ log "♻️ Restart connect worker to load"
 playground container restart --container connect
 ```
 
+> [!NOTE]
+> The `--source` path is the absolute path of your checkout. When the model is shared with [`playground repro export`](/reusables?id=%f0%9f%93%a6-share-a-reproduction-model), `playground repro import` changes it into the path of the other machine.
+
 And add the transform config to connector:
 
 ```json
@@ -99,6 +102,120 @@ It will automatically:
 * Use same kafka topic for all connectors
 * Add all required containers for all sink and source
 * Update `CONNECT_PLUGIN_PATH` to include all connectors
+
+## 📦 Share a reproduction model
+
+[`playground repro export`](/playground%20repro%20export) packs one or more reproduction models into a single `.tgz` bundle. Your colleague then runs [`playground repro import`](/playground%20repro%20import) to get them in their own `reproduction-models` folder, along with the exact `playground run` line to use.
+
+```bash
+# preview: what goes in, and what the scan finds
+playground repro export --dry-run
+
+# write the bundle (current reproduction model)
+playground repro export
+# 📤 Exported bundle is available: /path/to/playground_repro_s3-sink-repro-123456-dlq_2026-10-21.tgz (8.0K)
+
+# on the other machine
+playground repro import -f ~/Downloads/playground_repro_s3-sink-repro-123456-dlq_2026-10-21.tgz
+```
+
+### 📤 Export
+
+Without `--file`, the current reproduction model (the last one you ran or bootstrapped) is exported. The model doesn't have to be uncommitted.
+
+```bash
+# a given model (repeat -f to put several in one bundle)
+playground repro export -f $PWD/reproduction-models/connect-connect-aws-s3-sink/s3-sink-repro-123456-dlq.sh
+
+# every new or modified model of the reproduction-models folder
+playground repro export --all-uncommitted
+
+# write the bundle somewhere else than the current folder
+playground repro export --output ~/Desktop
+```
+
+The bundle contains what the model needs:
+
+* the script;
+* the files of its folder that the script, or a docker compose file it uses, mentions: the docker compose override, producer or custom SMT sources, SQL files…;
+* the support files linked by `repro bootstrap`: `README.md`, `stop.sh`, `benchmark-load.bash`, `config-*`.
+
+Symlinks are stored as their content, so the bundle does not depend on the version of the example on the other machine. Files ignored by git, build output (`target/`), heap dumps, flight recordings, logs and credential files (`keyfile.json`, `*.pem`, `*.key`) are left out.
+
+A `repro-manifest.json` describes the bundle:
+
+* the last `playground run` line of each model, taken from your run history (`--tag`, `--connector-tag`, `--environment`, `--enable-*`…);
+* its case number, author and base example;
+* the playground commit it was exported from;
+* the names, never the values, of the credentials it uses;
+* the sha256 of every file.
+
+`--cluster-creds` / `--cluster-schema-registry-creds` are removed from the run line: whoever imports the model runs it with their own cluster.
+
+#### 🕵️ Secrets and customer data scan
+
+Before anything is written, and with `--dry-run` too, the bundle is scanned. The export stops when a file contains:
+
+* the value of a credential known to your machine: the [`playground secrets`](/playground%20secrets) store, exported credential variables, `CLUSTER_CREDS` / `SCHEMA_REGISTRY_CREDS` of `playground.ini`, `~/.aws/credentials`;
+* a well-known token format: AWS access key id, private key, GitHub or Slack token, Google API key, JWT (a Confluent license for example), Azure storage account key.
+
+```text
+🔐 connect-connect-aws-s3-sink/s3-sink-repro-123456-dlq.sh:42 contains the value of AWS_SECRET_ACCESS_KEY
+❌ 1 secret finding(s): remove them (use ${VAR} instead of the value), or use --force if they are not real secrets
+```
+
+Email addresses, public IP addresses and hard-coded passwords that do not come from the base example are reported as possible customer data, without stopping the export. Values are never printed.
+
+> [!WARNING]
+> A reproduction model must never contain customer data. The scan is a safety net, not a review: check the findings, and anonymize the data (topic names, hostnames, records) before you share a bundle.
+
+#### 📎 Files outside the repository (`--include-artifacts`)
+
+Some models need files that are not in the repository:
+
+* the connector zip or jar the model ran with (`--connector-zip`, `--connector-jar`);
+* a file the script reads by absolute path, like `~/Downloads/customer-config.json`.
+
+By default, export only lists them:
+
+```text
+📎 connect-connect-aws-s3-sink/s3-sink-repro-123456-dlq.sh uses /Users/me/Downloads/kafka-connect-s3-10.6.0-SNAPSHOT.zip, which is outside the repository and not in the bundle: use --include-artifacts to add it
+```
+
+With `--include-artifacts`, they are packed under `<model folder>/artifacts/` and scanned like the other files. On import, the run line, the script and the compose files are changed to point to the imported copies. Your hidden home folders (`~/.aws`, `~/.ssh`…) and `/tmp` files are never packed.
+
+### 📥 Import
+
+```bash
+# what would be imported, and what would conflict with your files
+playground repro import -f ~/Downloads/playground_repro_s3-sink-repro-123456-dlq_2026-10-21.tgz --dry-run
+
+playground repro import -f ~/Downloads/playground_repro_s3-sink-repro-123456-dlq_2026-10-21.tgz
+```
+
+Any file name works (`playground_repro_export (1).tgz` too), and <kbd>Tab</kbd> completion lists the bundles found in your `folder_zip_or_jar` folders. The import:
+
+* extracts the bundle in a temporary folder first, and refuses it if it contains absolute paths, `..`, special files, or a file whose sha256 does not match the manifest;
+* restores the symlinks to the example when your copy of the example file is identical;
+* changes the paths of the exporter's machine into yours, e.g. the jar path that [`--custom-smt`](/reusables?id=with-custom-smt-custom-smt) writes into the script;
+* makes the model the current one;
+* prints the `playground run` line to use, and the credentials missing from your [`playground secrets`](/playground%20secrets) profile:
+
+```text
+▶️  playground run -f /path/to/kafka-docker-playground/reproduction-models/connect-connect-aws-s3-sink/s3-sink-repro-123456-dlq.sh --tag=8.1.0 --connector-tag=10.6.0
+   🔑 calls handle_aws_credentials, make sure the matching credentials are set up
+```
+
+Files identical to yours are skipped. When a file differs from your copy, nothing is imported unless you choose with `--on-conflict`:
+
+| `--on-conflict` | what happens |
+| --- | --- |
+| `abort` (default) | nothing is imported, the differing files are listed |
+| `rename` | the differing files are imported with an `-imported-<date>` suffix and yours are kept; the imported script refers to the renamed files |
+| `overwrite` | your copy is replaced |
+
+> [!TIP]
+> Bundles created by older versions of the playground (`playground_repro_export.tgz`, without manifest) can still be imported: they have no run line and their files cannot be verified.
 
 ## 👉 Producing data
 

@@ -120,7 +120,7 @@ playground repro import -f ~/Downloads/playground_repro_s3-sink-repro-123456-dlq
 ```
 
 > [!TIP]
-> On macOS, the bundle is also copied to the clipboard **as a file**: press <kbd>Cmd</kbd>+<kbd>V</kbd> in a Slack conversation (or a Zendesk comment, a mail) to attach it. This follows the `playground config clipboard` setting; `playground repro export --clipboard` copies it even when the setting is `false`.
+> On macOS, the bundle is also copied to the clipboard **as a file**: press <kbd>Cmd</kbd>+<kbd>V</kbd> in a Slack conversation (or a Zendesk comment, a mail) to attach it. Use `--no-clipboard` to skip it.
 
 ### 📤 Export
 

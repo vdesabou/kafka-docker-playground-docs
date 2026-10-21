@@ -20,6 +20,7 @@ fly when missing, and their output is brought back to your machine.
 - **tcp-dump**: capture traffic, open it in Wireshark
 - **testssl**: probe a TLS endpoint, locally or in the cloud
 - **block-traffic**: cut a route with iptables, to simulate an outage
+- **degrade-traffic**: add latency, packet loss or corruption with tc
 - **java-debug**: turn on the JVM SSL, Kerberos or class loading traces
 
 **🔬 It is in the code**
@@ -55,6 +56,7 @@ playground debug COMMAND
 - [gc-analyze](playground%20debug%20gc-analyze) - Moved to `playground analyze gc-logs` (kept as a hidden alias)
 - [tcp-dump](playground%20debug%20tcp-dump) - 🕵️‍♂️ Take a tcp dump (sniffing network)
 - [block-traffic](playground%20debug%20block-traffic) - 🚫 Blocking traffic using iptables
+- [degrade-traffic](playground%20debug%20degrade-traffic) - 🐌 Add latency, packet loss, corruption or a bandwidth limit using tc
 - [java-debug](playground%20debug%20java-debug) - 🤎 JVM arguments for SSL, Kerberos or Class Loading
 - [jscissors](playground%20debug%20jscissors) - ✂️ jscissors is an instrumentation framework and can help to analyse control flow and perform some specific logging
 - [flight-recorder](playground%20debug%20flight-recorder) - 🛩️ Record a JVM with Java Flight Recorder, from `--action` start to `--action` stop

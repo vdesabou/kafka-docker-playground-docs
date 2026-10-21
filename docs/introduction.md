@@ -1,5 +1,5 @@
 # 🐳 kafka-docker-playground
-![success tests](https://img.shields.io/badge/success%20tests-852%2F1066-red)![connector tested](https://img.shields.io/badge/connector%20tested-145-green)![cp versions tested](https://img.shields.io/badge/cp%20version%20tested-8.3.2-green)![last run](https://img.shields.io/badge/last%20run-2026--10--21%2012:43-green)
+![success tests](https://img.shields.io/badge/success%20tests-856%2F1068-red)![connector tested](https://img.shields.io/badge/connector%20tested-145-green)![cp versions tested](https://img.shields.io/badge/cp%20version%20tested-8.3.2-green)![last run](https://img.shields.io/badge/last%20run-2026--10--21%2023:29-green)
 ![GitHub issues by-label](https://img.shields.io/github/issues/vdesabou/kafka-docker-playground/CI%20failing%20🔥)![GitHub issues by-label](https://img.shields.io/github/issues/vdesabou/kafka-docker-playground/enhancement%20✨)
 ![GitHub repo size](https://img.shields.io/github/repo-size/vdesabou/kafka-docker-playground)
 [![Add a star on GitHub](https://img.shields.io/github/stars/vdesabou/kafka-docker-playground?style=social)](https://github.com/vdesabou/kafka-docker-playground)
@@ -17,7 +17,7 @@
 - 📈 [Benchmark](/reusables?id=%e2%8f%b1%ef%b8%8f-benchmark-a-connector) a connector: throughput, version comparison, and where the time of the tasks goes (Java Flight Recorder)
 - 📊 Find what is wrong with shareable [reports](/reports): thread dumps, GC logs, flight recordings, connector benchmarks, SMT tests, Oracle XStream and CFK diagnostics
 - 🎓 Learn how the playground [works](/how-it-works)
-- 👷‍♂️ Build your own reproduction models with [reusables](/reusables)
+- 🧰 Build your own reproduction models with the [reproduction toolkit](/reusables)
 - 🎩 Work remotely with VS Code on AWS EC2 instances using [playground ec2](/playground%20ec2) commands
 - 🤖 Automated testing using Github Actions [CI](/how-it-works?id=🤖-how-ci-works)
 - 👾 And even more [playgrounds](/content?id=👾-other-playgrounds)...

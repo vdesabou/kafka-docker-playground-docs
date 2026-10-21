@@ -43,6 +43,9 @@ run line: whoever imports runs with their own cluster.
 
 Without `--file`, the current reproduction model is exported.
 
+📋 On macOS, the bundle is copied to the clipboard as a file: paste it  
+(Cmd+V) in a Slack conversation to attach it (`--no-clipboard` to skip).
+
 🎓 Tip: start with `--dry-run` to see what would be packed, and what the scan finds.
 
 ## Usage
@@ -93,6 +96,10 @@ Can be repeated to put several models in one bundle.
 #### `--include-artifacts`
 
 📎 Also pack the files outside the repository the models need (connector zip / jar, files referenced by absolute path)
+
+#### `--no-clipboard`
+
+📋 Do not copy the bundle to the clipboard (macOS)
 
 ## Examples
 

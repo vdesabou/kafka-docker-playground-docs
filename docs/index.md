@@ -191,6 +191,7 @@ visit https://docs.docker.com/get-docker to install
 - [gc-analyze](playground%20debug%20gc-analyze) - Moved to `playground analyze gc-logs` (kept as a hidden alias)
 - [tcp-dump](playground%20debug%20tcp-dump) - 🕵️‍♂️ Take a tcp dump (sniffing network)
 - [block-traffic](playground%20debug%20block-traffic) - 🚫 Blocking traffic using iptables
+- [degrade-traffic](playground%20debug%20degrade-traffic) - 🐌 Add latency, packet loss, corruption or a bandwidth limit using tc
 - [java-debug](playground%20debug%20java-debug) - 🤎 JVM arguments for SSL, Kerberos or Class Loading
 - [jscissors](playground%20debug%20jscissors) - ✂️ jscissors is an instrumentation framework and can help to analyse control flow and perform some specific logging
 - [flight-recorder](playground%20debug%20flight-recorder) - 🛩️ Record a JVM with Java Flight Recorder, from `--action` start to `--action` stop

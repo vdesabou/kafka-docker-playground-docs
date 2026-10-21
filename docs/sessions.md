@@ -13,6 +13,7 @@ link to a live report so you can click around it yourself.
 | 🩺 | [A sink is RUNNING but writes nothing: diagnose, dead letter queue, replay](/sessions?id=🩺-a-sink-is-running-but-writes-nothing) | a running example |
 | 🔀 | [What does this transform chain (SMT) do to a record?](/sessions?id=🔀-what-does-this-transform-chain-do-to-a-record) | a running example |
 | 🧑‍💻 | [The source code of a connector at the customer's version](/sessions?id=🧑💻-the-source-code-of-a-connector-at-the-customers-version) | nothing |
+| 🐞 | [A breakpoint in a running connector: remote debugging](/sessions?id=🐞-a-breakpoint-in-a-running-connector-remote-debugging) | a running example |
 | 🧵 | [A connector looks stuck: analyze thread dumps](/sessions?id=🧵-a-connector-looks-stuck-analyze-thread-dumps) | nothing (`--sample`) |
 | ♻️ | [Long GC pauses or a memory leak: analyze GC logs](/sessions?id=♻️-long-gc-pauses-or-a-memory-leak-analyze-gc-logs) | nothing (`--sample`) |
 | 🛩️ | [A slow connector: where does the task time go?](/sessions?id=🛩️-a-slow-connector-where-does-the-task-time-go) | nothing (`--sample`) |
@@ -108,6 +109,43 @@ playground connector-plugin sourcecode -c confluentinc/kafka-connect-jdbc --conn
 **Links**
 
 - 🧠 CLI reference: [playground connector-plugin config-key](/playground%20connector-plugin%20config-key),
+  [playground connector-plugin sourcecode](/playground%20connector-plugin%20sourcecode)
+
+## 🐞 A breakpoint in a running connector: remote debugging
+
+The logs are not enough: you want to see what the connector does with a record. The `connect` container always listens
+for a Java debugger on port `5005`: get the code of the version that runs, attach a debugger, set a breakpoint, and inspect
+the records as the connector sees them.
+
+<video src="videos/session-remote-debugging.mp4" poster="images/sessions/remote-debugging.png" controls playsinline width="100%"></video>
+
+**In this session**
+
+- the version of the connector that runs, and its code at that tag, to know where to stop
+- `jdb`, the debugger of the JDK, attached to `localhost:5005`, a breakpoint in `JdbcSinkTask.put` before the records are written
+- `where`, `list`, `locals`, `print`: the call stack from the Connect framework, the source, the batch, the value of a record
+- the same in Visual Studio Code (and IntelliJ IDEA): an attach configuration on `127.0.0.1:5005`
+
+**Commands**
+
+```bash
+playground connector versions
+playground connector-plugin sourcecode -c confluentinc/kafka-connect-jdbc --connector-tag 10.9.9 --checkout-only
+jdb -attach localhost:5005 -sourcepath /tmp/connector-plugin-sourcecode/kafka-connect-jdbc-10.9.9/src/main/java
+# in jdb: stop at io.confluent.connect.jdbc.sink.JdbcSinkTask:87, then where, list, locals, print first.value(), clear, cont
+
+# another container than connect (broker, schema-registry...): also prints the launch.json entry for VS Code
+playground debug enable-remote-debugging -c broker
+```
+
+> [!WARNING]
+> `stop at` suspends every thread of the worker: keep the pause short (the worker and consumer groups time out), then
+> `clear` the breakpoint and `cont`.
+
+**Links**
+
+- 📚 Step by step with Visual Studio Code: [✨ Remote debugging](/reusables?id=✨-remote-debugging) in the Reproduction toolkit
+- 🧠 CLI reference: [playground debug enable-remote-debugging](/playground%20debug%20enable-remote-debugging),
   [playground connector-plugin sourcecode](/playground%20connector-plugin%20sourcecode)
 
 ## 🧵 A connector looks stuck: analyze thread dumps

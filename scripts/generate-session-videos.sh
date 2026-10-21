@@ -6,11 +6,11 @@
 #        (default: all the sessions)
 #
 # requirements: vhs, ffmpeg, Google Chrome (headless screenshots of the HTML report), docker for the sessions that
-# run an example (cfk-bundle, dlq, smt-test, topic-produce, benchmark)
+# run an example (cfk-bundle, remote-debugging, dlq, smt-test, topic-produce, benchmark)
 # Same isolation as scripts/generate-cli-videos.sh (neutral clone path, env -i, empty HOME except for the docker
 # sessions, no-op open), but it does not change your playground config.
 #
-# ⚠️ the dlq, smt-test, topic-produce and benchmark sessions start an example off camera: it stops the environment
+# ⚠️ the remote-debugging, dlq, smt-test, topic-produce and benchmark sessions start an example off camera: it stops the environment
 # that is running in that clone
 set -e
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
@@ -38,9 +38,11 @@ fi
 #   page_height height of the headless browser window, at least the height of the report page
 #   docker      yes when the tape needs docker (your HOME is then used, for the docker config)
 #   setup       function run before the recording, off camera, in KDP_DIR
-ALL_SESSIONS=(thread-dump gc-logs flight-recorder oracle-xstream-report cfk-bundle sourcecode dlq smt-test topic-produce benchmark)
+#   stills      images shown after the terminal part instead of a report (screenshots of an IDE...):
+#               "<image>:<seconds>" items, each fitted to the frame on the background color of the terminal
+ALL_SESSIONS=(thread-dump gc-logs flight-recorder oracle-xstream-report cfk-bundle sourcecode remote-debugging dlq smt-test topic-produce benchmark)
 session_settings() {
-  report="" scroll="" page_height=4100 docker="" setup=""
+  report="" scroll="" page_height=4100 docker="" setup="" stills=""
   case "$1" in
     thread-dump)
       report="/tmp/thread-dump/*-thread-report.html"
@@ -65,6 +67,11 @@ session_settings() {
       docker=yes
       ;;
     sourcecode)
+      ;;
+    remote-debugging)
+      docker=yes
+      setup=setup_remote_debugging
+      stills="docs/images/remote_debugging3.jpg:6 docs/images/remote_debugging4.jpg:5 docs/images/remote_debugging7.jpg:8"
       ;;
     dlq)
       docker=yes
@@ -134,6 +141,14 @@ setup_topic_produce() {
   do
     playground topic create --topic $topic >> /tmp/kdp-session-setup.log 2>&1
   done
+}
+
+# the JDBC PostgreSQL sink example, the avro schema of its orders topic for the record produced on camera, and no
+# checkout of the connector code yet (the tape clones it)
+setup_remote_debugging() {
+  setup_jdbc_postgresql_sink
+  sed -n "/topic produce -t orders --nb-messages 1 << 'EOF'/,/^EOF/p" connect/connect-jdbc-postgresql-sink/postgres-sink.sh | sed '1d;$d' > /tmp/orders.avsc
+  rm -rf /tmp/connector-plugin-sourcecode/kafka-connect-jdbc-*
 }
 
 # the first part of other/reprocess-dlq-messages-with-sink-connector/replay-dlq-messages-with-playground.sh: 10 avro
@@ -206,9 +221,26 @@ do
   terminal_duration=$(ffprobe -v error -show_entries format=duration -of csv=p=0 "$terminal")
   poster_at=$(echo "$terminal_duration - 6" | bc)
 
-  if [ -z "$report" ]
+  if [ -z "$report" ] && [ -z "$stills" ]
   then
     mv "$terminal" "docs/videos/session-$session.mp4"
+  elif [ -n "$stills" ]
+  then
+    inputs=(-i "$terminal") filter="[0:v]fps=25,format=yuv420p,setsar=1[v0];" labels="[v0]" n=0
+    for still in $stills
+    do
+      image=${still%%:*} hold=${still##*:}
+      n=$((n + 1))
+      ffmpeg -hide_banner -loglevel error -y -loop 1 -framerate 25 -i "$image" -t "$hold" \
+        -vf "scale=1300:760:force_original_aspect_ratio=decrease,pad=1400:820:(ow-iw)/2:(oh-ih)/2:color=0x1e1e2e,format=yuv420p" \
+        -c:v libx264 -r 25 "$work_dir/still-$n.mp4"
+      inputs+=(-i "$work_dir/still-$n.mp4")
+      filter+="[$n:v]fps=25,format=yuv420p,setsar=1[v$n];"
+      labels+="[v$n]"
+    done
+    ffmpeg -hide_banner -loglevel error -y "${inputs[@]}" -filter_complex "${filter}${labels}concat=n=$((n + 1)):v=1[v]" \
+      -map "[v]" -c:v libx264 -movflags +faststart "docs/videos/session-$session.mp4"
+    rm -f "$terminal"
   else
     report_file=$(ls -t $report 2> /dev/null | head -1)
     if [ -z "$report_file" ]
@@ -252,7 +284,7 @@ do
   ffmpeg -hide_banner -loglevel error -y -ss "$poster_at" -i "docs/videos/session-$session.mp4" -frames:v 1 "docs/images/sessions/$session.png"
 done
 
-if [[ " ${sessions[*]} " =~ " "(dlq|smt-test|topic-produce|benchmark)" " ]]
+if [[ " ${sessions[*]} " =~ " "(remote-debugging|dlq|smt-test|topic-produce|benchmark)" " ]]
 then
   echo "🛑 stopping the example"
   (cd "$KDP_DIR" && PATH="$KDP_DIR/scripts/cli:$PATH" playground stop > /dev/null 2>&1) || true

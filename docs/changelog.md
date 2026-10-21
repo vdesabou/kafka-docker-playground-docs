@@ -3,6 +3,7 @@
 ## October 2026
 ##### 🌟 Enhancements
 
+- 🧠 Make repro export / import self-contained and safe [#9447](https://github.com/vdesabou/kafka-docker-playground/issues/9447)
 - 🧠 Bite size sessions: narrated terminal videos that end on the HTML report [#9437](https://github.com/vdesabou/kafka-docker-playground/issues/9437)
 - 🧠 playground topic dlq inspect and replay [#9433](https://github.com/vdesabou/kafka-docker-playground/issues/9433)
 - 🧠 playground connector validate and connector diff [#9432](https://github.com/vdesabou/kafka-docker-playground/issues/9432)

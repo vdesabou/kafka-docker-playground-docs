@@ -13,7 +13,7 @@ Pages are Markdown files rendered with Docsify: append `.md` to a page path to g
 - [How to Use](https://kafka-docker-playground.io/how-to-use.md): prerequisites, running examples, specifying CP/connector versions, options (ksqlDB, Control Center, Grafana...)
 - [CLI](https://kafka-docker-playground.io/cli.md): setup of the `playground` CLI and command reference
 - [How it works](https://kafka-docker-playground.io/how-it-works.md): environments, docker compose overrides, CI
-- [Reusables](https://kafka-docker-playground.io/reusables.md): building custom examples and reproduction models (`playground repro bootstrap`), producing and consuming data, debugging tools (remote debugging, TCP/heap/thread dumps, flight recorder), analyzing what you collected (`playground analyze`), network fault injection, HTTPS proxy, specific JDKs, performance testing
+- [Reusables](https://kafka-docker-playground.io/reusables.md): building custom examples and reproduction models (`playground repro bootstrap`), sharing them as a self-contained bundle (`playground repro export` / `playground repro import`), producing and consuming data, debugging tools (remote debugging, TCP/heap/thread dumps, flight recorder), analyzing what you collected (`playground analyze`), network fault injection, HTTPS proxy, specific JDKs, performance testing
 - [Academy](https://kafka-docker-playground.io/academy.md): step by step exercises on real-world connector issues
 - [Tips & Tricks](https://kafka-docker-playground.io/tips-and-tricks.md): useful docker and playground commands
 - [Claude Code](https://kafka-docker-playground.io/claude-code.md): using the repository with Claude Code (`CLAUDE.md` project guide, skills, agent-friendly CLI commands, permissions)

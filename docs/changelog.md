@@ -74,6 +74,7 @@
 
 ##### 🐛 Bugs
 
+- 🐛 playground topic produce --validate fails on CP 8.x (schema-validator built with JDK 11) [#9466](https://github.com/vdesabou/kafka-docker-playground/issues/9466)
 - 🐛 get-topic-list hides topics whose name contains delete, checkpoint or connect- [#9461](https://github.com/vdesabou/kafka-docker-playground/issues/9461)
 - 🐛 cfk: default CP version hardcoded to 8.3.0 instead of the default tag of utils.sh [#9265](https://github.com/vdesabou/kafka-docker-playground/issues/9265)
 - 🐛 rbac-with-anonymous-sr: anonymous requests to Schema Registry get 401 Unauthorized [#9251](https://github.com/vdesabou/kafka-docker-playground/issues/9251)

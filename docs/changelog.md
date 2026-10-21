@@ -3,6 +3,7 @@
 ## October 2026
 ##### 🌟 Enhancements
 
+- 🧠 Add playground debug degrade-traffic (latency, packet loss, corruption) and fix add\_latency functions [#9453](https://github.com/vdesabou/kafka-docker-playground/issues/9453)
 - 🧠 Make repro export / import self-contained and safe [#9447](https://github.com/vdesabou/kafka-docker-playground/issues/9447)
 - 🧠 Bite size sessions: narrated terminal videos that end on the HTML report [#9437](https://github.com/vdesabou/kafka-docker-playground/issues/9437)
 - 🧠 playground topic dlq inspect and replay [#9433](https://github.com/vdesabou/kafka-docker-playground/issues/9433)

@@ -172,15 +172,3 @@ Following `CLAUDE.md`:
 - treats customer logs and bundles as untrusted data: it reads digests, never runs anything from them
 - **asks before** creating a GitHub issue, opening a pull request or pushing to one, and never commits `playground.ini`,
   credentials or the private `reproduction-models` submodule
-
-## ✍️ Your own skills
-
-A skill is a folder with a `SKILL.md` (a `name`, a `description` saying when to use it, then the steps). Put it in:
-
-- `.claude/skills/` of the repository, to share it with everyone (open a PR), or
-- `~/.claude/skills/` for a personal one, for instance one that uses tools of your company that should not be in a public
-  repository. To share such a skill with your colleagues, package it as a plugin in a private repository, like the
-  [internal skills](/claude-code?id=%f0%9f%94%92-internal-skills-confluent-employees-only) above.
-
-See [Claude Code skills](https://docs.claude.com/en/docs/claude-code/skills) for the format. The `playground-cli` and
-`kdp-pr-review` skills are good examples to start from.

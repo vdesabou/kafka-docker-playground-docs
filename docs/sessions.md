@@ -304,4 +304,4 @@ playground connector benchmark --mode steady --duration 5m          # a throughp
 
 - 🌐 <a href="reports/benchmark.html" target="_blank" rel="noopener">A benchmark report</a> (JDBC PostgreSQL sink 10.8.4 vs 10.9.9: click around)
 - 🧠 CLI reference: [playground connector benchmark](/playground%20connector%20benchmark), and
-  [⏱️ Benchmark a connector](/reusables?id=⏱️-benchmark-a-connector) in Reusables
+  [⏱️ Benchmark a connector](/reusables?id=⏱️-benchmark-a-connector) in the Reproduction toolkit

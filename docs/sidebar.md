@@ -7,7 +7,7 @@
 - [🎬 Bite size sessions](/sessions.md)
 - [📈 Benchmark](/reusables?id=%e2%8f%b1%ef%b8%8f-benchmark-a-connector)
 - [🎓 How it works](/how-it-works.md)
-- [👷‍♂️ Reusables](/reusables.md)
+- [🧰 Reproduction toolkit](/reusables.md)
 - [🧑‍🎓 Academy](/academy.md)
 - [💡 Tips & Tricks](/tips-and-tricks.md)
 - [🤖 Claude Code](/claude-code.md)

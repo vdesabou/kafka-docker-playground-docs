@@ -1,6 +1,6 @@
-# 👷‍♂️ How to build your own examples or reproduction models with reusables
+# 🧰 Reproduction toolkit
 
-Below is a collection of *how to* that you can re-use when you build your own examples or reproduction models.
+Everything you need once an example runs: bootstrap a reproduction model from it, share it, produce and consume data, test SMTs, debug the JVM and the network, break the network on purpose, and measure throughput.
 
 ## 🛠 Bootstrap reproduction model
 
@@ -884,7 +884,7 @@ When logs are not enough to understand a connectivity problem (connection resets
 Just use [CLI](/playground%20debug%20tcp-dump) `playground debug tcp-dump`. It installs `tcpdump` in the container if needed, captures the traffic for `--duration` seconds (default 30, all ports unless `--port` is set), copies the resulting `.pcap` file to the current directory and opens it with [Wireshark](https://www.wireshark.org/) if it is installed. Start it, then reproduce the issue while the capture is running.
 
 > [!NOTE]
-> On an encrypted listener (SSL, SASL_SSL) you will see the TCP connections and the TLS handshake, but not the content of the requests. To read HTTPS traffic in clear text, use [mitmproxy](/reusables?id=%f0%9f%95%b5%ef%b8%8f%e2%80%8d%e2%99%82%ef%b8%8f-see-tls-traffic-with-mitmproxy) instead.
+> On an encrypted listener (SSL, SASL_SSL) you will see the TCP connections and the TLS handshake, but not the content of the requests. To read HTTPS traffic in clear text, use [mitmproxy](/reusables?id=%f0%9f%95%b5%ef%b8%8f%e2%99%82%ef%b8%8f-see-tls-traffic-with-mitmproxy) instead.
 
 ```bash
 playground debug tcp-dump --container control-center --port 9021 --duration 60
@@ -1158,6 +1158,8 @@ playground debug block-traffic --destination google.com --action start
 playground debug block-traffic --container schema-registry --destination broker --port 9092 --action start
 playground debug block-traffic -c connect -c ksqldb-server --destination schema-registry --action stop
 ```
+
+<a id="🐌-add-latency-packet-loss-or-corruption"></a>
 
 ## 🐌 Degrade traffic - Add latency, packet loss or corruption
 

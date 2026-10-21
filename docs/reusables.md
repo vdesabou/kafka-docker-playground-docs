@@ -833,18 +833,6 @@ Then you can enable TRACE logs on `org.apache.http`:
 $ playground debug log-level set --package "org.apache.http" --level TRACE
 ```
 
-or legacy way:
-
-```bash
-curl --request PUT \
-  --url http://localhost:8083/admin/loggers/org.apache.http \
-  --header 'Accept: application/json' \
-  --header 'Content-Type: application/json' \
-  --data '{
- "level": "TRACE"
-}'
-```
-
 ### 🕵️‍♂️ See TLS traffic with mitmproxy
 
 [mitmproxy](https://github.com/mitmproxy/mitmproxy) 

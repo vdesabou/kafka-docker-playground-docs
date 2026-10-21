@@ -50,6 +50,7 @@ request matches it, and follows its steps. They are versioned with the repositor
 | [`kdp-new-example`](https://github.com/vdesabou/kafka-docker-playground/blob/master/.claude/skills/kdp-new-example/SKILL.md) | add a self-managed (`connect/`) or fully managed (`ccloud/fm-*`) connector example | "add an example for the fully managed Zendesk Source connector", `/kdp-new-example` |
 | [`kdp-pr-review`](https://github.com/vdesabou/kafka-docker-playground/blob/master/.claude/skills/kdp-pr-review/SKILL.md) | review a PR or your local diff against the repository rules | `/kdp-pr-review 9293`, "review my changes before I open a PR" |
 | [`playground-cli`](https://github.com/vdesabou/kafka-docker-playground/blob/master/.claude/skills/playground-cli/SKILL.md) | add or change a `playground` command, flag or help text | "add a `--sort-by-size` flag to playground topic list" |
+| [`kdp-benchmark`](https://github.com/vdesabou/kafka-docker-playground/blob/master/.claude/skills/kdp-benchmark/SKILL.md) | measure or compare the throughput of a connector, write a `benchmark-load.bash` load | "is version 10.8 of the JDBC sink slower than 10.7?", `/kdp-benchmark` |
 | [`kdp-xstream-report`](https://github.com/vdesabou/kafka-docker-playground/blob/master/.claude/skills/kdp-xstream-report/SKILL.md) | analyze an Oracle XStream CDC diagnostics report and write the summary | `/kdp-xstream-report <orclcdc_diag.html>`, "why is my XStream connector idle? here is the report" |
 
 ### 👾 kdp-new-example
@@ -93,6 +94,20 @@ needed), check `--help`, a success and an error path, and commit the source with
 ```text
 > add a --sort-by-size flag to playground topic list
 ```
+
+### 🏎️ kdp-benchmark
+
+Drives [`playground connector benchmark`](/playground%20connector%20benchmark): drain or steady mode, the load shapes
+(bulk, small transactions, update, delete), several plugin versions compared in one run, parallel sessions, fully managed
+connectors. When a source example has no load yet, or a reproduction model needs a table of its own, it writes the
+`benchmark-load.bash` with the shared helpers and its contract (stop at a batch boundary, print `BENCHMARK_BATCH`).
+
+```text
+> is version 10.8 of the JDBC sink slower than 10.7?
+> add a benchmark load to the orders table of my reproduction model
+```
+
+See [Benchmark a connector](/reusables?id=⏱️-benchmark-a-connector) for the command itself.
 
 ### 🅾️ kdp-xstream-report
 

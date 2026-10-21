@@ -196,8 +196,8 @@ visit https://docs.docker.com/get-docker to install
 ### Repro commands
 
 - [repro](playground%20repro) - 👷‍♂️ Reproduction model commands
-- [export](playground%20repro%20export) - 📤 Export as tgz file uncommitted reproduction models from the folder of current reproduction model
-- [import](playground%20repro%20import) - 📥 Import tgz file which was created with export command
+- [export](playground%20repro%20export) - 📤 Export reproduction models as a self-contained tgz bundle
+- [import](playground%20repro%20import) - 📥 Import a tgz bundle created by `playground repro export`
 - [bootstrap](playground%20repro%20bootstrap) - 🛠  Bootstrap reproduction model, just run `<playground repro bootstrap>` !
 
 ### Kafka commands

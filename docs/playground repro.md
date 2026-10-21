@@ -6,8 +6,8 @@ A reproduction model is an example written to demonstrate one specific
 problem, so that anyone can reproduce it with a single command.
 
 - **bootstrap**: scaffold one from an existing example, then edit it
-- **export**: package the models you have not committed, as a tgz
-- **import**: unpack a tgz someone sent you, and run it
+- **export**: package one or more models as a self-contained tgz bundle
+- **import**: unpack a bundle someone sent you, and run it
 
 👉 Always scaffold with bootstrap rather than copying a script by hand: it  
 creates the header, the docker compose override, the CLI cheat sheet and  
@@ -40,8 +40,8 @@ visit https://github.com/junegunn/fzf#installation to install
 
 ## Commands
 
-- [export](playground%20repro%20export) - 📤 Export as tgz file uncommitted reproduction models from the folder of current reproduction model
-- [import](playground%20repro%20import) - 📥 Import tgz file which was created with export command
+- [export](playground%20repro%20export) - 📤 Export reproduction models as a self-contained tgz bundle
+- [import](playground%20repro%20import) - 📥 Import a tgz bundle created by `playground repro export`
 - [bootstrap](playground%20repro%20bootstrap) - 🛠  Bootstrap reproduction model, just run `<playground repro bootstrap>` !
 
 

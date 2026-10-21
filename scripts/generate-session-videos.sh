@@ -38,8 +38,7 @@ fi
 #   page_height height of the headless browser window, at least the height of the report page
 #   docker      yes when the tape needs docker (your HOME is then used, for the docker config)
 #   setup       function run before the recording, off camera, in KDP_DIR
-# topic-produce is not in the list yet: its producer hangs now and then in the vhs terminal (see the tape)
-ALL_SESSIONS=(thread-dump gc-logs flight-recorder oracle-xstream-report cfk-bundle sourcecode dlq smt-test benchmark)
+ALL_SESSIONS=(thread-dump gc-logs flight-recorder oracle-xstream-report cfk-bundle sourcecode dlq smt-test topic-produce benchmark)
 session_settings() {
   report="" scroll="" page_height=4100 docker="" setup=""
   case "$1" in
@@ -126,9 +125,15 @@ EOF
 }
 
 # the JDBC PostgreSQL sink example (a broker and a schema registry), and the one JSON record "sent by a customer"
+# the topics are created off camera: in the vhs terminal, the screen sometimes stops updating while 'topic produce'
+# creates a topic
 setup_topic_produce() {
   setup_jdbc_postgresql_sink
   echo '{"order_id": 1, "customer": "acme", "amount": 9.99, "paid": true}' > /tmp/payment.json
+  for topic in leads payments trades big
+  do
+    playground topic create --topic $topic >> /tmp/kdp-session-setup.log 2>&1
+  done
 }
 
 # the first part of other/reprocess-dlq-messages-with-sink-connector/replay-dlq-messages-with-playground.sh: 10 avro

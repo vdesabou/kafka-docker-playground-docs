@@ -18,6 +18,7 @@ link to a live report so you can click around it yourself.
 | 🛩️ | [A slow connector: where does the task time go?](/sessions?id=🛩️-a-slow-connector-where-does-the-task-time-go) | nothing (`--sample`) |
 | 🅾️ | [Oracle XStream CDC lags or is idle: analyze the orclcdc_diag report](/sessions?id=🅾️-oracle-xstream-cdc-lags-or-is-idle) | nothing (`--sample`) |
 | ☸️ | [What is wrong in this CFK cluster? Analyze a support bundle](/sessions?id=☸️-what-is-wrong-in-this-cfk-cluster) | nothing (`--sample`) |
+| 📨 | [Produce realistic test data](/sessions?id=📨-produce-realistic-test-data) | a running environment |
 | 📈 | [Is version Y slower? Benchmark two versions](/sessions?id=📈-is-version-y-slower-benchmark-two-versions) | a running example |
 
 ## 🩺 A sink is RUNNING but writes nothing
@@ -249,6 +250,34 @@ playground analyze cfk-bundle --sample synthetic --output-dir /tmp/cfk-bundle
 
 - 🌐 <a href="reports/cfk-bundle.html" target="_blank" rel="noopener">The HTML report shown in the session</a> (the real report: click around)
 - 🧠 CLI reference: [playground analyze cfk-bundle](/playground%20analyze%20cfk-bundle)
+
+## 📨 Produce realistic test data
+
+You need records like the customer's: give a schema, get random records that match it, with the schema registered for you,
+on any environment (SASL, mTLS, Confluent Cloud).
+
+<video src="videos/session-topic-produce.mp4" poster="images/sessions/topic-produce.png" controls playsinline width="100%"></video>
+
+**In this session**
+
+- random records from an Avro, JSON Schema or Protobuf schema, with a key and headers, read back with `topic consume`
+- a schema derived from one JSON record (`--derive-value-schema-as`)
+- datagen schemas, tombstones, big records (`--record-size`)
+- `--forced-value`, `--nb-messages -1`, `--validate`, subject name strategies, compression
+
+**Commands**
+
+```bash
+playground topic produce -t leads --nb-messages 5 --key 'lead-%g' --headers 'source:web,version:2' < scripts/cli/predefined-schemas/avro/lead.avsc
+echo '{"order_id": 1, "customer": "acme", "amount": 9.99, "paid": true}' | playground topic produce -t payments --nb-messages 3 --derive-value-schema-as AVRO
+playground topic produce -t trades --nb-messages 3 < scripts/cli/predefined-schemas/datagen/stock_trades_schema.avro
+playground topic produce -t leads --tombstone --key 'lead-1'
+playground topic produce -t big --nb-messages 2 --record-size 1000000 < scripts/cli/predefined-schemas/avro/lead.avsc
+```
+
+**Links**
+
+- 🧠 CLI reference: [playground topic produce](/playground%20topic%20produce) (an example for each flag)
 
 ## 📈 Is version Y slower? Benchmark two versions
 

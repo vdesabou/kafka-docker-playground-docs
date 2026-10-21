@@ -1,6 +1,7 @@
 # 🎓 Bite size session: produce realistic test data to a topic (narrated with comments typed in the terminal)
-# ⚠️ not published yet: the console producer hangs now and then in the vhs terminal right after the topic is created
-# off camera (scripts/generate-session-videos.sh): the JDBC PostgreSQL sink example, and a JSON record in /tmp/payment.json
+# each command keeps its output in /tmp/out.log and shows its last 12 lines: the vhs terminal (ttyd flow control) stops
+# updating after a burst of a few dozen lines, the screen then never shows the end of the command
+# off camera (scripts/generate-session-videos.sh): the JDBC PostgreSQL sink example, its topics, and a JSON record in /tmp/payment.json
 Output docs/videos/session-topic-produce-terminal.mp4
 Source tapes/settings.tape
 Set Width 1400
@@ -19,7 +20,7 @@ Sleep 3s
 Type@15ms "# ① an Avro schema on stdin, 5 records, a key (%g = the record number) and headers"
 Enter
 Sleep 1s
-Type "playground topic produce -t leads --nb-messages 5 --key 'lead-%g' --headers 'source:web,version:2' < scripts/cli/predefined-schemas/avro/lead.avsc 2> /dev/null | grep -v WARNING | cut -c1-150"
+Type "playground topic produce -t leads --nb-messages 5 --key 'lead-%g' --headers 'source:web,version:2' < scripts/cli/predefined-schemas/avro/lead.avsc > /tmp/out.log 2>&1; grep -v WARNING /tmp/out.log | tail -n 12 | cut -c1-150"
 Sleep 800ms
 Enter
 Wait+Screen@3m /produced 5 records to topic leads/
@@ -28,7 +29,7 @@ Sleep 6s
 Type@15ms "# and read them back, with their key and headers"
 Enter
 Sleep 1s
-Type "playground topic consume -t leads --max-messages 2 2> /dev/null | tail -2 | cut -c1-150"
+Type "playground topic consume -t leads --max-messages 2 > /tmp/out.log 2>&1; grep Key: /tmp/out.log | cut -c1-150"
 Sleep 800ms
 Enter
 Wait+Screen@3m /Key:lead-2/
@@ -48,12 +49,15 @@ Type "cat /tmp/payment.json"
 Sleep 800ms
 Enter
 Sleep 2s
-Type "playground topic produce -t payments --nb-messages 3 --derive-value-schema-as AVRO < /tmp/payment.json 2> /dev/null | grep -v WARNING"
+Type "playground topic produce -t payments --nb-messages 3 --derive-value-schema-as AVRO < /tmp/payment.json > /tmp/out.log 2>&1; grep -v WARNING /tmp/out.log | tail -n 12 | cut -c1-150"
 Sleep 800ms
 Enter
 Wait+Screen@3m /produced 3 records to topic payments/
 Sleep 1s
 Sleep 8s
+Type@15ms "# the derived schema (amount double, customer string, order_id int, paid boolean) is registered as payments-value"
+Enter
+Sleep 4s
 Hide
 Type "clear"
 Enter
@@ -64,7 +68,7 @@ Show
 Type@15ms "# ③ datagen schemas give realistic values: stock trades, pizza orders, clickstream... (predefined-schemas/datagen)"
 Enter
 Sleep 1s
-Type "playground topic produce -t trades --nb-messages 3 < scripts/cli/predefined-schemas/datagen/stock_trades_schema.avro 2> /dev/null | grep -v WARNING"
+Type "playground topic produce -t trades --nb-messages 3 < scripts/cli/predefined-schemas/datagen/stock_trades_schema.avro > /tmp/out.log 2>&1; grep -v WARNING /tmp/out.log | tail -n 12 | cut -c1-150"
 Sleep 800ms
 Enter
 Wait+Screen@3m /produced 3 records to topic trades/
@@ -73,21 +77,20 @@ Sleep 6s
 Type@15ms "# ④ a tombstone (null value) for a key: deletes in a compacted topic, a JDBC sink with delete.enabled"
 Enter
 Sleep 1s
-Type "playground topic produce -t leads --tombstone --key 'lead-1' 2> /dev/null | grep -v WARNING"
+Type "playground topic produce -t leads --tombstone --key 'lead-1' > /tmp/out.log 2>&1; grep -v WARNING /tmp/out.log | tail -n 12 | cut -c1-150"
 Sleep 800ms
 Enter
 Wait+Screen@3m /produced 1 records to topic leads/
 Sleep 1s
 Sleep 4s
-Type@15ms "# ⑤ big records: --record-size 1000000 (1 MB each, to test max.request.size, message.max.bytes...), lines cut to fit the screen"
+Type@15ms "# ⑤ big records: --record-size 1000000 (1 MB each, to test max.request.size, message.max.bytes...)"
 Enter
 Sleep 1s
-Type "playground topic produce -t big --nb-messages 2 --record-size 1000000 < scripts/cli/predefined-schemas/avro/lead.avsc 2> /dev/null | grep -v WARNING | cut -c1-150"
+Type "playground topic produce -t big --nb-messages 2 --record-size 1000000 < scripts/cli/predefined-schemas/avro/lead.avsc > /tmp/out.log 2>&1; grep -E 'record size|records were generated|produc' /tmp/out.log | cut -c1-150"
 Sleep 800ms
 Enter
 Wait+Screen@3m /produced 2 records to topic big/
-Sleep 1s
-Sleep 4s
+Sleep 9s
 Hide
 Type "clear"
 Enter

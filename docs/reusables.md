@@ -1168,7 +1168,7 @@ playground debug block-traffic --container schema-registry --destination broker 
 playground debug block-traffic -c connect -c ksqldb-server --destination schema-registry --action stop
 ```
 
-## 🐌 Add latency, packet loss or corruption
+## 🐌 Degrade traffic - Add latency, packet loss or corruption
 
 Some issues only happen on a slow or unreliable network: request timeouts, retries, rebalances, producer or consumer errors. A reproduction model, or you on a running environment, can simulate them by making the traffic of a container slow or lossy, then putting it back to normal to check how the connector or client recovers.
 
@@ -1213,31 +1213,6 @@ After `start`, `stop` and `status`, the command measures the effect from the con
 > * `tc` only slows down the packets a container **sends**: with `--latency 100ms` from connect to the broker, the round trip between them grows by 100ms. To degrade the other direction as well, run the command on the destination too.
 > * A new `--action start` replaces what was applied before on the container: to combine effects, pass them all in one call.
 > * A restart of the container (e.g. `playground container restart`) removes the degradation.
-
-In a reproduction model, the functions of [`scripts/cli/src/lib/utils_function.sh`](https://github.com/vdesabou/kafka-docker-playground/blob/master/scripts/cli/src/lib/utils_function.sh) are shortcuts for the most common cases:
-
-| Function | Usage |
-|---|---|
-| `add_latency` | `add_latency <src_container> <dst_container or ip> <latency>`, e.g. `add_latency connect broker 100ms` |
-| `add_packet_loss` | `add_packet_loss <src_container> <dst_container or ip> <loss>`, e.g. `add_packet_loss connect broker 1%` |
-| `add_packet_corruption` | `add_packet_corruption <src_container> <dst_container or ip> <corruption>`, e.g. `add_packet_corruption connect broker 1%` |
-| `get_latency` | `get_latency <src_container> <dst_container>`: average ping time in ms |
-| `clear_traffic_control` | `clear_traffic_control <src_container>`: back to normal |
-
-*Example:*
-
-```bash
-latency=$(get_latency connect broker)
-log "Latency from connect to broker BEFORE traffic control: $latency ms"
-
-add_latency connect broker 100ms
-
-latency=$(get_latency connect broker)
-log "Latency from connect to broker AFTER traffic control: $latency ms"
-
-log "Clear traffic control"
-clear_traffic_control connect
-```
 
 > [!TIP]
 > A complete example is available [here](https://github.com/vdesabou/kafka-docker-playground/blob/master/other/monitoring-sink-latency/start.sh).

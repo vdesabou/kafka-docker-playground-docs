@@ -23,6 +23,7 @@ link to a live report so you can click around it yourself.
 | 📥 | [Read a topic: the last records, one offset, from a time, as JSON](/sessions?id=📥-read-a-topic) | a running environment |
 | 📈 | [Is version Y slower? Benchmark two versions](/sessions?id=📈-is-version-y-slower-benchmark-two-versions) | a running example |
 | 🚚 | [Move a self-managed connector to fully managed](/sessions?id=🚚-move-a-self-managed-connector-to-fully-managed) | Confluent Cloud, AWS credentials |
+| 🏗️ | [Deploy a fully managed connector with Terraform](/sessions?id=🏗️-deploy-a-fully-managed-connector-with-terraform) | Confluent Cloud, terraform |
 
 ## 🩺 A sink is RUNNING but writes nothing
 
@@ -430,3 +431,39 @@ playground connector connect-migration-utility migrate --migration-mode stop_cre
 - 🧠 CLI reference: [playground connector connect-migration-utility discovery](/playground%20connector%20connect-migration-utility%20discovery),
   [playground connector connect-migration-utility migrate](/playground%20connector%20connect-migration-utility%20migrate)
 - 📚 The utility, its modes and the supported connectors: [confluentinc/connect-migration-utility](https://github.com/confluentinc/connect-migration-utility)
+
+## 🏗️ Deploy a fully managed connector with Terraform
+
+The customer manages their fully managed connectors with Terraform: deploy the connector of a playground example the same
+way, from the same JSON config, and see the HCL it becomes. Running it again updates the connector in place, and deleting it
+runs `terraform destroy`.
+
+<video src="videos/session-terraform.mp4" poster="images/sessions/terraform.png" controls playsinline width="100%"></video>
+
+**In this session**
+
+- `--terraform`: the JSON config of the Datagen example becomes HCL, then `terraform init`, `plan` and `apply`
+- the secrets in `config_sensitive`, masked in the output
+- the folder of the connector, with its `connector.tf` and its state
+- a changed config, the same command: the plan shows `~ "max.interval" = "10000" -> "1000"`, the connector is updated in place
+- `connector delete` runs `terraform destroy`
+
+**Commands**
+
+```bash
+envsubst < /tmp/datagen.json | playground connector create-or-update -c DatagenSource_playground --terraform --wait
+terraform -chdir=$(ls -d .terraform-playground/DatagenSource_playground-*) state list
+sed -i '' 's/"10000"/"1000"/' /tmp/datagen.json
+envsubst < /tmp/datagen.json | playground connector create-or-update -c DatagenSource_playground --terraform
+playground topic consume -t datagen_pageviews --last 3
+playground connector delete --connector DatagenSource_playground
+```
+
+Recorded on the example `ccloud/fm-datagen-source/fully-managed-datagen-source.sh`: its config in `/tmp/datagen.json`, with
+`"$CLOUD_KEY"` / `"$CLOUD_SECRET"` placeholders replaced by `envsubst`.
+
+**Links**
+
+- 📖 [Fully managed connectors with Terraform](/reusables?id=🏗️-fully-managed-connectors-with-terraform)
+- 🧠 CLI reference: [playground connector create-or-update](/playground%20connector%20create-or-update),
+  [playground connector delete](/playground%20connector%20delete)

@@ -1208,6 +1208,35 @@ export PG_CCLOUD_SERVICE_ACCOUNT=true
 export PG_CCLOUD_SERVICE_ACCOUNT_ACL_EXCLUDE="READ Group:.*-schemahistory"
 ```
 
+## 🏗️ Fully managed connectors with Terraform
+
+Customers often manage their fully managed connectors with Terraform. Add `--terraform` to [playground connector create-or-update](/playground%20connector%20create-or-update) to deploy the connector of any fully managed or custom connector example that way. The JSON config stays as is: it is converted to HCL for the [confluentinc/confluent](https://registry.terraform.io/providers/confluentinc/confluent/latest/docs/resources/confluent_connector) provider, then `terraform init`, `plan` and `apply` run.
+
+```bash
+playground connector create-or-update -c DatagenSource_$USER --terraform --wait << EOF
+{
+  "connector.class": "DatagenSource",
+  "kafka.auth.mode": "KAFKA_API_KEY",
+  "kafka.api.key": "$CLOUD_KEY",
+  "kafka.api.secret": "$CLOUD_SECRET",
+  "kafka.topic": "datagen_pageviews",
+  "output.data.format": "JSON",
+  "quickstart": "PAGEVIEWS",
+  "tasks.max": "1"
+}
+EOF
+```
+
+* The keys that look like secrets (`*.secret`, `*.password`, `*.key`, `sasl.jaas.config`...) go to `config_sensitive`. Their values are masked in the output, and Terraform shows `(sensitive value)`.
+* The folder of the connector (`.terraform-playground/<connector>-*`, with `connector.tf` and the state) is kept. Running the command again updates the connector in place (the plan shows what changes, for example `~ "max.interval" = "10000" -> "1000"`). A connector created without `--terraform` is imported into the state the first time.
+* [playground connector delete](/playground%20connector%20delete) runs `terraform destroy` for a connector deployed with Terraform.
+* `connector.tf` is plain HCL: a starting point to reproduce a customer's Terraform code.
+
+> [!NOTE]
+> It needs [terraform](https://developer.hashicorp.com/terraform/install) (`brew install hashicorp/tap/terraform`) and a Cloud API key (`CONFLUENT_CLOUD_API_KEY`, `CONFLUENT_CLOUD_API_SECRET`). `--level`, `--offsets` and `--initial-state` are not supported with `--terraform`.
+
+🎬 Bite size session: [Deploy a fully managed connector with Terraform](/sessions?id=🏗️-deploy-a-fully-managed-connector-with-terraform)
+
 ## 🚫 Blocking traffic
 
 To reproduce what happens when a component cannot reach another one (a broker, Schema Registry, a database or an external API going down, a firewall dropping packets), a reproduction model can block the traffic between containers or to an external host, then unblock it to check how the connector or client recovers.

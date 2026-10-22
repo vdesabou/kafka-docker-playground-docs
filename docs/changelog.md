@@ -3,6 +3,7 @@
 ## October 2026
 ##### 🌟 Enhancements
 
+- 🧠 playground topic consume: add --last, --from-timestamp, --partition/--offset, --json, --count, --no-decode, --print-schema [#9479](https://github.com/vdesabou/kafka-docker-playground/issues/9479)
 - 🐛 playground topic produce: fix keys, headers, batches, --validate and playground stop, add --throughput and --value-format [#9474](https://github.com/vdesabou/kafka-docker-playground/issues/9474)
 - 🧠 Add playground debug degrade-traffic (latency, packet loss, corruption) and fix add\_latency functions [#9453](https://github.com/vdesabou/kafka-docker-playground/issues/9453)
 - 🧠 Make repro export / import self-contained and safe [#9447](https://github.com/vdesabou/kafka-docker-playground/issues/9447)

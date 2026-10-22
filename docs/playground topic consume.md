@@ -81,10 +81,6 @@ Tail on logs.
 |-----------------|-------------
 | Conflicts With: | `--min-expected-messages`, `--max-messages`, `--open`
 
-#### `--plot-latencies-timestamp-field TIMESTAMP`
-
-🗳 Timestamp field name that represents when record was created in source system
-
 #### `--key-subject KEY-SUBJECT`
 
 📛 Subject for key in schema-registry to use (useful when data was produced with `--key-subject-name-strategy` other than TopicNameStrategy)
@@ -177,7 +173,7 @@ Example: playground topic consume `--topic` orders `--json` | jq -r '.value.id'
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Conflicts With: | `--open`, `--count`, `--plot-latencies-timestamp-field`, `--tail`
+| Conflicts With: | `--open`, `--count`, `--tail`
 
 #### `--count`
 
@@ -189,7 +185,7 @@ compacted records and records that cannot be deserialized do not count)
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Conflicts With: | `--tail`, `--open`, `--json`, `--plot-latencies-timestamp-field`
+| Conflicts With: | `--tail`, `--open`, `--json`
 
 #### `--no-decode`
 

@@ -97,8 +97,8 @@
         tabHeadings: true       // default
       },
       plugins: [
-        // "Edit on github" link, except on pages generated from https://github.com/vdesabou/kafka-docker-playground
-        // (CLI reference, content, introduction, changelog), where edits would be overwritten
+        // "Edit on github" link to the source of the page in docs/ of https://github.com/vdesabou/kafka-docker-playground,
+        // except on generated pages (CLI reference, content, introduction, changelog), which have no source file there
         function (hook, vm) {
           var generated = /^(playground .*|index|cli|content|introduction|badges|changelog)\.md$/;
           hook.afterEach(function (html) {
@@ -106,7 +106,7 @@
             if (!file || generated.test(file)) {
               return html;
             }
-            var url = 'https://github.com/vdesabou/kafka-docker-playground-docs/edit/main/docs/' + encodeURI(file);
+            var url = 'https://github.com/vdesabou/kafka-docker-playground/edit/master/docs/' + encodeURI(file);
             return '<div style="overflow: auto"><p style="float: right"><a style="text-decoration: underline" target="_blank" rel="noopener" href="' + url + '">Edit on github</a></p></div>' + html;
           });
         },

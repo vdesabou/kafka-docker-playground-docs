@@ -15,6 +15,11 @@ instead of failing silently later.
 🎓 Tip: add `--validate` to have the config checked by the plugin before  
 it is deployed, which reports every invalid property at once.
 
+An update shows the keys added, removed and changed compared to the  
+running config (secrets masked). The config can also be given in the  
+REST API format ({"name": ..., "config": {...}}, as returned by  
+GET /connectors/`<name>`), or as the path of a json file.
+
 ## Usage
 
 ```bash
@@ -43,7 +48,7 @@ playground connector create-or-update [JSON] [OPTIONS]
 
 #### `JSON`
 
-json (reads from stdin if empty)
+json, or the path of a json file (@file.json works too); reads from stdin if empty
 
 | Attributes      | &nbsp;
 |-----------------|-------------
@@ -75,7 +80,7 @@ json (reads from stdin if empty)
 
 #### `--package, -p PACKAGE`
 
-Package name
+Package name (with `--level`: the log level of that package instead of the connector's)
 
 #### `--wait-for-zero-lag`
 
@@ -113,6 +118,8 @@ This flag allows to skip this automatic configuration (only useful to reproduce 
 
 🪵 Create connector with specific status (https://cwiki.apache.org/confluence/display/KAFKA/KIP-980%3A+Allow+creating+connectors+in+a+stopped+state)
 
+If the connector already exists, its config is updated, then it is paused, stopped or resumed.
+
 Only available if CP \> 7.7
 
 ⚠️ not available for ccloud connectors
@@ -121,11 +128,26 @@ Only available if CP \> 7.7
 |-----------------|-------------
 | Allowed Values: | `RUNNING`, `PAUSED`, `STOPPED`
 
+#### `--dry-run`
+
+🌵 Print the final config (with the automatic configuration added for the environment, the CFK rewrites)  
+and the request that would be sent, without deploying anything
+
+With `--ccloud-service-account`, the service account and its ACLs are not created.
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Conflicts With: | `--wait`, `--wait-for-zero-lag`, `--terraform`, `--level`
+
 #### `--terraform`
 
 🏗️ Deploy connector using Terraform instead of REST API
 
 Dynamically converts JSON connector config to Terraform HCL and deploys using terraform apply
+
+The values of config_sensitive are masked in the output. The Terraform folder of a connector  
+(.terraform-playground/`<connector>`-\*) is reused: running the command again updates the connector, and a  
+connector created with the REST API is imported first. playground connector delete runs terraform destroy.
 
 ⚠️ Only available for Confluent Cloud connectors
 

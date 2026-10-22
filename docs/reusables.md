@@ -1827,7 +1827,7 @@ A benchmark is only meaningful when the connector is what limits the throughput.
 
 | Warning | Meaning |
 | --- | --- |
-| the connector kept up with the load | steady mode: the load generated about as many records as the connector processed (or the consumer lag of a sink stayed below one sample of records). This is the speed of the load: use `--mode drain` |
+| the connector kept up with the load | steady mode: the load generated about as many records as the connector processed (or the consumer lag of a sink stayed below one sample of records). This is the speed of the load: use `--mode drain`, or compare the end-to-end latency of a source (below) |
 | the connector or its tasks were not RUNNING at N status checks | paused, restarting or rebalancing during the measure |
 | the connect worker is CPU bound / spent X% of the time in gc pauses | ≥ 90% of the CPUs available to the worker, or > 10% of the time in GC pauses: the result reflects the docker host or the heap size (`KAFKA_HEAP_OPTS`) |
 | the records are not spread across the tasks | an idle task, or one task doing most of the work: `tasks.max` greater than the number of partitions, key skew, or a connector that does not parallelize this load |
@@ -1837,6 +1837,29 @@ A benchmark is only meaningful when the connector is what limits the throughput.
 At the end, it prints a summary (throughput with p50 / p95 / min per sample, put or poll batch time, running ratio, connect CPU), writes the samples (csv) and the result (json, also with `--json`) to `--output-dir`, and opens an HTML report with the charts. Each result is appended to a `benchmark-history` file, and compared with the previous benchmark of the same connector in the same example, mode and shape.
 
 ![playground connector benchmark report](./images/report-benchmark.jpg)
+
+#### ⏱️ End-to-end latency of a source
+
+With `--mode steady`, the benchmark of a source connector also measures the end-to-end latency of its records: the Kafka record timestamp minus the time of the change in the source system. After the measure, it reads the records written to the topics of the connector during it (all of them up to 100000, a sample spread over the measure otherwise). It gives p50 / p95 / p99 / max in the summary and the result json. The report shows the latency over time, its distribution and the slowest records, and adds a latency column to the comparable runs and to the `--connector-tag` comparisons. When the connector simply keeps up with the load, this is the number to compare.
+
+```bash
+# JDBC source: kafka timestamp - create_ts, the column the load fills with the time of the insert
+playground connector benchmark --mode steady --duration 2m --nb-records 1000 --shape small-txn
+
+# another field of the records: a dotted path for a nested one
+playground connector benchmark --mode steady --duration 2m --latency-field after.create_ts
+```
+
+```
+   end-to-end latency     p50 2529.5 ms  p95 4761.0 ms  p99 4916.0 ms  max 4943.0 ms   (create_ts, 33200 records)
+```
+
+The field is `--latency-field`, otherwise the field the `benchmark-load.bash` of the example writes the time of the change to (`create_ts` of the `CUSTOMERS` table, `update_ts` with `--shape update`; a load of your own prints `BENCHMARK_LATENCY_FIELD=<field>`), otherwise `source.ts_ms` of a CDC envelope (commit time in the database), or `wallTime` / `clusterTime` of a MongoDB change event. `--no-latency` disables it.
+
+> [!TIP]
+> * Use `--shape small-txn`: with `--shape bulk`, a default `CURRENT_TIMESTAMP` is the start of the transaction of the whole batch.
+> * The summary warns about negative latencies (the clocks of the source system and of connect are not in sync), a timestamp with a precision of one second (a MySQL `TIMESTAMP` without milliseconds), and latencies that are all 0 ms (the connector sets the record timestamp from the source).
+> * It is not measured in a drain: the latency of a record is then the time it waited in the backlog.
 
 #### Insert, update, then delete the same rows
 

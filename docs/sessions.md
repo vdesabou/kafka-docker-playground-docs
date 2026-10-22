@@ -20,6 +20,7 @@ link to a live report so you can click around it yourself.
 | 🅾️ | [Oracle XStream CDC lags or is idle: analyze the orclcdc_diag report](/sessions?id=🅾️-oracle-xstream-cdc-lags-or-is-idle) | nothing (`--sample`) |
 | ☸️ | [What is wrong in this CFK cluster? Analyze a support bundle](/sessions?id=☸️-what-is-wrong-in-this-cfk-cluster) | nothing (`--sample`) |
 | 📨 | [Produce realistic test data](/sessions?id=📨-produce-realistic-test-data) | a running environment |
+| 📥 | [Read a topic: the last records, one offset, from a time, as JSON](/sessions?id=📥-read-a-topic) | a running environment |
 | 📈 | [Is version Y slower? Benchmark two versions](/sessions?id=📈-is-version-y-slower-benchmark-two-versions) | a running example |
 | 🚚 | [Move a self-managed connector to fully managed](/sessions?id=🚚-move-a-self-managed-connector-to-fully-managed) | Confluent Cloud, AWS credentials |
 
@@ -302,7 +303,8 @@ on any environment (SASL, mTLS, Confluent Cloud).
 - random records from an Avro, JSON Schema or Protobuf schema, with a key and headers, read back with `topic consume`
 - a schema derived from one JSON record (`--derive-value-schema-as`)
 - datagen schemas, tombstones, big records (`--record-size`)
-- `--forced-value`, `--nb-messages -1`, `--validate`, subject name strategies, compression
+- a steady flow until ctrl-c (`--nb-messages -1 --throughput 20`): the progress every 10 seconds, and the exact number of records sent
+- `--forced-value`, `--value-format raw`, `--validate`, subject name strategies, compression
 
 **Commands**
 
@@ -312,11 +314,46 @@ echo '{"order_id": 1, "customer": "acme", "amount": 9.99, "paid": true}' | playg
 playground topic produce -t trades --nb-messages 3 < scripts/cli/predefined-schemas/datagen/stock_trades_schema.avro
 playground topic produce -t leads --tombstone --key 'lead-1'
 playground topic produce -t big --nb-messages 2 --record-size 1000000 < scripts/cli/predefined-schemas/avro/lead.avsc
+playground topic produce -t ticks --nb-messages -1 --throughput 20 --value '{"tick": %g}'     # ctrl-c to stop
+playground topic consume -t ticks --count
 ```
 
 **Links**
 
 - 🧠 CLI reference: [playground topic produce](/playground%20topic%20produce) (an example for each flag)
+
+## 📥 Read a topic
+
+`playground topic consume` finds the format on its own (Avro, Protobuf, JSON Schema, plain) and reads from the beginning.
+On a big topic the first 100 records are rarely the ones you want: show the last ones, the record a connector is stuck on,
+what arrived during an incident, or the records as JSON for `jq`. And when an example checks that data flowed, records
+that cannot be deserialized are caught.
+
+<video src="videos/session-topic-consume.mp4" poster="images/sessions/topic-consume.png" controls playsinline width="100%"></video>
+
+**In this session**
+
+- `--last N`: the most recent records, sorted by timestamp across the partitions
+- `--partition 1 --offset 42`: the record a connector is stuck on
+- `--from-timestamp 20s` (or a date, an epoch, `10m`, `2h`): what arrived from that time
+- `--json`: one object per record, only the records on stdout, piped to `jq`
+- `--count` (with `--grep`): records, not offsets
+- `--min-expected-messages`: 5 offsets, but 2 records that are not Avro, so the check fails and says why
+
+**Commands**
+
+```bash
+playground topic consume -t orders --last 3
+playground topic consume -t orders --partition 1 --offset 42 --max-messages 1
+playground topic consume -t orders --from-timestamp 20s                          # or "2026-10-22 10:30", 1792660170522, 10m, 2h
+playground topic consume -t orders --last 3 --json | jq -c '{key, partition, offset, quantity: .value.quantity}'
+playground topic consume -t orders --count --grep order-7
+playground topic consume -t payments --min-expected-messages 5
+```
+
+**Links**
+
+- 🧠 CLI reference: [playground topic consume](/playground%20topic%20consume) (an example for each flag)
 
 ## 📈 Is version Y slower? Benchmark two versions
 

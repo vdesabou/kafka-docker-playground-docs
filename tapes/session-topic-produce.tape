@@ -97,11 +97,37 @@ Enter
 Sleep 300ms
 Show
 
-# ── 5. more ─────────────────────────────────────────────────────────────────
+# ── 5. a steady flow ────────────────────────────────────────────────────────
+Type@15ms "# ⑥ a steady flow until ctrl-c: --nb-messages -1 --throughput 20 (records per second), the progress every 10 seconds"
+Enter
+Sleep 1s
+Type `playground topic produce -t ticks --nb-messages -1 --throughput 20 --value '{"tick": %g}' 2>&1 | (trap '' INT; grep --line-buffered -E 'throughput|sent so far|produced' | cut -c1-200)`
+Sleep 800ms
+Enter
+Wait+Screen@3m /40[0-9] records sent so far/
+Sleep 2s
+Ctrl+C
+Wait+Screen@1m /interrupted with ctrl-c/
+Sleep 4s
+Type@15ms "# after ctrl-c the count is exact: the records really in the topic"
+Enter
+Sleep 1s
+Type `echo "records in the topic: $(playground topic consume -t ticks --count 2> /dev/null)"`
+Sleep 800ms
+Enter
+Wait+Screen@2m /records in the topic: [0-9]+/
+Sleep 6s
+Hide
+Type "clear"
+Enter
+Sleep 300ms
+Show
+
+# ── 6. more ─────────────────────────────────────────────────────────────────
 Type@15ms "# 💡 --forced-value '{...}'  your exact payload (%g = the record number), --generate-only to print records without sending"
 Enter
 Sleep 2s
-Type@15ms "# 💡 --nb-messages -1  produce without end (load test), --sleep-time-between-batch to pace it"
+Type@15ms `# 💡 --value-format raw  sends your payload as is when the format detection gets it wrong ("_meta", proto3...)`
 Enter
 Sleep 2s
 Type@15ms "# 💡 --validate  checks the schema against the converter of the sink connector"

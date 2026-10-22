@@ -356,6 +356,25 @@ playground topic produce -t a-topic --tombstone --key "mykey1"
 playground topic produce -t a-topic --nb-messages 200000 --record-size 1000
 ```
 
+#### **Steady flow**
+
+A record every 100 ms until ctrl-c, for example to watch a connector catch up. The progress is logged every 10 seconds, and
+after ctrl-c the number of records sent is exact:
+
+```bash
+playground topic produce -t a-topic --nb-messages -1 --throughput 10 --value '{"id": %g}'
+```
+
+#### **Force the format**
+
+The format of `--value` (and `--key`) is detected from its content: a raw payload that contains `"_meta"`, `proto3`,
+`"type": "object"`... would not be sent as is. Set it with `--value-format` (`avro`, `json-schema`, `protobuf`, `json`,
+`sql`, `datagen`, `raw`):
+
+```bash
+playground topic produce -t a-topic --value-format raw --value '{"_meta": "not a datagen schema", "id": %g}'
+```
+
 <!-- tabs:end -->
 
 > [!NOTE]
@@ -363,7 +382,7 @@ playground topic produce -t a-topic --nb-messages 200000 --record-size 1000
 
 ## 👉 Consuming data
 
-Use [playground topic consume](/playground%20topic%20consume): it reads the topic from the beginning and detects the format (avro, protobuf, json schema or plain) on its own. Every record is displayed with its timestamp, partition, offset, headers, key and schema ID.
+Use [playground topic consume](/playground%20topic%20consume): it reads the topic from the beginning and detects the format (avro, protobuf, json schema or plain) on its own. Every record is displayed with its timestamp, partition, offset, headers, key and schema ID (add `--print-schema` to also print the registered schemas). The consumer stops when no record arrives for 10 seconds (30 on Confluent Cloud).
 
 <!-- tabs:start -->
 
@@ -381,10 +400,52 @@ playground topic consume
 
 #### **Assert content**
 
-Wait up to `--timeout` seconds for at least 10 records containing `value1`, and fail otherwise (this is how examples verify that data flowed):
+Wait up to `--timeout` seconds for at least 10 records, consume them, and fail if fewer could be consumed (records that cannot be deserialized are reported and do not count) or if none contains `value1`. This is how examples verify that data flowed:
 
 ```bash
 playground topic consume --topic a-topic --min-expected-messages 10 --grep "value1" --timeout 60
+```
+
+#### **Last records**
+
+The most recent records, sorted by timestamp across partitions (by default, the first `--max-messages` 100 are displayed):
+
+```bash
+playground topic consume --topic a-topic --last 10
+```
+
+#### **From a time**
+
+The records from a date (local time, add `Z` for UTC), an epoch, or a duration ago (`30s`, `10m`, `2h`, `1d`):
+
+```bash
+playground topic consume --topic a-topic --from-timestamp 10m
+playground topic consume --topic a-topic --from-timestamp "2026-10-22 10:30"
+```
+
+#### **One offset**
+
+The record a connector is stuck on (`--offset` is a number, `earliest` or `latest`, and needs `--partition`):
+
+```bash
+playground topic consume --topic a-topic --partition 0 --offset 1234 --max-messages 1
+```
+
+#### **JSON**
+
+One json object per record (key and value embedded as json when they are valid json), only the records on stdout:
+
+```bash
+playground topic consume --topic a-topic --json | jq -r '.value.u_name'
+```
+
+#### **Count**
+
+The number of records (not offsets: transaction markers, compacted records and records that cannot be deserialized do not count), alone on stdout:
+
+```bash
+playground topic consume --topic a-topic --count
+playground topic consume --topic a-topic --count --grep "scissors"
 ```
 
 #### **Tail**

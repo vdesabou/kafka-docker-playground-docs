@@ -21,6 +21,7 @@ link to a live report so you can click around it yourself.
 | ☸️ | [What is wrong in this CFK cluster? Analyze a support bundle](/sessions?id=☸️-what-is-wrong-in-this-cfk-cluster) | nothing (`--sample`) |
 | 📨 | [Produce realistic test data](/sessions?id=📨-produce-realistic-test-data) | a running environment |
 | 📈 | [Is version Y slower? Benchmark two versions](/sessions?id=📈-is-version-y-slower-benchmark-two-versions) | a running example |
+| 🚚 | [Move a self-managed connector to fully managed](/sessions?id=🚚-move-a-self-managed-connector-to-fully-managed) | Confluent Cloud, AWS credentials |
 
 ## 🩺 A sink is RUNNING but writes nothing
 
@@ -343,3 +344,52 @@ playground connector benchmark --mode steady --duration 5m          # a throughp
 - 🌐 <a href="reports/benchmark.html" target="_blank" rel="noopener">A benchmark report</a> (JDBC PostgreSQL sink 10.8.4 vs 10.9.9: click around)
 - 🧠 CLI reference: [playground connector benchmark](/playground%20connector%20benchmark), and
   [⏱️ Benchmark a connector](/reusables?id=⏱️-benchmark-a-connector) in the Reproduction toolkit
+
+## 🚚 Move a self-managed connector to fully managed
+
+A customer wants to move a self-managed connector to Confluent Cloud: what does its configuration become, and will the move
+lose or replay data? Rehearse it with the [Connector Migration Utility](https://github.com/confluentinc/connect-migration-utility):
+a local Connect worker connected to Confluent Cloud runs the self-managed connector, `discovery` writes its fully managed
+configuration, `migrate` creates the fully managed connector from the offsets of the self-managed one.
+
+<video src="videos/session-connect-migration.mp4" poster="images/sessions/connect-migration.png" controls playsinline width="100%"></video>
+
+**In this session**
+
+- the self-managed AWS CloudWatch Metrics sink, RUNNING on a local worker connected to Confluent Cloud
+- `discovery`: the summary (what can move, what cannot and why) and the generated fully managed configuration
+  (`AwsCloudWatchMetricsSinkConnector` becomes `CloudWatchMetricsSink`, the Avro converter becomes `input.data.format`,
+  secrets redacted)
+- the three migration modes, and `stop_create_latest_offset`: no loss, no duplicates
+- `migrate`: the secrets passed again with `--sensitive-property`, the fully managed connector RUNNING, the self-managed one
+  STOPPED
+
+**Commands**
+
+```bash
+playground run -f ccloud/connect-migration-utility/cloudwatch-metrics-sink.sh   # the example (Confluent Cloud + AWS credentials)
+
+playground connector connect-migration-utility discovery
+playground connector connect-migration-utility migrate --migration-mode stop_create_latest_offset \
+  --sensitive-property 'aws.access.key.id=$AWS_ACCESS_KEY_ID' --sensitive-property 'aws.secret.access.key=$AWS_SECRET_ACCESS_KEY'
+# --no-open: do not open the generated configs in the editor, nor the connector in the browser (scripts, agents)
+```
+
+| `--migration-mode` | Starts from | Self-managed connector | Trade-off |
+| --- | --- | --- | --- |
+| `create` (default) | no offsets | keeps running | replays or skips data, depending on the connector |
+| `create_latest_offset` | its latest offsets | keeps running | no downtime, some duplicates while both run |
+| `stop_create_latest_offset` | its latest offsets | stopped first | no loss, no duplicates |
+
+> [!WARNING]
+> Pass the secrets with single quotes (`'aws.secret.access.key=$AWS_SECRET_ACCESS_KEY'`): `migrate` expands the variable
+> itself, so the value does not show in your terminal or shell history. After `migrate`, the configurations in
+> `connect-migration-utility-discovery-output/` hold the real secrets: delete that folder when you are done. The fully
+> managed connector is billed: delete it with `playground connector delete` once the rehearsal is over.
+
+**Links**
+
+- 📁 The example: [ccloud/connect-migration-utility](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/connect-migration-utility)
+- 🧠 CLI reference: [playground connector connect-migration-utility discovery](/playground%20connector%20connect-migration-utility%20discovery),
+  [playground connector connect-migration-utility migrate](/playground%20connector%20connect-migration-utility%20migrate)
+- 📚 The utility, its modes and the supported connectors: [confluentinc/connect-migration-utility](https://github.com/confluentinc/connect-migration-utility)

@@ -6,11 +6,14 @@
 #        (default: all the sessions)
 #
 # requirements: vhs, ffmpeg, Google Chrome (headless screenshots of the HTML report), docker for the sessions that
-# run an example (cfk-bundle, remote-debugging, dlq, smt-test, topic-produce, benchmark)
+# run an example (cfk-bundle, remote-debugging, dlq, smt-test, topic-produce, benchmark, connect-migration)
+# connect-migration also needs Confluent Cloud (the [ccloud] details in the playground.ini of KDP_DIR, from a ccloud
+# example run once in that clone, and the Cloud API key of the secrets store) and AWS credentials (~/.aws): it creates a
+# fully managed connector, deleted after the recording
 # Same isolation as scripts/generate-cli-videos.sh (neutral clone path, env -i, empty HOME except for the docker
 # sessions, no-op open), but it does not change your playground config.
 #
-# ⚠️ the remote-debugging, dlq, smt-test, topic-produce and benchmark sessions start an example off camera: it stops the environment
+# ⚠️ the remote-debugging, dlq, smt-test, topic-produce, benchmark and connect-migration sessions start an example off camera: it stops the environment
 # that is running in that clone
 set -e
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
@@ -38,11 +41,13 @@ fi
 #   page_height height of the headless browser window, at least the height of the report page
 #   docker      yes when the tape needs docker (your HOME is then used, for the docker config)
 #   setup       function run before the recording, off camera, in KDP_DIR
+#   teardown    function run after the recording, off camera, in KDP_DIR, also when the recording fails (resources
+#               that cost money)
 #   stills      images shown after the terminal part instead of a report (screenshots of an IDE...):
 #               "<image>:<seconds>" items, each fitted to the frame on the background color of the terminal
-ALL_SESSIONS=(thread-dump gc-logs flight-recorder oracle-xstream-report cfk-bundle sourcecode remote-debugging dlq smt-test topic-produce benchmark)
+ALL_SESSIONS=(thread-dump gc-logs flight-recorder oracle-xstream-report cfk-bundle sourcecode remote-debugging dlq smt-test topic-produce benchmark connect-migration)
 session_settings() {
-  report="" scroll="" page_height=4100 docker="" setup="" stills=""
+  report="" scroll="" page_height=4100 docker="" setup="" teardown="" stills=""
   case "$1" in
     thread-dump)
       report="/tmp/thread-dump/*-thread-report.html"
@@ -93,6 +98,11 @@ session_settings() {
       page_height=6000
       docker=yes
       setup=setup_jdbc_postgresql_sink
+      ;;
+    connect-migration)
+      docker=yes
+      setup=setup_connect_migration
+      teardown=teardown_connect_migration
       ;;
     *)
       echo "❌ unknown session $1 (known: ${ALL_SESSIONS[*]})"
@@ -177,6 +187,63 @@ EOF
   )
 }
 
+# the first half of ccloud/connect-migration-utility/cloudwatch-metrics-sink.sh (up to the discovery): a local worker
+# connected to Confluent Cloud with the self-managed AWS CloudWatch Metrics sink, renamed OnPremCloudWatchMetricsSink_playground
+# so that no login shows (USER itself cannot change: the connector install runs 'id -u $USER'). The full example would
+# already migrate the connector, and it ends with a confirmation prompt.
+# The tape runs under env -i: it gets what it needs from a private file it sources off camera (removed by the teardown): the
+# [ccloud] details, exported so that discovery and migrate do not ask "Use previously used ccloud cluster", and the AWS
+# keys for migrate --sensitive-property
+connect_migration_env=/tmp/kdp-session-connect-migration.env
+setup_connect_migration() {
+  if [ -z "$(playground state get ccloud.CLUSTER_NAME 2> /dev/null)" ]
+  then
+    echo "❌ no [ccloud] details in $KDP_DIR/playground.ini: run a ccloud example once in that clone" | tee /tmp/kdp-session-setup.log
+    return 1
+  fi
+  local example=ccloud/connect-migration-utility
+  sed -e '/^playground connector connect-migration-utility discovery/,$d' \
+    -e 's/^connector_name="OnPremCloudWatchMetricsSink_\$USER"/connector_name="OnPremCloudWatchMetricsSink_playground"/' \
+    $example/cloudwatch-metrics-sink.sh > $example/session-setup.sh
+  grep -q '^connector_name="OnPremCloudWatchMetricsSink_playground"' $example/session-setup.sh || { echo "❌ connector_name not found in $example/cloudwatch-metrics-sink.sh" | tee /tmp/kdp-session-setup.log; return 1; }
+  chmod +x $example/session-setup.sh
+  rm -rf connect-migration-utility-discovery-output
+  (umask 077 && : > "$connect_migration_env")
+  local name
+  for name in ENVIRONMENT CLUSTER_NAME CLUSTER_CLOUD CLUSTER_REGION CLUSTER_CREDS SCHEMA_REGISTRY_CREDS
+  do
+    printf 'export %s=%q\n' "$name" "$(playground state get ccloud.$name)" >> "$connect_migration_env"
+  done
+  printf 'export AWS_ACCESS_KEY_ID=%q\n' "${AWS_ACCESS_KEY_ID:-$(aws configure get aws_access_key_id)}" >> "$connect_migration_env"
+  printf 'export AWS_SECRET_ACCESS_KEY=%q\n' "${AWS_SECRET_ACCESS_KEY:-$(aws configure get aws_secret_access_key)}" >> "$connect_migration_env"
+  # the exit code of 'playground run' is not enough: it can be 1 after a successful ccloud example (end of run summary)
+  playground run -f "$PWD/$example/session-setup.sh" < /dev/null > /tmp/kdp-session-setup.log 2>&1
+  grep -q "RESULT: SUCCESS" /tmp/kdp-session-setup.log
+}
+
+# the fully managed connector is billed: delete it, then the local environment, and everything that holds a secret
+# (after migrate, the discovered configs hold the AWS keys)
+teardown_connect_migration() {
+  local ret=0
+  (
+    # the generator runs under set -e: nothing (a missing file, a failing switch) may end the teardown before the delete
+    set +e
+    source "$connect_migration_env" 2> /dev/null
+    playground switch-ccloud
+    playground connector delete --connector OnPremCloudWatchMetricsSink_playground
+  ) < /dev/null > /tmp/kdp-session-teardown.log 2>&1 || ret=$?
+  # nothing to delete when the recording stopped before migrate
+  grep -q "resource not found" /tmp/kdp-session-teardown.log && ret=0
+  cat /tmp/kdp-session-teardown.log >> /tmp/kdp-session-setup.log
+  rm -f /tmp/kdp-session-teardown.log
+  playground container kill-all >> /tmp/kdp-session-setup.log 2>&1
+  rm -rf connect-migration-utility-discovery-output ccloud/connect-migration-utility/session-setup.sh "$connect_migration_env" \
+    /tmp/discovery.log /tmp/migrate.log
+  # the setup log holds the connector config printed by the example, AWS keys included: kept only to debug a failure
+  [ $ret -eq 0 ] && rm -f /tmp/kdp-session-setup.log
+  return $ret
+}
+
 work_dir=/tmp/kdp-session-video
 rm -rf "$work_dir"
 export VHS_BIN_DIR="$work_dir/bin"
@@ -207,7 +274,16 @@ do
   if [ -n "$setup" ]
   then
     echo "   ⏳ off camera: $setup (log in /tmp/kdp-session-setup.log)"
-    (cd "$KDP_DIR" && PATH="$KDP_DIR/scripts/cli:$PATH" && $setup) || { echo "❌ $setup failed, see /tmp/kdp-session-setup.log"; exit 1; }
+    if ! (cd "$KDP_DIR" && PATH="$KDP_DIR/scripts/cli:$PATH" && $setup)
+    then
+      echo "❌ $setup failed, see /tmp/kdp-session-setup.log"
+      if [ -n "$teardown" ]
+      then
+        echo "   🧹 off camera: $teardown"
+        (cd "$KDP_DIR" && PATH="$KDP_DIR/scripts/cli:$PATH" && $teardown) || echo "⚠️ $teardown failed: clean up by hand"
+      fi
+      exit 1
+    fi
   fi
 
   vhs_home="$work_dir/home"
@@ -215,7 +291,18 @@ do
   vhs_env=(env -i HOME="$vhs_home" USER="$USER" SHELL=/bin/bash LANG="${LANG:-en_US.UTF-8}" TERM=xterm-256color
     PATH="$KDP_DIR/scripts/cli:$PATH" KDP_DIR="$KDP_DIR" VHS_BIN_DIR="$VHS_BIN_DIR")
   # the first start of ttyd sometimes fails (net::ERR_CONNECTION_REFUSED): retry once
-  "${vhs_env[@]}" vhs "tapes/session-$session.tape" > /dev/null || "${vhs_env[@]}" vhs "tapes/session-$session.tape" > /dev/null
+  recorded=yes
+  "${vhs_env[@]}" vhs "tapes/session-$session.tape" > /dev/null || "${vhs_env[@]}" vhs "tapes/session-$session.tape" > /dev/null || recorded=""
+  if [ -n "$teardown" ]
+  then
+    echo "   🧹 off camera: $teardown (log in /tmp/kdp-session-setup.log)"
+    (cd "$KDP_DIR" && PATH="$KDP_DIR/scripts/cli:$PATH" && $teardown) || echo "⚠️ $teardown failed, see /tmp/kdp-session-setup.log: clean up by hand"
+  fi
+  if [ -z "$recorded" ]
+  then
+    echo "❌ vhs failed for tapes/session-$session.tape"
+    exit 1
+  fi
 
   # poster: the end of the terminal part, where the comments sum up the session
   terminal_duration=$(ffprobe -v error -show_entries format=duration -of csv=p=0 "$terminal")
@@ -284,7 +371,7 @@ do
   ffmpeg -hide_banner -loglevel error -y -ss "$poster_at" -i "docs/videos/session-$session.mp4" -frames:v 1 "docs/images/sessions/$session.png"
 done
 
-if [[ " ${sessions[*]} " =~ " "(remote-debugging|dlq|smt-test|topic-produce|benchmark)" " ]]
+if [[ " ${sessions[*]} " =~ " "(remote-debugging|dlq|smt-test|topic-produce|benchmark|connect-migration)" " ]]
 then
   echo "🛑 stopping the example"
   (cd "$KDP_DIR" && PATH="$KDP_DIR/scripts/cli:$PATH" playground stop > /dev/null 2>&1) || true

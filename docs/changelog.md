@@ -77,6 +77,7 @@
 
 ##### 🐛 Bugs
 
+- 🐛 playground connector create-or-update: sed-built request bodies, --initial-state with several workers, hangs without a terminal [#9484](https://github.com/vdesabou/kafka-docker-playground/issues/9484)
 - 🐛 playground topic consume: --min-expected-messages checks offsets, hangs on transactional topics, slow, | in data breaks the display [#9477](https://github.com/vdesabou/kafka-docker-playground/issues/9477)
 - 🐛 playground topic produce generates out-of-range int32 values for Protobuf schemas [#9467](https://github.com/vdesabou/kafka-docker-playground/issues/9467)
 - 🐛 playground topic produce --validate fails on CP 8.x (schema-validator built with JDK 11) [#9466](https://github.com/vdesabou/kafka-docker-playground/issues/9466)

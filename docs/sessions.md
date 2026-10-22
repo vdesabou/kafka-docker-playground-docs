@@ -22,6 +22,7 @@ link to a live report so you can click around it yourself.
 | 📨 | [Produce realistic test data](/sessions?id=📨-produce-realistic-test-data) | a running environment |
 | 📥 | [Read a topic: the last records, one offset, from a time, as JSON](/sessions?id=📥-read-a-topic) | a running environment |
 | 📈 | [Is version Y slower? Benchmark two versions](/sessions?id=📈-is-version-y-slower-benchmark-two-versions) | a running example |
+| 🐌 | [A slow or broken network, on purpose: degrade and block traffic](/sessions?id=🐌-a-slow-or-broken-network-on-purpose) | a running example |
 | 🚚 | [Move a self-managed connector to fully managed](/sessions?id=🚚-move-a-self-managed-connector-to-fully-managed) | Confluent Cloud, AWS credentials |
 | 🏗️ | [Deploy a fully managed connector with Terraform](/sessions?id=🏗️-deploy-a-fully-managed-connector-with-terraform) | Confluent Cloud, terraform |
 
@@ -382,6 +383,58 @@ playground connector benchmark --mode steady --duration 5m          # a throughp
 - 🌐 <a href="reports/benchmark.html" target="_blank" rel="noopener">A benchmark report</a> (JDBC PostgreSQL sink 10.8.4 vs 10.9.9: click around)
 - 🧠 CLI reference: [playground connector benchmark](/playground%20connector%20benchmark), and
   [⏱️ Benchmark a connector](/reusables?id=⏱️-benchmark-a-connector) in the Reproduction toolkit
+
+## 🐌 A slow or broken network, on purpose
+
+The customer blames the network: timeouts, a connector that fails during the night, rebalances on a slow link. Make the
+network slow, lossy or cut, on the example you run, without changing the example or restarting a container, and see what
+the connector does, and whether it recovers when the network comes back.
+
+<video src="videos/session-network-traffic.mp4" poster="images/sessions/network-traffic.png" controls playsinline width="100%"></video>
+
+**In this session**
+
+- `debug degrade-traffic`: latency, jitter, loss, corruption, duplicates or a bandwidth limit with `tc netem`, run from a
+  netshoot container in the network namespace of the container (nothing installed, any image)
+- `tc` only delays what a container **sends**: `--latency 200ms` on connect adds 200 ms to the round trip, degrade the
+  other side too for 400 ms
+- each container keeps its own degradation until it is stopped or replaced by a new `--action start`
+- several effects in one call, scoped to one `--port`; `--action status` shows what is applied and measures the round trip
+- `debug block-traffic`: an `iptables` DROP, like a firewall: no error comes back, the client waits for its own timeout
+- the JDBC sink fails with `SocketTimeoutException: Connect timed out`, and stays `FAILED` once the network is back: it
+  needs a restart
+
+**Commands**
+
+```bash
+playground debug degrade-traffic -c connect --destination postgres --action status
+playground debug degrade-traffic -c connect --destination postgres --latency 200ms --action start
+playground debug degrade-traffic -c postgres --destination connect --latency 200ms --action start      # both ways
+playground debug degrade-traffic -c postgres --action stop                                               # each container keeps its own
+playground debug degrade-traffic -c connect --destination postgres --port 5432 --latency 100ms --jitter 50ms --loss 5% --action start
+playground debug degrade-traffic -c connect --action stop
+
+playground debug block-traffic -c connect --destination postgres --port 5432 --action start
+playground connector wait --connector postgres-sink --state FAILED --max-wait 300
+playground container logs -c connect --errors --since 5m
+playground debug block-traffic -c connect --destination postgres --port 5432 --action stop              # same flags as start
+playground connector restart --connector postgres-sink
+```
+
+Recorded on the example `connect/connect-jdbc-postgresql-sink/postgres-sink.sh`.
+
+> [!TIP]
+> Without `--destination`, `degrade-traffic` applies to all the traffic of the container: use it when the destination
+> has IP addresses that change (Confluent Cloud, a SaaS API). A container restart removes both the degradation and the
+> block. Each `block-traffic --action start` adds one `iptables` rule and each `--action stop` removes one: started twice,
+> stop twice (the `iptables-save` printed at the end shows what is left).
+
+**Links**
+
+- 📖 [Blocking traffic](/reusables?id=🚫-blocking-traffic) and [Degrade traffic](/reusables?id=🐌-degrade-traffic---add-latency-packet-loss-or-corruption)
+  in the Reproduction toolkit
+- 🧠 CLI reference: [playground debug degrade-traffic](/playground%20debug%20degrade-traffic),
+  [playground debug block-traffic](/playground%20debug%20block-traffic), [playground connector wait](/playground%20connector%20wait)
 
 ## 🚚 Move a self-managed connector to fully managed
 

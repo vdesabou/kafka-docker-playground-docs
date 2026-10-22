@@ -45,7 +45,7 @@ fi
 #               that cost money)
 #   stills      images shown after the terminal part instead of a report (screenshots of an IDE...):
 #               "<image>:<seconds>" items, each fitted to the frame on the background color of the terminal
-ALL_SESSIONS=(thread-dump gc-logs flight-recorder oracle-xstream-report cfk-bundle sourcecode remote-debugging dlq smt-test topic-produce topic-consume benchmark connect-migration)
+ALL_SESSIONS=(thread-dump gc-logs flight-recorder oracle-xstream-report cfk-bundle sourcecode remote-debugging dlq smt-test topic-produce topic-consume benchmark connect-migration terraform)
 session_settings() {
   report="" scroll="" page_height=4100 docker="" setup="" teardown="" stills=""
   case "$1" in
@@ -107,6 +107,11 @@ session_settings() {
       docker=yes
       setup=setup_connect_migration
       teardown=teardown_connect_migration
+      ;;
+    terraform)
+      docker=yes
+      setup=setup_terraform
+      teardown=teardown_terraform
       ;;
     *)
       echo "❌ unknown session $1 (known: ${ALL_SESSIONS[*]})"
@@ -259,6 +264,75 @@ teardown_connect_migration() {
   return $ret
 }
 
+# the beginning of ccloud/fm-datagen-source/fully-managed-datagen-source.sh (up to the connector): Confluent Cloud
+# bootstrapped and the topic datagen_pageviews, no connector. The tape runs under env -i: it gets the [ccloud] details
+# and the API key of the cluster ($CLOUD_KEY, $CLOUD_SECRET) from a private file it sources off camera (removed by the
+# teardown). The connector config, with "$CLOUD_KEY" / "$CLOUD_SECRET" placeholders that envsubst replaces, is in
+# /tmp/datagen.json: no secret shows on camera. Needs terraform and the Cloud API key of the secrets store
+terraform_env=/tmp/kdp-session-terraform.env
+terraform_connector=DatagenSource_playground
+setup_terraform() {
+  if ! command -v terraform > /dev/null 2>&1 || ! command -v envsubst > /dev/null 2>&1
+  then
+    echo "❌ terraform and envsubst are needed (brew install hashicorp/tap/terraform gettext)" | tee /tmp/kdp-session-setup.log
+    return 1
+  fi
+  if [ -z "$(playground state get ccloud.CLUSTER_NAME 2> /dev/null)" ]
+  then
+    echo "❌ no [ccloud] details in $KDP_DIR/playground.ini: run a ccloud example once in that clone" | tee /tmp/kdp-session-setup.log
+    return 1
+  fi
+  local example=ccloud/fm-datagen-source
+  sed -e '/^connector_name="DatagenSource_\$USER"/,$d' $example/fully-managed-datagen-source.sh > $example/session-setup.sh
+  grep -q 'playground topic create --topic datagen_pageviews' $example/session-setup.sh || { echo "❌ the topic creation was not found in $example/fully-managed-datagen-source.sh" | tee /tmp/kdp-session-setup.log; return 1; }
+  chmod +x $example/session-setup.sh
+  (umask 077 && : > "$terraform_env")
+  local name creds
+  for name in ENVIRONMENT CLUSTER_NAME CLUSTER_CLOUD CLUSTER_REGION CLUSTER_CREDS SCHEMA_REGISTRY_CREDS
+  do
+    printf 'export %s=%q\n' "$name" "$(playground state get ccloud.$name)" >> "$terraform_env"
+  done
+  creds=$(playground state get ccloud.CLUSTER_CREDS)
+  printf 'export CLOUD_KEY=%q\nexport CLOUD_SECRET=%q\n' "${creds%%:*}" "${creds#*:}" >> "$terraform_env"
+  cat > /tmp/datagen.json << DATAGEN
+{
+  "connector.class": "DatagenSource",
+  "name": "$terraform_connector",
+  "kafka.auth.mode": "KAFKA_API_KEY",
+  "kafka.api.key": "\$CLOUD_KEY",
+  "kafka.api.secret": "\$CLOUD_SECRET",
+  "kafka.topic": "datagen_pageviews",
+  "output.data.format": "JSON",
+  "quickstart": "PAGEVIEWS",
+  "max.interval": "10000",
+  "tasks.max": "1"
+}
+DATAGEN
+  (
+    source "$terraform_env"
+    # the exit code of 'playground run' is not enough: it can be 1 after a successful ccloud example (end of run summary)
+    playground run -f "$PWD/$example/session-setup.sh" < /dev/null > /tmp/kdp-session-setup.log 2>&1
+    grep -q "RESULT: SUCCESS" /tmp/kdp-session-setup.log || exit 1
+    # the connector, its terraform state and its last config of a previous recording that failed
+    playground connector delete --connector $terraform_connector >> /tmp/kdp-session-setup.log 2>&1
+    rm -rf .terraform-playground/$terraform_connector-*
+    playground state del terraform.connector.$terraform_connector >> /tmp/kdp-session-setup.log 2>&1
+    rm -f /tmp/config-$terraform_connector
+    exit 0
+  )
+}
+# the fully managed connector is billed: delete it (terraform destroy) if the tape did not, then the private files
+teardown_terraform() {
+  (
+    set +e
+    source "$terraform_env" 2> /dev/null
+    playground connector delete --connector $terraform_connector
+  ) < /dev/null >> /tmp/kdp-session-setup.log 2>&1
+  playground container kill-all >> /tmp/kdp-session-setup.log 2>&1
+  rm -rf ccloud/fm-datagen-source/session-setup.sh "$terraform_env" /tmp/datagen.json
+  return 0
+}
+
 work_dir=/tmp/kdp-session-video
 rm -rf "$work_dir"
 export VHS_BIN_DIR="$work_dir/bin"
@@ -386,7 +460,7 @@ do
   ffmpeg -hide_banner -loglevel error -y -ss "$poster_at" -i "docs/videos/session-$session.mp4" -frames:v 1 "docs/images/sessions/$session.png"
 done
 
-if [[ " ${sessions[*]} " =~ " "(remote-debugging|dlq|smt-test|topic-produce|topic-consume|benchmark|connect-migration)" " ]]
+if [[ " ${sessions[*]} " =~ " "(remote-debugging|dlq|smt-test|topic-produce|topic-consume|benchmark|connect-migration|terraform)" " ]]
 then
   echo "🛑 stopping the example"
   (cd "$KDP_DIR" && PATH="$KDP_DIR/scripts/cli:$PATH" playground stop > /dev/null 2>&1) || true

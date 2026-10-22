@@ -3,6 +3,7 @@
 ## October 2026
 ##### 🌟 Enhancements
 
+- 🐛 playground topic produce: fix keys, headers, batches, --validate and playground stop, add --throughput and --value-format [#9474](https://github.com/vdesabou/kafka-docker-playground/issues/9474)
 - 🧠 Add playground debug degrade-traffic (latency, packet loss, corruption) and fix add\_latency functions [#9453](https://github.com/vdesabou/kafka-docker-playground/issues/9453)
 - 🧠 Make repro export / import self-contained and safe [#9447](https://github.com/vdesabou/kafka-docker-playground/issues/9447)
 - 🧠 Bite size sessions: narrated terminal videos that end on the HTML report [#9437](https://github.com/vdesabou/kafka-docker-playground/issues/9437)
@@ -74,6 +75,7 @@
 
 ##### 🐛 Bugs
 
+- 🐛 playground topic produce generates out-of-range int32 values for Protobuf schemas [#9467](https://github.com/vdesabou/kafka-docker-playground/issues/9467)
 - 🐛 playground topic produce --validate fails on CP 8.x (schema-validator built with JDK 11) [#9466](https://github.com/vdesabou/kafka-docker-playground/issues/9466)
 - 🐛 get-topic-list hides topics whose name contains delete, checkpoint or connect- [#9461](https://github.com/vdesabou/kafka-docker-playground/issues/9461)
 - 🐛 cfk: default CP version hardcoded to 8.3.0 instead of the default tag of utils.sh [#9265](https://github.com/vdesabou/kafka-docker-playground/issues/9265)

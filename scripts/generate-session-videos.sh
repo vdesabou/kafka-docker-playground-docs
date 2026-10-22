@@ -6,14 +6,15 @@
 #        (default: all the sessions)
 #
 # requirements: vhs, ffmpeg, Google Chrome (headless screenshots of the HTML report), docker for the sessions that
-# run an example (cfk-bundle, remote-debugging, dlq, smt-test, topic-produce, topic-consume, benchmark, connect-migration)
+# run an example (cfk-bundle, remote-debugging, dlq, smt-test, topic-produce, topic-consume, benchmark, network-traffic,
+# connect-migration)
 # connect-migration also needs Confluent Cloud (the [ccloud] details in the playground.ini of KDP_DIR, from a ccloud
 # example run once in that clone, and the Cloud API key of the secrets store) and AWS credentials (~/.aws): it creates a
 # fully managed connector, deleted after the recording
 # Same isolation as scripts/generate-cli-videos.sh (neutral clone path, env -i, empty HOME except for the docker
 # sessions, no-op open), but it does not change your playground config.
 #
-# ⚠️ the remote-debugging, dlq, smt-test, topic-produce, topic-consume, benchmark and connect-migration sessions start an example off camera: it stops the environment
+# ⚠️ the remote-debugging, dlq, smt-test, topic-produce, topic-consume, benchmark, network-traffic and connect-migration sessions start an example off camera: it stops the environment
 # that is running in that clone
 set -e
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
@@ -45,7 +46,7 @@ fi
 #               that cost money)
 #   stills      images shown after the terminal part instead of a report (screenshots of an IDE...):
 #               "<image>:<seconds>" items, each fitted to the frame on the background color of the terminal
-ALL_SESSIONS=(thread-dump gc-logs flight-recorder oracle-xstream-report cfk-bundle sourcecode remote-debugging dlq smt-test topic-produce topic-consume benchmark connect-migration terraform)
+ALL_SESSIONS=(thread-dump gc-logs flight-recorder oracle-xstream-report cfk-bundle sourcecode remote-debugging dlq smt-test topic-produce topic-consume benchmark network-traffic connect-migration terraform)
 session_settings() {
   report="" scroll="" page_height=4100 docker="" setup="" teardown="" stills=""
   case "$1" in
@@ -102,6 +103,10 @@ session_settings() {
       page_height=6000
       docker=yes
       setup=setup_jdbc_postgresql_sink
+      ;;
+    network-traffic)
+      docker=yes
+      setup=setup_network_traffic
       ;;
     connect-migration)
       docker=yes
@@ -179,6 +184,13 @@ setup_remote_debugging() {
   setup_jdbc_postgresql_sink
   sed -n "/topic produce -t orders --nb-messages 1 << 'EOF'/,/^EOF/p" connect/connect-jdbc-postgresql-sink/postgres-sink.sh | sed '1d;$d' > /tmp/orders.avsc
   rm -rf /tmp/connector-plugin-sourcecode/kafka-connect-jdbc-*
+}
+
+# the JDBC PostgreSQL sink example, and the avro schema of its orders topic for the records produced on camera while
+# postgres is blocked
+setup_network_traffic() {
+  setup_jdbc_postgresql_sink
+  sed -n "/topic produce -t orders --nb-messages 1 << 'EOF'/,/^EOF/p" connect/connect-jdbc-postgresql-sink/postgres-sink.sh | sed '1d;$d' > /tmp/orders.avsc
 }
 
 # the first part of other/reprocess-dlq-messages-with-sink-connector/replay-dlq-messages-with-playground.sh: 10 avro
@@ -460,7 +472,7 @@ do
   ffmpeg -hide_banner -loglevel error -y -ss "$poster_at" -i "docs/videos/session-$session.mp4" -frames:v 1 "docs/images/sessions/$session.png"
 done
 
-if [[ " ${sessions[*]} " =~ " "(remote-debugging|dlq|smt-test|topic-produce|topic-consume|benchmark|connect-migration|terraform)" " ]]
+if [[ " ${sessions[*]} " =~ " "(remote-debugging|dlq|smt-test|topic-produce|topic-consume|benchmark|network-traffic|connect-migration|terraform)" " ]]
 then
   echo "🛑 stopping the example"
   (cd "$KDP_DIR" && PATH="$KDP_DIR/scripts/cli:$PATH" playground stop > /dev/null 2>&1) || true

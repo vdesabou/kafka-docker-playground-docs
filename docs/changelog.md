@@ -3,6 +3,7 @@
 ## October 2026
 ##### 🌟 Enhancements
 
+- 🧠 playground repro check: scan repro models for secrets and customer data before they are committed (pre-commit hook) [#9481](https://github.com/vdesabou/kafka-docker-playground/issues/9481)
 - 🧠 playground topic consume: add --last, --from-timestamp, --partition/--offset, --json, --count, --no-decode, --print-schema [#9479](https://github.com/vdesabou/kafka-docker-playground/issues/9479)
 - 🐛 playground topic produce: fix keys, headers, batches, --validate and playground stop, add --throughput and --value-format [#9474](https://github.com/vdesabou/kafka-docker-playground/issues/9474)
 - 🧠 Add playground debug degrade-traffic (latency, packet loss, corruption) and fix add\_latency functions [#9453](https://github.com/vdesabou/kafka-docker-playground/issues/9453)

@@ -116,6 +116,7 @@ visit https://docs.docker.com/get-docker to install
 
 - [repro](playground%20repro) - 👷‍♂️ Reproduction model commands
 - [export](playground%20repro%20export) - 📤 Export reproduction models as a self-contained tgz bundle
+- [check](playground%20repro%20check) - 🕵️ Scan reproduction models for secrets and customer data before they are committed
 - [import](playground%20repro%20import) - 📥 Import a tgz bundle created by `playground repro export`
 - [bootstrap](playground%20repro%20bootstrap) - 🛠  Bootstrap reproduction model, just run `<playground repro bootstrap>` !
 

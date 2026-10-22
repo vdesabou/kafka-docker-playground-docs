@@ -7,8 +7,13 @@ avro, protobuf, json schema and plain formats are all detected from
 the payload, so you do not have to pick a console consumer.
 
 🎓 Tip: `--min-expected-messages` turns it into an assertion. It waits  
-up to `--timeout` for that many records and fails otherwise, which is  
-how examples verify that data actually flowed.
+up to `--timeout` for that many records, consumes them and fails if  
+fewer could be consumed (records that cannot be deserialized do not  
+count), which is how examples verify that data actually flowed.
+
+The consumer stops when no record arrives for 10 seconds (30 seconds  
+on Confluent Cloud), so it never waits for records that cannot come  
+(transaction markers and compacted records use offsets).
 
 ## Usage
 
@@ -38,7 +43,9 @@ You can use -1 to display all messages
 
 #### `--min-expected-messages MIN-EXPECTED-MESSAGES`
 
-Minimum expected number of messages to be present in topic, returns an error if this is not the case
+Minimum expected number of records to be consumed from the topic, returns an error if this is not the case
+
+Records that cannot be deserialized are reported and do not count.
 
 Note: `--topic` should be specified in this case.
 
@@ -49,6 +56,8 @@ Note: `--topic` should be specified in this case.
 #### `--grep GREP`
 
 Verify that topic content contains record which contains specified string
+
+It is searched in the records as displayed (decoded when base64 encoded), and the command fails when no record contains it.
 
 | Attributes      | &nbsp;
 |-----------------|-------------
@@ -90,7 +99,7 @@ Note: `--topic` should be specified in this case.
 
 #### `--max-characters MAX-CHARACTERS`
 
-Max characters per message to display (default is 3000)
+Max characters per message to display (default is 3000, 0 for no limit)
 
 | Attributes      | &nbsp;
 |-----------------|-------------
@@ -113,6 +122,83 @@ If not set, default is read_uncommitted
 |-----------------|-------------
 | Default Value:  | `read_uncommitted`
 | Allowed Values: | `read_uncommitted`, `read_committed`
+
+#### `--last LAST`
+
+⏮️ Display the last N records of the topic (the most recent ones, sorted by timestamp across partitions),  
+instead of the first `--max-messages`
+
+Example: `--last` 10
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Conflicts With: | `--tail`, `--from-timestamp`, `--offset`, `--min-expected-messages`, `--open`, `--count`
+
+#### `--from-timestamp FROM-TIMESTAMP`
+
+⏱️ Display the records from this time (sorted by timestamp across partitions, `--max-messages` still applies)
+
+Accepted values:
+
+- a date, in local time: "2026-10-22 10:30", "2026-10-22T10:30:00.250" (add Z for UTC: "2026-10-22T08:30:00Z")
+- an epoch, in milliseconds or seconds: 1792660170522
+- a duration ago: 30s, 10m, 2h, 1d
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Conflicts With: | `--tail`, `--last`, `--offset`, `--open`
+
+#### `--partition PARTITION`
+
+🧩 Only consume this partition (with `--offset`, from that offset; otherwise from the beginning, or new records with `--tail`)
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Conflicts With: | `--open`
+
+#### `--offset OFFSET`
+
+📍 Offset of `--partition` to start from: a number, earliest or latest
+
+Example: `--partition` 0 `--offset` 1234 `--max-messages` 1, the record a connector is stuck on
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Conflicts With: | `--tail`, `--last`, `--from-timestamp`, `--open`
+
+#### `--json`
+
+🧾 Print each record as a json object on one line (topic, partition, offset, timestamp, date, headers, key,  
+value, schema ids): key and value are embedded as json when they are valid json, as strings otherwise.
+
+Only the records go to stdout, everything else goes to stderr, so the output can be piped to jq.
+
+Example: playground topic consume `--topic` orders `--json` | jq -r '.value.id'
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Conflicts With: | `--open`, `--count`, `--plot-latencies-timestamp-field`, `--tail`
+
+#### `--count`
+
+🔢 Only print the number of records consumed (with `--grep`, the number of records containing that string),  
+on stdout: logs go to stderr. Without `--topic`, one "`<topic>` `<number>`" line per topic.
+
+Unlike playground topic get-number-records, records are counted, not offsets (transaction markers,  
+compacted records and records that cannot be deserialized do not count)
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Conflicts With: | `--tail`, `--open`, `--json`, `--plot-latencies-timestamp-field`
+
+#### `--no-decode`
+
+🤖 Never decode the values, even when they look base64 encoded (by default, they are decoded when the first  
+record is valid base64 of printable utf-8)
+
+#### `--print-schema`
+
+📜 Also print the key and value schemas registered for the topic
 
 ## Examples
 

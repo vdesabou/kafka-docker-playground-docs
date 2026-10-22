@@ -73,6 +73,30 @@ Otherwise, the key will be same for all records.
 |-----------------|-------------
 | Default Value:  | `-`
 
+#### `--value-format VALUE-FORMAT`
+
+🔮 Format of `--value`, instead of detecting it from its content
+
+Detection looks for keywords (proto3, "type": "object", "_meta", CREATE TABLE, arg.properties,  
+"type": "record"), so a raw payload containing one of them is not sent as raw data:  
+use `--value-format` raw in that case.
+
+Cannot be used with `--derive-value-schema-as`.
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Allowed Values: | `avro`, `json-schema`, `protobuf`, `json`, `sql`, `datagen`, `raw`
+
+#### `--key-format KEY-FORMAT`
+
+🔮 Format of `--key`, instead of detecting it from its content (see `--value-format`)
+
+Cannot be used with `--derive-key-schema-as`.
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Allowed Values: | `avro`, `json-schema`, `protobuf`, `json`, `sql`, `datagen`, `raw`
+
 #### `--verbose, -v`
 
 🐞 Show command being ran.
@@ -126,11 +150,24 @@ default is 0
 |-----------------|-------------
 | Default Value:  | `0`
 
+#### `--throughput THROUGHPUT`
+
+🐢 Maximum number of records per second (default is 0, no limit)
+
+Useful with `--nb-messages` -1 to get a steady flow of records, for example:
+
+`playground topic produce -t a-topic --nb-messages -1 --throughput 10 --value '{"id": %g}'`
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Default Value:  | `0`
+
 #### `--nb-partitions NB-PARTITIONS`
 
 🔢 Number of partitions for the topic. (default is 1)
 
-❌ Important: If topic is existing, it will be re-created before producing to topic.
+❌ Important: if the topic exists with another number of partitions, it is re-created when it  
+is empty, and the command fails when it is not.
 
 | Attributes      | &nbsp;
 |-----------------|-------------
@@ -174,6 +211,8 @@ Value Subject Name Strategy
 🚏 Headers to use for all records. If not set, no header is used.
 
 Example: `--headers` "header1:value1,header2:value2"
+
+Header keys and values cannot contain "," or ":" (they are the separators).
 
 Note: CP 7.2+ is required.
 
@@ -252,7 +291,8 @@ N.B: only work with avro and json-schema
 
 #### `--consume`
 
-📥 After producing, directly consume topic.
+📥 After producing, directly consume topic (until at least the number of records produced  
+are consumed, or 60 seconds).
 
 #### `--delete-topic`
 

@@ -6,14 +6,14 @@
 #        (default: all the sessions)
 #
 # requirements: vhs, ffmpeg, Google Chrome (headless screenshots of the HTML report), docker for the sessions that
-# run an example (cfk-bundle, remote-debugging, dlq, smt-test, topic-produce, benchmark, connect-migration)
+# run an example (cfk-bundle, remote-debugging, dlq, smt-test, topic-produce, topic-consume, benchmark, connect-migration)
 # connect-migration also needs Confluent Cloud (the [ccloud] details in the playground.ini of KDP_DIR, from a ccloud
 # example run once in that clone, and the Cloud API key of the secrets store) and AWS credentials (~/.aws): it creates a
 # fully managed connector, deleted after the recording
 # Same isolation as scripts/generate-cli-videos.sh (neutral clone path, env -i, empty HOME except for the docker
 # sessions, no-op open), but it does not change your playground config.
 #
-# ⚠️ the remote-debugging, dlq, smt-test, topic-produce, benchmark and connect-migration sessions start an example off camera: it stops the environment
+# ⚠️ the remote-debugging, dlq, smt-test, topic-produce, topic-consume, benchmark and connect-migration sessions start an example off camera: it stops the environment
 # that is running in that clone
 set -e
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
@@ -45,7 +45,7 @@ fi
 #               that cost money)
 #   stills      images shown after the terminal part instead of a report (screenshots of an IDE...):
 #               "<image>:<seconds>" items, each fitted to the frame on the background color of the terminal
-ALL_SESSIONS=(thread-dump gc-logs flight-recorder oracle-xstream-report cfk-bundle sourcecode remote-debugging dlq smt-test topic-produce benchmark connect-migration)
+ALL_SESSIONS=(thread-dump gc-logs flight-recorder oracle-xstream-report cfk-bundle sourcecode remote-debugging dlq smt-test topic-produce topic-consume benchmark connect-migration)
 session_settings() {
   report="" scroll="" page_height=4100 docker="" setup="" teardown="" stills=""
   case "$1" in
@@ -91,6 +91,10 @@ session_settings() {
     topic-produce)
       docker=yes
       setup=setup_topic_produce
+      ;;
+    topic-consume)
+      docker=yes
+      setup=setup_topic_consume
       ;;
     benchmark)
       report="/tmp/benchmark/*-versions-*.html"
@@ -144,10 +148,21 @@ EOF
 # the JDBC PostgreSQL sink example (a broker and a schema registry), and the one JSON record "sent by a customer"
 # the topics are created off camera: in the vhs terminal, the screen sometimes stops updating while 'topic produce'
 # creates a topic
+# a plaintext environment, the topic orders (3 partitions, 300 avro records, keys order-1 to order-300, the schema in
+# /tmp/order.avsc for the records produced on camera) and the topic payments: 3 avro records, then 2 records that are not
+# avro (a misconfigured producer)
+setup_topic_consume() {
+  playground start-environment --environment plaintext > /tmp/kdp-session-setup.log 2>&1
+  echo '{"type": "record", "name": "Order", "fields": [{"name": "order_id", "type": "int"}, {"name": "product", "type": "string"}, {"name": "quantity", "type": "int"}]}' > /tmp/order.avsc
+  playground topic produce -t orders --nb-partitions 3 --nb-messages 300 --key 'order-%g' < /tmp/order.avsc >> /tmp/kdp-session-setup.log 2>&1
+  playground topic produce -t payments --nb-messages 3 < /tmp/order.avsc >> /tmp/kdp-session-setup.log 2>&1
+  playground topic produce -t payments --nb-messages 2 --value-format raw --value 'not avro %g' >> /tmp/kdp-session-setup.log 2>&1
+}
+
 setup_topic_produce() {
   setup_jdbc_postgresql_sink
   echo '{"order_id": 1, "customer": "acme", "amount": 9.99, "paid": true}' > /tmp/payment.json
-  for topic in leads payments trades big
+  for topic in leads payments trades big ticks
   do
     playground topic create --topic $topic >> /tmp/kdp-session-setup.log 2>&1
   done
@@ -371,7 +386,7 @@ do
   ffmpeg -hide_banner -loglevel error -y -ss "$poster_at" -i "docs/videos/session-$session.mp4" -frames:v 1 "docs/images/sessions/$session.png"
 done
 
-if [[ " ${sessions[*]} " =~ " "(remote-debugging|dlq|smt-test|topic-produce|benchmark|connect-migration)" " ]]
+if [[ " ${sessions[*]} " =~ " "(remote-debugging|dlq|smt-test|topic-produce|topic-consume|benchmark|connect-migration)" " ]]
 then
   echo "🛑 stopping the example"
   (cd "$KDP_DIR" && PATH="$KDP_DIR/scripts/cli:$PATH" playground stop > /dev/null 2>&1) || true

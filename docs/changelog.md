@@ -3,6 +3,7 @@
 ## October 2026
 ##### 🌟 Enhancements
 
+- 👾 ServiceNow sink examples: create u\_test\_table automatically [#9522](https://github.com/vdesabou/kafka-docker-playground/issues/9522)
 - 🧠 Add a Deep dives section to the website, starting with block-traffic / degrade-traffic [#9509](https://github.com/vdesabou/kafka-docker-playground/pull/9509)
 - 🧠 Add a Deep dives section to the website, starting with block-traffic / degrade-traffic [#9508](https://github.com/vdesabou/kafka-docker-playground/issues/9508)
 - 🧠 playground connector create-or-update: wait for the connector by default (strict for examples, warn-only for repro models, --no-wait) [#9502](https://github.com/vdesabou/kafka-docker-playground/issues/9502)

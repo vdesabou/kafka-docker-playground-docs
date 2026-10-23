@@ -3,6 +3,7 @@
 ## October 2026
 ##### 🌟 Enhancements
 
+- 🧠 playground connector create-or-update: wait for the connector by default (strict for examples, warn-only for repro models, --no-wait) [#9502](https://github.com/vdesabou/kafka-docker-playground/issues/9502)
 - 🧠 playground connector benchmark: end-to-end latency of source connectors in the report, remove topic consume --plot-latencies-timestamp-field [#9487](https://github.com/vdesabou/kafka-docker-playground/issues/9487)
 - 🧠 playground repro check: scan repro models for secrets and customer data before they are committed (pre-commit hook) [#9481](https://github.com/vdesabou/kafka-docker-playground/issues/9481)
 - 🧠 playground topic consume: add --last, --from-timestamp, --partition/--offset, --json, --count, --no-decode, --print-schema [#9479](https://github.com/vdesabou/kafka-docker-playground/issues/9479)

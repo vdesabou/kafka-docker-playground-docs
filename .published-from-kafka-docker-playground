@@ -28,7 +28,11 @@ assets/videos/materials/topic-produce/demo.sh
 badges-template.md
 claude-code.md
 content-template.md
+deep-dive-connector-create-or-update.md
+deep-dive-connector-troubleshooting.md
+deep-dive-container-logs.md
 deep-dive-network-traffic.md
+deep-dive-offsets-and-lag.md
 deep-dive-topic-consume.md
 deep-dive-topic-produce.md
 deep-dives.md

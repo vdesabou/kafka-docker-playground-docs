@@ -28,12 +28,14 @@ assets/videos/materials/topic-produce/demo.sh
 badges-template.md
 claude-code.md
 content-template.md
+deep-dive-connector-benchmark.md
 deep-dive-connector-create-or-update.md
 deep-dive-connector-plugin.md
 deep-dive-connector-smt-test.md
 deep-dive-connector-troubleshooting.md
 deep-dive-container-lifecycle.md
 deep-dive-container-logs.md
+deep-dive-fully-managed.md
 deep-dive-jvm-diagnostics.md
 deep-dive-log-levels.md
 deep-dive-network-traffic.md
@@ -41,6 +43,8 @@ deep-dive-offsets-and-lag.md
 deep-dive-reproduction-models.md
 deep-dive-run-and-versions.md
 deep-dive-schema.md
+deep-dive-secured-environments.md
+deep-dive-topic-administration.md
 deep-dive-topic-consume.md
 deep-dive-topic-produce.md
 deep-dives.md

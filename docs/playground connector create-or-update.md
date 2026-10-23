@@ -7,10 +7,15 @@ is read from stdin, usually as a heredoc, so it stays readable in the
 script. If the connector already exists it is updated in place, which  
 makes the command safe to re-run while you iterate on a configuration.
 
-The command then displays the connector status. Add `--wait` to wait for  
-the connector and all its tasks to be RUNNING and fail with the error  
-if they are not, so a broken config stops the example immediately  
-instead of failing silently later.
+The command then waits for the connector and all its tasks to be  
+RUNNING, displays the connector status, and fails with the error if  
+they are not, so a broken config stops the example immediately instead  
+of failing silently later. When the script that runs is a reproduction  
+model, a connector that is not RUNNING is only reported as a warning,  
+since a reproduction model often creates a failing connector on  
+purpose. Use `--wait` to fail there too, `--no-wait` to skip the wait.
+
+Fully managed connectors are only waited for with `--wait`.
 
 🎓 Tip: add `--validate` to have the config checked by the plugin before  
 it is deployed, which reports every invalid property at once.
@@ -90,13 +95,33 @@ Package name (with `--level`: the log level of that package instead of the conne
 
 ⏳ Wait until the connector and all its tasks are RUNNING (or in `--initial-state`), and fail otherwise
 
-Same as running `playground connector wait` right after the command. It fails right away if the connector or one of its tasks is FAILED.
+Self-managed connectors are waited for by default: `--wait` also makes the command fail when the script that runs is a reproduction model (by default, it is only a warning there).
+
+Same as running `playground connector wait` right after the command. It fails right away if the connector or one of its tasks is FAILED. An update of a PAUSED or STOPPED connector waits for that state.
 
 With fully managed connectors, it waits for the connector to be provisioned and restarts it if it fails while being provisioned (same as wait_for_ccloud_connector_up in example scripts).
 
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Conflicts With: | `--no-wait`
+
+#### `--no-wait`
+
+🏃 Do not wait for the connector and its tasks to be RUNNING, only display the status
+
+🎓 Tip: use it to create a connector that is expected to fail, then check it with `playground connector wait --state FAILED`
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Conflicts With: | `--wait`, `--max-wait`
+
 #### `--max-wait MAX_WAIT`
 
-⏳ Max time in seconds to wait with `--wait` (default is 120, or 600 for fully managed connectors)
+⏳ Max time in seconds to wait for the connector (default is 120, or 600 for fully managed connectors with `--wait`)
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Conflicts With: | `--no-wait`
 
 #### `--validate`
 
@@ -154,7 +179,7 @@ connector created with the REST API is imported first. playground connector dele
 ## Examples
 
 ```bash
-playground connector create-or-update -c filestream-sink --wait << EOF
+playground connector create-or-update -c filestream-sink << EOF
 {
     "tasks.max": "1",
     "connector.class": "org.apache.kafka.connect.file.FileStreamSinkConnector",

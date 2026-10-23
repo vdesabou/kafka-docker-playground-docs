@@ -12,12 +12,15 @@ processes its first record and can fail right after.
 
 When waiting for RUNNING, it fails right away if the connector or one of  
 its tasks is FAILED, since a failed task does not recover on its own.  
+A connector RUNNING without any task for 30 seconds (Replicator without  
+matching topic yet, JDBC source without table) is accepted with a  
+warning.  
 For the same reason, `--state` FAILED is reached as soon as the connector  
 or one of its tasks is FAILED (the connector itself usually stays  
 RUNNING when only a task fails).
 
-🎓 Tip: in an example script, use it right after 'connector  
-create-or-update' instead of a fixed sleep.
+🎓 Tip: 'connector create-or-update' already waits for RUNNING. Use  
+it for another state, or after 'connector create-or-update `--no-wait`'.
 
 ## Usage
 

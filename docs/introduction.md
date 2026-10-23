@@ -1,26 +1,29 @@
 # 🐳 kafka-docker-playground
-![success tests](https://img.shields.io/badge/success%20tests-859%2F1068-red)![connector tested](https://img.shields.io/badge/connector%20tested-145-green)![cp versions tested](https://img.shields.io/badge/cp%20version%20tested-8.3.2-green)![last run](https://img.shields.io/badge/last%20run-2026--10--22%2022:46-green)
+![success tests](https://img.shields.io/badge/success%20tests-790%2F1068-red)![connector tested](https://img.shields.io/badge/connector%20tested-145-green)![cp versions tested](https://img.shields.io/badge/cp%20version%20tested-8.3.2-green)![last run](https://img.shields.io/badge/last%20run-2026--10--23%2013:15-green)
 ![GitHub issues by-label](https://img.shields.io/github/issues/vdesabou/kafka-docker-playground/CI%20failing%20🔥)![GitHub issues by-label](https://img.shields.io/github/issues/vdesabou/kafka-docker-playground/enhancement%20✨)
 ![GitHub repo size](https://img.shields.io/github/repo-size/vdesabou/kafka-docker-playground)
 [![Add a star on GitHub](https://img.shields.io/github/stars/vdesabou/kafka-docker-playground?style=social)](https://github.com/vdesabou/kafka-docker-playground)
 
 ## ✨ Features
 
-- 🔗 150+ onprem (or self-managed) connectors [examples](/content?id=🔗-connectors) (Docker Compose and CFK environments supported)
-- 🌤️ 100+ fully-managed connectors [examples](/content?id=%f0%9f%a4%96-fully-managed-connectors)
-- 🔐 10+ secured [environments](/content?id=%F0%9F%94%90-environments) (SASL, RBAC, SSL...)
-- ☁️ Confluent Cloud [examples](/content?id=☁%EF%B8%8F-confluent-cloud)
-- 💸 Confluent commercial [features](/content?id=💸-confluent-commercial) (Tiered Storage, Control Center, Audit logs...)
-- ♻️ Cluster Linking, Replicator and MirrorMaker 2 [examples](/content?id=🌍-multi-data-center-deployments)
-- 🎯 Run examples with any Confluent Platform or connector [versions](/how-to-use?id=🪄-specify-versions)
-- 🧠 Easily run commands with playground [CLI](/cli)
-- 📈 [Benchmark](/reusables?id=%e2%8f%b1%ef%b8%8f-benchmark-a-connector) a connector: throughput, version comparison, and where the time of the tasks goes (Java Flight Recorder)
-- 📊 Find what is wrong with shareable [reports](/reports): thread dumps, GC logs, flight recordings, connector benchmarks, SMT tests, Oracle XStream and CFK diagnostics
-- 🎓 Learn how the playground [works](/how-it-works)
-- 🧰 Build your own reproduction models with the [reproduction toolkit](/reusables)
-- 🎩 Work remotely with VS Code on AWS EC2 instances using [playground ec2](/playground%20ec2) commands
-- 🤖 Automated testing using Github Actions [CI](/how-it-works?id=🤖-how-ci-works)
-- 👾 And even more [playgrounds](/content?id=👾-other-playgrounds)...
+- 🔗 170+ onprem (or self-managed) connectors [examples](https://kafka-docker-playground.io/#/content?id=🔗-connectors)
+- 🌤️ 100+ fully-managed connectors [examples](https://kafka-docker-playground.io/#/content?id=%f0%9f%a4%96-fully-managed-connectors)
+- 🔐 10+ secured [environments](https://kafka-docker-playground.io/#/content?id=%F0%9F%94%90-environments) (SASL, RBAC, SSL...)
+- ☁️ Confluent Cloud [examples](https://kafka-docker-playground.io/#/content?id=☁%EF%B8%8F-confluent-cloud)
+- 💸 Confluent commercial [features](https://kafka-docker-playground.io/#/content?id=💸-confluent-commercial) (Tiered Storage, Control Center, Audit logs...)
+- ♻️ Cluster Linking, Replicator and MirrorMaker 2 [examples](https://kafka-docker-playground.io/#/content?id=🌍-multi-data-center-deployments)
+- 🎯 Run examples with any Confluent Platform or connector [versions](https://kafka-docker-playground.io/#/how-to-use?id=🪄-specify-versions)
+- 🧠 Easily run commands with playground [CLI](https://kafka-docker-playground.io/#/cli)
+- 📈 [Benchmark](https://kafka-docker-playground.io/#/reusables?id=%e2%8f%b1%ef%b8%8f-benchmark-a-connector) a connector: throughput, version comparison, and where the time of the tasks goes (Java Flight Recorder)
+- 📊 Find what is wrong with shareable [reports](https://kafka-docker-playground.io/#/reports): thread dumps, GC logs, flight recordings, connector benchmarks, SMT tests, Oracle XStream and CFK diagnostics
+- 🤖 Use it with [Claude Code](https://kafka-docker-playground.io/#/claude-code): project guide, skills to add examples, review PRs, change the CLI or analyze Oracle XStream reports
+- 🎓 Learn how the playground [works](https://kafka-docker-playground.io/#/how-it-works)
+- 🧰 Build your own examples or reproduction models with the [reproduction toolkit](https://kafka-docker-playground.io/#/reusables)
+- ✨ Work remotely with VS Code using [playground ec2](https://kafka-docker-playground.io/#/playground%20ec2) CLI command
+- 🦭 Run examples with [Podman](https://kafka-docker-playground.io/#/how-to-use?id=%f0%9f%a6%ad-using-podman-instead-of-docker) through its Docker-compatible API
+- 🤖 Automated testing using Github Actions [CI](https://kafka-docker-playground.io/#/how-it-works?id=🤖-how-ci-works)
+- ☸️ Run any onprem connector example using Confluent For Kubernetes (CFK) completely transparently using `--environment cfk` CLI option
+- 👾 And even more [playgrounds](https://kafka-docker-playground.io/#/content?id=👾-other-playgrounds)...
 
 ## 📊 See what it finds
 

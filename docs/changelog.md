@@ -80,6 +80,8 @@
 
 ##### 🐛 Bugs
 
+- 🐛 playground container set-environment-variables writes an invalid compose override (remote debugging broken) [#9515](https://github.com/vdesabou/kafka-docker-playground/issues/9515)
+- 🐛 playground topic consume garbles and doesn't count records with multi-line headers (dead letter queues) [#9514](https://github.com/vdesabou/kafka-docker-playground/issues/9514)
 - 🐛 playground stop fails when --connector-tag is set, the previous example keeps running [#9504](https://github.com/vdesabou/kafka-docker-playground/issues/9504)
 - 🐛 playground connector create-or-update: sed-built request bodies, --initial-state with several workers, hangs without a terminal [#9484](https://github.com/vdesabou/kafka-docker-playground/issues/9484)
 - 🐛 playground topic consume: --min-expected-messages checks offsets, hangs on transactional topics, slow, | in data breaks the display [#9477](https://github.com/vdesabou/kafka-docker-playground/issues/9477)

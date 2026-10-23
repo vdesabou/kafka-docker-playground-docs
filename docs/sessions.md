@@ -370,6 +370,7 @@ playground topic consume -t ticks --count
 
 **Links**
 
+- 🍪 Deep dive: [`topic produce` under the hood, hands-on lab and repro recipes](/deep-dive-topic-produce.md)
 - 🧠 CLI reference: [playground topic produce](/playground%20topic%20produce) (an example for each flag)
 
 ## 📥 Read a topic
@@ -403,6 +404,7 @@ playground topic consume -t payments --min-expected-messages 5
 
 **Links**
 
+- 🍪 Deep dive: [`topic consume` under the hood, hands-on lab and repro recipes](/deep-dive-topic-consume.md)
 - 🧠 CLI reference: [playground topic consume](/playground%20topic%20consume) (an example for each flag)
 
 ## 📈 Is version Y slower? Benchmark two versions

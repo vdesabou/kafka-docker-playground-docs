@@ -6,16 +6,16 @@
 #        (default: all the sessions)
 #
 # requirements: vhs, ffmpeg, Google Chrome (headless screenshots of the HTML report), docker for the sessions that
-# run an example (cfk-bundle, remote-debugging, dlq, smt-test, topic-produce, topic-consume, benchmark, network-traffic,
-# connect-migration)
+# run an example (run, cfk-bundle, remote-debugging, dlq, smt-test, topic-produce, topic-consume, benchmark,
+# network-traffic, connect-migration)
 # connect-migration also needs Confluent Cloud (the [ccloud] details in the playground.ini of KDP_DIR, from a ccloud
 # example run once in that clone, and the Cloud API key of the secrets store) and AWS credentials (~/.aws): it creates a
 # fully managed connector, deleted after the recording
 # Same isolation as scripts/generate-cli-videos.sh (neutral clone path, env -i, empty HOME except for the docker
 # sessions, no-op open), but it does not change your playground config.
 #
-# ⚠️ the remote-debugging, dlq, smt-test, topic-produce, topic-consume, benchmark, network-traffic and connect-migration sessions start an example off camera: it stops the environment
-# that is running in that clone
+# ⚠️ the remote-debugging, dlq, smt-test, topic-produce, topic-consume, benchmark, network-traffic and connect-migration sessions start an example off camera, and the run
+# session runs examples on camera: it stops the environment that is running in that clone
 set -e
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 cd "$DIR/.."
@@ -46,10 +46,15 @@ fi
 #               that cost money)
 #   stills      images shown after the terminal part instead of a report (screenshots of an IDE...):
 #               "<image>:<seconds>" items, each fitted to the frame on the background color of the terminal
-ALL_SESSIONS=(thread-dump gc-logs flight-recorder oracle-xstream-report cfk-bundle sourcecode remote-debugging dlq smt-test topic-produce topic-consume benchmark network-traffic connect-migration terraform)
+ALL_SESSIONS=(run thread-dump gc-logs flight-recorder oracle-xstream-report cfk-bundle sourcecode remote-debugging dlq smt-test topic-produce topic-consume benchmark network-traffic connect-migration terraform)
 session_settings() {
   report="" scroll="" page_height=4100 docker="" setup="" teardown="" stills=""
   case "$1" in
+    run)
+      docker=yes
+      setup=setup_run
+      teardown=teardown_run
+      ;;
     thread-dump)
       report="/tmp/thread-dump/*-thread-report.html"
       scroll="4:0 7:960 6:2560"
@@ -123,6 +128,24 @@ session_settings() {
       exit 1
       ;;
   esac
+}
+
+# the run history of the clone, put aside: the session shows its own runs only ('playground history', the history of
+# the menu), restored by the teardown
+setup_run() {
+  rm -f playground-run-history.session-backup
+  if [ -f playground-run-history ]
+  then
+    mv playground-run-history playground-run-history.session-backup
+  fi
+  : > playground-run-history
+}
+teardown_run() {
+  if [ -f playground-run-history.session-backup ]
+  then
+    mv playground-run-history.session-backup playground-run-history
+  fi
+  return 0
 }
 
 setup_jdbc_postgresql_sink() {
@@ -472,7 +495,7 @@ do
   ffmpeg -hide_banner -loglevel error -y -ss "$poster_at" -i "docs/videos/session-$session.mp4" -frames:v 1 "docs/images/sessions/$session.png"
 done
 
-if [[ " ${sessions[*]} " =~ " "(remote-debugging|dlq|smt-test|topic-produce|topic-consume|benchmark|network-traffic|connect-migration|terraform)" " ]]
+if [[ " ${sessions[*]} " =~ " "(run|remote-debugging|dlq|smt-test|topic-produce|topic-consume|benchmark|network-traffic|connect-migration|terraform)" " ]]
 then
   echo "🛑 stopping the example"
   (cd "$KDP_DIR" && PATH="$KDP_DIR/scripts/cli:$PATH" playground stop > /dev/null 2>&1) || true

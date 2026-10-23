@@ -8,8 +8,8 @@
 - 🧠 playground topic consume: add --last, --from-timestamp, --partition/--offset, --json, --count, --no-decode, --print-schema [#9479](https://github.com/vdesabou/kafka-docker-playground/issues/9479)
 - 🐛 playground topic produce: fix keys, headers, batches, --validate and playground stop, add --throughput and --value-format [#9474](https://github.com/vdesabou/kafka-docker-playground/issues/9474)
 - 🧠 Add playground debug degrade-traffic (latency, packet loss, corruption) and fix add\_latency functions [#9453](https://github.com/vdesabou/kafka-docker-playground/issues/9453)
-- 🧠 Make repro export / import self-contained and safe [#9447](https://github.com/vdesabou/kafka-docker-playground/issues/9447)
-- 🧠 Bite size sessions: narrated terminal videos that end on the HTML report [#9437](https://github.com/vdesabou/kafka-docker-playground/issues/9437)
+- 🧰🧠 Make repro export / import self-contained and safe [#9447](https://github.com/vdesabou/kafka-docker-playground/issues/9447)
+- 🎬 Bite size sessions: narrated terminal videos that end on the HTML report [#9437](https://github.com/vdesabou/kafka-docker-playground/issues/9437)
 - 🧠 playground topic dlq inspect and replay [#9433](https://github.com/vdesabou/kafka-docker-playground/issues/9433)
 - 🧠 playground connector validate and connector diff [#9432](https://github.com/vdesabou/kafka-docker-playground/issues/9432)
 - 🧠 playground consumer-group reset-offsets and delete [#9431](https://github.com/vdesabou/kafka-docker-playground/issues/9431)
@@ -20,7 +20,6 @@
 - 🧠 playground connector benchmark: load for the SQS, Kinesis, Pub/Sub, SFTP and HDFS 3 source examples [#9395](https://github.com/vdesabou/kafka-docker-playground/issues/9395)
 - 🧠 playground connector benchmark: annotate the measure on the Grafana dashboards and link to them, Prometheus scrapes every 15s [#9376](https://github.com/vdesabou/kafka-docker-playground/issues/9376)
 - 🧠 --enable-sql-datagen uses the benchmark-load.bash of the example (no more Java datagen), playground connector benchmark --sessions, MySQL examples on CUSTOMERS [#9374](https://github.com/vdesabou/kafka-docker-playground/issues/9374)
-- 🧠 playground debug flight-recorder: record over JMX instead of jcmd (no change-jdk), playground settings by default, analyze on stop [#9368](https://github.com/vdesabou/kafka-docker-playground/issues/9368)
 - 🧠 playground connector benchmark: record the workers with Java Flight Recorder and show where the time goes, new playground analyze flight-recorder [#9366](https://github.com/vdesabou/kafka-docker-playground/issues/9366)
 - 🧠 connect-testing-smt-filestream-sink: show all the ways to use playground connector smt test, plus --no-open and --smt-jar with dependencies [#9360](https://github.com/vdesabou/kafka-docker-playground/issues/9360)
 - ✨⭐🧠 playground connector smt test: run a transform chain on a record, step by step, with an HTML report [#9358](https://github.com/vdesabou/kafka-docker-playground/issues/9358)
@@ -78,6 +77,7 @@
 
 ##### 🐛 Bugs
 
+- 🐛 playground stop fails when --connector-tag is set, the previous example keeps running [#9504](https://github.com/vdesabou/kafka-docker-playground/issues/9504)
 - 🐛 playground connector create-or-update: sed-built request bodies, --initial-state with several workers, hangs without a terminal [#9484](https://github.com/vdesabou/kafka-docker-playground/issues/9484)
 - 🐛 playground topic consume: --min-expected-messages checks offsets, hangs on transactional topics, slow, | in data breaks the display [#9477](https://github.com/vdesabou/kafka-docker-playground/issues/9477)
 - 🐛 playground topic produce generates out-of-range int32 values for Protobuf schemas [#9467](https://github.com/vdesabou/kafka-docker-playground/issues/9467)

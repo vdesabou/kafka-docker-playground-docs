@@ -3,6 +3,7 @@
 ## October 2026
 ##### 🌟 Enhancements
 
+- 🧠🚇 Tunnels: bore server as a drop-in replacement for ngrok (no monthly quota) [#9604](https://github.com/vdesabou/kafka-docker-playground/issues/9604)
 - 🧠 ServiceNow examples: set Identity Type of admin to Machine automatically [#9524](https://github.com/vdesabou/kafka-docker-playground/issues/9524)
 - 👾 ServiceNow sink examples: create u\_test\_table automatically [#9522](https://github.com/vdesabou/kafka-docker-playground/issues/9522)
 - 🧠 Add a Deep dives section to the website, starting with block-traffic / degrade-traffic [#9509](https://github.com/vdesabou/kafka-docker-playground/pull/9509)

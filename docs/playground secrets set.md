@@ -14,7 +14,8 @@ updated where the existing reference points, which is not necessarily
 the backend currently configured.
 
 🎓 Tip: set the config key secrets.github-repo and every value stored  
-here is also pushed to that repository's GitHub Actions secrets.
+here is also pushed to that repository's GitHub Actions secrets  
+(not when `PLAYGROUND_SECRETS_DIR` points at another store).
 
 ## Usage
 

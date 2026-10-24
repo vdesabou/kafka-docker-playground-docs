@@ -6,16 +6,16 @@
 #        (default: all the sessions)
 #
 # requirements: vhs, ffmpeg, Google Chrome (headless screenshots of the HTML report), docker for the sessions that
-# run an example (run, cfk-bundle, remote-debugging, dlq, smt-test, topic-produce, topic-consume, benchmark,
-# network-traffic, connect-migration)
+# run an example or an environment (every session with docker=yes in session_settings: all but thread-dump, gc-logs,
+# flight-recorder, oracle-xstream-report and sourcecode)
 # connect-migration also needs Confluent Cloud (the [ccloud] details in the playground.ini of KDP_DIR, from a ccloud
 # example run once in that clone, and the Cloud API key of the secrets store) and AWS credentials (~/.aws): it creates a
 # fully managed connector, deleted after the recording
 # Same isolation as scripts/generate-cli-videos.sh (neutral clone path, env -i, empty HOME except for the docker
 # sessions, no-op open), but it does not change your playground config.
 #
-# ⚠️ the remote-debugging, dlq, smt-test, topic-produce, topic-consume, benchmark, network-traffic and connect-migration sessions start an example off camera, and the run
-# session runs examples on camera: it stops the environment that is running in that clone
+# ⚠️ the docker sessions start an example or an environment, off camera or on camera: it stops the environment that is
+# running in that clone
 set -e
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 cd "$DIR/.."
@@ -46,7 +46,7 @@ fi
 #               that cost money)
 #   stills      images shown after the terminal part instead of a report (screenshots of an IDE...):
 #               "<image>:<seconds>" items, each fitted to the frame on the background color of the terminal
-ALL_SESSIONS=(run thread-dump gc-logs flight-recorder oracle-xstream-report cfk-bundle sourcecode remote-debugging dlq smt-test topic-produce topic-consume benchmark network-traffic connect-migration terraform)
+ALL_SESSIONS=(run secured-environments repro-models versions container-lifecycle offsets-and-lag create-or-update log-levels container-logs schema topic-administration thread-dump gc-logs flight-recorder oracle-xstream-report cfk-bundle sourcecode remote-debugging dlq smt-test topic-produce topic-consume benchmark network-traffic connect-migration terraform)
 session_settings() {
   report="" scroll="" page_height=4100 docker="" setup="" teardown="" stills=""
   case "$1" in
@@ -54,6 +54,48 @@ session_settings() {
       docker=yes
       setup=setup_run
       teardown=teardown_run
+      ;;
+    topic-administration)
+      docker=yes
+      setup=setup_topic_administration
+      ;;
+    schema)
+      docker=yes
+      setup=setup_schema
+      ;;
+    container-logs)
+      docker=yes
+      setup=setup_container_logs
+      ;;
+    log-levels)
+      docker=yes
+      setup=setup_log_levels
+      ;;
+    create-or-update)
+      docker=yes
+      setup=setup_create_or_update
+      ;;
+    offsets-and-lag)
+      docker=yes
+      setup=setup_offsets_and_lag
+      ;;
+    container-lifecycle)
+      docker=yes
+      setup=setup_jdbc_postgresql_sink
+      ;;
+    versions)
+      docker=yes
+      setup=setup_versions
+      ;;
+    repro-models)
+      docker=yes
+      setup=setup_repro_models
+      teardown=teardown_repro_models
+      ;;
+    secured-environments)
+      docker=yes
+      setup=setup_secured_environments
+      teardown=teardown_secured_environments
       ;;
     thread-dump)
       report="/tmp/thread-dump/*-thread-report.html"
@@ -145,6 +187,210 @@ teardown_run() {
   then
     mv playground-run-history.session-backup playground-run-history
   fi
+  return 0
+}
+
+# a plaintext environment and no topic orders: the tape creates it with 'topic create' (in the vhs terminal, the screen
+# sometimes stops updating while 'topic produce' creates a topic)
+setup_topic_administration() {
+  playground start-environment --environment plaintext > /tmp/kdp-session-setup.log 2>&1
+  playground topic delete -t orders >> /tmp/kdp-session-setup.log 2>&1
+  rm -f /tmp/out.log
+}
+
+# a plaintext environment (fresh registry: the ids start at 1), the empty topic orders (in the vhs terminal, the screen
+# sometimes stops updating while 'topic produce' creates a topic) and three versions of the Order schema of the schema
+# deep dive lab: v1 (id, amount), v2-bad (+ currency without default, refused by BACKWARD), v2 (+ currency with a default)
+setup_schema() {
+  playground start-environment --environment plaintext > /tmp/kdp-session-setup.log 2>&1
+  playground topic create -t orders >> /tmp/kdp-session-setup.log 2>&1
+  cat > /tmp/order-v1.avsc << 'EOF'
+{ "type": "record", "name": "Order", "namespace": "com.example",
+  "fields": [ {"name": "id", "type": "int"}, {"name": "amount", "type": "double"} ] }
+EOF
+  cat > /tmp/order-v2-bad.avsc << 'EOF'
+{ "type": "record", "name": "Order", "namespace": "com.example",
+  "fields": [ {"name": "id", "type": "int"}, {"name": "amount", "type": "double"}, {"name": "currency", "type": "string"} ] }
+EOF
+  cat > /tmp/order-v2.avsc << 'EOF'
+{ "type": "record", "name": "Order", "namespace": "com.example",
+  "fields": [ {"name": "id", "type": "int"}, {"name": "amount", "type": "double"}, {"name": "currency", "type": "string", "default": "EUR"} ] }
+EOF
+  rm -f /tmp/out.log
+}
+
+# the FileStream sink example, and the bad-sink connector of other/deep-dive-labs/container-logs.sh: an AvroConverter on
+# the plain JSON records of topic filestream, its task FAILED (Unknown magic byte!), so that the digest has an ERROR
+setup_container_logs() {
+  playground run -f connect/connect-filestream-sink/filestream-sink.sh > /tmp/kdp-session-setup.log 2>&1 || return 1
+  playground connector create-or-update --connector bad-sink --no-wait >> /tmp/kdp-session-setup.log 2>&1 << 'EOF'
+{
+  "tasks.max": "1",
+  "connector.class": "org.apache.kafka.connect.file.FileStreamSinkConnector",
+  "topics": "filestream",
+  "file": "/tmp/bad.json",
+  "key.converter": "org.apache.kafka.connect.storage.StringConverter",
+  "value.converter": "io.confluent.connect.avro.AvroConverter",
+  "value.converter.schema.registry.url": "http://schema-registry:8081"
+}
+EOF
+  playground connector wait --connector bad-sink --state FAILED --max-wait 120 >> /tmp/kdp-session-setup.log 2>&1
+}
+
+# the FileStream sink example (connector filestream-sink, topic filestream to /tmp/output.json), with the default log
+# levels: a restart of connect puts back the levels a previous recording may have set
+setup_log_levels() {
+  playground run -f connect/connect-filestream-sink/filestream-sink.sh > /tmp/kdp-session-setup.log 2>&1
+}
+
+# in session_settings(), next to the other cases
+
+# with the other setup functions
+# the FileStream sink example (connector filestream-sink, 5 records in the topic filestream), and the config "sent by a
+# customer" in the REST API format: a file in a folder that does not exist in the connect container, and the same config
+# fixed (/tmp/customer-output.json). No broken-sink connector left by a previous recording
+setup_create_or_update() {
+  playground run -f connect/connect-filestream-sink/filestream-sink.sh > /tmp/kdp-session-setup.log 2>&1
+  cat > /tmp/customer-connector.json << 'EOF'
+{
+  "name": "customer-sink",
+  "config": {
+    "tasks.max": "1",
+    "connector.class": "org.apache.kafka.connect.file.FileStreamSinkConnector",
+    "topics": "filestream",
+    "file": "/does/not/exist/output.json",
+    "key.converter": "org.apache.kafka.connect.storage.StringConverter",
+    "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+    "value.converter.schemas.enable": "false"
+  }
+}
+EOF
+  sed 's|/does/not/exist/output.json|/tmp/customer-output.json|' /tmp/customer-connector.json > /tmp/customer-connector-fixed.json
+  playground connector delete -c broken-sink >> /tmp/kdp-session-setup.log 2>&1 || true
+}
+
+# in session_settings(), next to the other cases
+
+# with the other setup functions
+# the FileStream sink example (5 records written to /tmp/output.json), its first commit (offset 5: lag 0 instead of
+# "lag: -"), then the connector paused and 20 more records in the topic filestream: a lag of 20 that does not move
+setup_offsets_and_lag() {
+  playground run -f connect/connect-filestream-sink/filestream-sink.sh > /tmp/kdp-session-setup.log 2>&1
+  playground connector show-lag --connector filestream-sink --interval 5 --max-wait 90 >> /tmp/kdp-session-setup.log 2>&1
+  playground connector pause --connector filestream-sink >> /tmp/kdp-session-setup.log 2>&1
+  playground topic produce -t filestream --nb-messages 20 --value '{"id": %g}' >> /tmp/kdp-session-setup.log 2>&1
+}
+
+# add container-lifecycle to ALL_SESSIONS, to the docker list of the header comment, to the "start an example off camera"
+# warning, and to the regex of the final 'stopping the example' block
+
+# in session_settings():
+
+# no setup_container_lifecycle / teardown needed: setup_jdbc_postgresql_sink (connect/connect-jdbc-postgresql-sink/postgres-sink.sh)
+# already logs to /tmp/kdp-session-setup.log. The tape leaves connect on its original definition (the last recreate
+# drops the KAFKA_HEAP_OPTS override, and the JDK 17 goes away with it)
+
+# add versions to ALL_SESSIONS, to the docker list of the header comment, to the "start an example off camera" warning,
+# and to the regex of the final 'stopping the example' block
+
+# in session_settings():
+
+# the JDBC PostgreSQL sink example with the customer's versions (CP 8.2.0, connector 10.8.4), the avro schema of its
+# topic orders in /tmp/orders.avsc for the record produced on camera, and the 10.9.9 zip of the connector from
+# Confluent Hub in /tmp/engineering-build (it plays the build sent by engineering). The tape needs 10.9.9 to be the
+# latest version on Confluent Hub: 'connector versions' says "is latest" after the zip, and update-version --connect-tag
+# installs the latest version again (see the risks)
+setup_versions() {
+  local latest
+  latest=$(curl -s https://api.hub.confluent.io/api/plugins/confluentinc/kafka-connect-jdbc/versions | jq -r '.[-1].version')
+  if [ "$latest" != "10.9.9" ]
+  then
+    echo "❌ the latest JDBC connector on Confluent Hub is $latest, not 10.9.9: update tapes/session-versions.tape" | tee /tmp/kdp-session-setup.log
+    return 1
+  fi
+  # the version list cached by 'connector versions' (a stale one would not show 10.9.9 as the latest)
+  rm -f /tmp/version_confluentinc_kafka-connect-jdbc
+  rm -rf /tmp/engineering-build
+  mkdir -p /tmp/engineering-build
+  curl -sSfL -o /tmp/engineering-build/confluentinc-kafka-connect-jdbc-10.9.9.zip \
+    https://hub-downloads.confluent.io/api/plugins/confluentinc/kafka-connect-jdbc/versions/10.9.9/confluentinc-kafka-connect-jdbc-10.9.9.zip > /tmp/kdp-session-setup.log 2>&1 || return 1
+  playground run -f connect/connect-jdbc-postgresql-sink/postgres-sink.sh --tag 8.2.0 --connector-tag 10.8.4 >> /tmp/kdp-session-setup.log 2>&1
+  sed -n "/topic produce -t orders --nb-messages 1 << 'EOF'/,/^EOF/p" connect/connect-jdbc-postgresql-sink/postgres-sink.sh | sed '1d;$d' > /tmp/orders.avsc
+}
+
+    # in session_settings
+
+# an empty reproduction-models folder: the private submodule is never checked out in this clone, and the session must
+# show no private model. Bootstrap needs no git repository there (without reproduction-models/.git it skips the
+# pre-commit hook, check -f / export -f / import skip their git calls). The clipboard is disabled (bootstrap and run
+# copy their command with pbcopy), the run history is put aside (export takes the run line of the model from it), and
+# the previous current example is kept: the teardown restores all three and removes everything bootstrap / import wrote
+repro_models_state=/tmp/kdp-session-repro-state
+setup_repro_models() {
+  if [ -e reproduction-models/.git ] || [ -n "$(ls -A reproduction-models 2> /dev/null)" ]
+  then
+    echo "❌ $KDP_DIR/reproduction-models is not empty: the session must not show private models" | tee /tmp/kdp-session-setup.log
+    return 1
+  fi
+  mkdir -p reproduction-models "$repro_models_state"
+  playground config get clipboard 2> /dev/null | tail -1 > "$repro_models_state/clipboard"
+  playground state get run.test_file 2> /dev/null | tail -1 > "$repro_models_state/test_file"
+  playground config set clipboard false > /tmp/kdp-session-setup.log 2>&1
+  rm -f playground-run-history.session-backup
+  if [ -f playground-run-history ]
+  then
+    mv playground-run-history playground-run-history.session-backup
+  fi
+  : > playground-run-history
+  # the bundle folder, and the empty secrets dir the tape points PLAYGROUND_SECRETS_DIR to
+  rm -rf /tmp/kdp-session-repro /tmp/kdp-session-secrets
+  mkdir -p /tmp/kdp-session-repro /tmp/kdp-session-secrets
+}
+teardown_repro_models() {
+  # the model's environment, while its stop.sh still exists
+  playground stop >> /tmp/kdp-session-setup.log 2>&1
+  # everything bootstrap and import wrote (the folder was empty before the session)
+  if [ ! -e reproduction-models/.git ]
+  then
+    find reproduction-models -mindepth 1 -maxdepth 1 -exec rm -rf {} +
+  fi
+  rm -rf /tmp/kdp-session-repro /tmp/kdp-session-secrets
+  if [ -f playground-run-history.session-backup ]
+  then
+    mv playground-run-history.session-backup playground-run-history
+  fi
+  local prev
+  prev=$(cat "$repro_models_state/test_file" 2> /dev/null)
+  [ -n "$prev" ] && playground state set run.test_file "$prev" >> /tmp/kdp-session-setup.log 2>&1
+  prev=$(cat "$repro_models_state/clipboard" 2> /dev/null)
+  playground config set clipboard "${prev:-true}" >> /tmp/kdp-session-setup.log 2>&1
+  rm -rf "$repro_models_state"
+  return 0
+}
+
+    # in session_settings
+
+# the config of the FileStream sink of the example with an Avro converter: it opens its own Schema Registry connection,
+# so create-or-update --dry-run shows the keys it adds under sasl-ssl. The tape runs the example itself, twice
+# (sasl-ssl, then rbac-sasl-plain): nothing is started off camera
+setup_secured_environments() {
+  rm -f /tmp/out.log
+  cat > /tmp/filestream-avro.json << 'EOF2'
+{
+  "tasks.max": "1",
+  "connector.class": "org.apache.kafka.connect.file.FileStreamSinkConnector",
+  "topics": "filestream",
+  "file": "/tmp/output.json",
+  "value.converter": "io.confluent.connect.avro.AvroConverter",
+  "value.converter.schema.registry.url": "http://schema-registry:8081"
+}
+EOF2
+  : > /tmp/kdp-session-setup.log
+}
+# the rbac environment holds the role binding deleted on camera if the recording stopped in the middle: stop it
+teardown_secured_environments() {
+  playground stop >> /tmp/kdp-session-setup.log 2>&1
+  rm -f /tmp/filestream-avro.json /tmp/out.log
   return 0
 }
 
@@ -414,9 +660,18 @@ do
   [ -n "$docker" ] && vhs_home="$HOME"
   vhs_env=(env -i HOME="$vhs_home" USER="$USER" SHELL=/bin/bash LANG="${LANG:-en_US.UTF-8}" TERM=xterm-256color
     PATH="$KDP_DIR/scripts/cli:$PATH" KDP_DIR="$KDP_DIR" VHS_BIN_DIR="$VHS_BIN_DIR")
-  # the first start of ttyd sometimes fails (net::ERR_CONNECTION_REFUSED): retry once
+  # the first start of ttyd sometimes fails (net::ERR_CONNECTION_REFUSED): retry once. A failed take may have changed
+  # what the setup prepared (offsets moved, a connector stopped, a rule added): run the setup again before the retry
   recorded=yes
-  "${vhs_env[@]}" vhs "tapes/session-$session.tape" > /dev/null || "${vhs_env[@]}" vhs "tapes/session-$session.tape" > /dev/null || recorded=""
+  if ! "${vhs_env[@]}" vhs "tapes/session-$session.tape" > /dev/null
+  then
+    if [ -n "$setup" ]
+    then
+      echo "   🔁 off camera: $setup again before the retry (log in /tmp/kdp-session-setup.log)"
+      (cd "$KDP_DIR" && PATH="$KDP_DIR/scripts/cli:$PATH" && $setup) || recorded=""
+    fi
+    [ -n "$recorded" ] && { "${vhs_env[@]}" vhs "tapes/session-$session.tape" > /dev/null || recorded=""; }
+  fi
   if [ -n "$teardown" ]
   then
     echo "   🧹 off camera: $teardown (log in /tmp/kdp-session-setup.log)"
@@ -495,7 +750,7 @@ do
   ffmpeg -hide_banner -loglevel error -y -ss "$poster_at" -i "docs/videos/session-$session.mp4" -frames:v 1 "docs/images/sessions/$session.png"
 done
 
-if [[ " ${sessions[*]} " =~ " "(run|remote-debugging|dlq|smt-test|topic-produce|topic-consume|benchmark|network-traffic|connect-migration|terraform)" " ]]
+if [[ " ${sessions[*]} " =~ " "(run|secured-environments|repro-models|versions|container-lifecycle|offsets-and-lag|create-or-update|log-levels|container-logs|schema|topic-administration|remote-debugging|dlq|smt-test|topic-produce|topic-consume|benchmark|network-traffic|connect-migration|terraform)" " ]]
 then
   echo "🛑 stopping the example"
   (cd "$KDP_DIR" && PATH="$KDP_DIR/scripts/cli:$PATH" playground stop > /dev/null 2>&1) || true

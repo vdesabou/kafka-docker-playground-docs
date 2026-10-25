@@ -4,8 +4,9 @@
 #
 # usage: scripts/generate-reports-gallery.sh [path of the kafka-docker-playground clone]
 #
-# The benchmark and SMT test reports need a real run, they are not regenerated: pass them with
-#   BENCHMARK_REPORT=/tmp/playground-benchmark/<run>.html SMT_REPORT=/tmp/playground-smt-test/<run>.html
+# The connector diagnose, benchmark and SMT test reports need a real run, they are not regenerated: pass them with
+#   DIAGNOSE_REPORT=/tmp/playground-diagnose/<run>.html BENCHMARK_REPORT=/tmp/playground-benchmark/<run>.html
+#   SMT_REPORT=/tmp/playground-smt-test/<run>.html
 set -e
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 DOCS="$DIR/../docs"
@@ -26,6 +27,7 @@ reports=(
   "oracle-xstream-report|oracle-xstream-report --sample synthetic_failures"
   "cfk-bundle|cfk-bundle --sample synthetic"
   "tcp-dump|tcp-dump --sample kafka_and_network_errors"
+  "logs|logs --sample support_bundle --include-warnings"
 )
 
 cd "$KDP"
@@ -42,6 +44,7 @@ done
 strip_user_paths() {
   perl -pe 's#"/(?:Users|home|private)/[^"]*/([^"/]+)"#"$1"#g' "$1" > "$2"
 }
+[ -n "$DIAGNOSE_REPORT" ] && strip_user_paths "$DIAGNOSE_REPORT" "$DOCS/reports/connector-diagnose.html"
 [ -n "$BENCHMARK_REPORT" ] && strip_user_paths "$BENCHMARK_REPORT" "$DOCS/reports/benchmark.html"
 [ -n "$SMT_REPORT" ] && strip_user_paths "$SMT_REPORT" "$DOCS/reports/smt-test.html"
 

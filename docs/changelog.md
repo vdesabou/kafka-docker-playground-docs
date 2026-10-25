@@ -3,6 +3,7 @@
 ## October 2026
 ##### 🌟 Enhancements
 
+- 🧠📊 analyze logs and connector diagnose: HTML report [#9648](https://github.com/vdesabou/kafka-docker-playground/issues/9648)
 - 🧠🦈 tcp-dump: capture from netshoot (no install), and analyze tcp-dump with an HTML report [#9644](https://github.com/vdesabou/kafka-docker-playground/issues/9644)
 - 🧠🚇 Tunnels: bore server as a drop-in replacement for ngrok (no monthly quota) [#9604](https://github.com/vdesabou/kafka-docker-playground/issues/9604)
 - 🧠 ServiceNow examples: set Identity Type of admin to Machine automatically [#9524](https://github.com/vdesabou/kafka-docker-playground/issues/9524)

@@ -13,6 +13,8 @@ misbehaves, and returns:
 It never follows logs and never waits for the lag to reach 0, so it is  
 safe to use from scripts and AI agents.
 
+🌐 Also writes a self-contained HTML report in `--output-dir`, to attach to a case, opened in the browser in an interactive terminal (`--no-open` to skip): verdict, findings, status and traces of the tasks, error records naming the connector, lag per partition or offsets, next steps, and the configuration (secrets masked).
+
 🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-connector-troubleshooting  
 🎬 Bite size session: https://kafka-docker-playground.io/#/sessions?id=%F0%9F%A9%BA-a-sink-is-running-but-writes-nothing
 
@@ -44,11 +46,23 @@ playground connector diagnose [OPTIONS]
 
 #### `--max-findings MAX_FINDINGS`
 
-✂️ Maximum number of distinct error records to show (default 15)
+✂️ Maximum number of distinct error records to show (default 15). The HTML report has them all
 
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Default Value:  | `15`
+
+#### `--output-dir, -o OUTPUT_DIR`
+
+📂 Output directory for the HTML report (default: /tmp/playground-diagnose)
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Default Value:  | `/tmp/playground-diagnose`
+
+#### `--no-open`
+
+🙈 Do not open the HTML report in the browser
 
 ## Examples
 
@@ -62,6 +76,10 @@ playground connector diagnose --connector http-sink
 
 ```bash
 playground connector diagnose --connector http-sink --since 10m --max-findings 5
+```
+
+```bash
+playground connector diagnose --connector http-sink --output-dir ./case-123456 --no-open
 ```
 
 ## Example output
@@ -89,6 +107,9 @@ topic: filestream partition: 0   current-offset: 5          end-offset: 5       
    playground container logs -c connect --grep "filestream-sink" --no-follow --tail 200
    playground debug log-level set --package <connector package> --level TRACE
    playground debug thread-dump --container connect
+
+17:22:10 ℹ️ ✅ HTML report saved: /tmp/playground-diagnose/connector-diagnose-filestream-sink-20261013-172210.html
+17:22:10 ℹ️ 🔗 Open in browser: file:///tmp/playground-diagnose/connector-diagnose-filestream-sink-20261013-172210.html
 ```
 
 

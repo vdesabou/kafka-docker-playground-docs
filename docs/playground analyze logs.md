@@ -17,6 +17,8 @@ level-less lines that merely contain "error" or "failed", never are.
 are extracted in a temporary folder, .gz files are decompressed on the  
 fly, binary files are skipped. Only files with findings are shown.
 
+🌐 Also writes a self-contained HTML report in `--output-dir`, opened in the browser in an interactive terminal: verdict, known causes (task killed, authentication, TLS, unknown magic byte, OutOfMemoryError...), occurrences over time, root causes (deepest exception of each record), files with findings, and every distinct record.
+
 🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-container-logs  
 🎬 Bite size session: https://kafka-docker-playground.io/#/sessions?id=%F0%9F%95%B5%EF%B8%8F-a-connector-failed-read-the-logs-live-or-from-a-customer-bundle
 
@@ -56,11 +58,23 @@ playground analyze logs [OPTIONS]
 
 #### `--max-findings MAX_FINDINGS`
 
-✂️ Maximum number of distinct records to show per file (default 40)
+✂️ Maximum number of distinct records to show per file (default 40). The HTML report and `--json` have them all
 
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Default Value:  | `40`
+
+#### `--output-dir, -o OUTPUT_DIR`
+
+📂 Output directory for the HTML report (default: ./log-analysis-output)
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Default Value:  | `./log-analysis-output`
+
+#### `--json`
+
+🗂️  Output JSON on stdout: summary, findings, root causes and every distinct record (text digest on stderr, no HTML report)
 
 ## Examples
 
@@ -84,6 +98,14 @@ playground analyze logs --file connect-logs.zip --include-warnings
 playground analyze logs -f ./logs -f broker.log.gz --max-findings 10
 ```
 
+```bash
+playground analyze logs -f support-bundle.zip --output-dir /tmp/log-reports
+```
+
+```bash
+playground analyze logs -f connect.log --json
+```
+
 ## Example output
 
 ```text
@@ -98,6 +120,8 @@ $ playground analyze logs -f connect.log
         at io.confluent.connect.http.writer.HttpWriterImpl.handleErrors(HttpWriterImpl.java:405)
 
 17:23:19 ℹ️ 📊 1 file(s) with findings out of 1 scanned (binary files skipped: 0)
+17:23:19 ℹ️ ✅ HTML report saved: /home/me/log-analysis-output/connect-log-report.html
+17:23:19 ℹ️ 🔗 Open in browser: file:///home/me/log-analysis-output/connect-log-report.html
 ```
 
 

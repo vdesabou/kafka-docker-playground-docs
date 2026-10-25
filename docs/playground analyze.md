@@ -16,9 +16,8 @@ playground, to see what they report.
 - **oracle-xstream-report**: Oracle XStream diagnostics (orclcdc_diag)
 - **cfk-bundle**: CFK support bundle: pods, events, CRs, logs
 - **flight-recorder**: JFR: where the time of the connector tasks goes
-- **tcp-dump**: network capture: resets, TLS alerts, Kafka errors
 
-To collect them: playground debug thread-dump, heap-dump, flight-recorder, tcp-dump,  
+To collect them: playground debug thread-dump, heap-dump, flight-recorder,  
 playground connector oracle-cdc-xstream generate-report,  
 playground debug cfk generate-bundle.
 
@@ -41,6 +40,5 @@ playground analyze COMMAND
 - [oracle-xstream-report](playground%20analyze%20oracle-xstream-report) - 🅾️ Analyze Oracle XStream CDC diagnostics reports (orclcdc_diag.sql)
 - [cfk-bundle](playground%20analyze%20cfk-bundle) - 📦 Analyze a Confluent for Kubernetes (CFK) support bundle
 - [flight-recorder](playground%20analyze%20flight-recorder) - 🛩️ Analyze a Java Flight Recorder recording: where the time of the connector tasks goes
-- [tcp-dump](playground%20analyze%20tcp-dump) - 🦈 Analyze a network capture (.pcap, .pcapng): refused and reset connections, retransmissions, TLS alerts, DNS errors, Kafka and HTTP errors and response times
 
 

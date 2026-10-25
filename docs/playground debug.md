@@ -17,7 +17,7 @@ fly when missing, and their output is brought back to your machine.
 
 **🌐 It is a network or TLS problem**
 
-- **tcp-dump**: capture traffic, analyze it, open it in Wireshark
+- **tcp-dump**: capture traffic, open it in Wireshark
 - **testssl**: probe a TLS endpoint, locally or in the cloud
 - **block-traffic**: cut a route with iptables, to simulate an outage
 - **degrade-traffic**: add latency, packet loss or corruption with tc
@@ -34,8 +34,7 @@ fly when missing, and their output is brought back to your machine.
 - **generate-diagnostics**: a support bundle for connect or broker
 
 🔎 To analyze what you collected (thread dumps, GC logs, heap dumps,  
-logs, Oracle XStream reports, CFK bundles, flight recordings, network  
-captures): playground analyze
+logs, Oracle XStream reports, CFK bundles, flight recordings): playground analyze
 
 ## Usage
 

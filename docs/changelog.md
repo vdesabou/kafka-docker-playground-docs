@@ -3,6 +3,7 @@
 ## October 2026
 ##### 🌟 Enhancements
 
+- 🧠✂️ jscissors rewrite: attach without restart, call trees, HTML report, and JDK 25 method tracing in the flight recorder [#9653](https://github.com/vdesabou/kafka-docker-playground/issues/9653)
 - 🧠📊 HTML reports for dlq inspect, heap-dump, connector diff, get-ci-result and container logs [#9650](https://github.com/vdesabou/kafka-docker-playground/issues/9650)
 - 🧠📊 analyze logs and connector diagnose: HTML report [#9648](https://github.com/vdesabou/kafka-docker-playground/issues/9648)
 - 🧠🦈 tcp-dump: capture from netshoot (no install), and analyze tcp-dump with an HTML report [#9644](https://github.com/vdesabou/kafka-docker-playground/issues/9644)

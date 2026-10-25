@@ -68,6 +68,16 @@ use `<option+enter>` to use the value you typed manually
 
 🔌 Class of the connector, to classify its frames as connector code (default: read from `--connector`, or guessed from the package)
 
+#### `--trace-method METHOD`
+
+🎯 Also record every call of this method, with its duration and its caller (method tracing of JDK 25+, JEP 520: the cp 8.3.2 images ship JDK 25): a class (all its methods), Class::method or @Annotation. The report gets a "Traced methods" section: calls, total, avg, max, the slowest calls and their stack. No argument values: for them, use playground debug jscissors
+
+🎓 Tip: you can pass multiple methods by specifying `--trace-method` multiple times
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Repeatable:     |  ✓ Yes
+
 #### `--threads REGEX`
 
 🧵 Regular expression of the thread names to analyze (default: ^task-thread-, or the task threads of `--connector`)
@@ -116,6 +126,10 @@ playground analyze flight-recorder -f /tmp/playground-benchmark/my-sink-20261016
 
 ```bash
 playground analyze flight-recorder -f recording.jfr --threads '^pool-.*' --json
+```
+
+```bash
+playground analyze flight-recorder -c connect --duration 60s --trace-method io.confluent.connect.jdbc.sink.JdbcDbWriter::write
 ```
 
 

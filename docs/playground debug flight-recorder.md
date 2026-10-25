@@ -63,6 +63,16 @@ playground debug flight-recorder [OPTIONS]
 | Default Value:  | `playground`
 | Allowed Values: | `playground`, `profile`, `default`, `all`
 
+#### `--trace-method METHOD`
+
+🎯 With `--action` start, also record every call of this method, with its duration and its caller (method tracing of JDK 25+, JEP 520: the cp 8.3.2 images ship JDK 25): a class (all its methods), Class::method or @Annotation. The report gets a "Traced methods" section: calls, total, avg, max, the slowest calls and their stack. No argument values: for them, use playground debug jscissors
+
+🎓 Tip: you can pass multiple methods by specifying `--trace-method` multiple times
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Repeatable:     |  ✓ Yes
+
 #### `--output-dir, -o OUTPUT_DIR`
 
 📂 Folder for the .jfr and the HTML report of the analysis, used by `--action` stop (default: current folder)
@@ -95,6 +105,10 @@ playground debug flight-recorder -c connect -c connect2 --action start --setting
 
 ```bash
 playground debug flight-recorder --action stop --output-dir /tmp/jfr --no-analyze
+```
+
+```bash
+playground debug flight-recorder --action start --trace-method io.confluent.connect.jdbc.sink.BufferedRecords --trace-method io.confluent.connect.jdbc.sink.JdbcDbWriter::write
 ```
 
 

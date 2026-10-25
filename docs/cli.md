@@ -222,6 +222,7 @@ visit https://docs.docker.com/get-docker to install
 - [oracle-xstream-report](playground%20analyze%20oracle-xstream-report) - 🅾️ Analyze Oracle XStream CDC diagnostics reports (orclcdc_diag.sql)
 - [cfk-bundle](playground%20analyze%20cfk-bundle) - 📦 Analyze a Confluent for Kubernetes (CFK) support bundle
 - [flight-recorder](playground%20analyze%20flight-recorder) - 🛩️ Analyze a Java Flight Recorder recording: where the time of the connector tasks goes
+- [jscissors](playground%20analyze%20jscissors) - ✂️ Analyze a jscissors trace: what the traced methods did, call by call
 - [tcp-dump](playground%20analyze%20tcp-dump) - 🦈 Analyze a network capture (.pcap, .pcapng): refused and reset connections, retransmissions, TLS alerts, DNS errors, Kafka and HTTP errors and response times
 
 ### Debug commands
@@ -237,7 +238,7 @@ visit https://docs.docker.com/get-docker to install
 - [block-traffic](playground%20debug%20block-traffic) - 🚫 Blocking traffic using iptables
 - [degrade-traffic](playground%20debug%20degrade-traffic) - 🐌 Add latency, packet loss, corruption or a bandwidth limit using tc
 - [java-debug](playground%20debug%20java-debug) - 🤎 JVM arguments for SSL, Kerberos or Class Loading
-- [jscissors](playground%20debug%20jscissors) - ✂️ jscissors is an instrumentation framework and can help to analyse control flow and perform some specific logging
+- [jscissors](playground%20debug%20jscissors) - ✂️ Trace the calls of any method of a running JVM: arguments, return values, durations, exceptions, call tree
 - [flight-recorder](playground%20debug%20flight-recorder) - 🛩️ Record a JVM with Java Flight Recorder, from `--action` start to `--action` stop
 - [log-level](playground%20debug%20log-level) - 🧬 Set log level for any package
 - [cfk](playground%20debug%20cfk) - 🧱 CFK debug sub-commands

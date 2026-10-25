@@ -6,6 +6,8 @@
 
 📈 Use `--compare` with a second dump of the same JVM, taken later under the same load, to see which classes grow
 
+🌐 Also writes a self-contained HTML report, `<dump>`-heap-report.html in `--output-dir`, opened in the browser in an interactive terminal: verdict, leak suspects in plain words, Kafka-aware hints (producer buffers, consumer fetch buffers, records held by the tasks, storage sink writers, CDC queues, schema caches), retained heap by class, growth between the two dumps, and links to the MAT reports
+
 🐳 MAT needs roughly as much memory as the used heap of the dump (1 to 1.5x the .hprof size): give Docker enough memory or use `--max-memory`
 
 🧪 With `--sample`, it analyzes the samples shipped in tools/heap-analyzer/samples: a quick way to see what it reports.
@@ -70,6 +72,10 @@ use `<option+enter>` to use the value you typed manually
 
 📈 Second heap dump of the same JVM, taken later: prints the classes whose instance count and shallow size grew
 
+#### `--json`
+
+🗂️  Output JSON on stdout: overview, leak suspects, retained heap by class, growth and findings (text digest on stderr, no HTML report)
+
 ## Examples
 
 ```bash
@@ -98,6 +104,10 @@ playground analyze heap-dump -f heap-1.hprof --compare heap-2.hprof
 
 ```bash
 playground analyze heap-dump -f big-heap-dump.hprof --max-memory 12g
+```
+
+```bash
+playground analyze heap-dump --sample leak_growth --json
 ```
 
 

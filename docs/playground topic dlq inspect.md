@@ -12,6 +12,8 @@ offsets, the offsets in the dead letter queue and a sample value.
 Keys and values are read as raw bytes, so it works whatever the  
 format of the records (avro, protobuf, json schema, plain json).
 
+🌐 Also writes a self-contained HTML report in `--output-dir`, opened in the browser in an interactive terminal (`--no-open` to skip): known causes, when the records arrived, the groups with their original offsets and a sample value, and the replay commands.
+
 👉 Example: https://github.com/vdesabou/kafka-docker-playground/tree/master/other/reprocess-dlq-messages-with-sink-connector
 
 ## Usage
@@ -46,7 +48,19 @@ playground topic dlq inspect [OPTIONS]
 
 #### `--json`
 
-🤖 Print the groups as JSON
+🤖 Print the groups as JSON (no HTML report)
+
+#### `--output-dir, -o OUTPUT_DIR`
+
+📂 Output directory for the HTML report (default: /tmp/playground-dlq-inspect)
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Default Value:  | `/tmp/playground-dlq-inspect`
+
+#### `--no-open`
+
+🙈 Do not open the HTML report in the browser
 
 #### `--verbose, -v`
 
@@ -66,6 +80,10 @@ playground topic dlq inspect --connector http-sink
 playground topic dlq inspect --topic dlq --grep "Unknown magic byte"
 ```
 
+```bash
+playground topic dlq inspect --topic dlq --output-dir ./case-123456 --no-open
+```
+
 ## Example output
 
 ```text
@@ -81,6 +99,8 @@ $ playground topic dlq inspect --topic dlq
   🔎 sample value: {"f1":"value1"}
 
 17:22:09 ℹ️ 🎓 replay them once the cause is fixed: playground topic dlq replay --topic dlq
+17:22:09 ℹ️ ✅ HTML report saved: /tmp/playground-dlq-inspect/dlq-dlq-20261013-172209.html
+17:22:09 ℹ️ 🔗 Open in browser: file:///tmp/playground-dlq-inspect/dlq-dlq-20261013-172209.html
 ```
 
 

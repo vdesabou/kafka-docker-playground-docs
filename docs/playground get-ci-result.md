@@ -16,6 +16,8 @@ and for each failing script the last lines before the failure are shown
 with a digest of the ERROR/FATAL records (same digest as 'playground  
 container logs `--errors`').
 
+🌐 With `--logs`, also writes a self-contained HTML report of the failure in `--output-dir`, opened in the browser in an interactive terminal (`--no-open` to skip): known causes, last lines before the failure of each failing script, root causes and every distinct record, with links to the issue and the job.
+
 Use `--test` to ask about any example, without running it.
 
 ## Usage
@@ -52,11 +54,23 @@ Default is the environment of the current example, or plaintext with `--test`
 
 #### `--max-findings MAX_FINDINGS`
 
-✂️ With `--logs`, maximum number of distinct records to show per failing script (default 20)
+✂️ With `--logs`, maximum number of distinct records to show per failing script (default 20). The HTML report has them all
 
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Default Value:  | `20`
+
+#### `--output-dir, -o OUTPUT_DIR`
+
+📂 With `--logs`, output directory for the HTML report (default: /tmp/playground-ci-result)
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Default Value:  | `/tmp/playground-ci-result`
+
+#### `--no-open`
+
+🙈 With `--logs`, do not open the HTML report in the browser
 
 ## Examples
 
@@ -74,6 +88,10 @@ playground get-ci-result --test other/connect-secret-registry --logs
 
 ```bash
 playground get-ci-result --test connect/connect-mqtt-sink --environment cfk --podman --logs
+```
+
+```bash
+playground get-ci-result --test connect/connect-replicator --logs --no-open
 ```
 
 ## Example output
@@ -105,6 +123,9 @@ $ playground get-ci-result --test connect/connect-replicator --logs --max-findin
         at org.apache.kafka.common.config.AbstractConfig.getConfiguredInstance(AbstractConfig.java:429)
 
 ✂️ 2 more distinct record(s) not shown, increase --max-findings
+
+17:24:17 ℹ️ ✅ HTML report saved: /tmp/playground-ci-result/ci-result-connect_connect-replicator-plaintext-115072055973.html
+17:24:17 ℹ️ 🔗 Open in browser: file:///tmp/playground-ci-result/ci-result-connect_connect-replicator-plaintext-115072055973.html
 ```
 
 

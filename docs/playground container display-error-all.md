@@ -37,6 +37,10 @@ playground container display-error-all [OPTIONS]
 |-----------------|-------------
 | Default Value:  | `15`
 
+#### `--html`
+
+🌐 Also write a self-contained HTML report of all the containers in /tmp/playground-log-reports (known causes, timeline, root causes, every distinct record), opened in the browser in an interactive terminal
+
 ## Examples
 
 ```bash
@@ -45,6 +49,10 @@ playground container display-error-all
 
 ```bash
 playground container display-error-all --since 10m --include-warnings
+```
+
+```bash
+playground container display-error-all --html
 ```
 
 

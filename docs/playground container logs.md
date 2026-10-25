@@ -128,6 +128,10 @@ Scans the whole log unless `--since` or `--tail` narrow it.
 |-----------------|-------------
 | Default Value:  | `40`
 
+#### `--html`
+
+🌐 With `--errors`, also write a self-contained HTML report of the digest in /tmp/playground-log-reports (known causes, timeline, root causes, every distinct record), opened in the browser in an interactive terminal
+
 ## Examples
 
 ```bash
@@ -136,6 +140,10 @@ playground container logs --container connect
 
 ```bash
 playground container logs -c connect --errors
+```
+
+```bash
+playground container logs -c connect -c broker --errors --html
 ```
 
 ```bash

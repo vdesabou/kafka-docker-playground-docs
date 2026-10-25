@@ -109,41 +109,6 @@ visit https://docs.docker.com/get-docker to install
 - [help](playground%20help) - Show help about a command
 - [status](playground%20status) - 🗺️ Show a status
 - [doctor](playground%20doctor) - 🩺 Check that the container engine is ready for the playground
-- [get-docker-ports](playground%20get-docker-ports) - Return some completion for docker ports
-- [get-container-list](playground%20get-container-list) - Return some completion for container/pod list
-- [get-connector-list](playground%20get-connector-list) - Return some completion for connector list
-- [get-ec2-instance-list](playground%20get-ec2-instance-list) - Return some completion for ec2 instance list
-- [get-ec2-cloudformation-list](playground%20get-ec2-cloudformation-list) - Return some completion for ec2 cloudformation list
-- [get-zazkia-connection-list](playground%20get-zazkia-connection-list) - Return some completion for zazkia connections list
-- [get-secret-list](playground%20get-secret-list) - Return some completion for secret names
-- [get-secret-profile-list](playground%20get-secret-profile-list) - Return some completion for secret profiles
-- [compile-all-connector-plugins](playground%20compile-all-connector-plugins) - Call playground connector-plugin sourcecode `--compile` for all plugins in confluent-hub-plugin-list.txt
-- [generate-fzf-find-files](playground%20generate-fzf-find-files) - force call to generate_fzf_find_files
-- [generate-tag-list](playground%20generate-tag-list) - generate the confluent platform tag list
-- [generate-connector-plugin-list](playground%20generate-connector-plugin-list) - generate the confluent hub plugin list
-- [generate-kafka-region-list](playground%20generate-kafka-region-list) - generate the confluent kafka region list
-- [get-connector-plugin](playground%20get-connector-plugin) - Return some completion for connector plugin
-- [get-ccloud-environment-list](playground%20get-ccloud-environment-list) - Return some completion for ccloud environment
-- [get-ccloud-cluster-list](playground%20get-ccloud-cluster-list) - Return some completion for ccloud cluster
-- [get-tag-list](playground%20get-tag-list) - Return some completion for confluent platform tag
-- [get-kafka-region-list](playground%20get-kafka-region-list) - Return some completion for confluent cloud kafka cluster region list
-- [get-topic-list](playground%20get-topic-list) - Return some completion for topic list
-- [get-consumer-group-list](playground%20get-consumer-group-list) - Return some completion for consumer group list
-- [get-catalog-tag-list](playground%20get-catalog-tag-list) - Return some completion for stream catalog tag list
-- [get-subject-list](playground%20get-subject-list) - Return some completion for subject list
-- [get-examples-list-with-fzf](playground%20get-examples-list-with-fzf) - Return some completion for examples list
-- [get-zip-or-jar-with-fzf](playground%20get-zip-or-jar-with-fzf) - Return some completion for zip or jar list
-- [get-specific-file-extension](playground%20get-specific-file-extension) - Return some completion for extension provided
-- [get-any-file-with-fzf](playground%20get-any-file-with-fzf) - Return some completion for any files
-- [get-playground-repro-export-with-fzf](playground%20get-playground-repro-export-with-fzf) - Return some completion for export tgz files
-- [get-predefined-schemas](playground%20get-predefined-schemas) - Return some completion for predefined schemas
-- [update-cache-versions](playground%20update-cache-versions) - 
-- [update-readme](playground%20update-readme) - 
-- [force-ci](playground%20force-ci) - 
-- [start-ci](playground%20start-ci) - 
-- [update-docs](playground%20update-docs) - 
-- [bashly-reload](playground%20bashly-reload) - 
-- [state](playground%20state) - 
 - [config](playground%20config) - ⚙️ Configure CLI
 - [ccloud-costs](playground%20ccloud-costs) - 💰  Retrieve ccloud costs for a range of dates
 - [ccloud-costs-history](playground%20ccloud-costs-history) - 👛  Retrieve ccloud costs for each month since last year
@@ -160,12 +125,10 @@ visit https://docs.docker.com/get-docker to install
 - [env](playground%20secrets%20env) - 🐚 Export what an example needs into the current shell
 - [import](playground%20secrets%20import) - 📥 Import an existing secret.properties / variable.properties file
 - [export](playground%20secrets%20export) - 📤 Write every credential of a profile to a file, in clear text
-- [push-github](playground%20secrets%20push-github) - 🐙 Push a profile to the GitHub Actions secrets and variables of a repository
 - [edit](playground%20secrets%20edit) - ✏️ Open the store in your editor
 - [backend](playground%20secrets%20backend) - 🏦 Show or change where secrets are kept
 - [profile](playground%20secrets%20profile) - 🗂️ Show or switch the active profile
 - [scan](playground%20secrets%20scan) - 🔎 Look for stored credentials in clear text in the repository
-- [lint](playground%20secrets%20lint) - 🧹 List the examples whose environment variables are not auto-detected
 
 ### Cloud Resources commands
 
@@ -180,7 +143,6 @@ visit https://docs.docker.com/get-docker to install
 - [get-ci-result](playground%20get-ci-result) - 🤖 get CI result for current example
 - [history](playground%20history) - 🏰 Get an history of the examples which were run with run command and run it again
 - [find-example](playground%20find-example) - 🔎 Find examples matching a free-text query, without the interactive picker
-- [start-environment](playground%20start-environment) - 🔐 Simply start an environment listed in http://tinyurl.com/y4ybbw32:
 - [switch-ccloud](playground%20switch-ccloud) - 🌩️  Switch to ccloud environment.
 - [switch-back](playground%20switch-back) - 💺  Switch back from previous environment before switch-ccloud was called.
 - [switch-podman](playground%20switch-podman) - 🦭 Switch the container engine to Podman
@@ -269,11 +231,7 @@ visit https://docs.docker.com/get-docker to install
 - [testssl](playground%20debug%20testssl) - 🔐 Testing TLS/SSL encryption using https://testssl.sh/
 - [generate-diagnostics](playground%20debug%20generate-diagnostics) - ⛑️ Generate a diagnostic bundle with Diagnostics Bundle Tool
 - [thread-dump](playground%20debug%20thread-dump) - 🎯 Take a java thread dump
-- [thread-analyze](playground%20debug%20thread-analyze) - Moved to `playground analyze thread-dump` (kept as a hidden alias)
 - [heap-dump](playground%20debug%20heap-dump) - 👻 Take a heap dump
-- [heap-analyze](playground%20debug%20heap-analyze) - Moved to `playground analyze heap-dump` (kept as a hidden alias)
-- [analyze-logs](playground%20debug%20analyze-logs) - Moved to `playground analyze logs` (kept as a hidden alias)
-- [gc-analyze](playground%20debug%20gc-analyze) - Moved to `playground analyze gc-logs` (kept as a hidden alias)
 - [tcp-dump](playground%20debug%20tcp-dump) - 🕵️‍♂️ Take a tcp dump (sniffing network)
 - [block-traffic](playground%20debug%20block-traffic) - 🚫 Blocking traffic using iptables
 - [degrade-traffic](playground%20debug%20degrade-traffic) - 🐌 Add latency, packet loss, corruption or a bandwidth limit using tc
@@ -302,7 +260,6 @@ visit https://docs.docker.com/get-docker to install
 - [resume](playground%20container%20resume) - ⏯️  Resume a container
 - [kill](playground%20container%20kill) - 🔫 Kill a container
 - [set-environment-variables](playground%20container%20set-environment-variables) - 📦  Set environment variable(s) for a container
-- [wait-for-connect-rest-api-ready](playground%20container%20wait-for-connect-rest-api-ready) - 🚏 wait-for-connect-rest-api-ready
 
 ### Topic commands
 
@@ -390,11 +347,9 @@ visit https://docs.docker.com/get-docker to install
 - [create](playground%20ec2%20create) - 👷 Create kafka-docker-playground EC2 instance using AWS Cloud Formation
 - [delete](playground%20ec2%20delete) - ❌ Delete an EC2 instance created with Cloud Formation
 - [open](playground%20ec2%20open) - 👨‍💻 Open an EC2 instance using Visual Studio code
-- [allow-my-ip](playground%20ec2%20allow-my-ip) - 🛂 Allow your current ip to connect to ec2 instance via ssh
 - [list](playground%20ec2%20list) - 🔘 List all EC2 instance
 - [stop](playground%20ec2%20stop) - 🔴 Stop an EC2 instance
 - [start](playground%20ec2%20start) - 🟢 Start an EC2 instance
-- [status](playground%20ec2%20status) - 🗺️ Show a status
 - [sync-repro-folder](playground%20ec2%20sync-repro-folder) - ↔️ Synchronize reproduction-models folder between local and ec2 instance
 - [push-secrets](playground%20ec2%20push-secrets) - 🔐 Send the secrets store to an ec2 instance
 

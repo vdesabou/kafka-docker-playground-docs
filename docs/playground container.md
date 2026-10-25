@@ -65,6 +65,5 @@ playground container COMMAND
 - [resume](playground%20container%20resume) - ⏯️  Resume a container
 - [kill](playground%20container%20kill) - 🔫 Kill a container
 - [set-environment-variables](playground%20container%20set-environment-variables) - 📦  Set environment variable(s) for a container
-- [wait-for-connect-rest-api-ready](playground%20container%20wait-for-connect-rest-api-ready) - 🚏 wait-for-connect-rest-api-ready
 
 

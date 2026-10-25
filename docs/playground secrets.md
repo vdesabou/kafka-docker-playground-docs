@@ -102,11 +102,9 @@ playground secrets COMMAND
 - [env](playground%20secrets%20env) - 🐚 Export what an example needs into the current shell
 - [import](playground%20secrets%20import) - 📥 Import an existing secret.properties / variable.properties file
 - [export](playground%20secrets%20export) - 📤 Write every credential of a profile to a file, in clear text
-- [push-github](playground%20secrets%20push-github) - 🐙 Push a profile to the GitHub Actions secrets and variables of a repository
 - [edit](playground%20secrets%20edit) - ✏️ Open the store in your editor
 - [backend](playground%20secrets%20backend) - 🏦 Show or change where secrets are kept
 - [profile](playground%20secrets%20profile) - 🗂️ Show or switch the active profile
 - [scan](playground%20secrets%20scan) - 🔎 Look for stored credentials in clear text in the repository
-- [lint](playground%20secrets%20lint) - 🧹 List the examples whose environment variables are not auto-detected
 
 

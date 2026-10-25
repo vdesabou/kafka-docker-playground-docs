@@ -17,6 +17,9 @@ registers the model, which a hand-written file would be missing.
 Keep a model minimal and about one issue, state expected versus actual  
 behaviour in its comments header, and never put customer data in it.
 
+🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-reproduction-models  
+🎬 Bite size session: https://kafka-docker-playground.io/#/sessions?id=%F0%9F%A7%AA-the-life-of-a-reproduction-model
+
 ## Usage
 
 ```bash

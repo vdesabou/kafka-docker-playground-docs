@@ -12,6 +12,9 @@ that failed, the record that broke and what the SMT chain did to it.
 🎓 Tip: it will also set io.confluent.kafka.schemaregistry.client.rest.RestService (to see schema registry rest requests) and org.apache.kafka.connect.runtime.TransformationChain (to see records before and after SMTs)  
 it will also set org.apache.kafka.connect.runtime.WorkerSinkTask for sink and org.apache.kafka.connect.runtime.WorkerSourceTask for source connectors.
 
+🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-log-levels  
+🎬 Bite size session: https://kafka-docker-playground.io/#/sessions?id=%F0%9F%A7%AC-trace-on-a-running-connector-without-a-restart
+
 ## Usage
 
 ```bash

@@ -11,6 +11,9 @@ Three ways to use it:
 The last one is what example scripts use to synchronise on a component  
 being ready, instead of sleeping and hoping.
 
+🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-container-logs  
+🎬 Bite size session: https://kafka-docker-playground.io/#/sessions?id=%F0%9F%95%B5%EF%B8%8F-a-connector-failed-read-the-logs-live-or-from-a-customer-bundle
+
 ## Usage
 
 ```bash

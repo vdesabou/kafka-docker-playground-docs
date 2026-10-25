@@ -18,6 +18,9 @@ Three ways to say what to send:
 🎓 Tip: pipe the schema with a quoted heredoc, \<\< 'EOF', so that the  
 %g placeholders survive the shell.
 
+🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-topic-produce  
+🎬 Bite size session: https://kafka-docker-playground.io/#/sessions?id=%F0%9F%93%A8-produce-realistic-test-data
+
 ## Usage
 
 ```bash

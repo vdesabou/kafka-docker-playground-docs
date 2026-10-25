@@ -21,6 +21,9 @@ installed in the container, so it works with any image.
 the round trip to the destination grows by 100ms. A container restart  
 removes the degradation.
 
+🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-network-traffic  
+🎬 Bite size session: https://kafka-docker-playground.io/#/sessions?id=%F0%9F%90%8C-a-slow-or-broken-network-on-purpose
+
 ## Usage
 
 ```bash

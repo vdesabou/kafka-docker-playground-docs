@@ -52,6 +52,9 @@ In case you want to use your own existing cluster, you need to setup, in additio
 
 ❗ this command will kill all containers using `playground container kill-all`, you can disable this by running `playground config container-kill-all-before-run false`
 
+🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-run-and-versions  
+🎬 Bite size session: https://kafka-docker-playground.io/#/sessions?id=%F0%9F%95%B9%EF%B8%8F-run-an-example-with-the-menu-or-with-flags
+
 ## Usage
 
 ```bash

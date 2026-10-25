@@ -11,6 +11,9 @@ source connector has created its topic.
 🎓 Tip: in an example script, use it instead of a fixed sleep before  
 checking what a source connector produced.
 
+🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-topic-administration  
+🎬 Bite size session: https://kafka-docker-playground.io/#/sessions?id=%F0%9F%AA%9B-a-producer-gets-recordtoolargeexception
+
 ## Usage
 
 ```bash

@@ -7,6 +7,9 @@ records in between. Useful to see whether retention has already
 deleted data, which partitions received records, or which offsets a  
 connector should be at.
 
+🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-topic-administration  
+🎬 Bite size session: https://kafka-docker-playground.io/#/sessions?id=%F0%9F%AA%9B-a-producer-gets-recordtoolargeexception
+
 ## Usage
 
 ```bash

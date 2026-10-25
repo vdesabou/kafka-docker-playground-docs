@@ -6,6 +6,9 @@ Counts the records currently in the topic, from the partition offsets.
 The cheap way to check that a source connector produced something, or  
 that a sink has data to read.
 
+🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-topic-administration  
+🎬 Bite size session: https://kafka-docker-playground.io/#/sessions?id=%F0%9F%AA%9B-a-producer-gets-recordtoolargeexception
+
 ## Usage
 
 ```bash

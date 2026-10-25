@@ -16,6 +16,9 @@ The consumer stops when no record arrives for 10 seconds (30 seconds
 on Confluent Cloud), so it never waits for records that cannot come  
 (transaction markers and compacted records use offsets).
 
+🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-topic-consume  
+🎬 Bite size session: https://kafka-docker-playground.io/#/sessions?id=%F0%9F%93%A5-read-a-topic
+
 ## Usage
 
 ```bash

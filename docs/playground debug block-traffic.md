@@ -10,6 +10,9 @@ that cannot resolve the schema registry.
 Blocking with `--action` start and restoring with `--action` stop, so the  
 failure is reversible without restarting anything.
 
+🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-network-traffic  
+🎬 Bite size session: https://kafka-docker-playground.io/#/sessions?id=%F0%9F%90%8C-a-slow-or-broken-network-on-purpose
+
 ## Usage
 
 ```bash

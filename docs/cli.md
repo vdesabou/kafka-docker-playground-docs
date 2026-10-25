@@ -85,6 +85,9 @@ CLI can be configured using [playground config](/playground%20config), or from t
 
 👉 Check documentation https://kafka-docker-playground.io/#/cli
 
+🎬 Bite size sessions (short videos): https://kafka-docker-playground.io/#/sessions  
+🍪 Deep dives (one family of commands each): https://kafka-docker-playground.io/#/deep-dives
+
 | Attributes       | &nbsp;
 |------------------|-------------
 | Version:         | 1.0.0

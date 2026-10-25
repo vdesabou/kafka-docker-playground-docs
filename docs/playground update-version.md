@@ -19,6 +19,9 @@ example must be up.
 🎓 Tip: this is a version bisect tool. Keep the example running and call it  
 repeatedly until you find the version where the behaviour changes.
 
+🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-run-and-versions  
+🎬 Bite size session: https://kafka-docker-playground.io/#/sessions?id=%F0%9F%8E%AF-is-it-fixed-in-a-newer-version
+
 ## Usage
 
 ```bash

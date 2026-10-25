@@ -31,6 +31,9 @@ at once.
 🎓 Tip: the usual names are broker, connect, schema-registry,  
 control-center, ksqldb-server, plus whatever the example adds.
 
+🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-container-lifecycle  
+🎬 Bite size session: https://kafka-docker-playground.io/#/sessions?id=%F0%9F%90%B3-restart-or-recreate-what-a-container-keeps
+
 | Attributes       | &nbsp;
 |------------------|-------------
 | Alias:           | pod

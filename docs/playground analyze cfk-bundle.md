@@ -22,6 +22,8 @@
 
 🔖 Exit code is 0 when the analysis completed (whatever was found, read the summary), 64 for an invalid, unsafe or empty bundle.
 
+🎬 Bite size session: https://kafka-docker-playground.io/#/sessions?id=%E2%98%B8%EF%B8%8F-what-is-wrong-in-this-cfk-cluster
+
 ## Usage
 
 ```bash

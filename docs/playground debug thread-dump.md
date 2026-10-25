@@ -12,6 +12,9 @@ every thread, and the deadlocks if any.
 🎓 Tip: take two or three dumps a few seconds apart. Threads that appear  
 in the same place every time are the ones that are really blocked. playground analyze thread-dump does it and analyzes them.
 
+🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-jvm-diagnostics  
+🎬 Bite size session: https://kafka-docker-playground.io/#/sessions?id=%F0%9F%A7%B5-a-connector-looks-stuck-analyze-thread-dumps
+
 ## Usage
 
 ```bash

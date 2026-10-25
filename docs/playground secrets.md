@@ -83,6 +83,8 @@ So 'export FOO=bar' and 'source secret.properties' keep working, and
 `PLAYGROUND_SECRETS_PROFILE` and `PLAYGROUND_OP_VAULT` override them for a  
 single command.
 
+🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-secrets
+
 ## Usage
 
 ```bash

@@ -28,6 +28,9 @@ A subject is normally named after the topic: `<topic>`-key and
 `<topic>`-value. `playground topic delete` removes both along with the  
 topic.
 
+🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-schema  
+🎬 Bite size session: https://kafka-docker-playground.io/#/sessions?id=%F0%9F%94%B0-schema-not-found-after-a-cleanup
+
 ## Usage
 
 ```bash

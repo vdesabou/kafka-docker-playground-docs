@@ -10,6 +10,9 @@ Keep them with `--skip-delete-schema`.
 A regex is accepted, matched in full, to clean up a family of topics  
 at once.
 
+🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-topic-administration  
+🎬 Bite size session: https://kafka-docker-playground.io/#/sessions?id=%F0%9F%AA%9B-a-producer-gets-recordtoolargeexception
+
 ## Usage
 
 ```bash

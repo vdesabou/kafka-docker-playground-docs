@@ -20,6 +20,9 @@ written with "errors.deadletterqueue.context.headers.enable": "true"
 
 👉 Example: https://github.com/vdesabou/kafka-docker-playground/tree/master/other/reprocess-dlq-messages-with-sink-connector
 
+🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-connector-troubleshooting  
+🎬 Bite size session: https://kafka-docker-playground.io/#/sessions?id=%F0%9F%A9%BA-a-sink-is-running-but-writes-nothing
+
 ## Usage
 
 ```bash

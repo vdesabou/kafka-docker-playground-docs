@@ -7,6 +7,9 @@ reproduce behaviour driven by configuration: a small
 max.message.bytes to trigger a record too large error, a short  
 retention.ms to expire data, a compacted cleanup.policy, and so on.
 
+🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-topic-administration  
+🎬 Bite size session: https://kafka-docker-playground.io/#/sessions?id=%F0%9F%AA%9B-a-producer-gets-recordtoolargeexception
+
 ## Usage
 
 ```bash

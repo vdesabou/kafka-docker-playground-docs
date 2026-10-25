@@ -13,6 +13,9 @@ misbehaves, and returns:
 It never follows logs and never waits for the lag to reach 0, so it is  
 safe to use from scripts and AI agents.
 
+🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-connector-troubleshooting  
+🎬 Bite size session: https://kafka-docker-playground.io/#/sessions?id=%F0%9F%A9%BA-a-sink-is-running-but-writes-nothing
+
 ## Usage
 
 ```bash

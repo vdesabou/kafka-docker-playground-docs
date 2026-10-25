@@ -15,6 +15,9 @@ Confluent Cloud.
 🎓 Tip: for a sink connector, `playground connector show-lag` follows the  
 lag until it reaches 0.
 
+🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-offsets-and-lag  
+🎬 Bite size session: https://kafka-docker-playground.io/#/sessions?id=%E2%8F%AA-the-lag-of-a-sink-is-stuck
+
 ## Usage
 
 ```bash

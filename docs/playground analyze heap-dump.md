@@ -12,6 +12,8 @@
 
 🔖 Exit code is 0 when the analysis completed, non-zero when MAT could not parse the dump (truncated file, out of memory): never a "healthy" verdict on a failed parse
 
+🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-jvm-diagnostics
+
 ## Usage
 
 ```bash

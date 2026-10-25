@@ -7,6 +7,8 @@
 With `--live`, only the live objects are dumped, which runs a full GC first. Without it, every object of the  
 heap is dumped, without a GC.
 
+🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-jvm-diagnostics
+
 ## Usage
 
 ```bash

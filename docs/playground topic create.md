@@ -7,6 +7,9 @@ Only needed when you want something other than the defaults, since
 argument is passed through to kafka-topics `--create`, so `--config` works  
 as usual.
 
+🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-topic-administration  
+🎬 Bite size session: https://kafka-docker-playground.io/#/sessions?id=%F0%9F%AA%9B-a-producer-gets-recordtoolargeexception
+
 ## Usage
 
 ```bash

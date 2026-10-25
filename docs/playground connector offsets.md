@@ -21,6 +21,9 @@ reset stop it and resume it for you.
 🎓 Tip: a sink that reprocesses everything and a source that re-snapshots  
 are usually offsets problems, not connector problems. Look here first.
 
+🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-offsets-and-lag  
+🎬 Bite size session: https://kafka-docker-playground.io/#/sessions?id=%E2%8F%AA-the-lag-of-a-sink-is-stuck
+
 ## Usage
 
 ```bash

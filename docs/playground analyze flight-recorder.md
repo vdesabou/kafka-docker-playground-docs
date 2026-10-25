@@ -14,6 +14,9 @@
 
 🔖 Exit code is 0 when the analysis completed, 2 when the file is not a flight recording or has no event
 
+🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-jvm-diagnostics  
+🎬 Bite size session: https://kafka-docker-playground.io/#/sessions?id=%F0%9F%9B%A9%EF%B8%8F-a-slow-connector-where-does-the-task-time-go
+
 ## Usage
 
 ```bash

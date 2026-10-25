@@ -25,6 +25,10 @@ running config (secrets masked). The config can also be given in the
 REST API format ({"name": ..., "config": {...}}, as returned by  
 GET /connectors/`<name>`), or as the path of a json file.
 
+🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-connector-create-or-update  
+🎬 Bite size session: https://kafka-docker-playground.io/#/sessions?id=%F0%9F%94%8C-the-sink-fails-right-after-it-is-deployed  
+🎬 Bite size session: https://kafka-docker-playground.io/#/sessions?id=%F0%9F%8F%97%EF%B8%8F-deploy-a-fully-managed-connector-with-terraform
+
 ## Usage
 
 ```bash

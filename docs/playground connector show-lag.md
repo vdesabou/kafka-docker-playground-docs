@@ -9,6 +9,9 @@ are stuck rather than slow.
 
 It will run until all lag becomes 0 (press ctrl-c to exit)
 
+🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-offsets-and-lag  
+🎬 Bite size session: https://kafka-docker-playground.io/#/sessions?id=%E2%8F%AA-the-lag-of-a-sink-is-stuck
+
 ## Usage
 
 ```bash

@@ -18,6 +18,9 @@ with no threshold (scripts/cli/all.jfc), for a deep dive in JDK Mission Control,
 
 🔖 The recording of each container is kept in playground.ini (flight_recorder.`<container>`), `--action` status shows it.
 
+🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-jvm-diagnostics  
+🎬 Bite size session: https://kafka-docker-playground.io/#/sessions?id=%F0%9F%9B%A9%EF%B8%8F-a-slow-connector-where-does-the-task-time-go
+
 ## Usage
 
 ```bash

@@ -4,6 +4,8 @@
 
 👉 Check documentation https://kafka-docker-playground.io/#/reusables?id=%e2%9c%a8-remote-debugging
 
+🎬 Bite size session: https://kafka-docker-playground.io/#/sessions?id=%F0%9F%90%9E-a-breakpoint-in-a-running-connector-remote-debugging
+
 ## Usage
 
 ```bash

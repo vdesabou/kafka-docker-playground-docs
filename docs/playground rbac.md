@@ -13,6 +13,9 @@ superUser.
 
 🎓 Tip: principals are User:`<name>` or Group:`<name>`, a bare name means User:`<name>`.
 
+🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-secured-environments  
+🎬 Bite size session: https://kafka-docker-playground.io/#/sessions?id=%F0%9F%94%90-the-same-example-under-sasl_ssl-and-rbac
+
 ## Usage
 
 ```bash

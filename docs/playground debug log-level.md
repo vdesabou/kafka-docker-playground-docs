@@ -10,6 +10,9 @@ and rebuild the container.
 io.confluent.connect.s3 or org.apache.kafka.clients.consumer, rather  
 than the root logger, or the useful lines will be lost in the noise.
 
+🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-log-levels  
+🎬 Bite size session: https://kafka-docker-playground.io/#/sessions?id=%F0%9F%A7%AC-trace-on-a-running-connector-without-a-restart
+
 ## Usage
 
 ```bash

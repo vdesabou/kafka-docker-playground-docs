@@ -19,6 +19,9 @@ unless `--skip-automatic-connector-config` is set.
 🎓 Tip: works for fully managed connectors too, with the validate  
 endpoint of Confluent Cloud.
 
+🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-connector-create-or-update  
+🎬 Bite size session: https://kafka-docker-playground.io/#/sessions?id=%F0%9F%94%8C-the-sink-fails-right-after-it-is-deployed
+
 ## Usage
 
 ```bash

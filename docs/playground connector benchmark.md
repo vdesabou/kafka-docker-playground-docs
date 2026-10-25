@@ -140,6 +140,9 @@ self managed connector. The Metrics API uses the Cloud API key
 
 ⚠️ Not available with the cfk environment yet.
 
+🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-connector-benchmark  
+🎬 Bite size session: https://kafka-docker-playground.io/#/sessions?id=%F0%9F%93%88-is-version-y-slower-benchmark-two-versions
+
 ## Usage
 
 ```bash

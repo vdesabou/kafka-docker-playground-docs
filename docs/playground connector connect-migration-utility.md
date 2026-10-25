@@ -16,6 +16,9 @@ The connector example should be ran with `--environment` flag set to ccloud.
 
 See a full example at https://github.com/vdesabou/kafka-docker-playground/blob/master/ccloud/connect-migration-utility/README.md
 
+🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-fully-managed  
+🎬 Bite size session: https://kafka-docker-playground.io/#/sessions?id=%F0%9F%9A%9A-move-a-self-managed-connector-to-fully-managed
+
 ## Usage
 
 ```bash

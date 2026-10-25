@@ -17,6 +17,9 @@ level-less lines that merely contain "error" or "failed", never are.
 are extracted in a temporary folder, .gz files are decompressed on the  
 fly, binary files are skipped. Only files with findings are shown.
 
+🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-container-logs  
+🎬 Bite size session: https://kafka-docker-playground.io/#/sessions?id=%F0%9F%95%B5%EF%B8%8F-a-connector-failed-read-the-logs-live-or-from-a-customer-bundle
+
 ## Usage
 
 ```bash

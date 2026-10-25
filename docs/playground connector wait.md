@@ -24,6 +24,9 @@ RUNNING when only a task fails).
 🎓 Tip: 'connector create-or-update' already waits for RUNNING. Use  
 it for another state, or after 'connector create-or-update `--no-wait`'.
 
+🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-connector-create-or-update  
+🎬 Bite size session: https://kafka-docker-playground.io/#/sessions?id=%F0%9F%94%8C-the-sink-fails-right-after-it-is-deployed
+
 ## Usage
 
 ```bash

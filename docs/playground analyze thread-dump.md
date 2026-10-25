@@ -12,6 +12,9 @@
 
 🔖 Exit code is 0 when the analysis completed, 2 when no thread dump was found
 
+🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-jvm-diagnostics  
+🎬 Bite size session: https://kafka-docker-playground.io/#/sessions?id=%F0%9F%A7%B5-a-connector-looks-stuck-analyze-thread-dumps
+
 ## Usage
 
 ```bash

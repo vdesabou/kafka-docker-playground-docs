@@ -15,6 +15,8 @@ Passwords masked by the REST API are not compared.
 🎓 Tip: run it with the config of a customer and the config of the  
 example to see right away what differs.
 
+🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-connector-create-or-update
+
 ## Usage
 
 ```bash

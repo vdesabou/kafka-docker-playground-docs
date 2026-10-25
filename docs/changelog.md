@@ -3,6 +3,7 @@
 ## October 2026
 ##### 🌟 Enhancements
 
+- 🧠📊 HTML reports for dlq inspect, heap-dump, connector diff, get-ci-result and container logs [#9650](https://github.com/vdesabou/kafka-docker-playground/issues/9650)
 - 🧠📊 analyze logs and connector diagnose: HTML report [#9648](https://github.com/vdesabou/kafka-docker-playground/issues/9648)
 - 🧠🦈 tcp-dump: capture from netshoot (no install), and analyze tcp-dump with an HTML report [#9644](https://github.com/vdesabou/kafka-docker-playground/issues/9644)
 - 🧠🚇 Tunnels: bore server as a drop-in replacement for ngrok (no monthly quota) [#9604](https://github.com/vdesabou/kafka-docker-playground/issues/9604)

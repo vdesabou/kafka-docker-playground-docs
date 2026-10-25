@@ -31,6 +31,7 @@ reports=(
   "tcp-dump|tcp-dump --sample kafka_and_network_errors"
   "logs|logs --sample support_bundle --include-warnings"
   "heap-dump|heap-dump --sample leak_growth"
+  "jscissors|jscissors --sample filestream_sink_bad_json"
 )
 
 cd "$KDP"

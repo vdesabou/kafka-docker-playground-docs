@@ -1,5 +1,5 @@
 # 🐳 kafka-docker-playground
-![success tests](https://img.shields.io/badge/success%20tests-871%2F1106-red)![connector tested](https://img.shields.io/badge/connector%20tested-145-green)![cp versions tested](https://img.shields.io/badge/cp%20version%20tested-8.3.2-green)![last run](https://img.shields.io/badge/last%20run-2026--10--25%2010:27-green)
+![success tests](https://img.shields.io/badge/success%20tests-871%2F1106-red)![connector tested](https://img.shields.io/badge/connector%20tested-145-green)![cp versions tested](https://img.shields.io/badge/cp%20version%20tested-8.3.2-green)![last run](https://img.shields.io/badge/last%20run-2026--10--25%2013:14-green)
 ![GitHub issues by-label](https://img.shields.io/github/issues/vdesabou/kafka-docker-playground/CI%20failing%20🔥)![GitHub issues by-label](https://img.shields.io/github/issues/vdesabou/kafka-docker-playground/enhancement%20✨)
 ![GitHub repo size](https://img.shields.io/github/repo-size/vdesabou/kafka-docker-playground)
 [![Add a star on GitHub](https://img.shields.io/github/stars/vdesabou/kafka-docker-playground?style=social)](https://github.com/vdesabou/kafka-docker-playground)
@@ -15,7 +15,7 @@
 - 🎯 Run examples with any Confluent Platform or connector [versions](https://kafka-docker-playground.io/#/how-to-use?id=🪄-specify-versions)
 - 🧠 Easily run commands with playground [CLI](https://kafka-docker-playground.io/#/cli)
 - 📈 [Benchmark](https://kafka-docker-playground.io/#/reusables?id=%e2%8f%b1%ef%b8%8f-benchmark-a-connector) a connector: throughput, version comparison, and where the time of the tasks goes (Java Flight Recorder)
-- 📊 Find what is wrong with shareable [reports](https://kafka-docker-playground.io/#/reports): thread dumps, GC logs, flight recordings, connector benchmarks, SMT tests, Oracle XStream and CFK diagnostics
+- 📊 Find what is wrong with shareable [reports](https://kafka-docker-playground.io/#/reports): thread dumps, GC logs, flight recordings, network captures, connector benchmarks, SMT tests, Oracle XStream and CFK diagnostics
 - 🎬 Learn with [bite size sessions](https://kafka-docker-playground.io/#/sessions): short narrated videos, each about one thing the playground does for you, with the commands to copy
 - 🍪 Master a family of commands with the [deep dives](https://kafka-docker-playground.io/#/deep-dives): mental model, what runs under the hood, gotchas, a hands-on lab replayed nightly by CI, and recipes for support repros
 - 🤖 Use it with [Claude Code](https://kafka-docker-playground.io/#/claude-code): project guide, skills to add examples, review PRs, change the CLI or analyze Oracle XStream reports

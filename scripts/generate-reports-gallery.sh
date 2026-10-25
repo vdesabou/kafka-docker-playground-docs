@@ -25,6 +25,7 @@ reports=(
   "flight-recorder|flight-recorder --sample jdbc_postgres_sink"
   "oracle-xstream-report|oracle-xstream-report --sample synthetic_failures"
   "cfk-bundle|cfk-bundle --sample synthetic"
+  "tcp-dump|tcp-dump --sample kafka_and_network_errors"
 )
 
 cd "$KDP"

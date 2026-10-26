@@ -10,8 +10,6 @@ Your preferences, kept between sessions:
 - **container-kill-all-before-run**: kill every container before each run, or just stop the example
 - **cleanup-ccloud-resources-after-run delete the Confluent Cloud connectors**: and topics of the last ccloud run on stop and before the next run (ask, true or false)
 - **check-and-update-repo-version**: warn when your clone is out of date
-- **run-log true|false**: write a masked log of each `playground run` to share it
-- **run-log-folder `<dir>`**: where to write the run logs
 - **open-ccloud-connector-in-browser**: open fully managed connectors, and in
 - **open-grafana-in-browser**: which browser
 
@@ -32,8 +30,6 @@ playground config COMMAND
 - [open-ccloud-connector-in-browser](playground%20config%20open-ccloud-connector-in-browser) - when running a fully managed connector example, it opens the connector in browser
 - [open-grafana-in-browser](playground%20config%20open-grafana-in-browser) - when running an example with `--enable-jmx-grafana` flag, it opens grafana in browser
 - [container-kill-all-before-run](playground%20config%20container-kill-all-before-run) - when running an example, always call playground container kill-all first. If set to false, it will call playground stop instead.
-- [run-log](playground%20config%20run-log) - 📄 write a masked log of each `playground run` (default true)
-- [run-log-folder](playground%20config%20run-log-folder) - 🗂️ folder of the run logs
 - [cleanup-ccloud-resources-after-run](playground%20config%20cleanup-ccloud-resources-after-run) - 🧹 delete the Confluent Cloud resources left by the last ccloud example
 - [check-and-update-repo-version](playground%20config%20check-and-update-repo-version) - when running an example, always check if repo version is older than 3 days, if disabled, it will skip this check.
 

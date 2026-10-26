@@ -50,6 +50,21 @@ In case you want to use your own existing cluster, you need to setup, in additio
 - `--cluster-creds` (or `CLUSTER_CREDS` environment variable): The Kafka api key and secret to use, it should be separated with colon (example: `<API_KEY>:<API_KEY_SECRET>`)
 - `--cluster-schema-registry-creds` (or `SCHEMA_REGISTRY_CREDS` environment variable) (optional, if not set, new one will be created): The Schema Registry api key and secret to use, it should be separated with colon (example: `<SR_API_KEY>:<SR_API_KEY_SECRET>`)
 
+📄 Run log  
+The output is also written to a text file, passwords, api keys and  
+tokens masked, ready to share with a colleague or engineering: the  
+command to re-run, the versions, the host, the result and, for a  
+failure, the errors of the connect container. Its path is printed at  
+the end of the run. The last 50 are kept in  
+~/.local/state/kafka-docker-playground/run-logs.
+
+- `--run-log-file`: write it to that file
+- `--no-run-log`: don't write it
+- `playground config run-log false | run-log-folder <folder>`
+
+The masking is best-effort: review the file before sharing it  
+outside Confluent.
+
 ❗ this command will kill all containers using `playground container kill-all`, you can disable this by running `playground config container-kill-all-before-run false`
 
 🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-run-and-versions  
@@ -318,6 +333,24 @@ and fully managed connectors, not with the cfk environment.
 `BENCHMARK_ARGS`="`--mode` steady `--duration` 5m"), and `BENCHMARK_LOAD_SCRIPT`  
 selects another load script than benchmark-load.bash. If the benchmark  
 fails, the command exits with its exit code.
+
+#### `--run-log-file FILE`
+
+📄 Write the masked log of this run to this file, instead of the run log folder
+
+Same file as the one written by default (see `playground config run-log`), at this path.
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Conflicts With: | `--no-run-log`
+
+#### `--no-run-log`
+
+🙈 Don't write the masked log of this run (see `playground config run-log`)
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Conflicts With: | `--run-log-file`
 
 #### `--connect-community-image`
 

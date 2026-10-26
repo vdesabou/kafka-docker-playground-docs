@@ -50,6 +50,21 @@ In case you want to use your own existing cluster, you need to setup, in additio
 - `--cluster-creds` (or `CLUSTER_CREDS` environment variable): The Kafka api key and secret to use, it should be separated with colon (example: `<API_KEY>:<API_KEY_SECRET>`)
 - `--cluster-schema-registry-creds` (or `SCHEMA_REGISTRY_CREDS` environment variable) (optional, if not set, new one will be created): The Schema Registry api key and secret to use, it should be separated with colon (example: `<SR_API_KEY>:<SR_API_KEY_SECRET>`)
 
+📄 Run log  
+The output is also written to a text file, passwords, api keys and  
+tokens masked, ready to share with a colleague or engineering: the  
+command to re-run, the versions, the host, the result and, for a  
+failure, the errors of the connect container. Its path is printed at  
+the end of the run. The last 50 are kept in  
+~/.local/state/kafka-docker-playground/run-logs.
+
+- `--run-log-file`: write it to that file
+- `--no-run-log`: don't write it
+- `playground config run-log false | run-log-folder <folder>`
+
+The masking is best-effort: review the file before sharing it  
+outside Confluent.
+
 ❗ this command will kill all containers using `playground container kill-all`, you can disable this by running `playground config container-kill-all-before-run false`
 
 🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-run-and-versions  
@@ -87,7 +102,7 @@ visit https://github.com/junegunn/fzf#installation to install
 
 #### `BENCHMARK_ARGS`
 
-🏎️ With `--benchmark`, extra flags for playground connector benchmark (e.g. "`--mode` steady `--duration` 5m")
+🏎️ With `--benchmark`, extra flags for playground connector benchmark (e.g. "`--nb-records` 10000000 `--record-size` 100" or "`--mode` steady `--duration` 5m")
 
 #### `PG_CCLOUD_SERVICE_ACCOUNT_ACL_EXCLUDE`
 
@@ -314,10 +329,33 @@ script) or of the records produced by a sink example, then the
 throughput, the HTML report and where the task time went. Self-managed  
 and fully managed connectors, not with the cfk environment.
 
-`BENCHMARK_ARGS` adds flags to playground connector benchmark (e.g.  
-`BENCHMARK_ARGS`="`--mode` steady `--duration` 5m"), and `BENCHMARK_LOAD_SCRIPT`  
-selects another load script than benchmark-load.bash. If the benchmark  
-fails, the command exits with its exit code.
+`--benchmark` takes no value: the flags of playground connector benchmark  
+go in the `BENCHMARK_ARGS` environment variable, for instance a backlog of  
+10 million records of 100 bytes:
+
+`BENCHMARK_ARGS`="`--nb-records` 10000000 `--record-size` 100" playground run -f csv.sh `--benchmark`
+
+or a steady run: `BENCHMARK_ARGS`="`--mode` steady `--duration` 5m".  
+`BENCHMARK_LOAD_SCRIPT` selects another load script than benchmark-load.bash.  
+If the benchmark fails, the command exits with its exit code.
+
+#### `--run-log-file FILE`
+
+📄 Write the masked log of this run to this file, instead of the run log folder
+
+Same file as the one written by default (see `playground config run-log`), at this path.
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Conflicts With: | `--no-run-log`
+
+#### `--no-run-log`
+
+🙈 Don't write the masked log of this run (see `playground config run-log`)
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Conflicts With: | `--run-log-file`
 
 #### `--connect-community-image`
 
@@ -464,6 +502,10 @@ No ACL is created nor deleted, and the service account is kept.
 
 ```bash
 playground run (interactive mode)
+```
+
+```bash
+BENCHMARK_ARGS="--nb-records 10000000 --record-size 100" playground run -f connect/connect-spool-dir-source/csv.sh --benchmark
 ```
 
 

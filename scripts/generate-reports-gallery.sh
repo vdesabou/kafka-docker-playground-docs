@@ -41,8 +41,9 @@ do
   echo "📊 playground analyze ${report#*|}"
   # shellcheck disable=SC2086
   "$PLAYGROUND" analyze ${report#*|} --output-dir "$work/$name" < /dev/null > "$work/$name.log" 2>&1 || { cat "$work/$name.log"; exit 1; }
-  # the report of the playground, not the index.html pages of Eclipse MAT (heap-dump)
-  cp "$(find "$work/$name" -name "*.html" ! -name index.html | head -1)" "$DOCS/reports/$name.html"
+  # the report of the playground, at the top of the output folder: not the pages of Eclipse MAT in its subfolders
+  # (heap-dump: */index.html, */toc.html...)
+  cp "$(find "$work/$name" -maxdepth 1 -name "*.html" ! -name index.html | head -1)" "$DOCS/reports/$name.html"
 done
 
 # cloud costs: from the dummy billing data of tools/cloud-costs/samples, no Confluent Cloud call
@@ -68,11 +69,14 @@ then
   exit 1
 fi
 
+# screenshots in the light theme, even on a machine in dark mode: the reports follow the system theme until their
+# "Toggle theme" button is clicked, and an explicit data-theme on <html> wins (the published reports keep following it)
 for html in "$DOCS"/reports/*.html
 do
   name=$(basename "$html" .html)
   echo "📸 $name"
+  perl -0pe 's/<html\b(?![^>]*data-theme)/<html data-theme="light"/i' "$html" > "$work/screenshot-$name.html"
   "$CHROME" --headless=new --disable-gpu --hide-scrollbars --window-size=1400,900 --virtual-time-budget=4000 \
-    --screenshot="$DOCS/images/reports/$name.png" "file://$html" > /dev/null 2>&1
+    --blink-settings=preferredColorScheme=1 --screenshot="$DOCS/images/reports/$name.png" "file://$work/screenshot-$name.html" > /dev/null 2>&1
 done
 echo "✅ done, preview with: docsify serve $DOCS"

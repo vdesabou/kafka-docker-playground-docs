@@ -52,7 +52,48 @@ details summary{font-size:.84rem;font-weight:normal}
 pre{margin:4px 0 8px}
 .diff-a{background:#fee2e2}.diff-b{background:#dcfce7}.muted{color:#94a3b8}
 code{font-family:'SFMono-Regular',Consolas,Menlo,monospace;font-size:.8rem;background:#f1f5f9;padding:1px 5px;border-radius:4px}
-</style></head><body><div class='page'><div class='header'><h1>✂️ jscissors trace</h1><div class='header-meta'><span>✂️ pid 1 org.apache.kafka.connect.cli.ConnectDistributed</span><span>OpenJDK 64-Bit Server VM 25.0.4.1</span><span>agent 2.0, attached</span><span>from 2026-10-25 15:50:01</span><span>Generated: 2026-10-25 19:39:47</span></div></div><style>
+html[data-theme="dark"] body{background:#0f172a;color:#e2e8f0}
+html[data-theme="dark"] h2,html[data-theme="dark"] h3,html[data-theme="dark"] .section-title,html[data-theme="dark"] .rec-text,html[data-theme="dark"] .verdict{color:#cbd5e1}
+html[data-theme="dark"] .kpi-card,html[data-theme="dark"] .chart-card,html[data-theme="dark"] .rec-card,html[data-theme="dark"] .table-card,html[data-theme="dark"] .verdict{background:#1e293b;box-shadow:none}
+html[data-theme="dark"] .kpi-label,html[data-theme="dark"] .legend,html[data-theme="dark"] .kpi-unit,html[data-theme="dark"] .footer,html[data-theme="dark"] .muted{color:#94a3b8}
+html[data-theme="dark"] th{background:#273449;border-bottom-color:#334155;color:#cbd5e1}
+html[data-theme="dark"] td{border-bottom-color:#273449}
+html[data-theme="dark"] tr:hover td{background:#273449}
+html[data-theme="dark"] pre,html[data-theme="dark"] code{background:#0b1220;color:#e2e8f0}
+html[data-theme="dark"] details{border-top-color:#334155}
+html[data-theme="dark"] a{color:#93c5fd}
+html[data-theme="dark"] .header a{color:#fff}
+html[data-theme="dark"] .st{background:#334155;color:#cbd5e1}
+html[data-theme="dark"] .rec-badge.critical,html[data-theme="dark"] .st.fatal,html[data-theme="dark"] .st.failed{background:#450a0a;color:#fca5a5}
+html[data-theme="dark"] .rec-badge.high,html[data-theme="dark"] .st.error{background:#431407;color:#fdba74}
+html[data-theme="dark"] .rec-badge.medium,html[data-theme="dark"] .st.warn,html[data-theme="dark"] .st.paused,html[data-theme="dark"] .st.unassigned{background:#422006;color:#fcd34d}
+html[data-theme="dark"] .rec-badge.low,html[data-theme="dark"] .st.running{background:#052e16;color:#86efac}
+html[data-theme="dark"] .rec-badge.info,html[data-theme="dark"] .st.mine{background:#172554;color:#93c5fd}
+html[data-theme="dark"] .rec-badge.ok{background:#083344;color:#67e8f9}
+html[data-theme="dark"] .diff-a{background:#450a0a}
+html[data-theme="dark"] .diff-b{background:#052e16}
+html[data-theme="dark"] svg [fill="#64748b"],html[data-theme="dark"] svg [fill="#94a3b8"]{fill:#94a3b8}
+html[data-theme="dark"] svg [fill="#1e293b"],html[data-theme="dark"] svg [fill="#334155"],html[data-theme="dark"] svg [fill="#475569"]{fill:#cbd5e1}
+html[data-theme="dark"] svg [stroke="#e2e8f0"],html[data-theme="dark"] svg [stroke="#f1f5f9"]{stroke:#334155}
+html[data-theme="dark"] svg [fill="#e2e8f0"],html[data-theme="dark"] svg [fill="#f1f5f9"]{fill:#334155}
+html[data-theme="dark"] svg text:not([fill]){fill:#cbd5e1}
+
+.theme-toggle{position:absolute;top:2px;right:12px;font:inherit;font-size:.72rem;line-height:1.4;color:#475569;background:#fff;border:1px solid #cbd5e1;border-radius:6px;padding:1px 9px;cursor:pointer}
+html[data-theme="dark"] .theme-toggle{color:#cbd5e1;background:#1e293b;border-color:#334155}
+</style><script>
+(function () {
+  const root = document.documentElement;
+  if (!root.dataset.theme) root.dataset.theme = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  document.addEventListener("DOMContentLoaded", function () {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "theme-toggle";
+    button.textContent = "Toggle theme";
+    button.addEventListener("click", function () { root.dataset.theme = root.dataset.theme === "dark" ? "light" : "dark"; });
+    document.body.appendChild(button);
+  });
+})();
+</script></head><body><div class='page'><div class='header'><h1>✂️ jscissors trace</h1><div class='header-meta'><span>✂️ pid 1 org.apache.kafka.connect.cli.ConnectDistributed</span><span>OpenJDK 64-Bit Server VM 25.0.4.1</span><span>agent 2.0, attached</span><span>from 2026-10-25 15:50:01</span><span>Generated: 2026-10-27 13:58:29</span></div></div><style>
 .tree details{border:0;padding:0;margin-left:18px}
 .tree>details{margin-left:0;border-top:1px solid #f1f5f9;padding:2px 0}
 .tree summary{font-family:'SFMono-Regular',Consolas,Menlo,monospace;font-size:.76rem;font-weight:normal;padding:2px 0;list-style-position:outside}
@@ -62,6 +103,12 @@ code{font-family:'SFMono-Regular',Consolas,Menlo,monospace;font-size:.8rem;backg
 .tree .thr{color:#94a3b8}
 .callinfo{margin:4px 0 6px 18px}
 .tree.flat .leaf{margin-left:0;border-top:1px solid #f1f5f9}.tree.flat>details{margin-left:0}
+html[data-theme="dark"] .tree>details,html[data-theme="dark"] .tree.flat .leaf{border-top-color:#334155}
+html[data-theme="dark"] .tree .dur{color:#94a3b8}
+html[data-theme="dark"] .tree .slow{color:#fdba74}
+html[data-theme="dark"] .tree .exc{color:#f87171}
+html[data-theme="dark"] .tree .ret{color:#4ade80}
+html[data-theme="dark"] .tree .args{color:#93c5fd}
 </style><div class='verdict warn'>✂️ 21 call(s) of 4 method(s) in 12s, 3 threw an exception, most time in WorkerSinkTask.convertMessages (70.4 ms).</div><div class='kpi-grid'><div class="kpi-card "><div class="kpi-label">⏱️ Trace</div><div class="kpi-value">12s</div><div class="kpi-unit">attached</div></div><div class="kpi-card "><div class="kpi-label">📞 Calls</div><div class="kpi-value">21</div><div class="kpi-unit">21 with details, 2/s</div></div><div class="kpi-card "><div class="kpi-label">🧩 Methods</div><div class="kpi-value">4</div><div class="kpi-unit">3 class(es) instrumented</div></div><div class="kpi-card warn"><div class="kpi-label">💥 Exceptions</div><div class="kpi-value">3</div><div class="kpi-unit">1 kind(s)</div></div><div class="kpi-card ok"><div class="kpi-label">⏳ Still running</div><div class="kpi-value">0</div><div class="kpi-unit">when the trace stopped</div></div><div class="kpi-card "><div class="kpi-label">🧵 Threads</div><div class="kpi-value">1</div><div class="kpi-unit">task-thread-jscissors-demo-sink-0</div></div></div><div class='section-title'>🔎 Findings</div><div class='recs-list'><div class="rec-card medium"><span class="rec-badge medium">🟡 MEDIUM</span><span class="rec-text">💥 3 call(s) of JsonConverter.toConnectData threw org.apache.kafka.connect.errors.DataException: Converting byte[] to Kafka Connect data failed due to serialization error:  (cause org.apache.kafka.common.errors.SerializationException: Error deserializing message to JSON in topic jscissors-demo)</span></div><div class="rec-card info"><span class="rec-badge info">ℹ️ INFO</span><span class="rec-text">🧵 Thread dump at the exception of org.apache.kafka.connect.json.JsonConverter.toConnectData(java.lang.String,[B): playground analyze thread-dump -f tools/jscissors/samples/filestream_sink_bad_json/pid-1/dumps/threads-1-1792939803221.txt</span></div><div class="rec-card info"><span class="rec-badge info">ℹ️ INFO</span><span class="rec-text">📸 2 dump(s) skipped by the limits (maxThreadDumps, maxHeapDumps, dumpIntervalMs)</span></div></div><div class='charts-grid'><div class='chart-card'><h2>📈 Calls recorded with details, and exceptions</h2><div class='legend'><i style='background:#2a78d6'></i>calls<i style='background:#eb6834'></i>exceptions · per 1s</div><svg viewBox="0 0 600 190" xmlns="http://www.w3.org/2000/svg" role="img"><line x1="44" x2="590" y1="164.0" y2="164.0" stroke="#e2e8f0" stroke-width="1"/><text x="38" y="167.0" font-size="10" fill="#64748b" text-anchor="end">0</text><line x1="44" x2="590" y1="86.0" y2="86.0" stroke="#e2e8f0" stroke-width="1"/><text x="38" y="89.0" font-size="10" fill="#64748b" text-anchor="end">15</text><line x1="44" x2="590" y1="8.0" y2="8.0" stroke="#e2e8f0" stroke-width="1"/><text x="38" y="11.0" font-size="10" fill="#64748b" text-anchor="end">30</text><rect x="45.0" y="54.8" width="272.0" height="109.2" rx="1" fill="#2a78d6"><title>2026-10-25 15:50:03: 21 calls</title></rect><rect x="317.0" y="148.4" width="272.0" height="15.6" rx="1" fill="#eb6834"><title>2026-10-25 15:50:03: 3 exceptions</title></rect><text x="317.0" y="182" font-size="10" fill="#64748b" text-anchor="middle">15:50:03</text></svg></div><div class='chart-card'><h2>⏱️ Total time by method (ms)</h2><svg viewBox="0 0 600 98" xmlns="http://www.w3.org/2000/svg" role="img"><text x="294" y="19" font-size="10" fill="#334155" text-anchor="end">WorkerSinkTask.convertMessages</text><rect x="300" y="8" width="230.0" height="15" rx="2" fill="#2a78d6"><title>1 calls, 70.4 ms in total</title></rect><text x="535.0" y="19" font-size="10" fill="#475569">70.4 ms</text><text x="294" y="41" font-size="10" fill="#334155" text-anchor="end">JsonConverter.toConnectData</text><rect x="300" y="30" width="21.9" height="15" rx="2" fill="#2a78d6"><title>18 calls, 6.7 ms in total</title></rect><text x="326.9" y="41" font-size="10" fill="#475569">6.7 ms</text><text x="294" y="63" font-size="10" fill="#334155" text-anchor="end">WorkerSinkTask.deliverMessages</text><rect x="300" y="52" width="9.3" height="15" rx="2" fill="#2a78d6"><title>1 calls, 2.9 ms in total</title></rect><text x="314.3" y="63" font-size="10" fill="#475569">2.9 ms</text><text x="294" y="85" font-size="10" fill="#334155" text-anchor="end">FileStreamSinkTask.put</text><rect x="300" y="74" width="8.1" height="15" rx="2" fill="#2a78d6"><title>1 calls, 2.5 ms in total</title></rect><text x="313.1" y="85" font-size="10" fill="#475569">2.5 ms</text></svg></div></div><div class='table-card'><h2>⏱️ Methods, by total time</h2><table><tr><th>Method</th><th class='num'>Calls</th><th class='num'>Total</th><th class='num'>Avg</th><th class='num'>p95</th><th class='num'>Max</th><th class='num'>Self</th><th class='num'>Exceptions</th></tr><tr><td><span class='mono'>WorkerSinkTask.<b>convertMessages</b>(org.apache.kafka.clients.consumer.ConsumerRecords)</span><div class='legend'>org.apache.kafka.connect.runtime.WorkerSinkTask</div></td><td class='num'>1</td><td class='num'>70.4 ms</td><td class='num'>70.4 ms</td><td class='num'>70.4 ms</td><td class='num'>70.4 ms</td><td class='num'>63.7 ms</td><td class='num'>0</td></tr><tr><td><span class='mono'>JsonConverter.<b>toConnectData</b>(java.lang.String,[B)</span><div class='legend'>org.apache.kafka.connect.json.JsonConverter</div></td><td class='num'>18</td><td class='num'>6.7 ms</td><td class='num'>373 µs</td><td class='num'>1.7 ms</td><td class='num'>3.5 ms</td><td class='num'>6.7 ms</td><td class='num'><span class='st error'>3</span></td></tr><tr><td><span class='mono'>WorkerSinkTask.<b>deliverMessages</b>()</span><div class='legend'>org.apache.kafka.connect.runtime.WorkerSinkTask</div></td><td class='num'>1</td><td class='num'>2.9 ms</td><td class='num'>2.9 ms</td><td class='num'>2.9 ms</td><td class='num'>2.9 ms</td><td class='num'>392 µs</td><td class='num'>0</td></tr><tr><td><span class='mono'>FileStreamSinkTask.<b>put</b>(java.util.Collection)</span><div class='legend'>org.apache.kafka.connect.file.FileStreamSinkTask</div></td><td class='num'>1</td><td class='num'>2.5 ms</td><td class='num'>2.5 ms</td><td class='num'>2.5 ms</td><td class='num'>2.5 ms</td><td class='num'>2.5 ms</td><td class='num'>0</td></tr></table><p class='legend'>Calls, total, average, max and exceptions are exact (counted by the agent for every call). p95 and self time (time not spent in a traced callee) come from the calls recorded with details.</p></div><div class='table-card'><h2>💥 Exceptions thrown by the traced methods</h2><details open><summary><span class='st error'>×3</span> <span class='mono'>org.apache.kafka.connect.json.JsonConverter.toConnectData → org.apache.kafka.connect.errors.DataException: Converting byte[] to Kafka Connect data failed due to serialization error: </span></summary><div class='legend'>arguments of one call: <span class='mono'>&quot;jscissors-demo&quot;, byte[22] &quot;not-json {order_id: 13&quot;</span></div><pre>org.apache.kafka.connect.errors.DataException: Converting byte[] to Kafka Connect data failed due to serialization error: 
 	at org.apache.kafka.connect.json.JsonConverter.toConnectData(JsonConverter.java:348)
 	at org.apache.kafka.connect.storage.Converter.toConnectData(Converter.java:98)

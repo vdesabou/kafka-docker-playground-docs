@@ -1,6 +1,6 @@
 #!/bin/bash
 # Regenerates the HTML reports and screenshots of docs/reports.md from the samples shipped with
-# kafka-docker-playground (playground analyze <cmd> --sample <name>).
+# kafka-docker-playground (playground analyze <cmd> --sample <name>, playground ccloud-costs-history --sample <name>).
 #
 # usage: scripts/generate-reports-gallery.sh [path of the kafka-docker-playground clone]
 #
@@ -44,6 +44,11 @@ do
   # the report of the playground, not the index.html pages of Eclipse MAT (heap-dump)
   cp "$(find "$work/$name" -name "*.html" ! -name index.html | head -1)" "$DOCS/reports/$name.html"
 done
+
+# cloud costs: from the dummy billing data of tools/cloud-costs/samples, no Confluent Cloud call
+echo "📊 playground ccloud-costs-history --sample ccloud_dummy"
+"$PLAYGROUND" ccloud-costs-history --sample ccloud_dummy --no-open --output-dir "$work/cloud-costs" < /dev/null > "$work/cloud-costs.log" 2>&1 || { cat "$work/cloud-costs.log"; exit 1; }
+cp "$(find "$work/cloud-costs" -name "*.html" | head -1)" "$DOCS/reports/cloud-costs.html"
 
 # reports of real runs: keep only the file name of the paths under a user folder (flight recorder analysis...)
 strip_user_paths() {

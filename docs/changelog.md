@@ -3,6 +3,7 @@
 ## October 2026
 ##### 🌟 Enhancements
 
+- 🧠💰 HTML report for ccloud / aws / azure costs-history [#9684](https://github.com/vdesabou/kafka-docker-playground/issues/9684)
 - 🧠📄 playground run saves a masked copy of its output to a shareable log file [#9663](https://github.com/vdesabou/kafka-docker-playground/issues/9663)
 - 👾⬆️ Upgrade playground to default CP 8.4.0 [#9661](https://github.com/vdesabou/kafka-docker-playground/issues/9661)
 - 🧠✂️ jscissors rewrite: attach without restart, call trees, HTML report, and JDK 25 method tracing in the flight recorder [#9653](https://github.com/vdesabou/kafka-docker-playground/issues/9653)

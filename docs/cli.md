@@ -299,6 +299,7 @@ visit https://docs.docker.com/get-docker to install
 - [connector-plugin](playground%20connector-plugin) - 🔌 Connector-plugin commands
 - [search-jar](playground%20connector-plugin%20search-jar) - ☕ List jars for a connector plugin from confluent hub https://www.confluent.io/hub/
 - [versions](playground%20connector-plugin%20versions) - 💯 List versions for a connector plugin from confluent hub https://www.confluent.io/hub/
+- [changelog](playground%20connector-plugin%20changelog) - 📜 Show the release notes of a connector plugin between two versions
 - [display-last-updated](playground%20connector-plugin%20display-last-updated) - 🆕 List last updated connector plugins from confluent hub https://www.confluent.io/hub/
 - [config-key](playground%20connector-plugin%20config-key) - 🔑 Explain a connector configuration key: documentation, type, default, since when, and which examples set it
 - [sourcecode](playground%20connector-plugin%20sourcecode) - 🧑‍💻 Open source code url in your browser (or in your editor when used with `--open`)

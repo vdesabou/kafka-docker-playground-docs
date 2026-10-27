@@ -86,6 +86,7 @@ window.KDP_CLI_PAGES = [
   "/playground%20connector%20validate",
   "/playground%20connector%20versions",
   "/playground%20connector%20wait",
+  "/playground%20connector-plugin%20changelog",
   "/playground%20connector-plugin%20config-key",
   "/playground%20connector-plugin%20display-last-updated",
   "/playground%20connector-plugin%20search-jar",

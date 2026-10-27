@@ -46,7 +46,7 @@ fi
 #               that cost money)
 #   stills      images shown after the terminal part instead of a report (screenshots of an IDE...):
 #               "<image>:<seconds>" items, each fitted to the frame on the background color of the terminal
-ALL_SESSIONS=(run secured-environments repro-models versions container-lifecycle offsets-and-lag create-or-update log-levels container-logs schema topic-administration thread-dump gc-logs flight-recorder oracle-xstream-report cfk-bundle sourcecode remote-debugging dlq smt-test topic-produce topic-consume benchmark network-traffic connect-migration terraform)
+ALL_SESSIONS=(run secured-environments repro-models versions container-lifecycle offsets-and-lag create-or-update log-levels container-logs schema topic-administration thread-dump gc-logs flight-recorder jscissors oracle-xstream-report cfk-bundle sourcecode remote-debugging dlq smt-test topic-produce topic-consume benchmark network-traffic connect-migration terraform)
 session_settings() {
   report="" scroll="" page_height=4100 docker="" setup="" teardown="" stills=""
   case "$1" in
@@ -108,6 +108,13 @@ session_settings() {
     flight-recorder)
       report="/tmp/flight-recorder/*-jfr-report.html"
       scroll="6:0 7:820"
+      ;;
+    jscissors)
+      report="/tmp/jscissors/*/*-jscissors-report.html"
+      scroll="6:0 8:650"
+      docker=yes
+      setup=setup_jscissors
+      teardown=teardown_jscissors
       ;;
     oracle-xstream-report)
       report="/tmp/xstream/*-xstream-report.html"
@@ -462,6 +469,32 @@ setup_network_traffic() {
   sed -n "/topic produce -t orders --nb-messages 1 << 'EOF'/,/^EOF/p" connect/connect-jdbc-postgresql-sink/postgres-sink.sh | sed '1d;$d' > /tmp/orders.avsc
 }
 
+# the JDBC PostgreSQL sink example with errors.tolerance=all (no dead letter queue, no errors.log.enable: a record the
+# converter rejects is dropped without a word), the avro schema of its topic orders in /tmp/orders.avsc, and no trace of
+# a previous recording (the report of the session is the newest one under /tmp/jscissors)
+setup_jscissors() {
+  setup_jdbc_postgresql_sink
+  sed -n "/topic produce -t orders --nb-messages 1 << 'EOF'/,/^EOF/p" connect/connect-jdbc-postgresql-sink/postgres-sink.sh | sed '1d;$d' > /tmp/orders.avsc
+  playground connector create-or-update --connector postgres-sink >> /tmp/kdp-session-setup.log 2>&1 << 'EOF'
+{
+  "connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
+  "tasks.max": "1",
+  "connection.url": "jdbc:postgresql://postgres/postgres?user=myuser&password=mypassword&ssl=false",
+  "topics": "orders",
+  "auto.create": "true",
+  "errors.tolerance": "all"
+}
+EOF
+  rm -rf /tmp/jscissors
+}
+# a recording stopped in the middle leaves the route to postgres cut and the agent tracing
+teardown_jscissors() {
+  playground debug block-traffic -c connect --destination postgres --action stop >> /tmp/kdp-session-setup.log 2>&1
+  playground debug jscissors -c connect --action stop --no-analyze --output-dir /tmp/kdp-session-jscissors-trace >> /tmp/kdp-session-setup.log 2>&1
+  rm -rf /tmp/kdp-session-jscissors-trace
+  return 0
+}
+
 # the first part of other/reprocess-dlq-messages-with-sink-connector/replay-dlq-messages-with-playground.sh: 10 avro
 # records, schema-registry killed, a FileStream sink with errors.tolerance=all sends them to the dlq topic
 setup_dlq() {
@@ -750,7 +783,7 @@ do
   ffmpeg -hide_banner -loglevel error -y -ss "$poster_at" -i "docs/videos/session-$session.mp4" -frames:v 1 "docs/images/sessions/$session.png"
 done
 
-if [[ " ${sessions[*]} " =~ " "(run|secured-environments|repro-models|versions|container-lifecycle|offsets-and-lag|create-or-update|log-levels|container-logs|schema|topic-administration|remote-debugging|dlq|smt-test|topic-produce|topic-consume|benchmark|network-traffic|connect-migration|terraform)" " ]]
+if [[ " ${sessions[*]} " =~ " "(run|secured-environments|repro-models|versions|container-lifecycle|offsets-and-lag|create-or-update|log-levels|container-logs|schema|topic-administration|remote-debugging|dlq|smt-test|jscissors|topic-produce|topic-consume|benchmark|network-traffic|connect-migration|terraform)" " ]]
 then
   echo "🛑 stopping the example"
   (cd "$KDP_DIR" && PATH="$KDP_DIR/scripts/cli:$PATH" playground stop > /dev/null 2>&1) || true

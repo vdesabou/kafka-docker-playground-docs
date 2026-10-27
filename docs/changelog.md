@@ -90,6 +90,7 @@
 
 ##### 🐛 Bugs
 
+- 🐛💸 Oracle pdb examples delete and re-download the 11 GB Oracle image in CI [#9692](https://github.com/vdesabou/kafka-docker-playground/issues/9692)
 - 🐛🐳 playground container set-environment-variables writes an invalid compose override (remote debugging broken) [#9515](https://github.com/vdesabou/kafka-docker-playground/issues/9515)
 - 🐛📥 playground topic consume garbles and doesn't count records with multi-line headers (dead letter queues) [#9514](https://github.com/vdesabou/kafka-docker-playground/issues/9514)
 - 🐛🛑 playground stop fails when --connector-tag is set, the previous example keeps running [#9504](https://github.com/vdesabou/kafka-docker-playground/issues/9504)

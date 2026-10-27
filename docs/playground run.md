@@ -52,11 +52,11 @@ In case you want to use your own existing cluster, you need to setup, in additio
 
 📄 Run log  
 The output is also written to a text file, passwords, api keys and  
-tokens masked, ready to share with a colleague or engineering: the  
+tokens masked, ready to share with a colleague: the  
 command to re-run, the versions, the host, the result and, for a  
 failure, the errors of the connect container. Its path is printed at  
 the end of the run. The last 50 are kept in  
-~/.local/state/kafka-docker-playground/run-logs.
+/tmp/playground-run-logs.
 
 - `--run-log-file`: write it to that file
 - `--no-run-log`: don't write it

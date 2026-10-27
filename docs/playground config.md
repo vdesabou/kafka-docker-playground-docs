@@ -12,6 +12,7 @@ Your preferences, kept between sessions:
 - **check-and-update-repo-version**: warn when your clone is out of date
 - **run-log true|false**: write a masked log of each `playground run` to share it
 - **run-log-folder `<dir>`**: where to write the run logs
+- **display-last-updated-connector-plugins**: list the connector plugins released recently at the end of a self-managed run (true or false, -days `<n>`, -vendor \<vendor|all\>)
 - **open-ccloud-connector-in-browser**: open fully managed connectors, and in
 - **open-grafana-in-browser**: which browser
 
@@ -34,6 +35,9 @@ playground config COMMAND
 - [container-kill-all-before-run](playground%20config%20container-kill-all-before-run) - when running an example, always call playground container kill-all first. If set to false, it will call playground stop instead.
 - [run-log](playground%20config%20run-log) - 📄 write a masked log of each `playground run` (default true)
 - [run-log-folder](playground%20config%20run-log-folder) - 🗂️ folder of the run logs
+- [display-last-updated-connector-plugins](playground%20config%20display-last-updated-connector-plugins) - 🆕 at the end of a self-managed connector run, list the connector plugins released recently on Confluent Hub (default false)
+- [display-last-updated-connector-plugins-days](playground%20config%20display-last-updated-connector-plugins-days) - 📅 number of days to look back for display-last-updated-connector-plugins
+- [display-last-updated-connector-plugins-vendor](playground%20config%20display-last-updated-connector-plugins-vendor) - 🏢 vendor of the connector plugins listed by display-last-updated-connector-plugins
 - [cleanup-ccloud-resources-after-run](playground%20config%20cleanup-ccloud-resources-after-run) - 🧹 delete the Confluent Cloud resources left by the last ccloud example
 - [check-and-update-repo-version](playground%20config%20check-and-update-repo-version) - when running an example, always check if repo version is older than 3 days, if disabled, it will skip this check.
 

@@ -2,7 +2,7 @@
 
 🗂️ folder of the run logs
 
-Default is ~/.local/state/kafka-docker-playground/run-logs.
+Default is /tmp/playground-run-logs.
 
 The last 50 run logs of the folder are kept.
 

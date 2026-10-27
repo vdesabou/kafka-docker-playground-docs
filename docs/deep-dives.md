@@ -37,10 +37,10 @@ CLI change that makes a page wrong shows up as a failing test.
 - 🧠 Commands: `connector smt test`
 - 🎬 Bite size session: [🔀 What does this transform chain do to a record?](/sessions?id=🔀-what-does-this-transform-chain-do-to-a-record)
 
-### 🧑‍💻 Connector plugins: versions, release notes, config keys, source code, jars
+### 🧑‍💻 Connector plugins: versions, config keys, source code, jars
 
 - 📖 [Read the deep dive](/deep-dive-connector-plugin.md)
-- 🧠 Commands: `connector-plugin versions`, `changelog`, `config-key`, `sourcecode`, `search-jar`
+- 🧠 Commands: `connector-plugin versions`, `config-key`, `sourcecode`, `search-jar`
 - 🎬 Bite size session: [🧑‍💻 The source code of a connector at the customer's version](/sessions?id=🧑💻-the-source-code-of-a-connector-at-the-customers-version)
 
 ### 📈 Benchmark a connector
@@ -98,8 +98,8 @@ CLI change that makes a page wrong shows up as a failing test.
 ### 🧵 JVM diagnostics: which collector, which analyzer
 
 - 📖 [Read the deep dive](/deep-dive-jvm-diagnostics.md)
-- 🧠 Commands: `debug thread-dump`, `heap-dump`, `flight-recorder`, `jscissors`, `analyze thread-dump`, `gc-logs`, `flight-recorder`, `heap-dump`, `jscissors`
-- 🎬 Bite size session: [🧵 thread dumps](/sessions?id=🧵-a-connector-looks-stuck-analyze-thread-dumps), [♻️ GC logs](/sessions?id=♻️-long-gc-pauses-or-a-memory-leak-analyze-gc-logs), [🛩️ flight recorder](/sessions?id=🛩️-a-slow-connector-where-does-the-task-time-go), [✂️ jscissors](/sessions?id=✂️-records-vanish-a-task-hangs-what-does-the-code-do)
+- 🧠 Commands: `debug thread-dump`, `heap-dump`, `flight-recorder`, `analyze thread-dump`, `gc-logs`, `flight-recorder`, `heap-dump`
+- 🎬 Bite size session: [🧵 thread dumps](/sessions?id=🧵-a-connector-looks-stuck-analyze-thread-dumps), [♻️ GC logs](/sessions?id=♻️-long-gc-pauses-or-a-memory-leak-analyze-gc-logs), [🛩️ flight recorder](/sessions?id=🛩️-a-slow-connector-where-does-the-task-time-go)
 
 ## ⚙️ Run, environments and reproductions
 

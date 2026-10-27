@@ -14,8 +14,7 @@ A java agent (tools/jscissors/agent, byte-buddy) loaded in the JVM of the contai
 
 🔖 The session of each container is kept in playground.ini (jscissors.`<container>`), `--action` status shows it with the calls so far. The agent jar is built from tools/jscissors/agent with maven in a container the first time (and after a change of its sources).
 
-🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-jvm-diagnostics  
-🎬 Bite size session: https://kafka-docker-playground.io/#/sessions?id=%E2%9C%82%EF%B8%8F-records-vanish-a-task-hangs-what-does-the-code-do
+🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-jvm-diagnostics
 
 ## Usage
 

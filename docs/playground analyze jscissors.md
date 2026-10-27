@@ -12,7 +12,8 @@ Reads the folder copied by playground debug jscissors `--action` stop (it runs t
 
 🔖 Exit code is 0 when the analysis completed, 2 when the folder holds no trace
 
-🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-jvm-diagnostics
+🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-jvm-diagnostics  
+🎬 Bite size session: https://kafka-docker-playground.io/#/sessions?id=%E2%9C%82%EF%B8%8F-records-vanish-a-task-hangs-what-does-the-code-do
 
 ## Usage
 

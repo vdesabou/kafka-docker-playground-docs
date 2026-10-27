@@ -49,7 +49,7 @@ By default, for each connector, the latest available version on Confluent Hub is
 
 💌 Confluent employees only: for fully managed connectors, use the cc-connect image version for the pcc. You must have a Confluent Github token set with `GITHUB_TOKEN` or `GH_TOKEN` environment variable and also be using Confluent VPN.
 
-🎓 Tip: set to " " in order to select the version dynamically
+🎓 Tip: set to " " in order to select the version dynamically (for Confluent plugins, the preview shows the release notes of each version)
 
 🎓 Tip: you can compare different sourcecode versions by specifying `--connector-tag` two times, in such case it will open github in comparison mode
 

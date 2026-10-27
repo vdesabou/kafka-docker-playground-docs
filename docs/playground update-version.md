@@ -56,7 +56,7 @@ Must be greater or equal to 5.3.0
 
 By default, for each connector, the latest available version on Confluent Hub is used
 
-🎓 Tip: set to " " in order to select the version dynamically
+🎓 Tip: set to " " in order to select the version dynamically (for Confluent plugins, the preview shows the release notes of each version)
 
 | Attributes      | &nbsp;
 |-----------------|-------------

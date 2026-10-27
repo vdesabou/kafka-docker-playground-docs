@@ -36,10 +36,17 @@ playground connector-plugin versions [OPTIONS]
 |-----------------|-------------
 | Conflicts With: | `--all`
 
+#### `--with-changelog`
+
+📜 Show the release notes of each version under it
+
+From the changelog feeds of docs.confluent.io, like playground connector-plugin changelog: Confluent self-managed plugins only.
+
 ## Examples
 
 ```bash
 playground connector-plugin versions --connector-plugin confluentinc/kafka-connect-s3
+playground connector-plugin versions --connector-plugin confluentinc/kafka-connect-jdbc --last 3 --with-changelog
 
 ```
 

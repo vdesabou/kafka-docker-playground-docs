@@ -24,7 +24,7 @@ playground connector sourcecode [OPTIONS]
 
 By default, for each connector, the current version is used (for Confluent employees, it will also get latest versions for fully managed connectors)
 
-🎓 Tip: set to " " in order to select the version dynamically
+🎓 Tip: set to " " in order to select the version dynamically (for Confluent plugins, the preview shows the release notes of each version)
 
 🎓 Tip: you can compare different sourcecode versions by specifying `--connector-tag` two times, in such case it will open github in comparison mode
 

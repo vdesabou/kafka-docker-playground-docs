@@ -204,7 +204,7 @@ With `--enable-legacy-control-center`, this is a CP version (\< 8), by default t
 
 By default, for each connector, the latest available version on Confluent Hub is used
 
-🎓 Tip: set to " " in order to select the version dynamically
+🎓 Tip: set to " " in order to select the version dynamically (for Confluent plugins, the preview shows the release notes of each version)
 
 | Attributes      | &nbsp;
 |-----------------|-------------

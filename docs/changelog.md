@@ -3,6 +3,7 @@
 ## October 2026
 ##### 🌟 Enhancements
 
+- 🧠🩺 connector create-or-update / wait: run playground connector diagnose automatically when a connector fails [#9727](https://github.com/vdesabou/kafka-docker-playground/issues/9727)
 - 🧠🎬 Bite size session: a fully managed connector with a service account loses an ACL [#9725](https://github.com/vdesabou/kafka-docker-playground/issues/9725)
 - 🧹🎨 HTML reports: same header and dark theme everywhere (CFK, benchmark, flight recorder, SMT test) [#9723](https://github.com/vdesabou/kafka-docker-playground/issues/9723)
 - 🧠💰 AWS cost report: Amazon S3 details (cost and volume per kind of usage, destinations, buckets, hints) [#9719](https://github.com/vdesabou/kafka-docker-playground/issues/9719)

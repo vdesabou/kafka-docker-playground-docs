@@ -5,9 +5,8 @@
 Deploys, with the Salesforce CLI (sf) installed on your machine:
 
 • an External Client App with the OAuth JWT bearer flow, trusting the  
-certificate of salesforce-confluent.keystore.jks, pre-authorized for  
-the profile of your user (no browser approval) and with IP  
-restrictions relaxed  
+certificate of your keystore, pre-authorized for the profile of your  
+user (no browser approval) and with IP restrictions relaxed  
 • the Platform Event MyPlatformEvent__e with the text field Message__c  
 • Change Data Capture on Contact
 
@@ -19,6 +18,14 @@ then reads the consumer key back, waits until a JWT bearer login works
 Without `--target-org`, 'sf org login web' opens the browser once to log  
 in: that is the only manual step. Running it again on the same org  
 changes nothing.
+
+🔐 Your keystore (JWT private key and certificate, password confluent)  
+is ~/.config/kafka-docker-playground/salesforce-confluent.keystore.jks,  
+outside the repository, and is copied into the Salesforce example  
+folders, where the examples read it. The first time, the command  
+reuses the keystore already in the examples if there is one (so the  
+orgs that trust it keep working), else generates a key pair that never  
+leaves your machine.
 
 `SALESFORCE_PASSWORD` and `SALESFORCE_SECURITY_TOKEN` can't be read from  
 Salesforce: the command tells you how to store them.
@@ -79,14 +86,15 @@ https://test.salesforce.com for a sandbox.
 
 🔐 PKCS12 keystore (password confluent) holding the JWT private key and certificate
 
-Default is connect/connect-salesforce-cdc-source/salesforce-confluent.keystore.jks,  
-downloaded from the playground S3 bucket when missing (Confluent employees only).
+setup: it becomes your keystore (~/.config/kafka-docker-playground/salesforce-confluent.keystore.jks),  
+copied into the Salesforce example folders.  
+check: default is your keystore, else connect/connect-salesforce-cdc-source/salesforce-confluent.keystore.jks.
 
 #### `--generate-keystore`
 
-🆕 Generate a new key pair when the keystore is missing
+🆕 Generate a new key pair, even if you already have a keystore
 
-It is copied into every Salesforce example folder, so the examples use it.
+The previous one is kept as .bak: the orgs set up with it must be set up again.
 
 #### `--max-wait MAX_WAIT`
 

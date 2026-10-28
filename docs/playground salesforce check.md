@@ -6,9 +6,10 @@ Logs in with the OAuth JWT bearer flow, exactly like a connector with
 salesforce.grant.type=`JWT_BEARER` (stored `SALESFORCE_USERNAME`,  
 `SALESFORCE_CONSUMER_KEY_WITH_JWT`, `SALESFORCE_INSTANCE` and the keystore),  
 explains a rejection, then checks that the org has MyPlatformEvent__e and  
-Change Data Capture on Contact. Needs neither Docker nor the sf CLI.
+Change Data Capture on Contact (warnings: only some examples need them).  
+Needs neither Docker nor the sf CLI.
 
-Exits with 1 when something is missing.
+Exits with 1 when the login fails.
 
 ## Usage
 
@@ -30,8 +31,9 @@ playground salesforce check [OPTIONS]
 
 🔐 PKCS12 keystore (password confluent) holding the JWT private key and certificate
 
-Default is connect/connect-salesforce-cdc-source/salesforce-confluent.keystore.jks,  
-downloaded from the playground S3 bucket when missing (Confluent employees only).
+setup: it becomes your keystore (~/.config/kafka-docker-playground/salesforce-confluent.keystore.jks),  
+copied into the Salesforce example folders.  
+check: default is your keystore, else connect/connect-salesforce-cdc-source/salesforce-confluent.keystore.jks.
 
 ## Examples
 

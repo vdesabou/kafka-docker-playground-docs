@@ -46,7 +46,7 @@ fi
 #               that cost money)
 #   stills      images shown after the terminal part instead of a report (screenshots of an IDE...):
 #               "<image>:<seconds>" items, each fitted to the frame on the background color of the terminal
-ALL_SESSIONS=(run secured-environments repro-models versions container-lifecycle offsets-and-lag create-or-update log-levels container-logs schema topic-administration thread-dump gc-logs flight-recorder jscissors oracle-xstream-report cfk-bundle sourcecode remote-debugging dlq smt-test topic-produce topic-consume benchmark network-traffic connect-migration terraform)
+ALL_SESSIONS=(run secured-environments repro-models versions container-lifecycle offsets-and-lag create-or-update log-levels container-logs schema topic-administration thread-dump gc-logs flight-recorder jscissors oracle-xstream-report cfk-bundle sourcecode remote-debugging dlq smt-test topic-produce topic-consume benchmark network-traffic connect-migration terraform ccloud-service-account)
 session_settings() {
   report="" scroll="" page_height=4100 docker="" setup="" teardown="" stills=""
   case "$1" in
@@ -171,6 +171,11 @@ session_settings() {
       docker=yes
       setup=setup_terraform
       teardown=teardown_terraform
+      ;;
+    ccloud-service-account)
+      docker=yes
+      setup=setup_ccloud_service_account
+      teardown=teardown_ccloud_service_account
       ;;
     *)
       echo "❌ unknown session $1 (known: ${ALL_SESSIONS[*]})"
@@ -647,6 +652,72 @@ teardown_terraform() {
   return 0
 }
 
+# same off camera setup as terraform (the beginning of ccloud/fm-datagen-source/fully-managed-datagen-source.sh, the [ccloud]
+# details and $CLOUD_KEY / $CLOUD_SECRET in a private file, the config with placeholders in /tmp/datagen-sa.json): the tape
+# creates the connector with PG_CCLOUD_SERVICE_ACCOUNT=true, which also creates a service account and its ACLs (the
+# confluent CLI must be logged in, as an OrgAdmin or with the Assigner role)
+ccloud_service_account_env=/tmp/kdp-session-ccloud-service-account.env
+ccloud_service_account_connector=DatagenSource_playground
+setup_ccloud_service_account() {
+  if ! command -v envsubst > /dev/null 2>&1
+  then
+    echo "❌ envsubst is needed (brew install gettext)" | tee /tmp/kdp-session-setup.log
+    return 1
+  fi
+  if [ -z "$(playground state get ccloud.CLUSTER_NAME 2> /dev/null)" ]
+  then
+    echo "❌ no [ccloud] details in $KDP_DIR/playground.ini: run a ccloud example once in that clone" | tee /tmp/kdp-session-setup.log
+    return 1
+  fi
+  local example=ccloud/fm-datagen-source
+  sed -e '/^connector_name="DatagenSource_\$USER"/,$d' $example/fully-managed-datagen-source.sh > $example/session-setup.sh
+  grep -q 'playground topic create --topic datagen_pageviews' $example/session-setup.sh || { echo "❌ the topic creation was not found in $example/fully-managed-datagen-source.sh" | tee /tmp/kdp-session-setup.log; return 1; }
+  chmod +x $example/session-setup.sh
+  (umask 077 && : > "$ccloud_service_account_env")
+  local name creds
+  for name in ENVIRONMENT CLUSTER_NAME CLUSTER_CLOUD CLUSTER_REGION CLUSTER_CREDS SCHEMA_REGISTRY_CREDS
+  do
+    printf 'export %s=%q\n' "$name" "$(playground state get ccloud.$name)" >> "$ccloud_service_account_env"
+  done
+  creds=$(playground state get ccloud.CLUSTER_CREDS)
+  printf 'export CLOUD_KEY=%q\nexport CLOUD_SECRET=%q\n' "${creds%%:*}" "${creds#*:}" >> "$ccloud_service_account_env"
+  cat > /tmp/datagen-sa.json << DATAGEN
+{
+  "connector.class": "DatagenSource",
+  "name": "$ccloud_service_account_connector",
+  "kafka.auth.mode": "KAFKA_API_KEY",
+  "kafka.api.key": "\$CLOUD_KEY",
+  "kafka.api.secret": "\$CLOUD_SECRET",
+  "kafka.topic": "datagen_pageviews",
+  "output.data.format": "JSON",
+  "quickstart": "PAGEVIEWS",
+  "max.interval": "1000",
+  "tasks.max": "1"
+}
+DATAGEN
+  (
+    source "$ccloud_service_account_env"
+    # the exit code of 'playground run' is not enough: it can be 1 after a successful ccloud example (end of run summary)
+    playground run -f "$PWD/$example/session-setup.sh" < /dev/null > /tmp/kdp-session-setup.log 2>&1
+    grep -q "RESULT: SUCCESS" /tmp/kdp-session-setup.log || exit 1
+    # the connector (and its service account) of a previous recording that failed
+    playground connector delete --connector $ccloud_service_account_connector >> /tmp/kdp-session-setup.log 2>&1
+    rm -f /tmp/config-$ccloud_service_account_connector
+    exit 0
+  )
+}
+# the fully managed connector is billed: delete it (and its service account) if the tape did not, then the private files
+teardown_ccloud_service_account() {
+  (
+    set +e
+    source "$ccloud_service_account_env" 2> /dev/null
+    playground connector delete --connector $ccloud_service_account_connector
+  ) < /dev/null >> /tmp/kdp-session-setup.log 2>&1
+  playground container kill-all >> /tmp/kdp-session-setup.log 2>&1
+  rm -rf ccloud/fm-datagen-source/session-setup.sh "$ccloud_service_account_env" /tmp/datagen-sa.json
+  return 0
+}
+
 work_dir=/tmp/kdp-session-video
 rm -rf "$work_dir"
 export VHS_BIN_DIR="$work_dir/bin"
@@ -783,7 +854,7 @@ do
   ffmpeg -hide_banner -loglevel error -y -ss "$poster_at" -i "docs/videos/session-$session.mp4" -frames:v 1 "docs/images/sessions/$session.png"
 done
 
-if [[ " ${sessions[*]} " =~ " "(run|secured-environments|repro-models|versions|container-lifecycle|offsets-and-lag|create-or-update|log-levels|container-logs|schema|topic-administration|remote-debugging|dlq|smt-test|jscissors|topic-produce|topic-consume|benchmark|network-traffic|connect-migration|terraform)" " ]]
+if [[ " ${sessions[*]} " =~ " "(run|secured-environments|repro-models|versions|container-lifecycle|offsets-and-lag|create-or-update|log-levels|container-logs|schema|topic-administration|remote-debugging|dlq|smt-test|jscissors|topic-produce|topic-consume|benchmark|network-traffic|connect-migration|terraform|ccloud-service-account)" " ]]
 then
   echo "🛑 stopping the example"
   (cd "$KDP_DIR" && PATH="$KDP_DIR/scripts/cli:$PATH" playground stop > /dev/null 2>&1) || true

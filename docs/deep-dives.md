@@ -55,6 +55,12 @@ CLI change that makes a page wrong shows up as a failing test.
 - 🧠 Commands: `connector create-or-update`, `status`, `offsets`… on Confluent Cloud
 - 🎬 Bite size session: [🚚 Move to fully managed](/sessions?id=🚚-move-a-self-managed-connector-to-fully-managed), [🏗️ Terraform](/sessions?id=🏗️-deploy-a-fully-managed-connector-with-terraform)
 
+### 🅾️ Oracle CDC: LogMiner and XStream, self-managed and fully managed
+
+- 📖 [Read the deep dive](/deep-dive-oracle-cdc.md)
+- 🧠 Commands: `analyze oracle-xstream-report`, `connector oracle-cdc-xstream generate-report`, `debug`
+- 🎬 Bite size session: [🅾️ Oracle XStream CDC lags or is idle](/sessions?id=🅾️-oracle-xstream-cdc-lags-or-is-idle)
+
 ## 🗃️ Topics and schemas
 
 ### 📨 Produce test data: schemas, payloads, keys, load
@@ -120,6 +126,17 @@ CLI change that makes a page wrong shows up as a failing test.
 - 📖 [Read the deep dive](/deep-dive-secured-environments.md)
 - 🧠 Commands: `start-environment --environment …`, `run --environment …`, `rbac role-binding`
 - 🎬 Bite size session: [🔐 The same example under SASL_SSL and RBAC](/sessions?id=🔐-the-same-example-under-sasl_ssl-and-rbac)
+
+### 🌍 Replication between clusters: Replicator, MirrorMaker 2, Cluster Linking
+
+- 📖 [Read the deep dive](/deep-dive-replication.md)
+- 🧠 Commands: `start-environment --environment mdc-*`, `container exec -c connect-us|broker-europe …`, and the commands refused in an mdc environment
+
+### ☸️ Confluent for Kubernetes: the cfk environment, support bundles
+
+- 📖 [Read the deep dive](/deep-dive-cfk.md)
+- 🧠 Commands: `run --environment cfk`, `start-environment --environment cfk|cfk-rbac`, `debug cfk generate-bundle`, `analyze cfk-bundle`
+- 🎬 Bite size session: [☸️ What is wrong in this CFK cluster?](/sessions?id=☸️-what-is-wrong-in-this-cfk-cluster) (`analyze cfk-bundle`)
 
 ### 🐌 A slow or broken network, on purpose
 

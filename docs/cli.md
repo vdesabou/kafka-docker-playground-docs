@@ -130,6 +130,12 @@ visit https://docs.docker.com/get-docker to install
 - [profile](playground%20secrets%20profile) - 🗂️ Show or switch the active profile
 - [scan](playground%20secrets%20scan) - 🔎 Look for stored credentials in clear text in the repository
 
+### Salesforce commands
+
+- [salesforce](playground%20salesforce) - ☁️ Set up a Salesforce org for the Salesforce examples, and check it
+- [setup](playground%20salesforce%20setup) - 🛠️ Configure a Salesforce org for the Salesforce examples
+- [check](playground%20salesforce%20check) - 🩺 Check that the stored Salesforce credentials work
+
 ### Cloud Resources commands
 
 - [cloud-resources](playground%20cloud-resources) - ☁️ What the playground left behind in your cloud accounts, and what it costs

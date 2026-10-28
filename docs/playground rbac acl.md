@@ -14,6 +14,8 @@ account of a fully managed connector created with
 authorization errors: delete or deny one of its ACLs, then restart the  
 connector.
 
+🎬 Bite size session: https://kafka-docker-playground.io/#/sessions?id=%F0%9F%91%A4-a-fully-managed-connector-with-a-service-account-loses-an-acl
+
 ## Usage
 
 ```bash

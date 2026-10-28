@@ -480,6 +480,8 @@ cleanup-cloud-resources).
 restart the connector and run playground connector diagnose.  
 `PG_CCLOUD_SERVICE_ACCOUNT_ACL_EXCLUDE` skips ACLs when they are created.
 
+🎬 Bite size session: https://kafka-docker-playground.io/#/sessions?id=%F0%9F%91%A4-a-fully-managed-connector-with-a-service-account-loses-an-acl
+
 #### `--ccloud-service-account-acls PROFILE`
 
 🚦 ACLs of the service accounts created by `--ccloud-service-account` (implies it)

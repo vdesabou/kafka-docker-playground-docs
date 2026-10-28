@@ -1,6 +1,7 @@
 #!/bin/bash
 # Regenerates the HTML reports and screenshots of docs/reports.md from the samples shipped with
-# kafka-docker-playground (playground analyze <cmd> --sample <name>, playground ccloud-costs-history --sample <name>).
+# kafka-docker-playground (playground analyze <cmd> --sample <name>, playground ccloud-costs-history --sample <name>,
+# playground cloud-resources aws costs-history --sample <name>).
 #
 # usage: scripts/generate-reports-gallery.sh [path of the kafka-docker-playground clone]
 #
@@ -51,6 +52,11 @@ echo "📊 playground ccloud-costs-history --sample ccloud_dummy"
 "$PLAYGROUND" ccloud-costs-history --sample ccloud_dummy --no-open --output-dir "$work/cloud-costs" < /dev/null > "$work/cloud-costs.log" 2>&1 || { cat "$work/cloud-costs.log"; exit 1; }
 cp "$(find "$work/cloud-costs" -name "*.html" | head -1)" "$DOCS/reports/cloud-costs.html"
 
+# aws costs, with the Amazon S3 details: from the dummy cost data of tools/cloud-costs/samples, no AWS call
+echo "📊 playground cloud-resources aws costs-history --sample aws_dummy"
+"$PLAYGROUND" cloud-resources aws costs-history --sample aws_dummy --no-open --output-dir "$work/aws-costs" < /dev/null > "$work/aws-costs.log" 2>&1 || { cat "$work/aws-costs.log"; exit 1; }
+cp "$(find "$work/aws-costs" -name "*.html" | head -1)" "$DOCS/reports/aws-costs.html"
+
 # reports of real runs: keep only the file name of the paths under a user folder (flight recorder analysis...)
 strip_user_paths() {
   perl -pe 's#"/(?:Users|home|private)/[^"]*/([^"/]+)"#"$1"#g' "$1" > "$2"
@@ -76,6 +82,11 @@ do
   name=$(basename "$html" .html)
   echo "📸 $name"
   perl -0pe 's/<html\b(?![^>]*data-theme)/<html data-theme="light"/i' "$html" > "$work/screenshot-$name.html"
+  # aws costs: the gallery card is about the Amazon S3 details, lower in the page: only the header and that section
+  if [ "$name" = "aws-costs" ]
+  then
+    perl -0pi -e 's#</head>#<style>.page>*:not(.header):not(\#s3-details){display:none}</style></head>#' "$work/screenshot-$name.html"
+  fi
   "$CHROME" --headless=new --disable-gpu --hide-scrollbars --window-size=1400,900 --virtual-time-budget=4000 \
     --blink-settings=preferredColorScheme=1 --screenshot="$DOCS/images/reports/$name.png" "file://$work/screenshot-$name.html" > /dev/null 2>&1
 done

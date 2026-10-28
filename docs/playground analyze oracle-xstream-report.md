@@ -18,6 +18,7 @@
 
 👉 Check documentation https://docs.confluent.io/kafka-connectors/oracle-xstream-cdc-source/current/troubleshooting.html#connector-diagnostics-script
 
+🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-oracle-cdc  
 🎬 Bite size session: https://kafka-docker-playground.io/#/sessions?id=%F0%9F%85%BE%EF%B8%8F-oracle-xstream-cdc-lags-or-is-idle
 
 ## Usage

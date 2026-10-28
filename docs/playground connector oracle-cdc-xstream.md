@@ -13,6 +13,8 @@ the Oracle side, and the connect logs say nothing about it.
 Only available when an oracle container is running. To analyze a report  
 (also one sent by a customer), use `playground analyze oracle-xstream-report`.
 
+🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-oracle-cdc
+
 ## Usage
 
 ```bash

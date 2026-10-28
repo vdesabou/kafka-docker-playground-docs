@@ -156,6 +156,7 @@ visit https://docs.docker.com/get-docker to install
 - [cleanup-cloud-details](playground%20cleanup-cloud-details) - 🧼 playground is actively caching ccloud details (https://kafka-docker-playground.io/#/how-to-use?id=%f0%9f%8c%a4%ef%b8%8f-confluent-cloud-examples)
 - [open-docs](playground%20open-docs) - 🧑‍🎓 Open Confluent documentation of currently running example
 - [open-changelog](playground%20open-changelog) - 📜 Open playground changelog (https://kafka-docker-playground.io/#/changelog)
+- [cp-changelog](playground%20cp-changelog) - 📜 Show what changed in Confluent Platform between two versions
 - [cleanup-cloud-resources](playground%20cleanup-cloud-resources) - 🧹 Cleanup cloud resources that were created by running examples from the playground
 
 ### Repro commands

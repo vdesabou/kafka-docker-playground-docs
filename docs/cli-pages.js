@@ -116,6 +116,7 @@ window.KDP_CLI_PAGES = [
   "/playground%20container%20ssh",
   "/playground%20container%20update",
   "/playground%20container",
+  "/playground%20cp-changelog",
   "/playground%20debug%20block-traffic",
   "/playground%20debug%20cfk%20generate-bundle",
   "/playground%20debug%20cfk",

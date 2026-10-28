@@ -3,6 +3,7 @@
 ## October 2026
 ##### 🌟 Enhancements
 
+- 🧹🎨 HTML reports: same header and dark theme everywhere (CFK, benchmark, flight recorder, SMT test) [#9723](https://github.com/vdesabou/kafka-docker-playground/issues/9723)
 - 🧠💰 AWS cost report: Amazon S3 details (cost and volume per kind of usage, destinations, buckets, hints) [#9719](https://github.com/vdesabou/kafka-docker-playground/issues/9719)
 - 🧠📜 cp-changelog: release notes of Confluent Platform versions from the docs changelog feeds [#9715](https://github.com/vdesabou/kafka-docker-playground/issues/9715)
 - 🧠📜 connector versions (end of playground run) shows the release notes of the last versions [#9712](https://github.com/vdesabou/kafka-docker-playground/issues/9712)

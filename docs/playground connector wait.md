@@ -11,7 +11,10 @@ RUNNING one `--interval` later, since a task is RUNNING before it
 processes its first record and can fail right after.
 
 When waiting for RUNNING, it fails right away if the connector or one of  
-its tasks is FAILED, since a failed task does not recover on its own.  
+its tasks is FAILED, since a failed task does not recover on its own,  
+and runs `playground connector diagnose --no-open` on it: status with  
+the trace, digest of the connect errors since the wait started, offsets,  
+next steps and HTML report (`PG_SKIP_AUTO_DIAGNOSE`=1 for the status only).  
 A connector RUNNING without any task for 30 seconds (Replicator without  
 matching topic yet, JDBC source without table) is accepted with a  
 warning. A Datagen task that failed with "Stopping connector: generated  
@@ -32,6 +35,12 @@ it for another state, or after 'connector create-or-update `--no-wait`'.
 ```bash
 playground connector wait [OPTIONS]
 ```
+
+## Environment Variables
+
+#### `PG_SKIP_AUTO_DIAGNOSE`
+
+🩺 Set to 1 to display only the status of a FAILED connector, instead of running 'connector diagnose' on it (also for create-or-update)
 
 ## Options
 

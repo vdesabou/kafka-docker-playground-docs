@@ -10,7 +10,9 @@ makes the command safe to re-run while you iterate on a configuration.
 The command then waits for the connector and all its tasks to be  
 RUNNING, displays the connector status, and fails with the error if  
 they are not, so a broken config stops the example immediately instead  
-of failing silently later. When the script that runs is a reproduction  
+of failing silently later. A FAILED connector or task is reported with  
+`playground connector diagnose` (trace, error digest, offsets, next  
+steps and HTML report). When the script that runs is a reproduction  
 model, a connector that is not RUNNING is only reported as a warning,  
 since a reproduction model often creates a failing connector on  
 purpose. Use `--wait` to fail there too, `--no-wait` to skip the wait.

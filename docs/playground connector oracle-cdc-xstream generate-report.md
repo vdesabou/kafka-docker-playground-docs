@@ -11,8 +11,6 @@ analyzes it in one go.
 
 See https://docs.confluent.io/kafka-connectors/oracle-xstream-cdc-source/current/troubleshooting.html#connector-diagnostics-script
 
-🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-oracle-cdc
-
 ## Usage
 
 ```bash

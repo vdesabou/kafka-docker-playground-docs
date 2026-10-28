@@ -35,7 +35,6 @@ window.KDP_CLI_PAGES = [
   "/playground%20config%20open-ccloud-connector-in-browser%20automatically",
   "/playground%20config%20open-ccloud-connector-in-browser%20browser",
   "/playground%20config%20open-ccloud-connector-in-browser",
-  "/playground%20config%20open-diagnose-report-on-failure",
   "/playground%20config%20open-grafana-in-browser%20automatically",
   "/playground%20config%20open-grafana-in-browser%20browser",
   "/playground%20config%20open-grafana-in-browser",

@@ -16,8 +16,6 @@ Read it top to bottom when a connector is RUNNING but idle: a capture
 process not in CAPTURING CHANGES, or an SCN that never moves, tells  
 you the problem is in the database and not in the connector.
 
-🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-oracle-cdc
-
 ## Usage
 
 ```bash

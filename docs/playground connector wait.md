@@ -12,11 +12,9 @@ processes its first record and can fail right after.
 
 When waiting for RUNNING, it fails right away if the connector or one of  
 its tasks is FAILED, since a failed task does not recover on its own,  
-and runs `playground connector diagnose` on it: status with the trace,  
-digest of the connect errors since the wait started, offsets, next  
-steps and HTML report, opened in the browser from an interactive  
-terminal (`playground config open-diagnose-report-on-failure false` to  
-only print its path, `PG_SKIP_AUTO_DIAGNOSE`=1 for the status only).  
+and runs `playground connector diagnose --no-open` on it: status with  
+the trace, digest of the connect errors since the wait started, offsets,  
+next steps and HTML report (`PG_SKIP_AUTO_DIAGNOSE`=1 for the status only).  
 A connector RUNNING without any task for 30 seconds (Replicator without  
 matching topic yet, JDBC source without table) is accepted with a  
 warning. A Datagen task that failed with "Stopping connector: generated  

@@ -24,6 +24,8 @@
 
 🎬 Bite size session: https://kafka-docker-playground.io/#/sessions?id=%E2%98%B8%EF%B8%8F-what-is-wrong-in-this-cfk-cluster
 
+🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-cfk
+
 ## Usage
 
 ```bash

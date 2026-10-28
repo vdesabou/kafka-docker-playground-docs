@@ -4,6 +4,8 @@
 
 see https://docs.confluent.io/operator/current/co-troubleshooting.html#support-bundle
 
+🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-cfk
+
 ## Usage
 
 ```bash

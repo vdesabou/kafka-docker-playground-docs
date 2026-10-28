@@ -71,6 +71,9 @@ Sleep 3s
 Type@15ms "# The right pane lists the flags picked so far, Esc quits without running or stopping anything"
 Enter
 Sleep 3s
+Type@15ms "# In the CP and connector version pickers, the right pane shows what changed in the highlighted version 📜"
+Enter
+Sleep 3s
 Type@15ms "# Now for real: CP 8.2.0, connector 10.8.12, Grafana + kcat (tab selects several), and one bad combination 👇"
 Enter
 Sleep 3s
@@ -99,9 +102,18 @@ Type@100ms "CP version (all"
 Sleep 1500ms
 Enter
 Wait+Screen@1m /select cp version/
+Sleep 2s
+# the preview: the commits of the highlighted CP version, from the docs.confluent.io changelog feeds
+Type@150ms "8.2."
+Wait+Screen@30s /released:/
+Sleep 4s
+Up
+Wait+Screen@30s /released:/
 Sleep 3s
+Ctrl+U
 Type@150ms "8.2.0"
-Sleep 1500ms
+Wait+Screen@30s /🔢 8\.2\.0 -/
+Sleep 3s
 Enter
 Wait+Screen@1m /--tag\s+\[8\.2\.0\]/
 Sleep 3s
@@ -109,9 +121,12 @@ Type@100ms "connector version"
 Sleep 1500ms
 Enter
 Wait+Screen@1m /select connector version/
-Sleep 3s
+Sleep 2s
+# the preview: the release notes of the highlighted connector version
+Wait+Screen@30s /🌐 changelog:/
+Sleep 4s
 Type@150ms "10.8.12"
-Sleep 1500ms
+Sleep 5s
 Enter
 Wait+Screen@1m /--connector-tag\s+\[10\.8\.12\]/
 Sleep 3s
@@ -147,12 +162,20 @@ Sleep 8s
 # the run takes a few minutes: cut it
 Hide
 Wait@20m /❯\s*$/
+# the end of the run prints the release notes of the connector versions in one burst: let the terminal catch up
+Sleep 10s
 Show
 Sleep 5s
 Type@15ms "# ✅ RESULT: SUCCESS: environment started, connector created, records produced and checked (the wait is cut)"
 Enter
 Sleep 3s
-Type@15ms "# Above: the connector versions, its status, and the links to the example docs and to the connector source code"
+Type@15ms "# Above: the last connector versions with their release notes, and the command to see all the changes since 10.8.12"
+Enter
+Sleep 3s
+Type@15ms "# 📢 CP 8.2.0 is not the latest 8.2 patch: how many changes since (security ones counted), and how to update"
+Enter
+Sleep 3s
+Type@15ms "# then the connector status, and the links to the example docs and to the connector source code"
 Enter
 Sleep 3s
 Type@15ms "# The same run as a command, ready to paste, is in 'playground history' (and in the clipboard on macOS)"
@@ -217,6 +240,9 @@ Type@15ms "#   playground run -f <example> -o     📖 open the example and its 
 Enter
 Sleep 2s
 Type@15ms "#   playground secrets set <VAR>       🔐 store the credentials an example needs once (AWS, Salesforce...)"
+Enter
+Sleep 2s
+Type@15ms "#   playground cp-changelog --from X   📜 what changed in Confluent Platform since X (--grep, --security)"
 Enter
 Sleep 2s
 Type@15ms "#   playground run --help              every flag, with what it does"

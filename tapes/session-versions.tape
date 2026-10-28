@@ -26,7 +26,26 @@ Sleep 800ms
 Enter
 Wait@2m /❯\s*$/
 Sleep 7s
-Type@15ms "# CP 8.2.0, connector v10.8.4 'is not latest': v10.9.9 is the latest on Confluent Hub (the last 5 versions above)"
+Type@15ms "# CP 8.2.0, connector v10.8.4 'is not latest': v10.9.9 is the latest on Confluent Hub (the last 5 above, with their release notes)"
+Enter
+Sleep 3s
+Hide
+Type "clear"
+Enter
+Sleep 300ms
+Show
+Type@15ms "# Is their bug fixed in a newer version? Say SQL values and passwords show in their connector logs: grep the release notes"
+Enter
+Sleep 1s
+Type@15ms "# of every version since theirs (from the docs.confluent.io changelogs):"
+Enter
+Sleep 1s
+Type "playground connector-plugin changelog --connector-plugin confluentinc/kafka-connect-jdbc --from 10.8.4 --to 10.8.12 --grep 'sensitive|redact'"
+Sleep 800ms
+Enter
+Wait@2m /❯\s*$/
+Sleep 7s
+Type@15ms "# fixed in 10.8.6 (CC-41005), more redaction in 10.8.8, 10.8.9 and 10.8.12: the latest patch of their 10.8 line has them all"
 Enter
 Sleep 3s
 Type@15ms "# playground run with other flags would start everything again. update-version swaps versions on the example that runs 👇"
@@ -109,7 +128,23 @@ Sleep 300ms
 Show
 
 # ── 4. another Connect version ──────────────────────────────────────────────
-Type@15ms "# ③ and the worker? --tag changes every CP component, --connect-tag only connect (a Connect cluster older or newer than the brokers)"
+Type@15ms "# ③ and the worker? What changed in Connect between CP 8.2.0 and 8.3.2, from the CP changelogs:"
+Enter
+Sleep 1s
+Type "playground cp-changelog --from 8.2.0 --to 8.3.2 --component kafka --grep 'kafka.connect|connect '"
+Sleep 800ms
+Enter
+Wait@2m /❯\s*$/
+Sleep 7s
+Type@15ms "# the commits of the community components (Kafka, Schema Registry, ksqlDB...), newest first: try it on the example 👇"
+Enter
+Sleep 3s
+Hide
+Type "clear"
+Enter
+Sleep 300ms
+Show
+Type@15ms "# --tag changes every CP component, --connect-tag only connect (a Connect cluster older or newer than the brokers)"
 Enter
 Sleep 2s
 Type@15ms "# connect on 8.3.2, the brokers stay on 8.2.0:"
@@ -145,6 +180,12 @@ Type@15ms "# 🧰 Versions of the example that runs:"
 Enter
 Sleep 1s
 Type@15ms "#   playground connector versions                    what runs (CP, connector) and the latest on Confluent Hub"
+Enter
+Sleep 2s
+Type@15ms "#   playground connector-plugin changelog --from X   what changed in the connector since X (--grep the symptom)"
+Enter
+Sleep 2s
+Type@15ms "#   playground cp-changelog --from X                 what changed in Confluent Platform since X (--component, --security)"
 Enter
 Sleep 2s
 Type@15ms "#   playground update-version --connector-tag X      another connector version (A,B for an example with two connectors)"

@@ -41,6 +41,7 @@ deep-dive-log-levels.md
 deep-dive-network-traffic.md
 deep-dive-offsets-and-lag.md
 deep-dive-oracle-cdc.md
+deep-dive-replication.md
 deep-dive-reproduction-models.md
 deep-dive-run-and-versions.md
 deep-dive-schema.md

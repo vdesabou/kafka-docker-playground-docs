@@ -4,7 +4,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .page{max-width:1300px;margin:0 auto;padding:24px}
 h1{font-size:1.55rem;font-weight:700}
 h2{font-size:1.05rem;font-weight:600;margin-bottom:12px;color:#334155}
-h3{font-size:.95rem;font-weight:600;margin:14px 0 8px;color:#334155}
 .header{background:linear-gradient(135deg,#1e3a5f 0%,#2563eb 100%);color:#fff;border-radius:12px;padding:22px 28px;margin-bottom:22px}
 .header-meta{font-size:.83rem;opacity:.85;margin-top:6px}
 .header-meta span{margin-right:18px}
@@ -12,7 +11,7 @@ h3{font-size:.95rem;font-weight:600;margin:14px 0 8px;color:#334155}
 .kpi-card{background:#fff;border-radius:10px;padding:14px 16px;box-shadow:0 1px 3px rgba(0,0,0,.07);border-left:4px solid #2563eb}
 .kpi-card.warn{border-left-color:#d97706}.kpi-card.danger{border-left-color:#dc2626}.kpi-card.ok{border-left-color:#16a34a}
 .kpi-label{font-size:.75rem;color:#64748b;text-transform:uppercase;letter-spacing:.05em}
-.kpi-value{font-size:1.75rem;font-weight:700;margin:3px 0 2px;word-break:break-word}
+.kpi-value{font-size:1.75rem;font-weight:700;margin:3px 0 2px}
 .kpi-unit{font-size:.73rem;color:#94a3b8}
 .charts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(560px,1fr));gap:18px;margin-bottom:22px}
 .chart-card{background:#fff;border-radius:10px;padding:18px 20px;box-shadow:0 1px 3px rgba(0,0,0,.07)}
@@ -36,16 +35,65 @@ td{padding:7px 11px;border-bottom:1px solid #f1f5f9;vertical-align:top}
 td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
 tr:hover td{background:#f8fafc}
 .mono{font-family:'SFMono-Regular',Consolas,'Liberation Mono',Menlo,monospace;font-size:.78rem;word-break:break-all}
-details{border-top:1px solid #f1f5f9;padding:2px 0}
-details summary{cursor:pointer;font-size:.84rem;padding:6px 0}
-.st{display:inline-block;font-size:.68rem;font-weight:700;padding:1px 7px;border-radius:12px;background:#f1f5f9;color:#475569;white-space:nowrap}
-.st.fatal,.st.failed{background:#fee2e2;color:#dc2626}.st.error{background:#ffedd5;color:#c2410c}.st.warn,.st.paused,.st.unassigned{background:#fef3c7;color:#b45309}
-.st.running{background:#dcfce7;color:#15803d}.st.mine{background:#dbeafe;color:#1d4ed8}
+details summary{cursor:pointer;font-weight:600;font-size:.86rem;padding:6px 0}
+.st{display:inline-block;font-size:.68rem;font-weight:700;padding:1px 7px;border-radius:12px;background:#f1f5f9;color:#475569}
 .verdict{background:#fff;border-radius:10px;padding:14px 18px;box-shadow:0 1px 3px rgba(0,0,0,.07);border-left:4px solid #16a34a;font-size:1rem;font-weight:500;margin-bottom:22px}
 .verdict.danger{border-left-color:#dc2626}.verdict.warn{border-left-color:#d97706}.verdict.ok{border-left-color:#16a34a}
-pre{font-family:'SFMono-Regular',Consolas,Menlo,monospace;font-size:.76rem;background:#f8fafc;padding:10px;border-radius:6px;overflow-x:auto;white-space:pre-wrap;word-break:break-all;margin:4px 0 8px}
+pre{font-family:'SFMono-Regular',Consolas,Menlo,monospace;font-size:.76rem;background:#f8fafc;padding:10px;border-radius:6px;overflow-x:auto;white-space:pre-wrap;word-break:break-all}
 .footer{text-align:center;font-size:.78rem;color:#94a3b8;padding:14px}
-</style></head><body><div class='page'><div class='header'><h1>🩺 Connector Diagnose</h1><div class='header-meta'><span>🔗 strict-sink</span><span><span class='mono'>org.apache.kafka.connect.file.FileStreamSinkConnector</span></span><span>🌎 plaintext</span><span>Generated: 2026-10-25 11:19:52</span></div></div><div class='verdict danger'>🔥 strict-sink: 1 task(s) FAILED. Read the trace, fix the cause, then restart it.</div><div class='kpi-grid'><div class="kpi-card ok"><div class="kpi-label">🧩 Connector</div><div class="kpi-value">RUNNING</div><div class="kpi-unit">sink · 🌎 self-managed</div></div><div class="kpi-card danger"><div class="kpi-label">⚙️ Tasks</div><div class="kpi-value">0/1</div><div class="kpi-unit">RUNNING</div></div><div class="kpi-card danger"><div class="kpi-label">🔥 Error records</div><div class="kpi-value">2</div><div class="kpi-unit">1 naming the connector</div></div></div><div class='section-title'>🔎 Findings</div><div class='recs-list'><div class="rec-card critical"><span class="rec-badge critical">🔴 CRITICAL</span><span class="rec-text">🔥 Task 0 FAILED on connect:8083: java.lang.IllegalArgumentException: Unknown magic byte!</span></div><div class="rec-card high"><span class="rec-badge high">🟠 HIGH</span><span class="rec-text">🧨 A connector task was killed: 1 occurrence(s) in connect (first at line 7399): it stays FAILED until it is restarted: fix the cause (the exception chain of the record), then playground connector restart --connector strict-sink</span></div><div class="rec-card high"><span class="rec-badge high">🟠 HIGH</span><span class="rec-text">🧲 Unknown magic byte: 1 occurrence(s) in connect (first at line 7399): the records were not written with the Schema Registry serializer the converter expects: check key.converter / value.converter against the producer (playground topic consume shows the real format)</span></div><div class="rec-card medium"><span class="rec-badge medium">🟡 MEDIUM</span><span class="rec-text">🔀 Serialization or conversion error: 1 occurrence(s) in connect (first at line 7399): the converter does not match the format of the records, or a record does not match the schema; errors.tolerance=all + a dead letter queue keeps the task running (playground topic dlq inspect)</span></div><div class="rec-card info"><span class="rec-badge info">ℹ️ INFO</span><span class="rec-text">ℹ️ 1 other distinct ERROR/FATAL record(s) in the worker logs do not name this connector: they can still explain it (worker, other connectors, Kafka clients)</span></div></div><div class='table-card'><h2>🗺️ Status</h2><table><tr><th>What</th><th>State</th><th>Worker</th><th>Trace</th></tr><tr><td>connector</td><td><span class='st running'>RUNNING</span></td><td class='mono' style='white-space:nowrap'>connect:8083</td><td><span class='legend'>-</span></td></tr><tr><td style='white-space:nowrap'>task 0</td><td><span class='st failed'>FAILED</span></td><td class='mono' style='white-space:nowrap'>connect:8083</td><td><details><summary class='mono'>java.lang.IllegalArgumentException: Unknown magic byte!</summary><pre>org.apache.kafka.connect.errors.ConnectException: Tolerance exceeded in error handler
+
+h3{font-size:.95rem;font-weight:600;margin:14px 0 8px;color:#334155}
+.kpi-value{word-break:break-word}
+details{border-top:1px solid #f1f5f9;padding:2px 0}
+details summary{font-size:.84rem;font-weight:normal}
+.st{white-space:nowrap}
+.st.fatal,.st.failed{background:#fee2e2;color:#dc2626}.st.error{background:#ffedd5;color:#c2410c}.st.warn,.st.paused,.st.unassigned{background:#fef3c7;color:#b45309}
+.st.running{background:#dcfce7;color:#15803d}.st.mine{background:#dbeafe;color:#1d4ed8}
+pre{margin:4px 0 8px}
+.diff-a{background:#fee2e2}.diff-b{background:#dcfce7}.muted{color:#94a3b8}
+code{font-family:'SFMono-Regular',Consolas,Menlo,monospace;font-size:.8rem;background:#f1f5f9;padding:1px 5px;border-radius:4px}
+html[data-theme="dark"] body{background:#0f172a;color:#e2e8f0}
+html[data-theme="dark"] h2,html[data-theme="dark"] h3,html[data-theme="dark"] .section-title,html[data-theme="dark"] .rec-text,html[data-theme="dark"] .verdict{color:#cbd5e1}
+html[data-theme="dark"] .kpi-card,html[data-theme="dark"] .chart-card,html[data-theme="dark"] .rec-card,html[data-theme="dark"] .table-card,html[data-theme="dark"] .verdict{background:#1e293b;box-shadow:none}
+html[data-theme="dark"] .kpi-label,html[data-theme="dark"] .legend,html[data-theme="dark"] .kpi-unit,html[data-theme="dark"] .footer,html[data-theme="dark"] .muted{color:#94a3b8}
+html[data-theme="dark"] th{background:#273449;border-bottom-color:#334155;color:#cbd5e1}
+html[data-theme="dark"] td{border-bottom-color:#273449}
+html[data-theme="dark"] tr:hover td{background:#273449}
+html[data-theme="dark"] pre,html[data-theme="dark"] code{background:#0b1220;color:#e2e8f0}
+html[data-theme="dark"] details{border-top-color:#334155}
+html[data-theme="dark"] a{color:#93c5fd}
+html[data-theme="dark"] .header a{color:#fff}
+html[data-theme="dark"] .st{background:#334155;color:#cbd5e1}
+html[data-theme="dark"] .rec-badge.critical,html[data-theme="dark"] .st.fatal,html[data-theme="dark"] .st.failed{background:#450a0a;color:#fca5a5}
+html[data-theme="dark"] .rec-badge.high,html[data-theme="dark"] .st.error{background:#431407;color:#fdba74}
+html[data-theme="dark"] .rec-badge.medium,html[data-theme="dark"] .st.warn,html[data-theme="dark"] .st.paused,html[data-theme="dark"] .st.unassigned{background:#422006;color:#fcd34d}
+html[data-theme="dark"] .rec-badge.low,html[data-theme="dark"] .st.running{background:#052e16;color:#86efac}
+html[data-theme="dark"] .rec-badge.info,html[data-theme="dark"] .st.mine{background:#172554;color:#93c5fd}
+html[data-theme="dark"] .rec-badge.ok{background:#083344;color:#67e8f9}
+html[data-theme="dark"] .diff-a{background:#450a0a}
+html[data-theme="dark"] .diff-b{background:#052e16}
+html[data-theme="dark"] svg [fill="#64748b"],html[data-theme="dark"] svg [fill="#94a3b8"]{fill:#94a3b8}
+html[data-theme="dark"] svg [fill="#1e293b"],html[data-theme="dark"] svg [fill="#334155"],html[data-theme="dark"] svg [fill="#475569"]{fill:#cbd5e1}
+html[data-theme="dark"] svg [stroke="#e2e8f0"],html[data-theme="dark"] svg [stroke="#f1f5f9"]{stroke:#334155}
+html[data-theme="dark"] svg [fill="#e2e8f0"],html[data-theme="dark"] svg [fill="#f1f5f9"]{fill:#334155}
+html[data-theme="dark"] svg text:not([fill]){fill:#cbd5e1}
+
+.theme-toggle{position:absolute;top:2px;right:12px;font:inherit;font-size:.72rem;line-height:1.4;color:#475569;background:#fff;border:1px solid #cbd5e1;border-radius:6px;padding:1px 9px;cursor:pointer}
+html[data-theme="dark"] .theme-toggle{color:#cbd5e1;background:#1e293b;border-color:#334155}
+</style><script>
+(function () {
+  const root = document.documentElement;
+  if (!root.dataset.theme) root.dataset.theme = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  document.addEventListener("DOMContentLoaded", function () {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "theme-toggle";
+    button.textContent = "Toggle theme";
+    button.addEventListener("click", function () { root.dataset.theme = root.dataset.theme === "dark" ? "light" : "dark"; });
+    document.body.appendChild(button);
+  });
+})();
+</script></head><body><div class='page'><div class='header'><h1>🩺 Connector Diagnose</h1><div class='header-meta'><span>🔗 strict-sink</span><span><span class='mono'>org.apache.kafka.connect.file.FileStreamSinkConnector</span></span><span>🌎 plaintext</span><span>Generated: 2026-10-28 11:48:56</span></div></div><div class='verdict danger'>🔥 strict-sink: 1 task(s) FAILED. Read the trace, fix the cause, then restart it.</div><div class='kpi-grid'><div class="kpi-card ok"><div class="kpi-label">🧩 Connector</div><div class="kpi-value">RUNNING</div><div class="kpi-unit">sink · 🌎 self-managed</div></div><div class="kpi-card danger"><div class="kpi-label">⚙️ Tasks</div><div class="kpi-value">0/1</div><div class="kpi-unit">RUNNING</div></div></div><div class='section-title'>🔎 Findings</div><div class='recs-list'><div class="rec-card critical"><span class="rec-badge critical">🔴 CRITICAL</span><span class="rec-text">🔥 Task 0 FAILED on connect:8083: java.lang.IllegalArgumentException: Unknown magic byte!</span></div></div><div class='table-card'><h2>🗺️ Status</h2><table><tr><th>What</th><th>State</th><th>Worker</th><th>Trace</th></tr><tr><td>connector</td><td><span class='st running'>RUNNING</span></td><td class='mono' style='white-space:nowrap'>connect:8083</td><td><span class='legend'>-</span></td></tr><tr><td style='white-space:nowrap'>task 0</td><td><span class='st failed'>FAILED</span></td><td class='mono' style='white-space:nowrap'>connect:8083</td><td><details><summary class='mono'>java.lang.IllegalArgumentException: Unknown magic byte!</summary><pre>org.apache.kafka.connect.errors.ConnectException: Tolerance exceeded in error handler
 	at org.apache.kafka.connect.runtime.errors.RetryWithToleranceOperator.execAndHandleError(RetryWithToleranceOperator.java:274)
 	at org.apache.kafka.connect.runtime.errors.RetryWithToleranceOperator.execute(RetryWithToleranceOperator.java:189)
 	at org.apache.kafka.connect.runtime.WorkerSinkTask.convertAndTransformRecord(WorkerSinkTask.java:626)
@@ -56,14 +104,14 @@ pre{font-family:'SFMono-Regular',Consolas,Menlo,monospace;font-size:.76rem;backg
 	at org.apache.kafka.connect.runtime.WorkerSinkTask.execute(WorkerSinkTask.java:248)
 	at org.apache.kafka.connect.runtime.WorkerTask.doRun(WorkerTask.java:289)
 	at org.apache.kafka.connect.runtime.WorkerTask.run(WorkerTask.java:345)
-	at org.apache.kafka.connect.runtime.isolation.Plugins.lambda$withClassLoader$0(Plugins.java:373)
+	at org.apache.kafka.connect.runtime.isolation.Plugins.lambda$withClassLoader$0(Plugins.java:354)
 	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
 	at java.base/java.util.concurrent.FutureTask.run(Unknown Source)
 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
 	at java.base/java.lang.Thread.run(Unknown Source)
 Caused by: org.apache.kafka.connect.errors.DataException: Failed to deserialize data for topic orders to Avro:
-	at io.confluent.connect.avro.AvroConverter.toConnectData(AvroConverter.java:255)
+	at io.confluent.connect.avro.AvroConverter.toConnectData(AvroConverter.java:262)
 	at org.apache.kafka.connect.runtime.WorkerSinkTask.lambda$convertAndTransformRecord$1(WorkerSinkTask.java:628)
 	at org.apache.kafka.connect.runtime.errors.RetryWithToleranceOperator.execAndRetry(RetryWithToleranceOperator.java:217)
 	at org.apache.kafka.connect.runtime.errors.RetryWithToleranceOperator.execAndHandleError(RetryWithToleranceOperator.java:254)
@@ -75,23 +123,11 @@ Caused by: org.apache.kafka.common.errors.SerializationException: Error deserial
 	at io.confluent.kafka.serializers.AbstractKafkaAvroDeserializer.deserializeWithSchemaAndVersion(AbstractKafkaAvroDeserializer.java:259)
 	at io.confluent.kafka.serializers.AbstractKafkaAvroDeserializer.deserializeWithSchemaAndVersion(AbstractKafkaAvroDeserializer.java:250)
 	at io.confluent.kafka.serializers.AbstractKafkaAvroDeserializer.deserializeWithSchemaAndVersion(AbstractKafkaAvroDeserializer.java:244)
-	at io.confluent.connect.avro.AvroConverter$Deserializer.deserialize(AvroConverter.java:335)
-	at io.confluent.connect.avro.AvroConverter.toConnectData(AvroConverter.java:216)
+	at io.confluent.connect.avro.AvroConverter$Deserializer.deserialize(AvroConverter.java:347)
+	at io.confluent.connect.avro.AvroConverter.toConnectData(AvroConverter.java:223)
 	... 18 more
 Caused by: java.lang.IllegalArgumentException: Unknown magic byte!
 	at io.confluent.kafka.serializers.schema.id.SchemaId.fromBytes(SchemaId.java:70)
 	at io.confluent.kafka.serializers.schema.id.DualSchemaIdDeserializer.deserialize(DualSchemaIdDeserializer.java:47)
 	... 25 more
-</pre></details></td></tr></table></div><div class='table-card'><h2>🔥 Errors in the connect logs (since 5m, whole worker)</h2><h3>Naming strict-sink (1)</h3><details open><summary><span class='st error'>ERROR</span> ×1 <span class='mono'>WorkerSinkTask{id=strict-sink-0} Task threw an uncaught and unrecoverable exception. Task is being killed and will not recover until manually restarted:</span> <span class='legend'>· line 7399 (2026-10-25 10:19:48)</span></summary><pre>[2026-10-25 10:19:48,463] ERROR [strict-sink|task-0] WorkerSinkTask{id=strict-sink-0} Task threw an uncaught and unrecoverable exception. Task is being killed and will not recover until manually restarted:
-    org.apache.kafka.connect.errors.ConnectException: Tolerance exceeded in error handler
-    Caused by: org.apache.kafka.connect.errors.DataException: Failed to deserialize data for topic orders to Avro:
-    Caused by: org.apache.kafka.common.errors.SerializationException: Error deserializing schema ID
-    Caused by: java.lang.IllegalArgumentException: Unknown magic byte!
-        at io.confluent.kafka.serializers.schema.id.SchemaId.fromBytes(SchemaId.java:70)
-        at io.confluent.kafka.serializers.schema.id.DualSchemaIdDeserializer.deserialize(DualSchemaIdDeserializer.java:47)</pre></details><h3>Elsewhere in the worker (1)</h3><details><summary><span class='st error'>ERROR</span> ×2 <span class='mono'>WorkerSinkTask{id=bad-sink-0} Task threw an uncaught and unrecoverable exception. Task is being killed and will not recover until manually restarted:</span> <span class='legend'>· line 4111 (2026-10-25 10:18:26) → line 5511 (2026-10-25 10:18:29)</span></summary><pre>[2026-10-25 10:18:26,350] ERROR [bad-sink|task-0] WorkerSinkTask{id=bad-sink-0} Task threw an uncaught and unrecoverable exception. Task is being killed and will not recover until manually restarted:
-    org.apache.kafka.connect.errors.ConnectException: Tolerance exceeded in error handler
-    Caused by: org.apache.kafka.connect.errors.DataException: Failed to deserialize data for topic filestream to Avro:
-    Caused by: org.apache.kafka.common.errors.SerializationException: Error deserializing schema ID
-    Caused by: java.lang.IllegalArgumentException: Unknown magic byte!
-        at io.confluent.kafka.serializers.schema.id.SchemaId.fromBytes(SchemaId.java:70)
-        at io.confluent.kafka.serializers.schema.id.DualSchemaIdDeserializer.deserialize(DualSchemaIdDeserializer.java:47)</pre></details><p class='legend' style='margin-top:10px'>De-duplicated like playground container logs --errors: one block per distinct record, with its number of occurrences and its exception chain.</p></div><div class='table-card'><h2>🐢 Progress: offsets</h2><p>ℹ️ no offset committed yet: it failed or started less than offset.flush.interval.ms (60 s by default) ago.</p></div><div class='table-card'><h2>👉 Next steps</h2><p class='rec-text' style='margin:6px 0'>🔥 a task or the connector FAILED: read the trace above, then after a fix: playground connector restart --connector strict-sink</p><pre>playground connector show-config --connector strict-sink</pre><pre>playground container logs -c connect --grep &quot;strict-sink&quot; --no-follow --tail 200</pre><pre>playground debug log-level set --package &lt;connector package&gt; --level TRACE</pre><pre>playground debug thread-dump --container connect</pre></div><div class='table-card'><details><summary><b>⚙️ Configuration (8 keys, secrets masked)</b></summary><table><tr><th>Key</th><th>Value</th></tr><tr><td class='mono'>__internal.config.version</td><td class='mono'>9f43028b62f4a7cf89fe4772d00adeb49b0b9cd171fea721f8056760b9897142</td></tr><tr><td class='mono'>connector.class</td><td class='mono'>org.apache.kafka.connect.file.FileStreamSinkConnector</td></tr><tr><td class='mono'>file</td><td class='mono'>/tmp/strict.txt</td></tr><tr><td class='mono'>name</td><td class='mono'>strict-sink</td></tr><tr><td class='mono'>tasks.max</td><td class='mono'>1</td></tr><tr><td class='mono'>topics</td><td class='mono'>orders</td></tr><tr><td class='mono'>value.converter</td><td class='mono'>io.confluent.connect.avro.AvroConverter</td></tr><tr><td class='mono'>value.converter.schema.registry.url</td><td class='mono'>http://schema-registry:8081</td></tr></table></details></div><div class='footer'>🛠️ Generated by playground connector diagnose (self-contained, no external resource). A snapshot: run it again to see whether the state, the lag or the offsets move.</div></div></body></html>
+</pre></details></td></tr></table></div><div class='table-card'><h2>🐢 Progress: offsets</h2><p>ℹ️ no offset committed yet: it failed or started less than offset.flush.interval.ms (60 s by default) ago.</p></div><div class='table-card'><h2>👉 Next steps</h2><p class='rec-text' style='margin:6px 0'>🔥 a task or the connector FAILED: read the trace above, then after a fix: playground connector restart --connector strict-sink</p><pre>playground connector show-config --connector strict-sink</pre><pre>playground container logs -c connect --grep &quot;strict-sink&quot; --no-follow --tail 200</pre><pre>playground debug log-level set --package &lt;connector package&gt; --level TRACE</pre><pre>playground debug thread-dump --container connect</pre></div><div class='table-card'><details><summary><b>⚙️ Configuration (8 keys, secrets masked)</b></summary><table><tr><th>Key</th><th>Value</th></tr><tr><td class='mono'>__internal.config.version</td><td class='mono'>9f43028b62f4a7cf89fe4772d00adeb49b0b9cd171fea721f8056760b9897142</td></tr><tr><td class='mono'>connector.class</td><td class='mono'>org.apache.kafka.connect.file.FileStreamSinkConnector</td></tr><tr><td class='mono'>file</td><td class='mono'>/tmp/strict.txt</td></tr><tr><td class='mono'>name</td><td class='mono'>strict-sink</td></tr><tr><td class='mono'>tasks.max</td><td class='mono'>1</td></tr><tr><td class='mono'>topics</td><td class='mono'>orders</td></tr><tr><td class='mono'>value.converter</td><td class='mono'>io.confluent.connect.avro.AvroConverter</td></tr><tr><td class='mono'>value.converter.schema.registry.url</td><td class='mono'>http://schema-registry:8081</td></tr></table></details></div><div class='footer'>🛠️ Generated by playground connector diagnose (self-contained, no external resource). A snapshot: run it again to see whether the state, the lag or the offsets move.</div></div></body></html>

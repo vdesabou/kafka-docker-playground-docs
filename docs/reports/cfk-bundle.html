@@ -14,13 +14,12 @@ body {
   line-height: 1.5;
 }
 header {
-  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-  color: #f9fafb;
+  background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 100%);
+  color: #fff;
   padding: 32px 40px;
-  border-bottom: 1px solid #0f172a;
 }
 header h1 { margin: 0 0 8px 0; font-size: 24px; font-weight: 600; }
-header .meta { color: #cbd5e1; font-size: 13px; }
+header .meta { color: #fff; opacity: .85; font-size: 13px; }
 .verdict {
   background: white;
   border: 1px solid #e5e7eb;
@@ -142,6 +141,10 @@ main { max-width: 1180px; margin: 0 auto; padding: 32px 40px 80px 40px; }
   padding: 3px 8px;
   border-radius: 4px;
 }
+.severity-pill.critical { background: #fef2f2; color: #b91c1c; }
+.severity-pill.high { background: #fff7ed; color: #c2410c; }
+.severity-pill.medium { background: #fefce8; color: #a16207; }
+.severity-pill.low { background: #f0fdf4; color: #15803d; }
 .count {
   background: #e5e7eb;
   color: #374151;
@@ -237,13 +240,57 @@ footer {
   padding: 24px 0;
 }
 footer a { color: #6b7280; }
-</style>
+html[data-theme="dark"] body{background:#0f172a;color:#e2e8f0}
+html[data-theme="dark"] .verdict,html[data-theme="dark"] .card,html[data-theme="dark"] .category,html[data-theme="dark"] .panel{background:#1e293b;border-color:#334155}
+html[data-theme="dark"] .card .label,html[data-theme="dark"] .panel .label,html[data-theme="dark"] .controls .label,html[data-theme="dark"] .issue .location,html[data-theme="dark"] footer,html[data-theme="dark"] footer a,html[data-theme="dark"] .category > summary::before{color:#94a3b8}
+html[data-theme="dark"] .card.critical .value{color:#fca5a5}
+html[data-theme="dark"] .card.high .value{color:#fdba74}
+html[data-theme="dark"] .card.medium .value{color:#fcd34d}
+html[data-theme="dark"] .card.low .value{color:#86efac}
+html[data-theme="dark"] .filter-btn,html[data-theme="dark"] .component-btn,html[data-theme="dark"] .instance-btn,html[data-theme="dark"] .search{background:#1e293b;border-color:#334155;color:#cbd5e1}
+html[data-theme="dark"] .filter-btn:hover,html[data-theme="dark"] .component-btn:hover,html[data-theme="dark"] .instance-btn:hover{border-color:#94a3b8}
+html[data-theme="dark"] .filter-btn.active{background:#e2e8f0;color:#0f172a;border-color:#e2e8f0}
+html[data-theme="dark"] .component-btn.active,html[data-theme="dark"] .instance-btn.active{background:#2563eb;color:#fff;border-color:#2563eb}
+html[data-theme="dark"] .component-tag{background:#172554;color:#93c5fd}
+html[data-theme="dark"] .category > summary{background:#273449}
+html[data-theme="dark"] .category[open] > summary{border-bottom-color:#334155}
+html[data-theme="dark"] .count{background:#334155;color:#cbd5e1}
+html[data-theme="dark"] table.env th{color:#94a3b8;border-bottom-color:#334155}
+html[data-theme="dark"] table.env td{border-bottom-color:#273449}
+html[data-theme="dark"] .affected > summary,html[data-theme="dark"] .recommendation .why{color:#94a3b8}
+html[data-theme="dark"] .recommendation{background:#172033;border-bottom-color:#334155}
+html[data-theme="dark"] .recommendation ol li,html[data-theme="dark"] .issue .message{color:#e2e8f0}
+html[data-theme="dark"] .recommendation .docs,html[data-theme="dark"] .issue details summary,html[data-theme="dark"] a{color:#93c5fd}
+html[data-theme="dark"] .issue{border-top-color:#273449}
+html[data-theme="dark"] .issue pre{background:#0b1220}
+html[data-theme="dark"] .no-issues{background:#1e293b;border-color:#14532d;color:#86efac}
+html[data-theme="dark"] .severity-pill.critical{background:#450a0a;color:#fca5a5}
+html[data-theme="dark"] .severity-pill.high{background:#431407;color:#fdba74}
+html[data-theme="dark"] .severity-pill.medium{background:#422006;color:#fcd34d}
+html[data-theme="dark"] .severity-pill.low{background:#052e16;color:#86efac}
+
+.theme-toggle{position:absolute;top:2px;right:12px;font:inherit;font-size:.72rem;line-height:1.4;color:#475569;background:#fff;border:1px solid #cbd5e1;border-radius:6px;padding:1px 9px;cursor:pointer}
+html[data-theme="dark"] .theme-toggle{color:#cbd5e1;background:#1e293b;border-color:#334155}
+</style><script>
+(function () {
+  const root = document.documentElement;
+  if (!root.dataset.theme) root.dataset.theme = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  document.addEventListener("DOMContentLoaded", function () {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "theme-toggle";
+    button.textContent = "Toggle theme";
+    button.addEventListener("click", function () { root.dataset.theme = root.dataset.theme === "dark" ? "light" : "dark"; });
+    document.body.appendChild(button);
+  });
+})();
+</script>
 </head>
 <body>
   <header>
     <h1>📦 CFK Bundle Analysis Report</h1>
     <div class="meta">
-      Generated 2026-10-27 12:58:10
+      Generated 2026-10-28 10:50:26
       &nbsp;·&nbsp; Files analyzed: 10
       &nbsp;·&nbsp; 5 pods, 3 CFK CRs, 4 events, 5 log files (50 lines)
       &nbsp;·&nbsp; Time: 0.01s
@@ -285,7 +332,7 @@ footer a { color: #6b7280; }
     
             <details class="category" data-severity="critical" open>
               <summary>
-                <span class="severity-pill" style="background:#fef2f2;color:#b91c1c">🔴 critical</span>
+                <span class="severity-pill critical">🔴 critical</span>
                 <span class="title">☸️ Pod Failures</span>
                 <span class="count">5</span>
               </summary>
@@ -298,7 +345,7 @@ footer a { color: #6b7280; }
                 
                 <div class="issue" data-severity="critical" data-component="kafka" data-instance="kafka">
                   <div class="head">
-                    <span class="severity-pill" style="background:#fef2f2;color:#b91c1c">🔴 critical</span>
+                    <span class="severity-pill critical">🔴 critical</span>
                     <span class="component-tag">📨 Kafka · kafka</span>
                     <span class="location">confluent/cluster-resources/events.yaml &nbsp;×42</span>
                   </div>
@@ -320,7 +367,7 @@ lastTimestamp: &#x27;2026-10-14T09:12:31Z&#x27;
                 
                 <div class="issue" data-severity="critical" data-component="kafka" data-instance="kafka">
                   <div class="head">
-                    <span class="severity-pill" style="background:#fef2f2;color:#b91c1c">🔴 critical</span>
+                    <span class="severity-pill critical">🔴 critical</span>
                     <span class="component-tag">📨 Kafka · kafka</span>
                     <span class="location">confluent/cluster-resources/pods.yaml</span>
                   </div>
@@ -330,7 +377,7 @@ lastTimestamp: &#x27;2026-10-14T09:12:31Z&#x27;
                 
                 <div class="issue" data-severity="high" data-component="kafka" data-instance="kafka">
                   <div class="head">
-                    <span class="severity-pill" style="background:#fff7ed;color:#c2410c">🟠 high</span>
+                    <span class="severity-pill high">🟠 high</span>
                     <span class="component-tag">📨 Kafka · kafka</span>
                     <span class="location">confluent/cluster-resources/pods.yaml</span>
                   </div>
@@ -340,7 +387,7 @@ lastTimestamp: &#x27;2026-10-14T09:12:31Z&#x27;
                 
                 <div class="issue" data-severity="medium" data-component="kafka" data-instance="kafka">
                   <div class="head">
-                    <span class="severity-pill" style="background:#fefce8;color:#a16207">🟡 medium</span>
+                    <span class="severity-pill medium">🟡 medium</span>
                     <span class="component-tag">📨 Kafka · kafka</span>
                     <span class="location">confluent/cluster-resources/pods.yaml</span>
                   </div>
@@ -350,7 +397,7 @@ lastTimestamp: &#x27;2026-10-14T09:12:31Z&#x27;
                 
                 <div class="issue" data-severity="medium" data-component="connect" data-instance="connect">
                   <div class="head">
-                    <span class="severity-pill" style="background:#fefce8;color:#a16207">🟡 medium</span>
+                    <span class="severity-pill medium">🟡 medium</span>
                     <span class="component-tag">🔌 Connect · connect</span>
                     <span class="location">confluent/cluster-resources/pods.yaml</span>
                   </div>
@@ -363,7 +410,7 @@ lastTimestamp: &#x27;2026-10-14T09:12:31Z&#x27;
             
             <details class="category" data-severity="critical" open>
               <summary>
-                <span class="severity-pill" style="background:#fef2f2;color:#b91c1c">🔴 critical</span>
+                <span class="severity-pill critical">🔴 critical</span>
                 <span class="title">💾 Resource Issues</span>
                 <span class="count">2</span>
               </summary>
@@ -376,7 +423,7 @@ lastTimestamp: &#x27;2026-10-14T09:12:31Z&#x27;
                 
                 <div class="issue" data-severity="critical" data-component="connect" data-instance="connect">
                   <div class="head">
-                    <span class="severity-pill" style="background:#fef2f2;color:#b91c1c">🔴 critical</span>
+                    <span class="severity-pill critical">🔴 critical</span>
                     <span class="component-tag">🔌 Connect · connect</span>
                     <span class="location">confluent/cluster-resources/pods.yaml</span>
                   </div>
@@ -386,7 +433,7 @@ lastTimestamp: &#x27;2026-10-14T09:12:31Z&#x27;
                 
                 <div class="issue" data-severity="critical" data-component="connect" data-instance="connect">
                   <div class="head">
-                    <span class="severity-pill" style="background:#fef2f2;color:#b91c1c">🔴 critical</span>
+                    <span class="severity-pill critical">🔴 critical</span>
                     <span class="component-tag">🔌 Connect · connect</span>
                     <span class="location">confluent/connect/logs/connect-0.log:7</span>
                   </div>
@@ -403,7 +450,7 @@ java.lang.OutOfMemoryError: Java heap space
             
             <details class="category" data-severity="high" open>
               <summary>
-                <span class="severity-pill" style="background:#fff7ed;color:#c2410c">🟠 high</span>
+                <span class="severity-pill high">🟠 high</span>
                 <span class="title">🩺 Health Check Issues</span>
                 <span class="count">1</span>
               </summary>
@@ -416,7 +463,7 @@ java.lang.OutOfMemoryError: Java heap space
                 
                 <div class="issue" data-severity="high" data-component="schemaregistry" data-instance="schemaregistry">
                   <div class="head">
-                    <span class="severity-pill" style="background:#fff7ed;color:#c2410c">🟠 high</span>
+                    <span class="severity-pill high">🟠 high</span>
                     <span class="component-tag">📜 Schema Registry · schemaregistry</span>
                     <span class="location">confluent/cluster-resources/events.yaml &nbsp;×18</span>
                   </div>
@@ -441,7 +488,7 @@ lastTimestamp: &#x27;2026-10-14T09:10:44Z&#x27;
             
             <details class="category" data-severity="high" open>
               <summary>
-                <span class="severity-pill" style="background:#fff7ed;color:#c2410c">🟠 high</span>
+                <span class="severity-pill high">🟠 high</span>
                 <span class="title">🔐 Certificate/TLS Issues</span>
                 <span class="count">2</span>
               </summary>
@@ -454,7 +501,7 @@ lastTimestamp: &#x27;2026-10-14T09:10:44Z&#x27;
                 
                 <div class="issue" data-severity="high" data-component="kafka" data-instance="kafka">
                   <div class="head">
-                    <span class="severity-pill" style="background:#fff7ed;color:#c2410c">🟠 high</span>
+                    <span class="severity-pill high">🟠 high</span>
                     <span class="component-tag">📨 Kafka · kafka</span>
                     <span class="location">confluent/kafka/logs/kafka-2.log:2 &nbsp;×2</span>
                   </div>
@@ -467,7 +514,7 @@ javax.net.ssl.SSLHandshakeException: PKIX path validation failed: java.security.
                 
                 <div class="issue" data-severity="high" data-component="kafka" data-instance="kafka">
                   <div class="head">
-                    <span class="severity-pill" style="background:#fff7ed;color:#c2410c">🟠 high</span>
+                    <span class="severity-pill high">🟠 high</span>
                     <span class="component-tag">📨 Kafka · kafka</span>
                     <span class="location">confluent/kafka/logs/kafka-2.log:11</span>
                   </div>
@@ -483,7 +530,7 @@ org.apache.kafka.common.errors.SslAuthenticationException: SSL handshake failed<
             
             <details class="category" data-severity="high" open>
               <summary>
-                <span class="severity-pill" style="background:#fff7ed;color:#c2410c">🟠 high</span>
+                <span class="severity-pill high">🟠 high</span>
                 <span class="title">🔌 Connect Issues</span>
                 <span class="count">2</span>
               </summary>
@@ -496,7 +543,7 @@ org.apache.kafka.common.errors.SslAuthenticationException: SSL handshake failed<
                 
                 <div class="issue" data-severity="high" data-component="connect" data-instance="orders-sink">
                   <div class="head">
-                    <span class="severity-pill" style="background:#fff7ed;color:#c2410c">🟠 high</span>
+                    <span class="severity-pill high">🟠 high</span>
                     <span class="component-tag">🔌 Connect · orders-sink</span>
                     <span class="location">confluent/connect/connector-orders-sink.yaml</span>
                   </div>
@@ -506,7 +553,7 @@ org.apache.kafka.common.errors.SslAuthenticationException: SSL handshake failed<
                 
                 <div class="issue" data-severity="medium" data-component="connect" data-instance="connect">
                   <div class="head">
-                    <span class="severity-pill" style="background:#fefce8;color:#a16207">🟡 medium</span>
+                    <span class="severity-pill medium">🟡 medium</span>
                     <span class="component-tag">🔌 Connect · connect</span>
                     <span class="location">confluent/connect/logs/connect-0.log:2</span>
                   </div>
@@ -522,7 +569,7 @@ org.apache.kafka.connect.errors.ConnectException: Exiting WorkerSinkTask due to 
             
             <details class="category" data-severity="high" open>
               <summary>
-                <span class="severity-pill" style="background:#fff7ed;color:#c2410c">🟠 high</span>
+                <span class="severity-pill high">🟠 high</span>
                 <span class="title">🔑 Authentication Issues</span>
                 <span class="count">1</span>
               </summary>
@@ -535,7 +582,7 @@ org.apache.kafka.connect.errors.ConnectException: Exiting WorkerSinkTask due to 
                 
                 <div class="issue" data-severity="high" data-component="schemaregistry" data-instance="schemaregistry">
                   <div class="head">
-                    <span class="severity-pill" style="background:#fff7ed;color:#c2410c">🟠 high</span>
+                    <span class="severity-pill high">🟠 high</span>
                     <span class="component-tag">📜 Schema Registry · schemaregistry</span>
                     <span class="location">confluent/schemaregistry/logs/schemaregistry-0.log:2</span>
                   </div>
@@ -551,7 +598,7 @@ Caused by: org.apache.kafka.common.errors.SaslAuthenticationException: Authentic
             
             <details class="category" data-severity="medium" open>
               <summary>
-                <span class="severity-pill" style="background:#fefce8;color:#a16207">🟡 medium</span>
+                <span class="severity-pill medium">🟡 medium</span>
                 <span class="title">🗓️ Scheduling Issues</span>
                 <span class="count">1</span>
               </summary>
@@ -564,7 +611,7 @@ Caused by: org.apache.kafka.common.errors.SaslAuthenticationException: Authentic
                 
                 <div class="issue" data-severity="medium" data-component="kafka" data-instance="kafka">
                   <div class="head">
-                    <span class="severity-pill" style="background:#fefce8;color:#a16207">🟡 medium</span>
+                    <span class="severity-pill medium">🟡 medium</span>
                     <span class="component-tag">📨 Kafka · kafka</span>
                     <span class="location">confluent/cluster-resources/events.yaml &nbsp;×7</span>
                   </div>
@@ -591,7 +638,7 @@ lastTimestamp: &#x27;2026-10-14T08:20:02Z&#x27;
             
             <details class="category" data-severity="medium" open>
               <summary>
-                <span class="severity-pill" style="background:#fefce8;color:#a16207">🟡 medium</span>
+                <span class="severity-pill medium">🟡 medium</span>
                 <span class="title">🤖 Operator Issues</span>
                 <span class="count">1</span>
               </summary>
@@ -604,7 +651,7 @@ lastTimestamp: &#x27;2026-10-14T08:20:02Z&#x27;
                 
                 <div class="issue" data-severity="medium" data-component="operator" data-instance="">
                   <div class="head">
-                    <span class="severity-pill" style="background:#fefce8;color:#a16207">🟡 medium</span>
+                    <span class="severity-pill medium">🟡 medium</span>
                     <span class="component-tag">⚙️ Operator</span>
                     <span class="location">operator/confluent-operator-7d9c8b6f5-x2x7k.log:2 &nbsp;×2</span>
                   </div>
@@ -619,7 +666,7 @@ lastTimestamp: &#x27;2026-10-14T08:20:02Z&#x27;
             
             <details class="category" data-severity="medium" open>
               <summary>
-                <span class="severity-pill" style="background:#fefce8;color:#a16207">🟡 medium</span>
+                <span class="severity-pill medium">🟡 medium</span>
                 <span class="title">🧩 Other Exceptions (Unclassified)</span>
                 <span class="count">1</span>
               </summary>
@@ -632,7 +679,7 @@ lastTimestamp: &#x27;2026-10-14T08:20:02Z&#x27;
                 
                 <div class="issue" data-severity="medium" data-component="connect" data-instance="connect">
                   <div class="head">
-                    <span class="severity-pill" style="background:#fefce8;color:#a16207">🟡 medium</span>
+                    <span class="severity-pill medium">🟡 medium</span>
                     <span class="component-tag">🔌 Connect · connect</span>
                     <span class="location">confluent/connect/logs/connect-0.log:6</span>
                   </div>
@@ -649,7 +696,7 @@ java.lang.OutOfMemoryError: Java heap space</pre></details>
             
             <details class="category" data-severity="medium" open>
               <summary>
-                <span class="severity-pill" style="background:#fefce8;color:#a16207">🟡 medium</span>
+                <span class="severity-pill medium">🟡 medium</span>
                 <span class="title">🩺 Component Status</span>
                 <span class="count">3</span>
               </summary>
@@ -662,7 +709,7 @@ java.lang.OutOfMemoryError: Java heap space</pre></details>
                 
                 <div class="issue" data-severity="medium" data-component="kafka" data-instance="kafka">
                   <div class="head">
-                    <span class="severity-pill" style="background:#fefce8;color:#a16207">🟡 medium</span>
+                    <span class="severity-pill medium">🟡 medium</span>
                     <span class="component-tag">📨 Kafka · kafka</span>
                     <span class="location">confluent/kafka/kafka.yaml</span>
                   </div>
@@ -686,7 +733,7 @@ conditions:
                 
                 <div class="issue" data-severity="medium" data-component="kafka" data-instance="kafka">
                   <div class="head">
-                    <span class="severity-pill" style="background:#fefce8;color:#a16207">🟡 medium</span>
+                    <span class="severity-pill medium">🟡 medium</span>
                     <span class="component-tag">📨 Kafka · kafka</span>
                     <span class="location">confluent/kafka/kafka.yaml</span>
                   </div>
@@ -696,7 +743,7 @@ conditions:
                 
                 <div class="issue" data-severity="medium" data-component="kafka" data-instance="kafka">
                   <div class="head">
-                    <span class="severity-pill" style="background:#fefce8;color:#a16207">🟡 medium</span>
+                    <span class="severity-pill medium">🟡 medium</span>
                     <span class="component-tag">📨 Kafka · kafka</span>
                     <span class="location">confluent/kafka/kafka.yaml</span>
                   </div>

@@ -3,6 +3,7 @@
 ## October 2026
 ##### 🌟 Enhancements
 
+- 🧠📜 cp-changelog: release notes of Confluent Platform versions from the docs changelog feeds [#9715](https://github.com/vdesabou/kafka-docker-playground/issues/9715)
 - 🧠📜 connector versions (end of playground run) shows the release notes of the last versions [#9712](https://github.com/vdesabou/kafka-docker-playground/issues/9712)
 - 🧠📜 connector-plugin versions --with-changelog and release notes in the --connector-tag picker [#9709](https://github.com/vdesabou/kafka-docker-playground/issues/9709)
 - 🧠📜 connector-plugin changelog: release notes of a plugin between two versions [#9694](https://github.com/vdesabou/kafka-docker-playground/issues/9694)

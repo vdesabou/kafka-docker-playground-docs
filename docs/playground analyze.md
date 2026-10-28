@@ -23,10 +23,6 @@ To collect them: playground debug thread-dump, heap-dump, flight-recorder, tcp-d
 playground connector oracle-cdc-xstream generate-report,  
 playground debug cfk generate-bundle.
 
-| Attributes       | &nbsp;
-|------------------|-------------
-| Alias:           | analyse
-
 ## Usage
 
 ```bash

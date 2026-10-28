@@ -94,6 +94,7 @@
 
 ##### 🐛 Bugs
 
+- 🐛🐘 hdfs2-sink-ha-kerberos still fails on podman: namenode format is not retried when the journal nodes reject it [#9716](https://github.com/vdesabou/kafka-docker-playground/issues/9716)
 - 🐛💸 Oracle pdb examples delete and re-download the 11 GB Oracle image in CI [#9692](https://github.com/vdesabou/kafka-docker-playground/issues/9692)
 - 🐛🐳 playground container set-environment-variables writes an invalid compose override (remote debugging broken) [#9515](https://github.com/vdesabou/kafka-docker-playground/issues/9515)
 - 🐛📥 playground topic consume garbles and doesn't count records with multi-line headers (dead letter queues) [#9514](https://github.com/vdesabou/kafka-docker-playground/issues/9514)

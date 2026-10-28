@@ -3,6 +3,7 @@
 ## October 2026
 ##### 🌟 Enhancements
 
+- 🧠📜 connector versions (end of playground run) shows the release notes of the last versions [#9712](https://github.com/vdesabou/kafka-docker-playground/issues/9712)
 - 🧠📜 connector-plugin versions --with-changelog and release notes in the --connector-tag picker [#9709](https://github.com/vdesabou/kafka-docker-playground/issues/9709)
 - 🧠📜 connector-plugin changelog: release notes of a plugin between two versions [#9694](https://github.com/vdesabou/kafka-docker-playground/issues/9694)
 - 🧠💰 HTML report for ccloud / aws / azure costs-history [#9684](https://github.com/vdesabou/kafka-docker-playground/issues/9684)

@@ -4,7 +4,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .page{max-width:1300px;margin:0 auto;padding:24px}
 h1{font-size:1.55rem;font-weight:700}
 h2{font-size:1.05rem;font-weight:600;margin-bottom:12px;color:#334155}
-h3{font-size:.95rem;font-weight:600;margin:14px 0 8px;color:#334155}
 .header{background:linear-gradient(135deg,#1e3a5f 0%,#2563eb 100%);color:#fff;border-radius:12px;padding:22px 28px;margin-bottom:22px}
 .header-meta{font-size:.83rem;opacity:.85;margin-top:6px}
 .header-meta span{margin-right:18px}
@@ -12,7 +11,7 @@ h3{font-size:.95rem;font-weight:600;margin:14px 0 8px;color:#334155}
 .kpi-card{background:#fff;border-radius:10px;padding:14px 16px;box-shadow:0 1px 3px rgba(0,0,0,.07);border-left:4px solid #2563eb}
 .kpi-card.warn{border-left-color:#d97706}.kpi-card.danger{border-left-color:#dc2626}.kpi-card.ok{border-left-color:#16a34a}
 .kpi-label{font-size:.75rem;color:#64748b;text-transform:uppercase;letter-spacing:.05em}
-.kpi-value{font-size:1.75rem;font-weight:700;margin:3px 0 2px;word-break:break-word}
+.kpi-value{font-size:1.75rem;font-weight:700;margin:3px 0 2px}
 .kpi-unit{font-size:.73rem;color:#94a3b8}
 .charts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(560px,1fr));gap:18px;margin-bottom:22px}
 .chart-card{background:#fff;border-radius:10px;padding:18px 20px;box-shadow:0 1px 3px rgba(0,0,0,.07)}
@@ -36,15 +35,62 @@ td{padding:7px 11px;border-bottom:1px solid #f1f5f9;vertical-align:top}
 td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
 tr:hover td{background:#f8fafc}
 .mono{font-family:'SFMono-Regular',Consolas,'Liberation Mono',Menlo,monospace;font-size:.78rem;word-break:break-all}
-details{border-top:1px solid #f1f5f9;padding:2px 0}
-details summary{cursor:pointer;font-size:.84rem;padding:6px 0}
-.st{display:inline-block;font-size:.68rem;font-weight:700;padding:1px 7px;border-radius:12px;background:#f1f5f9;color:#475569;white-space:nowrap}
-.st.fatal,.st.failed{background:#fee2e2;color:#dc2626}.st.error{background:#ffedd5;color:#c2410c}.st.warn,.st.paused,.st.unassigned{background:#fef3c7;color:#b45309}
-.st.running{background:#dcfce7;color:#15803d}.st.mine{background:#dbeafe;color:#1d4ed8}
+details summary{cursor:pointer;font-weight:600;font-size:.86rem;padding:6px 0}
+.st{display:inline-block;font-size:.68rem;font-weight:700;padding:1px 7px;border-radius:12px;background:#f1f5f9;color:#475569}
 .verdict{background:#fff;border-radius:10px;padding:14px 18px;box-shadow:0 1px 3px rgba(0,0,0,.07);border-left:4px solid #16a34a;font-size:1rem;font-weight:500;margin-bottom:22px}
 .verdict.danger{border-left-color:#dc2626}.verdict.warn{border-left-color:#d97706}.verdict.ok{border-left-color:#16a34a}
-pre{font-family:'SFMono-Regular',Consolas,Menlo,monospace;font-size:.76rem;background:#f8fafc;padding:10px;border-radius:6px;overflow-x:auto;white-space:pre-wrap;word-break:break-all;margin:4px 0 8px}
+pre{font-family:'SFMono-Regular',Consolas,Menlo,monospace;font-size:.76rem;background:#f8fafc;padding:10px;border-radius:6px;overflow-x:auto;white-space:pre-wrap;word-break:break-all}
+.footer{text-align:center;font-size:.78rem;color:#94a3b8;padding:14px}
+
+h3{font-size:.95rem;font-weight:600;margin:14px 0 8px;color:#334155}
+.kpi-value{word-break:break-word}
+details{border-top:1px solid #f1f5f9;padding:2px 0}
+details summary{font-size:.84rem;font-weight:normal}
+.st{white-space:nowrap}
+.st.fatal,.st.failed{background:#fee2e2;color:#dc2626}.st.error{background:#ffedd5;color:#c2410c}.st.warn,.st.paused,.st.unassigned{background:#fef3c7;color:#b45309}
+.st.running{background:#dcfce7;color:#15803d}.st.mine{background:#dbeafe;color:#1d4ed8}
+pre{margin:4px 0 8px}
 .diff-a{background:#fee2e2}.diff-b{background:#dcfce7}.muted{color:#94a3b8}
 code{font-family:'SFMono-Regular',Consolas,Menlo,monospace;font-size:.8rem;background:#f1f5f9;padding:1px 5px;border-radius:4px}
-.footer{text-align:center;font-size:.78rem;color:#94a3b8;padding:14px}
-</style></head><body><div class='page'><div class='header'><h1>🔀 Connector Config Diff</h1><div class='header-meta'><span>🔗 filestream-sink</span><span>vs customer-connector.json</span><span><span class='mono'>org.apache.kafka.connect.file.FileStreamSinkConnector</span></span><span>Generated: 2026-10-25 11:50:31</span></div></div><div class='verdict warn'>🔀 4 key(s) differ between filestream-sink and customer-connector.json.</div><div class='kpi-grid'><div class="kpi-card warn"><div class="kpi-label">✏️ Different</div><div class="kpi-value">1</div><div class="kpi-unit">same key, other value</div></div><div class="kpi-card warn"><div class="kpi-label">➖ Only left</div><div class="kpi-value">3</div><div class="kpi-unit">filestream-sink</div></div><div class="kpi-card ok"><div class="kpi-label">➕ Only right</div><div class="kpi-value">0</div><div class="kpi-unit">customer-connector.json</div></div><div class="kpi-card "><div class="kpi-label">🟰 Same</div><div class="kpi-value">4</div><div class="kpi-unit">identical keys</div></div><div class="kpi-card "><div class="kpi-label">🔒 Masked</div><div class="kpi-value">0</div><div class="kpi-unit">not compared</div></div></div><div class='section-title'>🔎 Findings</div><div class='recs-list'><div class="rec-card high"><span class="rec-badge high">🟠 HIGH</span><span class="rec-text">🔀 another converter: the records are read (sink) or written (source) in another format: key.converter, value.converter</span></div><div class="rec-card medium"><span class="rec-badge medium">🟡 MEDIUM</span><span class="rec-text">🔀 another converter setting (schema registry url, schemas.enable, subject strategy...): value.converter.schemas.enable</span></div><div class="rec-card low"><span class="rec-badge low">🟢 LOW</span><span class="rec-text">⚙️ another parallelism: tasks.max</span></div></div><div class='table-card'><h2>🔀 Keys that differ</h2><table><tr><th>Key</th><th>Status</th><th>filestream-sink</th><th>customer-connector.json</th></tr><tr><td><span class='mono'><b>tasks.max</b></span></td><td><span class='st warn'>different</span></td><td class='diff-a'><span class='mono'>1</span></td><td class='diff-b'><span class='mono'>4</span></td></tr><tr><td><span class='mono'><b>key.converter</b></span></td><td><span class='st failed'>only left</span></td><td class='diff-a'><span class='mono'>org.apache.kafka.connect.storage.StringConverter</span></td><td><span class='muted'>—</span></td></tr><tr><td><span class='mono'><b>value.converter</b></span></td><td><span class='st failed'>only left</span></td><td class='diff-a'><span class='mono'>org.apache.kafka.connect.json.JsonConverter</span></td><td><span class='muted'>—</span></td></tr><tr><td><span class='mono'><b>value.converter.schemas.enable</b></span><br><span class='legend'>BOOLEAN · default true · HIGH</span><details><summary class='legend'>doc</summary><p class='legend'>Include schemas within each of the serialized values and keys.</p></details></td><td><span class='st failed'>only left</span></td><td class='diff-a'><span class='mono'>false</span></td><td><span class='muted'>—</span></td></tr></table></div><div class='table-card'><details><summary><b>🟰 4 identical key(s)</b></summary><table><tr><th>Key</th><th>Status</th><th>filestream-sink</th><th>customer-connector.json</th></tr><tr><td><span class='mono'><b>connector.class</b></span></td><td><span class='st same'>same</span></td><td><span class='mono'>org.apache.kafka.connect.file.FileStreamSinkConnector</span></td><td><span class='mono'>org.apache.kafka.connect.file.FileStreamSinkConnector</span></td></tr><tr><td><span class='mono'><b>errors.tolerance</b></span></td><td><span class='st same'>same</span></td><td><span class='mono'>all</span></td><td><span class='mono'>all</span></td></tr><tr><td><span class='mono'><b>file</b></span><br><span class='legend'>STRING · default null · HIGH</span><details><summary class='legend'>doc</summary><p class='legend'>Destination filename. If not specified, the standard output will be used</p></details></td><td><span class='st same'>same</span></td><td><span class='mono'>/tmp/output2.json</span></td><td><span class='mono'>/tmp/output2.json</span></td></tr><tr><td><span class='mono'><b>topics</b></span></td><td><span class='st same'>same</span></td><td><span class='mono'>filestream</span></td><td><span class='mono'>filestream</span></td></tr></table></details></div><div class='footer'>🛠️ Generated by playground connector diff (self-contained, no external resource). Documentation and defaults from config-org.apache.kafka.connect.file.FileStreamSinkConnector-8.3.2-ce.txt. Values masked by the REST API ([hidden], ****) are never compared, secrets are masked in this report.</div></div></body></html>
+html[data-theme="dark"] body{background:#0f172a;color:#e2e8f0}
+html[data-theme="dark"] h2,html[data-theme="dark"] h3,html[data-theme="dark"] .section-title,html[data-theme="dark"] .rec-text,html[data-theme="dark"] .verdict{color:#cbd5e1}
+html[data-theme="dark"] .kpi-card,html[data-theme="dark"] .chart-card,html[data-theme="dark"] .rec-card,html[data-theme="dark"] .table-card,html[data-theme="dark"] .verdict{background:#1e293b;box-shadow:none}
+html[data-theme="dark"] .kpi-label,html[data-theme="dark"] .legend,html[data-theme="dark"] .kpi-unit,html[data-theme="dark"] .footer,html[data-theme="dark"] .muted{color:#94a3b8}
+html[data-theme="dark"] th{background:#273449;border-bottom-color:#334155;color:#cbd5e1}
+html[data-theme="dark"] td{border-bottom-color:#273449}
+html[data-theme="dark"] tr:hover td{background:#273449}
+html[data-theme="dark"] pre,html[data-theme="dark"] code{background:#0b1220;color:#e2e8f0}
+html[data-theme="dark"] details{border-top-color:#334155}
+html[data-theme="dark"] a{color:#93c5fd}
+html[data-theme="dark"] .header a{color:#fff}
+html[data-theme="dark"] .st{background:#334155;color:#cbd5e1}
+html[data-theme="dark"] .rec-badge.critical,html[data-theme="dark"] .st.fatal,html[data-theme="dark"] .st.failed{background:#450a0a;color:#fca5a5}
+html[data-theme="dark"] .rec-badge.high,html[data-theme="dark"] .st.error{background:#431407;color:#fdba74}
+html[data-theme="dark"] .rec-badge.medium,html[data-theme="dark"] .st.warn,html[data-theme="dark"] .st.paused,html[data-theme="dark"] .st.unassigned{background:#422006;color:#fcd34d}
+html[data-theme="dark"] .rec-badge.low,html[data-theme="dark"] .st.running{background:#052e16;color:#86efac}
+html[data-theme="dark"] .rec-badge.info,html[data-theme="dark"] .st.mine{background:#172554;color:#93c5fd}
+html[data-theme="dark"] .rec-badge.ok{background:#083344;color:#67e8f9}
+html[data-theme="dark"] .diff-a{background:#450a0a}
+html[data-theme="dark"] .diff-b{background:#052e16}
+html[data-theme="dark"] svg [fill="#64748b"],html[data-theme="dark"] svg [fill="#94a3b8"]{fill:#94a3b8}
+html[data-theme="dark"] svg [fill="#1e293b"],html[data-theme="dark"] svg [fill="#334155"],html[data-theme="dark"] svg [fill="#475569"]{fill:#cbd5e1}
+html[data-theme="dark"] svg [stroke="#e2e8f0"],html[data-theme="dark"] svg [stroke="#f1f5f9"]{stroke:#334155}
+html[data-theme="dark"] svg [fill="#e2e8f0"],html[data-theme="dark"] svg [fill="#f1f5f9"]{fill:#334155}
+html[data-theme="dark"] svg text:not([fill]){fill:#cbd5e1}
+
+.theme-toggle{position:absolute;top:2px;right:12px;font:inherit;font-size:.72rem;line-height:1.4;color:#475569;background:#fff;border:1px solid #cbd5e1;border-radius:6px;padding:1px 9px;cursor:pointer}
+html[data-theme="dark"] .theme-toggle{color:#cbd5e1;background:#1e293b;border-color:#334155}
+</style><script>
+(function () {
+  const root = document.documentElement;
+  if (!root.dataset.theme) root.dataset.theme = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  document.addEventListener("DOMContentLoaded", function () {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "theme-toggle";
+    button.textContent = "Toggle theme";
+    button.addEventListener("click", function () { root.dataset.theme = root.dataset.theme === "dark" ? "light" : "dark"; });
+    document.body.appendChild(button);
+  });
+})();
+</script></head><body><div class='page'><div class='header'><h1>🔀 Connector Config Diff</h1><div class='header-meta'><span>🔗 filestream-sink</span><span>vs customer-connector.json</span><span><span class='mono'>org.apache.kafka.connect.file.FileStreamSinkConnector</span></span><span>Generated: 2026-10-28 11:48:47</span></div></div><div class='verdict warn'>🔀 6 key(s) differ between filestream-sink and customer-connector.json.</div><div class='kpi-grid'><div class="kpi-card warn"><div class="kpi-label">✏️ Different</div><div class="kpi-value">2</div><div class="kpi-unit">same key, other value</div></div><div class="kpi-card warn"><div class="kpi-label">➖ Only left</div><div class="kpi-value">3</div><div class="kpi-unit">filestream-sink</div></div><div class="kpi-card warn"><div class="kpi-label">➕ Only right</div><div class="kpi-value">1</div><div class="kpi-unit">customer-connector.json</div></div><div class="kpi-card "><div class="kpi-label">🟰 Same</div><div class="kpi-value">2</div><div class="kpi-unit">identical keys</div></div><div class="kpi-card "><div class="kpi-label">🔒 Masked</div><div class="kpi-value">0</div><div class="kpi-unit">not compared</div></div></div><div class='section-title'>🔎 Findings</div><div class='recs-list'><div class="rec-card high"><span class="rec-badge high">🟠 HIGH</span><span class="rec-text">🔀 another converter: the records are read (sink) or written (source) in another format: key.converter, value.converter</span></div><div class="rec-card high"><span class="rec-badge high">🟠 HIGH</span><span class="rec-text">🧯 another error handling: errors.tolerance / dead letter queue decide whether a bad record fails the task or is skipped: errors.tolerance</span></div><div class="rec-card medium"><span class="rec-badge medium">🟡 MEDIUM</span><span class="rec-text">🔀 another converter setting (schema registry url, schemas.enable, subject strategy...): value.converter.schemas.enable</span></div><div class="rec-card low"><span class="rec-badge low">🟢 LOW</span><span class="rec-text">⚙️ another parallelism: tasks.max</span></div></div><div class='table-card'><h2>🔀 Keys that differ</h2><table><tr><th>Key</th><th>Status</th><th>filestream-sink</th><th>customer-connector.json</th></tr><tr><td><span class='mono'><b>file</b></span><br><span class='legend'>STRING · default null · HIGH</span><details><summary class='legend'>doc</summary><p class='legend'>Destination filename. If not specified, the standard output will be used</p></details></td><td><span class='st warn'>different</span></td><td class='diff-a'><span class='mono'>/tmp/output.json</span></td><td class='diff-b'><span class='mono'>/tmp/output2.json</span></td></tr><tr><td><span class='mono'><b>tasks.max</b></span></td><td><span class='st warn'>different</span></td><td class='diff-a'><span class='mono'>1</span></td><td class='diff-b'><span class='mono'>4</span></td></tr><tr><td><span class='mono'><b>key.converter</b></span></td><td><span class='st failed'>only left</span></td><td class='diff-a'><span class='mono'>org.apache.kafka.connect.storage.StringConverter</span></td><td><span class='muted'>—</span></td></tr><tr><td><span class='mono'><b>value.converter</b></span></td><td><span class='st failed'>only left</span></td><td class='diff-a'><span class='mono'>org.apache.kafka.connect.json.JsonConverter</span></td><td><span class='muted'>—</span></td></tr><tr><td><span class='mono'><b>value.converter.schemas.enable</b></span><br><span class='legend'>BOOLEAN · default true · HIGH</span><details><summary class='legend'>doc</summary><p class='legend'>Include schemas within each of the serialized values and keys.</p></details></td><td><span class='st failed'>only left</span></td><td class='diff-a'><span class='mono'>false</span></td><td><span class='muted'>—</span></td></tr><tr><td><span class='mono'><b>errors.tolerance</b></span></td><td><span class='st running'>only right</span></td><td><span class='muted'>—</span></td><td class='diff-b'><span class='mono'>all</span></td></tr></table></div><div class='table-card'><details><summary><b>🟰 2 identical key(s)</b></summary><table><tr><th>Key</th><th>Status</th><th>filestream-sink</th><th>customer-connector.json</th></tr><tr><td><span class='mono'><b>connector.class</b></span></td><td><span class='st same'>same</span></td><td><span class='mono'>org.apache.kafka.connect.file.FileStreamSinkConnector</span></td><td><span class='mono'>org.apache.kafka.connect.file.FileStreamSinkConnector</span></td></tr><tr><td><span class='mono'><b>topics</b></span></td><td><span class='st same'>same</span></td><td><span class='mono'>filestream</span></td><td><span class='mono'>filestream</span></td></tr></table></details></div><div class='footer'>🛠️ Generated by playground connector diff (self-contained, no external resource). Documentation and defaults from config-org.apache.kafka.connect.file.FileStreamSinkConnector-unknown.txt. Values masked by the REST API ([hidden], ****) are never compared, secrets are masked in this report.</div></div></body></html>

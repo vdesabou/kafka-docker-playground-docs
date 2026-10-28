@@ -4,7 +4,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .page{max-width:1300px;margin:0 auto;padding:24px}
 h1{font-size:1.55rem;font-weight:700}
 h2{font-size:1.05rem;font-weight:600;margin-bottom:12px;color:#334155}
-h3{font-size:.95rem;font-weight:600;margin:14px 0 8px;color:#334155}
 .header{background:linear-gradient(135deg,#1e3a5f 0%,#2563eb 100%);color:#fff;border-radius:12px;padding:22px 28px;margin-bottom:22px}
 .header-meta{font-size:.83rem;opacity:.85;margin-top:6px}
 .header-meta span{margin-right:18px}
@@ -12,7 +11,7 @@ h3{font-size:.95rem;font-weight:600;margin:14px 0 8px;color:#334155}
 .kpi-card{background:#fff;border-radius:10px;padding:14px 16px;box-shadow:0 1px 3px rgba(0,0,0,.07);border-left:4px solid #2563eb}
 .kpi-card.warn{border-left-color:#d97706}.kpi-card.danger{border-left-color:#dc2626}.kpi-card.ok{border-left-color:#16a34a}
 .kpi-label{font-size:.75rem;color:#64748b;text-transform:uppercase;letter-spacing:.05em}
-.kpi-value{font-size:1.75rem;font-weight:700;margin:3px 0 2px;word-break:break-word}
+.kpi-value{font-size:1.75rem;font-weight:700;margin:3px 0 2px}
 .kpi-unit{font-size:.73rem;color:#94a3b8}
 .charts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(560px,1fr));gap:18px;margin-bottom:22px}
 .chart-card{background:#fff;border-radius:10px;padding:18px 20px;box-shadow:0 1px 3px rgba(0,0,0,.07)}
@@ -36,18 +35,65 @@ td{padding:7px 11px;border-bottom:1px solid #f1f5f9;vertical-align:top}
 td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
 tr:hover td{background:#f8fafc}
 .mono{font-family:'SFMono-Regular',Consolas,'Liberation Mono',Menlo,monospace;font-size:.78rem;word-break:break-all}
-details{border-top:1px solid #f1f5f9;padding:2px 0}
-details summary{cursor:pointer;font-size:.84rem;padding:6px 0}
-.st{display:inline-block;font-size:.68rem;font-weight:700;padding:1px 7px;border-radius:12px;background:#f1f5f9;color:#475569;white-space:nowrap}
-.st.fatal,.st.failed{background:#fee2e2;color:#dc2626}.st.error{background:#ffedd5;color:#c2410c}.st.warn,.st.paused,.st.unassigned{background:#fef3c7;color:#b45309}
-.st.running{background:#dcfce7;color:#15803d}.st.mine{background:#dbeafe;color:#1d4ed8}
+details summary{cursor:pointer;font-weight:600;font-size:.86rem;padding:6px 0}
+.st{display:inline-block;font-size:.68rem;font-weight:700;padding:1px 7px;border-radius:12px;background:#f1f5f9;color:#475569}
 .verdict{background:#fff;border-radius:10px;padding:14px 18px;box-shadow:0 1px 3px rgba(0,0,0,.07);border-left:4px solid #16a34a;font-size:1rem;font-weight:500;margin-bottom:22px}
 .verdict.danger{border-left-color:#dc2626}.verdict.warn{border-left-color:#d97706}.verdict.ok{border-left-color:#16a34a}
-pre{font-family:'SFMono-Regular',Consolas,Menlo,monospace;font-size:.76rem;background:#f8fafc;padding:10px;border-radius:6px;overflow-x:auto;white-space:pre-wrap;word-break:break-all;margin:4px 0 8px}
+pre{font-family:'SFMono-Regular',Consolas,Menlo,monospace;font-size:.76rem;background:#f8fafc;padding:10px;border-radius:6px;overflow-x:auto;white-space:pre-wrap;word-break:break-all}
+.footer{text-align:center;font-size:.78rem;color:#94a3b8;padding:14px}
+
+h3{font-size:.95rem;font-weight:600;margin:14px 0 8px;color:#334155}
+.kpi-value{word-break:break-word}
+details{border-top:1px solid #f1f5f9;padding:2px 0}
+details summary{font-size:.84rem;font-weight:normal}
+.st{white-space:nowrap}
+.st.fatal,.st.failed{background:#fee2e2;color:#dc2626}.st.error{background:#ffedd5;color:#c2410c}.st.warn,.st.paused,.st.unassigned{background:#fef3c7;color:#b45309}
+.st.running{background:#dcfce7;color:#15803d}.st.mine{background:#dbeafe;color:#1d4ed8}
+pre{margin:4px 0 8px}
 .diff-a{background:#fee2e2}.diff-b{background:#dcfce7}.muted{color:#94a3b8}
 code{font-family:'SFMono-Regular',Consolas,Menlo,monospace;font-size:.8rem;background:#f1f5f9;padding:1px 5px;border-radius:4px}
-.footer{text-align:center;font-size:.78rem;color:#94a3b8;padding:14px}
-</style></head><body><div class='page'><div class='header'><h1>🤖 CI failure</h1><div class='header-meta'><span>&#128196; connect/connect-replicator (plaintext)</span><span>🕐 2026-10-13 00:43:29 → 2026-10-13 00:52:16</span><span>Levels: ERROR/FATAL</span><span><a href='https://github.com/vdesabou/kafka-docker-playground/issues/9054' style='color:#fff'>🐛 issue #9054</a></span><span><a href='https://github.com/vdesabou/kafka-docker-playground/actions/runs/38328314041/job/115072055973' style='color:#fff'>🔗 job 115072055973 (run of 2026-10-13T00:39:22Z, commit 141b0aa0d)</a></span><span>Generated: 2026-10-25 11:54:18</span></div></div><div class='verdict danger'>🚨 12 ERROR/FATAL occurrence(s), 12 distinct record(s) in 3 script(s): start with KafkaException: class io.confluent.telemetry.events.exporter.http.EventHttpExporter is not an instance of io.confluent.telemetry.events.exporter.Exporter.</div><div class='kpi-grid'><div class="kpi-card "><div class="kpi-label">🗂️ Scripts scanned</div><div class="kpi-value">3</div><div class="kpi-unit">1874 lines</div></div><div class="kpi-card danger"><div class="kpi-label">🔥 Scripts with findings</div><div class="kpi-value">3</div><div class="kpi-unit">ERROR/FATAL records</div></div><div class="kpi-card "><div class="kpi-label">🧬 Distinct records</div><div class="kpi-value">12</div><div class="kpi-unit">after de-duplication</div></div><div class="kpi-card "><div class="kpi-label">🔁 Occurrences</div><div class="kpi-value">12</div><div class="kpi-unit">all levels reported</div></div><div class="kpi-card ok"><div class="kpi-label">💀 FATAL</div><div class="kpi-value">0</div><div class="kpi-unit">occurrences</div></div><div class="kpi-card danger"><div class="kpi-label">🔴 ERROR</div><div class="kpi-value">12</div><div class="kpi-unit">occurrences</div></div><div class="kpi-card "><div class="kpi-label">🟠 WARN</div><div class="kpi-value">0</div><div class="kpi-unit">not included (--include-warnings)</div></div></div><div class='section-title'>🔎 Findings</div><div class='recs-list'><div class="rec-card high"><span class="rec-badge high">🟠 HIGH</span><span class="rec-text">ERROR ×3 in 3 scripts: org.apache.kafka.common.KafkaException: class io.confluent.telemetry.events.exporter.http.EventHttpExporter is not an instance of io.confluent.telemetry.events.exporter.Exporter</span></div><div class="rec-card high"><span class="rec-badge high">🟠 HIGH</span><span class="rec-text">ERROR ×3 in 3 scripts: Failed to resolve path to FileStore (io.confluent.telemetry.collector.VolumeMetricsCollector)</span></div><div class="rec-card high"><span class="rec-badge high">🟠 HIGH</span><span class="rec-text">ERROR ×3 in 3 scripts: Uncaught exception in SBK_DataBalanceEngine-0:  (io.confluent.databalancer.ConfluentDataBalanceEngine)</span></div><div class="rec-card high"><span class="rec-badge high">🟠 HIGH</span><span class="rec-text">ERROR ×1 in replicator-2way-ssl.sh: Failed to start task duplicate-topic-ssl-0</span></div><div class="rec-card high"><span class="rec-badge high">🟠 HIGH</span><span class="rec-text">ERROR ×1 in replicator-sasl-ssl.sh: Failed to start task replicator-sasl-ssl-0</span></div></div><div class='table-card'><h2>🔥 replicator-2way-ssl.sh: last lines before the failure</h2><pre>00:45:11 ❗ ❌ topic test-topic-ssl-duplicate does not exist, retrying in 1 second (elapsed time: 22 seconds), waiting max for 60 seconds
+html[data-theme="dark"] body{background:#0f172a;color:#e2e8f0}
+html[data-theme="dark"] h2,html[data-theme="dark"] h3,html[data-theme="dark"] .section-title,html[data-theme="dark"] .rec-text,html[data-theme="dark"] .verdict{color:#cbd5e1}
+html[data-theme="dark"] .kpi-card,html[data-theme="dark"] .chart-card,html[data-theme="dark"] .rec-card,html[data-theme="dark"] .table-card,html[data-theme="dark"] .verdict{background:#1e293b;box-shadow:none}
+html[data-theme="dark"] .kpi-label,html[data-theme="dark"] .legend,html[data-theme="dark"] .kpi-unit,html[data-theme="dark"] .footer,html[data-theme="dark"] .muted{color:#94a3b8}
+html[data-theme="dark"] th{background:#273449;border-bottom-color:#334155;color:#cbd5e1}
+html[data-theme="dark"] td{border-bottom-color:#273449}
+html[data-theme="dark"] tr:hover td{background:#273449}
+html[data-theme="dark"] pre,html[data-theme="dark"] code{background:#0b1220;color:#e2e8f0}
+html[data-theme="dark"] details{border-top-color:#334155}
+html[data-theme="dark"] a{color:#93c5fd}
+html[data-theme="dark"] .header a{color:#fff}
+html[data-theme="dark"] .st{background:#334155;color:#cbd5e1}
+html[data-theme="dark"] .rec-badge.critical,html[data-theme="dark"] .st.fatal,html[data-theme="dark"] .st.failed{background:#450a0a;color:#fca5a5}
+html[data-theme="dark"] .rec-badge.high,html[data-theme="dark"] .st.error{background:#431407;color:#fdba74}
+html[data-theme="dark"] .rec-badge.medium,html[data-theme="dark"] .st.warn,html[data-theme="dark"] .st.paused,html[data-theme="dark"] .st.unassigned{background:#422006;color:#fcd34d}
+html[data-theme="dark"] .rec-badge.low,html[data-theme="dark"] .st.running{background:#052e16;color:#86efac}
+html[data-theme="dark"] .rec-badge.info,html[data-theme="dark"] .st.mine{background:#172554;color:#93c5fd}
+html[data-theme="dark"] .rec-badge.ok{background:#083344;color:#67e8f9}
+html[data-theme="dark"] .diff-a{background:#450a0a}
+html[data-theme="dark"] .diff-b{background:#052e16}
+html[data-theme="dark"] svg [fill="#64748b"],html[data-theme="dark"] svg [fill="#94a3b8"]{fill:#94a3b8}
+html[data-theme="dark"] svg [fill="#1e293b"],html[data-theme="dark"] svg [fill="#334155"],html[data-theme="dark"] svg [fill="#475569"]{fill:#cbd5e1}
+html[data-theme="dark"] svg [stroke="#e2e8f0"],html[data-theme="dark"] svg [stroke="#f1f5f9"]{stroke:#334155}
+html[data-theme="dark"] svg [fill="#e2e8f0"],html[data-theme="dark"] svg [fill="#f1f5f9"]{fill:#334155}
+html[data-theme="dark"] svg text:not([fill]){fill:#cbd5e1}
+
+.theme-toggle{position:absolute;top:2px;right:12px;font:inherit;font-size:.72rem;line-height:1.4;color:#475569;background:#fff;border:1px solid #cbd5e1;border-radius:6px;padding:1px 9px;cursor:pointer}
+html[data-theme="dark"] .theme-toggle{color:#cbd5e1;background:#1e293b;border-color:#334155}
+</style><script>
+(function () {
+  const root = document.documentElement;
+  if (!root.dataset.theme) root.dataset.theme = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  document.addEventListener("DOMContentLoaded", function () {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "theme-toggle";
+    button.textContent = "Toggle theme";
+    button.addEventListener("click", function () { root.dataset.theme = root.dataset.theme === "dark" ? "light" : "dark"; });
+    document.body.appendChild(button);
+  });
+})();
+</script></head><body><div class='page'><div class='header'><h1>🤖 CI failure</h1><div class='header-meta'><span>&#128196; connect/connect-replicator (plaintext)</span><span>🕐 2026-10-13 00:43:29 → 2026-10-13 00:52:16</span><span>Levels: ERROR/FATAL</span><span><a href='https://github.com/vdesabou/kafka-docker-playground/issues/9054' style='color:#fff'>🐛 issue #9054</a></span><span><a href='https://github.com/vdesabou/kafka-docker-playground/actions/runs/38328314041/job/115072055973' style='color:#fff'>🔗 job 115072055973 (run of 2026-10-13T00:39:22Z, commit 141b0aa0d)</a></span><span>Generated: 2026-10-28 11:49:39</span></div></div><div class='verdict danger'>🚨 12 ERROR/FATAL occurrence(s), 12 distinct record(s) in 3 script(s): start with KafkaException: class io.confluent.telemetry.events.exporter.http.EventHttpExporter is not an instance of io.confluent.telemetry.events.exporter.Exporter.</div><div class='kpi-grid'><div class="kpi-card "><div class="kpi-label">🗂️ Scripts scanned</div><div class="kpi-value">3</div><div class="kpi-unit">1874 lines</div></div><div class="kpi-card danger"><div class="kpi-label">🔥 Scripts with findings</div><div class="kpi-value">3</div><div class="kpi-unit">ERROR/FATAL records</div></div><div class="kpi-card "><div class="kpi-label">🧬 Distinct records</div><div class="kpi-value">12</div><div class="kpi-unit">after de-duplication</div></div><div class="kpi-card "><div class="kpi-label">🔁 Occurrences</div><div class="kpi-value">12</div><div class="kpi-unit">all levels reported</div></div><div class="kpi-card ok"><div class="kpi-label">💀 FATAL</div><div class="kpi-value">0</div><div class="kpi-unit">occurrences</div></div><div class="kpi-card danger"><div class="kpi-label">🔴 ERROR</div><div class="kpi-value">12</div><div class="kpi-unit">occurrences</div></div><div class="kpi-card "><div class="kpi-label">🟠 WARN</div><div class="kpi-value">0</div><div class="kpi-unit">not included (--include-warnings)</div></div></div><div class='section-title'>🔎 Findings</div><div class='recs-list'><div class="rec-card high"><span class="rec-badge high">🟠 HIGH</span><span class="rec-text">ERROR ×3 in 3 scripts: org.apache.kafka.common.KafkaException: class io.confluent.telemetry.events.exporter.http.EventHttpExporter is not an instance of io.confluent.telemetry.events.exporter.Exporter</span></div><div class="rec-card high"><span class="rec-badge high">🟠 HIGH</span><span class="rec-text">ERROR ×3 in 3 scripts: Failed to resolve path to FileStore (io.confluent.telemetry.collector.VolumeMetricsCollector)</span></div><div class="rec-card high"><span class="rec-badge high">🟠 HIGH</span><span class="rec-text">ERROR ×3 in 3 scripts: Uncaught exception in SBK_DataBalanceEngine-0:  (io.confluent.databalancer.ConfluentDataBalanceEngine)</span></div><div class="rec-card high"><span class="rec-badge high">🟠 HIGH</span><span class="rec-text">ERROR ×1 in replicator-2way-ssl.sh: Failed to start task duplicate-topic-ssl-0</span></div><div class="rec-card high"><span class="rec-badge high">🟠 HIGH</span><span class="rec-text">ERROR ×1 in replicator-sasl-ssl.sh: Failed to start task replicator-sasl-ssl-0</span></div></div><div class='table-card'><h2>🔥 replicator-2way-ssl.sh: last lines before the failure</h2><pre>00:45:11 ❗ ❌ topic test-topic-ssl-duplicate does not exist, retrying in 1 second (elapsed time: 22 seconds), waiting max for 60 seconds
 00:45:13 ❗ ❌ topic test-topic-ssl-duplicate does not exist, retrying in 1 second (elapsed time: 24 seconds), waiting max for 60 seconds
 00:45:14 ❗ ❌ topic test-topic-ssl-duplicate does not exist, retrying in 1 second (elapsed time: 25 seconds), waiting max for 60 seconds
 00:45:16 ❗ ❌ topic test-topic-ssl-duplicate does not exist, retrying in 1 second (elapsed time: 27 seconds), waiting max for 60 seconds

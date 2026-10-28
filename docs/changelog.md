@@ -3,6 +3,7 @@
 ## October 2026
 ##### 🌟 Enhancements
 
+- 🧠📚 docs: deep dive on Oracle CDC and XStream [#9730](https://github.com/vdesabou/kafka-docker-playground/issues/9730)
 - 🧠🩺 connector create-or-update / wait: run playground connector diagnose automatically when a connector fails [#9727](https://github.com/vdesabou/kafka-docker-playground/issues/9727)
 - 🧠🎬 Bite size session: a fully managed connector with a service account loses an ACL [#9725](https://github.com/vdesabou/kafka-docker-playground/issues/9725)
 - 🧹🎨 HTML reports: same header and dark theme everywhere (CFK, benchmark, flight recorder, SMT test) [#9723](https://github.com/vdesabou/kafka-docker-playground/issues/9723)

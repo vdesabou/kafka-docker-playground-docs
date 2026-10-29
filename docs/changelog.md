@@ -3,6 +3,7 @@
 ## October 2026
 ##### 🌟 Enhancements
 
+- 🧠🚦 playground quota get|set|delete: client quotas of users, client ids and connectors [#9751](https://github.com/vdesabou/kafka-docker-playground/issues/9751)
 - 🧠🐿️ playground flink sql|list-jobs|cancel, Flink SQL Kafka example, remove old flink/ setups [#9749](https://github.com/vdesabou/kafka-docker-playground/issues/9749)
 - 🧠🔍 analyze logs: summary, --connector, --show-config with config changes between restarts, --json-sections [#9747](https://github.com/vdesabou/kafka-docker-playground/issues/9747)
 - 🧠🔍 analyze logs: detect and analyze CFK support bundles, shared known causes, sanitization and faster digests [#9745](https://github.com/vdesabou/kafka-docker-playground/issues/9745)

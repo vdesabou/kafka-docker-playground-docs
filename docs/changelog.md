@@ -3,6 +3,7 @@
 ## October 2026
 ##### 🌟 Enhancements
 
+- 🧠⚙️ playground broker config get|set|delete: dynamic broker configs without restart [#9761](https://github.com/vdesabou/kafka-docker-playground/issues/9761)
 - 🧠💰 playground ccloud-costs: HTML report of the range of dates [#9759](https://github.com/vdesabou/kafka-docker-playground/issues/9759)
 - 🧠🔀 playground topic reassign|elect-leader: move replicas and leaders between brokers [#9754](https://github.com/vdesabou/kafka-docker-playground/issues/9754)
 - 🧠🚦 playground quota get|set|delete: client quotas of users, client ids and connectors [#9751](https://github.com/vdesabou/kafka-docker-playground/issues/9751)

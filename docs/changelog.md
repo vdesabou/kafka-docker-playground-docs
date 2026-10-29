@@ -3,6 +3,7 @@
 ## October 2026
 ##### 🌟 Enhancements
 
+- 🧠🔍 analyze logs: summary, --connector, --show-config with config changes between restarts, --json-sections [#9747](https://github.com/vdesabou/kafka-docker-playground/issues/9747)
 - 🧠🔍 analyze logs: detect and analyze CFK support bundles, shared known causes, sanitization and faster digests [#9745](https://github.com/vdesabou/kafka-docker-playground/issues/9745)
 - 🧠🔐 playground salesforce setup: generate a keystore per user instead of the shared S3 one [#9741](https://github.com/vdesabou/kafka-docker-playground/issues/9741)
 - 🧠☁️ playground salesforce setup|check: automate the Salesforce org setup [#9739](https://github.com/vdesabou/kafka-docker-playground/issues/9739)

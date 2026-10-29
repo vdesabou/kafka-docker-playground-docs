@@ -26,6 +26,8 @@ and connector JSON files of the input.
 
 🔒 Passwords and other secrets (password=…, JAAS configs, tokens, keys, credentials in URLs), IPs, hostnames, emails and LDAP DNs are replaced by placeholders (`<REDACTED>`, `<IP-1>`, `<HOST-1>`…, the same in the digest, the report and the JSON) by default. It is best effort: review the output before sharing it. `--no-sanitize` keeps them, for internal logs only.
 
+🧭 After the digest of each file, a short summary: time range, occurrences by connector, known causes with what to do, root causes no known cause explains, and the configuration logged at startup (connectors, components, clients) with the keys changed between restarts. `--connector` keeps one connector, `--show-config` prints a configuration.
+
 🌐 Also writes a self-contained HTML report in `--output-dir`, opened in the browser in an interactive terminal: verdict, known causes (task killed, authentication, TLS, unknown magic byte, OutOfMemoryError...), occurrences over time, root causes (deepest exception of each record), files with findings, and every distinct record.
 
 🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-container-logs  
@@ -92,6 +94,28 @@ playground analyze logs [OPTIONS]
 
 📜 Do not detect CFK support bundles: plain ERROR/FATAL digest of every log file
 
+#### `--connector, -c CONNECTOR`
+
+🔌 Only keep the records and the configuration of this connector ([connector|task-0] / [connector|worker] context of the log lines, WorkerSourceTask{id=connector-0}), in the digest, the summary, the HTML report and the JSON
+
+🎓 Tip: can be set several times. The 🔌 by connector line of the summary lists the names
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Repeatable:     |  ✓ Yes
+
+#### `--with-worker`
+
+🧱 With `--connector`, also keep the records and configs without connector context (worker, clients of the worker, Kafka)
+
+#### `--show-config NAME`
+
+⚙️ Print the configuration logged at startup (last dump, with the keys changed between restarts) as key = value: for a connector, its own configs (a config contained in a bigger one with the same values is only named, its producer / consumer / admin clients summed up in one line); for a config class (ProducerConfig, DistributedConfig…) or a client id, every match
+
+#### `--json-sections SECTIONS`
+
+🗂️ With `--json`, only these sections, comma separated: summary, findings, known_causes, root_causes, files, files_without_findings, configuration (default: all). For example `--json-sections` summary,findings,root_causes
+
 #### `--component COMPONENT`
 
 🧩 CFK support bundle: only keep the issues of this component (repeat `--component` for several). other = not a CFK component (nodes, volumes, unknown pods)
@@ -147,6 +171,14 @@ playground analyze logs -f connect.log --json
 
 ```bash
 playground analyze logs --sample cfk_bundle
+```
+
+```bash
+playground analyze logs -f connect-logs.zip --connector my-jdbc-sink --show-config my-jdbc-sink
+```
+
+```bash
+playground analyze logs -f connect.log --json --json-sections summary,findings,root_causes
 ```
 
 ```bash

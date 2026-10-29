@@ -212,6 +212,13 @@ visit https://docs.docker.com/get-docker to install
 - [reset-offsets](playground%20consumer-group%20reset-offsets) - ⏪ Reset the committed offsets of a consumer group
 - [delete](playground%20consumer-group%20delete) - 🗑️ Delete a consumer group, or its offsets for one topic
 
+### Flink commands
+
+- [flink](playground%20flink) - 🐿️ Flink commands
+- [sql](playground%20flink%20sql) - 🐿️ Run Flink SQL statements with the SQL client
+- [list-jobs](playground%20flink%20list-jobs) - 📋 List the jobs of the Flink cluster
+- [cancel](playground%20flink%20cancel) - 🛑 Cancel a Flink job
+
 ### RBAC commands
 
 - [rbac](playground%20rbac) - 🛡️ RBAC commands (rbac-sasl-plain and cfk-rbac environments, plus Confluent Cloud ACLs)

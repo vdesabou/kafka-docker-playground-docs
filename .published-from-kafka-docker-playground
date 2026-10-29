@@ -28,6 +28,7 @@ assets/videos/materials/topic-produce/demo.sh
 badges-template.md
 claude-code.md
 content-template.md
+deep-dive-broker.md
 deep-dive-cfk.md
 deep-dive-connector-benchmark.md
 deep-dive-connector-create-or-update.md

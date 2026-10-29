@@ -12,6 +12,8 @@
 
 Not available on Confluent Cloud and multi data center environments.
 
+🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-broker
+
 ## Usage
 
 ```bash

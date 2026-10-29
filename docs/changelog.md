@@ -109,6 +109,7 @@
 
 ##### 🐛 Bugs
 
+- 🐛🔍 analyze logs: the exception chains of killed tasks are missing since the shared known causes [#9757](https://github.com/vdesabou/kafka-docker-playground/issues/9757)
 - 🐛☸️ cfk: connector offsets get|alter|reset and the auto-diagnose fail with 'could not find current CP version from docker ps' [#9743](https://github.com/vdesabou/kafka-docker-playground/issues/9743)
 - 🐛🐘 hdfs2-sink-ha-kerberos still fails on podman: namenode format is not retried when the journal nodes reject it [#9716](https://github.com/vdesabou/kafka-docker-playground/issues/9716)
 - 🐛💸 Oracle pdb examples delete and re-download the 11 GB Oracle image in CI [#9692](https://github.com/vdesabou/kafka-docker-playground/issues/9692)

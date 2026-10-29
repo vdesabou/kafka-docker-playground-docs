@@ -72,6 +72,7 @@ window.KDP_CLI_PAGES = [
   "/playground%20connector%20display-metrics-api",
   "/playground%20connector%20enable-remote-debugging",
   "/playground%20connector%20error-recommendations",
+  "/playground%20connector%20history",
   "/playground%20connector%20log-level",
   "/playground%20connector%20logs",
   "/playground%20connector%20metrics",

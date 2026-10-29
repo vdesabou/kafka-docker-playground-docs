@@ -416,6 +416,7 @@ visit https://docs.docker.com/get-docker to install
   - [resume](playground%20connector%20resume) - ⏯️  Resume connector
   - [delete](playground%20connector%20delete) - 🗑️  Delete connector
   - [diagnose](playground%20connector%20diagnose) - 🩺 Diagnose a connector in one call: status, errors and progress
+  - [history](playground%20connector%20history) - 🕰️ Show the history of a connector: state changes, failures, restarts and config changes
   - [show-lag](playground%20connector%20show-lag) - 🐢 Show lag of sink connector
   - [benchmark](playground%20connector%20benchmark) - 🏎️ Benchmark the throughput of a connector
   - [show-config](playground%20connector%20show-config) - 🧰 Show current connector config that was applied

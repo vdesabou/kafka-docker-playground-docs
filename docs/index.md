@@ -96,10 +96,6 @@ visit https://docs.docker.com/get-docker to install
 
 - [get-docker-compose](playground%20get-docker-compose) - 🐋 Get docker-compose
 - [get-jmx-metrics](playground%20get-jmx-metrics) - 🔢 Get JMX metrics from a container
-- [quota](playground%20quota) - 🚦 Client quota commands
-- [get](playground%20quota%20get) - 🔎 Display client quotas
-- [set](playground%20quota%20set) - 🚦 Set client quotas
-- [delete](playground%20quota%20delete) - 🗑️ Remove client quotas
 
 ### Schema commands
 
@@ -202,8 +198,6 @@ visit https://docs.docker.com/get-docker to install
 - [list](playground%20topic%20list) - 🔘 List topics
 - [get-size](playground%20topic%20get-size) - 📏 Get size of topics
 - [describe](playground%20topic%20describe) - 🔬 Describe topic
-- [reassign](playground%20topic%20reassign) - 🔀 Move the replicas of a topic to other brokers
-- [elect-leader](playground%20topic%20elect-leader) - 👑 Elect the leaders of a topic
 - [set-schema-compatibility](playground%20topic%20set-schema-compatibility) - 🛡️ Change topic's schema compatibility
 - [consume](playground%20topic%20consume) - 📥 Consume topic from beginning
 - [produce](playground%20topic%20produce) - 📤 Produce to a topic
@@ -217,13 +211,6 @@ visit https://docs.docker.com/get-docker to install
 - [describe](playground%20consumer-group%20describe) - 🔬 Describe consumer group
 - [reset-offsets](playground%20consumer-group%20reset-offsets) - ⏪ Reset the committed offsets of a consumer group
 - [delete](playground%20consumer-group%20delete) - 🗑️ Delete a consumer group, or its offsets for one topic
-
-### Flink commands
-
-- [flink](playground%20flink) - 🐿️ Flink commands
-- [sql](playground%20flink%20sql) - 🐿️ Run Flink SQL statements with the SQL client
-- [list-jobs](playground%20flink%20list-jobs) - 📋 List the jobs of the Flink cluster
-- [cancel](playground%20flink%20cancel) - 🛑 Cancel a Flink job
 
 ### RBAC commands
 

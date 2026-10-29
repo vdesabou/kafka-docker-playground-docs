@@ -23,7 +23,6 @@ command works on plaintext, on sasl-ssl and on Confluent Cloud.
 **🔧 Manage**
 
 - **list / describe / alter / delete**
-- **reassign / elect-leader**: move replicas between brokers, move leaders
 - **dlq inspect / replay**: dead letter queue grouped by error, and replay
 - **set-schema-compatibility**: compatibility of the topic subjects
 - **tag**: stream catalog tags (Confluent Cloud only)
@@ -50,8 +49,6 @@ playground topic COMMAND
 - [list](playground%20topic%20list) - 🔘 List topics
 - [get-size](playground%20topic%20get-size) - 📏 Get size of topics
 - [describe](playground%20topic%20describe) - 🔬 Describe topic
-- [reassign](playground%20topic%20reassign) - 🔀 Move the replicas of a topic to other brokers
-- [elect-leader](playground%20topic%20elect-leader) - 👑 Elect the leaders of a topic
 - [set-schema-compatibility](playground%20topic%20set-schema-compatibility) - 🛡️ Change topic's schema compatibility
 - [consume](playground%20topic%20consume) - 📥 Consume topic from beginning
 - [produce](playground%20topic%20produce) - 📤 Produce to a topic

@@ -410,6 +410,8 @@ visit https://docs.docker.com/get-docker to install
   - [enable-remote-debugging](playground%20connector%20enable-remote-debugging) - ✨ Enable java remote debugging for the connector.
   - [disable-remote-debugging](playground%20connector%20disable-remote-debugging) - 🛑 Disable java remote debugging for the connector.
   - [restart](playground%20connector%20restart) - ♻️  Restart connector
+  - [tasks](playground%20connector%20tasks) - 🧵 Show the tasks of a connector: state, worker, config and partitions
+  - [topics](playground%20connector%20topics) - 📚 Show the topics a connector is using, or reset that list
   - [stop](playground%20connector%20stop) - 🛑 Stop connector (only available if CP \> 7.5)
   - [resume](playground%20connector%20resume) - ⏯️  Resume connector
   - [delete](playground%20connector%20delete) - 🗑️  Delete connector

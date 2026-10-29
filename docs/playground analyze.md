@@ -12,9 +12,8 @@ playground, to see what they report.
 - **thread-dump**: deadlocks, lock contention, stuck threads
 - **gc-logs**: GC pauses, failures, live set, leak trend
 - **heap-dump**: Eclipse MAT leak suspects, retained sizes
-- **logs**: ERROR/FATAL digest of logs, folders, zips
+- **logs**: ERROR/FATAL digest of logs, folders, zips, CFK support bundles
 - **oracle-xstream-report**: Oracle XStream diagnostics (orclcdc_diag)
-- **cfk-bundle**: CFK support bundle: pods, events, CRs, logs
 - **flight-recorder**: JFR: where the time of the connector tasks goes
 - **tcp-dump**: network capture: resets, TLS alerts, Kafka errors
 - **jscissors**: traced method calls: arguments, durations, exceptions
@@ -36,7 +35,6 @@ playground analyze COMMAND
 - [logs](playground%20analyze%20logs) - 🔥 Show a digest of ERROR/FATAL records found in log files, folders or zip bundles
 - [gc-logs](playground%20analyze%20gc-logs) - 📈 Analyze JVM Garbage Collection logs
 - [oracle-xstream-report](playground%20analyze%20oracle-xstream-report) - 🅾️ Analyze Oracle XStream CDC diagnostics reports (orclcdc_diag.sql)
-- [cfk-bundle](playground%20analyze%20cfk-bundle) - 📦 Analyze a Confluent for Kubernetes (CFK) support bundle
 - [flight-recorder](playground%20analyze%20flight-recorder) - 🛩️ Analyze a Java Flight Recorder recording: where the time of the connector tasks goes
 - [jscissors](playground%20analyze%20jscissors) - ✂️ Analyze a jscissors trace: what the traced methods did, call by call
 - [tcp-dump](playground%20analyze%20tcp-dump) - 🦈 Analyze a network capture (.pcap, .pcapng): refused and reset connections, retransmissions, TLS alerts, DNS errors, Kafka and HTTP errors and response times

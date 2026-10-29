@@ -17,6 +17,10 @@ level-less lines that merely contain "error" or "failed", never are.
 are extracted in a temporary folder, .gz files are decompressed on the  
 fly, binary files are skipped. Only files with findings are shown.
 
+☸️ A Confluent for Kubernetes (CFK) support bundle (kubectl confluent support-bundle or playground debug cfk generate-bundle: a folder with cluster-details.txt, or with cluster-resources/ and operator/), alone or inside a folder or an archive, is detected and analyzed as a whole, in a Docker image built on first use: Warning events, pods (phase, waiting reasons, restarts, OOMKilled), every platform.confluent.io custom resource (phase/state, ready replicas, False conditions, failed connector tasks), the environment checked against the CFK support matrix (Kubernetes, CFK operator, CP and init container versions), the recent changes (who edited which CR and when, StatefulSet rollouts, pod restarts), a JVM default truststore set without its password, and the ERROR/FATAL records of its logs, sorted into ~30 categories (pod failures, TLS, auth, MDS/RBAC, license, KRaft, replication, storage, scheduling…) with remediation steps. Each issue is attributed to a component and an instance (CR name), and to its connector: `--component` keeps some of them, the HTML report has Component / Instance / Connector filters. 🔒 Secrets, IPs, hostnames, emails and LDAP DNs are sanitized by default (best effort: review before sharing), `--no-sanitize` for internal bundles only. `--logs-only` gives the plain log digest instead.
+
+🔒 Passwords and other secrets (password=…, JAAS configs, tokens, keys, credentials in URLs), IPs, hostnames, emails and LDAP DNs are replaced by placeholders (`<REDACTED>`, `<IP-1>`, `<HOST-1>`…, the same in the digest, the report and the JSON) by default. It is best effort: review the output before sharing it. `--no-sanitize` keeps them, for internal logs only.
+
 🌐 Also writes a self-contained HTML report in `--output-dir`, opened in the browser in an interactive terminal: verdict, known causes (task killed, authentication, TLS, unknown magic byte, OutOfMemoryError...), occurrences over time, root causes (deepest exception of each record), files with findings, and every distinct record.
 
 🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-container-logs  
@@ -42,15 +46,16 @@ playground analyze logs [OPTIONS]
 
 #### `--sample, -s SAMPLE`
 
-🧪 Sample of tools/log-analyzer/samples
+🧪 Sample of tools/log-analyzer/samples and cfk-analysis/samples
 
 - **connect_task_failure**: Connect worker log: Oracle XStream connector with a wrong password, an unknown outbound server, and a task failing after the outbound server was stopped
 - **support_bundle**: .zip with that log and a gzipped broker log
+- **cfk_bundle**: CFK support bundle: kafka-2 crash-looping on an expired certificate, pending volume, OOMKilled Connect pod, failed connector task, Schema Registry authentication failure, operator reconcile errors
 
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Repeatable:     |  ✓ Yes
-| Allowed Values: | `connect_task_failure`, `support_bundle`
+| Allowed Values: | `connect_task_failure`, `support_bundle`, `cfk_bundle`
 
 #### `--include-warnings`
 
@@ -75,6 +80,35 @@ playground analyze logs [OPTIONS]
 #### `--json`
 
 🗂️  Output JSON on stdout: summary, findings, root causes and every distinct record (text digest on stderr, no HTML report)
+
+"type": "logs", with the analysis of each CFK support bundle found in "cfk_bundles"; "type": "cfk-bundle" (issues with their recommendation, environment, timeline) when the input is one CFK bundle
+
+#### `--logs-only`
+
+📜 Do not detect CFK support bundles: plain ERROR/FATAL digest of every log file
+
+#### `--component COMPONENT`
+
+🧩 CFK support bundle: only keep the issues of this component (repeat `--component` for several). other = not a CFK component (nodes, volumes, unknown pods)
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Repeatable:     |  ✓ Yes
+| Allowed Values: | `kafka`, `kraftcontroller`, `zookeeper`, `connect`, `schemaregistry`, `ksqldb`, `controlcenter`, `kafkarestproxy`, `operator`, `other`
+
+#### `--severity LEVEL`
+
+🎚️  CFK support bundle: only keep the issues of this severity or above (critical | high | medium | low)
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Allowed Values: | `critical`, `high`, `medium`, `low`
+
+#### `--no-sanitize`
+
+⚠️  Do not sanitize passwords and other secrets, IPs, hostnames, emails and LDAP DNs (digest, HTML report, JSON, CFK bundle analysis)
+
+🚫 NEVER use this for customer logs. Internal/test logs only.
 
 ## Examples
 
@@ -106,6 +140,18 @@ playground analyze logs -f support-bundle.zip --output-dir /tmp/log-reports
 playground analyze logs -f connect.log --json
 ```
 
+```bash
+playground analyze logs --sample cfk_bundle
+```
+
+```bash
+playground analyze logs -f ./support-bundle-ns-confluent.tar.gz --component connect --severity high
+```
+
+```bash
+playground analyze logs -f ./support-bundle-ns-confluent/ --logs-only
+```
+
 ## Example output
 
 ```text
@@ -120,6 +166,7 @@ $ playground analyze logs -f connect.log
         at io.confluent.connect.http.writer.HttpWriterImpl.handleErrors(HttpWriterImpl.java:405)
 
 17:23:19 ℹ️ 📊 1 file(s) with findings out of 1 scanned (binary files skipped: 0)
+17:23:19 ℹ️ 🔒 Sanitized (best effort, review before sharing): 0 secret(s), 0 IP(s), 0 hostname(s), 0 email(s), 0 LDAP DN(s), --no-sanitize to keep them
 17:23:19 ℹ️ ✅ HTML report saved: /home/me/log-analysis-output/connect-log-report.html
 17:23:19 ℹ️ 🔗 Open in browser: file:///home/me/log-analysis-output/connect-log-report.html
 ```

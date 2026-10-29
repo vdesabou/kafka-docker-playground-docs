@@ -227,7 +227,6 @@ visit https://docs.docker.com/get-docker to install
 - [logs](playground%20analyze%20logs) - 🔥 Show a digest of ERROR/FATAL records found in log files, folders or zip bundles
 - [gc-logs](playground%20analyze%20gc-logs) - 📈 Analyze JVM Garbage Collection logs
 - [oracle-xstream-report](playground%20analyze%20oracle-xstream-report) - 🅾️ Analyze Oracle XStream CDC diagnostics reports (orclcdc_diag.sql)
-- [cfk-bundle](playground%20analyze%20cfk-bundle) - 📦 Analyze a Confluent for Kubernetes (CFK) support bundle
 - [flight-recorder](playground%20analyze%20flight-recorder) - 🛩️ Analyze a Java Flight Recorder recording: where the time of the connector tasks goes
 - [jscissors](playground%20analyze%20jscissors) - ✂️ Analyze a jscissors trace: what the traced methods did, call by call
 - [tcp-dump](playground%20analyze%20tcp-dump) - 🦈 Analyze a network capture (.pcap, .pcapng): refused and reset connections, retransmissions, TLS alerts, DNS errors, Kafka and HTTP errors and response times

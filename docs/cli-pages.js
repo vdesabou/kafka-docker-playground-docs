@@ -74,6 +74,7 @@ window.KDP_CLI_PAGES = [
   "/playground%20connector%20error-recommendations",
   "/playground%20connector%20log-level",
   "/playground%20connector%20logs",
+  "/playground%20connector%20metrics",
   "/playground%20connector%20offsets%20alter",
   "/playground%20connector%20offsets%20get-offsets-request-status",
   "/playground%20connector%20offsets%20get",

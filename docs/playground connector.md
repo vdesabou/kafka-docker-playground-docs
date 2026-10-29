@@ -86,6 +86,7 @@ playground connector COMMAND
 - [benchmark](playground%20connector%20benchmark) - 🏎️ Benchmark the throughput of a connector
 - [show-config](playground%20connector%20show-config) - 🧰 Show current connector config that was applied
 - [show-config-parameters](playground%20connector%20show-config-parameters) - 🔩 Show all possible configuration parameters of connector
+- [metrics](playground%20connector%20metrics) - 📈 Show the metrics of a connector: throughput, time, errors, and the metrics of the connector itself
 - [display-metrics-api](playground%20connector%20display-metrics-api) - 〽️ Display metrics api for fully managed connector
 - [display-metrics-api-with-grafana](playground%20connector%20display-metrics-api-with-grafana) - 📊 Display metrics api for fully managed connector in Grafana dashboard
 - [select-config](playground%20connector%20select-config) - 🗜️ Easily select config from all possible configuration parameters of connector

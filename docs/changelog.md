@@ -3,6 +3,8 @@
 ## October 2026
 ##### 🌟 Enhancements
 
+- 🧠💱 topic produce: --transactional-id to commit, abort or leave open a transaction [#9766](https://github.com/vdesabou/kafka-docker-playground/issues/9766)
+- 🧠🖥️ playground broker: health, stop/start, rolling-restart, transactions, describe, metrics [#9765](https://github.com/vdesabou/kafka-docker-playground/issues/9765)
 - 🧠⚙️ playground broker config get|set|delete: dynamic broker configs without restart [#9761](https://github.com/vdesabou/kafka-docker-playground/issues/9761)
 - 🧠💰 playground ccloud-costs: HTML report of the range of dates [#9759](https://github.com/vdesabou/kafka-docker-playground/issues/9759)
 - 🧠🔀 playground topic reassign|elect-leader: move replicas and leaders between brokers [#9754](https://github.com/vdesabou/kafka-docker-playground/issues/9754)
@@ -140,11 +142,6 @@
 - 🐛💼 clashes between Salesforce tests (audit, sinks excluded) [#8931](https://github.com/vdesabou/kafka-docker-playground/issues/8931)
 - 🐛💼 SFDC examples: Unique PushTopic names per script and environment [#8930](https://github.com/vdesabou/kafka-docker-playground/issues/8930)
 
-##### :heart: Contributors
-
-Thank you to all the contributors who worked on this release:
-
-@vdesabou
 ## September 2026
 ##### 🌟 Enhancements
 

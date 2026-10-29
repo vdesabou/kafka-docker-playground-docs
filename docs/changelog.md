@@ -3,6 +3,7 @@
 ## October 2026
 ##### 🌟 Enhancements
 
+- 🧠📈 connector: add connector metrics [#9773](https://github.com/vdesabou/kafka-docker-playground/issues/9773)
 - 🧠🧵 connector: add restart --only-failed, connector tasks and connector topics [#9772](https://github.com/vdesabou/kafka-docker-playground/issues/9772)
 - 🧠📚 deep dive: brokers and transactions (playground broker), with a 3-broker lab [#9770](https://github.com/vdesabou/kafka-docker-playground/issues/9770)
 - 🧠🖥️ --enable-multiple-brokers: replication factor 3 for the internal topics [#9768](https://github.com/vdesabou/kafka-docker-playground/issues/9768)

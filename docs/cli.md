@@ -181,6 +181,8 @@ visit https://docs.docker.com/get-docker to install
 - [get](playground%20quota%20get) - 🔎 Display client quotas
 - [set](playground%20quota%20set) - 🚦 Set client quotas
 - [delete](playground%20quota%20delete) - 🗑️ Remove client quotas
+- [broker](playground%20broker) - 🖥️ Broker commands
+- [config](playground%20broker%20config) - ⚙️ Dynamic broker config commands
 
 ### Schema commands
 

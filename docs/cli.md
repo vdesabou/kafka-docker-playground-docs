@@ -116,31 +116,31 @@ visit https://docs.docker.com/get-docker to install
 ### Secrets commands
 
 - [secrets](playground%20secrets) - 🔐 Credentials required by examples
-- [set](playground%20secrets%20set) - 🔐 Store a credential
-- [get](playground%20secrets%20get) - 🔍 Show a stored credential (masked unless `--reveal` is used)
-- [unset](playground%20secrets%20unset) - 🗑️ Remove a stored credential
-- [list](playground%20secrets%20list) - 📋 List stored credentials
-- [link](playground%20secrets%20link) - 🔗 Point a variable at a secret manager, without storing any value
-- [check](playground%20secrets%20check) - ✅ Show what an example needs, and what is missing
-- [env](playground%20secrets%20env) - 🐚 Export what an example needs into the current shell
-- [import](playground%20secrets%20import) - 📥 Import an existing secret.properties / variable.properties file
-- [export](playground%20secrets%20export) - 📤 Write every credential of a profile to a file, in clear text
-- [edit](playground%20secrets%20edit) - ✏️ Open the store in your editor
-- [backend](playground%20secrets%20backend) - 🏦 Show or change where secrets are kept
-- [profile](playground%20secrets%20profile) - 🗂️ Show or switch the active profile
-- [scan](playground%20secrets%20scan) - 🔎 Look for stored credentials in clear text in the repository
+  - [set](playground%20secrets%20set) - 🔐 Store a credential
+  - [get](playground%20secrets%20get) - 🔍 Show a stored credential (masked unless `--reveal` is used)
+  - [unset](playground%20secrets%20unset) - 🗑️ Remove a stored credential
+  - [list](playground%20secrets%20list) - 📋 List stored credentials
+  - [link](playground%20secrets%20link) - 🔗 Point a variable at a secret manager, without storing any value
+  - [check](playground%20secrets%20check) - ✅ Show what an example needs, and what is missing
+  - [env](playground%20secrets%20env) - 🐚 Export what an example needs into the current shell
+  - [import](playground%20secrets%20import) - 📥 Import an existing secret.properties / variable.properties file
+  - [export](playground%20secrets%20export) - 📤 Write every credential of a profile to a file, in clear text
+  - [edit](playground%20secrets%20edit) - ✏️ Open the store in your editor
+  - [backend](playground%20secrets%20backend) - 🏦 Show or change where secrets are kept
+  - [profile](playground%20secrets%20profile) - 🗂️ Show or switch the active profile
+  - [scan](playground%20secrets%20scan) - 🔎 Look for stored credentials in clear text in the repository
 
 ### Salesforce commands
 
 - [salesforce](playground%20salesforce) - ☁️ Set up a Salesforce org for the Salesforce examples, and check it
-- [setup](playground%20salesforce%20setup) - 🛠️ Configure a Salesforce org for the Salesforce examples
-- [check](playground%20salesforce%20check) - 🩺 Check that the stored Salesforce credentials work
+  - [setup](playground%20salesforce%20setup) - 🛠️ Configure a Salesforce org for the Salesforce examples
+  - [check](playground%20salesforce%20check) - 🩺 Check that the stored Salesforce credentials work
 
 ### Cloud Resources commands
 
 - [cloud-resources](playground%20cloud-resources) - ☁️ What the playground left behind in your cloud accounts, and what it costs
-- [aws](playground%20cloud-resources%20aws) - ☁️ What is still running in AWS, and what it costs
-- [azure](playground%20cloud-resources%20azure) - ☁️ What is still running in Azure, and what it costs
+  - [aws](playground%20cloud-resources%20aws) - ☁️ What is still running in AWS, and what it costs
+  - [azure](playground%20cloud-resources%20azure) - ☁️ What is still running in Azure, and what it costs
 
 ### Run commands
 
@@ -168,214 +168,214 @@ visit https://docs.docker.com/get-docker to install
 ### Repro commands
 
 - [repro](playground%20repro) - 👷‍♂️ Reproduction model commands
-- [export](playground%20repro%20export) - 📤 Export reproduction models as a self-contained tgz bundle
-- [check](playground%20repro%20check) - 🕵️ Scan reproduction models for secrets and customer data before they are committed
-- [import](playground%20repro%20import) - 📥 Import a tgz bundle created by `playground repro export`
-- [bootstrap](playground%20repro%20bootstrap) - 🛠  Bootstrap reproduction model, just run `<playground repro bootstrap>` !
+  - [export](playground%20repro%20export) - 📤 Export reproduction models as a self-contained tgz bundle
+  - [check](playground%20repro%20check) - 🕵️ Scan reproduction models for secrets and customer data before they are committed
+  - [import](playground%20repro%20import) - 📥 Import a tgz bundle created by `playground repro export`
+  - [bootstrap](playground%20repro%20bootstrap) - 🛠  Bootstrap reproduction model, just run `<playground repro bootstrap>` !
 
 ### Kafka commands
 
 - [get-docker-compose](playground%20get-docker-compose) - 🐋 Get docker-compose
 - [get-jmx-metrics](playground%20get-jmx-metrics) - 🔢 Get JMX metrics from a container
 - [quota](playground%20quota) - 🚦 Client quota commands
-- [get](playground%20quota%20get) - 🔎 Display client quotas
-- [set](playground%20quota%20set) - 🚦 Set client quotas
-- [delete](playground%20quota%20delete) - 🗑️ Remove client quotas
+  - [get](playground%20quota%20get) - 🔎 Display client quotas
+  - [set](playground%20quota%20set) - 🚦 Set client quotas
+  - [delete](playground%20quota%20delete) - 🗑️ Remove client quotas
 - [broker](playground%20broker) - 🖥️ Broker commands
-- [config](playground%20broker%20config) - ⚙️ Dynamic broker config commands
+  - [config](playground%20broker%20config) - ⚙️ Dynamic broker config commands
 
 ### Schema commands
 
 - [schema](playground%20schema) - 🔰 Schema commands
-- [get](playground%20schema%20get) - 🔰 Get all schemas versions for specified subject (if `--subject` is not specified, all subjects will be used)
-- [register](playground%20schema%20register) - ⏺️ Register a schema in specified subject
-- [get-compatibility](playground%20schema%20get-compatibility) - 🛡️ Get subject-level compatibility
-- [set-compatibility](playground%20schema%20set-compatibility) - 🛡️ Set subject-level compatibility
-- [get-mode](playground%20schema%20get-mode) - 🔏 Get subject-level mode
-- [set-mode](playground%20schema%20set-mode) - 🔏 Set subject-level mode
-- [set-normalize](playground%20schema%20set-normalize) - 🧽 Set normalize at schema registry level
-- [validate-new-schemas](playground%20schema%20validate-new-schemas) - 🩺 Validate new schemas (default is true since CP 8.2.0)
-- [delete](playground%20schema%20delete) - 🧟 Delete schema
-- [derive-schema](playground%20schema%20derive-schema) - 🪄 Derive a schema based on payload
-- [set-alias](playground%20schema%20set-alias) - 🔯 Set a subject alias
-- [get-alias](playground%20schema%20get-alias) - 🔯 Get subject alias
+  - [get](playground%20schema%20get) - 🔰 Get all schemas versions for specified subject (if `--subject` is not specified, all subjects will be used)
+  - [register](playground%20schema%20register) - ⏺️ Register a schema in specified subject
+  - [get-compatibility](playground%20schema%20get-compatibility) - 🛡️ Get subject-level compatibility
+  - [set-compatibility](playground%20schema%20set-compatibility) - 🛡️ Set subject-level compatibility
+  - [get-mode](playground%20schema%20get-mode) - 🔏 Get subject-level mode
+  - [set-mode](playground%20schema%20set-mode) - 🔏 Set subject-level mode
+  - [set-normalize](playground%20schema%20set-normalize) - 🧽 Set normalize at schema registry level
+  - [validate-new-schemas](playground%20schema%20validate-new-schemas) - 🩺 Validate new schemas (default is true since CP 8.2.0)
+  - [delete](playground%20schema%20delete) - 🧟 Delete schema
+  - [derive-schema](playground%20schema%20derive-schema) - 🪄 Derive a schema based on payload
+  - [set-alias](playground%20schema%20set-alias) - 🔯 Set a subject alias
+  - [get-alias](playground%20schema%20get-alias) - 🔯 Get subject alias
 
 ### TCP Proxy commands
 
 - [tcp-proxy](playground%20tcp-proxy) - 🏚 Zazkia TCP Proxy commands
-- [start](playground%20tcp-proxy%20start) - 💗 Start the TCP proxy and automatically replace connector config with zazkia hostname and port 49998
-- [get-connections](playground%20tcp-proxy%20get-connections) - 🧲 Get Zazkia active TCP connections config and stats
-- [delay](playground%20tcp-proxy%20delay) - ⏲️ Add milliseconds delay to service response.
-- [break](playground%20tcp-proxy%20break) - 💔 Break sending the response to the client.
-- [close-connection](playground%20tcp-proxy%20close-connection) - ❌ Close the Zazkia active TCP connections
-- [close-all-connection-with-error](playground%20tcp-proxy%20close-all-connection-with-error) - 🧹 Close all Zazkia TCP connections which are in error state
-- [toggle-accept-connections](playground%20tcp-proxy%20toggle-accept-connections) - 🙅‍♂️ Change whether new connections can be accepted
-- [toggle-reads-client](playground%20tcp-proxy%20toggle-reads-client) - ✅ Change whether reading data from the client is enabled.
-- [toggle-reads-service](playground%20tcp-proxy%20toggle-reads-service) - ✅ Change whether reading data from the service is enabled.
-- [toggle-writes-client](playground%20tcp-proxy%20toggle-writes-client) - ✅ Change whether writing data to the client is enabled.
-- [toggle-writes-service](playground%20tcp-proxy%20toggle-writes-service) - ✅ Change whether writing data to the service is enabled.
-- [open-ui](playground%20tcp-proxy%20open-ui) - 🌐 Just open Zazkia UI (http://localhost:9191) in your browser
+  - [start](playground%20tcp-proxy%20start) - 💗 Start the TCP proxy and automatically replace connector config with zazkia hostname and port 49998
+  - [get-connections](playground%20tcp-proxy%20get-connections) - 🧲 Get Zazkia active TCP connections config and stats
+  - [delay](playground%20tcp-proxy%20delay) - ⏲️ Add milliseconds delay to service response.
+  - [break](playground%20tcp-proxy%20break) - 💔 Break sending the response to the client.
+  - [close-connection](playground%20tcp-proxy%20close-connection) - ❌ Close the Zazkia active TCP connections
+  - [close-all-connection-with-error](playground%20tcp-proxy%20close-all-connection-with-error) - 🧹 Close all Zazkia TCP connections which are in error state
+  - [toggle-accept-connections](playground%20tcp-proxy%20toggle-accept-connections) - 🙅‍♂️ Change whether new connections can be accepted
+  - [toggle-reads-client](playground%20tcp-proxy%20toggle-reads-client) - ✅ Change whether reading data from the client is enabled.
+  - [toggle-reads-service](playground%20tcp-proxy%20toggle-reads-service) - ✅ Change whether reading data from the service is enabled.
+  - [toggle-writes-client](playground%20tcp-proxy%20toggle-writes-client) - ✅ Change whether writing data to the client is enabled.
+  - [toggle-writes-service](playground%20tcp-proxy%20toggle-writes-service) - ✅ Change whether writing data to the service is enabled.
+  - [open-ui](playground%20tcp-proxy%20open-ui) - 🌐 Just open Zazkia UI (http://localhost:9191) in your browser
 
 ### Tools commands
 
 - [tools](playground%20tools) - 🧰 Tools commands
-- [install-vscode-extension](playground%20tools%20install-vscode-extension) - 🪄 Install a slightly modified version of "Shell Script Command Completion" Visual Studio Code extension (https://marketplace.visualstudio.com/items?itemName=tetradresearch.vscode-h2o)
-- [read-avro-file](playground%20tools%20read-avro-file) - 🔖 Read provided avro file
-- [read-parquet-file](playground%20tools%20read-parquet-file) - 🔖 Read provided parquet file
-- [certs-create](playground%20tools%20certs-create) - 🔐 Generate keys and certificates used for SSL
-- [redos-check](playground%20tools%20redos-check) - 🪖 Check topics.regex for ReDos vulnerabilities using recheck (https://github.com/makenowjust-labs/recheck)
+  - [install-vscode-extension](playground%20tools%20install-vscode-extension) - 🪄 Install a slightly modified version of "Shell Script Command Completion" Visual Studio Code extension (https://marketplace.visualstudio.com/items?itemName=tetradresearch.vscode-h2o)
+  - [read-avro-file](playground%20tools%20read-avro-file) - 🔖 Read provided avro file
+  - [read-parquet-file](playground%20tools%20read-parquet-file) - 🔖 Read provided parquet file
+  - [certs-create](playground%20tools%20certs-create) - 🔐 Generate keys and certificates used for SSL
+  - [redos-check](playground%20tools%20redos-check) - 🪖 Check topics.regex for ReDos vulnerabilities using recheck (https://github.com/makenowjust-labs/recheck)
 
 ### Analyze commands
 
 - [analyze](playground%20analyze) - 🔎 Analyze commands
-- [thread-dump](playground%20analyze%20thread-dump) - 🧵 Analyze java thread dumps: deadlocks, lock contention, stuck and CPU-hungry threads
-- [heap-dump](playground%20analyze%20heap-dump) - 🔬 Analyze a heap dump with Eclipse Memory Analyzer (MAT), run headless in Docker
-- [logs](playground%20analyze%20logs) - 🔥 Show a digest of ERROR/FATAL records found in log files, folders or zip bundles
-- [gc-logs](playground%20analyze%20gc-logs) - 📈 Analyze JVM Garbage Collection logs
-- [oracle-xstream-report](playground%20analyze%20oracle-xstream-report) - 🅾️ Analyze Oracle XStream CDC diagnostics reports (orclcdc_diag.sql)
-- [flight-recorder](playground%20analyze%20flight-recorder) - 🛩️ Analyze a Java Flight Recorder recording: where the time of the connector tasks goes
-- [jscissors](playground%20analyze%20jscissors) - ✂️ Analyze a jscissors trace: what the traced methods did, call by call
-- [tcp-dump](playground%20analyze%20tcp-dump) - 🦈 Analyze a network capture (.pcap, .pcapng): refused and reset connections, retransmissions, TLS alerts, DNS errors, Kafka and HTTP errors and response times
+  - [thread-dump](playground%20analyze%20thread-dump) - 🧵 Analyze java thread dumps: deadlocks, lock contention, stuck and CPU-hungry threads
+  - [heap-dump](playground%20analyze%20heap-dump) - 🔬 Analyze a heap dump with Eclipse Memory Analyzer (MAT), run headless in Docker
+  - [logs](playground%20analyze%20logs) - 🔥 Show a digest of ERROR/FATAL records found in log files, folders or zip bundles
+  - [gc-logs](playground%20analyze%20gc-logs) - 📈 Analyze JVM Garbage Collection logs
+  - [oracle-xstream-report](playground%20analyze%20oracle-xstream-report) - 🅾️ Analyze Oracle XStream CDC diagnostics reports (orclcdc_diag.sql)
+  - [flight-recorder](playground%20analyze%20flight-recorder) - 🛩️ Analyze a Java Flight Recorder recording: where the time of the connector tasks goes
+  - [jscissors](playground%20analyze%20jscissors) - ✂️ Analyze a jscissors trace: what the traced methods did, call by call
+  - [tcp-dump](playground%20analyze%20tcp-dump) - 🦈 Analyze a network capture (.pcap, .pcapng): refused and reset connections, retransmissions, TLS alerts, DNS errors, Kafka and HTTP errors and response times
 
 ### Debug commands
 
 - [debug](playground%20debug) - 🐞 Debug commands
-- [enable-remote-debugging](playground%20debug%20enable-remote-debugging) - ✨ Enable java remote debugging for container
-- [disable-remote-debugging](playground%20debug%20disable-remote-debugging) - 🛑 Disable java remote debugging for container
-- [testssl](playground%20debug%20testssl) - 🔐 Testing TLS/SSL encryption using https://testssl.sh/
-- [generate-diagnostics](playground%20debug%20generate-diagnostics) - ⛑️ Generate a diagnostic bundle with Diagnostics Bundle Tool
-- [thread-dump](playground%20debug%20thread-dump) - 🎯 Take a java thread dump
-- [heap-dump](playground%20debug%20heap-dump) - 👻 Take a heap dump
-- [tcp-dump](playground%20debug%20tcp-dump) - 🕵️‍♂️ Take a tcp dump (sniffing network)
-- [block-traffic](playground%20debug%20block-traffic) - 🚫 Blocking traffic using iptables
-- [degrade-traffic](playground%20debug%20degrade-traffic) - 🐌 Add latency, packet loss, corruption or a bandwidth limit using tc
-- [java-debug](playground%20debug%20java-debug) - 🤎 JVM arguments for SSL, Kerberos or Class Loading
-- [jscissors](playground%20debug%20jscissors) - ✂️ Trace the calls of any method of a running JVM: arguments, return values, durations, exceptions, call tree
-- [flight-recorder](playground%20debug%20flight-recorder) - 🛩️ Record a JVM with Java Flight Recorder, from `--action` start to `--action` stop
-- [log-level](playground%20debug%20log-level) - 🧬 Set log level for any package
-- [cfk](playground%20debug%20cfk) - 🧱 CFK debug sub-commands
+  - [enable-remote-debugging](playground%20debug%20enable-remote-debugging) - ✨ Enable java remote debugging for container
+  - [disable-remote-debugging](playground%20debug%20disable-remote-debugging) - 🛑 Disable java remote debugging for container
+  - [testssl](playground%20debug%20testssl) - 🔐 Testing TLS/SSL encryption using https://testssl.sh/
+  - [generate-diagnostics](playground%20debug%20generate-diagnostics) - ⛑️ Generate a diagnostic bundle with Diagnostics Bundle Tool
+  - [thread-dump](playground%20debug%20thread-dump) - 🎯 Take a java thread dump
+  - [heap-dump](playground%20debug%20heap-dump) - 👻 Take a heap dump
+  - [tcp-dump](playground%20debug%20tcp-dump) - 🕵️‍♂️ Take a tcp dump (sniffing network)
+  - [block-traffic](playground%20debug%20block-traffic) - 🚫 Blocking traffic using iptables
+  - [degrade-traffic](playground%20debug%20degrade-traffic) - 🐌 Add latency, packet loss, corruption or a bandwidth limit using tc
+  - [java-debug](playground%20debug%20java-debug) - 🤎 JVM arguments for SSL, Kerberos or Class Loading
+  - [jscissors](playground%20debug%20jscissors) - ✂️ Trace the calls of any method of a running JVM: arguments, return values, durations, exceptions, call tree
+  - [flight-recorder](playground%20debug%20flight-recorder) - 🛩️ Record a JVM with Java Flight Recorder, from `--action` start to `--action` stop
+  - [log-level](playground%20debug%20log-level) - 🧬 Set log level for any package
+  - [cfk](playground%20debug%20cfk) - 🧱 CFK debug sub-commands
 
 ### Container commands
 
 - [container](playground%20container) - 🐳 Container commands
-- [get-properties](playground%20container%20get-properties) - 📝 Get properties file from a container
-- [recreate](playground%20container%20recreate) - 💫 Recreate container(s)
-- [update](playground%20container%20update) - ✍️ Edit and apply runtime container/pod definition
-- [get-ip-addresses](playground%20container%20get-ip-addresses) - 🖥️  Get ip address of running containers
-- [kill-all](playground%20container%20kill-all) - 💀 Kill all containers and prune all volumes
-- [logs](playground%20container%20logs) - 🕵️  Tail and follow container logs
-- [display-error-all](playground%20container%20display-error-all) - 🔥 Display all ERROR/FATAL logs in all containers/pods. Useful for quick troubleshooting
-- [ssh](playground%20container%20ssh) - 🛬 SSH into container
-- [change-jdk](playground%20container%20change-jdk) - 🤎 Change java JDK version using Azul JDK (https://www.azul.com/downloads/#downloads-table-zulu)
-- [exec](playground%20container%20exec) - 🪄 Execute command in a container
-- [cp](playground%20container%20cp) - 🪄 Copy files between local filesystem and container
-- [restart](playground%20container%20restart) - 🔁 Restart a container
-- [pause](playground%20container%20pause) - ⏸️  Pause a container
-- [resume](playground%20container%20resume) - ⏯️  Resume a container
-- [kill](playground%20container%20kill) - 🔫 Kill a container
-- [set-environment-variables](playground%20container%20set-environment-variables) - 📦  Set environment variable(s) for a container
+  - [get-properties](playground%20container%20get-properties) - 📝 Get properties file from a container
+  - [recreate](playground%20container%20recreate) - 💫 Recreate container(s)
+  - [update](playground%20container%20update) - ✍️ Edit and apply runtime container/pod definition
+  - [get-ip-addresses](playground%20container%20get-ip-addresses) - 🖥️  Get ip address of running containers
+  - [kill-all](playground%20container%20kill-all) - 💀 Kill all containers and prune all volumes
+  - [logs](playground%20container%20logs) - 🕵️  Tail and follow container logs
+  - [display-error-all](playground%20container%20display-error-all) - 🔥 Display all ERROR/FATAL logs in all containers/pods. Useful for quick troubleshooting
+  - [ssh](playground%20container%20ssh) - 🛬 SSH into container
+  - [change-jdk](playground%20container%20change-jdk) - 🤎 Change java JDK version using Azul JDK (https://www.azul.com/downloads/#downloads-table-zulu)
+  - [exec](playground%20container%20exec) - 🪄 Execute command in a container
+  - [cp](playground%20container%20cp) - 🪄 Copy files between local filesystem and container
+  - [restart](playground%20container%20restart) - 🔁 Restart a container
+  - [pause](playground%20container%20pause) - ⏸️  Pause a container
+  - [resume](playground%20container%20resume) - ⏯️  Resume a container
+  - [kill](playground%20container%20kill) - 🔫 Kill a container
+  - [set-environment-variables](playground%20container%20set-environment-variables) - 📦  Set environment variable(s) for a container
 
 ### Topic commands
 
 - [topic](playground%20topic) - 🗳 Topic commands
-- [get-number-records](playground%20topic%20get-number-records) - 💯 Get number of records in a topic
-- [wait-for-records](playground%20topic%20wait-for-records) - ⏳ Wait for a topic to contain a minimum number of records
-- [get-offsets](playground%20topic%20get-offsets) - 📍 Get earliest and latest offsets per partition of a topic
-- [display-consumer-offsets](playground%20topic%20display-consumer-offsets) - 📭 Display content of __consumer_offsets topic
-- [list](playground%20topic%20list) - 🔘 List topics
-- [get-size](playground%20topic%20get-size) - 📏 Get size of topics
-- [describe](playground%20topic%20describe) - 🔬 Describe topic
-- [reassign](playground%20topic%20reassign) - 🔀 Move the replicas of a topic to other brokers
-- [elect-leader](playground%20topic%20elect-leader) - 👑 Elect the leaders of a topic
-- [set-schema-compatibility](playground%20topic%20set-schema-compatibility) - 🛡️ Change topic's schema compatibility
-- [consume](playground%20topic%20consume) - 📥 Consume topic from beginning
-- [produce](playground%20topic%20produce) - 📤 Produce to a topic
-- [create](playground%20topic%20create) - 🆕 Create topic
-- [delete](playground%20topic%20delete) - ❌ Delete topic and associated schema/subject if applicable
-- [alter](playground%20topic%20alter) - 🪛 Alter topic config
-- [dlq](playground%20topic%20dlq) - 📬 Dead letter queue commands
-- [tag](playground%20topic%20tag) - 🏷️ Stream Catalog tags (Confluent Cloud only)
+  - [get-number-records](playground%20topic%20get-number-records) - 💯 Get number of records in a topic
+  - [wait-for-records](playground%20topic%20wait-for-records) - ⏳ Wait for a topic to contain a minimum number of records
+  - [get-offsets](playground%20topic%20get-offsets) - 📍 Get earliest and latest offsets per partition of a topic
+  - [display-consumer-offsets](playground%20topic%20display-consumer-offsets) - 📭 Display content of __consumer_offsets topic
+  - [list](playground%20topic%20list) - 🔘 List topics
+  - [get-size](playground%20topic%20get-size) - 📏 Get size of topics
+  - [describe](playground%20topic%20describe) - 🔬 Describe topic
+  - [reassign](playground%20topic%20reassign) - 🔀 Move the replicas of a topic to other brokers
+  - [elect-leader](playground%20topic%20elect-leader) - 👑 Elect the leaders of a topic
+  - [set-schema-compatibility](playground%20topic%20set-schema-compatibility) - 🛡️ Change topic's schema compatibility
+  - [consume](playground%20topic%20consume) - 📥 Consume topic from beginning
+  - [produce](playground%20topic%20produce) - 📤 Produce to a topic
+  - [create](playground%20topic%20create) - 🆕 Create topic
+  - [delete](playground%20topic%20delete) - ❌ Delete topic and associated schema/subject if applicable
+  - [alter](playground%20topic%20alter) - 🪛 Alter topic config
+  - [dlq](playground%20topic%20dlq) - 📬 Dead letter queue commands
+  - [tag](playground%20topic%20tag) - 🏷️ Stream Catalog tags (Confluent Cloud only)
 - [consumer-group](playground%20consumer-group) - 👥 Consumer group commands
-- [list](playground%20consumer-group%20list) - 👥 List consumer groups
-- [describe](playground%20consumer-group%20describe) - 🔬 Describe consumer group
-- [reset-offsets](playground%20consumer-group%20reset-offsets) - ⏪ Reset the committed offsets of a consumer group
-- [delete](playground%20consumer-group%20delete) - 🗑️ Delete a consumer group, or its offsets for one topic
+  - [list](playground%20consumer-group%20list) - 👥 List consumer groups
+  - [describe](playground%20consumer-group%20describe) - 🔬 Describe consumer group
+  - [reset-offsets](playground%20consumer-group%20reset-offsets) - ⏪ Reset the committed offsets of a consumer group
+  - [delete](playground%20consumer-group%20delete) - 🗑️ Delete a consumer group, or its offsets for one topic
 
 ### Flink commands
 
 - [flink](playground%20flink) - 🐿️ Flink commands
-- [sql](playground%20flink%20sql) - 🐿️ Run Flink SQL statements with the SQL client
-- [list-jobs](playground%20flink%20list-jobs) - 📋 List the jobs of the Flink cluster
-- [cancel](playground%20flink%20cancel) - 🛑 Cancel a Flink job
+  - [sql](playground%20flink%20sql) - 🐿️ Run Flink SQL statements with the SQL client
+  - [list-jobs](playground%20flink%20list-jobs) - 📋 List the jobs of the Flink cluster
+  - [cancel](playground%20flink%20cancel) - 🛑 Cancel a Flink job
 
 ### RBAC commands
 
 - [rbac](playground%20rbac) - 🛡️ RBAC commands (rbac-sasl-plain and cfk-rbac environments, plus Confluent Cloud ACLs)
-- [role-binding](playground%20rbac%20role-binding) - 🔐 Role binding commands
-- [user](playground%20rbac%20user) - 🧑 LDAP user commands
-- [acl](playground%20rbac%20acl) - 🚦 ACL commands
+  - [role-binding](playground%20rbac%20role-binding) - 🔐 Role binding commands
+  - [user](playground%20rbac%20user) - 🧑 LDAP user commands
+  - [acl](playground%20rbac%20acl) - 🚦 ACL commands
 
 ### Connector-Plugin commands
 
 - [connector-plugin](playground%20connector-plugin) - 🔌 Connector-plugin commands
-- [search-jar](playground%20connector-plugin%20search-jar) - ☕ List jars for a connector plugin from confluent hub https://www.confluent.io/hub/
-- [versions](playground%20connector-plugin%20versions) - 💯 List versions for a connector plugin from confluent hub https://www.confluent.io/hub/
-- [changelog](playground%20connector-plugin%20changelog) - 📜 Show the release notes of a connector plugin between two versions
-- [display-last-updated](playground%20connector-plugin%20display-last-updated) - 🆕 List last updated connector plugins from confluent hub https://www.confluent.io/hub/
-- [config-key](playground%20connector-plugin%20config-key) - 🔑 Explain a connector configuration key: documentation, type, default, since when, and which examples set it
-- [sourcecode](playground%20connector-plugin%20sourcecode) - 🧑‍💻 Open source code url in your browser (or in your editor when used with `--open`)
+  - [search-jar](playground%20connector-plugin%20search-jar) - ☕ List jars for a connector plugin from confluent hub https://www.confluent.io/hub/
+  - [versions](playground%20connector-plugin%20versions) - 💯 List versions for a connector plugin from confluent hub https://www.confluent.io/hub/
+  - [changelog](playground%20connector-plugin%20changelog) - 📜 Show the release notes of a connector plugin between two versions
+  - [display-last-updated](playground%20connector-plugin%20display-last-updated) - 🆕 List last updated connector plugins from confluent hub https://www.confluent.io/hub/
+  - [config-key](playground%20connector-plugin%20config-key) - 🔑 Explain a connector configuration key: documentation, type, default, since when, and which examples set it
+  - [sourcecode](playground%20connector-plugin%20sourcecode) - 🧑‍💻 Open source code url in your browser (or in your editor when used with `--open`)
 
 ### Connector commands
 
 - [connector](playground%20connector) - 🔗 Connector commands
-- [status](playground%20connector%20status) - 🧩 Show status of all connectors
-- [wait](playground%20connector%20wait) - ⏳ Wait for connectors to reach a state
-- [validate](playground%20connector%20validate) - ✅ Validate a connector config without creating the connector
-- [diff](playground%20connector%20diff) - 🔀 Diff the config of a running connector with another config
-- [error-recommendations](playground%20connector%20error-recommendations) - 💡 Show error recommendations for fully managed connectors
-- [oracle-cdc-xstream](playground%20connector%20oracle-cdc-xstream) - 🅾️ Specific Oracle CDC Xstream commands
-- [smt](playground%20connector%20smt) - 🧪 Single message transforms (SMT)
-- [offsets](playground%20connector%20offsets) - 💈 Handle source and sink connectors offsets
-- [plugins](playground%20connector%20plugins) - 🎨 Show all connector plugins installed. You can also display transforms, converters and predicates using `--all` flag
-- [pause](playground%20connector%20pause) - ⏸️  Pause connector
-- [versions](playground%20connector%20versions) - 🧞 Get current and latest versions available on Confluent Hub for connector(s) used in example
-- [sourcecode](playground%20connector%20sourcecode) - 🧑‍💻 open source code url for connector(s) used in example
-- [enable-remote-debugging](playground%20connector%20enable-remote-debugging) - ✨ Enable java remote debugging for the connector.
-- [disable-remote-debugging](playground%20connector%20disable-remote-debugging) - 🛑 Disable java remote debugging for the connector.
-- [restart](playground%20connector%20restart) - ♻️  Restart connector
-- [stop](playground%20connector%20stop) - 🛑 Stop connector (only available if CP \> 7.5)
-- [resume](playground%20connector%20resume) - ⏯️  Resume connector
-- [delete](playground%20connector%20delete) - 🗑️  Delete connector
-- [diagnose](playground%20connector%20diagnose) - 🩺 Diagnose a connector in one call: status, errors and progress
-- [show-lag](playground%20connector%20show-lag) - 🐢 Show lag of sink connector
-- [benchmark](playground%20connector%20benchmark) - 🏎️ Benchmark the throughput of a connector
-- [show-config](playground%20connector%20show-config) - 🧰 Show current connector config that was applied
-- [show-config-parameters](playground%20connector%20show-config-parameters) - 🔩 Show all possible configuration parameters of connector
-- [display-metrics-api](playground%20connector%20display-metrics-api) - 〽️ Display metrics api for fully managed connector
-- [display-metrics-api-with-grafana](playground%20connector%20display-metrics-api-with-grafana) - 📊 Display metrics api for fully managed connector in Grafana dashboard
-- [select-config](playground%20connector%20select-config) - 🗜️ Easily select config from all possible configuration parameters of connector
-- [snippets](playground%20connector%20snippets) - 🔌 useful snippets
-- [open-docs](playground%20connector%20open-docs) - 🧑‍🎓 Open connector documentation of currently running connector(s)
-- [log-level](playground%20connector%20log-level) - 🧬 Set connect log level
-- [logs](playground%20connector%20logs) - 🕵️  Tail and follow connect logs
-- [open-ccloud-connector-in-browser](playground%20connector%20open-ccloud-connector-in-browser) - 🤖 Open Fully Managed connector in browser (Confluent Cloud dashboard)
-- [display-leader-name](playground%20connector%20display-leader-name) - 👑 Display Connect Worker leader name using JMX MBean leader-name from kafka.connect:type=connect-worker-rebalance-metrics
-- [translate](playground%20connector%20translate) - 💱 Translate Self Managed Connector Plugin Configurations to Fully Managed Connector Plugin Configuration
-- [connect-migration-utility](playground%20connector%20connect-migration-utility) - 🧩 Run Kafka Connector Migration Utility (see https://github.com/confluentinc/connect-migration-utility/) on running connect cluster
-- [create-or-update](playground%20connector%20create-or-update) - 🧑‍🎨  Create or update connector
-- [update](playground%20connector%20update) - 🛠️ Update connector configuration by opening current connector config in text editor set with playground config editor `<editor>` (default is code). Once file is saved, the new configuration is updated.
+  - [status](playground%20connector%20status) - 🧩 Show status of all connectors
+  - [wait](playground%20connector%20wait) - ⏳ Wait for connectors to reach a state
+  - [validate](playground%20connector%20validate) - ✅ Validate a connector config without creating the connector
+  - [diff](playground%20connector%20diff) - 🔀 Diff the config of a running connector with another config
+  - [error-recommendations](playground%20connector%20error-recommendations) - 💡 Show error recommendations for fully managed connectors
+  - [oracle-cdc-xstream](playground%20connector%20oracle-cdc-xstream) - 🅾️ Specific Oracle CDC Xstream commands
+  - [smt](playground%20connector%20smt) - 🧪 Single message transforms (SMT)
+  - [offsets](playground%20connector%20offsets) - 💈 Handle source and sink connectors offsets
+  - [plugins](playground%20connector%20plugins) - 🎨 Show all connector plugins installed. You can also display transforms, converters and predicates using `--all` flag
+  - [pause](playground%20connector%20pause) - ⏸️  Pause connector
+  - [versions](playground%20connector%20versions) - 🧞 Get current and latest versions available on Confluent Hub for connector(s) used in example
+  - [sourcecode](playground%20connector%20sourcecode) - 🧑‍💻 open source code url for connector(s) used in example
+  - [enable-remote-debugging](playground%20connector%20enable-remote-debugging) - ✨ Enable java remote debugging for the connector.
+  - [disable-remote-debugging](playground%20connector%20disable-remote-debugging) - 🛑 Disable java remote debugging for the connector.
+  - [restart](playground%20connector%20restart) - ♻️  Restart connector
+  - [stop](playground%20connector%20stop) - 🛑 Stop connector (only available if CP \> 7.5)
+  - [resume](playground%20connector%20resume) - ⏯️  Resume connector
+  - [delete](playground%20connector%20delete) - 🗑️  Delete connector
+  - [diagnose](playground%20connector%20diagnose) - 🩺 Diagnose a connector in one call: status, errors and progress
+  - [show-lag](playground%20connector%20show-lag) - 🐢 Show lag of sink connector
+  - [benchmark](playground%20connector%20benchmark) - 🏎️ Benchmark the throughput of a connector
+  - [show-config](playground%20connector%20show-config) - 🧰 Show current connector config that was applied
+  - [show-config-parameters](playground%20connector%20show-config-parameters) - 🔩 Show all possible configuration parameters of connector
+  - [display-metrics-api](playground%20connector%20display-metrics-api) - 〽️ Display metrics api for fully managed connector
+  - [display-metrics-api-with-grafana](playground%20connector%20display-metrics-api-with-grafana) - 📊 Display metrics api for fully managed connector in Grafana dashboard
+  - [select-config](playground%20connector%20select-config) - 🗜️ Easily select config from all possible configuration parameters of connector
+  - [snippets](playground%20connector%20snippets) - 🔌 useful snippets
+  - [open-docs](playground%20connector%20open-docs) - 🧑‍🎓 Open connector documentation of currently running connector(s)
+  - [log-level](playground%20connector%20log-level) - 🧬 Set connect log level
+  - [logs](playground%20connector%20logs) - 🕵️  Tail and follow connect logs
+  - [open-ccloud-connector-in-browser](playground%20connector%20open-ccloud-connector-in-browser) - 🤖 Open Fully Managed connector in browser (Confluent Cloud dashboard)
+  - [display-leader-name](playground%20connector%20display-leader-name) - 👑 Display Connect Worker leader name using JMX MBean leader-name from kafka.connect:type=connect-worker-rebalance-metrics
+  - [translate](playground%20connector%20translate) - 💱 Translate Self Managed Connector Plugin Configurations to Fully Managed Connector Plugin Configuration
+  - [connect-migration-utility](playground%20connector%20connect-migration-utility) - 🧩 Run Kafka Connector Migration Utility (see https://github.com/confluentinc/connect-migration-utility/) on running connect cluster
+  - [create-or-update](playground%20connector%20create-or-update) - 🧑‍🎨  Create or update connector
+  - [update](playground%20connector%20update) - 🛠️ Update connector configuration by opening current connector config in text editor set with playground config editor `<editor>` (default is code). Once file is saved, the new configuration is updated.
 
 ### EC2 commands
 
 - [ec2](playground%20ec2) - ✨ Create and manage AWS EC2 instances (using Cloud Formation) to run kafka-docker-playground
-- [create](playground%20ec2%20create) - 👷 Create kafka-docker-playground EC2 instance using AWS Cloud Formation
-- [delete](playground%20ec2%20delete) - ❌ Delete an EC2 instance created with Cloud Formation
-- [open](playground%20ec2%20open) - 👨‍💻 Open an EC2 instance using Visual Studio code
-- [list](playground%20ec2%20list) - 🔘 List all EC2 instance
-- [stop](playground%20ec2%20stop) - 🔴 Stop an EC2 instance
-- [start](playground%20ec2%20start) - 🟢 Start an EC2 instance
-- [sync-repro-folder](playground%20ec2%20sync-repro-folder) - ↔️ Synchronize reproduction-models folder between local and ec2 instance
-- [push-secrets](playground%20ec2%20push-secrets) - 🔐 Send the secrets store to an ec2 instance
+  - [create](playground%20ec2%20create) - 👷 Create kafka-docker-playground EC2 instance using AWS Cloud Formation
+  - [delete](playground%20ec2%20delete) - ❌ Delete an EC2 instance created with Cloud Formation
+  - [open](playground%20ec2%20open) - 👨‍💻 Open an EC2 instance using Visual Studio code
+  - [list](playground%20ec2%20list) - 🔘 List all EC2 instance
+  - [stop](playground%20ec2%20stop) - 🔴 Stop an EC2 instance
+  - [start](playground%20ec2%20start) - 🟢 Start an EC2 instance
+  - [sync-repro-folder](playground%20ec2%20sync-repro-folder) - ↔️ Synchronize reproduction-models folder between local and ec2 instance
+  - [push-secrets](playground%20ec2%20push-secrets) - 🔐 Send the secrets store to an ec2 instance
 
 ## Options
 

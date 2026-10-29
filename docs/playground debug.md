@@ -62,6 +62,6 @@ playground debug COMMAND
 ## Debug commands
 
 - [cfk](playground%20debug%20cfk) - 🧱 CFK debug sub-commands
-- [generate-bundle](playground%20debug%20cfk%20generate-bundle) - ⛑️ Generate a Support bundle
+  - [generate-bundle](playground%20debug%20cfk%20generate-bundle) - ⛑️ Generate a Support bundle
 
 

@@ -59,8 +59,8 @@ playground topic COMMAND
 - [delete](playground%20topic%20delete) - ❌ Delete topic and associated schema/subject if applicable
 - [alter](playground%20topic%20alter) - 🪛 Alter topic config
 - [dlq](playground%20topic%20dlq) - 📬 Dead letter queue commands
-- [inspect](playground%20topic%20dlq%20inspect) - 🩺 Show what is in a dead letter queue, grouped by error
-- [replay](playground%20topic%20dlq%20replay) - 🔁 Produce the records of a dead letter queue again
+  - [inspect](playground%20topic%20dlq%20inspect) - 🩺 Show what is in a dead letter queue, grouped by error
+  - [replay](playground%20topic%20dlq%20replay) - 🔁 Produce the records of a dead letter queue again
 - [tag](playground%20topic%20tag) - 🏷️ Stream Catalog tags (Confluent Cloud only)
 
 

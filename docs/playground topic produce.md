@@ -340,11 +340,51 @@ Note that `--no-null` will be used when this option is set
 |-----------------|-------------
 | Default Value:  | `0`
 
+#### `--transactional-id TRANSACTIONAL-ID`
+
+💱 Produce the records in one transaction, with this transactional.id
+
+The records are produced as usual (keys, headers, schemas,  
+partitioning) to a hidden staging topic with the same number of  
+partitions, then copied byte for byte to the topic in one  
+transaction, which is committed, aborted or left open  
+(`--transaction`). With the default subject name strategy, the  
+schemas are registered under the subjects of the topic.
+
+Useful to reproduce what read_committed consumers do: an open  
+transaction holds the last stable offset of its partitions.
+
+Not available on Confluent Cloud, and not with `--nb-messages` -1.
+
+#### `--transaction TRANSACTION`
+
+💱 How the transaction of `--transactional-id` ends: commit  
+(default), abort, or open (left open, the coordinator aborts it  
+after `--transaction-timeout`)
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Default Value:  | `commit`
+| Allowed Values: | `commit`, `abort`, `open`
+
+#### `--transaction-timeout MS`
+
+⏱️ transaction.timeout.ms of the transactional producer, in ms  
+(default 60000): an open transaction is aborted by the coordinator  
+after it. At most transaction.max.timeout.ms of the brokers (15  
+minutes by default)
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Default Value:  | `60000`
+
 ## Examples
 
 ```bash
 
 playground topic produce --tombstone --topic a-topic --key mykey
+
+playground topic produce -t payments --nb-messages 10 --value 'payment-%g' --transactional-id payments-txn --transaction open --transaction-timeout 900000
 
 playground topic produce -t topic-json --nb-messages 10 << 'EOF'
 {

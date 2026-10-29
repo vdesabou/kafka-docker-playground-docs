@@ -62,5 +62,12 @@ playground topic COMMAND
   - [inspect](playground%20topic%20dlq%20inspect) - 🩺 Show what is in a dead letter queue, grouped by error
   - [replay](playground%20topic%20dlq%20replay) - 🔁 Produce the records of a dead letter queue again
 - [tag](playground%20topic%20tag) - 🏷️ Stream Catalog tags (Confluent Cloud only)
+  - [list](playground%20topic%20tag%20list) - 🏷️ List tag definitions
+  - [create](playground%20topic%20tag%20create) - 🆕 Create a tag definition
+  - [delete](playground%20topic%20tag%20delete) - ❌ Delete a tag definition
+  - [add](playground%20topic%20tag%20add) - 🏷️ Assign a tag to a topic
+  - [remove](playground%20topic%20tag%20remove) - 🧽 Remove a tag from a topic
+  - [show](playground%20topic%20tag%20show) - 🔎 Show tags assigned to a topic
+  - [search](playground%20topic%20tag%20search) - 🔎 Search topics having a tag
 
 

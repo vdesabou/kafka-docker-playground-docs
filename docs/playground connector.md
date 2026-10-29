@@ -60,8 +60,15 @@ playground connector COMMAND
 - [diff](playground%20connector%20diff) - 🔀 Diff the config of a running connector with another config
 - [error-recommendations](playground%20connector%20error-recommendations) - 💡 Show error recommendations for fully managed connectors
 - [oracle-cdc-xstream](playground%20connector%20oracle-cdc-xstream) - 🅾️ Specific Oracle CDC Xstream commands
+  - [generate-report](playground%20connector%20oracle-cdc-xstream%20generate-report) - ⚙️ Generate and open oracle cdc xstream connector diagnostics
+  - [debug](playground%20connector%20oracle-cdc-xstream%20debug) - 🐞 Execute various SQL commands to debug xstream components
 - [smt](playground%20connector%20smt) - 🧪 Single message transforms (SMT)
+  - [test](playground%20connector%20smt%20test) - 🧪 Apply the transform chain (SMT) of a connector to a record, step by step
 - [offsets](playground%20connector%20offsets) - 💈 Handle source and sink connectors offsets
+  - [get](playground%20connector%20offsets%20get) - 🏹 Get current offsets for source and sink connectors
+  - [reset](playground%20connector%20offsets%20reset) - 🆕 Reset offsets for source and sink connectors
+  - [alter](playground%20connector%20offsets%20alter) - ⛏️ Alter offsets for source and sink connectors
+  - [get-offsets-request-status](playground%20connector%20offsets%20get-offsets-request-status) - 👁️‍🗨️ Get the status of the previous offset request
 - [plugins](playground%20connector%20plugins) - 🎨 Show all connector plugins installed. You can also display transforms, converters and predicates using `--all` flag
 - [pause](playground%20connector%20pause) - ⏸️  Pause connector
 - [versions](playground%20connector%20versions) - 🧞 Get current and latest versions available on Confluent Hub for connector(s) used in example
@@ -85,6 +92,8 @@ playground connector COMMAND
 - [log-level](playground%20connector%20log-level) - 🧬 Set connect log level
 - [translate](playground%20connector%20translate) - 💱 Translate Self Managed Connector Plugin Configurations to Fully Managed Connector Plugin Configuration
 - [connect-migration-utility](playground%20connector%20connect-migration-utility) - 🧩 Run Kafka Connector Migration Utility (see https://github.com/confluentinc/connect-migration-utility/) on running connect cluster
+  - [discovery](playground%20connector%20connect-migration-utility%20discovery) - 👨‍🔬 Discover connectors in the local connect cluster and export their configurations to files
+  - [migrate](playground%20connector%20connect-migration-utility%20migrate) - 🪄 Migrate discovered connectors to fully managed connectors
 - [create-or-update](playground%20connector%20create-or-update) - 🧑‍🎨  Create or update connector
 - [update](playground%20connector%20update) - 🛠️ Update connector configuration by opening current connector config in text editor set with playground config editor `<editor>` (default is code). Once file is saved, the new configuration is updated.
 

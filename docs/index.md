@@ -29,6 +29,24 @@ visit https://docs.docker.com/get-docker to install
 - [status](playground%20status) - 🗺️ Show a status
 - [doctor](playground%20doctor) - 🩺 Check that the container engine is ready for the playground
 - [config](playground%20config) - ⚙️ Configure CLI
+  - [editor](playground%20config%20editor) - editor to use to open files
+  - [folder_zip_or_jar](playground%20config%20folder_zip_or_jar) - 📂 list of folders where to search for zip or jar
+  - [clipboard](playground%20config%20clipboard) - copy to clipboard connector config (only working on MacOS)
+  - [open-ccloud-connector-in-browser](playground%20config%20open-ccloud-connector-in-browser) - when running a fully managed connector example, it opens the connector in browser
+    - [automatically](playground%20config%20open-ccloud-connector-in-browser%20automatically) - automatically open the connector in browser
+    - [browser](playground%20config%20open-ccloud-connector-in-browser%20browser) - browser to use
+  - [open-grafana-in-browser](playground%20config%20open-grafana-in-browser) - when running an example with `--enable-jmx-grafana` flag, it opens grafana in browser
+    - [automatically](playground%20config%20open-grafana-in-browser%20automatically) - automatically open grafana in browser
+    - [browser](playground%20config%20open-grafana-in-browser%20browser) - browser to use
+  - [container-kill-all-before-run](playground%20config%20container-kill-all-before-run) - when running an example, always call playground container kill-all first. If set to false, it will call playground stop instead.
+  - [run-log](playground%20config%20run-log) - 📄 write a masked log of each `playground run` (default true)
+  - [run-log-folder](playground%20config%20run-log-folder) - 🗂️ folder of the run logs
+  - [open-diagnose-report-on-failure](playground%20config%20open-diagnose-report-on-failure) - 🩺 open the HTML report when a connector fails (default true)
+  - [display-last-updated-connector-plugins](playground%20config%20display-last-updated-connector-plugins) - 🆕 at the end of a self-managed connector run, list the connector plugins released recently on Confluent Hub (default false)
+  - [display-last-updated-connector-plugins-days](playground%20config%20display-last-updated-connector-plugins-days) - 📅 number of days to look back for display-last-updated-connector-plugins
+  - [display-last-updated-connector-plugins-vendor](playground%20config%20display-last-updated-connector-plugins-vendor) - 🏢 vendor of the connector plugins listed by display-last-updated-connector-plugins
+  - [cleanup-ccloud-resources-after-run](playground%20config%20cleanup-ccloud-resources-after-run) - 🧹 delete the Confluent Cloud resources left by the last ccloud example
+  - [check-and-update-repo-version](playground%20config%20check-and-update-repo-version) - when running an example, always check if repo version is older than 3 days, if disabled, it will skip this check.
 - [ccloud-costs](playground%20ccloud-costs) - 💰  Retrieve ccloud costs for a range of dates
 - [ccloud-costs-history](playground%20ccloud-costs-history) - 👛  Retrieve ccloud costs for each month since last year
 
@@ -59,7 +77,13 @@ visit https://docs.docker.com/get-docker to install
 
 - [cloud-resources](playground%20cloud-resources) - ☁️ What the playground left behind in your cloud accounts, and what it costs
   - [aws](playground%20cloud-resources%20aws) - ☁️ What is still running in AWS, and what it costs
+    - [list](playground%20cloud-resources%20aws%20list) - 📋 List all active resources
+    - [costs](playground%20cloud-resources%20aws%20costs) - 💰 Show aws costs
+    - [costs-history](playground%20cloud-resources%20aws%20costs-history) - 👛  Retrieve aws costs for each month since last year
   - [azure](playground%20cloud-resources%20azure) - ☁️ What is still running in Azure, and what it costs
+    - [list](playground%20cloud-resources%20azure%20list) - 📋 List all active resources
+    - [costs](playground%20cloud-resources%20azure%20costs) - 💰 Show azure costs
+    - [costs-history](playground%20cloud-resources%20azure%20costs-history) - 👛  Retrieve azure costs for each month since last year
 
 ### Run commands
 
@@ -102,6 +126,21 @@ visit https://docs.docker.com/get-docker to install
   - [delete](playground%20quota%20delete) - 🗑️ Remove client quotas
 - [broker](playground%20broker) - 🖥️ Broker commands
   - [config](playground%20broker%20config) - ⚙️ Dynamic broker config commands
+    - [get](playground%20broker%20config%20get) - 🔎 Display dynamic broker configs
+    - [set](playground%20broker%20config%20set) - ⚙️ Set a dynamic broker config
+    - [delete](playground%20broker%20config%20delete) - 🗑️ Remove a dynamic broker config
+  - [health](playground%20broker%20health) - 🩺 Check the health of the cluster
+  - [stop](playground%20broker%20stop) - 🛑 Stop a broker
+  - [start](playground%20broker%20start) - ▶️ Start a broker stopped with `playground broker stop`
+  - [rolling-restart](playground%20broker%20rolling-restart) - 🔄 Restart the brokers one by one, like a rolling upgrade
+  - [transactions](playground%20broker%20transactions) - 💱 Transaction commands
+    - [list](playground%20broker%20transactions%20list) - 📋 List the transactional ids
+    - [describe](playground%20broker%20transactions%20describe) - 🔎 Describe a transactional id
+    - [describe-producers](playground%20broker%20transactions%20describe-producers) - 🏭 Describe the active producers of a topic
+    - [find-hanging](playground%20broker%20transactions%20find-hanging) - 🧟 Find hanging transactions
+    - [abort](playground%20broker%20transactions%20abort) - 🧹 Abort a hanging transaction
+  - [describe](playground%20broker%20describe) - 🗺️ Describe the cluster
+  - [metrics](playground%20broker%20metrics) - 📈 Display the key JMX metrics of the brokers
 
 ### Schema commands
 
@@ -172,7 +211,10 @@ visit https://docs.docker.com/get-docker to install
   - [jscissors](playground%20debug%20jscissors) - ✂️ Trace the calls of any method of a running JVM: arguments, return values, durations, exceptions, call tree
   - [flight-recorder](playground%20debug%20flight-recorder) - 🛩️ Record a JVM with Java Flight Recorder, from `--action` start to `--action` stop
   - [log-level](playground%20debug%20log-level) - 🧬 Set log level for any package
+    - [get](playground%20debug%20log-level%20get) - Get log levels
+    - [set](playground%20debug%20log-level%20set) - Set log level for specific logger
   - [cfk](playground%20debug%20cfk) - 🧱 CFK debug sub-commands
+    - [generate-bundle](playground%20debug%20cfk%20generate-bundle) - ⛑️ Generate a Support bundle
 
 ### Container commands
 
@@ -213,7 +255,16 @@ visit https://docs.docker.com/get-docker to install
   - [delete](playground%20topic%20delete) - ❌ Delete topic and associated schema/subject if applicable
   - [alter](playground%20topic%20alter) - 🪛 Alter topic config
   - [dlq](playground%20topic%20dlq) - 📬 Dead letter queue commands
+    - [inspect](playground%20topic%20dlq%20inspect) - 🩺 Show what is in a dead letter queue, grouped by error
+    - [replay](playground%20topic%20dlq%20replay) - 🔁 Produce the records of a dead letter queue again
   - [tag](playground%20topic%20tag) - 🏷️ Stream Catalog tags (Confluent Cloud only)
+    - [list](playground%20topic%20tag%20list) - 🏷️ List tag definitions
+    - [create](playground%20topic%20tag%20create) - 🆕 Create a tag definition
+    - [delete](playground%20topic%20tag%20delete) - ❌ Delete a tag definition
+    - [add](playground%20topic%20tag%20add) - 🏷️ Assign a tag to a topic
+    - [remove](playground%20topic%20tag%20remove) - 🧽 Remove a tag from a topic
+    - [show](playground%20topic%20tag%20show) - 🔎 Show tags assigned to a topic
+    - [search](playground%20topic%20tag%20search) - 🔎 Search topics having a tag
 - [consumer-group](playground%20consumer-group) - 👥 Consumer group commands
   - [list](playground%20consumer-group%20list) - 👥 List consumer groups
   - [describe](playground%20consumer-group%20describe) - 🔬 Describe consumer group
@@ -231,8 +282,17 @@ visit https://docs.docker.com/get-docker to install
 
 - [rbac](playground%20rbac) - 🛡️ RBAC commands (rbac-sasl-plain and cfk-rbac environments, plus Confluent Cloud ACLs)
   - [role-binding](playground%20rbac%20role-binding) - 🔐 Role binding commands
+    - [create](playground%20rbac%20role-binding%20create) - 🔐 Create a role binding
+    - [delete](playground%20rbac%20role-binding%20delete) - 🗑️ Delete a role binding
+    - [list](playground%20rbac%20role-binding%20list) - 📋 List role bindings
   - [user](playground%20rbac%20user) - 🧑 LDAP user commands
+    - [add](playground%20rbac%20user%20add) - ➕ Add an LDAP user
+    - [delete](playground%20rbac%20user%20delete) - 🗑️ Delete an LDAP user, and remove it from its groups
+    - [list](playground%20rbac%20user%20list) - 📋 List LDAP users and their groups
   - [acl](playground%20rbac%20acl) - 🚦 ACL commands
+    - [create](playground%20rbac%20acl%20create) - 🚦 Create ACLs, one per `--operation`
+    - [delete](playground%20rbac%20acl%20delete) - 🗑️ Delete ACLs, one per `--operation`
+    - [list](playground%20rbac%20acl%20list) - 📋 List ACLs
 
 ### Connector-Plugin commands
 
@@ -253,8 +313,15 @@ visit https://docs.docker.com/get-docker to install
   - [diff](playground%20connector%20diff) - 🔀 Diff the config of a running connector with another config
   - [error-recommendations](playground%20connector%20error-recommendations) - 💡 Show error recommendations for fully managed connectors
   - [oracle-cdc-xstream](playground%20connector%20oracle-cdc-xstream) - 🅾️ Specific Oracle CDC Xstream commands
+    - [generate-report](playground%20connector%20oracle-cdc-xstream%20generate-report) - ⚙️ Generate and open oracle cdc xstream connector diagnostics
+    - [debug](playground%20connector%20oracle-cdc-xstream%20debug) - 🐞 Execute various SQL commands to debug xstream components
   - [smt](playground%20connector%20smt) - 🧪 Single message transforms (SMT)
+    - [test](playground%20connector%20smt%20test) - 🧪 Apply the transform chain (SMT) of a connector to a record, step by step
   - [offsets](playground%20connector%20offsets) - 💈 Handle source and sink connectors offsets
+    - [get](playground%20connector%20offsets%20get) - 🏹 Get current offsets for source and sink connectors
+    - [reset](playground%20connector%20offsets%20reset) - 🆕 Reset offsets for source and sink connectors
+    - [alter](playground%20connector%20offsets%20alter) - ⛏️ Alter offsets for source and sink connectors
+    - [get-offsets-request-status](playground%20connector%20offsets%20get-offsets-request-status) - 👁️‍🗨️ Get the status of the previous offset request
   - [plugins](playground%20connector%20plugins) - 🎨 Show all connector plugins installed. You can also display transforms, converters and predicates using `--all` flag
   - [pause](playground%20connector%20pause) - ⏸️  Pause connector
   - [versions](playground%20connector%20versions) - 🧞 Get current and latest versions available on Confluent Hub for connector(s) used in example
@@ -281,6 +348,8 @@ visit https://docs.docker.com/get-docker to install
   - [display-leader-name](playground%20connector%20display-leader-name) - 👑 Display Connect Worker leader name using JMX MBean leader-name from kafka.connect:type=connect-worker-rebalance-metrics
   - [translate](playground%20connector%20translate) - 💱 Translate Self Managed Connector Plugin Configurations to Fully Managed Connector Plugin Configuration
   - [connect-migration-utility](playground%20connector%20connect-migration-utility) - 🧩 Run Kafka Connector Migration Utility (see https://github.com/confluentinc/connect-migration-utility/) on running connect cluster
+    - [discovery](playground%20connector%20connect-migration-utility%20discovery) - 👨‍🔬 Discover connectors in the local connect cluster and export their configurations to files
+    - [migrate](playground%20connector%20connect-migration-utility%20migrate) - 🪄 Migrate discovered connectors to fully managed connectors
   - [create-or-update](playground%20connector%20create-or-update) - 🧑‍🎨  Create or update connector
   - [update](playground%20connector%20update) - 🛠️ Update connector configuration by opening current connector config in text editor set with playground config editor `<editor>` (default is code). Once file is saved, the new configuration is updated.
 
@@ -294,6 +363,8 @@ visit https://docs.docker.com/get-docker to install
   - [stop](playground%20ec2%20stop) - 🔴 Stop an EC2 instance
   - [start](playground%20ec2%20start) - 🟢 Start an EC2 instance
   - [sync-repro-folder](playground%20ec2%20sync-repro-folder) - ↔️ Synchronize reproduction-models folder between local and ec2 instance
+    - [local-to-ec2](playground%20ec2%20sync-repro-folder%20local-to-ec2) - 👉 Sync local reproduction-models folder to ec2 instance
+    - [ec2-to-local](playground%20ec2%20sync-repro-folder%20ec2-to-local) - 👈 Sync ec2 instance reproduction-models folder to local
   - [push-secrets](playground%20ec2%20push-secrets) - 🔐 Send the secrets store to an ec2 instance
 
 ## Options

@@ -58,6 +58,8 @@ playground debug COMMAND
 - [jscissors](playground%20debug%20jscissors) - ✂️ Trace the calls of any method of a running JVM: arguments, return values, durations, exceptions, call tree
 - [flight-recorder](playground%20debug%20flight-recorder) - 🛩️ Record a JVM with Java Flight Recorder, from `--action` start to `--action` stop
 - [log-level](playground%20debug%20log-level) - 🧬 Set log level for any package
+  - [get](playground%20debug%20log-level%20get) - Get log levels
+  - [set](playground%20debug%20log-level%20set) - Set log level for specific logger
 
 ## Debug commands
 

@@ -177,6 +177,10 @@ visit https://docs.docker.com/get-docker to install
 
 - [get-docker-compose](playground%20get-docker-compose) - 🐋 Get docker-compose
 - [get-jmx-metrics](playground%20get-jmx-metrics) - 🔢 Get JMX metrics from a container
+- [quota](playground%20quota) - 🚦 Client quota commands
+- [get](playground%20quota%20get) - 🔎 Display client quotas
+- [set](playground%20quota%20set) - 🚦 Set client quotas
+- [delete](playground%20quota%20delete) - 🗑️ Remove client quotas
 
 ### Schema commands
 

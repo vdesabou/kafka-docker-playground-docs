@@ -3,6 +3,7 @@
 ## October 2026
 ##### 🌟 Enhancements
 
+- 🧠📚 deep dive: brokers and transactions (playground broker), with a 3-broker lab [#9770](https://github.com/vdesabou/kafka-docker-playground/issues/9770)
 - 🧠🖥️ --enable-multiple-brokers: replication factor 3 for the internal topics [#9768](https://github.com/vdesabou/kafka-docker-playground/issues/9768)
 - 🧠💱 topic produce: --transactional-id to commit, abort or leave open a transaction [#9766](https://github.com/vdesabou/kafka-docker-playground/issues/9766)
 - 🧠🖥️ playground broker: health, stop/start, rolling-restart, transactions, describe, metrics [#9765](https://github.com/vdesabou/kafka-docker-playground/issues/9765)

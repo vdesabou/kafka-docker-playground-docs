@@ -266,7 +266,11 @@ By default, flink is not started for every test
 
 Once enabled, the CLI will ask if you need to download any connectors. Based on the response, you can download one or more connectors from Flink maven repository.
 
-Flink UI is reacheable using http://127.0.0.1:8081 within the flink child directory. If you enable Flink by starting connector deployment, http://127.0.0.1:18081 will be used.
+To skip the question (in a script or CI), set `FLINK_URL` to the jar(s) to download, e.g. the Kafka SQL connector.
+
+Flink UI and REST API: http://127.0.0.1:18081
+
+🎓 Tip: run Flink SQL and manage the jobs with `playground flink sql|list-jobs|cancel`, see the flink/flink-sql-kafka example.
 
 #### `--enable-conduktor`
 

@@ -3,6 +3,7 @@
 ## October 2026
 ##### 🌟 Enhancements
 
+- 🧠🧪 repro diff: what a reproduction model changes compared with its base example [#9812](https://github.com/vdesabou/kafka-docker-playground/issues/9812)
 - 🧠🧪 repro export: a hand-off report (`<model>`.REPRO.md) in every bundle, and --report-only for a Jira [#9810](https://github.com/vdesabou/kafka-docker-playground/issues/9810)
 - 🧠🧪 repro list: find reproduction models by case, status, verdict, base example, author or date [#9807](https://github.com/vdesabou/kafka-docker-playground/issues/9807)
 - 🧠🧪 repro bisect: run a reproduction model on several versions to find the one that introduced or fixed the problem [#9804](https://github.com/vdesabou/kafka-docker-playground/issues/9804)

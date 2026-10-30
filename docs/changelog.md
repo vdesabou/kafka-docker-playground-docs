@@ -134,6 +134,7 @@
 
 ##### 🐛 Bugs
 
+- 🐛🏰 history: unquoted run lines, dead entries, esc still prompts, secrets in clear [#9832](https://github.com/vdesabou/kafka-docker-playground/issues/9832)
 - 🐛🌍 mdc environments fail at startup: wait\_container\_ready needs a cluster since #9823 [#9830](https://github.com/vdesabou/kafka-docker-playground/issues/9830)
 - 🐛🌍 mdc environments start their containers twice, kerberos recreate uses the wrong compose order [#9819](https://github.com/vdesabou/kafka-docker-playground/issues/9819)
 - 🐛🔍 analyze logs: the exception chains of killed tasks are missing since the shared known causes [#9757](https://github.com/vdesabou/kafka-docker-playground/issues/9757)

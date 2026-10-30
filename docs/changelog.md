@@ -3,6 +3,7 @@
 ## October 2026
 ##### 🌟 Enhancements
 
+- 🧠🧪 repro: expected / actual / jira / status fields in the model header, and playground repro status [#9781](https://github.com/vdesabou/kafka-docker-playground/issues/9781)
 - 🧠🔄 connector: read the config formats customers send (CFK, Strimzi, terraform, .properties, REST dumps) and add connector convert [#9779](https://github.com/vdesabou/kafka-docker-playground/issues/9779)
 - 🧠🕰️ connector: add connector history [#9774](https://github.com/vdesabou/kafka-docker-playground/issues/9774)
 - 🧠📈 connector: add connector metrics [#9773](https://github.com/vdesabou/kafka-docker-playground/issues/9773)

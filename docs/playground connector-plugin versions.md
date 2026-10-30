@@ -3,8 +3,11 @@
 💯 List versions for a connector plugin from confluent hub https://www.confluent.io/hub/
 
 What to feed to `--connector-tag` when you want to test another version,  
-and the way to find out which release you are behind on. The list is  
-cached; use `--force-refresh` after a brand new release.
+and the way to find out which release you are behind on (`--from`).
+
+The answer of Confluent Hub is cached for one day in  
+/tmp/version_`<owner>`_`<name>`.json and the age of each version is  
+computed on every call; use `--force-refresh` right after a release.
 
 ## Usage
 
@@ -34,7 +37,27 @@ playground connector-plugin versions [OPTIONS]
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Conflicts With: | `--all`
+| Conflicts With: | `--latest`
+
+#### `--from FROM`
+
+📌 Version in use: show how many versions it is behind, and only the newer ones
+
+Combine with `--with-changelog` to read what changed since, or use playground connector-plugin changelog `--from`.
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Conflicts With: | `--latest`
+
+#### `--latest`
+
+🔝 Only print the latest version number, nothing else
+
+🎓 Tip: use it in scripts and from AI agents, the output is just the version (for example 10.9.9)
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Conflicts With: | `--last`, `--from`, `--with-changelog`, `--json`
 
 #### `--with-changelog`
 
@@ -42,11 +65,28 @@ playground connector-plugin versions [OPTIONS]
 
 From the changelog feeds of docs.confluent.io, like playground connector-plugin changelog: Confluent self-managed plugins only.
 
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Conflicts With: | `--latest`
+
+#### `--json`
+
+🤖 Print the result as JSON
+
+latest, versions (version, release_date, days_ago, and changes with `--with-changelog`), documentation_url, versions_behind with `--from`.
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Conflicts With: | `--latest`
+
 ## Examples
 
 ```bash
 playground connector-plugin versions --connector-plugin confluentinc/kafka-connect-s3
 playground connector-plugin versions --connector-plugin confluentinc/kafka-connect-jdbc --last 3 --with-changelog
+playground connector-plugin versions --connector-plugin confluentinc/kafka-connect-jdbc --from 10.7.4
+playground connector-plugin versions --connector-plugin confluentinc/kafka-connect-jdbc --latest
+playground connector-plugin versions --connector-plugin confluentinc/kafka-connect-jdbc --last 3 --json
 
 ```
 

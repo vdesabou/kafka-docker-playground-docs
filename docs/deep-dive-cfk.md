@@ -198,7 +198,8 @@ playground analyze logs -f /tmp/cfk-support-bundle/<bundle>.tar.gz --output-dir 
   `packages.confluent.io` and extracts the plugin of your OS and architecture into `/usr/local/bin` (with `sudo` if
   needed, `~/.local/bin` as a last resort). It only works on a running `cfk` / `cfk-rbac` environment.
 - `analyze logs` detects a CFK support bundle (a folder with `cluster-details.txt`, or with `cluster-resources/` and
-  `operator/`, alone or inside a folder or an archive: `--logs-only` to get the plain log digest instead) and works offline on any bundle made by `kubectl confluent support-bundle`: a customer's one, or
+  `operator/`, or a flat collection of `kubectl` outputs made by hand with a `confluent-operator-*.log` or the YAML of a
+  `platform.confluent.io` custom resource at its top, alone or inside a folder or an archive: `--logs-only` to get the plain log digest instead) and works offline on any bundle made by `kubectl confluent support-bundle`: a customer's one, or
   yours. It prints the environment (Kubernetes and CFK versions, images, checked against the support matrix), the
   recent changes, and the issues by category (pod failures, resources, TLS, auth, connect…) with the next steps. Its
   HTML report also shows the **configuration** of Kafka, ZooKeeper, Schema Registry, Connect and Control Center: the
@@ -242,7 +243,7 @@ playground analyze logs -f /tmp/cfk-support-bundle/<bundle>.tar.gz --output-dir 
   occurrences), known CFK issues, KRaft migration phase, and a verdict (`better`, `worse`, `changed`, `no change`,
   `different clusters`), in the terminal, a `cfk-bundles-comparison-*.html` report and `"comparison"` in `--json`.
   `--sample cfk_rollout --sample cfk_rollout_after` shows one. It
-  sanitizes secrets, IPs and hostnames by default (best effort), and writes an HTML report in `--output-dir` (default
+  sanitizes secrets, IPs and hostnames with `--sanitize` (off by default, best effort), and writes an HTML report in `--output-dir` (default
   `./log-analysis-output`: pass a `/tmp` folder), with Component / Instance / Connector filters. The location of each
   issue (`confluent/connect/logs/connect-0.log:33`, `pods.yaml`) opens the file at that line (the `name:` of the pod or
   CR for a YAML file) in a page written in `<report>-files/` next to the report, and its ✏️ opens it in the editor of

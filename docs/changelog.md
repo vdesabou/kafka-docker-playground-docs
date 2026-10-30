@@ -3,6 +3,11 @@
 ## October 2026
 ##### 🌟 Enhancements
 
+- 🧠☁️ connector-plugin fm-versions: connector version of each cc-connect image, first image with a fix, commits between them [#9861](https://github.com/vdesabou/kafka-docker-playground/issues/9861)
+- 🧠🛡️ connector-plugin cve-scan: known vulnerabilities of a plugin version, fixed or not by another one [#9859](https://github.com/vdesabou/kafka-docker-playground/issues/9859)
+- 🧠🔧 connector-plugin config-diff: config keys added, removed or changed between two versions, and config-key --since-version [#9857](https://github.com/vdesabou/kafka-docker-playground/issues/9857)
+- 🧠🧑‍💻 connector-plugin sourcecode: --log, --files and --grep between versions, --json [#9855](https://github.com/vdesabou/kafka-docker-playground/issues/9855)
+- 🧠📚 connector-plugin dependencies: bundled libraries of a plugin version, diff between two versions, first version shipping a library [#9853](https://github.com/vdesabou/kafka-docker-playground/issues/9853)
 - 🧠🪪 connector-plugin info: one page on a plugin (license, versions behind, examples and CI, fully managed) [#9851](https://github.com/vdesabou/kafka-docker-playground/issues/9851)
 - 🧠☕ connector-plugin search-jar: cached jars, exact class match, --connector-zip, --with-worker and --json [#9849](https://github.com/vdesabou/kafka-docker-playground/issues/9849)
 - 🧠🆕 connector-plugin display-last-updated: one Hub request instead of one per plugin, --with-changelog and --json [#9847](https://github.com/vdesabou/kafka-docker-playground/issues/9847)

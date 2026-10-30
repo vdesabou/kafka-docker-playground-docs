@@ -2,7 +2,7 @@
 
 ✨ Enable java remote debugging for the connector.
 
-👉 Check documentation https://kafka-docker-playground.io/#/reusables?id=%e2%9c%a8-remote-debugging
+👉 Check documentation https://kafka-docker-playground.io/#/toolkit-debugging?id=%e2%9c%a8-remote-debugging
 
 🏗️ It will checkout (you need git installed) and compile code for the connector (required for remote debugging).
 

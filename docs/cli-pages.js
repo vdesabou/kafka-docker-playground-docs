@@ -141,6 +141,7 @@ window.KDP_CLI_PAGES = [
   "/playground%20cp-changelog",
   "/playground%20debug%20block-traffic",
   "/playground%20debug%20cfk%20generate-bundle",
+  "/playground%20debug%20cfk%20sourcecode",
   "/playground%20debug%20cfk",
   "/playground%20debug%20degrade-traffic",
   "/playground%20debug%20disable-remote-debugging",

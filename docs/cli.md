@@ -299,6 +299,7 @@ visit https://docs.docker.com/get-docker to install
     - [set](playground%20debug%20log-level%20set) - Set log level for specific logger
   - [cfk](playground%20debug%20cfk) - 🧱 CFK debug sub-commands
     - [generate-bundle](playground%20debug%20cfk%20generate-bundle) - ⛑️ Generate a Support bundle
+    - [sourcecode](playground%20debug%20cfk%20sourcecode) - 🧑‍💻 Source code of the CFK operator at the version of a cluster or of a support bundle
 
 ### Container commands
 

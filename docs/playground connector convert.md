@@ -81,6 +81,13 @@ path of the file with the config (@file works too); reads from stdin if empty
 
 🧷 With `--to` heredoc or json, keep the config as it is (no rewrite of the bootstrap servers, schema registry, license, replication factors, client security)
 
+#### `--secrets-as-variables`
+
+🔐 Also turn the secret values written as they are (passwords, keys, tokens, JAAS configs) into variables to export, like the masked ones
+
+For `--to` heredoc (and the values to fill in of `--json`): the heredoc can then go in a script that is committed,  
+like a reproduction model (`playground repro bootstrap --config` uses it).
+
 #### `--json`
 
 🤖 Print the detected format, the name, the config and the values to fill in as JSON
@@ -89,6 +96,10 @@ path of the file with the config (@file works too); reads from stdin if empty
 
 ```bash
 playground connector convert customer-connector.yaml
+```
+
+```bash
+playground connector convert customer-connector.yaml --secrets-as-variables
 ```
 
 ```bash

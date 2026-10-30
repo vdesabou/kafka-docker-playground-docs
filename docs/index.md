@@ -117,6 +117,7 @@ visit https://docs.docker.com/get-docker to install
   - [bootstrap](playground%20repro%20bootstrap) - 🛠  Bootstrap reproduction model, just run `<playground repro bootstrap>` !
   - [status](playground%20repro%20status) - 🩹 Show or update what a reproduction model proves, from its header
   - [assert](playground%20repro%20assert) - 🧪 End a reproduction model with its verdict: 🐞 REPRODUCED or ✅ NOT REPRODUCED
+  - [bisect](playground%20repro%20bisect) - 🔀 Run a reproduction model on several versions: which one introduced or fixed the problem
 
 ### Kafka commands
 

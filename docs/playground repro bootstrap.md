@@ -75,6 +75,14 @@ factors); the connector keeps the name of the example
 references become variables, checked at the top of the model so  
 that `playground run` loads them from `playground secrets`
 
+In interactive mode (no `--file`, no `--config`), the first menu asks  
+whether to start from an example or from a connector config: the  
+files of the folders of `playground config folder_zip_or_jar` and of  
+the current folder that hold a connector config are listed, newest  
+first.
+
+🎓 Tip: use `<tab>` completion to trigger fzf completion
+
 🎓 Tip: then compare the running connector with the customer file:  
 `playground connector diff --connector <c> --file <file>`
 

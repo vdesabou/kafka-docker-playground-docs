@@ -43,6 +43,14 @@ run line: whoever imports runs with their own cluster.
 
 Without `--file`, the current reproduction model is exported.
 
+📖 Each model gets a hand-off report, `<model>`.REPRO.md next to its  
+script in the bundle: case, jira, status, last verdict, 🎯 expected,  
+💥 actual, the commands to import and run it, the credentials it  
+needs, and what it changes compared with the script of its base  
+example (diff). `playground repro import` prints where it is.  
+`--report-only` prints it (Markdown, for a Jira or a Slack message)  
+without writing the bundle, `--no-report` leaves it out.
+
 📋 On macOS, the bundle is copied to the clipboard as a file: paste it  
 (Cmd+V) in a Slack conversation to attach it (`--no-clipboard` to skip).
 
@@ -102,6 +110,18 @@ Can be repeated to put several models in one bundle.
 
 📋 Do not copy the bundle to the clipboard (macOS)
 
+#### `--report-only`
+
+📖 Print the hand-off report of the models (Markdown) on stdout, without writing the bundle (the scan still runs)
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Conflicts With: | `--no-report`, `--dry-run`
+
+#### `--no-report`
+
+📖 Do not put the hand-off report (`<model>`.REPRO.md) in the bundle
+
 ## Examples
 
 ```bash
@@ -118,6 +138,10 @@ playground repro export --all-uncommitted --output ~/Desktop
 
 ```bash
 playground repro export --include-artifacts
+```
+
+```bash
+playground repro export --report-only | pbcopy
 ```
 
 

@@ -3,6 +3,7 @@
 ## October 2026
 ##### 🌟 Enhancements
 
+- 🧠🔄 connector: read the config formats customers send (CFK, Strimzi, terraform, .properties, REST dumps) and add connector convert [#9779](https://github.com/vdesabou/kafka-docker-playground/issues/9779)
 - 🧠🕰️ connector: add connector history [#9774](https://github.com/vdesabou/kafka-docker-playground/issues/9774)
 - 🧠📈 connector: add connector metrics [#9773](https://github.com/vdesabou/kafka-docker-playground/issues/9773)
 - 🧠🧵 connector: add restart --only-failed, connector tasks and connector topics [#9772](https://github.com/vdesabou/kafka-docker-playground/issues/9772)

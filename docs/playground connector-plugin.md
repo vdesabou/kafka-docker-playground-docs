@@ -14,7 +14,8 @@ running environment:
 
 🎓 Tip: search-jar answers "is this class really in the plugin, and with  
 which signature", which is the question behind most NoSuchMethodError and  
-ClassNotFoundException reports.
+ClassNotFoundException reports; with `--with-worker`, also "does Connect  
+load the worker's copy instead".
 
 🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-connector-plugin  
 🎬 Bite size session: https://kafka-docker-playground.io/#/sessions?id=%F0%9F%A7%91%F0%9F%92%BB-the-source-code-of-a-connector-at-the-customers-version

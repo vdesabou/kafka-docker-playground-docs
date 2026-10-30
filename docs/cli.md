@@ -196,6 +196,7 @@ visit https://docs.docker.com/get-docker to install
   - [check](playground%20repro%20check) - 🕵️ Scan reproduction models for secrets and customer data before they are committed
   - [import](playground%20repro%20import) - 📥 Import a tgz bundle created by `playground repro export`
   - [bootstrap](playground%20repro%20bootstrap) - 🛠  Bootstrap reproduction model, just run `<playground repro bootstrap>` !
+  - [status](playground%20repro%20status) - 🩹 Show or update what a reproduction model proves, from its header
 
 ### Kafka commands
 

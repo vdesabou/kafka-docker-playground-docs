@@ -26,6 +26,26 @@ playground repro bootstrap [OPTIONS]
 
 💭 Description for the reproduction model
 
+#### `--expected EXPECTED`
+
+🎯 Expected behaviour, written in the '# 🎯 expected:' line of the header
+
+Asked after the description in interactive mode. Update it later with  
+`playground repro status --expected`.
+
+#### `--actual ACTUAL`
+
+💥 Actual behaviour (the problem), written in the '# 💥 actual:' line of the header
+
+Asked after the description in interactive mode. Update it later with  
+`playground repro status --actual`.
+
+#### `--jira JIRA`
+
+🎫 Jira of the problem, written in the '# 🎫 jira:' line of the header
+
+A key (CC-1234) becomes its https://confluentinc.atlassian.net/browse/ link.
+
 #### `--custom-smt`
 
 🔧 Add a custom SMT (which is a no-op)
@@ -70,6 +90,10 @@ playground repro bootstrap (interactive mode)
 
 ```bash
 playground repro bootstrap -f "$PWD/connect/connect-http-sink/http_no_auth.sh" -d "123456 dlq not working" --no-run
+```
+
+```bash
+playground repro bootstrap -f "$PWD/connect/connect-http-sink/http_no_auth.sh" -d "123456 dlq not working" --expected "bad records go to the DLQ" --actual "the task fails with Unknown magic byte" --jira CC-1234 --no-run
 ```
 
 

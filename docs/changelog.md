@@ -3,6 +3,7 @@
 ## October 2026
 ##### 🌟 Enhancements
 
+- 🧠☸️ analyze logs: match CFK support bundles against the known CFK issues and reduce noise on healthy bundles [#9783](https://github.com/vdesabou/kafka-docker-playground/issues/9783)
 - 🧠🧪 repro: expected / actual / jira / status fields in the model header, and playground repro status [#9781](https://github.com/vdesabou/kafka-docker-playground/issues/9781)
 - 🧠🔄 connector: read the config formats customers send (CFK, Strimzi, terraform, .properties, REST dumps) and add connector convert [#9779](https://github.com/vdesabou/kafka-docker-playground/issues/9779)
 - 🧠🕰️ connector: add connector history [#9774](https://github.com/vdesabou/kafka-docker-playground/issues/9774)

@@ -313,6 +313,7 @@ visit https://docs.docker.com/get-docker to install
   - [search-jar](playground%20connector-plugin%20search-jar) - ☕ List jars for a connector plugin from confluent hub https://www.confluent.io/hub/
   - [dependencies](playground%20connector-plugin%20dependencies) - 📚 Libraries bundled in a connector plugin, and what changed between two versions
   - [cve-scan](playground%20connector-plugin%20cve-scan) - 🛡️ Known vulnerabilities (CVE) of the jars of a connector plugin version
+  - [fm-versions](playground%20connector-plugin%20fm-versions) - ☁️ Fully managed connector: the connector version shipped by each cc-connect image (Confluent employees)
   - [versions](playground%20connector-plugin%20versions) - 💯 List versions for a connector plugin from confluent hub https://www.confluent.io/hub/
   - [info](playground%20connector-plugin%20info) - 🪪 One page on a connector plugin of Confluent Hub
   - [changelog](playground%20connector-plugin%20changelog) - 📜 Show the release notes of a connector plugin between two versions

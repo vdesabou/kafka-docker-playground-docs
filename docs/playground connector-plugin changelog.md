@@ -34,6 +34,9 @@ playground connector-plugin changelog [OPTIONS]
 
 🔌 Connector plugin name
 
+owner/name, a connector class (io.confluent.connect.jdbc.JdbcSinkConnector: its plugin is found in the examples)  
+or a fully managed type (`S3_SINK`)
+
 🎓 Tip: use `<tab>` completion to trigger fzf completion
 
 | Attributes      | &nbsp;

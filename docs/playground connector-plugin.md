@@ -5,16 +5,17 @@
 Questions about connector plugins on Confluent Hub, answered without a  
 running environment:
 
-- **info**: one page on a plugin: license, versions, examples, CI, fully managed
+- **info**: one page: license, versions behind, examples and CI
 - **versions**: every released version of a plugin
 - **changelog**: what changed between two versions (release notes)
 - **display-last-updated**: what was published recently, by vendor
 - **search-jar**: which jars ship in it, and which class is where
-- **dependencies**: which libraries (and versions) it bundles, what changed between two versions
-- **cve-scan**: known vulnerabilities of its jars, fixed or not by another version
+- **dependencies**: bundled libraries, and their changes between versions
+- **cve-scan**: known CVEs in its jars, fixed or not by a version
+- **fm-versions**: fully managed: connector version per cc-connect image
 - **config-key**: what a config key does, its default, since when, who sets it
-- **config-diff**: config keys added, removed or changed between two versions
-- **sourcecode**: open the source on GitHub
+- **config-diff**: config keys added, removed, changed by an upgrade
+- **sourcecode**: the source at a version, commits and files between two
 
 🎓 Tip: search-jar answers "is this class really in the plugin, and with  
 which signature", which is the question behind most NoSuchMethodError and  
@@ -35,6 +36,7 @@ playground connector-plugin COMMAND
 - [search-jar](playground%20connector-plugin%20search-jar) - ☕ List jars for a connector plugin from confluent hub https://www.confluent.io/hub/
 - [dependencies](playground%20connector-plugin%20dependencies) - 📚 Libraries bundled in a connector plugin, and what changed between two versions
 - [cve-scan](playground%20connector-plugin%20cve-scan) - 🛡️ Known vulnerabilities (CVE) of the jars of a connector plugin version
+- [fm-versions](playground%20connector-plugin%20fm-versions) - ☁️ Fully managed connector: the connector version shipped by each cc-connect image (Confluent employees)
 - [versions](playground%20connector-plugin%20versions) - 💯 List versions for a connector plugin from confluent hub https://www.confluent.io/hub/
 - [info](playground%20connector-plugin%20info) - 🪪 One page on a connector plugin of Confluent Hub
 - [changelog](playground%20connector-plugin%20changelog) - 📜 Show the release notes of a connector plugin between two versions

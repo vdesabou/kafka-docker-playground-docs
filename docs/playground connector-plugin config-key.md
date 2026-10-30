@@ -63,6 +63,10 @@ Needs one connector (`--connector-class`). The plugin is found from the examples
 
 🔌 Plugin of the connector for `--since-version` (owner/name), when the examples don't tell it
 
+#### `--json`
+
+🤖 Print the result as JSON (connectors with their definition, versions run locally, values in examples)
+
 ## Examples
 
 ```bash

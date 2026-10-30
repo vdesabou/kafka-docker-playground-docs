@@ -114,6 +114,7 @@ window.KDP_CLI_PAGES = [
   "/playground%20connector-plugin%20cve-scan",
   "/playground%20connector-plugin%20dependencies",
   "/playground%20connector-plugin%20display-last-updated",
+  "/playground%20connector-plugin%20fm-versions",
   "/playground%20connector-plugin%20info",
   "/playground%20connector-plugin%20search-jar",
   "/playground%20connector-plugin%20sourcecode",

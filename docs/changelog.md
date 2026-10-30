@@ -3,6 +3,7 @@
 ## October 2026
 ##### 🌟 Enhancements
 
+- 🧠🧪 repro bootstrap: start from the connector config the customer sent in the interactive menu [#9794](https://github.com/vdesabou/kafka-docker-playground/issues/9794)
 - 🧠🧪 repro assert: end a reproduction model with its verdict (reproduced / not reproduced) [#9788](https://github.com/vdesabou/kafka-docker-playground/issues/9788)
 - 🧠🧪 repro bootstrap --config: build the model from the connector config the customer sent [#9787](https://github.com/vdesabou/kafka-docker-playground/issues/9787)
 - 🧠☸️ analyze logs: match CFK support bundles against the known CFK issues and reduce noise on healthy bundles [#9783](https://github.com/vdesabou/kafka-docker-playground/issues/9783)

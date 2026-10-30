@@ -203,6 +203,7 @@ window.KDP_CLI_PAGES = [
   "/playground%20refresh-cp-docker-images",
   "/playground%20remove-all-docker-images",
   "/playground%20remove-cp-docker-images",
+  "/playground%20repro%20assert",
   "/playground%20repro%20bootstrap",
   "/playground%20repro%20check",
   "/playground%20repro%20export",

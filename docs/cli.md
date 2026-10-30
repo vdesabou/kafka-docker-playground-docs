@@ -197,6 +197,7 @@ visit https://docs.docker.com/get-docker to install
   - [import](playground%20repro%20import) - 📥 Import a tgz bundle created by `playground repro export`
   - [bootstrap](playground%20repro%20bootstrap) - 🛠  Bootstrap reproduction model, just run `<playground repro bootstrap>` !
   - [status](playground%20repro%20status) - 🩹 Show or update what a reproduction model proves, from its header
+  - [assert](playground%20repro%20assert) - 🧪 End a reproduction model with its verdict: 🐞 REPRODUCED or ✅ NOT REPRODUCED
 
 ### Kafka commands
 

@@ -3,6 +3,10 @@
 ## October 2026
 ##### 🌟 Enhancements
 
+- 🧠🪪 connector-plugin info: one page on a plugin (license, versions behind, examples and CI, fully managed) [#9851](https://github.com/vdesabou/kafka-docker-playground/issues/9851)
+- 🧠☕ connector-plugin search-jar: cached jars, exact class match, --connector-zip, --with-worker and --json [#9849](https://github.com/vdesabou/kafka-docker-playground/issues/9849)
+- 🧠🆕 connector-plugin display-last-updated: one Hub request instead of one per plugin, --with-changelog and --json [#9847](https://github.com/vdesabou/kafka-docker-playground/issues/9847)
+- 🧠🔢 connector-plugin versions: one-day cache, --from, --latest and --json [#9844](https://github.com/vdesabou/kafka-docker-playground/issues/9844)
 - 🧹📚 docs: split the Reproduction toolkit page into one page per topic [#9836](https://github.com/vdesabou/kafka-docker-playground/issues/9836)
 - 🧠🏰 history: result, date and preview of each run, --list / --json / --last / --run / --stats / --prune, tab completion [#9833](https://github.com/vdesabou/kafka-docker-playground/issues/9833)
 - 🧠🌍 topic compare: is everything replicated between two clusters (or two topics)? [#9828](https://github.com/vdesabou/kafka-docker-playground/issues/9828)

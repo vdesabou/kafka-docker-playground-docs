@@ -4,6 +4,7 @@
 ##### 🌟 Enhancements
 
 - 🧠🧪 repro: ask before bootstrap stops the running environment, repro import --run and from a URL [#9815](https://github.com/vdesabou/kafka-docker-playground/issues/9815)
+- 🧠☸️ analyze logs: --problem to match a CFK support bundle against the issue, and a 📥 data to request section [#9814](https://github.com/vdesabou/kafka-docker-playground/issues/9814)
 - 🧠🧪 repro diff: what a reproduction model changes compared with its base example [#9812](https://github.com/vdesabou/kafka-docker-playground/issues/9812)
 - 🧠🧪 repro export: a hand-off report (`<model>`.REPRO.md) in every bundle, and --report-only for a Jira [#9810](https://github.com/vdesabou/kafka-docker-playground/issues/9810)
 - 🧠🧪 repro list: find reproduction models by case, status, verdict, base example, author or date [#9807](https://github.com/vdesabou/kafka-docker-playground/issues/9807)

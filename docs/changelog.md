@@ -136,6 +136,7 @@
 
 ##### 🐛 Bugs
 
+- 🐛📄 run log: wrong connector parameter list, docker compose frames and duplicated lines [#9838](https://github.com/vdesabou/kafka-docker-playground/issues/9838)
 - 🐛🏰 history: unquoted run lines, dead entries, esc still prompts, secrets in clear [#9832](https://github.com/vdesabou/kafka-docker-playground/issues/9832)
 - 🐛🌍 mdc environments fail at startup: wait\_container\_ready needs a cluster since #9823 [#9830](https://github.com/vdesabou/kafka-docker-playground/issues/9830)
 - 🐛🌍 mdc environments start their containers twice, kerberos recreate uses the wrong compose order [#9819](https://github.com/vdesabou/kafka-docker-playground/issues/9819)

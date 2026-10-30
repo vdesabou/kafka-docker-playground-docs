@@ -3,6 +3,7 @@
 ## October 2026
 ##### 🌟 Enhancements
 
+- 🧠🧪 repro list: find reproduction models by case, status, verdict, base example, author or date [#9807](https://github.com/vdesabou/kafka-docker-playground/issues/9807)
 - 🧠🧪 repro bisect: run a reproduction model on several versions to find the one that introduced or fixed the problem [#9804](https://github.com/vdesabou/kafka-docker-playground/issues/9804)
 - 🧠🧪 repro bootstrap: start from the connector config the customer sent in the interactive menu [#9794](https://github.com/vdesabou/kafka-docker-playground/issues/9794)
 - 🧠🧪 repro assert: end a reproduction model with its verdict (reproduced / not reproduced) [#9788](https://github.com/vdesabou/kafka-docker-playground/issues/9788)

@@ -104,6 +104,12 @@ playground [OPTIONS] COMMAND
 
 visit https://docs.docker.com/get-docker to install
 
+### Environment Variables
+
+#### `PLAYGROUND_CLUSTER`
+
+🌍 Cluster used by the topic, consumer-group, connector and schema commands in an mdc-\* environment (us or europe) when `--cluster` is not set
+
 ### Commands
 
 - [help](playground%20help) - Show help about a command

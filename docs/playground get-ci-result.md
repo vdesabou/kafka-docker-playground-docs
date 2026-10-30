@@ -98,7 +98,8 @@ playground get-ci-result --test connect/connect-replicator --logs --no-open
 
 ```text
 $ playground get-ci-result --test connect/connect-http-sink
-17:23:20 ℹ️ 🤖 CI status: 🟢 ok, 🔗 test url: https://github.com/vdesabou/kafka-docker-playground/actions/runs/37858925089/job/113589742349
+17:23:20 ℹ️ 🤖CI status: 🟢 ok
+🔗test url: https://github.com/vdesabou/kafka-docker-playground/actions/runs/37858925089/job/113589742349
 ```
 
 ```text

@@ -35,14 +35,4 @@ playground connector delete [OPTIONS]
 
 🔰 Do not delete the dlq, success and error topics of a fully managed or custom connector
 
-#### `--cluster CLUSTER`
-
-🌍 Cluster to use in an mdc-\* environment (us or europe)
-
-Default: the `PLAYGROUND_CLUSTER` environment variable, else the value set with `playground state set run.cluster <cluster>`. Ignored in the other environments.
-
-| Attributes      | &nbsp;
-|-----------------|-------------
-| Allowed Values: | `us`, `europe`
-
 

@@ -216,16 +216,6 @@ connector created with the REST API is imported first. playground connector dele
 
 ⚠️ Only available for Confluent Cloud connectors
 
-#### `--cluster CLUSTER`
-
-🌍 Cluster to use in an mdc-\* environment (us or europe)
-
-Default: the `PLAYGROUND_CLUSTER` environment variable, else the value set with `playground state set run.cluster <cluster>`. Ignored in the other environments.
-
-| Attributes      | &nbsp;
-|-----------------|-------------
-| Allowed Values: | `us`, `europe`
-
 ## Examples
 
 ```bash

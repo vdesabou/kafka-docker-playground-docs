@@ -73,16 +73,6 @@ Example: `--metadata-property` "metadata1=value" `--metadata-property` "metadata
 
 🫧 Add ?normalize=true at the end of the request to normalize the schema. The default is false.
 
-#### `--cluster CLUSTER`
-
-🌍 Cluster to use in an mdc-\* environment (us or europe)
-
-Default: the `PLAYGROUND_CLUSTER` environment variable, else the value set with `playground state set run.cluster <cluster>`. Ignored in the other environments.
-
-| Attributes      | &nbsp;
-|-----------------|-------------
-| Allowed Values: | `us`, `europe`
-
 ## Examples
 
 ```bash

@@ -4,7 +4,7 @@
 
 🔥 HIGHLY RECOMMENDED: start in interactive mode by simple running `<playground repro bootstrap>` !
 
-👉 Check documentation https://kafka-docker-playground.io/#/toolkit-reproduction-models?id=%f0%9f%9b%a0-bootstrap-reproduction-model
+👉 Check documentation https://kafka-docker-playground.io/#/reusables?id=%f0%9f%9b%a0-bootstrap-reproduction-model
 
 ## Usage
 

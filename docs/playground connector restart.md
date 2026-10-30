@@ -45,16 +45,6 @@ versions and fully managed connectors, restarts each FAILED task one by one.
 |-----------------|-------------
 | Conflicts With: | `--task-id`
 
-#### `--cluster CLUSTER`
-
-🌍 Cluster to use in an mdc-\* environment (us or europe)
-
-Default: the `PLAYGROUND_CLUSTER` environment variable, else the value set with `playground state set run.cluster <cluster>`. Ignored in the other environments.
-
-| Attributes      | &nbsp;
-|-----------------|-------------
-| Allowed Values: | `us`, `europe`
-
 ## Examples
 
 ```bash

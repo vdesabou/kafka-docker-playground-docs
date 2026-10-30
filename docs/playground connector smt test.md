@@ -98,16 +98,6 @@ key and value are schemaless json, or {"schema": ..., "payload": ...} for a reco
 
 🚫 Do not open the html report in the browser (it is still written, and its path printed)
 
-#### `--cluster CLUSTER`
-
-🌍 Cluster to use in an mdc-\* environment (us or europe)
-
-Default: the `PLAYGROUND_CLUSTER` environment variable, else the value set with `playground state set run.cluster <cluster>`. Ignored in the other environments.
-
-| Attributes      | &nbsp;
-|-----------------|-------------
-| Allowed Values: | `us`, `europe`
-
 ## Examples
 
 ```bash

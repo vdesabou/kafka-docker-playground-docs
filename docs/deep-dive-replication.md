@@ -14,7 +14,8 @@ minutes to read and run.
 | a ready-made replication example | `playground run -f multi-data-center/replicator-connect/connect-plaintext.sh` (`replicator-executable`, `mirrormaker2`, `cluster-linking`, see §2) |
 | the worker config of one side | `playground container get-properties -c connect-us` (or `connect-europe`) |
 | a Kafka command on one cluster | `playground container exec -c broker-europe --command "kafka-consumer-groups --bootstrap-server broker-europe:9092 --describe --group <g>"` |
-| a topic, a connector, a group, a schema on one side | `playground topic list --cluster europe`, `playground connector status --cluster us` (or `export PLAYGROUND_CLUSTER=us` once), see §3 |
+| the Connect REST API of one side | `playground container exec -c connect-us --command "curl -s http://localhost:8083/connectors/<c>/status"` |
+| to know why `topic`, `connector`, `consumer-group` refuse to run | they are blocked in `mdc-*` environments, see §3 |
 
 ---
 
@@ -33,13 +34,13 @@ minutes to read and run.
    Each worker writes to **its own** cluster (`bootstrap.servers=broker-us:9092`, group `connect-us`, internal topics
    `connect-us.config|offsets|status`; the same with `europe`), and has the Replicator plugin installed
    (`plugin.path=/usr/share/confluent-hub-components/confluentinc-kafka-connect-replicator`, installed by
-   `start.sh` at the CP version, or at the default tag when that version is not on Confluent Hub, and skipped when that version is already in `confluent-hub/`). Brokers have no port on the host: everything goes through
+   `start.sh` at the CP version, or at the default tag when that version is not on Confluent Hub). Brokers have no port on the host: everything goes through
    `docker exec`. `broker-metrics` receives the metrics reporters and monitoring interceptors of both clusters, for
    Control Center (`--enable-control-center`). `mdc-sasl-plain` and `mdc-kerberos` add their compose file on top of the
    plaintext one, like the single cluster environments (SASL/PLAIN `client` / `client-secret`; Kerberos with a `kdc`
    and a `client` container, brokers named `broker-us.kerberos-demo.local`). In KRaft mode the cluster ids are fixed in
-   `docker-compose-kraft.yml`: `NkU3OEVBNTcwNTJENDM2Qk` for `us`, `MkU3OEVBNTcwNTJENDM2Qk` for `europe` and
-   `OkU3OEVBNTcwNTJENDM2Qk` for `metrics`.
+   `docker-compose-kraft.yml`: `NkU3OEVBNTcwNTJENDM2Qk` for `us`, and `MkU3OEVBNTcwNTJENDM2Qk` for `europe` **and**
+   `metrics` (the same id: keep it in mind when a tool compares cluster ids, like the Replicator provenance header).
 
 2. **The three tools copy different things, from different places.**
 
@@ -91,100 +92,64 @@ minutes to read and run.
 
 Gotchas:
 
-- **The `mdc-*` examples start their environment themselves** with `playground start-environment --environment
-  mdc-plaintext|mdc-sasl-plain|mdc-kerberos`. They don't read `PLAYGROUND_ENVIRONMENT`: `playground run --environment
-  sasl-ssl` doesn't turn them into another type, pick the `-sasl-plain` / `-kerberos` variant.
-- **They use the CLI with `--cluster`** (§3): `topic produce|consume`, `topic wait-for-records` for the replicated
-  topics (a replicated topic may not exist yet when the check starts), `connector create-or-update`, `consumer-group
-  describe`. What has no CLI equivalent stays a `kafka-*` tool: `kafka-cluster-links`, `kafka-mirrors`,
-  `kafka-replica-status`, the console consumers that commit with a `group.id` to show the offset sync, the producer
-  that a read-only mirror topic refuses, and the Schema Registry calls with basic auth of
-  `connect-plaintext-avro-with-sr-basic-auth.sh`.
+- **The `mdc-*` examples start their environment themselves**, some with `playground start-environment --environment
+  mdc-plaintext` (`replicator-executable`, `cluster-linking`), some by calling `environment/mdc-plaintext/start.sh`
+  directly (`replicator-connect`, `mirrormaker2`). Both record `run.environment=mdc-plaintext`. They don't read
+  `PLAYGROUND_ENVIRONMENT`: `playground run --environment sasl-ssl` doesn't turn them into another type, pick the
+  `-sasl-plain` / `-kerberos` variant.
 - **The Replicator connector runs on the destination side** in `replicator-connect` (`replicate-europe-to-us` on
   `connect-us`): Replicator is a *source* connector, it reads remotely with `src.kafka.*` and its worker writes
   locally. The executable does the same: `replicator-us` consumes from `broker-europe` and produces to `broker-us`.
-- `one-to-many-with-offsets-translation` (source `broker-metrics`, which `--cluster` can't select: it is produced to
-  with `kafka-console-producer`) and `kafka-offsets-migrator` (a third party script downloaded at run time) are not in
-  CI.
+- `one-to-many-with-offsets-translation` and `kafka-offsets-migrator` run `docker container exec connect-europe
+  playground connector create-or-update …` (the CLI inside the container, without `-i`): they are not in CI, read
+  them as notes rather than as working scripts.
 - Cluster Linking needs CP 7.0+ (the examples exit 111 before), and `cp-server` brokers: the default
   `CP_KAFKA_IMAGE`, not `cp-kafka`.
 
 ---
 
-## 3. Pick a cluster: `--cluster us|europe`
+## 3. What the CLI does, and doesn't do, in an mdc environment
 
-The CLI reads `run.environment` (`playground state get run.environment`). An `mdc-*` environment has two clusters, so
-the `topic`, `consumer-group`, `connector`, `schema`, `broker` and `quota` commands need to know which one you mean.
-**It is never guessed**:
+The CLI reads `run.environment` (`playground state get run.environment`). For `mdc-*` it doesn't pick a side:
 
-| Set it with | Scope |
-| --- | --- |
-| `--cluster us` or `--cluster europe` on the command | that command, and the `playground` commands it runs itself |
-| `export PLAYGROUND_CLUSTER=europe` | the shell session |
-| `playground state set run.cluster us` | every command, until you change it (`playground state set run.cluster ""`) |
+- **`topic`, `consumer-group`, `connector` and most of `schema` are blocked.** They carry the `not_mdc_environment`
+  filter in `bashly.yml` (`filter_not_mdc_environment` in `cli_function.sh`): any subcommand prints
+  `🔥 mdc-plaintext is not supported with this command !` and exits 1, before doing anything. For `schema`, the
+  blocked subcommands are `get`, `register`, `get-compatibility`, `set-compatibility`, `get-mode`, `set-mode`,
+  `set-normalize`, `validate-new-schemas`, `delete`, `set-alias` and `get-alias`. That includes the helpers the
+  other pages rely on: no `topic produce` / `consume`, no `connector create-or-update`, no `show-lag`, no
+  `connector diagnose`.
+- **The commands that take a container name have no such filter**: `container exec|logs|get-properties|cp|restart|recreate
+  -c connect-us` (or `broker-europe`, `replicator-us`…), `debug thread-dump|heap-dump -c connect-europe`… The lab uses
+  `container exec` and `container get-properties`. `playground stop` and `playground container recreate` replay
+  `run.docker_command`, recorded by the `mdc-*` `start.sh`.
+- `playground status` lists the containers, then hits the same filter (`🔥 mdc-plaintext is not supported with this
+  command !`) when it gets to the connectors.
+- Where a helper has to guess the worker, it takes the first running container of `connect connect2 connect3
+  connect-us connect-europe` (`get_connect_container`), and the REST port `8083`, which is `connect-us`; the broker
+  is the first of `broker broker2 broker3 broker-us broker-europe`. Don't rely on it: name the container.
 
-In that order: the flag wins over the variable, which wins over the state. Without any of them the command stops before
-doing anything:
-
-```text
-🔥 ❌ mdc-plaintext runs two clusters: pass --cluster us|europe, or set it for the session with 'export PLAYGROUND_CLUSTER=us' or 'playground state set run.cluster us'
-```
-
-What the cluster selects:
-
-| | `us` | `europe` |
-| --- | --- | --- |
-| broker (`topic`, `consumer-group`, `broker`, `quota`, `connector show-lag`, `offsets`) | `broker-us:9092`, broker id 1 | `broker-europe:9092`, broker id 1 |
-| Connect REST API (`connector …`) | `connect-us`, `localhost:8083` | `connect-europe`, `localhost:8283` |
-| Schema Registry (`schema …`, Avro / Protobuf / JSON Schema in `topic produce` / `consume`) | `schema-registry-us`, `localhost:28081` | `schema-registry-europe`, `localhost:18081` |
-| `topic produce` / `consume` run in | `connect-us` | `connect-europe` |
-
-The security follows the environment: `mdc-sasl-plain` uses the `client` user (`environment/mdc-sasl-plain/client/client.properties`,
-mounted as `/tmp/client.properties` in the brokers and workers), `mdc-kerberos` runs the tools in the `client`
-container with the `connect` principal and `/etc/kafka/<producer|consumer|command>-<cluster>.properties`, on the
-broker FQDN (`broker-us.kerberos-demo.local:9092`). The `metrics` cluster can't be selected (no Connect worker, no
-Schema Registry): reach `broker-metrics` with `playground container exec`.
+So in an mdc environment the examples (and you) use `kafka-*` tools and `curl` through `playground container exec`,
+always with an explicit `--bootstrap-server broker-us:9092` or `broker-europe:9092`:
 
 ```bash
-# produce in europe, read the replicated records in us
-playground topic produce --cluster europe --topic sales_EUROPE --nb-messages 20 --value 'european_sale_%g'
-playground topic consume --cluster us --topic sales_EUROPE --min-expected-messages 20
+# produce in europe
+seq -f "european_sale_%g" 20 | playground container exec -c broker-europe --command "kafka-console-producer --bootstrap-server broker-europe:9092 --topic sales_EUROPE"
 # a connector on the us worker
-playground connector create-or-update --cluster us --connector replicate-europe-to-us < config.json
-playground connector status --cluster us
+playground container exec -c connect-us --command "curl -s -X PUT -H 'Content-Type: application/json' --data @- http://localhost:8083/connectors/replicate-europe-to-us/config" < config.json
+playground container exec -c connect-us --command "curl -s http://localhost:8083/connectors/replicate-europe-to-us/status"
 # a group, on each side
-playground consumer-group describe --cluster europe --group my-app
-playground consumer-group describe --cluster us --group my-app
+playground container exec -c broker-us --command "kafka-consumer-groups --bootstrap-server broker-us:9092 --describe --group my-app"
 ```
-
-- **Is everything replicated?** `playground topic compare --topic sales_EUROPE --from europe --to us` prints the
-  earliest and latest offsets and the records of every partition on both sides, and exits 1 when the destination has
-  fewer records (`--to-topic EUROPE.sales_EUROPE` for MirrorMaker 2, `--wait --max-wait 180` to wait for the
-  replication, `--json`). The counts come from the offsets: transaction markers and compaction make them approximate.
-  Outside the mdc environments it compares two topics of the cluster (`--topic test-topic --to-topic test-topic-duplicate`).
-- `playground status` shows the connectors and the topics of each cluster (`🌍 Cluster us`, `🌍 Cluster europe`),
-  unless one is selected.
-- **A data center goes down**: `playground broker stop --cluster europe --broker 1 --kill` (a crash, `docker kill`) or
-  without `--kill` (controlled shutdown), `playground broker health --cluster europe` (exit 1), then `playground broker
-  start --cluster europe --broker 1` (waits for a healthy cluster). Each cluster has one broker: id 1. `broker metrics
-  --cluster us` reads the JMX metrics of `broker-us`.
-- **The commands that take a container name never needed a cluster**: `container exec|logs|get-properties|cp|restart|recreate
-  -c connect-us` (or `broker-europe`, `replicator-us`…), `debug thread-dump|heap-dump -c connect-europe`…
-  `playground stop` and `playground container recreate` replay `run.docker_command`, recorded by the `mdc-*` `start.sh`.
-- In a single cluster environment `--cluster` is ignored.
 
 Gotchas:
 
-- `playground connector create-or-update` with a customer config rewrites the bootstrap servers and the Schema Registry
-  url that are not playground hosts to `broker-<cluster>:9092` and `http://schema-registry-<cluster>:8081`. A
-  Replicator config keeps its `src.kafka.bootstrap.servers` / `dest.kafka.bootstrap.servers` when they name
-  `broker-us` / `broker-europe`: they are containers of the playground.
-- The `kafka-*` tools through `playground container exec`, with an explicit `--bootstrap-server broker-us:9092` or
-  `broker-europe:9092`, keep working: the cluster linking examples use them for `kafka-cluster-links` and `kafka-mirrors`.
+- **The `README.md` of `multi-data-center/mirrormaker2` shows `playground topic consume`**: it fails in that
+  environment. The script itself uses `docker container exec broker-europe kafka-console-consumer …`.
 - **In the `ccloud` examples, `playground topic …` targets Confluent Cloud** (the `ccloud` environment is not
   filtered): `migrate-schemas-to-confluent-cloud` produces to the local cluster with `playground container exec -c
   connect --command "kafka-avro-console-producer --bootstrap-server broker:9092 …"` for that reason.
-- `playground container exec` passes stdin to the container (`docker exec -i`): a heredoc or a pipe works.
+- `playground container exec` passes stdin to the container (`docker exec -i`): a heredoc or a pipe works, as above.
 - A process started in the background with `container exec` (`nohup … &`, like MirrorMaker 2 in the lab) keeps
   running after the command returns; stop it with `pkill` in the same container.
 
@@ -266,8 +231,7 @@ playground status
 # connect-us       Up About a minute   confluentinc/cp-server-connect:8.4.0
 # … schema-registry-us, schema-registry-europe, broker-us, broker-europe, broker-metrics,
 #   controller-europe, controller-metrics, controller-us
-# 🌍 Cluster us                                                 <- then its connectors and topics
-# 🌍 Cluster europe
+# 🔥 mdc-plaintext is not supported with this command !        <- when status gets to the connectors
 playground container get-properties -c connect-us | grep -E "^bootstrap|^group.id|storage.topic|plugin.path"
 # bootstrap.servers=broker-us:9092
 # config.storage.topic=connect-us.config
@@ -279,33 +243,19 @@ playground container get-properties -c connect-europe | grep "^bootstrap"
 # bootstrap.servers=broker-europe:9092
 ```
 
-**Step 2: pick the cluster with `--cluster`**
+**Step 2: the commands that refuse an mdc environment**
 
 ```bash
 playground topic list
-# 🔥 ❌ mdc-plaintext runs two clusters: pass --cluster us|europe, or set it for the session with 'export PLAYGROUND_CLUSTER=us' or 'playground state set run.cluster us'   <- exit 1
-playground topic create --topic lab_cluster_selector --cluster europe
-playground topic list --cluster europe
-# lab_cluster_selector
-playground topic list --cluster us                     # not there: another cluster
-PLAYGROUND_CLUSTER=europe playground topic describe --topic lab_cluster_selector
-# Topic: lab_cluster_selector …
-playground connector status --cluster us
-# 💤 No … connector is running !
-playground consumer-group list --cluster europe         # exit 0
-playground topic delete --topic lab_cluster_selector --cluster europe
-playground broker health --cluster europe
-# ✅ cluster is healthy
-playground broker stop --cluster europe --broker 1 --kill
-# 🔫 Killing broker 1 (container broker-europe): no controlled shutdown, like a crash
-# 🎓 see the impact with 'playground broker health --cluster europe', start it again with 'playground broker start --broker 1 --cluster europe'
-playground broker health --cluster us                   # the other data center doesn't notice
-playground broker start --cluster europe --broker 1
-# ✅ cluster is healthy, broker 1 started in …s
+# 🔥 mdc-plaintext is not supported with this command !       <- exit 1
+playground connector status
+# 🔥 mdc-plaintext is not supported with this command !       <- exit 1
+playground consumer-group list
+# 🔥 mdc-plaintext is not supported with this command !       <- exit 1
+playground container exec -c broker-europe --command "kafka-topics --bootstrap-server broker-europe:9092 --list"
+# __consumer_offsets … _confluent-link-metadata … _schemas
+# connect-europe.config  connect-europe.offsets  connect-europe.status        <- exit 0: name the broker yourself
 ```
-
-The next steps keep the `kafka-*` tools through `playground container exec`, with an explicit `--bootstrap-server`: what
-the `multi-data-center/` examples do.
 
 **Step 3: Replicator connector, `europe` → `us`, with offset translation**
 
@@ -333,7 +283,7 @@ playground container exec -c broker-europe --command "kafka-consumer-groups --bo
 ```
 
 The Replicator connector runs on `connect-us`, created with `curl` from inside the container (`playground connector
-create-or-update --cluster us --connector replicate-europe-to-us` does the same):
+create-or-update` is blocked here):
 
 ```bash
 playground container exec -c connect-us --command "curl -s -X PUT -H 'Content-Type: application/json' --data @- http://localhost:8083/connectors/replicate-europe-to-us/config" << 'EOF'
@@ -357,12 +307,6 @@ playground container exec -c broker-us --command "kafka-console-consumer --boots
 # __replicator_id:MkU3OEVBNTcwNTJENDM2Qk,sales_EUROPE,1793189867473	european_sale_1      <- the provenance header
 # …
 # Processed a total of 20 messages
-playground topic compare --topic sales_EUROPE --from europe --to us --wait
-# 🔀 Comparing sales_EUROPE (europe) with sales_EUROPE (us)
-# PARTITION  FROM-EARLIEST  FROM-LATEST    FROM-RECORDS   TO-EARLIEST    TO-LATEST      TO-RECORDS
-# 0          0              20             20             0              20             20
-# TOTAL                                    20                                           20
-# ✅ sales_EUROPE (us) has as many records as sales_EUROPE (europe) (20)
 playground container exec -c broker-us --command "kafka-consumer-groups --bootstrap-server broker-us:9092 --describe --group app-with-interceptor"
 # Consumer group 'app-with-interceptor' has no active members.
 # app-with-interceptor sales_EUROPE    0          10              20              10      <- translated: 10 in us too
@@ -408,8 +352,6 @@ playground container exec -c connect-us --command "nohup connect-mirror-maker /t
 playground container exec -c broker-us --command "kafka-console-consumer --bootstrap-server broker-us:9092 --topic EUROPE.sales_EUROPE --from-beginning --max-messages 20 --timeout-ms 180000"
 # european_sale_1 … european_sale_20
 # Processed a total of 20 messages              <- in EUROPE.sales_EUROPE: the source alias is the prefix
-playground topic compare --topic sales_EUROPE --to-topic EUROPE.sales_EUROPE --from europe --to us
-# ✅ EUROPE.sales_EUROPE (us) has as many records as sales_EUROPE (europe) (20)
 playground container exec -c broker-us --command "kafka-consumer-groups --bootstrap-server broker-us:9092 --describe --group app-without-interceptor"
 # GROUP                   TOPIC               PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG
 # app-without-interceptor EUROPE.sales_EUROPE 0          1               20              19     <- 10 in europe, 1 in us
@@ -487,20 +429,17 @@ playground stop
 | "Replicator, MirrorMaker 2 or Cluster Linking?" | see the table of §1: same offsets and no Connect to run → Cluster Linking (Confluent Server on both ends, or Confluent Cloud); topic renaming, filtering, a Connect cluster already there → Replicator (or MirrorMaker 2 when only Apache Kafka is allowed). Replay the three on the same data with the lab (steps 3 to 5) |
 | "consumer offsets not translated" (Replicator) | the consumers didn't run the `ConsumerTimestampsInterceptor` (no `__consumer_timestamps` in the source: `kafka-topics --list` on the source broker), or a member of the group is connected in the destination, or `offset.topic.commit=false`. Lab step 3: `app-without-interceptor` doesn't exist in `us` |
 | "consumer offsets not translated" (MirrorMaker 2) | `sync.group.offsets.enabled` is false by default; the group must have committed on a replicated topic, and have no active member in the target. Look at `<source>.checkpoints.internal` in the target |
-| "is everything replicated? the destination misses records" | `playground topic compare --topic <t> --from <source> --to <destination>` (`--to-topic <prefix>.<t>` for MirrorMaker 2): records per partition on both sides, exit 1 when the destination misses some. More records in the destination = duplicates after a restart of the replication, or other producers |
 | "duplicates after failover" | MirrorMaker 2: expected, lab step 4 (a group at 10 restarts at 1). Replicator: the translation goes through timestamps, exact in step 3, and only for consumers with the interceptor. Cluster Linking keeps the offsets (step 5). Make the consumer idempotent, or reset the group in the destination to a timestamp |
 | "the consumers in DR started from the beginning / the end" | the group didn't exist in the destination: `auto.offset.reset` decided. `kafka-consumer-groups --describe --group <g>` on both brokers (`GroupIdNotFoundException` = never translated) |
 | "messages loop between the two data centers" | Replicator both ways without `provenance.header.enable=true` (`replicator-connect` sets it). MirrorMaker 2 doesn't loop: the prefix marks remote topics |
 | "Replicator to Confluent Cloud" | `ccloud/replicator/connect-onprem-to-cloud.sh` (CP 7.x only, exits 111 with 8+): `dest.kafka.*` with `SASL_SSL`, `topic.auto.create=false` and the topic created first |
 | "migrate schemas to Confluent Cloud" | `ccloud/migrate-schemas-to-confluent-cloud/start.sh`: destination registry in `IMPORT` mode, `_schemas` replicated with `schema.registry.topic`, source registry `READONLY` |
 | "move a sink connector to the DR cluster without rewriting everything" | `multi-data-center/cluster-linking/start-plaintext-migrate-sink-connector.sh`: the group `connect-<connector>` follows through the link |
-| "the source data center goes down: what happens to the replication, the consumers?" | `playground broker stop --cluster europe --broker 1 --kill`, look at the Replicator / MirrorMaker 2 tasks (`playground connector status --cluster us`) and the groups on the other side, then `playground broker start --cluster europe --broker 1` |
 | "a mirror topic refuses writes" | expected until `kafka-mirrors --promote --topics <t>` (lab step 5) |
 | "SASL or Kerberos between the clusters" | `replicator-connect/connect-sasl-plain.sh`, `connect-kerberos.sh`, `replicator-executable/executable-sasl-plain.sh`, `executable-kerberos.sh` |
 
-In a repro model based on an mdc example, use `playground topic|connector|consumer-group|schema … --cluster us|europe`
-(or `export PLAYGROUND_CLUSTER=…` at the top of the script); the raw `kafka-*` / `curl` calls through `playground
-container exec` with an explicit `--bootstrap-server` keep working too.
+In a repro model based on an mdc example, keep the raw `kafka-*` / `curl` calls through `playground container exec`
+with an explicit `--bootstrap-server`: the `topic`, `connector` and `consumer-group` commands won't run there.
 
 ---
 
@@ -513,9 +452,7 @@ playground container exec -c broker-us|broker-europe --command "kafka-topics --b
 playground container exec -c broker-us --command "kafka-consumer-groups --bootstrap-server broker-us:9092 --describe --group <g>"
 playground container exec -c connect-us --command "curl -s http://localhost:8083/connectors/<c>/status"     # connect-europe: same, from inside
 playground container logs -c connect-us --errors      playground debug thread-dump -c connect-europe
-playground topic|consumer-group|connector|schema … --cluster us|europe
-playground topic compare --topic <t> [--to-topic <t2>] --from europe --to us [--wait]      # is everything replicated?     # or: export PLAYGROUND_CLUSTER=us, playground state set run.cluster us
-playground broker health|describe|metrics --cluster europe        playground broker stop --cluster europe --broker 1 --kill   # a data center goes down
+# blocked in mdc-*: playground topic …, consumer-group …, connector …, schema get|register|… (exit 1)
 # Cluster Linking, on the destination broker:
 kafka-cluster-links --bootstrap-server broker-europe:9092 --create --link <l> --config bootstrap.servers=broker-us:9092,consumer.offset.sync.enable=true [--consumer-group-filters-json-file <f>]
 kafka-mirrors --create --mirror-topic <t> --link <l> --bootstrap-server broker-europe:9092
@@ -530,7 +467,7 @@ kafka-mirrors --promote --topics <t> --bootstrap-server broker-europe:9092
 - Cluster Linking: same name, same offsets, read-only until promoted.
 - Sources: [`environment/mdc-plaintext/`](https://github.com/vdesabou/kafka-docker-playground/tree/master/environment/mdc-plaintext),
   [`multi-data-center/`](https://github.com/vdesabou/kafka-docker-playground/tree/master/multi-data-center),
-  `get_mdc_cluster` and `get_mdc_client` in [`cli_function.sh`](https://github.com/vdesabou/kafka-docker-playground/blob/master/scripts/cli/src/lib/cli_function.sh).
+  `filter_not_mdc_environment` in [`cli_function.sh`](https://github.com/vdesabou/kafka-docker-playground/blob/master/scripts/cli/src/lib/cli_function.sh).
 
 ---
 

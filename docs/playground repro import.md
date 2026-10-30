@@ -14,7 +14,14 @@ identical, otherwise their content is kept.
 
 Then the model becomes the current one, and the command prints the  
 `playground run` line to use and the credentials missing from your  
-`playground secrets` profile.
+`playground secrets` profile. `--run` goes on with that line when  
+nothing is missing (in a terminal, it asks first when containers are  
+running: the run stops them).
+
+`--file` also takes a URL (a GitHub release asset, a raw file, any public  
+link): the bundle is downloaded into an empty temporary folder, then  
+checked like a local one. Links that need a login (Slack, Google  
+Drive) must be downloaded by hand.
 
 ## Usage
 
@@ -26,7 +33,7 @@ playground repro import [OPTIONS]
 
 #### `--file, -f FILE`
 
-🤐 Bundle file (playground_repro_\*.tgz, any name is accepted)
+🤐 Bundle file (playground_repro_\*.tgz, any name is accepted), or its https:// URL
 
 🎓 Tip: use `<tab>` completion to trigger fzf completion  
 use playground config folder_zip_or_jar `<folder1>` `<folder2>`... (default is home folder and current folder is always included) to configure where to search the files
@@ -52,10 +59,26 @@ overwrite: replace your copy
 
 🔍 Only show the manifest, the files and the conflicts
 
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Conflicts With: | `--run`
+
+#### `--run`
+
+▶️ Then run the model with its run line (bundle with one model, nothing missing: credentials, external files)
+
 ## Examples
 
 ```bash
 playground repro import -f ~/Downloads/playground_repro_http-repro-123456-dlq_2026-10-21.tgz
+```
+
+```bash
+playground repro import -f ~/Downloads/playground_repro_http-repro-123456-dlq_2026-10-21.tgz --run
+```
+
+```bash
+playground repro import -f https://github.com/<owner>/<repo>/releases/download/v1/playground_repro_http-repro-123456-dlq_2026-10-21.tgz
 ```
 
 ```bash

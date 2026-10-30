@@ -6,6 +6,7 @@ A reproduction model is an example written to demonstrate one specific
 problem, so that anyone can reproduce it with a single command.
 
 - **bootstrap**: scaffold one from an existing example, then edit it
+- **list**: find models by case, status, verdict, base example, author, date
 - **status**: show or update what a model proves: expected, actual, jira, status
 - **assert**: end a model with its verdict: 🐞 reproduced or ✅ not reproduced
 - **bisect**: run a model on several versions: which one introduced or fixed it
@@ -53,6 +54,7 @@ visit https://github.com/junegunn/fzf#installation to install
 - [import](playground%20repro%20import) - 📥 Import a tgz bundle created by `playground repro export`
 - [bootstrap](playground%20repro%20bootstrap) - 🛠  Bootstrap reproduction model, just run `<playground repro bootstrap>` !
 - [status](playground%20repro%20status) - 🩹 Show or update what a reproduction model proves, from its header
+- [list](playground%20repro%20list) - 📋 List the reproduction models, newest first, with their case, status and last verdict
 - [assert](playground%20repro%20assert) - 🧪 End a reproduction model with its verdict: 🐞 REPRODUCED or ✅ NOT REPRODUCED
 - [bisect](playground%20repro%20bisect) - 🔀 Run a reproduction model on several versions: which one introduced or fixed the problem
 

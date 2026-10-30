@@ -4,7 +4,7 @@
 
 Compares the config of a running connector, key by key, with:
 
-- **stdin**: a config (plain json, or the heredoc printed by 'show-config')
+- **stdin**: a config (plain json, the heredoc printed by 'show-config', or a format customers send: CFK / Strimzi custom resource, terraform, .properties, a dump of GET /connectors?expand=info, see `playground connector convert`)
 - `--file`: the same, from a file, e.g. the config of a customer
 - `--with-connector`: another running connector
 - `--defaults`: the default value of each parameter of the plugin: shows only what the connector changes, and the keys set to their default that could be removed
@@ -39,7 +39,7 @@ playground connector diff [OPTIONS]
 
 #### `--file, -f FILE`
 
-📄 File with the config to compare with (json, or a create-or-update heredoc)
+📄 File with the config to compare with (json, a create-or-update heredoc, a CFK / Strimzi custom resource, terraform, .properties, a dump of GET /connectors?expand=info)
 
 #### `--with-connector WITH_CONNECTOR`
 

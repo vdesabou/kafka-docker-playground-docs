@@ -8,9 +8,12 @@ invalid property with its error message. Nothing is created or
 changed, so it is the dry run of 'create-or-update' for a customer  
 config. Exits with 1 if the config is invalid.
 
-The config is read from stdin. Without stdin, `--connector` validates  
-the config of that running connector, for example after switching  
-to another connector version.
+The config is read from stdin: json, or a format customers send (CFK /  
+Strimzi custom resource, terraform, .properties, a dump of GET  
+/connectors?expand=info with `--connector` to pick one, see 'playground  
+connector convert'). Without stdin, `--connector` validates the config  
+of that running connector, for example after switching to another  
+connector version.
 
 The same automatic config as 'create-or-update' is added for the  
 environment of the example (security settings on sasl-ssl...),  

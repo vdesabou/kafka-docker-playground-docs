@@ -62,6 +62,7 @@ window.KDP_CLI_PAGES = [
   "/playground%20connector%20connect-migration-utility%20discovery",
   "/playground%20connector%20connect-migration-utility%20migrate",
   "/playground%20connector%20connect-migration-utility",
+  "/playground%20connector%20convert",
   "/playground%20connector%20create-or-update",
   "/playground%20connector%20delete",
   "/playground%20connector%20diagnose",

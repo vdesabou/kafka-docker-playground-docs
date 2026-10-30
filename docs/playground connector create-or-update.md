@@ -24,9 +24,26 @@ Fully managed connectors are only waited for with `--wait`.
 it is deployed, which reports every invalid property at once.
 
 An update shows the keys added, removed and changed compared to the  
-running config (secrets masked). The config can also be given in the  
-REST API format ({"name": ..., "config": {...}}, as returned by  
-GET /connectors/`<name>`), or as the path of a json file.
+running config (secrets masked).
+
+The config can also be given as the path of a file, and in the  
+formats customers send (detected, see 'playground connector  
+convert'): the REST API format ({"name": ..., "config": {...}}), a  
+dump of GET /connectors?expand=info, a CFK Connector or Strimzi  
+KafkaConnector custom resource, a terraform confluent_connector  
+resource, or a connect-standalone .properties file. When the file  
+holds several connectors, the one named `--connector` is used.
+
+A config that comes from elsewhere (a file, or one of these formats)  
+is adapted to the playground (`--no-adapt` to keep it as is, `--adapt`  
+to adapt a plain json heredoc too): bootstrap servers and schema  
+registry urls whose hosts are not containers of the playground,  
+the credentials of that schema registry, a license, replication  
+factors above the number of brokers, and on plaintext the security of  
+the clients whose bootstrap servers were rewritten. Masked secrets,  
+config providers of the customer environment (${file:...}),  
+terraform references and the keys still pointing to external systems  
+are listed. The heredocs of the examples are never changed.
 
 🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-connector-create-or-update  
 🎬 Bite size session: https://kafka-docker-playground.io/#/sessions?id=%F0%9F%94%8C-the-sink-fails-right-after-it-is-deployed  
@@ -60,7 +77,7 @@ playground connector create-or-update [JSON] [OPTIONS]
 
 #### `JSON`
 
-json, or the path of a json file (@file.json works too); reads from stdin if empty
+json (or another supported format), or the path of a file (@file works too); reads from stdin if empty
 
 | Attributes      | &nbsp;
 |-----------------|-------------
@@ -79,6 +96,22 @@ json, or the path of a json file (@file.json works too); reads from stdin if emp
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Required:       | ✓ Yes
+
+#### `--no-adapt`
+
+🧷 Deploy a config that comes from elsewhere (a file, another format) as it is: do not rewrite its bootstrap servers, schema registry, license, replication factors and client security
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Conflicts With: | `--adapt`
+
+#### `--adapt`
+
+🔧 Adapt a plain json config too (a customer config pasted in a heredoc): by default, only a file or another format is adapted, never the heredocs of the examples
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Conflicts With: | `--no-adapt`
 
 #### `--level, -l LEVEL`
 

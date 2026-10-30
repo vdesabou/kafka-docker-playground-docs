@@ -58,6 +58,7 @@ playground connector COMMAND
 - [wait](playground%20connector%20wait) - ⏳ Wait for connectors to reach a state
 - [validate](playground%20connector%20validate) - ✅ Validate a connector config without creating the connector
 - [diff](playground%20connector%20diff) - 🔀 Diff the config of a running connector with another config
+- [convert](playground%20connector%20convert) - 🔄 Convert a connector config from the format a customer sent to another one
 - [error-recommendations](playground%20connector%20error-recommendations) - 💡 Show error recommendations for fully managed connectors
 - [oracle-cdc-xstream](playground%20connector%20oracle-cdc-xstream) - 🅾️ Specific Oracle CDC Xstream commands
   - [generate-report](playground%20connector%20oracle-cdc-xstream%20generate-report) - ⚙️ Generate and open oracle cdc xstream connector diagnostics

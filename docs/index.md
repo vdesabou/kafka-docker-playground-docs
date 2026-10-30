@@ -27,7 +27,7 @@ visit https://docs.docker.com/get-docker to install
 
 #### `PLAYGROUND_CLUSTER`
 
-🌍 Cluster used by the topic, consumer-group, connector and schema commands in an mdc-\* environment (us or europe) when `--cluster` is not set
+🌍 Cluster used by the topic, consumer-group, connector, schema, broker and quota commands in an mdc-\* environment (us or europe) when `--cluster` is not set
 
 ### Commands
 

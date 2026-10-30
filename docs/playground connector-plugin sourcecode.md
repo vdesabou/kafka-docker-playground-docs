@@ -105,10 +105,53 @@ the last line of the output.
 |-----------------|-------------
 | Conflicts With: | `--open`, `--compile`
 
+#### `--log`
+
+📜 With 2 `--connector-tag`: the commits between the two versions, newest first
+
+From the GitHub compare API (gh when logged in, else `GH_TOKEN` / `GITHUB_TOKEN` if set, else anonymous with  
+a low rate limit). Merge commits are left out. Complements playground connector-plugin changelog, which is  
+only as complete as the docs, and works for partner and fully managed plugins too.
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Conflicts With: | `--compile`, `--open`, `--checkout-only`
+
+#### `--files`
+
+🗂️ With 2 `--connector-tag`: the files changed between the two versions, with +/- line counts
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Conflicts With: | `--compile`, `--open`, `--checkout-only`
+
+#### `--path PATH`
+
+📄 Only the changed files matching this glob, and their diff
+
+Example: `--path` "\*/JdbcSinkConfig.java"
+
+#### `--grep GREP`
+
+🔎 One `--connector-tag`: grep the code at that version (checkout, file:line, 500 lines at most)
+
+With 2 `--connector-tag` and `--log`: only the commits whose message matches (case insensitive).  
+Extended regular expression, for example "`BATCH_SIZE_DEFAULT`|batch.size"
+
+#### `--json`
+
+🤖 Print the result as JSON (url, checkout folder, commits, files, matches), logs on stderr
+
 ## Examples
 
 ```bash
 
+# commits between two versions, only the ones about offsets
+playground connector-plugin sourcecode --connector-plugin confluentinc/kafka-connect-jdbc --connector-tag 10.8.4 --connector-tag 10.9.9 --log --grep "offset"
+# files changed between two versions, and the diff of one of them
+playground connector-plugin sourcecode --connector-plugin confluentinc/kafka-connect-jdbc --connector-tag 10.8.4 --connector-tag 10.9.9 --files --path "*/JdbcSinkConfig.java"
+# grep the code of a version
+playground connector-plugin sourcecode --connector-plugin confluentinc/kafka-connect-jdbc --connector-tag 10.8.4 --grep "BATCH_SIZE_DEFAULT"
 # will checkout the latest version from hub and print the path of the folder
 playground connector-plugin sourcecode --connector-plugin confluentinc/kafka-connect-hdfs --checkout-only
 

@@ -51,6 +51,18 @@ Examples: S3SinkConnector, io.confluent.connect.jdbc.JdbcSinkConnector, `S3_SINK
 |-----------------|-------------
 | Default Value:  | `10`
 
+#### `--since-version`
+
+📅 Find the first version of the plugin having the key (self-managed connectors)
+
+A binary search over the versions of Confluent Hub: each probed version is downloaded and its configuration  
+read without a worker, like playground connector-plugin config-diff (about 5 s per version, 6 or 7 versions).  
+Needs one connector (`--connector-class`). The plugin is found from the examples, or set with `--connector-plugin`.
+
+#### `--connector-plugin CONNECTOR-PLUGIN`
+
+🔌 Plugin of the connector for `--since-version` (owner/name), when the examples don't tell it
+
 ## Examples
 
 ```bash
@@ -67,6 +79,10 @@ playground connector-plugin config-key -k s3.part.size -c S3_SINK
 
 ```bash
 playground connector-plugin config-key -k errors.tolerance -c jdbc --max-examples 3
+```
+
+```bash
+playground connector-plugin config-key -k batch.max.rows -c io.confluent.connect.jdbc.JdbcSourceConnector --since-version
 ```
 
 ## Example output

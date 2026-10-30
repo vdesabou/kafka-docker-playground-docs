@@ -3,6 +3,7 @@
 ## October 2026
 ##### 🌟 Enhancements
 
+- 🧠🌍 mdc environments: --cluster for the broker and quota commands [#9824](https://github.com/vdesabou/kafka-docker-playground/issues/9824)
 - 🧠🌍 mdc environments: --cluster us|europe for the topic, consumer-group, connector and schema commands [#9822](https://github.com/vdesabou/kafka-docker-playground/issues/9822)
 - 🧠🧪 repro: ask before bootstrap stops the running environment, repro import --run and from a URL [#9815](https://github.com/vdesabou/kafka-docker-playground/issues/9815)
 - 🧠☸️ analyze logs: --problem to match a CFK support bundle against the issue, and a 📥 data to request section [#9814](https://github.com/vdesabou/kafka-docker-playground/issues/9814)

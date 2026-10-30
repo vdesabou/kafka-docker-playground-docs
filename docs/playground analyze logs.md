@@ -87,7 +87,7 @@ playground analyze logs [OPTIONS]
 
 #### `--output-dir, -o OUTPUT_DIR`
 
-📂 Output directory for the HTML report (default: ./log-analysis-output)
+📂 Output directory for the HTML report (default: ./log-analysis-output), with a `<report>`-files/ folder next to it: a page per file with findings, which the file names and line numbers of the report open (✏️ in the editor of playground config editor)
 
 | Attributes      | &nbsp;
 |-----------------|-------------

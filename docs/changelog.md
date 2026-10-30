@@ -3,6 +3,7 @@
 ## October 2026
 ##### 🌟 Enhancements
 
+- 🧠🏰 history: result, date and preview of each run, --list / --json / --last / --run / --stats / --prune, tab completion [#9833](https://github.com/vdesabou/kafka-docker-playground/issues/9833)
 - 🧠🌍 topic compare: is everything replicated between two clusters (or two topics)? [#9828](https://github.com/vdesabou/kafka-docker-playground/issues/9828)
 - 🧹🌍 multi-data-center examples: use the playground CLI with --cluster [#9826](https://github.com/vdesabou/kafka-docker-playground/issues/9826)
 - 🧠🌍 mdc environments: --cluster for the broker and quota commands [#9824](https://github.com/vdesabou/kafka-docker-playground/issues/9824)

@@ -24,6 +24,8 @@ it when you are done.
 
 🐚 Use zsh on the instance to have everything working out of the box.
 
+🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-ec2
+
 ## Usage
 
 ```bash

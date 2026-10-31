@@ -10,6 +10,8 @@
 
 ⚠️ This does not work for fully and custom connectors.
 
+🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-java-debugging
+
 ## Usage
 
 ```bash

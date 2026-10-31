@@ -20,6 +20,8 @@ streaming mode: add a LIMIT, or SET 'execution.runtime-mode' = 'batch'
 on a bounded source. Otherwise the client is stopped after  
 `--max-wait` seconds.
 
+🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-flink
+
 ## Usage
 
 ```bash

@@ -2,9 +2,11 @@
 
 🔐 Send the secrets store to an ec2 instance
 
-Writes ~/.playground-secrets.properties (mode 0600) on the instance, which  
-the playground .zshrc sources on login. This replaces the encrypted  
-secrets.tar.gpg committed in the repository.
+Writes ~/.playground-secrets.properties (mode 0600) on the instance. The  
+playground .zshrc doesn't load it by itself: a new shell prints a hint,  
+and the pgenv alias exports the variables (run it before an example  
+that expects them). This replaces the encrypted secrets.tar.gpg  
+committed in the repository.
 
 The file is piped over ssh, so no clear text copy is ever written locally  
 and the values never appear in 'ps'.

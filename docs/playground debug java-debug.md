@@ -59,7 +59,11 @@ playground debug java-debug --type class_loading
 ```
 
 ```bash
-playground debug java-debug --container broker --action start
+playground debug java-debug --container broker --type ssl_handshake --action enable
+```
+
+```bash
+playground debug java-debug --container broker --type ssl_handshake --action disable
 ```
 
 

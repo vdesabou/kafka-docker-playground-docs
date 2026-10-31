@@ -3,6 +3,7 @@
 ## October 2026
 ##### 🌟 Enhancements
 
+- 👾🔗 Add Schema Linking example, data contracts with the schema CLI, and --help examples for the schema commands [#9892](https://github.com/vdesabou/kafka-docker-playground/issues/9892)
 - 🧠🔰 schema: validate a schema on Schema Registries of several CP versions (throwaway registries) [#9890](https://github.com/vdesabou/kafka-docker-playground/issues/9890)
 - 🧠🔗 schema: Schema Linking exporters, --context, contexts and compare between registries [#9888](https://github.com/vdesabou/kafka-docker-playground/issues/9888)
 - 🧠🔰 schema: data contract rules (register --rule / --rule-set, test-rules) and derive-schema --name, -o, --register, logical type hints [#9886](https://github.com/vdesabou/kafka-docker-playground/issues/9886)

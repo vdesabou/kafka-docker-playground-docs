@@ -3,6 +3,11 @@
 ## October 2026
 ##### 🌟 Enhancements
 
+- 🧠🔰 schema: data contract rules (register --rule / --rule-set, test-rules) and derive-schema --name, -o, --register, logical type hints [#9886](https://github.com/vdesabou/kafka-docker-playground/issues/9886)
+- 🧠🔰 schema: export and import (keep the schema ids, load a customer's /schemas or \_schemas dump) [#9884](https://github.com/vdesabou/kafka-docker-playground/issues/9884)
+- 🧠🔰 schema: describe, history (timeline from \_schemas) and Schema Registry known causes in the log digests [#9881](https://github.com/vdesabou/kafka-docker-playground/issues/9881)
+- 🧠🔰 schema: check-compatibility (dry-run registration) and diff (field-level, verdict per rule) [#9876](https://github.com/vdesabou/kafka-docker-playground/issues/9876)
+- 🧠🔰 schema: list, --json, --global compatibility and mode, delete fixes and --dry-run, get --schema-only [#9874](https://github.com/vdesabou/kafka-docker-playground/issues/9874)
 - 🧠📚 docs: add missing deep dive sections and pages (Flink, TCP proxy, JVM debugging, EC2) [#9871](https://github.com/vdesabou/kafka-docker-playground/issues/9871)
 - 🧠☕ connector-plugin search-jar --with-worker: flag plugin classes that the worker config puts in the task clients [#9869](https://github.com/vdesabou/kafka-docker-playground/issues/9869)
 - 🧹🔌 connector-plugin: accept a connector class or a fully managed type everywhere, config-key --json [#9863](https://github.com/vdesabou/kafka-docker-playground/issues/9863)

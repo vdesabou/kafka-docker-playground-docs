@@ -28,4 +28,14 @@ Default: the `PLAYGROUND_CLUSTER` environment variable, else the value set with 
 |-----------------|-------------
 | Allowed Values: | `us`, `europe`
 
+## Examples
+
+```bash
+playground schema exporter list --cluster europe
+```
+
+```bash
+playground schema exporter list --json
+```
+
 

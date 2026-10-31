@@ -55,4 +55,10 @@ Default: the `PLAYGROUND_CLUSTER` environment variable, else the value set with 
 |-----------------|-------------
 | Allowed Values: | `us`, `europe`
 
+## Examples
+
+```bash
+playground schema set-alias --subject orders-value --alias legacy-orders-value
+```
+
 

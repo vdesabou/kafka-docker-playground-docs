@@ -56,4 +56,14 @@ Default: the `PLAYGROUND_CLUSTER` environment variable, else the value set with 
 |-----------------|-------------
 | Allowed Values: | `us`, `europe`
 
+## Examples
+
+```bash
+playground schema get-mode --subject orders-value
+```
+
+```bash
+playground schema get-mode --global --json
+```
+
 

@@ -2,7 +2,7 @@
 
 🚦 State of an exporter (RUNNING, PAUSED, ERROR with its trace), offset and number of objects exported
 
-Exit code 1 when the exporter is in ERROR.
+Exit code 1 when the exporter is in ERROR, or PAUSED with a trace (it stopped on a failure: 'exporter create' fails then too).
 
 ## Usage
 
@@ -41,5 +41,15 @@ Default: the `PLAYGROUND_CLUSTER` environment variable, else the value set with 
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Allowed Values: | `us`, `europe`
+
+## Examples
+
+```bash
+playground schema exporter status --name eu-to-us --cluster europe
+```
+
+```bash
+playground schema exporter status --name eu-to-us --wait --json
+```
 
 

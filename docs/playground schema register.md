@@ -75,7 +75,7 @@ Example: `--metadata-property` "metadata1=value" `--metadata-property` "metadata
 
 #### `--rule-set RULE-SET`
 
-📏 Data contract rules: a ruleSet json ({"domainRules": [...], "migrationRules": [...]}, or a bare array of domain rules), as @`<file>`, a file path or inline json
+📏 Data contract rules: a ruleSet json ({"domainRules": [...], "migrationRules": [...]}, a bare array of domain rules, or a {"ruleSet": {...}} request body), as @`<file>`, a file path or inline json
 
 See docs: https://docs.confluent.io/platform/current/schema-registry/fundamentals/data-contracts.html#rules
 

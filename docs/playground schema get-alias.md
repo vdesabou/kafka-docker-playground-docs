@@ -48,4 +48,14 @@ Default: the `PLAYGROUND_CLUSTER` environment variable, else the value set with 
 |-----------------|-------------
 | Allowed Values: | `us`, `europe`
 
+## Examples
+
+```bash
+playground schema get-alias --alias legacy-orders-value
+```
+
+```bash
+playground schema get-alias --alias legacy-orders-value --json
+```
+
 

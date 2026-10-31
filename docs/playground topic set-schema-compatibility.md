@@ -46,4 +46,14 @@ Default: the `PLAYGROUND_CLUSTER` environment variable, else the value set with 
 |-----------------|-------------
 | Allowed Values: | `us`, `europe`
 
+## Examples
+
+```bash
+playground topic set-schema-compatibility --topic orders --compatibility NONE
+```
+
+```bash
+playground topic set-schema-compatibility --topic orders --compatibility FULL --include-key
+```
+
 

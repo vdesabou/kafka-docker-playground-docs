@@ -3,6 +3,7 @@
 ## October 2026
 ##### 🌟 Enhancements
 
+- 🧠📚 docs: add missing deep dive sections and pages (Flink, TCP proxy, JVM debugging, EC2) [#9871](https://github.com/vdesabou/kafka-docker-playground/issues/9871)
 - 🧠☕ connector-plugin search-jar --with-worker: flag plugin classes that the worker config puts in the task clients [#9869](https://github.com/vdesabou/kafka-docker-playground/issues/9869)
 - 🧹🔌 connector-plugin: accept a connector class or a fully managed type everywhere, config-key --json [#9863](https://github.com/vdesabou/kafka-docker-playground/issues/9863)
 - 🧠☁️ connector-plugin fm-versions: connector version of each cc-connect image, first image with a fix, commits between them [#9861](https://github.com/vdesabou/kafka-docker-playground/issues/9861)

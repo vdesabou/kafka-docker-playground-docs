@@ -3,6 +3,8 @@
 ## October 2026
 ##### 🌟 Enhancements
 
+- 🧠🔰 schema: validate a schema on Schema Registries of several CP versions (throwaway registries) [#9890](https://github.com/vdesabou/kafka-docker-playground/issues/9890)
+- 🧠🔗 schema: Schema Linking exporters, --context, contexts and compare between registries [#9888](https://github.com/vdesabou/kafka-docker-playground/issues/9888)
 - 🧠🔰 schema: data contract rules (register --rule / --rule-set, test-rules) and derive-schema --name, -o, --register, logical type hints [#9886](https://github.com/vdesabou/kafka-docker-playground/issues/9886)
 - 🧠🔰 schema: export and import (keep the schema ids, load a customer's /schemas or \_schemas dump) [#9884](https://github.com/vdesabou/kafka-docker-playground/issues/9884)
 - 🧠🔰 schema: describe, history (timeline from \_schemas) and Schema Registry known causes in the log digests [#9881](https://github.com/vdesabou/kafka-docker-playground/issues/9881)

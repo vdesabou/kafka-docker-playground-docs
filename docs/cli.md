@@ -237,12 +237,31 @@ visit https://docs.docker.com/get-docker to install
 ### Schema commands
 
 - [schema](playground%20schema) - 🔰 Schema commands
+  - [list](playground%20schema%20list) - 📋 List the subjects of the registry
   - [get](playground%20schema%20get) - 🔰 Get all schemas versions for specified subject (if `--subject` is not specified, all subjects will be used)
   - [register](playground%20schema%20register) - ⏺️ Register a schema in specified subject
-  - [get-compatibility](playground%20schema%20get-compatibility) - 🛡️ Get subject-level compatibility
-  - [set-compatibility](playground%20schema%20set-compatibility) - 🛡️ Set subject-level compatibility
-  - [get-mode](playground%20schema%20get-mode) - 🔏 Get subject-level mode
-  - [set-mode](playground%20schema%20set-mode) - 🔏 Set subject-level mode
+  - [check-compatibility](playground%20schema%20check-compatibility) - 🧪 Check whether a schema would be accepted, without registering it
+  - [diff](playground%20schema%20diff) - 🔀 Compare two schemas field by field, with the verdict of each compatibility rule
+  - [describe](playground%20schema%20describe) - 🔎 Everything about one subject, or one schema id, in one call
+  - [history](playground%20schema%20history) - 📜 Timeline of the Schema Registry, from its _schemas topic
+  - [export](playground%20schema%20export) - 📦 Export the subjects of the registry to a folder
+  - [import](playground%20schema%20import) - 📥 Import schemas into the registry, keeping their ids
+  - [test-rules](playground%20schema%20test-rules) - 📏 Test the data contract rules of a subject against records
+  - [contexts](playground%20schema%20contexts) - 🗂️ List the contexts of the registry, with their number of subjects and mode
+  - [compare](playground%20schema%20compare) - 🔀 Compare the subjects of two registries (or two contexts)
+  - [exporter](playground%20schema%20exporter) - 🔗 Schema Linking: exporters that copy subjects to another registry
+    - [create](playground%20schema%20exporter%20create) - 🔗 Create an exporter, then wait until it runs
+    - [list](playground%20schema%20exporter%20list) - 📋 List the exporters of the registry, with their state
+    - [status](playground%20schema%20exporter%20status) - 🚦 State of an exporter (RUNNING, PAUSED, ERROR with its trace), offset and number of objects exported
+    - [pause](playground%20schema%20exporter%20pause) - ⏸️ Pause an exporter
+    - [resume](playground%20schema%20exporter%20resume) - ▶️ Resume a paused exporter
+    - [reset](playground%20schema%20exporter%20reset) - ⏮️ Reset a paused exporter: it exports everything again
+    - [delete](playground%20schema%20exporter%20delete) - 🗑️ Delete a paused exporter (the exported schemas stay in the destination)
+  - [validate](playground%20schema%20validate) - 🧪 Register schemas in a throwaway Schema Registry of each CP version, and compare the verdicts
+  - [get-compatibility](playground%20schema%20get-compatibility) - 🛡️ Get the compatibility rule in force
+  - [set-compatibility](playground%20schema%20set-compatibility) - 🛡️ Set the compatibility rule of a subject (`--subject`), or of the whole registry (`--global`)
+  - [get-mode](playground%20schema%20get-mode) - 🔏 Get the mode in force
+  - [set-mode](playground%20schema%20set-mode) - 🔏 Set the mode of a subject (`--subject`), or of the whole registry (`--global`)
   - [set-normalize](playground%20schema%20set-normalize) - 🧽 Set normalize at schema registry level
   - [validate-new-schemas](playground%20schema%20validate-new-schemas) - 🩺 Validate new schemas (default is true since CP 8.2.0)
   - [delete](playground%20schema%20delete) - 🧟 Delete schema

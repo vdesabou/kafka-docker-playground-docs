@@ -2,6 +2,8 @@
 
 🔐 Testing TLS/SSL encryption using https://testssl.sh/
 
+🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-java-debugging
+
 ## Usage
 
 ```bash

@@ -73,6 +73,30 @@ Example: `--metadata-property` "metadata1=value" `--metadata-property` "metadata
 
 🫧 Add ?normalize=true at the end of the request to normalize the schema. The default is false.
 
+#### `--rule-set RULE-SET`
+
+📏 Data contract rules: a ruleSet json ({"domainRules": [...], "migrationRules": [...]}, or a bare array of domain rules), as @`<file>`, a file path or inline json
+
+See docs: https://docs.confluent.io/platform/current/schema-registry/fundamentals/data-contracts.html#rules
+
+#### `--rule RULE`
+
+📏 Shortcut for a CEL condition checked when producing: `<name>`:`<CEL expression>`, added to the domain rules (kind CONDITION, type CEL, mode WRITE)
+
+Example: `--rule` 'amountPositive:message.amount \> 0' `--rule` 'hasCurrency:size(message.currency) == 3'
+
+❕ The rules run in the clients (serializers with use.latest.version=true and the kafka-schema-rules jar), not in the registry: registering them never refuses a record.
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Repeatable:     |  ✓ Yes
+
+#### `--context CONTEXT`
+
+🗂️ Schema Registry context (.europe, or europe): every call goes to /contexts/`<context>`/…
+
+The subjects exported by Schema Linking land in a context of the destination registry. Default: the default context.
+
 #### `--cluster CLUSTER`
 
 🌍 Cluster to use in an mdc-\* environment (us or europe)
@@ -98,6 +122,10 @@ message Customer {
     string address = 4;
 }
 EOF
+
+playground schema register --subject orders-value --rule 'amountPositive:message.amount > 0' --schema @order.avsc
+
+playground schema register --subject orders-value --rule-set @rules.json --metadata-property owner=team-a --schema @order.avsc
 
 playground schema register --subject test-avro --metadata-property test=test --metadata-property test2=test << 'EOF'
 {

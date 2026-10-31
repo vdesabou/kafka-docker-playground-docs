@@ -19,6 +19,8 @@ does: does it retry, does it lose records, does it fail the task.
 🎓 Tip: start with `playground tcp-proxy open-ui` to see what is  
 happening, then reproduce the same actions from the CLI in a script.
 
+🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-tcp-proxy
+
 ## Usage
 
 ```bash

@@ -39,6 +39,12 @@ playground schema set-alias [OPTIONS]
 
 🐞 Show command being ran.
 
+#### `--context CONTEXT`
+
+🗂️ Schema Registry context (.europe, or europe): every call goes to /contexts/`<context>`/…
+
+The subjects exported by Schema Linking land in a context of the destination registry. Default: the default context.
+
 #### `--cluster CLUSTER`
 
 🌍 Cluster to use in an mdc-\* environment (us or europe)

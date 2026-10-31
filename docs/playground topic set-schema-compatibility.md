@@ -2,9 +2,10 @@
 
 🛡️ Change topic's schema compatibility
 
-Sets the compatibility level on the subjects of the topic, which is  
-what you relax to let an otherwise rejected schema evolution through,  
-for instance to reproduce a schema compatibility issue.
+Sets the compatibility level on the value subject of the topic  
+(`<topic>`-value), and on its key subject too with `--include-key`. That  
+is what you relax to let an otherwise rejected schema evolution  
+through, for instance to reproduce a schema compatibility issue.
 
 ## Usage
 
@@ -26,6 +27,10 @@ Schema Registry compatibility rule
 |-----------------|-------------
 | Required:       | ✓ Yes
 | Allowed Values: | `BACKWARD`, `BACKWARD_TRANSITIVE`, `FORWARD`, `FORWARD_TRANSITIVE`, `FULL`, `FULL_TRANSITIVE`, `NONE`
+
+#### `--include-key`
+
+🔑 Also set it on the key subject (`<topic>`-key)
 
 #### `--verbose, -v`
 

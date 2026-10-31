@@ -24,9 +24,19 @@ playground schema get-alias [OPTIONS]
 |-----------------|-------------
 | Required:       | ✓ Yes
 
+#### `--json`
+
+📗 Print the result as JSON, and nothing else
+
 #### `--verbose, -v`
 
 🐞 Show command being ran.
+
+#### `--context CONTEXT`
+
+🗂️ Schema Registry context (.europe, or europe): every call goes to /contexts/`<context>`/…
+
+The subjects exported by Schema Linking land in a context of the destination registry. Default: the default context.
 
 #### `--cluster CLUSTER`
 

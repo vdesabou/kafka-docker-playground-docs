@@ -1,6 +1,6 @@
 # playground schema set-mode
 
-🔏 Set subject-level mode
+🔏 Set the mode of a subject (`--subject`), or of the whole registry (`--global`)
 
 - **READWRITE**: the normal mode, schemas can be read and registered
 - **READONLY**: freeze the subject, registration is refused
@@ -24,7 +24,15 @@ playground schema set-mode [OPTIONS]
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Required:       | ✓ Yes
+| Conflicts With: | `--global`
+
+#### `--global`
+
+🌍 The global setting of the registry, instead of one subject
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Conflicts With: | `--subject`
 
 #### `--verbose, -v`
 
@@ -38,6 +46,12 @@ Schema Registry mode
 |-----------------|-------------
 | Required:       | ✓ Yes
 | Allowed Values: | `IMPORT`, `READONLY`, `READWRITE`
+
+#### `--context CONTEXT`
+
+🗂️ Schema Registry context (.europe, or europe): every call goes to /contexts/`<context>`/…
+
+The subjects exported by Schema Linking land in a context of the destination registry. Default: the default context.
 
 #### `--cluster CLUSTER`
 

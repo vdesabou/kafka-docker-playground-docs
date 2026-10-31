@@ -21,15 +21,24 @@ or "the sink reads the wrong subject". Takes about 15 minutes to read and run.
 | every version of a subject (or of all subjects) | `playground schema get [--subject <s>]` |
 | one version as a plain schema file | `playground schema get --subject <s> --version N --schema-only > vN.avsc` |
 | the schema behind an id seen in a record | `playground schema get --id <id>` |
+| everything about a subject (rule, mode, versions, references, shared ids, topic) or an id | `playground schema describe --subject <s>` / `--id <id>` |
+| who deleted the schema, when, soft or hard? when was the rule relaxed? | `playground schema history [--subject <s>] [--since 2d]` (or `-f <_schemas dump>`) |
 | soft-deleted subjects too | `playground schema get --deleted` |
 | a new version, without producing | `playground schema register --subject <s> << 'EOF' … EOF` |
+| would this schema be accepted? (nothing registered) | `playground schema check-compatibility --subject <s> < new.avsc` (exit 0 / 1, `--compatibility <rule>`) |
+| what changed between two versions, and which rules refuse it | `playground schema diff --subject <s> [--from N] [--to M\|@file]` |
 | the rule that accepts or refuses a new version | `playground schema get-compatibility --subject <s>` (or `--global`) / `set-compatibility --compatibility …` |
 | the same, on the value subject of a topic | `playground topic set-schema-compatibility --topic <t> --compatibility …` |
 | remove a version or a subject | `playground schema delete --subject <s> [--version N] [--permanent] [--dry-run]` |
-| a schema from a sample JSON record | `playground schema derive-schema --schema-type AVRO\|JSON\|PROTOBUF << 'EOF' … EOF` |
+| a schema from a sample JSON record | `playground schema derive-schema --schema-type AVRO\|JSON\|PROTOBUF [--name <N>] [-o <file>] [--register --subject <s>] << 'EOF' … EOF` |
+| data contract rules on a version, and do these records pass them? | `playground schema register --subject <s> --rule '<name>:<CEL expr>'` / `playground schema test-rules --subject <s> --record '<json>'` |
 | freeze or migrate a subject (or the registry) | `playground schema set-mode --subject <s> \| --global --mode READONLY\|IMPORT\|READWRITE` |
 | registry-wide behaviour | `playground schema set-normalize --value true` / `validate-new-schemas --value false` |
+| accepted by Schema Registry 7.9, refused by 8.4? (no upgrade) | `playground schema validate --cp-version 7.9.2 --cp-version 8.4.0 < schema.avsc` |
 | one subject name pointing at another | `playground schema set-alias --subject <s> --alias <a>` (CP 7.4.1+) |
+| Schema Linking: copy subjects to another registry, and check what arrived | `playground schema exporter create --name <n> --cluster europe --to us [--destination-context <c>]` / `playground schema compare --from europe --to us [--to-context .<c>]` |
+| the subjects of one context (Schema Linking destinations) | `playground schema contexts` / `--context <ctx>` on the schema commands |
+| the customer's schemas in the playground, with their ids | `playground schema export -o <folder>` / `playground schema import -f <folder \| /schemas JSON \| _schemas dump>` |
 
 ---
 
@@ -107,6 +116,69 @@ Gotchas:
 - Without `--subject`, every subject is read one by one (several REST calls per version): slow on a registry with
   hundreds of subjects. Use `--subject` in scripts.
 
+### Everything about one subject: `describe`
+
+```bash
+playground schema describe --subject orders-value
+playground schema describe --id 3              # every subject and version using the id of a record
+playground schema describe --subject orders-value --json
+```
+
+```text
+🔰 subject orders-value
+   🛡️ compatibility  BACKWARD 🌍 (global, no subject-level rule)
+   🔏 mode           READWRITE 🌍 (global)
+   🏷️ record name    com.example.Order
+   🧭 strategy       TopicNameStrategy → topic orders ✅
+   📚 versions
+      💯 v1  id 3  AVRO  2026-10-31 15:54:23
+         ⬅️ referenced by order-ref v1 (id 5): can't be deleted before it
+         👯 same schema (id) in other-topic-com.example.Order v1
+      🧟 v2  id 4  AVRO  2026-10-31 15:58:55  soft deleted
+```
+
+- The strategy is guessed from the name: `<topic>-key` / `<topic>-value` (TopicNameStrategy), the record full name
+  (RecordNameStrategy) or `<topic>-<record full name>` (TopicRecordNameStrategy). `❗ (no such topic)` means no
+  topic has that name: a strategy mismatch, or a topic deleted without its subjects.
+- `👯 same schema (id)`: the same schema registered under another subject shares its id; permanently deleting one
+  subject doesn't make the id unresolvable while the other keeps it.
+
+### What happened, and when: `history`
+
+```bash
+playground schema history                                  # the whole timeline of the registry
+playground schema history --subject orders-value --since 2d
+playground schema history -f customer-schemas.txt          # a dump sent by a customer
+```
+
+It reads the `_schemas` topic (the registry's own log: every registration, delete and setting change, with the
+time it happened):
+
+```text
+📅 2026-10-31
+   15:53:44  ⏺️ orders-value: registered v1 (id 1, AVRO)
+   15:53:50  🛡️ orders-value: compatibility BACKWARD
+   15:54:10  🧟 orders-value: soft deleted the subject (versions 1, 2): the ids still resolve
+   15:54:21  💀 orders-value: permanently deleted v1 (id 1): ❌ id 1 no longer resolves, records written with it can't be deserialized
+
+🧭 11 events from 26 records: 4 registrations, 2 soft deletes, 3 permanent deletes, 2 setting changes
+   ❌ ids that no longer resolve: 1, 2 (consumers fail on the records written with them: 'Error retrieving Avro schema for id N' / 40403)
+```
+
+Gotchas:
+
+- **To ask a customer for the dump**: `kafka-console-consumer --bootstrap-server … --topic _schemas --from-beginning
+  --property print.key=true --property print.timestamp=true > schemas.txt` (the topic name is `kafkastore.topic`,
+  `_schemas_<name>_<namespace>` with CFK). It holds the schemas, not data, but check it before sharing it.
+- **Not on Confluent Cloud**: `_schemas` isn't exposed; the audit logs of the organization have the schema events.
+- A soft-deleted schema registered again makes the registry tombstone the old version then write a new one: the
+  timeline says `the id is registered again by orders-value v3`, not "no longer resolves".
+- The temporary subjects of `check-compatibility` and `diff` are hidden (`--include-temporary`).
+- The log digests (`playground analyze logs`, `container logs --errors`, `connector diagnose`) point to these commands:
+  `🔍 Schema id not found` (`Error retrieving Avro schema for id N`, `40403`) → `schema history` / `describe --id`,
+  `🛡️ Incompatible schema refused` (`409`) → `check-compatibility` / `diff`, `📛 Subject not found` (`40401`) →
+  `schema list`.
+
 ---
 
 ## 3. Writing: `register`, references, `--id`
@@ -128,8 +200,10 @@ playground schema register --subject orders-all-value << 'EOF'
                   {"name": "com.example.Product",  "subject": "product",  "version": 1} ] }
 EOF
 
-# data contracts: metadata properties
+# data contracts: metadata properties, and rules (CEL conditions checked by the producers)
 playground schema register --subject orders-value --metadata-property owner=team-a --metadata-property pii=false < order.avsc
+playground schema register --subject orders-value --rule 'amountPositive:message.amount > 0' < order.avsc
+playground schema register --subject orders-value --rule-set @rules.json < order.avsc     # {"domainRules": […], "migrationRules": […]}
 ```
 
 What `register` prints is the registry's answer:
@@ -162,6 +236,36 @@ Gotchas:
   registration. Without it, a schema that only differs by whitespace or field order can become a new version.
 - The plaintext environment validates Avro defaults (`SCHEMA_REGISTRY_SCHEMA_PROVIDERS_AVRO_VALIDATE_DEFAULTS: true`):
   a `"default"` of the wrong type is refused at registration.
+- **A Schema Registry of Confluent Platform drops the rules silently** unless it runs with
+  `resource.extension.class=io.confluent.kafka.schemaregistry.rulehandler.RuleSetResourceExtension`: `register` checks
+  and warns, `❗ the registry dropped the rules`, with the command that enables it in the playground:
+  `playground container set-environment-variables -c schema-registry --env "SCHEMA_REGISTRY_RESOURCE_EXTENSION_CLASS: io.confluent.kafka.schemaregistry.rulehandler.RuleSetResourceExtension"`.
+  An unchanged schema returns its existing version: register it again after the restart to get a version with the
+  rules. A single `--metadata-property` is kept (it used to be dropped).
+- `--rule '<name>:<expr>'` is a shortcut for a domain rule `{"kind": "CONDITION", "type": "CEL", "mode": "WRITE"}`;
+  anything else (`onFailure: DLQ`, `READ` rules, migration rules, `JSONATA` transforms) goes in `--rule-set`.
+
+### Testing the rules: `test-rules`
+
+```bash
+playground schema test-rules --subject orders-value --record '{"id": 1, "amount": 5.0}' --record '{"id": 2, "amount": -1.0}'
+playground schema test-rules --subject orders-value < records.jsonl --json
+```
+
+```text
+📏 orders-value v2 (id 6): amountPositive (CONDITION CEL WRITE)
+✅ {"id": 1, "amount": 5.0}
+❌ {"id": 2, "amount": -1.0}
+   rule amountPositive failed: 'message.amount > 0'
+🧭 1 passed, 1 failed: a failed record is refused by a producer using this version (use.latest.version=true), or sent to its DLQ with onFailure DLQ
+```
+
+- It sends each record through the real serializer (the console producer of the `schema-registry` container, with
+  `use.latest.version=true`) into a temporary topic and subject (`playground-schema-check-…`, deleted afterwards):
+  the verdict is the client's, not a reimplementation of CEL. Exit 1 when a record fails.
+- The rules run in the clients (`kafka-schema-rules` on their classpath), never in the registry: registering a rule
+  doesn't refuse anything by itself, a producer without `use.latest.version=true` (or an old client) ignores it.
+- Plaintext environment only, schemas without references.
 
 ---
 
@@ -175,6 +279,56 @@ playground schema set-compatibility --global --compatibility FULL               
 playground topic set-schema-compatibility --topic orders --compatibility FULL   # the -value subject of the topic (--include-key: -key too)
 playground topic produce -t orders --compatibility NONE …                        # set before producing
 ```
+
+### Before registering: `check-compatibility` and `diff`
+
+```bash
+playground schema check-compatibility --subject orders-value < customer-v2.avsc                      # the registry's verdict, nothing registered
+playground schema check-compatibility --subject orders-value --compatibility FULL < customer-v2.avsc  # under another rule
+playground schema diff --subject orders-value                                  # the latest version vs the one before
+playground schema diff --subject orders-value --to @customer-v2.avsc           # the latest version vs a file
+playground schema diff --from @v1.avsc --to @v2.avsc --no-verdict              # two files, no registry needed
+```
+
+`check-compatibility` asks the registry the question a `register` (or a producer with `auto.register.schemas=true`)
+would, and prints its reasons:
+
+```text
+❌ the schema is not compatible with the versions the rule checks of orders-value under BACKWARD (subject rule): register would refuse it (40901)
+   READER_FIELD_MISSING_DEFAULT_VALUE: The field 'currency' at path '/fields/2' in the new schema has no default value and is missing in the old schema
+```
+
+`diff` explains, field by field, what changed and which rule each change breaks, then asks the registry for the
+verdict of each rule:
+
+```text
+🔀 orders-value v1 (id 1)  →  v2-bad.avsc  (AVRO)
+   ➕ currency: string
+      💡 added without a default: the new schema can't read old data (breaks BACKWARD)
+
+🛡️  Verdict of the Schema Registry for v2-bad.avsc after orders-value v1 (id 1):
+   ❌ BACKWARD
+      READER_FIELD_MISSING_DEFAULT_VALUE: The field 'currency' at path '/fields/2' in the new schema has no default value and is missing in the old schema
+   ✅ FORWARD
+   ❌ FULL
+   ✅ NONE
+```
+
+Gotchas:
+
+- **`check-compatibility` exits 0 (compatible), 1 (not compatible) or 2 (the check couldn't be done)**: an invalid
+  schema (`Undefined schema: nope`) is a 2, like the `42201` a `register` would get. A subject with no version
+  accepts anything: the first version is never checked.
+- Without `--version`, the schema is checked against what the rule says: the latest version, or **every** version
+  with a `*_TRANSITIVE` rule (that's what `register` does). `--version N` checks against that version only.
+- `--compatibility <rule>` and the verdicts of `diff` use a **temporary subject** (`playground-schema-check-…`),
+  permanently deleted afterwards. Its versions are the subject's own schemas, so they keep their ids, but a `--from`
+  **file** that isn't registered yet consumes a schema id: the next real registration gets a higher id.
+- `diff` follows nested records, unions, enums, logical types (Avro), `properties` / `required` /
+  `additionalProperties` (JSON Schema), and field numbers, types and reserved numbers (Protobuf). Referenced types
+  are compared by name only. The hints are rules of thumb; the registry's verdict is the authority.
+
+### The rules
 
 | Rule | A new version must… | Typical change it accepts |
 | --- | --- | --- |
@@ -240,6 +394,7 @@ EOF
 
 playground schema derive-schema --schema-type PROTOBUF --payload '{"sport": "Football"}'
 playground schema derive-schema --schema-type JSON --payload @sample.json
+playground schema derive-schema --name Order --namespace com.example -o order.avsc --register --subject orders-value < sample.jsonl
 ```
 
 It runs the `derive-schema` goal of the Schema Registry Maven plugin, at the version of the playground's default CP
@@ -250,8 +405,14 @@ Gotchas:
 - **Several records give one schema that covers them all**: one JSON per line; a field with different types across
   records becomes a union (Avro). A single multi-line JSON document is minified into one record.
 - **The schema comes from the values you give**: `9.99` → `double`, `1` → `int` (not `long`), a `null` → a null type.
-  Give records that show the real range of values, and review the result: it never guesses optional fields or
-  logical types (dates, decimals). A JSON `null` becomes `{"type": "null"}` in a JSON Schema.
+  Give records that show the real range of values, and review the result: it never guesses optional fields. A JSON
+  `null` becomes `{"type": "null"}` in a JSON Schema.
+- **Logical types get a hint, not a type**: values that look like a date, a timestamp, a uuid, a decimal in a string or
+  epoch milliseconds stay `string` / `long`, with
+  `💡 day: "2026-10-31" looks like a date (avro: {"type": "int", "logicalType": "date"}, json schema: "format": "date")`.
+- The type is called `Schema` unless `--name` is set (`--namespace` sets the namespace, or the protobuf `package`; for
+  JSON Schema `--name` is the `title`). `-o` writes the schema, `--register --subject` registers it (the first schema
+  only, when the records gave several).
 - The first run downloads the Maven plugin and its dependencies (cached in `~/.m2`): slow once.
 - To register the result and produce with it in one go: `topic produce --derive-value-schema-as AVRO` (see the
   [`topic produce` deep dive](/deep-dive-topic-produce.md)).
@@ -271,6 +432,107 @@ Gotchas:
 These commands work with every environment the playground starts: plain http on plaintext / SASL environments,
 client certificates on `sasl-ssl` / `2way-ssl`, basic auth `superUser` on RBAC, and the API key of `.ccloud/` on
 Confluent Cloud. They're not available on multi data center environments.
+
+### Across CP versions: `validate`
+
+```bash
+playground schema validate --cp-version 7.9.2 --cp-version 8.4.0 < legacy.avsc
+playground schema validate --cp-version 7.9.2 --cp-version 8.4.0 --schema @v1.avsc --schema @v2.avsc --json
+```
+
+```text
+🐳 Schema Registry 7.9.2: starting confluentinc/cp-schema-registry:7.9.2
+   ✅ schema 1: accepted (id 1)
+🐳 Schema Registry 8.4.0: starting confluentinc/cp-schema-registry:8.4.0
+   ❌ schema 1: 42201 Namespace part "my-company" is invalid: Illegal character in: my-company
+
+🧭 Verdict per CP version (each version starts with an empty registry and its default settings)
+SCHEMA    7.9.2  8.4.0
+schema 1  ✅     ❌ 42201
+```
+
+- For each version, a Schema Registry container starts next to the broker of the running environment, with its own
+  kafkastore topic (both deleted afterwards, `--keep` to look at them): nothing changes in the registry of the
+  environment, and no upgrade is needed.
+- Several `--schema` are registered in that order in `--subject`: a v1 then a v2 also shows the compatibility checks
+  of each version (`409`).
+- Each registry runs with the **defaults of its version**: to tell whether the difference comes from the stricter
+  validation (CP 8.2.0+, Avro 1.12 namespaces) rather than from the parser itself, replay with
+  `playground schema validate-new-schemas --value false` on a registry of the new version.
+- Needs a running docker environment (not ccloud / cfk). CP 5.x / 6.0 registries can't talk to a CP 8 broker: start
+  the environment with an older `--tag` for them.
+
+### Moving a registry: `export` and `import`
+
+```bash
+playground schema export -o ./schemas                         # manifest.json + <subject>/v<n>.avsc|json|proto
+playground schema import -f ./schemas --dry-run               # what would be imported, and the conflicts
+playground schema import -f ./schemas                         # same subjects, versions and ids
+playground schema import -f customer-schemas.json             # curl <registry>/schemas, or schema get --json
+playground schema import -f customer-schemas-dump.txt         # a _schemas dump (kafka-console-consumer, print.key + print.timestamp)
+```
+
+```text
+📦 playground schema export: 3 subject(s), 3 version(s)
+➕ orders-value: v1 id 3
+➕ imp-value: v3 id 100
+🛡️ orders-value: compatibility FULL
+✅ 3 version(s) imported with their ids, 0 skipped: records written with them decode in this registry
+```
+
+Gotchas:
+
+- **The ids are kept** (IMPORT mode, versions registered in id order so references exist first): records copied from
+  the customer's topics decode in the playground. An id already used by another schema is refused
+  (`42205 Overwrite new schema with id 3 … is not permitted`): import into a fresh registry, or `--new-ids` (same
+  schemas, new ids, old records don't decode).
+- **A subject that already exists is skipped** by default: `--on-conflict overwrite` deletes it permanently first,
+  `merge` adds the versions to it.
+- The subject-level compatibility, mode and alias of the source are applied after the versions; the global rule only
+  with `--with-global-settings`.
+- In a reproduction model, export the customer's schemas into the model folder and start the scenario with
+  `playground schema import -f "${DIR}/schemas"`: the model ships them.
+
+### Contexts and Schema Linking: `--context`, `contexts`, `exporter`, `compare`
+
+A **context** is a separate namespace of subjects **and schema ids** inside one registry. Schema Linking (an
+**exporter** running in the source registry) copies subjects, with their ids, into a context of the destination
+registry. In the `mdc-*` environments the two registries are `--cluster europe` and `--cluster us`; the lab override
+`other/deep-dive-labs/docker-compose.mdc-plaintext.replication.yml` enables the exporter extension on both:
+
+```bash
+playground start-environment --environment mdc-plaintext --docker-compose-override-file "${PWD}/other/deep-dive-labs/docker-compose.mdc-plaintext.replication.yml"
+playground schema register --subject orders-value --cluster europe < order.avsc
+playground schema exporter create --name eu-to-us --cluster europe --destination-context europe
+# 🔗 exporter eu-to-us: RUNNING, offset 3, 2 object(s) exported
+playground schema contexts --cluster us
+#    .  0 subject(s)  mode READWRITE
+#    .europe  1 subject(s)  mode IMPORT
+playground schema list --cluster us --context europe          # :.europe:orders-value …
+playground schema compare --from europe --to us --to-context .europe
+# ✅ orders-value: 1 version(s), same schemas and ids
+playground schema exporter list|status|pause|resume|reset|delete --name eu-to-us --cluster europe
+```
+
+Gotchas:
+
+- **The ids live in the context**: on the destination, `playground schema get --id 1 --cluster us` fails with
+  `40403 Schema 1 not found`, `--context europe` finds it. A consumer of the destination reading replicated records
+  fails the same way, unless it looks up the context (`context.name.strategy` in the deserializer) or the exporter
+  uses `--context-type NONE` (default context, ids must not collide). This is the classic Schema Linking repro.
+- `--context-type AUTO` (default without `--destination-context`) lands in `.<exporter name>`, `CUSTOM` in
+  `--destination-context`, `NONE` in the default context. The destination context is put in `IMPORT` mode: nothing
+  can be registered there by hand.
+- The exporter commands need the exporter extension in the **source** registry (`resource.extension.class`,
+  `kafkastore.update.handlers`, `password.encoder.secret`): without it they print the settings to add. Outside `mdc-*`,
+  `exporter create --destination-url <url> [--destination-auth user:password]` exports to any registry the source
+  can reach (Confluent Cloud included).
+- `pause` before `reset` or `delete`; deleting an exporter leaves the exported schemas in the destination.
+- `compare` exports both sides (`schema export` under the hood) and ignores the context prefix of the names
+  (`:.europe:orders-value` = `orders-value`); exit 1 when they differ. Outside `mdc-*` it compares two contexts of the
+  registry (`--from-context`, `--to-context`).
+- Without `--context`, `schema list` / `get` show the subjects of every context (with their `:.<context>:` prefix);
+  `schema export` keeps only the default context.
 
 ---
 
@@ -385,15 +647,21 @@ playground stop
 
 | Customer symptom | Command |
 | --- | --- |
-| "`Schema not found` / `Error retrieving Avro schema for id N`" after a cleanup | produce, `schema delete --subject <s> --permanent`, consume: the skipped-records warning shows the failure; a soft delete doesn't reproduce it |
-| "the producer gets `Schema being registered is incompatible`" | `set-compatibility` to the customer's rule, `register` v1 then the customer's v2: the 409 is the registry's verdict |
+| "`Schema not found` / `Error retrieving Avro schema for id N`" after a cleanup | on the customer side: `schema history -f <their _schemas dump>` shows the 💀 permanent delete and when; to reproduce: produce, `schema delete --subject <s> --permanent`, consume: the skipped-records warning shows the failure; a soft delete doesn't reproduce it |
+| "who changed the compatibility rule?" / "the rule was relaxed then put back" | `schema history --subject <s>`: every `🛡️ compatibility X → Y` with its time |
+| "the producer gets `Schema being registered is incompatible`" | `set-compatibility` to the customer's rule, `register` v1, then `check-compatibility` and `diff --to @<customer v2>`: the verdict, its reasons and the field that breaks it, without registering anything |
+| "will the new version of our schema be accepted?" / "which rule should we use?" | `diff --subject <s> --to @<new>` shows the verdict of every rule at once; `check-compatibility --compatibility FULL_TRANSITIVE` for a transitive rule |
 | "consumers broke after someone relaxed compatibility" | `set-compatibility NONE`, `register` the incompatible version, set the rule back, consume old and new records |
-| "which schema is this record using?" | `topic consume -t <t> --last 1` for `ValueSchemaId:`, then `schema get --id <id>` |
+| "which schema is this record using?" | `topic consume -t <t> --last 1` for `ValueSchemaId:`, then `schema describe --id <id>` (and `schema get --id <id> --schema-only`) |
 | "the sink reads the wrong subject / subject not found" | the producer's subject name strategy: `schema get` to list the real subjects, `topic consume --value-subject` to read them (see the [`topic consume` deep dive](/deep-dive-topic-consume.md)) |
 | "the same schema keeps creating new versions" | register twice with a whitespace change, then `set-normalize --value true` and again |
-| "a schema registered years ago is refused after an upgrade" | `validate-new-schemas --value true` (CP 8.2 default) vs `false` on the same schema |
-| "we migrated subjects and the ids changed" | `register --id <id>` on the target registry (IMPORT mode under the hood) |
-| "we only have a sample message" | `derive-schema`, review, then `register` or `topic produce --derive-value-schema-as` |
+| "a schema registered years ago is refused after an upgrade" | `validate --cp-version <theirs> --cp-version <target> < schema.avsc` shows which version refuses it and why; then `validate-new-schemas --value true` (CP 8.2 default) vs `false` on the same schema |
+| "after Schema Linking, the consumers in DR fail with `Schema not found`" | `mdc-plaintext` with the lab override, `exporter create … --destination-context <c>`, then `schema get --id <id> --cluster us` (40403) vs `--context <c>` (found): the ids are in the context |
+| "is everything linked? the destination misses subjects" | `schema compare --from <source> --to <destination> --to-context .<c>`, and `schema exporter status --name <n>` (ERROR + trace) |
+| "we migrated subjects and the ids changed" | `export` on the source, `import` on the target: same ids (or `register --id <id>` for one schema) |
+| "here are our schemas" (a `/schemas` dump, a `_schemas` dump, an export) | `import -f <file>` before the connector: the repro uses the customer's schemas and ids |
+| "we only have a sample message" | `derive-schema --name <record> -o <file>`, review (and the 💡 hints), then `register` or `topic produce --derive-value-schema-as` |
+| "the producer fails with `Rule failed: …` / records end up in the DLQ of a data contract" | `register --rule` (or `--rule-set` with the customer's ruleSet) on a registry with the rule set extension, then `test-rules --record` with their records: which rule fails and its expression |
 
 In a repro model, register the customer's schemas **before** creating the connector, and fail fast when the registry
 refuses them:
@@ -414,8 +682,21 @@ playground schema register --subject <s> [--schema @file] [--metadata-property k
 playground schema get-compatibility --subject <s> | --global [--json]
 playground schema set-compatibility --subject <s> | --global --compatibility BACKWARD|FORWARD|FULL|NONE[_TRANSITIVE]
 playground topic set-schema-compatibility --topic <t> --compatibility … [--include-key]
+playground schema describe --subject <s> | --id <id> [--json]
+playground schema history [--subject <s>] [--since 12h|2d|<date>] [-f <_schemas dump>] [--json]
+playground schema validate --cp-version <A> --cp-version <B> [--schema @v1.avsc]... [--subject <s>] [--keep] [--json] < schema
+playground schema contexts [--cluster us|europe]             # --context <ctx> on list, get, describe, register, export, import…
+playground schema exporter create --name <n> [--cluster <source>] [--to <cluster> | --destination-url <url> [--destination-auth u:p]] [--context-type AUTO|CUSTOM|NONE] [--destination-context <c>] [--subjects "a,b*"]
+playground schema exporter list|status|pause|resume|reset|delete [--name <n>] [--cluster <source>]
+playground schema compare [--from europe] [--to us] [--from-context <c>] [--to-context <c>] [--json]
+playground schema export [--subject-prefix <p>] [-o <folder>]
+playground schema import -f <folder|.tgz|JSON array|_schemas dump> [--on-conflict skip|overwrite|merge] [--new-ids] [--dry-run]
+playground schema check-compatibility --subject <s> [--schema @file] [--version N] [--compatibility <rule>] [--json] < new.avsc
+playground schema diff [--subject <s>] [--from N|latest|id:<id>|@file] [--to …] [--no-verdict] [--json]
 playground schema delete --subject <s> [--version N] [--permanent] [--dry-run]
-playground schema derive-schema [--schema-type AVRO|JSON|PROTOBUF] [--payload '<json>'|@file] << 'EOF' … EOF
+playground schema derive-schema [--schema-type AVRO|JSON|PROTOBUF] [--payload '<json>'|@file] [--name <N>] [--namespace <ns>] [-o <file>] [--register --subject <s>] << 'EOF' … EOF
+playground schema register --subject <s> [--rule '<name>:<CEL expr>']... [--rule-set @rules.json] < schema
+playground schema test-rules --subject <s> [--version N] [--record '<json>']... [--json]
 playground schema get-mode|set-mode --subject <s> | --global [--mode READWRITE|READONLY|IMPORT]
 playground schema set-normalize|validate-new-schemas --value true|false
 playground schema get-alias|set-alias --subject <s> [--alias <a>]

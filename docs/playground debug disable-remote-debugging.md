@@ -2,6 +2,8 @@
 
 🛑 Disable java remote debugging for container
 
+🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-java-debugging
+
 ## Usage
 
 ```bash

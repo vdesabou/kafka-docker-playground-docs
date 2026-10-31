@@ -6,6 +6,8 @@
 
 see https://docs.confluent.io/platform/current/tools/diagnostics-tool.html#collect-diagnostics
 
+🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-java-debugging
+
 ## Usage
 
 ```bash

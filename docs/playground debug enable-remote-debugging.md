@@ -6,6 +6,8 @@
 
 🎬 Bite size session: https://kafka-docker-playground.io/#/sessions?id=%F0%9F%90%9E-a-breakpoint-in-a-running-connector-remote-debugging
 
+🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-java-debugging
+
 ## Usage
 
 ```bash

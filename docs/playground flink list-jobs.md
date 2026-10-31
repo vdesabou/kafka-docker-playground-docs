@@ -5,6 +5,8 @@
 Job id, state, name, start time and duration of every job, most  
 recent first. For a FAILED job, the root exception is also printed.
 
+🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-flink
+
 ## Usage
 
 ```bash

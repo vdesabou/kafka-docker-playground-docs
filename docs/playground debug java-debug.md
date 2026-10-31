@@ -10,8 +10,6 @@ versions collide.
 ❗ These traces are extremely verbose. Turn them back off with  
 `--action` disable once you have what you need.
 
-🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-java-debugging
-
 ## Usage
 
 ```bash

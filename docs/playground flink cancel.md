@@ -6,8 +6,6 @@ Cancels `--job`, or every running job with `--all`, and waits until the
 job is CANCELED (30 seconds at most). Without `--job` and `--all`, the  
 running job is cancelled when there is only one.
 
-🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-flink
-
 ## Usage
 
 ```bash

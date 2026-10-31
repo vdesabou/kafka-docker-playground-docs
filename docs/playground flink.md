@@ -12,8 +12,6 @@ Run Flink SQL and manage the jobs of the Flink cluster started with
 🎓 Tip: the Flink UI is served on the same port as the REST API:  
 http://localhost:18081. See the flink/flink-sql-kafka example.
 
-🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-flink
-
 ## Usage
 
 ```bash

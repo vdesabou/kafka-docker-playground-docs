@@ -22,8 +22,6 @@ you pause, and `playground ec2 delete` when you are done;
 is created. Back it up, it is the only way in, and only your current  
 ip address is allowed to connect.
 
-🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-ec2
-
 ## Usage
 
 ```bash

@@ -6,8 +6,6 @@ Starts the proxy in front of `--hostname` and `--port`, then rewrites the
 running connector configuration so its traffic goes through it. Nothing  
 else to change on your side.
 
-🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-tcp-proxy
-
 ## Usage
 
 ```bash

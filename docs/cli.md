@@ -391,6 +391,14 @@ visit https://docs.docker.com/get-docker to install
   - [list-jobs](playground%20flink%20list-jobs) - 📋 List the jobs of the Flink cluster
   - [cancel](playground%20flink%20cancel) - 🛑 Cancel a Flink job
 
+### ksqlDB commands
+
+- [ksqldb](playground%20ksqldb) - 🧮 ksqlDB commands
+  - [sql](playground%20ksqldb%20sql) - 🧮 Run ksqlDB statements with the ksql cli
+  - [list](playground%20ksqldb%20list) - 📋 List the streams, tables and persistent queries
+  - [describe](playground%20ksqldb%20describe) - 🔎 Describe a stream or a table
+  - [wait](playground%20ksqldb%20wait) - ⏳ Wait until the persistent queries are RUNNING and have no lag
+
 ### RBAC commands
 
 - [rbac](playground%20rbac) - 🛡️ RBAC commands (rbac-sasl-plain and cfk-rbac environments, plus Confluent Cloud ACLs)

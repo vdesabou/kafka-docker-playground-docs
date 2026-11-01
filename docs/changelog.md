@@ -3,8 +3,14 @@
 ## November 2026
 ##### 🌟 Enhancements
 
+- 🧹💀 playground run kills all containers twice: start-environment skips kill-all when no container exists [#9904](https://github.com/vdesabou/kafka-docker-playground/issues/9904)
+- 🧠🧭 playground run: failure hints and next steps that fit the example (connector diagnose, ksqlDB, Flink) [#9900](https://github.com/vdesabou/kafka-docker-playground/issues/9900)
 - 🧠🧮 playground ksqldb sql|list|describe|wait, ksqlDB examples only use playground commands [#9895](https://github.com/vdesabou/kafka-docker-playground/issues/9895)
 
+##### 🐛 Bugs
+
+- 🐛🧮 ksqlDB examples: fix the failures hidden before playground ksqldb sql, and ksqldb wait on queries that never commit [#9902](https://github.com/vdesabou/kafka-docker-playground/issues/9902)
+- 🐛🏃 playground run: ENABLE\_\* from the shell missing from flags, history and re-run; doc link warning on non-connector examples [#9898](https://github.com/vdesabou/kafka-docker-playground/issues/9898)
 
 ## October 2026
 ##### 🌟 Enhancements

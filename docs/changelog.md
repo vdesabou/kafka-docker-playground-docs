@@ -1,5 +1,11 @@
 # 📜 Change Log
 
+## November 2026
+##### 🌟 Enhancements
+
+- 🧠🧮 playground ksqldb sql|list|describe|wait, ksqlDB examples only use playground commands [#9895](https://github.com/vdesabou/kafka-docker-playground/issues/9895)
+
+
 ## October 2026
 ##### 🌟 Enhancements
 

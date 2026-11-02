@@ -65,7 +65,7 @@ the end of the run. The last 50 are kept in
 The masking is best-effort: review the file before sharing it  
 outside Confluent.
 
-❗ this command will kill all containers using `playground container kill-all`, you can disable this by running `playground config container-kill-all-before-run false`
+❗ the containers of the previous example are stopped first (`playground stop`). To kill every container instead (`playground container kill-all`), run `playground config container-kill-all-before-run true`
 
 🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-run-and-versions  
 🎬 Bite size session: https://kafka-docker-playground.io/#/sessions?id=%F0%9F%95%B9%EF%B8%8F-run-an-example-with-the-menu-or-with-flags
@@ -86,7 +86,7 @@ visit https://github.com/junegunn/fzf#installation to install
 
 #### `PLAYGROUND_ENVIRONMENT`
 
-🔐 Environment used when `--environment` is not set (plaintext by default in the examples)
+🔐 Environment used when `--environment` is not set (plaintext by default in the examples), recorded as `--environment` in the history and re-run
 
 #### `SQL_DATAGEN_DURATION`
 
@@ -128,12 +128,13 @@ visit https://github.com/junegunn/fzf#installation to install
 - sasl-ssl
 - ssl_kerberos
 
-Default is plaintext.  
+Default is `PLAYGROUND_ENVIRONMENT` when it is exported in your shell (it is then  
+added to the flags of the run), plaintext otherwise. Not available with  
+ccloud examples (they run against Confluent Cloud).  
 This is only supported when example is a connector example
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Default Value:  | `plaintext`
 | Allowed Values: | `ccloud`, `cfk`, `cfk-rbac`, `plaintext`, `sasl-ssl`, `sasl-plain`, `2way-ssl`, `sasl-scram`, `kerberos`, `ssl_kerberos`, `ldap-authorizer-sasl-plain`, `ldap-sasl-plain`, `rbac-sasl-plain`
 
 #### `--file, -f FILE`
@@ -262,6 +263,8 @@ Control Center is reachable at http://127.0.0.1:9021
 
 🐿️ Enable Flink
 
+❗ not supported with ccloud examples
+
 By default, flink is not started for every test
 
 Once enabled, the CLI will ask if you need to download any connectors. Based on the response, you can download one or more connectors from Flink maven repository.
@@ -308,6 +311,8 @@ Enable Grafana, Prometheus and Pyroscope
 #### `--enable-kcat`
 
 🐈‍⬛ Enable kcat
+
+❗ not supported with ccloud examples
 
 You can use it with:
 

@@ -4,6 +4,7 @@
 ##### 🌟 Enhancements
 
 - 🧠🪄 kdp Alfred workflow: results in the Alfred window, VS Code terminal [#9935](https://github.com/vdesabou/kafka-docker-playground/issues/9935)
+- 🧹🌐 open\_url everywhere, get-ci-result --json, prompts without a terminal [#9934](https://github.com/vdesabou/kafka-docker-playground/issues/9934)
 - 🧠🧹 cleanup-cloud-resources --dry-run [#9930](https://github.com/vdesabou/kafka-docker-playground/issues/9930)
 - 🧠🦭 switch-podman with several podman machines, open urls with xdg-open on Linux [#9929](https://github.com/vdesabou/kafka-docker-playground/issues/9929)
 - 🧠🪄 Alfred workflow for the playground CLI (kdp) [#9924](https://github.com/vdesabou/kafka-docker-playground/issues/9924)

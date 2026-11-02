@@ -324,7 +324,7 @@ PostgreSQL, SQL Server), self-managed and fully managed, and with their reproduc
 
 `SQL_DATAGEN_DURATION` (minutes, default 10) and `SQL_DATAGEN_SESSIONS` (default 5) change the duration and the number of  
 parallel sessions, `BENCHMARK_LOAD_SCRIPT` another load script than benchmark-load.bash (see playground connector  
-benchmark).
+benchmark). If the injection fails, the command exits with its exit code.
 
 #### `--benchmark`
 

@@ -89,6 +89,9 @@ No run prints [] and exits with code 1.
 ⏮️ Print the most recent command matching the query (the last run  
 without query), and nothing else
 
+The `--cluster-creds` and `--cluster-schema-registry-creds` values are  
+printed as '`<masked>`': use `--run` to replay the command with them
+
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Conflicts With: | `--list`, `--json`, `--run`, `--stats`, `--prune`

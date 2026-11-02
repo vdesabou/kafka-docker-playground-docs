@@ -3,6 +3,7 @@
 ## November 2026
 ##### 🌟 Enhancements
 
+- 🧠🪄 kdp Alfred workflow: pickers, running environment, smarter Universal Action, CI check [#9938](https://github.com/vdesabou/kafka-docker-playground/issues/9938)
 - 🧠🪄 kdp Alfred workflow: results in the Alfred window, VS Code terminal [#9935](https://github.com/vdesabou/kafka-docker-playground/issues/9935)
 - 🧹🌐 open\_url everywhere, get-ci-result --json, prompts without a terminal [#9934](https://github.com/vdesabou/kafka-docker-playground/issues/9934)
 - 🧠🧹 cleanup-cloud-resources --dry-run [#9930](https://github.com/vdesabou/kafka-docker-playground/issues/9930)

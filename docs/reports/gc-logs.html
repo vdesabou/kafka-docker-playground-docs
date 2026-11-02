@@ -28,6 +28,9 @@ h2{font-size:1.05rem;font-weight:600;margin-bottom:12px;color:#334155}
 .rec-badge.critical{background:#fee2e2;color:#dc2626}.rec-badge.high{background:#ffedd5;color:#ea580c}.rec-badge.medium{background:#fef3c7;color:#d97706}
 .rec-badge.low{background:#dcfce7;color:#16a34a}.rec-badge.info{background:#dbeafe;color:#2563eb}.rec-badge.ok{background:#cffafe;color:#0891b2}
 .rec-text{font-size:.88rem;flex:1;color:#334155}
+.sev-filter{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:-4px 0 10px;font-size:.78rem;color:#475569}
+.rec-card[hidden]{display:none}.sev-chip{border:0;cursor:pointer;font-family:inherit}.sev-chip[aria-pressed=false]{opacity:.35;text-decoration:line-through}
+.rec-details{margin:6px 0 0;padding-left:18px}.rec-details li{margin:3px 0;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.8rem;word-break:break-word}
 .table-card{background:#fff;border-radius:10px;padding:18px 20px;box-shadow:0 1px 3px rgba(0,0,0,.07);overflow-x:auto;margin-bottom:22px}
 table{width:100%;border-collapse:collapse;font-size:.84rem}
 th{text-align:left;padding:7px 11px;background:#f8fafc;font-weight:600;border-bottom:2px solid #e2e8f0;color:#475569}
@@ -41,6 +44,40 @@ details summary{cursor:pointer;font-weight:600;font-size:.86rem;padding:6px 0}
 .verdict.danger{border-left-color:#dc2626}.verdict.warn{border-left-color:#d97706}.verdict.ok{border-left-color:#16a34a}
 pre{font-family:'SFMono-Regular',Consolas,Menlo,monospace;font-size:.76rem;background:#f8fafc;padding:10px;border-radius:6px;overflow-x:auto;white-space:pre-wrap;word-break:break-all}
 .footer{text-align:center;font-size:.78rem;color:#94a3b8;padding:14px}
+
+.lh-ts{color:#0f766e}
+.lh-lvl{font-weight:700;border-radius:3px;padding:0 3px}
+.lh-fatal,.lh-error{color:#fff;background:#dc2626}.lh-warn{color:#78350f;background:#fde68a}
+.lh-info{color:#1d4ed8}.lh-debug,.lh-trace{color:#64748b}
+.lh-exc{color:#b91c1c;font-weight:600}
+.lh-cause{color:#b91c1c;font-weight:700}
+.lh-mdc{color:#7c3aed}
+.lh-logger,.lh-frame{color:#94a3b8}
+.lh-ph{color:#64748b;font-style:italic}
+html[data-theme="dark"] .lh-ts{color:#5eead4}
+html[data-theme="dark"] .lh-fatal,html[data-theme="dark"] .lh-error{color:#fff;background:#b91c1c}
+html[data-theme="dark"] .lh-warn{color:#451a03;background:#fcd34d}
+html[data-theme="dark"] .lh-info{color:#93c5fd}
+html[data-theme="dark"] .lh-debug,html[data-theme="dark"] .lh-trace{color:#94a3b8}
+html[data-theme="dark"] .lh-exc,html[data-theme="dark"] .lh-cause{color:#fca5a5}
+html[data-theme="dark"] .lh-mdc{color:#c4b5fd}
+html[data-theme="dark"] .lh-logger,html[data-theme="dark"] .lh-frame{color:#64748b}
+html[data-theme="dark"] .lh-ph{color:#94a3b8}
+
+.chart-card:has(.zoom-chart.wide){grid-column:1/-1}
+.zoom-bar{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:-4px 0 8px;font-size:.78rem}
+.zoom-bar button{font:inherit;font-size:.74rem;color:#475569;background:#fff;border:1px solid #cbd5e1;border-radius:6px;padding:1px 9px;cursor:pointer}
+.zoom-bar button:hover{border-color:#2a78d6;color:#2a78d6}
+.zoom-bar button.on{background:#2a78d6;border-color:#2a78d6;color:#fff}
+.zoom-bar button:disabled{opacity:.4;cursor:default}
+.zoom-bar button:disabled:hover{border-color:#cbd5e1;color:#475569}
+.zoom-info{margin-left:auto;color:#64748b}
+.zoom-chart svg{cursor:crosshair;user-select:none;-webkit-user-select:none}
+.zoom-hint{font-size:.72rem;color:#94a3b8;margin-top:2px}
+html[data-theme="dark"] .zoom-bar button,html[data-theme="dark"] .zoom-bar button:disabled:hover{color:#cbd5e1;background:#1e293b;border-color:#334155}
+html[data-theme="dark"] .zoom-bar button.on{background:#2a78d6;border-color:#2a78d6;color:#fff}
+html[data-theme="dark"] .zoom-info{color:#94a3b8}
+html[data-theme="dark"] .zoom-hint{color:#64748b}
 
 .header{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:16px}
 .health-badge{text-align:center;background:rgba(255,255,255,.92);border-radius:12px;padding:14px 22px;min-width:110px;box-shadow:0 2px 8px rgba(0,0,0,.15)}
@@ -102,4 +139,323 @@ html[data-theme="dark"] .theme-toggle{color:#cbd5e1;background:#1e293b;border-co
     document.body.appendChild(button);
   });
 })();
-</script></head><body><div class='page'><div class='header'><div><h1>♻️ JVM GC Log Analysis</h1><div class='header-meta'><span>&#128196; jdk21_g1_kafka_real.log</span><span>Run #1 of 1</span><span>JDK 21</span><span>Collector: G1GC</span><span>-Xmx: 256.0M</span><span>Span: 0.3s</span><span>Coverage: 57/57</span><span>Generated: 2026-10-27 13:58:07</span></div></div><div class='health-badge'><div class='health-score' style='color:#16a34a'>87</div><div class='health-label'>🩺 health</div><div class='health-name' style='color:#16a34a'>Good</div></div></div><div class='verdict warn'>⚠️ 2 things to look at, nothing critical.</div><div class='kpi-grid'><div class="kpi-card "><div class="kpi-label">🚀 Throughput</div><div class="kpi-value">-</div><div class="kpi-unit">%</div></div><div class="kpi-card "><div class="kpi-label">⏱️ GC pauses</div><div class="kpi-value">57</div><div class="kpi-unit">events</div></div><div class="kpi-card ok"><div class="kpi-label">♻️ Full GC</div><div class="kpi-value">0</div><div class="kpi-unit">events</div></div><div class="kpi-card ok"><div class="kpi-label">⏱️ p99 pause</div><div class="kpi-value">3.25</div><div class="kpi-unit">ms</div></div><div class="kpi-card "><div class="kpi-label">⏱️ Max pause</div><div class="kpi-value">3.25</div><div class="kpi-unit">ms</div></div><div class="kpi-card "><div class="kpi-label">💾 Live set</div><div class="kpi-value">162.0</div><div class="kpi-unit">MB of 256 MB Xmx</div></div></div><div class='charts-grid'><div class='chart-card'><h2>📈 GC pause timeline</h2><svg viewBox="0 0 560 270" xmlns="http://www.w3.org/2000/svg"><line x1="56" y1="234.0" x2="546" y2="234.0" stroke="#e2e8f0"/><text x="50" y="238.0" font-size="10" text-anchor="end" fill="#64748b">0</text><line x1="56" y1="182.0" x2="546" y2="182.0" stroke="#e2e8f0"/><text x="50" y="186.0" font-size="10" text-anchor="end" fill="#64748b">1</text><line x1="56" y1="130.0" x2="546" y2="130.0" stroke="#e2e8f0"/><text x="50" y="134.0" font-size="10" text-anchor="end" fill="#64748b">2</text><line x1="56" y1="78.0" x2="546" y2="78.0" stroke="#e2e8f0"/><text x="50" y="82.0" font-size="10" text-anchor="end" fill="#64748b">3</text><line x1="56" y1="26.0" x2="546" y2="26.0" stroke="#e2e8f0"/><text x="50" y="30.0" font-size="10" text-anchor="end" fill="#64748b">4</text><text x="56.0" y="248" font-size="10" text-anchor="middle" fill="#64748b">0</text><text x="178.5" y="248" font-size="10" text-anchor="middle" fill="#64748b">0.1</text><text x="301.0" y="248" font-size="10" text-anchor="middle" fill="#64748b">0.2</text><text x="423.5" y="248" font-size="10" text-anchor="middle" fill="#64748b">0.3</text><text x="546.0" y="248" font-size="10" text-anchor="middle" fill="#64748b">0.4</text><line x1="56" y1="234" x2="546" y2="234" stroke="#94a3b8"/><text x="301.0" y="266" font-size="11" text-anchor="middle" fill="#475569">seconds since start</text><text x="12" y="130.0" font-size="11" text-anchor="middle" fill="#475569" transform="rotate(-90 12 130.0)">pause (ms)</text><circle cx="56.0" cy="150.7" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="58.5" cy="175.0" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="59.7" cy="167.0" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="62.1" cy="152.3" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="64.6" cy="180.6" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="73.2" cy="135.5" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="80.5" cy="175.3" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="84.2" cy="169.4" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="90.3" cy="128.3" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="101.3" cy="128.4" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="109.9" cy="111.1" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="131.9" cy="101.6" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="144.2" cy="145.2" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="155.2" cy="129.3" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="166.2" cy="113.4" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="177.3" cy="135.4" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="189.5" cy="98.6" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="203.0" cy="100.5" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="214.0" cy="126.8" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="227.5" cy="106.4" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="239.8" cy="99.1" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="250.8" cy="131.6" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="263.0" cy="125.8" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="275.3" cy="111.2" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="286.3" cy="131.9" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="288.8" cy="149.1" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="293.6" cy="216.1" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="296.1" cy="227.3" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="299.8" cy="145.3" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="312.0" cy="88.8" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="321.8" cy="143.3" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="325.5" cy="214.7" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="326.7" cy="226.7" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="334.1" cy="137.7" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="356.1" cy="131.9" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="359.8" cy="215.0" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="362.2" cy="226.7" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="367.1" cy="143.2" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="388.0" cy="99.8" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="391.7" cy="212.5" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="395.3" cy="142.1" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="397.8" cy="214.7" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="405.1" cy="112.6" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="422.3" cy="64.8" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="432.1" cy="134.5" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="434.5" cy="213.3" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="437.0" cy="227.4" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="440.7" cy="152.0" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="446.8" cy="149.1" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="465.1" cy="150.9" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="468.8" cy="215.4" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="471.3" cy="165.7" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="472.5" cy="227.6" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="346.3" cy="95.4" r="3.5" fill="#dc2626"/><circle cx="379.4" cy="128.3" r="3.5" fill="#dc2626"/><circle cx="414.9" cy="107.7" r="3.5" fill="#dc2626"/><circle cx="457.8" cy="134.8" r="3.5" fill="#dc2626"/><text x="60" y="12" font-size="10" fill="#3b82f6">● pause</text><text x="115" y="12" font-size="10" fill="#dc2626">● Full GC / evacuation or mode failure</text></svg></div><div class='chart-card'><h2>💾 Heap before / after GC</h2><svg viewBox="0 0 560 270" xmlns="http://www.w3.org/2000/svg"><line x1="56" y1="234.0" x2="546" y2="234.0" stroke="#e2e8f0"/><text x="50" y="238.0" font-size="10" text-anchor="end" fill="#64748b">0</text><line x1="56" y1="164.7" x2="546" y2="164.7" stroke="#e2e8f0"/><text x="50" y="168.7" font-size="10" text-anchor="end" fill="#64748b">100</text><line x1="56" y1="95.3" x2="546" y2="95.3" stroke="#e2e8f0"/><text x="50" y="99.3" font-size="10" text-anchor="end" fill="#64748b">200</text><line x1="56" y1="26.0" x2="546" y2="26.0" stroke="#e2e8f0"/><text x="50" y="30.0" font-size="10" text-anchor="end" fill="#64748b">300</text><text x="56.0" y="248" font-size="10" text-anchor="middle" fill="#64748b">0</text><text x="178.5" y="248" font-size="10" text-anchor="middle" fill="#64748b">0.1</text><text x="301.0" y="248" font-size="10" text-anchor="middle" fill="#64748b">0.2</text><text x="423.5" y="248" font-size="10" text-anchor="middle" fill="#64748b">0.3</text><text x="546.0" y="248" font-size="10" text-anchor="middle" fill="#64748b">0.4</text><line x1="56" y1="234" x2="546" y2="234" stroke="#94a3b8"/><text x="301.0" y="266" font-size="11" text-anchor="middle" fill="#475569">seconds since start</text><text x="12" y="130.0" font-size="11" text-anchor="middle" fill="#475569" transform="rotate(-90 12 130.0)">heap (MB)</text><path d="M56.0,224.3 L58.5,227.8 L59.7,227.8 L62.1,227.1 L64.6,227.8 L73.2,218.7 L80.5,213.9 L84.2,213.9 L90.3,202.8 L101.3,184.1 L109.9,183.4 L131.9,141.1 L144.2,145.3 L155.2,134.9 L166.2,129.3 L177.3,125.1 L189.5,118.9 L203.0,114.7 L214.0,114.1 L227.5,103.7 L239.8,98.8 L250.8,98.1 L263.0,89.8 L275.3,83.5 L286.3,82.2 L288.8,160.5 L293.6,131.4 L296.1,100.9 L299.8,78.0 L312.0,76.6 L321.8,78.0 L325.5,134.9 L326.7,127.9 L334.1,77.3 L346.3,69.7 L356.1,73.1 L359.8,115.4 L362.2,95.3 L367.1,76.6 L379.4,65.5 L388.0,66.9 L391.7,86.3 L395.3,75.9 L397.8,115.4 L405.1,67.6 L414.9,64.1 L422.3,66.9 L432.1,67.6 L434.5,93.9 L437.0,81.5 L440.7,76.6 L446.8,67.6 L457.8,64.8 L465.1,66.9 L468.8,88.4 L471.3,73.1 L472.5,123.1" fill="none" stroke="#f97316" stroke-width="1.2" stroke-opacity=".85"/><path d="M56.0,233.3 L58.5,233.3 L59.7,232.6 L62.1,232.6 L64.6,231.9 L73.2,231.9 L80.5,230.5 L84.2,229.8 L90.3,228.5 L101.3,226.4 L109.9,224.3 L131.9,220.1 L144.2,216.7 L155.2,213.2 L166.2,209.0 L177.3,205.6 L189.5,201.4 L203.0,196.6 L214.0,192.4 L227.5,187.5 L239.8,183.4 L250.8,178.5 L263.0,174.4 L275.3,170.2 L286.3,166.1 L288.8,166.1 L293.6,131.4 L296.1,100.9 L299.8,161.9 L312.0,158.4 L321.8,153.6 L325.5,143.2 L326.7,127.9 L334.1,157.7 L346.3,153.6 L356.1,149.4 L359.8,126.5 L362.2,95.3 L367.1,156.3 L379.4,118.9 L388.0,116.8 L391.7,97.4 L395.3,125.1 L397.8,115.4 L405.1,122.4 L414.9,109.9 L422.3,119.6 L432.1,116.8 L434.5,106.4 L437.0,81.5 L440.7,126.5 L446.8,141.1 L457.8,121.7 L465.1,118.9 L468.8,98.1 L471.3,126.5 L472.5,123.1" fill="none" stroke="#16a34a" stroke-width="1.2" stroke-opacity=".85"/><line x1="56.0" y1="56.5" x2="472.5" y2="56.5" stroke="#dc2626" stroke-dasharray="4 3"/><text x="60" y="12" font-size="10" fill="#f97316">— before GC</text><text x="140" y="12" font-size="10" fill="#16a34a">— after GC</text><text x="215" y="12" font-size="10" fill="#dc2626">- - -Xmx</text></svg></div><div class='chart-card'><h2>📊 Pause distribution</h2><svg viewBox="0 0 560 290" xmlns="http://www.w3.org/2000/svg"><line x1="56" y1="230.0" x2="546" y2="230.0" stroke="#e2e8f0"/><text x="50" y="234.0" font-size="10" text-anchor="end" fill="#64748b">0</text><line x1="56" y1="158.0" x2="546" y2="158.0" stroke="#e2e8f0"/><text x="50" y="162.0" font-size="10" text-anchor="end" fill="#64748b">20</text><line x1="56" y1="86.0" x2="546" y2="86.0" stroke="#e2e8f0"/><text x="50" y="90.0" font-size="10" text-anchor="end" fill="#64748b">40</text><line x1="56" y1="14.0" x2="546" y2="14.0" stroke="#e2e8f0"/><text x="50" y="18.0" font-size="10" text-anchor="end" fill="#64748b">60</text><line x1="56" y1="230" x2="546" y2="230" stroke="#94a3b8"/><text x="301.0" y="286" font-size="11" text-anchor="middle" fill="#475569"></text><text x="12" y="122.0" font-size="11" text-anchor="middle" fill="#475569" transform="rotate(-90 12 122.0)">pauses</text><rect x="70.7" y="24.8" width="68.6" height="205.2" fill="#22c55e"/><text x="105.0" y="21.8" font-size="10" text-anchor="middle">57</text><text x="105.0" y="242" font-size="9" text-anchor="end" fill="#475569" transform="rotate(-25 105.0 242)">&lt;10ms</text><rect x="168.7" y="230.0" width="68.6" height="0.0" fill="#3b82f6"/><text x="203.0" y="227.0" font-size="10" text-anchor="middle">0</text><text x="203.0" y="242" font-size="9" text-anchor="end" fill="#475569" transform="rotate(-25 203.0 242)">10-50ms</text><rect x="266.7" y="230.0" width="68.6" height="0.0" fill="#eab308"/><text x="301.0" y="227.0" font-size="10" text-anchor="middle">0</text><text x="301.0" y="242" font-size="9" text-anchor="end" fill="#475569" transform="rotate(-25 301.0 242)">50-200ms</text><rect x="364.7" y="230.0" width="68.6" height="0.0" fill="#f97316"/><text x="399.0" y="227.0" font-size="10" text-anchor="middle">0</text><text x="399.0" y="242" font-size="9" text-anchor="end" fill="#475569" transform="rotate(-25 399.0 242)">200-500ms</text><rect x="462.7" y="230.0" width="68.6" height="0.0" fill="#dc2626"/><text x="497.0" y="227.0" font-size="10" text-anchor="middle">0</text><text x="497.0" y="242" font-size="9" text-anchor="end" fill="#475569" transform="rotate(-25 497.0 242)">&gt;500ms</text></svg></div><div class='chart-card'><h2>♻️ GC types</h2><svg viewBox="0 0 560 290" xmlns="http://www.w3.org/2000/svg"><line x1="56" y1="230.0" x2="546" y2="230.0" stroke="#e2e8f0"/><text x="50" y="234.0" font-size="10" text-anchor="end" fill="#64748b">0</text><line x1="56" y1="158.0" x2="546" y2="158.0" stroke="#e2e8f0"/><text x="50" y="162.0" font-size="10" text-anchor="end" fill="#64748b">10</text><line x1="56" y1="86.0" x2="546" y2="86.0" stroke="#e2e8f0"/><text x="50" y="90.0" font-size="10" text-anchor="end" fill="#64748b">20</text><line x1="56" y1="14.0" x2="546" y2="14.0" stroke="#e2e8f0"/><text x="50" y="18.0" font-size="10" text-anchor="end" fill="#64748b">30</text><line x1="56" y1="230" x2="546" y2="230" stroke="#94a3b8"/><text x="301.0" y="286" font-size="11" text-anchor="middle" fill="#475569"></text><text x="12" y="122.0" font-size="11" text-anchor="middle" fill="#475569" transform="rotate(-90 12 122.0)">events</text><rect x="68.2" y="35.6" width="57.2" height="194.4" fill="#3b82f6"/><text x="96.8" y="32.6" font-size="10" text-anchor="middle">27</text><text x="96.8" y="242" font-size="9" text-anchor="end" fill="#475569" transform="rotate(-25 96.8 242)">Young (Normal)</text><rect x="149.9" y="179.6" width="57.2" height="50.4" fill="#10b981"/><text x="178.5" y="176.6" font-size="10" text-anchor="middle">7</text><text x="178.5" y="242" font-size="9" text-anchor="end" fill="#475569" transform="rotate(-25 178.5 242)">Young (Mixed)</text><rect x="231.6" y="186.8" width="57.2" height="43.2" fill="#f97316"/><text x="260.2" y="183.8" font-size="10" text-anchor="middle">6</text><text x="260.2" y="242" font-size="9" text-anchor="end" fill="#475569" transform="rotate(-25 260.2 242)">Young (Concurrent Start)</text><rect x="313.2" y="186.8" width="57.2" height="43.2" fill="#8b5cf6"/><text x="341.8" y="183.8" font-size="10" text-anchor="middle">6</text><text x="341.8" y="242" font-size="9" text-anchor="end" fill="#475569" transform="rotate(-25 341.8 242)">Remark</text><rect x="394.9" y="186.8" width="57.2" height="43.2" fill="#ec4899"/><text x="423.5" y="183.8" font-size="10" text-anchor="middle">6</text><text x="423.5" y="242" font-size="9" text-anchor="end" fill="#475569" transform="rotate(-25 423.5 242)">Cleanup</text><rect x="476.6" y="194.0" width="57.2" height="36.0" fill="#14b8a6"/><text x="505.2" y="191.0" font-size="10" text-anchor="middle">5</text><text x="505.2" y="242" font-size="9" text-anchor="end" fill="#475569" transform="rotate(-25 505.2 242)">Young (Prepare Mixed)</text></svg></div></div><div class='section-title'>💡 Recommendations</div><div class='recs-list'><div class="rec-card high"><span class="rec-badge high">🟠 HIGH</span><span class="rec-text">4 evacuation failure(s) / to-space exhausted: G1 had no free region to copy live objects to. Give the heap more headroom (raise -Xmx), keep more free regions in reserve (raise G1ReservePercent, default 10), and check the humongous allocations below.<span class=rec-flag>-XX:G1ReservePercent=20</span></span></div><div class="rec-card medium"><span class="rec-badge medium">🟡 MEDIUM</span><span class="rec-text">Live set ~162.0M = 63.3% of -Xmx (256M). Keep the live set under half of the heap so the collector has room to work.<span class=rec-flag>-Xms512m -Xmx512m</span></span></div></div><div class='table-card'><h2>📋 GC causes</h2><table><tr><th>Cause</th><th>Count</th></tr><tr><td>G1 Evacuation Pause</td><td>42</td></tr><tr><td>G1 Humongous Allocation</td><td>3</td></tr></table></div><div class='table-card'><h2>⏱️ Top 10 longest pauses</h2><table><tr><th>When</th><th>Type</th><th>Cause</th><th>Pause (ms)</th><th>Heap</th><th>Source</th></tr><tr class=''><td>2026-10-13 15:56:09</td><td>Pause Young (Mixed)</td><td>G1 Evacuation Pause</td><td class=''>3.25</td><td>241M -&gt; 165M</td><td class='flag-cell'>jdk21_g1_kafka_real.log:657</td></tr><tr class=''><td>2026-10-13 15:56:09</td><td>Pause Young (Mixed)</td><td>G1 Evacuation Pause</td><td class=''>2.79</td><td>227M -&gt; 109M</td><td class='flag-cell'>jdk21_g1_kafka_real.log:434</td></tr><tr class=''><td>2026-10-13 15:56:09</td><td>Pause Young (Mixed)</td><td>G1 Evacuation Pause</td><td class=''>2.67</td><td>237M -&gt; 116M</td><td class='flag-cell'>jdk21_g1_kafka_real.log:499</td></tr><tr class=''><td>2026-10-13 15:56:09</td><td>Pause Young (Normal)</td><td>G1 Evacuation Pause</td><td class=''>2.60</td><td>166M -&gt; 47M</td><td class='flag-cell'>jdk21_g1_kafka_real.log:257</td></tr><tr class=''><td>2026-10-13 15:56:09</td><td>Pause Young (Normal)</td><td>G1 Evacuation Pause</td><td class=''>2.60</td><td>195M -&gt; 73M</td><td class='flag-cell'>jdk21_g1_kafka_real.log:313</td></tr><tr class=''><td>2026-10-13 15:56:09</td><td>Pause Young (Concurrent Start)</td><td>G1 Evacuation Pause</td><td class=''>2.58</td><td>241M -&gt; 169M</td><td class='flag-cell'>jdk21_g1_kafka_real.log:578</td></tr><tr class=''><td>2026-10-13 15:56:09</td><td>Pause Young (Normal)</td><td>G1 Evacuation Pause</td><td class=''>2.57</td><td>172M -&gt; 54M</td><td class='flag-cell'>jdk21_g1_kafka_real.log:271</td></tr><tr class=''><td>2026-10-13 15:56:09</td><td>Pause Young (Normal)</td><td>G1 Evacuation Pause</td><td class=''>2.55</td><td>134M -&gt; 20M</td><td class='flag-cell'>jdk21_g1_kafka_real.log:187</td></tr><tr class=''><td>2026-10-13 15:56:09</td><td>Pause Young (Normal)</td><td>G1 Evacuation Pause</td><td class=''>2.45</td><td>188M -&gt; 67M</td><td class='flag-cell'>jdk21_g1_kafka_real.log:299</td></tr><tr class=''><td>2026-10-13 15:56:09</td><td>Pause Young (Mixed)</td><td>G1 Evacuation Pause</td><td class=''>2.43</td><td>245M -&gt; 179M</td><td class='flag-cell'>jdk21_g1_kafka_real.log:643</td></tr></table></div><div class='footer'>🛠️ Generated by playground analyze gc-logs (self-contained, no external resource)</div></div></body></html>
+</script><script>// Zoomable charts of the playground HTML reports (inlined by report_html.style(), see zoom_chart() there).
+// Each <div class="zoom-chart" data-chart="{json}"> holds a static SVG drawn in Python (the chart without JavaScript),
+// replaced here by the same chart drawn for the visible window: drag over it to zoom on a range, ◀ ▶ to move the
+// window, the preset buttons (last 7 days…), double-click or "All" to zoom out. Charts with the same "group" zoom
+// together. Chart types:
+//   columns  one slot per x value: "x" (ISO days with "xfmt": "day", seconds with "xfmt": "second"), "values" (one
+//            array per slot, one value per series)
+//   events   "times": one sorted array of epoch seconds per series, counted again per time bucket (at most 60 buckets)
+//            for the visible window, so that zooming shows the detail of a burst; "ms": true when the times have
+//            milliseconds (buckets down to 1 ms)
+//   xy       "layers": {kind: dots|line, label, color, r, points: [[x, y], ...]}, "hline": {y, label, color},
+//            "xlabel", "ylabel"
+// Common keys: series [{label, color}] (columns, events), fmt (money|int|num), W, H, presets [[label, span]], group,
+// note (end of the legend), labels (value above the columns when they are few).
+// An element of another chart with data-zoom-link="<id of a zoom chart>", data-zoom-from and data-zoom-to (x values, the
+// end excluded) zooms that chart on a click (a month of the cost per month chart → its days in the cost per day chart).
+(function () {
+  "use strict";
+  const MON = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const BUCKETS = [1, 5, 10, 30, 60, 300, 600, 1800, 3600, 7200, 21600, 43200, 86400];
+  const MS_BUCKETS = [0.001, 0.005, 0.01, 0.05, 0.1, 0.5].concat(BUCKETS);
+  const MAX_DOTS = 4000;
+  const groups = {};
+  const pad = n => String(n).padStart(2, "0");
+  const esc = s => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  const dayShort = d => MON[+d.slice(5, 7) - 1] + " " + d.slice(8, 10);
+  const dayLong = d => dayShort(d) + ", " + d.slice(0, 4);
+
+  function fmtValue(v, fmt) {
+    if (fmt === "money") return v === 0 ? "$0.00" : Math.abs(v) < 0.01 ? "<$0.01"
+      : "$" + v.toLocaleString("en-US", {minimumFractionDigits: 2, maximumFractionDigits: 2});
+    if (fmt === "int") return Math.round(v).toLocaleString("en-US");
+    return (+v.toPrecision(4)).toLocaleString("en-US");
+  }
+  function fmtAxis(v, fmt) {
+    return (fmt === "money" ? "$" : "") + (+v.toPrecision(6)).toLocaleString("en-US");
+  }
+  // same as nice_max() of report_html.py: 1, 2, 2.5, 3, 4, 5, 6 or 8 x 10^n, even, so that the middle tick is an integer
+  function niceMax(v) {
+    if (v <= 2) return 2;
+    const mag = Math.pow(10, String(Math.floor(v)).length - 1);
+    for (const m of [1, 2, 2.5, 3, 4, 5, 6, 8, 10]) { const t = Math.round(m * mag); if (t >= v && t % 2 === 0) return t; }
+    return 10 * mag;
+  }
+  // same as _nice_ticks() of gc_log_analyzer.py
+  function niceTicks(lo, hi, n) {
+    if (hi <= lo) hi = lo + 1;
+    const raw = (hi - lo) / (n || 5), mag = Math.pow(10, Math.floor(Math.log10(raw)));
+    const step = [1, 2, 2.5, 5, 10].map(m => m * mag).find(s => s >= raw);
+    const ticks = [];
+    for (let v = Math.floor(lo / step) * step; v < hi + step * 0.999; v += step) ticks.push(+v.toPrecision(12));
+    return ticks;
+  }
+  function stamp(t, ms) {
+    const d = new Date(Math.round(t * 1000));
+    return d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate()) + " " +
+      pad(d.getHours()) + ":" + pad(d.getMinutes()) + ":" + pad(d.getSeconds()) + (ms ? "." + String(d.getMilliseconds()).padStart(3, "0") : "");
+  }
+  function fmtBucket(s) {
+    return s < 1 ? Math.round(s * 1000) + "ms" : s < 60 ? s + "s" : s < 3600 ? s / 60 + "min" : s < 86400 ? s / 3600 + "h" : s / 86400 + "d";
+  }
+  function lowerBound(arr, x) {
+    let lo = 0, hi = arr.length;
+    while (lo < hi) { const m = (lo + hi) >> 1; if (arr[m] < x) lo = m + 1; else hi = m; }
+    return lo;
+  }
+  function minMax(arrays) {
+    let lo = Infinity, hi = -Infinity;
+    for (const a of arrays) for (const v of a) { if (v < lo) lo = v; if (v > hi) hi = v; }
+    return [lo, hi];
+  }
+  function legend(items, note) {
+    if (!items.length && !note) return "";
+    return "<div class='legend'>" + items.map(s => "<i style='background:" + esc(s.color) + "'></i>" + esc(s.label)).join("") +
+      (note ? (items.length ? " · " : "") + esc(note) : "") + "</div>";
+  }
+
+  document.addEventListener("click", function (ev) {
+    const link = ev.target.closest && ev.target.closest("[data-zoom-link]");
+    const chart = link && document.getElementById(link.dataset.zoomLink);
+    if (!chart || !chart.zoomTo) return;
+    if (chart.zoomTo(link.dataset.zoomFrom, link.dataset.zoomTo)) chart.scrollIntoView({behavior: "smooth", block: "nearest"});
+  });
+
+  document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".zoom-chart").forEach(function (box) {
+      try { init(box); } catch (err) { console.error("zoom chart", err); }  // the static chart stays
+    });
+  });
+
+  function init(box) {
+    const c = JSON.parse(box.dataset.chart), type = c.type, fmt = c.fmt || "int";
+    const W = c.W || 600, H = c.H || (type === "xy" ? 270 : 200), R = 10;
+    const L = c.L || (type === "xy" ? 56 : 54), T = type === "xy" ? 14 : 16, B = type === "xy" ? 36 : 26;
+    const pw = W - L - R, ph = H - T - B;
+    const holder = box.querySelector(".zoom-svg"), info = box.querySelector(".zoom-info");
+    const series = c.series || [];
+    let lo, hi;
+    if (type === "columns") { lo = 0; hi = c.x.length; }
+    else if (type === "events") { [lo, hi] = minMax(c.times); hi += c.ms ? 0.001 : 1; }
+    else { lo = 0; hi = minMax(c.layers.map(l => l.points.map(p => p[0])))[1] || 1; }
+    const minSpan = type === "columns" ? 1 : type === "events" ? (c.ms ? 0.05 : 10) : (hi - lo) / 1000;
+    let a = lo, b = hi;
+    const self = {};
+    if (c.group) (groups[c.group] = groups[c.group] || []).push(self);
+
+    function show(na, nb, fromGroup) {
+      const span = Math.max(minSpan, nb - na);
+      if (span >= hi - lo) { na = lo; nb = hi; } else { na = Math.max(lo, Math.min(na, hi - span)); nb = na + span; }
+      if (type === "columns") { na = Math.round(na); nb = Math.max(na + 1, Math.round(nb)); }
+      a = na; b = nb;
+      draw();
+      if (c.group && !fromGroup) groups[c.group].forEach(o => { if (o !== self) o.show(a, b, true); });
+    }
+    self.show = show;
+    // zoom on [from, to): x values (ISO days of a columns chart); false when nothing of the chart is in that range
+    box.zoomTo = function (from, to) {
+      if (type !== "columns") { if (+to <= lo || +from >= hi) return false; show(+from, +to); return true; }
+      const i0 = c.x.findIndex(x => x >= from), i1 = c.x.findIndex(x => x >= to);
+      const na = i0, nb = i1 < 0 ? hi : i1;
+      if (na < 0 || nb <= na) return false;
+      show(na, nb);
+      return true;
+    };
+    const zoomed = () => a > lo || b < hi;
+
+    // --- columns and events: one slot per column, several series side by side in each slot -------------------------
+    function columns(n, val, tip, xlab, labelsFmt) {
+      const slot = pw / n, k = series.length || 1;
+      const mx = niceMax(Math.max(0, ...Array.from({length: n}, (_, i) => Math.max(...series.map((_, j) => val(i, j))))));
+      const bw = k === 1 ? Math.max(1, Math.min(46, slot - (n > 60 ? 2 : 6))) : Math.max(1, (slot - 2) / k);
+      const o = [];
+      for (const f of [0, 0.5, 1]) {
+        const y = (T + ph * (1 - f)).toFixed(1);
+        o.push('<line x1="' + L + '" x2="' + (W - R) + '" y1="' + y + '" y2="' + y + '" stroke="#e2e8f0" stroke-width="1"/>' +
+               '<text x="' + (L - 6) + '" y="' + (+y + 3) + '" font-size="10" fill="#64748b" text-anchor="end">' + esc(fmtAxis(mx * f, fmt)) + "</text>");
+      }
+      let top = 0, topV = -1;
+      for (let i = 0; i < n; i++) {
+        const v0 = val(i, 0);
+        if (v0 > topV) { top = i; topV = v0; }
+        o.push('<g><rect x="' + (L + i * slot).toFixed(1) + '" y="' + T + '" width="' + slot.toFixed(1) + '" height="' + ph + '" fill="transparent"/>');
+        const tips = [];
+        series.forEach(function (s, j) {
+          const v = val(i, j);
+          tips.push(fmtValue(v, fmt) + (s.label && (k > 1 || type === "events") ? " " + s.label : ""));
+          if (!(v > 0)) return;
+          const h = Math.max(1.5, ph * v / mx);
+          const x = k === 1 ? L + i * slot + (slot - bw) / 2 : L + i * slot + 1 + j * bw;
+          o.push('<rect x="' + x.toFixed(1) + '" y="' + (T + ph - h).toFixed(1) + '" width="' + bw.toFixed(1) + '" height="' + h.toFixed(1) +
+                 '" rx="' + (k === 1 ? 2 : 1) + '" fill="' + esc(s.color) + '"/>');
+        });
+        o.push("<title>" + esc(tip(i) + ": " + tips.join(", ")) + "</title></g>");
+      }
+      if (labelsFmt && k === 1) {
+        for (let i = 0; i < n; i++) {
+          const v = val(i, 0);
+          if (!(v > 0) || !(n <= 16 || (n <= 62 && i === top))) continue;
+          const h = Math.max(1.5, ph * v / mx), x = L + i * slot + slot / 2;
+          o.push('<text x="' + x.toFixed(1) + '" y="' + (T + ph - h - 4).toFixed(1) + '" font-size="' + (n > 31 ? 9 : 10) +
+                 '" fill="#334155" text-anchor="middle">' + esc(fmtValue(v, fmt)) + "</text>");
+        }
+      }
+      const step = Math.max(1, Math.ceil(n / Math.max(4, Math.floor(W / 60))));
+      for (let i = 0; i < n; i += step)
+        o.push('<text x="' + (L + i * slot + slot / 2).toFixed(1) + '" y="' + (H - 8) + '" font-size="10" fill="#64748b" text-anchor="middle">' +
+               esc(xlab(i)) + "</text>");
+      return o.join("");
+    }
+
+    function drawColumns() {
+      const n = b - a, day = c.xfmt === "day";
+      const xs = c.x.slice(a, b), vs = c.values.slice(a, b);
+      const body = columns(n, (i, j) => vs[i][j] || 0,
+        i => day ? dayLong(xs[i]) : "second " + xs[i],
+        i => day ? dayShort(xs[i]) : xs[i] + "s", c.labels);
+      const totals = series.map((_, j) => vs.reduce((t, v) => t + (v[j] || 0), 0));
+      let text = (day ? dayLong(xs[0]) + " → " + dayLong(xs[n - 1]) + " · " + n + " day" + (n > 1 ? "s" : "")
+                      : "seconds " + xs[0] + " → " + xs[n - 1]) + " · ";
+      text += series.length === 1 && fmt === "money"
+        ? fmtValue(totals[0], fmt) + " · " + fmtValue(totals[0] / n, fmt) + " per day"
+        : series.map((s, j) => fmtValue(totals[j], fmt) + " " + s.label).join(" · ");
+      return [legend(series.length > 1 ? series : [], c.note), body, text];
+    }
+
+    function drawEvents() {
+      const list = c.ms ? MS_BUCKETS : BUCKETS;
+      const bucket = list.find(bk => (b - a) / bk <= 60) || list[list.length - 1];
+      const start = Math.floor(a / bucket) * bucket, n = Math.max(1, Math.ceil((b - start) / bucket - 1e-9));
+      const counts = c.times.map(ts => {
+        const out = [];
+        let prev = lowerBound(ts, start);
+        for (let i = 0; i < n; i++) { const next = lowerBound(ts, start + (i + 1) * bucket); out.push(next - prev); prev = next; }
+        return out;
+      });
+      const d0 = new Date(start * 1000), d1 = new Date((start + n * bucket) * 1000 - 1);
+      const oneDay = d0.toDateString() === d1.toDateString(), ms = bucket < 1;
+      const xlab = t => { const s = stamp(t, ms); return ms ? s.slice(17) : bucket < 60 ? s.slice(11) : oneDay ? s.slice(11, 16) : s.slice(5, 16); };
+      const body = columns(n, (i, j) => counts[j][i], i => stamp(start + i * bucket, ms), i => xlab(start + i * bucket));
+      const inWindow = c.times.map(ts => lowerBound(ts, b) - lowerBound(ts, a));
+      const showMs = c.ms && b - a < 60;  // milliseconds in the range only when they matter
+      const text = stamp(a, showMs) + " → " + stamp(b, showMs) + " · " + series.map((s, j) => fmtValue(inWindow[j], "int") + " " + s.label).join(" · ");
+      return [legend(series, "per " + fmtBucket(bucket) + (c.note || "")), body, text];
+    }
+
+    function drawXY() {
+      const vis = c.layers.map(l => {
+        let pts = l.points.filter(p => p[0] >= a && p[0] <= b);
+        if (l.kind === "line") {  // one point on each side, so that the line reaches the edges
+          const i0 = l.points.findIndex(p => p[0] >= a), i1 = l.points.findIndex(p => p[0] > b);
+          if (i0 > 0) pts.unshift(l.points[i0 - 1]);
+          if (i1 > 0) pts.push(l.points[i1]);
+        } else if (pts.length > MAX_DOTS && !l.keep) {
+          const step = pts.length / MAX_DOTS;
+          pts = Array.from({length: MAX_DOTS}, (_, i) => pts[Math.floor(i * step)]);
+        }
+        return pts;
+      });
+      let ymax = 0;
+      vis.forEach((pts, i) => pts.forEach(p => { if (p[0] >= a && p[0] <= b && p[1] > ymax) ymax = p[1]; }));
+      if (c.hline && c.hline.y > ymax) ymax = c.hline.y;
+      const yt = niceTicks(0, ymax || 1), ytop = yt[yt.length - 1] || 1;
+      const xt = niceTicks(a, b).filter(x => x >= a - 1e-9 && x <= b + 1e-9);
+      const sx = x => L + pw * (x - a) / (b - a), sy = y => T + ph * (1 - y / ytop);
+      const id = "zc" + Math.random().toString(36).slice(2, 8);
+      const o = ['<defs><clipPath id="' + id + '"><rect x="' + L + '" y="' + (T - 4) + '" width="' + pw + '" height="' + (ph + 8) + '"/></clipPath></defs>'];
+      for (const y of yt)
+        o.push('<line x1="' + L + '" y1="' + sy(y).toFixed(1) + '" x2="' + (W - R) + '" y2="' + sy(y).toFixed(1) + '" stroke="#e2e8f0"/>' +
+               '<text x="' + (L - 6) + '" y="' + (sy(y) + 4).toFixed(1) + '" font-size="10" text-anchor="end" fill="#64748b">' + esc(fmtAxis(y, fmt)) + "</text>");
+      for (const x of xt)
+        o.push('<text x="' + sx(x).toFixed(1) + '" y="' + (H - B + 14) + '" font-size="10" text-anchor="middle" fill="#64748b">' + esc(fmtAxis(x, "num")) + "</text>");
+      o.push('<line x1="' + L + '" y1="' + (T + ph) + '" x2="' + (W - R) + '" y2="' + (T + ph) + '" stroke="#94a3b8"/>');
+      if (c.xlabel) o.push('<text x="' + (L + pw / 2) + '" y="' + (H - 4) + '" font-size="11" text-anchor="middle" fill="#475569">' + esc(c.xlabel) + "</text>");
+      if (c.ylabel) o.push('<text x="12" y="' + (T + ph / 2) + '" font-size="11" text-anchor="middle" fill="#475569" transform="rotate(-90 12 ' + (T + ph / 2) + ')">' + esc(c.ylabel) + "</text>");
+      o.push('<g clip-path="url(#' + id + ')">');
+      c.layers.forEach(function (l, i) {
+        const pts = vis[i];
+        if (l.kind === "line") {
+          if (pts.length) o.push('<path d="' + pts.map((p, k) => (k ? "L" : "M") + sx(p[0]).toFixed(1) + "," + sy(p[1]).toFixed(1)).join(" ") +
+                                 '" fill="none" stroke="' + esc(l.color) + '" stroke-width="1.2" stroke-opacity=".85"/>');
+        } else {
+          const r = l.r || 2, op = l.opacity || 1;
+          for (const p of pts)
+            o.push('<circle cx="' + sx(p[0]).toFixed(1) + '" cy="' + sy(p[1]).toFixed(1) + '" r="' + r + '" fill="' + esc(l.color) + '" fill-opacity="' + op + '">' +
+                   "<title>" + esc(fmtAxis(p[0], "num") + " " + (c.xlabel || "") + ": " + fmtValue(p[1], fmt) + " " + (c.yunit || "")) + "</title></circle>");
+        }
+      });
+      if (c.hline) o.push('<line x1="' + L + '" y1="' + sy(c.hline.y).toFixed(1) + '" x2="' + (W - R) + '" y2="' + sy(c.hline.y).toFixed(1) +
+                          '" stroke="' + esc(c.hline.color) + '" stroke-dasharray="4 3"/>');
+      o.push("</g>");
+      const items = c.layers.map(l => ({label: l.label, color: l.color})).concat(c.hline ? [{label: c.hline.label, color: c.hline.color}] : []);
+      const dots = c.layers.map((l, i) => l.kind === "line" ? null : fmtValue(l.points.filter(p => p[0] >= a && p[0] <= b).length, "int") + " " + l.label)
+        .filter(Boolean);
+      const text = fmtAxis(a, "num") + " → " + fmtAxis(b, "num") + " " + (c.xlabel || "") + (dots.length ? " · " + dots.join(" · ") : "");
+      return [legend(items, c.note), o.join(""), text];
+    }
+
+    function draw() {
+      const [leg, body, text] = type === "columns" ? drawColumns() : type === "events" ? drawEvents() : drawXY();
+      holder.innerHTML = leg + '<svg viewBox="0 0 ' + W + " " + H + '" xmlns="http://www.w3.org/2000/svg" role="img">' + body +
+        '<rect class="zoom-sel" x="0" y="' + T + '" width="0" height="' + ph + '" fill="#2a78d6" opacity=".15" pointer-events="none"/></svg>';
+      info.textContent = text;
+      box.querySelectorAll("[data-zoom]").forEach(x => x.classList.remove("on"));
+      const preset = box.querySelector("[data-zoom='all']");
+      if (!zoomed()) preset.classList.add("on");
+      box.querySelectorAll("[data-span]").forEach(x => { if (b === hi && Math.abs(b - a - +x.dataset.span) < 1e-6) x.classList.add("on"); });
+      box.querySelector("[data-zoom='prev']").disabled = a <= lo;
+      box.querySelector("[data-zoom='next']").disabled = b >= hi;
+      bind(holder.querySelector("svg"));
+    }
+
+    // domain value under the mouse
+    function at(svg, ev) {
+      const r = svg.getBoundingClientRect(), px = (ev.clientX - r.left) * W / r.width;
+      const f = Math.max(0, Math.min(1, (px - L) / pw));
+      return type === "columns" ? Math.min(b - 1, a + Math.floor(f * (b - a))) : a + f * (b - a);
+    }
+    function bind(svg) {
+      const sel = svg.querySelector(".zoom-sel");
+      const px = v => L + pw * (v - a) / (b - a);
+      function paint(v0, v1) {
+        let x0 = Math.min(v0, v1), x1 = Math.max(v0, v1);
+        if (type === "columns") x1 += 1;
+        sel.setAttribute("x", px(x0).toFixed(1));
+        sel.setAttribute("width", Math.max(0, px(x1) - px(x0)).toFixed(1));
+      }
+      svg.addEventListener("mousedown", function (ev) {
+        if (ev.button !== 0) return;
+        ev.preventDefault();
+        const start = at(svg, ev);
+        paint(start, start);
+        function move(e2) { paint(start, at(svg, e2)); }
+        function up(e2) {
+          document.removeEventListener("mousemove", move);
+          document.removeEventListener("mouseup", up);
+          const end = at(svg, e2), x0 = Math.min(start, end), x1 = Math.max(start, end) + (type === "columns" ? 1 : 0);
+          // a click (or a selection of one column) is not a zoom: the tooltips stay usable
+          if ((type === "columns" && x1 - x0 >= 2) || (type !== "columns" && px(x1) - px(x0) > 4)) show(x0, x1);
+          else sel.setAttribute("width", "0");
+        }
+        document.addEventListener("mousemove", move);
+        document.addEventListener("mouseup", up);
+      });
+      svg.addEventListener("dblclick", () => show(lo, hi));
+    }
+
+    box.querySelectorAll("[data-zoom]").forEach(function (x) {
+      x.addEventListener("click", function () {
+        const k = x.dataset.zoom, w = b - a;
+        if (k === "all") show(lo, hi);
+        else if (k === "prev") show(a - w, a);
+        else if (k === "next") show(b, b + w);
+        else show(hi - +x.dataset.span, hi);
+      });
+    });
+    box.querySelectorAll("[hidden]").forEach(x => { x.hidden = false; });
+    draw();
+  }
+})();
+</script></head><body><div class='page'><div class='header'><div><h1>♻️ JVM GC Log Analysis</h1><div class='header-meta'><span>&#128196; jdk21_g1_kafka_real.log</span><span>Run #1 of 1</span><span>JDK 21</span><span>Collector: G1GC</span><span>-Xmx: 256.0M</span><span>Span: 0.3s</span><span>Coverage: 57/57</span><span>Generated: 2026-11-02 15:59:15</span></div></div><div class='health-badge'><div class='health-score' style='color:#16a34a'>87</div><div class='health-label'>🩺 health</div><div class='health-name' style='color:#16a34a'>Good</div></div></div><div class='verdict warn'>⚠️ 2 things to look at, nothing critical.</div><div class='kpi-grid'><div class="kpi-card "><div class="kpi-label">🚀 Throughput</div><div class="kpi-value">-</div><div class="kpi-unit">%</div></div><div class="kpi-card "><div class="kpi-label">⏱️ GC pauses</div><div class="kpi-value">57</div><div class="kpi-unit">events</div></div><div class="kpi-card ok"><div class="kpi-label">♻️ Full GC</div><div class="kpi-value">0</div><div class="kpi-unit">events</div></div><div class="kpi-card ok"><div class="kpi-label">⏱️ p99 pause</div><div class="kpi-value">3.25</div><div class="kpi-unit">ms</div></div><div class="kpi-card "><div class="kpi-label">⏱️ Max pause</div><div class="kpi-value">3.25</div><div class="kpi-unit">ms</div></div><div class="kpi-card "><div class="kpi-label">💾 Live set</div><div class="kpi-value">162.0</div><div class="kpi-unit">MB of 256 MB Xmx</div></div></div><div class='charts-grid'><div class='chart-card'><h2>📈 GC pause timeline</h2><div class='zoom-chart' data-chart='{&quot;type&quot;:&quot;xy&quot;,&quot;fmt&quot;:&quot;num&quot;,&quot;W&quot;:560,&quot;H&quot;:270,&quot;xlabel&quot;:&quot;seconds since start&quot;,&quot;ylabel&quot;:&quot;pause (ms)&quot;,&quot;yunit&quot;:&quot;ms&quot;,&quot;group&quot;:&quot;gc&quot;,&quot;layers&quot;:[{&quot;kind&quot;:&quot;dots&quot;,&quot;label&quot;:&quot;pause&quot;,&quot;color&quot;:&quot;#3b82f6&quot;,&quot;r&quot;:2,&quot;opacity&quot;:0.55,&quot;points&quot;:[[0.0,1.601],[0.002,1.135],[0.003,1.289],[0.005,1.571],[0.007,1.027],[0.014,1.894],[0.02,1.128],[0.023,1.243],[0.028,2.033],[0.037,2.03],[0.044,2.364],[0.062,2.546],[0.072,1.707],[0.081,2.014],[0.09,2.319],[0.099,1.897],[0.109,2.604],[0.12,2.568],[0.129,2.061],[0.14,2.454],[0.15,2.595],[0.159,1.969],[0.169,2.08],[0.179,2.361],[0.188,1.964],[0.19,1.633],[0.194,0.345],[0.196,0.128],[0.199,1.706],[0.209,2.792],[0.217,1.745],[0.22,0.371],[0.221,0.141],[0.227,1.852],[0.245,1.964],[0.248,0.365],[0.25,0.14],[0.254,1.747],[0.271,2.58],[0.274,0.414],[0.277,1.768],[0.279,0.371],[0.285,2.335],[0.299,3.254],[0.307,1.914],[0.309,0.399],[0.311,0.126],[0.314,1.576],[0.319,1.633],[0.334,1.599],[0.337,0.358],[0.339,1.313],[0.34,0.124]]},{&quot;kind&quot;:&quot;dots&quot;,&quot;label&quot;:&quot;Full GC / evacuation or mode failure&quot;,&quot;color&quot;:&quot;#dc2626&quot;,&quot;r&quot;:3.5,&quot;keep&quot;:true,&quot;points&quot;:[[0.237,2.666],[0.264,2.033],[0.293,2.428],[0.328,1.908]]}]}'><div class='zoom-bar' hidden><button type='button' data-zoom='prev' title='Previous window'>◀</button><button type='button' data-zoom='next' title='Next window'>▶</button><button type='button' data-zoom='all'>All</button><span class='zoom-info'></span></div><div class='zoom-svg'><svg viewBox="0 0 560 270" xmlns="http://www.w3.org/2000/svg"><line x1="56" y1="234.0" x2="546" y2="234.0" stroke="#e2e8f0"/><text x="50" y="238.0" font-size="10" text-anchor="end" fill="#64748b">0</text><line x1="56" y1="182.0" x2="546" y2="182.0" stroke="#e2e8f0"/><text x="50" y="186.0" font-size="10" text-anchor="end" fill="#64748b">1</text><line x1="56" y1="130.0" x2="546" y2="130.0" stroke="#e2e8f0"/><text x="50" y="134.0" font-size="10" text-anchor="end" fill="#64748b">2</text><line x1="56" y1="78.0" x2="546" y2="78.0" stroke="#e2e8f0"/><text x="50" y="82.0" font-size="10" text-anchor="end" fill="#64748b">3</text><line x1="56" y1="26.0" x2="546" y2="26.0" stroke="#e2e8f0"/><text x="50" y="30.0" font-size="10" text-anchor="end" fill="#64748b">4</text><text x="56.0" y="248" font-size="10" text-anchor="middle" fill="#64748b">0</text><text x="178.5" y="248" font-size="10" text-anchor="middle" fill="#64748b">0.1</text><text x="301.0" y="248" font-size="10" text-anchor="middle" fill="#64748b">0.2</text><text x="423.5" y="248" font-size="10" text-anchor="middle" fill="#64748b">0.3</text><text x="546.0" y="248" font-size="10" text-anchor="middle" fill="#64748b">0.4</text><line x1="56" y1="234" x2="546" y2="234" stroke="#94a3b8"/><text x="301.0" y="266" font-size="11" text-anchor="middle" fill="#475569">seconds since start</text><text x="12" y="130.0" font-size="11" text-anchor="middle" fill="#475569" transform="rotate(-90 12 130.0)">pause (ms)</text><circle cx="56.0" cy="150.7" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="58.5" cy="175.0" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="59.7" cy="167.0" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="62.1" cy="152.3" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="64.6" cy="180.6" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="73.2" cy="135.5" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="80.5" cy="175.3" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="84.2" cy="169.4" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="90.3" cy="128.3" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="101.3" cy="128.4" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="109.9" cy="111.1" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="131.9" cy="101.6" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="144.2" cy="145.2" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="155.2" cy="129.3" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="166.2" cy="113.4" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="177.3" cy="135.4" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="189.5" cy="98.6" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="203.0" cy="100.5" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="214.0" cy="126.8" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="227.5" cy="106.4" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="239.8" cy="99.1" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="250.8" cy="131.6" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="263.0" cy="125.8" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="275.3" cy="111.2" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="286.3" cy="131.9" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="288.8" cy="149.1" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="293.6" cy="216.1" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="296.1" cy="227.3" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="299.8" cy="145.3" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="312.0" cy="88.8" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="321.8" cy="143.3" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="325.5" cy="214.7" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="326.7" cy="226.7" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="334.1" cy="137.7" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="356.1" cy="131.9" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="359.8" cy="215.0" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="362.2" cy="226.7" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="367.1" cy="143.2" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="388.0" cy="99.8" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="391.7" cy="212.5" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="395.3" cy="142.1" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="397.8" cy="214.7" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="405.1" cy="112.6" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="422.3" cy="64.8" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="432.1" cy="134.5" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="434.5" cy="213.3" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="437.0" cy="227.4" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="440.7" cy="152.0" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="446.8" cy="149.1" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="465.1" cy="150.9" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="468.8" cy="215.4" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="471.3" cy="165.7" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="472.5" cy="227.6" r="2" fill="#3b82f6" fill-opacity=".55"/><circle cx="346.3" cy="95.4" r="3.5" fill="#dc2626"/><circle cx="379.4" cy="128.3" r="3.5" fill="#dc2626"/><circle cx="414.9" cy="107.7" r="3.5" fill="#dc2626"/><circle cx="457.8" cy="134.8" r="3.5" fill="#dc2626"/><text x="60" y="12" font-size="10" fill="#3b82f6">● pause</text><text x="115" y="12" font-size="10" fill="#dc2626">● Full GC / evacuation or mode failure</text></svg></div><div class='zoom-hint' hidden>🔍 Drag over the chart to zoom on a range, double-click to zoom out: the charts next to it follow.</div></div></div><div class='chart-card'><h2>💾 Heap before / after GC</h2><div class='zoom-chart' data-chart='{&quot;type&quot;:&quot;xy&quot;,&quot;fmt&quot;:&quot;num&quot;,&quot;W&quot;:560,&quot;H&quot;:270,&quot;xlabel&quot;:&quot;seconds since start&quot;,&quot;ylabel&quot;:&quot;heap (MB)&quot;,&quot;yunit&quot;:&quot;MB&quot;,&quot;group&quot;:&quot;gc&quot;,&quot;layers&quot;:[{&quot;kind&quot;:&quot;line&quot;,&quot;label&quot;:&quot;before GC&quot;,&quot;color&quot;:&quot;#f97316&quot;,&quot;points&quot;:[[0.0,14.0],[0.002,9.0],[0.003,9.0],[0.005,10.0],[0.007,9.0],[0.014,22.0],[0.02,29.0],[0.023,29.0],[0.028,45.0],[0.037,72.0],[0.044,73.0],[0.062,134.0],[0.072,128.0],[0.081,143.0],[0.09,151.0],[0.099,157.0],[0.109,166.0],[0.12,172.0],[0.129,173.0],[0.14,188.0],[0.15,195.0],[0.159,196.0],[0.169,208.0],[0.179,217.0],[0.188,219.0],[0.19,106.0],[0.194,148.0],[0.196,192.0],[0.199,225.0],[0.209,227.0],[0.217,225.0],[0.22,143.0],[0.221,153.0],[0.227,226.0],[0.237,237.0],[0.245,232.0],[0.248,171.0],[0.25,200.0],[0.254,227.0],[0.264,243.0],[0.271,241.0],[0.274,213.0],[0.277,228.0],[0.279,171.0],[0.285,240.0],[0.293,245.0],[0.299,241.0],[0.307,240.0],[0.309,202.0],[0.311,220.0],[0.314,227.0],[0.319,240.0],[0.328,244.0],[0.334,241.0],[0.337,210.0],[0.339,232.0],[0.34,160.0]]},{&quot;kind&quot;:&quot;line&quot;,&quot;label&quot;:&quot;after GC&quot;,&quot;color&quot;:&quot;#16a34a&quot;,&quot;points&quot;:[[0.0,1.0],[0.002,1.0],[0.003,2.0],[0.005,2.0],[0.007,3.0],[0.014,3.0],[0.02,5.0],[0.023,6.0],[0.028,8.0],[0.037,11.0],[0.044,14.0],[0.062,20.0],[0.072,25.0],[0.081,30.0],[0.09,36.0],[0.099,41.0],[0.109,47.0],[0.12,54.0],[0.129,60.0],[0.14,67.0],[0.15,73.0],[0.159,80.0],[0.169,86.0],[0.179,92.0],[0.188,98.0],[0.19,98.0],[0.194,148.0],[0.196,192.0],[0.199,104.0],[0.209,109.0],[0.217,116.0],[0.22,131.0],[0.221,153.0],[0.227,110.0],[0.237,116.0],[0.245,122.0],[0.248,155.0],[0.25,200.0],[0.254,112.0],[0.264,166.0],[0.271,169.0],[0.274,197.0],[0.277,157.0],[0.279,171.0],[0.285,161.0],[0.293,179.0],[0.299,165.0],[0.307,169.0],[0.309,184.0],[0.311,220.0],[0.314,155.0],[0.319,134.0],[0.328,162.0],[0.334,166.0],[0.337,196.0],[0.339,155.0],[0.34,160.0]]}],&quot;hline&quot;:{&quot;y&quot;:256.0,&quot;label&quot;:&quot;-Xmx&quot;,&quot;color&quot;:&quot;#dc2626&quot;}}'><div class='zoom-bar' hidden><button type='button' data-zoom='prev' title='Previous window'>◀</button><button type='button' data-zoom='next' title='Next window'>▶</button><button type='button' data-zoom='all'>All</button><span class='zoom-info'></span></div><div class='zoom-svg'><svg viewBox="0 0 560 270" xmlns="http://www.w3.org/2000/svg"><line x1="56" y1="234.0" x2="546" y2="234.0" stroke="#e2e8f0"/><text x="50" y="238.0" font-size="10" text-anchor="end" fill="#64748b">0</text><line x1="56" y1="164.7" x2="546" y2="164.7" stroke="#e2e8f0"/><text x="50" y="168.7" font-size="10" text-anchor="end" fill="#64748b">100</text><line x1="56" y1="95.3" x2="546" y2="95.3" stroke="#e2e8f0"/><text x="50" y="99.3" font-size="10" text-anchor="end" fill="#64748b">200</text><line x1="56" y1="26.0" x2="546" y2="26.0" stroke="#e2e8f0"/><text x="50" y="30.0" font-size="10" text-anchor="end" fill="#64748b">300</text><text x="56.0" y="248" font-size="10" text-anchor="middle" fill="#64748b">0</text><text x="178.5" y="248" font-size="10" text-anchor="middle" fill="#64748b">0.1</text><text x="301.0" y="248" font-size="10" text-anchor="middle" fill="#64748b">0.2</text><text x="423.5" y="248" font-size="10" text-anchor="middle" fill="#64748b">0.3</text><text x="546.0" y="248" font-size="10" text-anchor="middle" fill="#64748b">0.4</text><line x1="56" y1="234" x2="546" y2="234" stroke="#94a3b8"/><text x="301.0" y="266" font-size="11" text-anchor="middle" fill="#475569">seconds since start</text><text x="12" y="130.0" font-size="11" text-anchor="middle" fill="#475569" transform="rotate(-90 12 130.0)">heap (MB)</text><path d="M56.0,224.3 L58.5,227.8 L59.7,227.8 L62.1,227.1 L64.6,227.8 L73.2,218.7 L80.5,213.9 L84.2,213.9 L90.3,202.8 L101.3,184.1 L109.9,183.4 L131.9,141.1 L144.2,145.3 L155.2,134.9 L166.2,129.3 L177.3,125.1 L189.5,118.9 L203.0,114.7 L214.0,114.1 L227.5,103.7 L239.8,98.8 L250.8,98.1 L263.0,89.8 L275.3,83.5 L286.3,82.2 L288.8,160.5 L293.6,131.4 L296.1,100.9 L299.8,78.0 L312.0,76.6 L321.8,78.0 L325.5,134.9 L326.7,127.9 L334.1,77.3 L346.3,69.7 L356.1,73.1 L359.8,115.4 L362.2,95.3 L367.1,76.6 L379.4,65.5 L388.0,66.9 L391.7,86.3 L395.3,75.9 L397.8,115.4 L405.1,67.6 L414.9,64.1 L422.3,66.9 L432.1,67.6 L434.5,93.9 L437.0,81.5 L440.7,76.6 L446.8,67.6 L457.8,64.8 L465.1,66.9 L468.8,88.4 L471.3,73.1 L472.5,123.1" fill="none" stroke="#f97316" stroke-width="1.2" stroke-opacity=".85"/><path d="M56.0,233.3 L58.5,233.3 L59.7,232.6 L62.1,232.6 L64.6,231.9 L73.2,231.9 L80.5,230.5 L84.2,229.8 L90.3,228.5 L101.3,226.4 L109.9,224.3 L131.9,220.1 L144.2,216.7 L155.2,213.2 L166.2,209.0 L177.3,205.6 L189.5,201.4 L203.0,196.6 L214.0,192.4 L227.5,187.5 L239.8,183.4 L250.8,178.5 L263.0,174.4 L275.3,170.2 L286.3,166.1 L288.8,166.1 L293.6,131.4 L296.1,100.9 L299.8,161.9 L312.0,158.4 L321.8,153.6 L325.5,143.2 L326.7,127.9 L334.1,157.7 L346.3,153.6 L356.1,149.4 L359.8,126.5 L362.2,95.3 L367.1,156.3 L379.4,118.9 L388.0,116.8 L391.7,97.4 L395.3,125.1 L397.8,115.4 L405.1,122.4 L414.9,109.9 L422.3,119.6 L432.1,116.8 L434.5,106.4 L437.0,81.5 L440.7,126.5 L446.8,141.1 L457.8,121.7 L465.1,118.9 L468.8,98.1 L471.3,126.5 L472.5,123.1" fill="none" stroke="#16a34a" stroke-width="1.2" stroke-opacity=".85"/><line x1="56.0" y1="56.5" x2="472.5" y2="56.5" stroke="#dc2626" stroke-dasharray="4 3"/><text x="60" y="12" font-size="10" fill="#f97316">— before GC</text><text x="140" y="12" font-size="10" fill="#16a34a">— after GC</text><text x="215" y="12" font-size="10" fill="#dc2626">- - -Xmx</text></svg></div><div class='zoom-hint' hidden>🔍 Drag over the chart to zoom on a range, double-click to zoom out: the charts next to it follow.</div></div></div><div class='chart-card'><h2>📊 Pause distribution</h2><svg viewBox="0 0 560 290" xmlns="http://www.w3.org/2000/svg"><line x1="56" y1="230.0" x2="546" y2="230.0" stroke="#e2e8f0"/><text x="50" y="234.0" font-size="10" text-anchor="end" fill="#64748b">0</text><line x1="56" y1="158.0" x2="546" y2="158.0" stroke="#e2e8f0"/><text x="50" y="162.0" font-size="10" text-anchor="end" fill="#64748b">20</text><line x1="56" y1="86.0" x2="546" y2="86.0" stroke="#e2e8f0"/><text x="50" y="90.0" font-size="10" text-anchor="end" fill="#64748b">40</text><line x1="56" y1="14.0" x2="546" y2="14.0" stroke="#e2e8f0"/><text x="50" y="18.0" font-size="10" text-anchor="end" fill="#64748b">60</text><line x1="56" y1="230" x2="546" y2="230" stroke="#94a3b8"/><text x="301.0" y="286" font-size="11" text-anchor="middle" fill="#475569"></text><text x="12" y="122.0" font-size="11" text-anchor="middle" fill="#475569" transform="rotate(-90 12 122.0)">pauses</text><rect x="70.7" y="24.8" width="68.6" height="205.2" fill="#22c55e"/><text x="105.0" y="21.8" font-size="10" text-anchor="middle">57</text><text x="105.0" y="242" font-size="9" text-anchor="end" fill="#475569" transform="rotate(-25 105.0 242)">&lt;10ms</text><rect x="168.7" y="230.0" width="68.6" height="0.0" fill="#3b82f6"/><text x="203.0" y="227.0" font-size="10" text-anchor="middle">0</text><text x="203.0" y="242" font-size="9" text-anchor="end" fill="#475569" transform="rotate(-25 203.0 242)">10-50ms</text><rect x="266.7" y="230.0" width="68.6" height="0.0" fill="#eab308"/><text x="301.0" y="227.0" font-size="10" text-anchor="middle">0</text><text x="301.0" y="242" font-size="9" text-anchor="end" fill="#475569" transform="rotate(-25 301.0 242)">50-200ms</text><rect x="364.7" y="230.0" width="68.6" height="0.0" fill="#f97316"/><text x="399.0" y="227.0" font-size="10" text-anchor="middle">0</text><text x="399.0" y="242" font-size="9" text-anchor="end" fill="#475569" transform="rotate(-25 399.0 242)">200-500ms</text><rect x="462.7" y="230.0" width="68.6" height="0.0" fill="#dc2626"/><text x="497.0" y="227.0" font-size="10" text-anchor="middle">0</text><text x="497.0" y="242" font-size="9" text-anchor="end" fill="#475569" transform="rotate(-25 497.0 242)">&gt;500ms</text></svg></div><div class='chart-card'><h2>♻️ GC types</h2><svg viewBox="0 0 560 290" xmlns="http://www.w3.org/2000/svg"><line x1="56" y1="230.0" x2="546" y2="230.0" stroke="#e2e8f0"/><text x="50" y="234.0" font-size="10" text-anchor="end" fill="#64748b">0</text><line x1="56" y1="158.0" x2="546" y2="158.0" stroke="#e2e8f0"/><text x="50" y="162.0" font-size="10" text-anchor="end" fill="#64748b">10</text><line x1="56" y1="86.0" x2="546" y2="86.0" stroke="#e2e8f0"/><text x="50" y="90.0" font-size="10" text-anchor="end" fill="#64748b">20</text><line x1="56" y1="14.0" x2="546" y2="14.0" stroke="#e2e8f0"/><text x="50" y="18.0" font-size="10" text-anchor="end" fill="#64748b">30</text><line x1="56" y1="230" x2="546" y2="230" stroke="#94a3b8"/><text x="301.0" y="286" font-size="11" text-anchor="middle" fill="#475569"></text><text x="12" y="122.0" font-size="11" text-anchor="middle" fill="#475569" transform="rotate(-90 12 122.0)">events</text><rect x="68.2" y="35.6" width="57.2" height="194.4" fill="#3b82f6"/><text x="96.8" y="32.6" font-size="10" text-anchor="middle">27</text><text x="96.8" y="242" font-size="9" text-anchor="end" fill="#475569" transform="rotate(-25 96.8 242)">Young (Normal)</text><rect x="149.9" y="179.6" width="57.2" height="50.4" fill="#10b981"/><text x="178.5" y="176.6" font-size="10" text-anchor="middle">7</text><text x="178.5" y="242" font-size="9" text-anchor="end" fill="#475569" transform="rotate(-25 178.5 242)">Young (Mixed)</text><rect x="231.6" y="186.8" width="57.2" height="43.2" fill="#f97316"/><text x="260.2" y="183.8" font-size="10" text-anchor="middle">6</text><text x="260.2" y="242" font-size="9" text-anchor="end" fill="#475569" transform="rotate(-25 260.2 242)">Young (Concurrent Start)</text><rect x="313.2" y="186.8" width="57.2" height="43.2" fill="#8b5cf6"/><text x="341.8" y="183.8" font-size="10" text-anchor="middle">6</text><text x="341.8" y="242" font-size="9" text-anchor="end" fill="#475569" transform="rotate(-25 341.8 242)">Remark</text><rect x="394.9" y="186.8" width="57.2" height="43.2" fill="#ec4899"/><text x="423.5" y="183.8" font-size="10" text-anchor="middle">6</text><text x="423.5" y="242" font-size="9" text-anchor="end" fill="#475569" transform="rotate(-25 423.5 242)">Cleanup</text><rect x="476.6" y="194.0" width="57.2" height="36.0" fill="#14b8a6"/><text x="505.2" y="191.0" font-size="10" text-anchor="middle">5</text><text x="505.2" y="242" font-size="9" text-anchor="end" fill="#475569" transform="rotate(-25 505.2 242)">Young (Prepare Mixed)</text></svg></div></div><div class='section-title'>💡 Recommendations</div><div class='recs-list'><div class="rec-card high"><span class="rec-badge high">🟠 HIGH</span><span class="rec-text">4 evacuation failure(s) / to-space exhausted: G1 had no free region to copy live objects to. Give the heap more headroom (raise -Xmx), keep more free regions in reserve (raise G1ReservePercent, default 10), and check the humongous allocations below.<span class=rec-flag>-XX:G1ReservePercent=20</span></span></div><div class="rec-card medium"><span class="rec-badge medium">🟡 MEDIUM</span><span class="rec-text">Live set ~162.0M = 63.3% of -Xmx (256M). Keep the live set under half of the heap so the collector has room to work.<span class=rec-flag>-Xms512m -Xmx512m</span></span></div></div><div class='table-card'><h2>📋 GC causes</h2><table><tr><th>Cause</th><th>Count</th></tr><tr><td>G1 Evacuation Pause</td><td>42</td></tr><tr><td>G1 Humongous Allocation</td><td>3</td></tr></table></div><div class='table-card'><h2>⏱️ Top 10 longest pauses</h2><table><tr><th>When</th><th>Type</th><th>Cause</th><th>Pause (ms)</th><th>Heap</th><th>Source</th></tr><tr class=''><td>2026-10-13 15:56:09</td><td>Pause Young (Mixed)</td><td>G1 Evacuation Pause</td><td class=''>3.25</td><td>241M -&gt; 165M</td><td class='flag-cell'>jdk21_g1_kafka_real.log:657</td></tr><tr class=''><td>2026-10-13 15:56:09</td><td>Pause Young (Mixed)</td><td>G1 Evacuation Pause</td><td class=''>2.79</td><td>227M -&gt; 109M</td><td class='flag-cell'>jdk21_g1_kafka_real.log:434</td></tr><tr class=''><td>2026-10-13 15:56:09</td><td>Pause Young (Mixed)</td><td>G1 Evacuation Pause</td><td class=''>2.67</td><td>237M -&gt; 116M</td><td class='flag-cell'>jdk21_g1_kafka_real.log:499</td></tr><tr class=''><td>2026-10-13 15:56:09</td><td>Pause Young (Normal)</td><td>G1 Evacuation Pause</td><td class=''>2.60</td><td>166M -&gt; 47M</td><td class='flag-cell'>jdk21_g1_kafka_real.log:257</td></tr><tr class=''><td>2026-10-13 15:56:09</td><td>Pause Young (Normal)</td><td>G1 Evacuation Pause</td><td class=''>2.60</td><td>195M -&gt; 73M</td><td class='flag-cell'>jdk21_g1_kafka_real.log:313</td></tr><tr class=''><td>2026-10-13 15:56:09</td><td>Pause Young (Concurrent Start)</td><td>G1 Evacuation Pause</td><td class=''>2.58</td><td>241M -&gt; 169M</td><td class='flag-cell'>jdk21_g1_kafka_real.log:578</td></tr><tr class=''><td>2026-10-13 15:56:09</td><td>Pause Young (Normal)</td><td>G1 Evacuation Pause</td><td class=''>2.57</td><td>172M -&gt; 54M</td><td class='flag-cell'>jdk21_g1_kafka_real.log:271</td></tr><tr class=''><td>2026-10-13 15:56:09</td><td>Pause Young (Normal)</td><td>G1 Evacuation Pause</td><td class=''>2.55</td><td>134M -&gt; 20M</td><td class='flag-cell'>jdk21_g1_kafka_real.log:187</td></tr><tr class=''><td>2026-10-13 15:56:09</td><td>Pause Young (Normal)</td><td>G1 Evacuation Pause</td><td class=''>2.45</td><td>188M -&gt; 67M</td><td class='flag-cell'>jdk21_g1_kafka_real.log:299</td></tr><tr class=''><td>2026-10-13 15:56:09</td><td>Pause Young (Mixed)</td><td>G1 Evacuation Pause</td><td class=''>2.43</td><td>245M -&gt; 179M</td><td class='flag-cell'>jdk21_g1_kafka_real.log:643</td></tr></table></div><div class='footer'>🛠️ Generated by playground analyze gc-logs (self-contained, no external resource)</div></div></body></html>

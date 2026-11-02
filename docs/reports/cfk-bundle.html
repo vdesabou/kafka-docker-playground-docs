@@ -82,6 +82,8 @@ main { max-width: 1180px; margin: 0 auto; padding: 32px 40px 80px 40px; }
 .search:focus { outline: 2px solid #2563eb; outline-offset: -1px; border-color: transparent; }
 .controls.components { margin-top: -12px; }
 .controls.instances { margin-top: -12px; }
+.controls.connectors { margin-top: -12px; }
+.connector-filter { font-family: inherit; font-size: 13px; max-width: 420px; padding: 4px 6px; border-radius: 6px; border: 1px solid #d1d5db; background: white; }
 .controls .label { font-size: 12px; color: #6b7280; font-weight: 600; }
 .component-btn, .instance-btn {
   background: white;
@@ -166,6 +168,12 @@ table.env { border-collapse: collapse; width: 100%; margin: 8px 0; font-size: 12
 table.env th { text-align: left; color: #6b7280; font-weight: 600; border-bottom: 1px solid #e5e7eb; padding: 4px 8px; }
 table.env td { border-bottom: 1px solid #f3f4f6; padding: 4px 8px; vertical-align: top; word-break: break-all; }
 table.env td.nowrap { white-space: nowrap; word-break: normal; }
+.panel details.cfg { margin: 6px 0; border: 1px solid #e5e7eb; border-radius: 6px; padding: 6px 10px; }
+.panel details.cfg > summary { cursor: pointer; font-size: 13.5px; }
+.panel details.cfg pre { max-height: 420px; overflow: auto; }
+.panel h3 { font-size: 14px; margin: 14px 0 4px; }
+.panel .cfg-search { margin: 8px 0; width: 100%; max-width: 420px; }
+table.cfg td:first-child { width: 34%; }
 .affected { margin-top: 4px; font-size: 12.5px; }
 .affected > summary { cursor: pointer; color: #4b5563; }
 .recommendation {
@@ -175,6 +183,11 @@ table.env td.nowrap { white-space: nowrap; word-break: normal; }
 }
 .recommendation .why { font-style: italic; color: #4b5563; margin-bottom: 10px; font-size: 14px; }
 .recommendation ol { margin: 0 0 12px 20px; padding: 0; }
+.next-steps { margin-top: 8px; padding: 8px 12px; border-left: 3px solid #2563eb; background: #eff6ff; border-radius: 4px; font-size: 13px; }
+.next-steps ol { margin: 4px 0 6px 20px; padding: 0; }
+.component-tag.problem-match { background: #fef3c7; color: #92400e; font-weight: 600; }
+.panel.problem .verdict { margin: 8px 0; }
+.panel.problem ul { margin: 6px 0 6px 20px; padding: 0; font-size: 13px; }
 .recommendation ol li { margin-bottom: 4px; font-size: 13.5px; color: #1f2937; }
 .recommendation .docs {
   font-size: 12px;
@@ -199,6 +212,17 @@ table.env td.nowrap { white-space: nowrap; word-break: normal; }
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
   font-size: 12px;
   color: #6b7280;
+}
+.issue .location a.file-link {
+  color: inherit;
+  text-decoration: underline dotted;
+}
+.issue .location a.file-edit {
+  text-decoration: none;
+}
+.issue .location a.file-link:hover {
+  color: #2563eb;
+  text-decoration: underline;
 }
 .issue .message {
   font-size: 13.5px;
@@ -240,14 +264,34 @@ footer {
   padding: 24px 0;
 }
 footer a { color: #6b7280; }
+
+.lh-ts{color:#0f766e}
+.lh-lvl{font-weight:700;border-radius:3px;padding:0 3px}
+.lh-fatal,.lh-error{color:#fff;background:#dc2626}.lh-warn{color:#78350f;background:#fde68a}
+.lh-info{color:#1d4ed8}.lh-debug,.lh-trace{color:#64748b}
+.lh-exc{color:#b91c1c;font-weight:600}
+.lh-cause{color:#b91c1c;font-weight:700}
+.lh-mdc{color:#7c3aed}
+.lh-logger,.lh-frame{color:#94a3b8}
+.lh-ph{color:#64748b;font-style:italic}
+html[data-theme="dark"] .lh-ts{color:#5eead4}
+html[data-theme="dark"] .lh-fatal,html[data-theme="dark"] .lh-error{color:#fff;background:#b91c1c}
+html[data-theme="dark"] .lh-warn{color:#451a03;background:#fcd34d}
+html[data-theme="dark"] .lh-info{color:#93c5fd}
+html[data-theme="dark"] .lh-debug,html[data-theme="dark"] .lh-trace{color:#94a3b8}
+html[data-theme="dark"] .lh-exc,html[data-theme="dark"] .lh-cause{color:#fca5a5}
+html[data-theme="dark"] .lh-mdc{color:#c4b5fd}
+html[data-theme="dark"] .lh-logger,html[data-theme="dark"] .lh-frame{color:#64748b}
+html[data-theme="dark"] .lh-ph{color:#94a3b8}
 html[data-theme="dark"] body{background:#0f172a;color:#e2e8f0}
 html[data-theme="dark"] .verdict,html[data-theme="dark"] .card,html[data-theme="dark"] .category,html[data-theme="dark"] .panel{background:#1e293b;border-color:#334155}
 html[data-theme="dark"] .card .label,html[data-theme="dark"] .panel .label,html[data-theme="dark"] .controls .label,html[data-theme="dark"] .issue .location,html[data-theme="dark"] footer,html[data-theme="dark"] footer a,html[data-theme="dark"] .category > summary::before{color:#94a3b8}
+html[data-theme="dark"] .issue .location a.file-link:hover{color:#93c5fd}
 html[data-theme="dark"] .card.critical .value{color:#fca5a5}
 html[data-theme="dark"] .card.high .value{color:#fdba74}
 html[data-theme="dark"] .card.medium .value{color:#fcd34d}
 html[data-theme="dark"] .card.low .value{color:#86efac}
-html[data-theme="dark"] .filter-btn,html[data-theme="dark"] .component-btn,html[data-theme="dark"] .instance-btn,html[data-theme="dark"] .search{background:#1e293b;border-color:#334155;color:#cbd5e1}
+html[data-theme="dark"] .filter-btn,html[data-theme="dark"] .component-btn,html[data-theme="dark"] .instance-btn,html[data-theme="dark"] .search,html[data-theme="dark"] .connector-filter{background:#1e293b;border-color:#334155;color:#cbd5e1}
 html[data-theme="dark"] .filter-btn:hover,html[data-theme="dark"] .component-btn:hover,html[data-theme="dark"] .instance-btn:hover{border-color:#94a3b8}
 html[data-theme="dark"] .filter-btn.active{background:#e2e8f0;color:#0f172a;border-color:#e2e8f0}
 html[data-theme="dark"] .component-btn.active,html[data-theme="dark"] .instance-btn.active{background:#2563eb;color:#fff;border-color:#2563eb}
@@ -257,9 +301,12 @@ html[data-theme="dark"] .category[open] > summary{border-bottom-color:#334155}
 html[data-theme="dark"] .count{background:#334155;color:#cbd5e1}
 html[data-theme="dark"] table.env th{color:#94a3b8;border-bottom-color:#334155}
 html[data-theme="dark"] table.env td{border-bottom-color:#273449}
+html[data-theme="dark"] .panel details.cfg{border-color:#334155}
 html[data-theme="dark"] .affected > summary,html[data-theme="dark"] .recommendation .why{color:#94a3b8}
 html[data-theme="dark"] .recommendation{background:#172033;border-bottom-color:#334155}
 html[data-theme="dark"] .recommendation ol li,html[data-theme="dark"] .issue .message{color:#e2e8f0}
+html[data-theme="dark"] .next-steps{background:#172554;border-left-color:#60a5fa}
+html[data-theme="dark"] .component-tag.problem-match{background:#451a03;color:#fcd34d}
 html[data-theme="dark"] .recommendation .docs,html[data-theme="dark"] .issue details summary,html[data-theme="dark"] a{color:#93c5fd}
 html[data-theme="dark"] .issue{border-top-color:#273449}
 html[data-theme="dark"] .issue pre{background:#0b1220}
@@ -290,24 +337,35 @@ html[data-theme="dark"] .theme-toggle{color:#cbd5e1;background:#1e293b;border-co
   <header>
     <h1>📦 CFK Bundle Analysis Report</h1>
     <div class="meta">
-      Generated 2026-10-28 10:50:26
-      &nbsp;·&nbsp; Files analyzed: 10
-      &nbsp;·&nbsp; 5 pods, 3 CFK CRs, 4 events, 5 log files (50 lines)
-      &nbsp;·&nbsp; Time: 0.01s
+      Generated 2026-11-02 14:59:17
+      &nbsp;·&nbsp; Files analyzed: 13
+      &nbsp;·&nbsp; 5 pods, 3 CFK CRs, 4 events, 5 log files (91 lines)
+      &nbsp;·&nbsp; Time: 0.03s
       &nbsp;·&nbsp; Bundle: cfk-support-bundle-synthetic.tar.gz
     </div>
   </header>
   <main>
     <div class="verdict critical">🚨 4 critical findings, 6 high: start with Pod Failures.</div>
     
+    
     <div class="summary">
-      <div class="card" data-count="total"><div class="label">🔎 Total issues</div><div class="value">19</div></div>
+      <div class="card" data-count="total"><div class="label">🔎 Total issues</div><div class="value">20</div></div>
       <div class="card critical" data-count="critical"><div class="label">🔴 Critical</div><div class="value">4</div></div>
       <div class="card high" data-count="high"><div class="label">🟠 High</div><div class="value">6</div></div>
       <div class="card medium" data-count="medium"><div class="label">🟡 Medium</div><div class="value">9</div></div>
-      <div class="card low" data-count="low"><div class="label">🟢 Low</div><div class="value">0</div></div>
+      <div class="card low" data-count="low"><div class="label">🟢 Low</div><div class="value">1</div></div>
     </div>
     
+    
+        <details class="panel" open>
+          <summary>📕 Known CFK issues <span class="label">1 matched: log messages and events of known CFK problems, read the runbook before digging further</span></summary>
+          <table class="env"><tr><th>Severity</th><th>Known issue</th><th>Seen in</th></tr><tr><td class="nowrap"><span class="severity-pill high">🟠 high</span></td><td><strong>Expired certificate</strong><br>a certificate (or its CA) expired. Renewing the secret after expiry can leave the roll stuck: only the pods restarted with the new certificate can talk to each other, so look at which pods run the new one<br><a href="https://docs.confluent.io/operator/current/co-network-encryption.html" target="_blank" rel="noopener">📘 Manage TLS certificates</a> · <a href="https://confluentinc.atlassian.net/wiki/spaces/GTS/pages/4844267856" target="_blank" rel="noopener" title="internal runbook of Confluent support">🔒 How to unblock Kraft and Kafka cluster which is down due to cert renewal after expiration</a> · <a href="https://confluentinc.atlassian.net/wiki/spaces/GTS/pages/6157041825" target="_blank" rel="noopener" title="internal runbook of Confluent support">🔒 CFK Roll Deadlock: General Recovery Pattern</a></td><td>1 issue(s), ×2<br><code>confluent/kafka/logs/kafka-2.log:10</code></td></tr></table>
+        </details>
+    
+        <details class="panel" open>
+          <summary>📥 Data to request <span class="label">6 item(s) to ask the customer for: from the gaps of the bundle, its findings (--problem adds the ones of its symptoms)</span></summary>
+          <table class="env"><tr><th>#</th><th>What and why</th><th>Command</th><th>From</th></tr><tr><td class="nowrap">1</td><td><strong>the full logs of the pods whose log starts too late</strong><br>the bundle keeps the end of each log: what happened before is not in it (🕰️ Log coverage)</td><td><code>kubectl logs &lt;pod&gt; -n &lt;namespace&gt; --since=&lt;duration&gt; &gt; &lt;pod&gt;.log</code></td><td class="nowrap">🕳️ gap of the bundle</td></tr><tr><td class="nowrap">2</td><td><strong>the log before the last restart of connect-0, kafka-2</strong><br>the container restarted: the error that stopped it is in the previous container, not in the bundle</td><td><code>kubectl logs &lt;pod&gt; -c &lt;container&gt; -n &lt;namespace&gt; --previous &gt; &lt;pod&gt;-previous.log</code></td><td class="nowrap">🕳️ gap of the bundle</td></tr><tr><td class="nowrap">3</td><td><strong>the resources and JVM settings of the OOMKilled pods, a heap dump</strong><br>a container was OOMKilled: is the heap larger than the memory limit, or does something fill it?</td><td><code>kubectl get &lt;kind&gt; &lt;name&gt; -n &lt;namespace&gt; -o yaml   # spec.podTemplate.resources, configOverrides.jvm; kubectl exec &lt;pod&gt; -n &lt;namespace&gt; -- jcmd 1 GC.heap_dump /tmp/heap.hprof</code></td><td class="nowrap">🔎 finding</td></tr><tr><td class="nowrap">4</td><td><strong>the nodes and the volumes</strong><br>a pod cannot be scheduled (capacity, taints, affinity, unbound PVC)</td><td><code>kubectl describe nodes &gt; nodes.txt; kubectl get pvc,pv -n &lt;namespace&gt; -o wide</code></td><td class="nowrap">🔎 finding</td></tr><tr><td class="nowrap">5</td><td><strong>the certificate chain served by the endpoint and its dates</strong><br>TLS errors in the bundle: expired certificate, wrong SAN, missing CA</td><td><code>openssl s_client -connect &lt;host&gt;:&lt;port&gt; -showcerts &lt;/dev/null | openssl x509 -noout -subject -issuer -dates -ext subjectAltName</code></td><td class="nowrap">🔎 finding</td></tr><tr><td class="nowrap">6</td><td><strong>the status and config of the failed connectors</strong><br>the trace of the failed task and the keys involved</td><td><code>kubectl exec connect-0 -n &lt;namespace&gt; -- curl -s localhost:8083/connectors/&lt;connector&gt;/status</code></td><td class="nowrap">🔎 finding</td></tr></table>
+        </details>
     
         <details class="panel" open>
           <summary>🧭 Environment</summary>
@@ -319,15 +377,31 @@ html[data-theme="dark"] .theme-toggle{color:#cbd5e1;background:#1e293b;border-co
           <table class="env"><tr><th>Time (UTC)</th><th>Object</th><th>Change</th></tr><tr><td class="nowrap">2026-10-14T09:05:00Z</td><td>Pod/kafka-2</td><td>container kafka terminated: Error exitCode=1 (restarts=42)</td></tr><tr><td class="nowrap">2026-10-14T09:05:00Z</td><td>Pod/connect-0</td><td>container connect terminated: OOMKilled exitCode=137 (restarts=6)</td></tr><tr><td class="nowrap">2026-10-13T18:42:10Z</td><td>Kafka/kafka</td><td>Update by kubectl-edit: spec.podTemplate, spec.tls</td></tr></table>
         </details>
     
+        <details class="panel">
+          <summary>🕰️ Log coverage <span class="label">4 log files, from 2026-10-14 09:00:01 to 2026-10-14 09:12:31: what happened outside these ranges is not in the bundle</span></summary>
+          <table class="env"><tr><th>Log</th><th>From</th><th>To</th><th>Covers</th><th>Pod started</th></tr><tr><td><code>confluent/connect/logs/connect-0.log</code></td><td class="nowrap">2026-10-14 09:00:30</td><td class="nowrap">2026-10-14 09:04:59</td><td class="nowrap">4 minute(s)</td><td class="nowrap"></td></tr><tr><td><code>confluent/kafka/logs/kafka-2.log</code></td><td class="nowrap">2026-10-14 09:12:20</td><td class="nowrap">2026-10-14 09:12:31</td><td class="nowrap">0 minute(s)</td><td class="nowrap"></td></tr><tr><td><code>confluent/schemaregistry/logs/schemaregistry-0.log</code></td><td class="nowrap">2026-10-14 09:10:40</td><td class="nowrap">2026-10-14 09:10:44</td><td class="nowrap">0 minute(s)</td><td class="nowrap"></td></tr><tr><td><code>operator/confluent-operator-7d9c8b6f5-x2x7k.log</code></td><td class="nowrap">2026-10-14 09:00:01</td><td class="nowrap">2026-10-14 09:05:03</td><td class="nowrap">5 minute(s)</td><td class="nowrap"></td></tr></table>
+        </details>
+    
+        <details class="panel" open>
+          <summary>⚙️ Configuration <span class="label">Kafka, ZooKeeper, Schema Registry, Connect, Control Center: properties rendered by CFK (ConfigMap &lt;cr&gt;-shared-config), configOverrides of the CR, config logged at startup · connectors: Connector CRs, config logged when they start</span></summary>
+          <input class="search cfg-search" type="search" placeholder="Filter keys and values…" />
+          <h3>🧱 Kafka (1)</h3><details class="cfg"><summary><strong>kafka</strong> <span class="label">kafka.properties, 8 keys</span></summary><div class="label">kafka.properties rendered by CFK, from confluent/kafka/cm/configmaps.yaml</div><table class="env cfg"><tr><th>Key</th><th>Value</th></tr><tr class="cfg-row"><td><code>advertised.listeners</code></td><td><code>INTERNAL://${POD_NAME}.kafka.confluent.svc.cluster.local:9071</code></td></tr><tr class="cfg-row"><td><code>default.replication.factor</code></td><td><code>3</code></td></tr><tr class="cfg-row"><td><code>listener.security.protocol.map</code></td><td><code>INTERNAL:SSL,CONTROLLER:SSL</code></td></tr><tr class="cfg-row"><td><code>listeners</code></td><td><code>INTERNAL://:9071</code></td></tr><tr class="cfg-row"><td><code>log.dirs</code></td><td><code>/mnt/data/data0/logs</code></td></tr><tr class="cfg-row"><td><code>min.insync.replicas</code></td><td><code>2</code></td></tr><tr class="cfg-row"><td><code>ssl.keystore.location</code></td><td><code>/mnt/sslcerts/keystore.p12</code></td></tr><tr class="cfg-row"><td><code>ssl.keystore.password</code></td><td><code>mykeystorepassword</code></td></tr></table><details class="cfg"><summary>📄 jvm.config</summary><pre>-Xmx4g
+</pre></details><details class="cfg"><summary>🪵 KafkaConfig logged at startup, with the defaults (7 keys) · confluent/kafka/logs/kafka-2.log:2 (2026-10-14 09:12:20)</summary><table class="env cfg"><tr><th>Key</th><th>Value</th></tr><tr class="cfg-row"><td><code>advertised.listeners</code></td><td><code>INTERNAL://kafka-2.kafka.confluent.svc.cluster.local:9071</code></td></tr><tr class="cfg-row"><td><code>default.replication.factor</code></td><td><code>3</code></td></tr><tr class="cfg-row"><td><code>log.retention.hours</code></td><td><code>168</code></td></tr><tr class="cfg-row"><td><code>min.insync.replicas</code></td><td><code>2</code></td></tr><tr class="cfg-row"><td><code>node.id</code></td><td><code>2</code></td></tr><tr class="cfg-row"><td><code>ssl.keystore.password</code></td><td><code>[hidden]</code></td></tr><tr class="cfg-row"><td><code>unclean.leader.election.enable</code></td><td><code>false</code></td></tr></table></details></details><h3>📜 Schema Registry (1)</h3><details class="cfg"><summary><strong>schemaregistry</strong> <span class="label">schemaregistry.properties, 7 keys</span></summary><div class="label">schemaregistry.properties rendered by CFK, from confluent/schemaregistry/cm/configmaps.yaml</div><table class="env cfg"><tr><th>Key</th><th>Value</th></tr><tr class="cfg-row"><td><code>kafkastore.bootstrap.servers</code></td><td><code>SASL_SSL://kafka.confluent.svc.cluster.local:9071</code></td></tr><tr class="cfg-row"><td><code>kafkastore.sasl.jaas.config</code></td><td><code>org.apache.kafka.common.security.plain.PlainLoginModule required username=&quot;sr&quot; password=&quot;sr-secret&quot;;</code></td></tr><tr class="cfg-row"><td><code>kafkastore.sasl.mechanism</code></td><td><code>PLAIN</code></td></tr><tr class="cfg-row"><td><code>kafkastore.security.protocol</code></td><td><code>SASL_SSL</code></td></tr><tr class="cfg-row"><td><code>kafkastore.topic</code></td><td><code>_schemas_schemaregistry_confluent</code></td></tr><tr class="cfg-row"><td><code>listeners</code></td><td><code>http://0.0.0.0:8081</code></td></tr><tr class="cfg-row"><td><code>schema.registry.group.id</code></td><td><code>id_schemaregistry_confluent</code></td></tr></table><details class="cfg"><summary>🪵 SchemaRegistryConfig logged at startup, with the defaults (6 keys) · confluent/schemaregistry/logs/schemaregistry-0.log:2 (2026-10-14 09:10:41)</summary><table class="env cfg"><tr><th>Key</th><th>Value</th></tr><tr class="cfg-row"><td><code>kafkastore.bootstrap.servers</code></td><td><code>[SASL_SSL://kafka.confluent.svc.cluster.local:9071]</code></td></tr><tr class="cfg-row"><td><code>kafkastore.sasl.jaas.config</code></td><td><code>[hidden]</code></td></tr><tr class="cfg-row"><td><code>kafkastore.sasl.mechanism</code></td><td><code>PLAIN</code></td></tr><tr class="cfg-row"><td><code>kafkastore.timeout.ms</code></td><td><code>500</code></td></tr><tr class="cfg-row"><td><code>leader.eligibility</code></td><td><code>true</code></td></tr><tr class="cfg-row"><td><code>mode.mutability</code></td><td><code>true</code></td></tr></table></details></details><h3>🔌 Connect (1)</h3><details class="cfg"><summary><strong>connect</strong> <span class="label">connect.properties, 13 keys</span></summary><div class="label">connect.properties rendered by CFK, from confluent/connect/cm/configmaps.yaml</div><table class="env cfg"><tr><th>Key</th><th>Value</th></tr><tr class="cfg-row"><td><code>bootstrap.servers</code></td><td><code>kafka.confluent.svc.cluster.local:9071</code></td></tr><tr class="cfg-row"><td><code>config.storage.topic</code></td><td><code>confluent.connect-configs</code></td></tr><tr class="cfg-row"><td><code>consumer.max.poll.records</code></td><td><code>2000</code></td></tr><tr class="cfg-row"><td><code>group.id</code></td><td><code>confluent.connect</code></td></tr><tr class="cfg-row"><td><code>key.converter</code></td><td><code>org.apache.kafka.connect.storage.StringConverter</code></td></tr><tr class="cfg-row"><td><code>listeners</code></td><td><code>http://0.0.0.0:8083</code></td></tr><tr class="cfg-row"><td><code>offset.storage.topic</code></td><td><code>confluent.connect-offsets</code></td></tr><tr class="cfg-row"><td><code>plugin.path</code></td><td><code>/usr/share/java,/usr/share/confluent-hub-components,/mnt/plugins</code></td></tr><tr class="cfg-row"><td><code>ssl.truststore.location</code></td><td><code>/mnt/sslcerts/truststore.p12</code></td></tr><tr class="cfg-row"><td><code>ssl.truststore.password</code></td><td><code>mystorepassword</code></td></tr><tr class="cfg-row"><td><code>status.storage.topic</code></td><td><code>confluent.connect-status</code></td></tr><tr class="cfg-row"><td><code>value.converter</code></td><td><code>io.confluent.connect.avro.AvroConverter</code></td></tr><tr class="cfg-row"><td><code>value.converter.schema.registry.url</code></td><td><code>http://schemaregistry.confluent.svc.cluster.local:8081</code></td></tr></table><details class="cfg"><summary>✏️ configOverrides.server of the CR (1 keys, already in connect.properties above)</summary><table class="env cfg"><tr><th>Key</th><th>Value</th></tr><tr class="cfg-row"><td><code>consumer.max.poll.records</code></td><td><code>2000</code></td></tr></table></details><details class="cfg"><summary>✏️ configOverrides.jvm of the CR</summary><pre>-Xmx1536m</pre></details><details class="cfg"><summary>📄 jvm.config</summary><pre>-Xmx1536m
+-XX:+UseG1GC
+</pre></details><details class="cfg"><summary>🪵 DistributedConfig logged at startup, with the defaults (8 keys) · confluent/connect/logs/connect-0.log:1 (2026-10-14 09:00:30)</summary><table class="env cfg"><tr><th>Key</th><th>Value</th></tr><tr class="cfg-row"><td><code>bootstrap.servers</code></td><td><code>[kafka.confluent.svc.cluster.local:9071]</code></td></tr><tr class="cfg-row"><td><code>config.storage.topic</code></td><td><code>confluent.connect-configs</code></td></tr><tr class="cfg-row"><td><code>connector.client.config.override.policy</code></td><td><code>All</code></td></tr><tr class="cfg-row"><td><code>group.id</code></td><td><code>confluent.connect</code></td></tr><tr class="cfg-row"><td><code>offset.flush.interval.ms</code></td><td><code>10000</code></td></tr><tr class="cfg-row"><td><code>scheduled.rebalance.max.delay.ms</code></td><td><code>300000</code></td></tr><tr class="cfg-row"><td><code>ssl.truststore.password</code></td><td><code>[hidden]</code></td></tr><tr class="cfg-row"><td><code>task.shutdown.graceful.timeout.ms</code></td><td><code>10000</code></td></tr></table></details></details><h3>🧩 Connectors (1)</h3><details class="cfg" data-connector="orders-sink"><summary>🧩 <strong>orders-sink</strong> <span class="label">JdbcSinkConnector · connect · RUNNING</span></summary><div class="label">Connector CR (9 keys) · confluent/connect/connector-orders-sink.yaml</div><table class="env cfg"><tr><th>Key</th><th>Value</th></tr><tr class="cfg-row"><td><code>connector.class</code></td><td><code>io.confluent.connect.jdbc.JdbcSinkConnector</code></td></tr><tr class="cfg-row"><td><code>tasks.max</code></td><td><code>2</code></td></tr><tr class="cfg-row"><td><code>auto.create</code></td><td><code>false</code></td></tr><tr class="cfg-row"><td><code>batch.size</code></td><td><code>3000</code></td></tr><tr class="cfg-row"><td><code>connection.password</code></td><td><code>s3cr3t-in-clear</code></td></tr><tr class="cfg-row"><td><code>connection.url</code></td><td><code>jdbc:postgresql://postgres.confluent.svc.cluster.local:5432/shop</code></td></tr><tr class="cfg-row"><td><code>connection.user</code></td><td><code>connect</code></td></tr><tr class="cfg-row"><td><code>insert.mode</code></td><td><code>insert</code></td></tr><tr class="cfg-row"><td><code>topics</code></td><td><code>orders</code></td></tr></table><div class="label">SinkConnectorConfig (worker) (8 keys) · confluent/connect/logs/connect-0.log:10 (2026-10-14 09:01:10)</div><table class="env cfg"><tr><th>Key</th><th>Value</th></tr><tr class="cfg-row"><td><code>config.action.reload</code></td><td><code>restart</code></td></tr><tr class="cfg-row"><td><code>connector.class</code></td><td><code>io.confluent.connect.jdbc.JdbcSinkConnector</code></td></tr><tr class="cfg-row"><td><code>errors.tolerance</code></td><td><code>none</code></td></tr><tr class="cfg-row"><td><code>key.converter</code></td><td><code>null</code></td></tr><tr class="cfg-row"><td><code>name</code></td><td><code>orders-sink</code></td></tr><tr class="cfg-row"><td><code>tasks.max</code></td><td><code>2</code></td></tr><tr class="cfg-row"><td><code>topics</code></td><td><code>[orders]</code></td></tr><tr class="cfg-row"><td><code>value.converter</code></td><td><code>null</code></td></tr></table><div class="label">JdbcSinkConfig (task-1) (7 keys) · confluent/connect/logs/connect-0.log:19 (2026-10-14 09:01:11)</div><table class="env cfg"><tr><th>Key</th><th>Value</th></tr><tr class="cfg-row"><td><code>auto.create</code></td><td><code>false</code></td></tr><tr class="cfg-row"><td><code>batch.size</code></td><td><code>3000</code></td></tr><tr class="cfg-row"><td><code>connection.password</code></td><td><code>[hidden]</code></td></tr><tr class="cfg-row"><td><code>connection.url</code></td><td><code>jdbc:postgresql://postgres.confluent.svc.cluster.local:5432/shop</code></td></tr><tr class="cfg-row"><td><code>connection.user</code></td><td><code>connect</code></td></tr><tr class="cfg-row"><td><code>insert.mode</code></td><td><code>insert</code></td></tr><tr class="cfg-row"><td><code>max.retries</code></td><td><code>10</code></td></tr></table></details>
+        </details>
+    
     <div class="controls">
       <button class="filter-btn active" data-filter="all">📋 All</button>
       <button class="filter-btn" data-filter="critical">🔴 Critical</button>
       <button class="filter-btn" data-filter="high">🟠 High</button>
       <button class="filter-btn" data-filter="medium">🟡 Medium</button>
       <button class="filter-btn" data-filter="low">🟢 Low</button>
+      
       <input id="search" class="search" type="search" placeholder="Search messages, files, categories, pods…" />
     </div>
-    <div class="controls components"><span class="label">Component</span><button class="component-btn active" data-component="all">🧩 All components<span class="n">19</span></button><button class="component-btn" data-component="kafka">📨 Kafka<span class="n">10</span></button><button class="component-btn" data-component="connect">🔌 Connect<span class="n">6</span></button><button class="component-btn" data-component="schemaregistry">📜 Schema Registry<span class="n">2</span></button><button class="component-btn" data-component="operator">⚙️ Operator<span class="n">1</span></button></div><div class="controls instances" style="display:none"><span class="label">Instance</span><button class="instance-btn active" data-instance="all">All instances</button><button class="instance-btn" data-component="connect" data-instance="connect" style="display:none">connect<span class="n">5</span></button><button class="instance-btn" data-component="connect" data-instance="orders-sink" style="display:none">orders-sink<span class="n">1</span></button><button class="instance-btn" data-component="kafka" data-instance="kafka" style="display:none">kafka<span class="n">10</span></button><button class="instance-btn" data-component="schemaregistry" data-instance="schemaregistry" style="display:none">schemaregistry<span class="n">2</span></button></div>
+    <div class="controls components"><span class="label">Component</span><button class="component-btn active" data-component="all">🧩 All components<span class="n">20</span></button><button class="component-btn" data-component="kafka">📨 Kafka<span class="n">10</span></button><button class="component-btn" data-component="connect">🔌 Connect<span class="n">6</span></button><button class="component-btn" data-component="schemaregistry">📜 Schema Registry<span class="n">2</span></button><button class="component-btn" data-component="operator">⚙️ Operator<span class="n">2</span></button></div><div class="controls instances" style="display:none"><span class="label">Instance</span><button class="instance-btn active" data-instance="all">All instances</button><button class="instance-btn" data-component="connect" data-instance="connect" style="display:none">connect<span class="n">6</span></button><button class="instance-btn" data-component="kafka" data-instance="kafka" style="display:none">kafka<span class="n">10</span></button><button class="instance-btn" data-component="schemaregistry" data-instance="schemaregistry" style="display:none">schemaregistry<span class="n">2</span></button></div>
+    <div class="controls connectors"><span class="label">Connector</span><select id="connector-filter" class="connector-filter" title="only the issues of this connector ([connector|task-0] context of the log record)"><option value="all">All (1 connector(s) + no connector)</option><option value="orders-sink">orders-sink (2)</option><option value="-">— no connector context — (18)</option></select></div>
     
     
             <details class="category" data-severity="critical" open>
@@ -343,11 +417,12 @@ html[data-theme="dark"] .theme-toggle{color:#cbd5e1;background:#1e293b;border-co
               </div>
               <div class="issues">
                 
-                <div class="issue" data-severity="critical" data-component="kafka" data-instance="kafka">
+                <div class="issue" data-severity="critical" data-component="kafka" data-instance="kafka" data-connectors="-" data-problem="0">
                   <div class="head">
                     <span class="severity-pill critical">🔴 critical</span>
                     <span class="component-tag">📨 Kafka · kafka</span>
-                    <span class="location">confluent/cluster-resources/events.yaml &nbsp;×42</span>
+                    <span class="location"><a class="file-link" href="cfk-support-bundle-synthetic-cfk-report-20261102-155917-files/001-events.yaml.html" target="_blank" rel="noopener" title="open the file">confluent/cluster-resources/events.yaml</a>  &nbsp;×42</span>
+                    
                   </div>
                   <div class="message">BackOff: Back-off restarting failed container kafka in pod kafka-2_confluent (Pod/kafka-2)</div>
                   <details><summary>📋 Show context</summary><pre>apiVersion: v1
@@ -360,46 +435,50 @@ involvedObject:
   kind: Pod
   name: kafka-2
   namespace: confluent
-firstTimestamp: &#x27;2026-10-14T08:00:00Z&#x27;
-lastTimestamp: &#x27;2026-10-14T09:12:31Z&#x27;
+firstTimestamp: '<span class="lh-ts">2026-10-14T08:00:00Z</span>'
+lastTimestamp: '<span class="lh-ts">2026-10-14T09:12:31Z</span>'
 </pre></details>
                 </div>
                 
-                <div class="issue" data-severity="critical" data-component="kafka" data-instance="kafka">
+                <div class="issue" data-severity="critical" data-component="kafka" data-instance="kafka" data-connectors="-" data-problem="0">
                   <div class="head">
                     <span class="severity-pill critical">🔴 critical</span>
                     <span class="component-tag">📨 Kafka · kafka</span>
-                    <span class="location">confluent/cluster-resources/pods.yaml</span>
+                    <span class="location"><a class="file-link" href="cfk-support-bundle-synthetic-cfk-report-20261102-155917-files/002-pods.yaml.html#L45" target="_blank" rel="noopener" title="open the file">confluent/cluster-resources/pods.yaml</a> </span>
+                    
                   </div>
                   <div class="message">Container kafka-2/kafka waiting: CrashLoopBackOff - back-off 5m0s restarting failed container</div>
                   
                 </div>
                 
-                <div class="issue" data-severity="high" data-component="kafka" data-instance="kafka">
+                <div class="issue" data-severity="high" data-component="kafka" data-instance="kafka" data-connectors="-" data-problem="0">
                   <div class="head">
                     <span class="severity-pill high">🟠 high</span>
                     <span class="component-tag">📨 Kafka · kafka</span>
-                    <span class="location">confluent/cluster-resources/pods.yaml</span>
+                    <span class="location"><a class="file-link" href="cfk-support-bundle-synthetic-cfk-report-20261102-155917-files/002-pods.yaml.html#L45" target="_blank" rel="noopener" title="open the file">confluent/cluster-resources/pods.yaml</a> </span>
+                    
                   </div>
                   <div class="message">Container kafka-2/kafka restarted 42 times</div>
                   
                 </div>
                 
-                <div class="issue" data-severity="medium" data-component="kafka" data-instance="kafka">
+                <div class="issue" data-severity="medium" data-component="kafka" data-instance="kafka" data-connectors="-" data-problem="0">
                   <div class="head">
                     <span class="severity-pill medium">🟡 medium</span>
                     <span class="component-tag">📨 Kafka · kafka</span>
-                    <span class="location">confluent/cluster-resources/pods.yaml</span>
+                    <span class="location"><a class="file-link" href="cfk-support-bundle-synthetic-cfk-report-20261102-155917-files/002-pods.yaml.html#L45" target="_blank" rel="noopener" title="open the file">confluent/cluster-resources/pods.yaml</a> </span>
+                    
                   </div>
                   <div class="message">Container kafka-2/kafka previously terminated: Error exitCode=1 (restarts=42)</div>
                   
                 </div>
                 
-                <div class="issue" data-severity="medium" data-component="connect" data-instance="connect">
+                <div class="issue" data-severity="medium" data-component="connect" data-instance="connect" data-connectors="-" data-problem="0">
                   <div class="head">
                     <span class="severity-pill medium">🟡 medium</span>
                     <span class="component-tag">🔌 Connect · connect</span>
-                    <span class="location">confluent/cluster-resources/pods.yaml</span>
+                    <span class="location"><a class="file-link" href="cfk-support-bundle-synthetic-cfk-report-20261102-155917-files/002-pods.yaml.html#L66" target="_blank" rel="noopener" title="open the file">confluent/cluster-resources/pods.yaml</a> </span>
+                    
                   </div>
                   <div class="message">Container connect-0/connect restarted 6 times</div>
                   
@@ -421,28 +500,30 @@ lastTimestamp: &#x27;2026-10-14T09:12:31Z&#x27;
               </div>
               <div class="issues">
                 
-                <div class="issue" data-severity="critical" data-component="connect" data-instance="connect">
+                <div class="issue" data-severity="critical" data-component="connect" data-instance="connect" data-connectors="-" data-problem="0">
                   <div class="head">
                     <span class="severity-pill critical">🔴 critical</span>
                     <span class="component-tag">🔌 Connect · connect</span>
-                    <span class="location">confluent/cluster-resources/pods.yaml</span>
+                    <span class="location"><a class="file-link" href="cfk-support-bundle-synthetic-cfk-report-20261102-155917-files/002-pods.yaml.html#L66" target="_blank" rel="noopener" title="open the file">confluent/cluster-resources/pods.yaml</a> </span>
+                    
                   </div>
                   <div class="message">Container connect-0/connect was OOMKilled (lastState, exitCode=137, restarts=6)</div>
                   
                 </div>
                 
-                <div class="issue" data-severity="critical" data-component="connect" data-instance="connect">
+                <div class="issue" data-severity="critical" data-component="connect" data-instance="connect" data-connectors="orders-sink" data-problem="0">
                   <div class="head">
                     <span class="severity-pill critical">🔴 critical</span>
                     <span class="component-tag">🔌 Connect · connect</span>
-                    <span class="location">confluent/connect/logs/connect-0.log:7</span>
+                    <span class="location"><a class="file-link" href="cfk-support-bundle-synthetic-cfk-report-20261102-155917-files/003-connect-0.log.html#L33" target="_blank" rel="noopener" title="open the file at this line">confluent/connect/logs/connect-0.log:33</a> </span>
+                    
                   </div>
-                  <div class="message">Oom Killed: [2026-10-14 09:04:59,002] ERROR [orders-sink|task-1] java.lang.OutOfMemoryError: Java heap space (org.apache.kafka.connect.runtime.WorkerTask)<br>&nbsp;&nbsp;↳ Caused by: java.lang.OutOfMemoryError: Java heap space</div>
-                  <details><summary>📋 Show context</summary><pre>Caused by: java.sql.SQLException: Exception chain:
-java.sql.BatchUpdateException: Batch entry 0 INSERT INTO &quot;orders&quot; (&quot;id&quot;,&quot;amount&quot;) VALUES (1042,NULL) was aborted: ERROR: null value in column &quot;amount&quot; violates not-null constraint
-[2026-10-14 09:04:59,002] ERROR [orders-sink|task-1] java.lang.OutOfMemoryError: Java heap space (org.apache.kafka.connect.runtime.WorkerTask)
-java.lang.OutOfMemoryError: Java heap space
-	at java.base/java.util.Arrays.copyOf(Arrays.java:3537)</pre></details>
+                  <div class="message">Oom Killed: [<span class="lh-ts">2026-10-14 09:04:59,002</span>] <span class="lh-lvl lh-error">ERROR</span> <span class="lh-mdc">[orders-sink|task-1]</span> <span class="lh-exc">java.lang.OutOfMemoryError</span>: Java heap space <span class="lh-logger">(org.apache.kafka.connect.runtime.WorkerTask)</span><br>&nbsp;&nbsp;↳ <span class="lh-cause">Caused by:</span> <span class="lh-exc">java.lang.OutOfMemoryError</span>: Java heap space</div>
+                  <details><summary>📋 Show context</summary><pre><span class="lh-cause">Caused by:</span> <span class="lh-exc">java.sql.SQLException</span>: Exception chain:
+<span class="lh-exc">java.sql.BatchUpdateException</span>: Batch entry 0 INSERT INTO &quot;orders&quot; (&quot;id&quot;,&quot;amount&quot;) VALUES (1042,NULL) was aborted: <span class="lh-lvl lh-error">ERROR</span>: null value in column &quot;amount&quot; violates not-null constraint
+[<span class="lh-ts">2026-10-14 09:04:59,002</span>] <span class="lh-lvl lh-error">ERROR</span> <span class="lh-mdc">[orders-sink|task-1]</span> <span class="lh-exc">java.lang.OutOfMemoryError</span>: Java heap space <span class="lh-logger">(org.apache.kafka.connect.runtime.WorkerTask)</span>
+<span class="lh-exc">java.lang.OutOfMemoryError</span>: Java heap space
+<span class="lh-frame">	at java.base/java.util.Arrays.copyOf(Arrays.java:3537)</span></pre></details>
                 </div>
                 
               </div>
@@ -461,25 +542,26 @@ java.lang.OutOfMemoryError: Java heap space
               </div>
               <div class="issues">
                 
-                <div class="issue" data-severity="high" data-component="schemaregistry" data-instance="schemaregistry">
+                <div class="issue" data-severity="high" data-component="schemaregistry" data-instance="schemaregistry" data-connectors="-" data-problem="0">
                   <div class="head">
                     <span class="severity-pill high">🟠 high</span>
                     <span class="component-tag">📜 Schema Registry · schemaregistry</span>
-                    <span class="location">confluent/cluster-resources/events.yaml &nbsp;×18</span>
+                    <span class="location"><a class="file-link" href="cfk-support-bundle-synthetic-cfk-report-20261102-155917-files/001-events.yaml.html" target="_blank" rel="noopener" title="open the file">confluent/cluster-resources/events.yaml</a>  &nbsp;×18</span>
+                    
                   </div>
                   <div class="message">Unhealthy: Readiness probe failed: HTTP probe failed with statuscode: 503 (Pod/schemaregistry-0)</div>
                   <details><summary>📋 Show context</summary><pre>apiVersion: v1
 kind: Event
 type: Warning
 reason: Unhealthy
-message: &#x27;Readiness probe failed: HTTP probe failed with statuscode: 503&#x27;
+message: 'Readiness probe failed: HTTP probe failed with statuscode: 503'
 count: 18
 involvedObject:
   kind: Pod
   name: schemaregistry-0
   namespace: confluent
-firstTimestamp: &#x27;2026-10-14T08:00:00Z&#x27;
-lastTimestamp: &#x27;2026-10-14T09:10:44Z&#x27;
+firstTimestamp: '<span class="lh-ts">2026-10-14T08:00:00Z</span>'
+lastTimestamp: '<span class="lh-ts">2026-10-14T09:10:44Z</span>'
 </pre></details>
                 </div>
                 
@@ -499,30 +581,33 @@ lastTimestamp: &#x27;2026-10-14T09:10:44Z&#x27;
               </div>
               <div class="issues">
                 
-                <div class="issue" data-severity="high" data-component="kafka" data-instance="kafka">
+                <div class="issue" data-severity="high" data-component="kafka" data-instance="kafka" data-connectors="-" data-problem="0">
                   <div class="head">
                     <span class="severity-pill high">🟠 high</span>
                     <span class="component-tag">📨 Kafka · kafka</span>
-                    <span class="location">confluent/kafka/logs/kafka-2.log:2 &nbsp;×2</span>
+                    <span class="location"><a class="file-link" href="cfk-support-bundle-synthetic-cfk-report-20261102-155917-files/004-kafka-2.log.html#L10" target="_blank" rel="noopener" title="open the file at this line">confluent/kafka/logs/kafka-2.log:10</a>  &nbsp;×2</span>
+                    
                   </div>
-                  <div class="message">Tls Handshake: [2026-10-14 09:12:24,902] ERROR [Controller id=2] Failed to connect to the quorum, retrying (org.apache.kafka.raft.KafkaRaftClient)<br>&nbsp;&nbsp;↳ Caused by: javax.net.ssl.SSLHandshakeException: PKIX path validation failed: java.security.cert.CertPathValidatorException: validity check failed<br>&nbsp;&nbsp;↳ Caused by: java.security.cert.CertificateExpiredException: NotAfter: Mon Oct 13 23:59:59 UTC 2026</div>
-                  <details><summary>📋 Show context</summary><pre>[2026-10-14 09:12:20,114] INFO Starting the controller-mode broker (kafka.server.KafkaRaftServer)
-[2026-10-14 09:12:24,902] ERROR [Controller id=2] Failed to connect to the quorum, retrying (org.apache.kafka.raft.KafkaRaftClient)
-javax.net.ssl.SSLHandshakeException: PKIX path validation failed: java.security.cert.CertPathValidatorException: validity check failed
-	at java.base/sun.security.ssl.Alert.createSSLException(Alert.java:130)</pre></details>
+                  <div class="message">Tls Handshake: [<span class="lh-ts">2026-10-14 09:12:24,902</span>] <span class="lh-lvl lh-error">ERROR</span> [Controller id=2] Failed to connect to the quorum, retrying <span class="lh-logger">(org.apache.kafka.raft.KafkaRaftClient)</span><br>&nbsp;&nbsp;↳ <span class="lh-cause">Caused by:</span> <span class="lh-exc">javax.net.ssl.SSLHandshakeException</span>: PKIX path validation failed: <span class="lh-exc">java.security.cert.CertPathValidatorException</span>: validity check failed<br>&nbsp;&nbsp;↳ <span class="lh-cause">Caused by:</span> <span class="lh-exc">java.security.cert.CertificateExpiredException</span>: NotAfter: Mon Oct 13 23:59:59 UTC 2026<br>&nbsp;&nbsp;📕 Known CFK issue: <strong>Expired certificate</strong></div>
+                  <details><summary>📋 Show context</summary><pre>	ssl.keystore.password = [hidden]
+	unclean.leader.election.enable = false <span class="lh-logger">(kafka.server.KafkaConfig)</span>
+[<span class="lh-ts">2026-10-14 09:12:24,902</span>] <span class="lh-lvl lh-error">ERROR</span> [Controller id=2] Failed to connect to the quorum, retrying <span class="lh-logger">(org.apache.kafka.raft.KafkaRaftClient)</span>
+<span class="lh-exc">javax.net.ssl.SSLHandshakeException</span>: PKIX path validation failed: <span class="lh-exc">java.security.cert.CertPathValidatorException</span>: validity check failed
+<span class="lh-frame">	at java.base/sun.security.ssl.Alert.createSSLException(Alert.java:130)</span></pre></details>
                 </div>
                 
-                <div class="issue" data-severity="high" data-component="kafka" data-instance="kafka">
+                <div class="issue" data-severity="high" data-component="kafka" data-instance="kafka" data-connectors="-" data-problem="0">
                   <div class="head">
                     <span class="severity-pill high">🟠 high</span>
                     <span class="component-tag">📨 Kafka · kafka</span>
-                    <span class="location">confluent/kafka/logs/kafka-2.log:11</span>
+                    <span class="location"><a class="file-link" href="cfk-support-bundle-synthetic-cfk-report-20261102-155917-files/004-kafka-2.log.html#L19" target="_blank" rel="noopener" title="open the file at this line">confluent/kafka/logs/kafka-2.log:19</a> </span>
+                    
                   </div>
-                  <div class="message">Tls Handshake: [2026-10-14 09:12:31,010] FATAL [KafkaRaftServer nodeId=2] Fatal error during broker startup. Prepare to shutdown (kafka.server.BrokerServer)<br>&nbsp;&nbsp;↳ Caused by: org.apache.kafka.common.errors.SslAuthenticationException: SSL handshake failed</div>
-                  <details><summary>📋 Show context</summary><pre>javax.net.ssl.SSLHandshakeException: PKIX path validation failed: java.security.cert.CertPathValidatorException: validity check failed
-Caused by: java.security.cert.CertificateExpiredException: NotAfter: Mon Oct 13 23:59:59 UTC 2026
-[2026-10-14 09:12:31,010] FATAL [KafkaRaftServer nodeId=2] Fatal error during broker startup. Prepare to shutdown (kafka.server.BrokerServer)
-org.apache.kafka.common.errors.SslAuthenticationException: SSL handshake failed</pre></details>
+                  <div class="message">Tls Handshake: [<span class="lh-ts">2026-10-14 09:12:31,010</span>] <span class="lh-lvl lh-fatal">FATAL</span> [KafkaRaftServer nodeId=2] Fatal error during broker startup. Prepare to shutdown <span class="lh-logger">(kafka.server.BrokerServer)</span><br>&nbsp;&nbsp;↳ <span class="lh-cause">Caused by:</span> <span class="lh-exc">org.apache.kafka.common.errors.SslAuthenticationException</span>: SSL handshake failed</div>
+                  <details><summary>📋 Show context</summary><pre><span class="lh-exc">javax.net.ssl.SSLHandshakeException</span>: PKIX path validation failed: <span class="lh-exc">java.security.cert.CertPathValidatorException</span>: validity check failed
+<span class="lh-cause">Caused by:</span> <span class="lh-exc">java.security.cert.CertificateExpiredException</span>: NotAfter: Mon Oct 13 23:59:59 UTC 2026
+[<span class="lh-ts">2026-10-14 09:12:31,010</span>] <span class="lh-lvl lh-fatal">FATAL</span> [KafkaRaftServer nodeId=2] Fatal error during broker startup. Prepare to shutdown <span class="lh-logger">(kafka.server.BrokerServer)</span>
+<span class="lh-exc">org.apache.kafka.common.errors.SslAuthenticationException</span>: SSL handshake failed</pre></details>
                 </div>
                 
               </div>
@@ -541,27 +626,30 @@ org.apache.kafka.common.errors.SslAuthenticationException: SSL handshake failed<
               </div>
               <div class="issues">
                 
-                <div class="issue" data-severity="high" data-component="connect" data-instance="orders-sink">
+                <div class="issue" data-severity="high" data-component="connect" data-instance="connect" data-connectors="-" data-problem="0">
                   <div class="head">
                     <span class="severity-pill high">🟠 high</span>
-                    <span class="component-tag">🔌 Connect · orders-sink</span>
-                    <span class="location">confluent/connect/connector-orders-sink.yaml</span>
+                    <span class="component-tag">🔌 Connect · connect</span>
+                    <span class="location"><a class="file-link" href="cfk-support-bundle-synthetic-cfk-report-20261102-155917-files/005-connector-orders-sink.yaml.html#L4" target="_blank" rel="noopener" title="open the file">confluent/connect/connector-orders-sink.yaml</a> </span>
+                    
                   </div>
-                  <div class="message">Connector/orders-sink has failed tasks: {&quot;1&quot;: {&quot;id&quot;: 1, &quot;state&quot;: &quot;FAILED&quot;, &quot;workerId&quot;: &quot;connect-0.connect.confluent.svc.cluster.local:8083&quot;, &quot;trace&quot;: &quot;org.apache.kafka.connect.errors.ConnectException: Exiting WorkerSinkTask due to unrecoverable exception.&quot;}}</div>
+                  <div class="message">Connector/orders-sink has failed tasks: {&quot;1&quot;: {&quot;id&quot;: 1, &quot;state&quot;: &quot;FAILED&quot;, &quot;workerId&quot;: &quot;connect-0.connect.confluent.svc.cluster.local:8083&quot;, &quot;trace&quot;: &quot;<span class="lh-exc">org.apache.kafka.connect.errors.ConnectException</span>: Exiting WorkerSinkTask due to unrecoverable exception.&quot;}}</div>
                   
                 </div>
                 
-                <div class="issue" data-severity="medium" data-component="connect" data-instance="connect">
+                <div class="issue" data-severity="medium" data-component="connect" data-instance="connect" data-connectors="orders-sink" data-problem="0">
                   <div class="head">
                     <span class="severity-pill medium">🟡 medium</span>
                     <span class="component-tag">🔌 Connect · connect</span>
-                    <span class="location">confluent/connect/logs/connect-0.log:2</span>
+                    <span class="location"><a class="file-link" href="cfk-support-bundle-synthetic-cfk-report-20261102-155917-files/003-connect-0.log.html#L28" target="_blank" rel="noopener" title="open the file at this line">confluent/connect/logs/connect-0.log:28</a> </span>
+                    
                   </div>
-                  <div class="message">Connect Error: [2026-10-14 09:04:58,771] ERROR [orders-sink|task-1] WorkerSinkTask{id=orders-sink-1} Task threw an uncaught and unrecoverable exception. Task is being killed and will not recover until manually restarted (org.apache.kafka.connect.runtime.WorkerTask)<br>&nbsp;&nbsp;↳ Caused by: org.apache.kafka.connect.errors.ConnectException: Exiting WorkerSinkTask due to unrecoverable exception.<br>&nbsp;&nbsp;↳ Caused by: java.sql.SQLException: Exception chain:</div>
-                  <details><summary>📋 Show context</summary><pre>[2026-10-14 09:01:12,400] INFO [orders-sink|task-1] Attempting to open connection #1 to PostgreSql (io.confluent.connect.jdbc.util.CachedConnectionProvider)
-[2026-10-14 09:04:58,771] ERROR [orders-sink|task-1] WorkerSinkTask{id=orders-sink-1} Task threw an uncaught and unrecoverable exception. Task is being killed and will not recover until manually restarted (org.apache.kafka.connect.runtime.WorkerTask)
-org.apache.kafka.connect.errors.ConnectException: Exiting WorkerSinkTask due to unrecoverable exception.
-	at org.apache.kafka.connect.runtime.WorkerSinkTask.deliverMessages(WorkerSinkTask.java:632)</pre></details>
+                  <div class="message">Connect Error: [<span class="lh-ts">2026-10-14 09:04:58,771</span>] <span class="lh-lvl lh-error">ERROR</span> <span class="lh-mdc">[orders-sink|task-1]</span> WorkerSinkTask{id=orders-sink-1} Task threw an uncaught and unrecoverable exception. Task is being killed and will not recover until manually restarted <span class="lh-logger">(org.apache.kafka.connect.runtime.WorkerTask)</span><br>&nbsp;&nbsp;↳ <span class="lh-cause">Caused by:</span> <span class="lh-exc">org.apache.kafka.connect.errors.ConnectException</span>: Exiting WorkerSinkTask due to unrecoverable exception.<br>&nbsp;&nbsp;↳ <span class="lh-cause">Caused by:</span> <span class="lh-exc">java.sql.SQLException</span>: Exception chain:</div>
+                  <details><summary>📋 Show context</summary><pre>	max.retries = 10 <span class="lh-logger">(org.apache.kafka.common.config.AbstractConfig)</span>
+[<span class="lh-ts">2026-10-14 09:01:12,400</span>] <span class="lh-lvl lh-info">INFO</span> <span class="lh-mdc">[orders-sink|task-1]</span> Attempting to open connection #1 to PostgreSql <span class="lh-logger">(io.confluent.connect.jdbc.util.CachedConnectionProvider)</span>
+[<span class="lh-ts">2026-10-14 09:04:58,771</span>] <span class="lh-lvl lh-error">ERROR</span> <span class="lh-mdc">[orders-sink|task-1]</span> WorkerSinkTask{id=orders-sink-1} Task threw an uncaught and unrecoverable exception. Task is being killed and will not recover until manually restarted <span class="lh-logger">(org.apache.kafka.connect.runtime.WorkerTask)</span>
+<span class="lh-exc">org.apache.kafka.connect.errors.ConnectException</span>: Exiting WorkerSinkTask due to unrecoverable exception.
+<span class="lh-frame">	at org.apache.kafka.connect.runtime.WorkerSinkTask.deliverMessages(WorkerSinkTask.java:632)</span></pre></details>
                 </div>
                 
               </div>
@@ -580,17 +668,19 @@ org.apache.kafka.connect.errors.ConnectException: Exiting WorkerSinkTask due to 
               </div>
               <div class="issues">
                 
-                <div class="issue" data-severity="high" data-component="schemaregistry" data-instance="schemaregistry">
+                <div class="issue" data-severity="high" data-component="schemaregistry" data-instance="schemaregistry" data-connectors="-" data-problem="0">
                   <div class="head">
                     <span class="severity-pill high">🟠 high</span>
                     <span class="component-tag">📜 Schema Registry · schemaregistry</span>
-                    <span class="location">confluent/schemaregistry/logs/schemaregistry-0.log:2</span>
+                    <span class="location"><a class="file-link" href="cfk-support-bundle-synthetic-cfk-report-20261102-155917-files/006-schemaregistry-0.log.html#L9" target="_blank" rel="noopener" title="open the file at this line">confluent/schemaregistry/logs/schemaregistry-0.log:9</a> </span>
+                    
                   </div>
-                  <div class="message">Authentication Failed: [2026-10-14 09:10:44,113] ERROR Error starting the schema registry (io.confluent.kafka.schemaregistry.rest.SchemaRegistryRestApplication)<br>&nbsp;&nbsp;↳ Caused by: io.confluent.kafka.schemaregistry.exceptions.SchemaRegistryInitializationException: Error initializing kafka store while initializing schema registry<br>&nbsp;&nbsp;↳ Caused by: org.apache.kafka.common.errors.SaslAuthenticationException: Authentication failed during authentication due to invalid credentials with SASL mechanism PLAIN</div>
-                  <details><summary>📋 Show context</summary><pre>[2026-10-14 09:10:40,551] INFO Starting Schema Registry (io.confluent.kafka.schemaregistry.rest.SchemaRegistryMain)
-[2026-10-14 09:10:44,113] ERROR Error starting the schema registry (io.confluent.kafka.schemaregistry.rest.SchemaRegistryRestApplication)
-io.confluent.kafka.schemaregistry.exceptions.SchemaRegistryInitializationException: Error initializing kafka store while initializing schema registry
-Caused by: org.apache.kafka.common.errors.SaslAuthenticationException: Authentication failed during authentication due to invalid credentials with SASL mechanism PLAIN</pre></details>
+                  <div class="message">Authentication Failed: [<span class="lh-ts">2026-10-14 09:10:44,113</span>] <span class="lh-lvl lh-error">ERROR</span> Error starting the schema registry <span class="lh-logger">(io.confluent.kafka.schemaregistry.rest.SchemaRegistryRestApplication)</span><br>&nbsp;&nbsp;↳ <span class="lh-cause">Caused by:</span> <span class="lh-exc">io.confluent.kafka.schemaregistry.exceptions.SchemaRegistryInitializationException</span>: Error initializing kafka store while initializing schema registry<br>&nbsp;&nbsp;↳ <span class="lh-cause">Caused by:</span> <span class="lh-exc">org.apache.kafka.common.errors.SaslAuthenticationException</span>: Authentication failed during authentication due to invalid credentials with SASL mechanism PLAIN</div>
+                  <details><summary>📋 Show context</summary><pre>	leader.eligibility = true
+	mode.mutability = true <span class="lh-logger">(io.confluent.kafka.schemaregistry.rest.SchemaRegistryConfig)</span>
+[<span class="lh-ts">2026-10-14 09:10:44,113</span>] <span class="lh-lvl lh-error">ERROR</span> Error starting the schema registry <span class="lh-logger">(io.confluent.kafka.schemaregistry.rest.SchemaRegistryRestApplication)</span>
+<span class="lh-exc">io.confluent.kafka.schemaregistry.exceptions.SchemaRegistryInitializationException</span>: Error initializing kafka store while initializing schema registry
+<span class="lh-cause">Caused by:</span> <span class="lh-exc">org.apache.kafka.common.errors.SaslAuthenticationException</span>: Authentication failed during authentication due to invalid credentials with SASL mechanism PLAIN</pre></details>
                 </div>
                 
               </div>
@@ -609,27 +699,28 @@ Caused by: org.apache.kafka.common.errors.SaslAuthenticationException: Authentic
               </div>
               <div class="issues">
                 
-                <div class="issue" data-severity="medium" data-component="kafka" data-instance="kafka">
+                <div class="issue" data-severity="medium" data-component="kafka" data-instance="kafka" data-connectors="-" data-problem="0">
                   <div class="head">
                     <span class="severity-pill medium">🟡 medium</span>
                     <span class="component-tag">📨 Kafka · kafka</span>
-                    <span class="location">confluent/cluster-resources/events.yaml &nbsp;×7</span>
+                    <span class="location"><a class="file-link" href="cfk-support-bundle-synthetic-cfk-report-20261102-155917-files/001-events.yaml.html" target="_blank" rel="noopener" title="open the file">confluent/cluster-resources/events.yaml</a>  &nbsp;×7</span>
+                    
                   </div>
                   <div class="message">FailedScheduling: 0/3 nodes are available: pod has unbound immediate PersistentVolumeClaims. preemption: 0/3 nodes are available: 3 Preemption is not helpful for scheduling. PersistentVolumeClaim data0-kafka-2 pending (Pod/kafka-2)</div>
                   <details><summary>📋 Show context</summary><pre>apiVersion: v1
 kind: Event
 type: Warning
 reason: FailedScheduling
-message: &#x27;0/3 nodes are available: pod has unbound immediate PersistentVolumeClaims.
+message: '0/3 nodes are available: pod has unbound immediate PersistentVolumeClaims.
   preemption: 0/3 nodes are available: 3 Preemption is not helpful for scheduling.
-  PersistentVolumeClaim data0-kafka-2 pending&#x27;
+  PersistentVolumeClaim data0-kafka-2 pending'
 count: 7
 involvedObject:
   kind: Pod
   name: kafka-2
   namespace: confluent
-firstTimestamp: &#x27;2026-10-14T08:00:00Z&#x27;
-lastTimestamp: &#x27;2026-10-14T08:20:02Z&#x27;
+firstTimestamp: '<span class="lh-ts">2026-10-14T08:00:00Z</span>'
+lastTimestamp: '<span class="lh-ts">2026-10-14T08:20:02Z</span>'
 </pre></details>
                 </div>
                 
@@ -644,21 +735,22 @@ lastTimestamp: &#x27;2026-10-14T08:20:02Z&#x27;
               </summary>
               <div class="recommendation">
                 <div class="why">CFK operator failed to reconcile a CR.</div>
-                <ol><li>kubectl -n &lt;operator-ns&gt; logs deployment/confluent-operator -f  — look for &#x27;Failed to reconcile &lt;kind&gt;/&lt;name&gt;&#x27;.</li><li>Validate the CR with: kubectl apply --dry-run=server -f &lt;cr.yaml&gt;.</li><li>If a webhook is failing: check the operator&#x27;s ValidatingWebhookConfiguration and its TLS cert validity.</li><li>Restart the operator pod after fixing the CR — it will retry on next reconcile loop.</li></ol>
+                <ol><li>kubectl -n &lt;operator-ns&gt; logs deployment/confluent-operator -f  — look for &#x27;Failed to reconcile &lt;kind&gt;/&lt;name&gt;&#x27;.</li><li>Validate the CR with: kubectl apply --dry-run=server -f &lt;cr.yaml&gt;.</li><li>If a webhook is failing: check the operator&#x27;s ValidatingWebhookConfiguration and its TLS cert validity.</li><li>Restart the operator pod after fixing the CR — it will retry on next reconcile loop.</li><li>Confluent only: playground debug cfk sourcecode --bundle &lt;bundle&gt; --grep &quot;&lt;message&gt;&quot; shows the operator code that logs it, at the version of the bundle.</li></ol>
                 
               </div>
               <div class="issues">
                 
-                <div class="issue" data-severity="medium" data-component="operator" data-instance="">
+                <div class="issue" data-severity="medium" data-component="operator" data-instance="" data-connectors="-" data-problem="0">
                   <div class="head">
                     <span class="severity-pill medium">🟡 medium</span>
                     <span class="component-tag">⚙️ Operator</span>
-                    <span class="location">operator/confluent-operator-7d9c8b6f5-x2x7k.log:2 &nbsp;×2</span>
+                    <span class="location"><a class="file-link" href="cfk-support-bundle-synthetic-cfk-report-20261102-155917-files/007-confluent-operator-7d9c8b6f5-x2x7k.log.html#L2" target="_blank" rel="noopener" title="open the file at this line">operator/confluent-operator-7d9c8b6f5-x2x7k.log:2</a>  &nbsp;×2</span>
+                    
                   </div>
-                  <div class="message">Operator Error: {&quot;level&quot;:&quot;error&quot;,&quot;ts&quot;:&quot;2026-10-14T09:00:03Z&quot;,&quot;logger&quot;:&quot;kafka&quot;,&quot;msg&quot;:&quot;Reconciler error&quot;,&quot;name&quot;:&quot;kafka&quot;,&quot;namespace&quot;:&quot;confluent&quot;,&quot;error&quot;:&quot;failed to reconcile statefulset kafka: 2/3 replicas ready, pod kafka-2 in CrashLoopBackOff&quot;}</div>
-                  <details><summary>📋 Show context</summary><pre>{&quot;level&quot;:&quot;info&quot;,&quot;ts&quot;:&quot;2026-10-14T09:00:01Z&quot;,&quot;logger&quot;:&quot;kafka&quot;,&quot;msg&quot;:&quot;reconciling&quot;,&quot;name&quot;:&quot;kafka&quot;,&quot;namespace&quot;:&quot;confluent&quot;}
-{&quot;level&quot;:&quot;error&quot;,&quot;ts&quot;:&quot;2026-10-14T09:00:03Z&quot;,&quot;logger&quot;:&quot;kafka&quot;,&quot;msg&quot;:&quot;Reconciler error&quot;,&quot;name&quot;:&quot;kafka&quot;,&quot;namespace&quot;:&quot;confluent&quot;,&quot;error&quot;:&quot;failed to reconcile statefulset kafka: 2/3 replicas ready, pod kafka-2 in CrashLoopBackOff&quot;}
-{&quot;level&quot;:&quot;error&quot;,&quot;ts&quot;:&quot;2026-10-14T09:05:03Z&quot;,&quot;logger&quot;:&quot;kafka&quot;,&quot;msg&quot;:&quot;Reconciler error&quot;,&quot;name&quot;:&quot;kafka&quot;,&quot;namespace&quot;:&quot;confluent&quot;,&quot;error&quot;:&quot;failed to reconcile statefulset kafka: 2/3 replicas ready, pod kafka-2 in CrashLoopBackOff&quot;}</pre></details>
+                  <div class="message">Operator Error: {<span class="lh-lvl lh-error">&quot;level&quot;:&quot;error&quot;</span>,&quot;ts&quot;:&quot;<span class="lh-ts">2026-10-14T09:00:03Z</span>&quot;,&quot;logger&quot;:&quot;kafka&quot;,&quot;msg&quot;:&quot;Reconciler error&quot;,&quot;name&quot;:&quot;kafka&quot;,&quot;namespace&quot;:&quot;confluent&quot;,&quot;error&quot;:&quot;failed to reconcile statefulset kafka: 2/3 replicas ready, pod kafka-2 in CrashLoopBackOff&quot;}</div>
+                  <details><summary>📋 Show context</summary><pre>{<span class="lh-lvl lh-info">&quot;level&quot;:&quot;info&quot;</span>,&quot;ts&quot;:&quot;<span class="lh-ts">2026-10-14T09:00:01Z</span>&quot;,&quot;logger&quot;:&quot;kafka&quot;,&quot;msg&quot;:&quot;reconciling&quot;,&quot;name&quot;:&quot;kafka&quot;,&quot;namespace&quot;:&quot;confluent&quot;}
+{<span class="lh-lvl lh-error">&quot;level&quot;:&quot;error&quot;</span>,&quot;ts&quot;:&quot;<span class="lh-ts">2026-10-14T09:00:03Z</span>&quot;,&quot;logger&quot;:&quot;kafka&quot;,&quot;msg&quot;:&quot;Reconciler error&quot;,&quot;name&quot;:&quot;kafka&quot;,&quot;namespace&quot;:&quot;confluent&quot;,&quot;error&quot;:&quot;failed to reconcile statefulset kafka: 2/3 replicas ready, pod kafka-2 in CrashLoopBackOff&quot;}
+{<span class="lh-lvl lh-error">&quot;level&quot;:&quot;error&quot;</span>,&quot;ts&quot;:&quot;<span class="lh-ts">2026-10-14T09:05:03Z</span>&quot;,&quot;logger&quot;:&quot;kafka&quot;,&quot;msg&quot;:&quot;Reconciler error&quot;,&quot;name&quot;:&quot;kafka&quot;,&quot;namespace&quot;:&quot;confluent&quot;,&quot;error&quot;:&quot;failed to reconcile statefulset kafka: 2/3 replicas ready, pod kafka-2 in CrashLoopBackOff&quot;}</pre></details>
                 </div>
                 
               </div>
@@ -677,18 +769,19 @@ lastTimestamp: &#x27;2026-10-14T08:20:02Z&#x27;
               </div>
               <div class="issues">
                 
-                <div class="issue" data-severity="medium" data-component="connect" data-instance="connect">
+                <div class="issue" data-severity="medium" data-component="connect" data-instance="connect" data-connectors="-" data-problem="0">
                   <div class="head">
                     <span class="severity-pill medium">🟡 medium</span>
                     <span class="component-tag">🔌 Connect · connect</span>
-                    <span class="location">confluent/connect/logs/connect-0.log:6</span>
+                    <span class="location"><a class="file-link" href="cfk-support-bundle-synthetic-cfk-report-20261102-155917-files/003-connect-0.log.html#L32" target="_blank" rel="noopener" title="open the file at this line">confluent/connect/logs/connect-0.log:32</a> </span>
+                    
                   </div>
-                  <div class="message">Error: java.sql.BatchUpdateException: Batch entry 0 INSERT INTO &quot;orders&quot; (&quot;id&quot;,&quot;amount&quot;) VALUES (1042,NULL) was aborted: ERROR: null value in column &quot;amount&quot; violates not-null constraint</div>
-                  <details><summary>📋 Show context</summary><pre>	at org.apache.kafka.connect.runtime.WorkerSinkTask.deliverMessages(WorkerSinkTask.java:632)
-Caused by: java.sql.SQLException: Exception chain:
-java.sql.BatchUpdateException: Batch entry 0 INSERT INTO &quot;orders&quot; (&quot;id&quot;,&quot;amount&quot;) VALUES (1042,NULL) was aborted: ERROR: null value in column &quot;amount&quot; violates not-null constraint
-[2026-10-14 09:04:59,002] ERROR [orders-sink|task-1] java.lang.OutOfMemoryError: Java heap space (org.apache.kafka.connect.runtime.WorkerTask)
-java.lang.OutOfMemoryError: Java heap space</pre></details>
+                  <div class="message">Error: <span class="lh-exc">java.sql.BatchUpdateException</span>: Batch entry 0 INSERT INTO &quot;orders&quot; (&quot;id&quot;,&quot;amount&quot;) VALUES (1042,NULL) was aborted: <span class="lh-lvl lh-error">ERROR</span>: null value in column &quot;amount&quot; violates not-null constraint</div>
+                  <details><summary>📋 Show context</summary><pre><span class="lh-frame">	at org.apache.kafka.connect.runtime.WorkerSinkTask.deliverMessages(WorkerSinkTask.java:632)</span>
+<span class="lh-cause">Caused by:</span> <span class="lh-exc">java.sql.SQLException</span>: Exception chain:
+<span class="lh-exc">java.sql.BatchUpdateException</span>: Batch entry 0 INSERT INTO &quot;orders&quot; (&quot;id&quot;,&quot;amount&quot;) VALUES (1042,NULL) was aborted: <span class="lh-lvl lh-error">ERROR</span>: null value in column &quot;amount&quot; violates not-null constraint
+[<span class="lh-ts">2026-10-14 09:04:59,002</span>] <span class="lh-lvl lh-error">ERROR</span> <span class="lh-mdc">[orders-sink|task-1]</span> <span class="lh-exc">java.lang.OutOfMemoryError</span>: Java heap space <span class="lh-logger">(org.apache.kafka.connect.runtime.WorkerTask)</span>
+<span class="lh-exc">java.lang.OutOfMemoryError</span>: Java heap space</pre></details>
                 </div>
                 
               </div>
@@ -707,11 +800,12 @@ java.lang.OutOfMemoryError: Java heap space</pre></details>
               </div>
               <div class="issues">
                 
-                <div class="issue" data-severity="medium" data-component="kafka" data-instance="kafka">
+                <div class="issue" data-severity="medium" data-component="kafka" data-instance="kafka" data-connectors="-" data-problem="0">
                   <div class="head">
                     <span class="severity-pill medium">🟡 medium</span>
                     <span class="component-tag">📨 Kafka · kafka</span>
-                    <span class="location">confluent/kafka/kafka.yaml</span>
+                    <span class="location"><a class="file-link" href="cfk-support-bundle-synthetic-cfk-report-20261102-155917-files/008-kafka.yaml.html#L4" target="_blank" rel="noopener" title="open the file">confluent/kafka/kafka.yaml</a> </span>
+                    
                   </div>
                   <div class="message">Kafka/kafka status.phase is PROVISIONING</div>
                   <details><summary>📋 Show context</summary><pre>phase: PROVISIONING
@@ -719,35 +813,64 @@ replicas: 3
 readyReplicas: 2
 conditions:
 - type: platform.confluent.io/statefulset-ready
-  status: &#x27;False&#x27;
+  status: 'False'
   reason: StatefulSetNotReady
-  message: &#x27;statefulset kafka: 2/3 replicas ready&#x27;
-  lastTransitionTime: &#x27;2026-10-14T08:01:00Z&#x27;
+  message: 'statefulset kafka: 2/3 replicas ready'
+  lastTransitionTime: '<span class="lh-ts">2026-10-14T08:01:00Z</span>'
 - type: platform.confluent.io/garbage-collecting
-  status: &#x27;False&#x27;
+  status: 'False'
   reason: Garbage Collection not triggered
   message: Cluster is not being garbage collected
-  lastTransitionTime: &#x27;2026-10-01T08:00:00Z&#x27;
+  lastTransitionTime: '<span class="lh-ts">2026-10-01T08:00:00Z</span>'
 </pre></details>
                 </div>
                 
-                <div class="issue" data-severity="medium" data-component="kafka" data-instance="kafka">
+                <div class="issue" data-severity="medium" data-component="kafka" data-instance="kafka" data-connectors="-" data-problem="0">
                   <div class="head">
                     <span class="severity-pill medium">🟡 medium</span>
                     <span class="component-tag">📨 Kafka · kafka</span>
-                    <span class="location">confluent/kafka/kafka.yaml</span>
+                    <span class="location"><a class="file-link" href="cfk-support-bundle-synthetic-cfk-report-20261102-155917-files/008-kafka.yaml.html#L4" target="_blank" rel="noopener" title="open the file">confluent/kafka/kafka.yaml</a> </span>
+                    
                   </div>
                   <div class="message">Kafka/kafka has 2/3 ready replicas</div>
                   
                 </div>
                 
-                <div class="issue" data-severity="medium" data-component="kafka" data-instance="kafka">
+                <div class="issue" data-severity="medium" data-component="kafka" data-instance="kafka" data-connectors="-" data-problem="0">
                   <div class="head">
                     <span class="severity-pill medium">🟡 medium</span>
                     <span class="component-tag">📨 Kafka · kafka</span>
-                    <span class="location">confluent/kafka/kafka.yaml</span>
+                    <span class="location"><a class="file-link" href="cfk-support-bundle-synthetic-cfk-report-20261102-155917-files/008-kafka.yaml.html#L4" target="_blank" rel="noopener" title="open the file">confluent/kafka/kafka.yaml</a> </span>
+                    
                   </div>
                   <div class="message">Kafka/kafka condition platform.confluent.io/statefulset-ready is False: StatefulSetNotReady statefulset kafka: 2/3 replicas ready</div>
+                  
+                </div>
+                
+              </div>
+            </details>
+            
+            <details class="category" data-severity="low" open>
+              <summary>
+                <span class="severity-pill low">🟢 low</span>
+                <span class="title">🕰️ Bundle Coverage</span>
+                <span class="count">1</span>
+              </summary>
+              <div class="recommendation">
+                <div class="why">Some logs of the bundle start too late to show what happened before: the bundle keeps the end of each log.</div>
+                <ol><li>Compare the time of the problem with the time range of each log (🕰️ Log coverage of the HTML report, .coverage.log_windows of --json).</li><li>Ask for the logs that cover it: kubectl logs &lt;pod&gt; --since=&lt;duration&gt;, and --previous for the container before a restart.</li></ol>
+                
+              </div>
+              <div class="issues">
+                
+                <div class="issue" data-severity="low" data-component="operator" data-instance="" data-connectors="-" data-problem="0">
+                  <div class="head">
+                    <span class="severity-pill low">🟢 low</span>
+                    <span class="component-tag">⚙️ Operator</span>
+                    <span class="location"><a class="file-link" href="cfk-support-bundle-synthetic-cfk-report-20261102-155917-files/007-confluent-operator-7d9c8b6f5-x2x7k.log.html" target="_blank" rel="noopener" title="open the file">operator/confluent-operator-7d9c8b6f5-x2x7k.log</a> </span>
+                    
+                  </div>
+                  <div class="message">Some logs start too late to explain what happened before: the last change of the CRs (Kafka/kafka at 2026-10-13 18:42) is before the start of the operator log operator/confluent-operator-7d9c8b6f5-x2x7k.log (2026-10-14 09:00): how the operator applied it is not in the bundle<div class="next-steps"><strong>🧭 Next steps</strong><ol><li>ask for the full logs of these pods: kubectl logs &lt;pod&gt; -n &lt;namespace&gt; --since=&lt;duration&gt; &gt; &lt;pod&gt;.log</li><li>and for the container before its last restart: kubectl logs &lt;pod&gt; -n &lt;namespace&gt; --previous</li></ol></div></div>
                   
                 </div>
                 
@@ -757,7 +880,8 @@ conditions:
   </main>
   <footer>
     🛠️ Generated by <strong>playground analyze cfk-bundle</strong>
-    &nbsp;·&nbsp; Sensitive values are sanitized by default (best effort) — review before sharing externally.
+    &nbsp;·&nbsp; ⚠️ Not sanitized: may contain passwords, IPs and hostnames, run with --sanitize before sharing externally.
+    &nbsp;·&nbsp; The file locations open the file in cfk-support-bundle-synthetic-cfk-report-20261102-155917-files/, ✏️ in your editor (playground config editor): keep that folder with the report.
   </footer>
   <script>
 const filterButtons = document.querySelectorAll('.filter-btn');
@@ -766,24 +890,47 @@ const instanceButtons = document.querySelectorAll('.instance-btn');
 const instanceBar = document.querySelector('.controls.instances');
 const categories = document.querySelectorAll('.category');
 const searchInput = document.getElementById('search');
+const connectorSelect = document.getElementById('connector-filter');
 const noMatch = document.querySelector('.no-match');
 
 let currentFilter = 'all';
 let currentComponent = 'all';
 let currentInstance = 'all';
 let currentSearch = '';
+let currentConnector = 'all';
+
+// connector options of the selected component / instance / search only, with their issue count there
+function updateConnectorOptions(byConnector) {
+  if (!connectorSelect) return;
+  let names = 0;
+  connectorSelect.querySelectorAll('option').forEach(opt => {
+    if (opt.value === 'all') return;
+    const n = byConnector[opt.value] || 0;
+    opt.textContent = (opt.value === '-' ? '— no connector context —' : opt.value) + ` (${n})`;
+    // disabled too: Safari ignores hidden on an option
+    opt.hidden = opt.disabled = n === 0 && opt.value !== currentConnector;
+    if (n && opt.value !== '-') names++;
+  });
+  connectorSelect.querySelector('option[value="all"]').textContent =
+    `All (${names} connector(s)${byConnector['-'] ? ' + no connector' : ''})`;
+}
 
 function applyFilters() {
   const counts = { total: 0, critical: 0, high: 0, medium: 0, low: 0 };
+  const byConnector = {};
   categories.forEach(cat => {
     const title = cat.querySelector('summary .title').textContent.toLowerCase();
     let visible = 0;
     cat.querySelectorAll('.issue').forEach(issue => {
-      const inScope =
+      const connectors = issue.dataset.connectors.split(' ');
+      const inContext =
         (currentComponent === 'all' || issue.dataset.component === currentComponent) &&
         (currentInstance === 'all' || issue.dataset.instance === currentInstance) &&
         (!currentSearch || title.includes(currentSearch) || issue.textContent.toLowerCase().includes(currentSearch));
-      const show = inScope && (currentFilter === 'all' || issue.dataset.severity === currentFilter);
+      if (inContext) connectors.forEach(c => { byConnector[c] = (byConnector[c] || 0) + 1; });
+      const inScope = inContext && (currentConnector === 'all' || connectors.includes(currentConnector));
+      const show = inScope && (currentFilter === 'all' || issue.dataset.severity === currentFilter ||
+                               (currentFilter === 'problem' && issue.dataset.problem === '1'));
       issue.style.display = show ? '' : 'none';
       if (show) visible++;
       // the summary cards count every severity of the selected component / instance / search
@@ -800,6 +947,7 @@ function applyFilters() {
   });
   const anyVisible = [...categories].some(cat => cat.style.display !== 'none');
   if (noMatch) noMatch.style.display = anyVisible ? 'none' : 'block';
+  updateConnectorOptions(byConnector);
 }
 
 function activate(buttons, btn) {
@@ -841,10 +989,35 @@ instanceButtons.forEach(btn => {
   });
 });
 
+if (connectorSelect) {
+  connectorSelect.addEventListener('change', () => {
+    currentConnector = connectorSelect.value;
+    applyFilters();
+  });
+}
+
 if (searchInput) {
   searchInput.addEventListener('input', () => {
     currentSearch = searchInput.value.toLowerCase().trim();
     applyFilters();
+  });
+}
+
+// ⚙️ Configuration: keys / values filter, opens the blocks with a match
+document.querySelectorAll('.cfg-search').forEach(input => {
+  input.addEventListener('input', () => {
+    const q = input.value.toLowerCase().trim();
+    const panel = input.closest('.panel');
+    panel.querySelectorAll('tr.cfg-row').forEach(tr => { tr.hidden = q !== '' && !tr.textContent.toLowerCase().includes(q); });
+    panel.querySelectorAll('details.cfg').forEach(d => {
+      if (q) d.open = !!d.querySelector('tr.cfg-row:not([hidden])') || d.querySelector('summary').textContent.toLowerCase().includes(q);
+    });
+  });
+});
+// the connector picked in the issues filter: its config opens
+if (connectorSelect) {
+  connectorSelect.addEventListener('change', () => {
+    document.querySelectorAll('details.cfg[data-connector]').forEach(d => { d.open = d.dataset.connector === connectorSelect.value; });
   });
 }
 </script>

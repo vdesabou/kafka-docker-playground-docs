@@ -1,6 +1,6 @@
 #!/bin/bash
 # Regenerates the HTML reports and screenshots of docs/reports.md from the samples shipped with
-# kafka-docker-playground (playground analyze <cmd> --sample <name>, playground ccloud-costs-history --sample <name>,
+# kafka-docker-playground (playground analyze <cmd> --sample <name>, playground cloud-resources ccloud costs-history --sample <name>,
 # playground cloud-resources aws costs-history --sample <name>).
 #
 # usage: scripts/generate-reports-gallery.sh [path of the kafka-docker-playground clone]
@@ -50,8 +50,8 @@ do
 done
 
 # cloud costs: from the dummy billing data of tools/cloud-costs/samples, no Confluent Cloud call
-echo "📊 playground ccloud-costs-history --sample ccloud_dummy"
-"$PLAYGROUND" ccloud-costs-history --sample ccloud_dummy --no-open --output-dir "$work/cloud-costs" < /dev/null > "$work/cloud-costs.log" 2>&1 || { cat "$work/cloud-costs.log"; exit 1; }
+echo "📊 playground cloud-resources ccloud costs-history --sample ccloud_dummy"
+"$PLAYGROUND" cloud-resources ccloud costs-history --sample ccloud_dummy --no-open --output-dir "$work/cloud-costs" < /dev/null > "$work/cloud-costs.log" 2>&1 || { cat "$work/cloud-costs.log"; exit 1; }
 cp "$(find "$work/cloud-costs" -name "*.html" | head -1)" "$DOCS/reports/cloud-costs.html"
 
 # aws costs, with the Amazon S3 details: from the dummy cost data of tools/cloud-costs/samples, no AWS call
@@ -71,8 +71,12 @@ strip_user_paths() {
 [ -n "$SMT_REPORT" ] && strip_user_paths "$SMT_REPORT" "$DOCS/reports/smt-test.html"
 [ -n "$CVE_REPORT" ] && strip_user_paths "$CVE_REPORT" "$DOCS/reports/cve-scan.html"
 
+# the ✏️ links that open a file of the report in the local editor (vscode://file/<temporary folder of the run>/...):
+# useless on the website, and they hold a local path
+perl -0pi -e 's#<a\b[^>]*\bhref=["\x27]vscode://[^>]*>.*?</a>##gs' "$DOCS"/reports/*.html
+
 # the reports are published: no path of a user folder must leak (/tmp paths of a benchmark run are fine)
-if grep -lE "/Users/|/home/|/private/" "$DOCS"/reports/*.html
+if grep -lE "/Users/|/home/|/private/|vscode://" "$DOCS"/reports/*.html
 then
   echo "❌ the files above contain a local path, fix them before publishing"
   exit 1

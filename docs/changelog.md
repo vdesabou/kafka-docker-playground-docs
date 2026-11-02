@@ -3,6 +3,8 @@
 ## November 2026
 ##### 🌟 Enhancements
 
+- 🧠🧹 cleanup-cloud-resources --dry-run [#9930](https://github.com/vdesabou/kafka-docker-playground/issues/9930)
+- 🧠🦭 switch-podman with several podman machines, open urls with xdg-open on Linux [#9929](https://github.com/vdesabou/kafka-docker-playground/issues/9929)
 - 🧠🪄 Alfred workflow for the playground CLI (kdp) [#9924](https://github.com/vdesabou/kafka-docker-playground/issues/9924)
 - 🧹💀 playground run kills all containers twice: start-environment skips kill-all when no container exists [#9904](https://github.com/vdesabou/kafka-docker-playground/issues/9904)
 - 🧠🧭 playground run: failure hints and next steps that fit the example (connector diagnose, ksqlDB, Flink) [#9900](https://github.com/vdesabou/kafka-docker-playground/issues/9900)

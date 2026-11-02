@@ -9,6 +9,7 @@
 
 ##### 🐛 Bugs
 
+- 🐛⬆️ update-version: Go back, tag ↔ zip switch, ccloud [#9918](https://github.com/vdesabou/kafka-docker-playground/issues/9918)
 - 🐛📂 commands accept an empty or missing example file [#9916](https://github.com/vdesabou/kafka-docker-playground/issues/9916)
 - 🐛⛅ run: CI ccloud cleanup skips connectors and topics (IFS leak) [#9912](https://github.com/vdesabou/kafka-docker-playground/issues/9912)
 - 🐛🔐 run, re-run and history show ccloud credentials in clear [#9910](https://github.com/vdesabou/kafka-docker-playground/issues/9910)

@@ -485,7 +485,7 @@ not changed.
 
 The service accounts and their ACLs are deleted with the connectors  
 (playground connector delete, end-of-run cleanup, playground  
-cleanup-cloud-resources).
+cloud-resources cleanup).
 
 🎓 Tip: to reproduce an authorization error, delete or deny an ACL with  
 `playground rbac acl delete|create --connector <connector> [--deny],`  

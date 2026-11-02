@@ -7,7 +7,7 @@
 
 Uses the organization your confluent CLI is logged into. Leftovers of  
 the examples (connectors, topics) are shown by `playground status`; to  
-delete them, use `playground cleanup-cloud-resources`.
+delete them, use `playground cloud-resources cleanup`.
 
 ## Usage
 

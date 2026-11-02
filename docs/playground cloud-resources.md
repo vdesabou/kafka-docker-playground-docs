@@ -1,6 +1,6 @@
 # playground cloud-resources
 
-☁️ What the playground left behind in your cloud accounts, and what it costs
+☁️ What the playground left behind in your cloud accounts, what it costs, and cleaning it up
 
 Examples that talk to a real cloud create real resources, and an  
 interrupted run leaves them behind. These commands show what is still  
@@ -13,8 +13,9 @@ alive and what you are being billed for:
 The same three exist for azure, and costs / costs-history for ccloud  
 (Confluent Cloud).
 
-🧹 Nothing is deleted here. To actually remove the resources, use  
-`playground cleanup-cloud-resources`.
+🧹 Only one command deletes anything:
+
+- **cloud-resources cleanup**: delete the leftovers in aws, gcp, azure, ccloud and salesforce (`--resource`, `--dry-run` first)
 
 ## Usage
 
@@ -35,5 +36,6 @@ playground cloud-resources COMMAND
 - [ccloud](playground%20cloud-resources%20ccloud) - ☁️ What Confluent Cloud costs you
   - [costs](playground%20cloud-resources%20ccloud%20costs) - 💰  Retrieve ccloud costs for a range of dates
   - [costs-history](playground%20cloud-resources%20ccloud%20costs-history) - 👛  Retrieve ccloud costs for each month since last year
+- [cleanup](playground%20cloud-resources%20cleanup) - 🧹 Cleanup cloud resources that were created by running examples from the playground
 
 

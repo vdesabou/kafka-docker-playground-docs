@@ -13,7 +13,7 @@ with the run. On `playground stop`, and at the start of the next
 Fully managed connectors are billed while they exist, and an  
 interrupted example never reaches its final 'playground connector  
 delete'. Resources of older runs, or created outside a run, are left  
-alone: use `playground cleanup-cloud-resources --resource ccloud`.
+alone: use `playground cloud-resources cleanup --resource ccloud`.
 
 ## Usage
 

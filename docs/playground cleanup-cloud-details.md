@@ -9,7 +9,7 @@ changed of Confluent Cloud organisation, or deleted the cluster from the UI
 behind the playground's back.
 
 ❕ Nothing is deleted in Confluent Cloud, only the local cache. To delete  
-the cloud resources themselves, see `playground cleanup-cloud-resources`.
+the cloud resources themselves, see `playground cloud-resources cleanup`.
 
 ## Usage
 

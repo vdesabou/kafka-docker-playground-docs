@@ -208,7 +208,7 @@ visit https://docs.docker.com/get-docker to install
 
 ### Cloud Resources commands
 
-- [cloud-resources](playground%20cloud-resources) - ☁️ What the playground left behind in your cloud accounts, and what it costs
+- [cloud-resources](playground%20cloud-resources) - ☁️ What the playground left behind in your cloud accounts, what it costs, and cleaning it up
   - [aws](playground%20cloud-resources%20aws) - ☁️ What is still running in AWS, and what it costs
     - [list](playground%20cloud-resources%20aws%20list) - 📋 List all active resources
     - [costs](playground%20cloud-resources%20aws%20costs) - 💰 Show aws costs
@@ -220,6 +220,7 @@ visit https://docs.docker.com/get-docker to install
   - [ccloud](playground%20cloud-resources%20ccloud) - ☁️ What Confluent Cloud costs you
     - [costs](playground%20cloud-resources%20ccloud%20costs) - 💰  Retrieve ccloud costs for a range of dates
     - [costs-history](playground%20cloud-resources%20ccloud%20costs-history) - 👛  Retrieve ccloud costs for each month since last year
+  - [cleanup](playground%20cloud-resources%20cleanup) - 🧹 Cleanup cloud resources that were created by running examples from the playground
 
 ### Run commands
 
@@ -242,7 +243,6 @@ visit https://docs.docker.com/get-docker to install
 - [open-docs](playground%20open-docs) - 🧑‍🎓 Open Confluent documentation of currently running example
 - [open-changelog](playground%20open-changelog) - 📜 Open playground changelog (https://kafka-docker-playground.io/#/changelog)
 - [cp-changelog](playground%20cp-changelog) - 📜 Show what changed in Confluent Platform between two versions
-- [cleanup-cloud-resources](playground%20cleanup-cloud-resources) - 🧹 Cleanup cloud resources that were created by running examples from the playground
 
 ### Repro commands
 

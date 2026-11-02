@@ -1,4 +1,4 @@
-# playground cleanup-cloud-resources
+# playground cloud-resources cleanup
 
 🧹 Cleanup cloud resources that were created by running examples from the playground
 
@@ -37,7 +37,7 @@ playground rather than one that also hosts resources you care about.
 ## Usage
 
 ```bash
-playground cleanup-cloud-resources [OPTIONS]
+playground cloud-resources cleanup [OPTIONS]
 ```
 
 ## Dependencies
@@ -104,15 +104,15 @@ one would create it.
 ## Examples
 
 ```bash
-playground cleanup-cloud-resources --dry-run
+playground cloud-resources cleanup --dry-run
 ```
 
 ```bash
-playground cleanup-cloud-resources --resource aws --dry-run
+playground cloud-resources cleanup --resource aws --dry-run
 ```
 
 ```bash
-playground cleanup-cloud-resources --resource aws --resource gcp
+playground cloud-resources cleanup --resource aws --resource gcp
 ```
 
 

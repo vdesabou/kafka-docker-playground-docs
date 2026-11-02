@@ -7,7 +7,7 @@
 - **costs-history**: spend per month over the last year
 
 Uses the subscription your az CLI is logged into. Nothing is deleted  
-here, use `playground cleanup-cloud-resources` for that.
+here, use `playground cloud-resources cleanup` for that.
 
 ## Usage
 

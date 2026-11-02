@@ -3,6 +3,7 @@
 ## November 2026
 ##### 🌟 Enhancements
 
+- 🧠📚 docs: screen recording of the kdp Alfred workflow instead of the GIF [#9944](https://github.com/vdesabou/kafka-docker-playground/issues/9944)
 - 🧠📚 docs: GIF of the kdp Alfred workflow [#9942](https://github.com/vdesabou/kafka-docker-playground/issues/9942)
 - 🧠🪄 kdp Alfred workflow: pickers, running environment, smarter Universal Action, CI check [#9938](https://github.com/vdesabou/kafka-docker-playground/issues/9938)
 - 🧠🪄 kdp Alfred workflow: results in the Alfred window, VS Code terminal [#9935](https://github.com/vdesabou/kafka-docker-playground/issues/9935)

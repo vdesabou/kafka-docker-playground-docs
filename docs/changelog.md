@@ -3,6 +3,7 @@
 ## November 2026
 ##### 🌟 Enhancements
 
+- 🧠🪄 Alfred workflow for the playground CLI (kdp) [#9924](https://github.com/vdesabou/kafka-docker-playground/issues/9924)
 - 🧹💀 playground run kills all containers twice: start-environment skips kill-all when no container exists [#9904](https://github.com/vdesabou/kafka-docker-playground/issues/9904)
 - 🧠🧭 playground run: failure hints and next steps that fit the example (connector diagnose, ksqlDB, Flink) [#9900](https://github.com/vdesabou/kafka-docker-playground/issues/9900)
 - 🧠🧮 playground ksqldb sql|list|describe|wait, ksqlDB examples only use playground commands [#9895](https://github.com/vdesabou/kafka-docker-playground/issues/9895)

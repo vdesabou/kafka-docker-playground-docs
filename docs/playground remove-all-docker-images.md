@@ -6,6 +6,9 @@ Reclaims disk space by wiping your whole local Docker state, not just the
 playground one. Everything has to be pulled again afterwards, so the next  
 run is slow.
 
+The Oracle database images (oracle/database, db-prebuilt-\*) are kept: they  
+take a long time to build.
+
 🎓 Tip: prefer `playground remove-cp-docker-images` to drop only the  
 Confluent Platform versions you no longer test.
 

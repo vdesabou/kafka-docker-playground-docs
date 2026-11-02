@@ -7,8 +7,8 @@ both for the default environment and for cfk, by reading the published
 badges from kafka-docker-playground.io.
 
 👉 Useful before you spend time debugging: if CI is red too, the breakage  
-is probably not on your side. Reproduction models are always reported as  
-fine, they are not part of the CI matrix.
+is probably not on your side. Reproduction models are skipped, they are not  
+part of the CI matrix.
 
 🔥 With `--logs`, also tells why it is red: the latest failing CI job of the  
 example is located from its '🔥' GitHub issue, its full log is downloaded,  
@@ -46,7 +46,7 @@ Default is the environment of the current example, or plaintext with `--test`
 
 #### `--podman`
 
-🦭 Check the podman CI run instead of the docker one
+🦭 With `--logs`, read the podman CI job instead of the docker one (the published CI status is the one of the docker runs)
 
 #### `--logs`
 

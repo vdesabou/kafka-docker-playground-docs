@@ -6,8 +6,14 @@
 
 Examples that talk to a real cloud create real, billable resources, and an  
 interrupted run leaves them behind. This sweeps them, scoped to the ones  
-whose name contains your username, across AWS, GCP, Azure, Confluent Cloud  
-and Salesforce. Restrict the scope with `--resource`, and run it regularly.
+whose name contains pg and your username (as is, or lowercased without
+
+- . _ like the examples write it), across AWS, GCP and Azure. Restrict the
+
+scope with `--resource`, and run it regularly.
+
+Salesforce: the accounts of the playground are dedicated test orgs, every  
+Lead, Contact and PushTopic of them is deleted.
 
 Confluent Cloud: connectors whose name contains your username are deleted,  
 with their dlq, success and error topics. All topics of the cluster are  
@@ -18,6 +24,9 @@ runs are deleted (local file playground-ccloud-created-topics): topics
 created with playground topic create / produce, and topics your fully  
 managed source connectors write to, as set in their config (kafka.topic,  
 api1.topics, topic.prefix...).
+
+In CI, the service accounts created by the playground (pg-`<user>`-\*) and the  
+subjects of the deleted topics (`<topic>`-key, `<topic>`-value) are deleted too.
 
 You are asked to confirm every deletion, unless `--force` is given.
 

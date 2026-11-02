@@ -12,7 +12,7 @@
 
 🔖 Exit code is 0 when the analysis completed, 2 when no GC event was found
 
-🌐 Also writes a self-contained HTML dashboard (pause timeline, heap before / after GC, pause distribution, KPI cards, recommendations; no external resource) in `--output-dir`, opened in the browser in an interactive terminal
+🌐 Also writes a self-contained HTML dashboard (pause timeline and heap before / after GC that zoom together, pause distribution, KPI cards, recommendations; no external resource) in `--output-dir`, opened in the browser in an interactive terminal
 
 🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-jvm-diagnostics  
 🎬 Bite size session: https://kafka-docker-playground.io/#/sessions?id=%E2%99%BB%EF%B8%8F-long-gc-pauses-or-a-memory-leak-analyze-gc-logs

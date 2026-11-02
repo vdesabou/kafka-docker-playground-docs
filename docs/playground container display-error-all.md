@@ -39,7 +39,7 @@ playground container display-error-all [OPTIONS]
 
 #### `--html`
 
-🌐 Also write a self-contained HTML report of all the containers in /tmp/playground-log-reports (known causes, timeline, root causes, every distinct record), opened in the browser in an interactive terminal
+🌐 Also write a self-contained HTML report of all the containers in /tmp/playground-log-reports (known causes, zoomable timeline, root causes, every distinct record), opened in the browser in an interactive terminal
 
 ## Examples
 

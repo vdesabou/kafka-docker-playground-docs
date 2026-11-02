@@ -130,7 +130,7 @@ Scans the whole log unless `--since` or `--tail` narrow it.
 
 #### `--html`
 
-🌐 With `--errors`, also write a self-contained HTML report of the digest in /tmp/playground-log-reports (known causes, timeline, root causes, every distinct record), opened in the browser in an interactive terminal
+🌐 With `--errors`, also write a self-contained HTML report of the digest in /tmp/playground-log-reports (known causes, zoomable timeline, root causes, every distinct record), opened in the browser in an interactive terminal
 
 ## Examples
 

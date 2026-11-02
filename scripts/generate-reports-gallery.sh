@@ -5,11 +5,13 @@
 #
 # usage: scripts/generate-reports-gallery.sh [path of the kafka-docker-playground clone]
 #
-# The connector diagnose, diff, dead letter queue, CI failure, benchmark and SMT test reports need a real run, they are
+# The connector diagnose, diff, dead letter queue, CI failure, benchmark, SMT test and CVE scan reports need a real run, they are
 # not regenerated: pass them with
 #   DIAGNOSE_REPORT=/tmp/playground-diagnose/<run>.html DLQ_REPORT=/tmp/playground-dlq-inspect/<run>.html
 #   DIFF_REPORT=/tmp/playground-connector-diff/<run>.html CI_REPORT=/tmp/playground-ci-result/<run>.html
 #   BENCHMARK_REPORT=/tmp/playground-benchmark/<run>.html SMT_REPORT=/tmp/playground-smt-test/<run>.html
+#   CVE_REPORT=/tmp/playground-cve-scan/<run>.html (playground connector-plugin cve-scan -c confluentinc/kafka-connect-jdbc
+#   --connector-tag 10.7.4 --compare-with 10.9.9)
 set -e
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 DOCS="$DIR/../docs"
@@ -67,6 +69,7 @@ strip_user_paths() {
 [ -n "$CI_REPORT" ] && strip_user_paths "$CI_REPORT" "$DOCS/reports/ci-result.html"
 [ -n "$BENCHMARK_REPORT" ] && strip_user_paths "$BENCHMARK_REPORT" "$DOCS/reports/benchmark.html"
 [ -n "$SMT_REPORT" ] && strip_user_paths "$SMT_REPORT" "$DOCS/reports/smt-test.html"
+[ -n "$CVE_REPORT" ] && strip_user_paths "$CVE_REPORT" "$DOCS/reports/cve-scan.html"
 
 # the reports are published: no path of a user folder must leak (/tmp paths of a benchmark run are fine)
 if grep -lE "/Users/|/home/|/private/" "$DOCS"/reports/*.html

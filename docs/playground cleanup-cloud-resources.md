@@ -28,7 +28,8 @@ api1.topics, topic.prefix...).
 In CI, the service accounts created by the playground (pg-`<user>`-\*) and the  
 subjects of the deleted topics (`<topic>`-key, `<topic>`-value) are deleted too.
 
-You are asked to confirm every deletion, unless `--force` is given.
+You are asked to confirm every deletion, unless `--force` is given. Use  
+`--dry-run` first to see what would be deleted.
 
 ☢️ Deletions are permanent. Use a dedicated cloud account for the  
 playground rather than one that also hosts resources you care about.
@@ -88,5 +89,30 @@ If not provided, all of them are cleaned up
 | Repeatable:     |  ✓ Yes
 | Default Value:  | `aws`, `gcp`, `azure`, `ccloud`, `salesforce`
 | Allowed Values: | `aws`, `gcp`, `azure`, `ccloud`, `salesforce`
+
+#### `--dry-run`
+
+🔎 List what would be deleted (the commands), without deleting anything nor asking
+
+The Confluent Cloud part is skipped when no cluster is known (`CLUSTER_NAME`, or a previous ccloud run): finding  
+one would create it.
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Conflicts With: | `--recorded-topics-only`
+
+## Examples
+
+```bash
+playground cleanup-cloud-resources --dry-run
+```
+
+```bash
+playground cleanup-cloud-resources --resource aws --dry-run
+```
+
+```bash
+playground cleanup-cloud-resources --resource aws --resource gcp
+```
 
 

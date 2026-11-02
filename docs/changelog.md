@@ -23,6 +23,7 @@
 
 ##### 🐛 Bugs
 
+- 🐛🔥 analyze logs: report header shows the last file link as escaped HTML [#9962](https://github.com/vdesabou/kafka-docker-playground/issues/9962)
 - 🐛🪄 kdp Alfred workflow: title in italics and setlocale warning in the output window [#9954](https://github.com/vdesabou/kafka-docker-playground/issues/9954)
 - 🐛🍔 run menu: esc in pickers ends the run, jar removes zip [#9946](https://github.com/vdesabou/kafka-docker-playground/issues/9946)
 - 🐛🪄 kdp Alfred workflow check leaves an untracked scripts/alfred-workflow/\_\_pycache\_\_ [#9940](https://github.com/vdesabou/kafka-docker-playground/issues/9940)

@@ -10,6 +10,7 @@
 
 ##### 🐛 Bugs
 
+- 🐛🔐 run --environment ignores PLAYGROUND\_ENVIRONMENT, ccloud flags accepted silently [#9926](https://github.com/vdesabou/kafka-docker-playground/issues/9926)
 - 🐛🤖 get-ci-result shows the cfk job for plaintext and nothing when no badge [#9922](https://github.com/vdesabou/kafka-docker-playground/issues/9922)
 - 🐛🐳 remove/refresh-cp-docker-images match the wrong versions [#9920](https://github.com/vdesabou/kafka-docker-playground/issues/9920)
 - 🐛⬆️ update-version: Go back, tag ↔ zip switch, ccloud [#9918](https://github.com/vdesabou/kafka-docker-playground/issues/9918)

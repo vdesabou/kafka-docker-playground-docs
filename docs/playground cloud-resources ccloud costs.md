@@ -1,4 +1,4 @@
-# playground ccloud-costs
+# playground cloud-resources ccloud costs
 
 💰  Retrieve ccloud costs for a range of dates
 
@@ -17,7 +17,7 @@ For accuracy, Confluent recommends using a start_date that is at least 72 hours 
 ## Usage
 
 ```bash
-playground ccloud-costs [OPTIONS]
+playground cloud-resources ccloud costs [OPTIONS]
 ```
 
 ## Dependencies
@@ -65,15 +65,15 @@ To see what the report looks like before running it on your organization.
 ## Examples
 
 ```bash
-playground ccloud-costs
+playground cloud-resources ccloud costs
 ```
 
 ```bash
-playground ccloud-costs --start-date 2026-09-01 --end-date 2026-10-01
+playground cloud-resources ccloud costs --start-date 2026-09-01 --end-date 2026-10-01
 ```
 
 ```bash
-playground ccloud-costs --sample ccloud_dummy
+playground cloud-resources ccloud costs --sample ccloud_dummy
 ```
 
 

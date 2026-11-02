@@ -1,4 +1,4 @@
-# playground ccloud-costs-history
+# playground cloud-resources ccloud costs-history
 
 👛  Retrieve ccloud costs for each month since last year
 
@@ -11,7 +11,7 @@ By default it will only display total cost in dollars. Use the `--detailed` flag
 ## Usage
 
 ```bash
-playground ccloud-costs-history [OPTIONS]
+playground cloud-resources ccloud costs-history [OPTIONS]
 ```
 
 ## Dependencies
@@ -51,11 +51,11 @@ To see what the report looks like before running it on your organization.
 ## Examples
 
 ```bash
-playground ccloud-costs-history
+playground cloud-resources ccloud costs-history
 ```
 
 ```bash
-playground ccloud-costs-history --sample ccloud_dummy
+playground cloud-resources ccloud costs-history --sample ccloud_dummy
 ```
 
 

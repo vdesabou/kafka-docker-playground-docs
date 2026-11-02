@@ -10,7 +10,8 @@ alive and what you are being billed for:
 - **cloud-resources aws costs**: spend over a range of dates
 - **cloud-resources aws costs-history**: spend per month over the last year
 
-The same three exist for azure.
+The same three exist for azure, and costs / costs-history for ccloud  
+(Confluent Cloud).
 
 🧹 Nothing is deleted here. To actually remove the resources, use  
 `playground cleanup-cloud-resources`.
@@ -31,5 +32,8 @@ playground cloud-resources COMMAND
   - [list](playground%20cloud-resources%20azure%20list) - 📋 List all active resources
   - [costs](playground%20cloud-resources%20azure%20costs) - 💰 Show azure costs
   - [costs-history](playground%20cloud-resources%20azure%20costs-history) - 👛  Retrieve azure costs for each month since last year
+- [ccloud](playground%20cloud-resources%20ccloud) - ☁️ What Confluent Cloud costs you
+  - [costs](playground%20cloud-resources%20ccloud%20costs) - 💰  Retrieve ccloud costs for a range of dates
+  - [costs-history](playground%20cloud-resources%20ccloud%20costs-history) - 👛  Retrieve ccloud costs for each month since last year
 
 

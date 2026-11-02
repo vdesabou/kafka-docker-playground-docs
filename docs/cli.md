@@ -182,8 +182,6 @@ visit https://docs.docker.com/get-docker to install
   - [display-last-updated-connector-plugins-vendor](playground%20config%20display-last-updated-connector-plugins-vendor) - 🏢 vendor of the connector plugins listed by display-last-updated-connector-plugins
   - [cleanup-ccloud-resources-after-run](playground%20config%20cleanup-ccloud-resources-after-run) - 🧹 delete the Confluent Cloud resources left by the last ccloud example
   - [check-and-update-repo-version](playground%20config%20check-and-update-repo-version) - when running an example, always check if repo version is older than 3 days, if disabled, it will skip this check.
-- [ccloud-costs](playground%20ccloud-costs) - 💰  Retrieve ccloud costs for a range of dates
-- [ccloud-costs-history](playground%20ccloud-costs-history) - 👛  Retrieve ccloud costs for each month since last year
 
 ### Secrets commands
 
@@ -219,6 +217,9 @@ visit https://docs.docker.com/get-docker to install
     - [list](playground%20cloud-resources%20azure%20list) - 📋 List all active resources
     - [costs](playground%20cloud-resources%20azure%20costs) - 💰 Show azure costs
     - [costs-history](playground%20cloud-resources%20azure%20costs-history) - 👛  Retrieve azure costs for each month since last year
+  - [ccloud](playground%20cloud-resources%20ccloud) - ☁️ What Confluent Cloud costs you
+    - [costs](playground%20cloud-resources%20ccloud%20costs) - 💰  Retrieve ccloud costs for a range of dates
+    - [costs-history](playground%20cloud-resources%20ccloud%20costs-history) - 👛  Retrieve ccloud costs for each month since last year
 
 ### Run commands
 

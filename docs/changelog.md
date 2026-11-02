@@ -9,8 +9,11 @@
 
 ##### 🐛 Bugs
 
+- 🐛🤖 get-ci-result shows the cfk job for plaintext and nothing when no badge [#9922](https://github.com/vdesabou/kafka-docker-playground/issues/9922)
+- 🐛🐳 remove/refresh-cp-docker-images match the wrong versions [#9920](https://github.com/vdesabou/kafka-docker-playground/issues/9920)
 - 🐛⬆️ update-version: Go back, tag ↔ zip switch, ccloud [#9918](https://github.com/vdesabou/kafka-docker-playground/issues/9918)
 - 🐛📂 commands accept an empty or missing example file [#9916](https://github.com/vdesabou/kafka-docker-playground/issues/9916)
+- 🐛🧹 cleanup-cloud-resources deletes resources of other users [#9914](https://github.com/vdesabou/kafka-docker-playground/issues/9914)
 - 🐛⛅ run: CI ccloud cleanup skips connectors and topics (IFS leak) [#9912](https://github.com/vdesabou/kafka-docker-playground/issues/9912)
 - 🐛🔐 run, re-run and history show ccloud credentials in clear [#9910](https://github.com/vdesabou/kafka-docker-playground/issues/9910)
 - 🐛🌍 mdc-kerberos: topic produce / consume require a Schema Registry that can't start, replicator Kerberos examples fail [#9908](https://github.com/vdesabou/kafka-docker-playground/issues/9908)

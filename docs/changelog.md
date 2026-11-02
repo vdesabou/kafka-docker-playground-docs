@@ -10,6 +10,7 @@
 
 ##### 🐛 Bugs
 
+- 🐛📜 playground-run-history loses lines with parallel runs [#9928](https://github.com/vdesabou/kafka-docker-playground/issues/9928)
 - 🐛🔐 run --environment ignores PLAYGROUND\_ENVIRONMENT, ccloud flags accepted silently [#9926](https://github.com/vdesabou/kafka-docker-playground/issues/9926)
 - 🐛🤖 get-ci-result shows the cfk job for plaintext and nothing when no badge [#9922](https://github.com/vdesabou/kafka-docker-playground/issues/9922)
 - 🐛🐳 remove/refresh-cp-docker-images match the wrong versions [#9920](https://github.com/vdesabou/kafka-docker-playground/issues/9920)

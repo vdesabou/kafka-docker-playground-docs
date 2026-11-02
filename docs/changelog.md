@@ -9,6 +9,7 @@
 
 ##### 🐛 Bugs
 
+- 🐛🧲 tcp-proxy get-connections and other REST API calls exit with the curl code and no error under set -e [#9906](https://github.com/vdesabou/kafka-docker-playground/issues/9906)
 - 🐛🧮 ksqlDB examples: fix the failures hidden before playground ksqldb sql, and ksqldb wait on queries that never commit [#9902](https://github.com/vdesabou/kafka-docker-playground/issues/9902)
 - 🐛🏃 playground run: ENABLE\_\* from the shell missing from flags, history and re-run; doc link warning on non-connector examples [#9898](https://github.com/vdesabou/kafka-docker-playground/issues/9898)
 

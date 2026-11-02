@@ -17,6 +17,7 @@
 
 ##### 🐛 Bugs
 
+- 🐛🍔 run menu: esc in pickers ends the run, jar removes zip [#9946](https://github.com/vdesabou/kafka-docker-playground/issues/9946)
 - 🐛🪄 kdp Alfred workflow check leaves an untracked scripts/alfred-workflow/\_\_pycache\_\_ [#9940](https://github.com/vdesabou/kafka-docker-playground/issues/9940)
 - 🐛📜 playground-run-history loses lines with parallel runs [#9928](https://github.com/vdesabou/kafka-docker-playground/issues/9928)
 - 🐛🔐 run --environment ignores PLAYGROUND\_ENVIRONMENT, ccloud flags accepted silently [#9926](https://github.com/vdesabou/kafka-docker-playground/issues/9926)

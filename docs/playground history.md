@@ -108,7 +108,8 @@ nor the edit prompt
 #### `--stats`
 
 📊 Print the most run examples, the most used `--tag`, `--connector-tag` and  
-`--environment`, and the results
+`--environment`, and the results, over every run of the history (the query is  
+ignored)
 
 | Attributes      | &nbsp;
 |-----------------|-------------

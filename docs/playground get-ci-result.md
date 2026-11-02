@@ -52,6 +52,21 @@ Default is the environment of the current example, or plaintext with `--test`
 
 🔥 When CI is red, show why: tail and ERROR/FATAL digest of each failing script of the latest failing job
 
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Conflicts With: | `--json`
+
+#### `--json`
+
+📗 Print the CI status as one JSON object, and nothing else: test, environment, status (ok, fail, not_tested,  
+not_in_ci, no_badge, unknown, skipped), url (job or issue) and message. Exits with code 1 when the status is fail
+
+🎓 Tip: for scripts and AI agents, for example playground get-ci-result `--test` `<dir>` `--json` | jq -r .status
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Conflicts With: | `--logs`
+
 #### `--max-findings MAX_FINDINGS`
 
 ✂️ With `--logs`, maximum number of distinct records to show per failing script (default 20). The HTML report has them all

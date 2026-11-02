@@ -3,6 +3,7 @@
 ## November 2026
 ##### 🌟 Enhancements
 
+- 🧹☁️ move ccloud-costs\* under cloud-resources ccloud [#9958](https://github.com/vdesabou/kafka-docker-playground/issues/9958)
 - 🧠📚 docs: connector CVE scan report missing from the reports gallery [#9956](https://github.com/vdesabou/kafka-docker-playground/issues/9956)
 - 🧠📚 docs: the kdp Alfred workflow in the main features [#9952](https://github.com/vdesabou/kafka-docker-playground/issues/9952)
 - 🧠🪄 kdp Alfred workflow: run, re-run, stop an example (says what it stops) [#9949](https://github.com/vdesabou/kafka-docker-playground/issues/9949)

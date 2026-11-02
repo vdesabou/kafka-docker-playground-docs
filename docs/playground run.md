@@ -18,7 +18,7 @@ Credentials the example needs are loaded from `playground secrets`.
 - `--connect-tag`: Confluent Platform version for connect only
 - `--schema-registry-tag`, `--ksqldb-tag`, `--control-center-tag`: version for that component only
 - `--connector-tag`: connector version from Confluent Hub
-- `--connector-zip`: connector from a local zip or a URL
+- `--connector-zip`: connector from a local zip
 - `--connector-jar`: a single jar, dropped into the existing plugin
 
 **🧰 Adding to the example**

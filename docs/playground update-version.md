@@ -9,7 +9,7 @@ connector 10.6.0?".
 - `--tag`: 🔢 every Confluent Platform component
 - `--connect-tag`: 🔗 only the connect container, other components untouched
 - `--connector-tag`: 🧩 the connector, from Confluent Hub
-- `--connector-zip`: 📦 the connector, from a local zip or a URL
+- `--connector-zip`: 📦 the connector, from a local zip
 - `--connector-jar`: ☕ a single jar, dropped into the existing plugin
 
 With no flag, you are prompted with the versions available. The versions  

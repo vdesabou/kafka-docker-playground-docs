@@ -9,6 +9,9 @@
 
 ##### 🐛 Bugs
 
+- 🐛📂 commands accept an empty or missing example file [#9916](https://github.com/vdesabou/kafka-docker-playground/issues/9916)
+- 🐛⛅ run: CI ccloud cleanup skips connectors and topics (IFS leak) [#9912](https://github.com/vdesabou/kafka-docker-playground/issues/9912)
+- 🐛🔐 run, re-run and history show ccloud credentials in clear [#9910](https://github.com/vdesabou/kafka-docker-playground/issues/9910)
 - 🐛🌍 mdc-kerberos: topic produce / consume require a Schema Registry that can't start, replicator Kerberos examples fail [#9908](https://github.com/vdesabou/kafka-docker-playground/issues/9908)
 - 🐛🧲 tcp-proxy get-connections and other REST API calls exit with the curl code and no error under set -e [#9906](https://github.com/vdesabou/kafka-docker-playground/issues/9906)
 - 🐛🧮 ksqlDB examples: fix the failures hidden before playground ksqldb sql, and ksqldb wait on queries that never commit [#9902](https://github.com/vdesabou/kafka-docker-playground/issues/9902)

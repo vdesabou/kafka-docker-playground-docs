@@ -12,7 +12,7 @@ One month is the maximum window between start and end dates
 
 For accuracy, Confluent recommends using a start_date that is at least 72 hours prior to the current date and time.
 
-🌐 Also writes a self-contained HTML report in `--output-dir`, opened in the browser in an interactive terminal (`--no-open` to skip): cost per day (zoomable), per product and environment, the resources still billing, the top resources, the resources of each product, the product x environment matrix and the cost per line type.
+🌐 Also writes a self-contained HTML report in `--output-dir`, opened in the browser in an interactive terminal (`--no-open` to skip): cost per day (zoomable, the other tiles follow the selected range), per product and environment, the resources still billing, the top resources, the resources of each product, the product x environment matrix and the cost per line type.
 
 ## Usage
 

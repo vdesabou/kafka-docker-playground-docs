@@ -6,7 +6,7 @@ All you have to do is to be already logged in with confluent CLI. It is using ht
 
 By default it will only display total cost in dollars. Use the `--detailed` flag to see more information.
 
-🌐 Also writes a self-contained HTML report in `--output-dir`, opened in the browser in an interactive terminal (`--no-open` to skip): cost per month and per day (zoomable: drag over a range of days, last 7 / 30 / 90 days), per product, environment and line type, the month x product matrix, the top resources with the ones still billing, and the details of each month.
+🌐 Also writes a self-contained HTML report in `--output-dir`, opened in the browser in an interactive terminal (`--no-open` to skip): cost per month and per day (zoomable: drag over a range of days, last 7 / 30 / 90 days; the other tiles follow the selected range), per product, environment and line type, the month x product matrix, the top resources with the ones still billing, and the details of each month.
 
 ## Usage
 

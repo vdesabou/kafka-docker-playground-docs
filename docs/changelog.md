@@ -4,6 +4,7 @@
 ##### 🌟 Enhancements
 
 - 🧠🪄 kdp Alfred workflow: run, re-run, stop an example (says what it stops) [#9949](https://github.com/vdesabou/kafka-docker-playground/issues/9949)
+- 🧹🧩 run.sh: one table for the boolean flags [#9948](https://github.com/vdesabou/kafka-docker-playground/issues/9948)
 - 🧠📚 docs: screen recording of the kdp Alfred workflow instead of the GIF [#9944](https://github.com/vdesabou/kafka-docker-playground/issues/9944)
 - 🧠📚 docs: GIF of the kdp Alfred workflow [#9942](https://github.com/vdesabou/kafka-docker-playground/issues/9942)
 - 🧠🪄 kdp Alfred workflow: pickers, running environment, smarter Universal Action, CI check [#9938](https://github.com/vdesabou/kafka-docker-playground/issues/9938)

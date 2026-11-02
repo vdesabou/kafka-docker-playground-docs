@@ -10,6 +10,7 @@ running environment:
 - **certs-create**: generate a keystore and truststore for a component
 - **redos-check**: check a topics.regex for catastrophic backtracking
 - **install-vscode-extension**: playground completion inside VS Code
+- **install-alfred-workflow**: kdp launcher for the playground CLI (macOS)
 
 🎓 Tip: the file readers are what you use to check what a sink connector  
 really wrote, after pulling the file out with `playground container cp`.
@@ -23,6 +24,7 @@ playground tools COMMAND
 ## Commands
 
 - [install-vscode-extension](playground%20tools%20install-vscode-extension) - 🪄 Install a slightly modified version of "Shell Script Command Completion" Visual Studio Code extension (https://marketplace.visualstudio.com/items?itemName=tetradresearch.vscode-h2o)
+- [install-alfred-workflow](playground%20tools%20install-alfred-workflow) - 🎩 Install the "kafka-docker-playground (kdp)" Alfred workflow (macOS, Alfred 5 with the Powerpack)
 - [read-avro-file](playground%20tools%20read-avro-file) - 🔖 Read provided avro file
 - [read-parquet-file](playground%20tools%20read-parquet-file) - 🔖 Read provided parquet file
 - [certs-create](playground%20tools%20certs-create) - 🔐 Generate keys and certificates used for SSL

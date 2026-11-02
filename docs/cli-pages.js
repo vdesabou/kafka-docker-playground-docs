@@ -294,6 +294,7 @@ window.KDP_CLI_PAGES = [
   "/playground%20tcp-proxy%20toggle-writes-service",
   "/playground%20tcp-proxy",
   "/playground%20tools%20certs-create",
+  "/playground%20tools%20install-alfred-workflow",
   "/playground%20tools%20install-vscode-extension",
   "/playground%20tools%20read-avro-file",
   "/playground%20tools%20read-parquet-file",

@@ -8,7 +8,7 @@ key, a case number) and use the Universal Action "kdp: config, stack
 trace, connector class, key, case…":
 
 - **kdp find `<words>`**: find-example: ↩ copies `playground run -f …`
-- **kdp history [words]**: replay a past run with its exact flags
+- **kdp history [words]**: replay a past run with its exact flags (Tab: re-run it)
 - **kdp plugin `<words>` [ver]**: pick a plugin, then a version, then info, changelog, source code, jars, CVEs
 - **kdp key `<words>`**: pick a config key, then a connector: config-key
 - **kdp docs [words]**: deep dive pages

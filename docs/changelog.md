@@ -3,6 +3,7 @@
 ## November 2026
 ##### 🌟 Enhancements
 
+- 🧠💰 cloud costs reports: the tiles follow the range selected in the cost per day chart [#9964](https://github.com/vdesabou/kafka-docker-playground/issues/9964)
 - 🧠📊 Zoomable charts over time in the HTML reports [#9960](https://github.com/vdesabou/kafka-docker-playground/issues/9960)
 - 🧹☁️ move ccloud-costs\* under cloud-resources ccloud [#9958](https://github.com/vdesabou/kafka-docker-playground/issues/9958)
 - 🧠📚 docs: connector CVE scan report missing from the reports gallery [#9956](https://github.com/vdesabou/kafka-docker-playground/issues/9956)

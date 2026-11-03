@@ -7,7 +7,7 @@ anywhere (a connector config, a stack trace, a connector class, a config
 key, a case number) and use the Universal Action "kdp: config, stack  
 trace, connector class, key, case…":
 
-- **kdp find `<words>`**: find-example: ↩ copies `playground run -f …`
+- **kdp find `<words>`**: find-example: ↩ opens the script in VS Code, ⌘ copies `playground run -f …`
 - **kdp history [words]**: replay a past run with its exact flags (Tab: re-run it)
 - **kdp plugin `<words>` [ver]**: pick a plugin, then a version, then info, changelog, source code, jars, CVEs
 - **kdp key `<words>`**: pick a config key, then a connector: config-key
@@ -20,7 +20,8 @@ trace, connector class, key, case…":
 
 On a result: ↩ copies the command (or opens), ⌘ opens in VS Code, ⌃ runs  
 it in the terminal (for an example, that stops the running environment),  
-⌥ and ⇧ depend on the mode.
+⌥ and ⇧ depend on the mode. On a script (find, repro, history): ↩ opens  
+it in VS Code and ⌘ copies `playground run -f …`.
 
 Read-only commands (plugin, key, status) show their output in the Alfred  
 window, streamed while they run. "Show output" and "Run in the terminal"  

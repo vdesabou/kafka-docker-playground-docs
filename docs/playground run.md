@@ -312,7 +312,11 @@ so that one of them can stop without making the cluster unavailable:
 
 - ZooKeeper mode: zookeeper, zookeeper2 and zookeeper3
 
-❗ not supported with ccloud examples, ignored with the mdc-\* and cfk  
+- cfk / cfk-rbac: 3 replicas on the KRaftController CR (pods
+
+kraftcontroller-0, kraftcontroller-1 and kraftcontroller-2)
+
+❗ not supported with ccloud examples, ignored with the mdc-\*  
 environments
 
 #### `--enable-jmx-grafana`

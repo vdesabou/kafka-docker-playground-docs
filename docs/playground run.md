@@ -314,7 +314,9 @@ so that one of them can stop without making the cluster unavailable:
 
 - cfk / cfk-rbac: 3 replicas on the KRaftController CR (pods
 
-kraftcontroller-0, kraftcontroller-1 and kraftcontroller-2)
+kraftcontroller-0, kraftcontroller-1 and kraftcontroller-2), or on  
+the Zookeeper CR with cfk in ZooKeeper mode (pods zookeeper-0,  
+zookeeper-1 and zookeeper-2)
 
 ❗ not supported with ccloud examples, ignored with the mdc-\*  
 environments

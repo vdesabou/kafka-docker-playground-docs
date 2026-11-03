@@ -176,6 +176,7 @@ window.KDP_CLI_PAGES = [
   "/playground%20ec2%20sync-repro-folder%20local-to-ec2",
   "/playground%20ec2%20sync-repro-folder",
   "/playground%20ec2",
+  "/playground%20find-command",
   "/playground%20find-example",
   "/playground%20flink%20cancel",
   "/playground%20flink%20list-jobs",

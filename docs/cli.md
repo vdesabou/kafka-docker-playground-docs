@@ -134,7 +134,8 @@ CLI can be configured using [playground config](/playground%20config), or from t
 👉 Check documentation https://kafka-docker-playground.io/#/cli
 
 🎬 Bite size sessions (short videos): https://kafka-docker-playground.io/#/sessions  
-🍪 Deep dives (one family of commands each): https://kafka-docker-playground.io/#/deep-dives
+🍪 Deep dives (one family of commands each): https://kafka-docker-playground.io/#/deep-dives  
+🧭 Which command answers my question? playground find-command "`<question>`"
 
 | Attributes       | &nbsp;
 |------------------|-------------
@@ -229,6 +230,7 @@ visit https://docs.docker.com/get-docker to install
 - [get-ci-result](playground%20get-ci-result) - 🤖 get CI result for current example
 - [history](playground%20history) - 🏰 Get an history of the examples which were run with run command and run it again
 - [find-example](playground%20find-example) - 🔎 Find examples matching a free-text query, without the interactive picker
+- [find-command](playground%20find-command) - 🧭 Find the playground command that answers a question, without reading the docs
 - [switch-ccloud](playground%20switch-ccloud) - 🌩️  Switch to ccloud environment.
 - [switch-back](playground%20switch-back) - 💺  Switch back from previous environment before switch-ccloud was called.
 - [switch-podman](playground%20switch-podman) - 🦭 Switch the container engine to Podman

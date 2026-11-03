@@ -8,7 +8,8 @@ and script body. Every word of the query must match somewhere; matches in
 the path and connector class rank higher than matches in the body.
 
 Prints the ready-to-paste `playground run -f` command for each hit, best  
-first. Use `playground run` instead to browse examples interactively.
+first. Use `playground run` instead to browse examples interactively.  
+Use `playground find-command` to find a command instead.
 
 ## Usage
 

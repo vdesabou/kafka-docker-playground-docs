@@ -7,6 +7,7 @@ anywhere (a connector config, a stack trace, a connector class, a config
 key, a case number) and use the Universal Action "kdp: config, stack  
 trace, connector class, key, case…":
 
+- **kdp how `<question>`**: find-command: the command that answers a question, ⌥ its `--help`, ⇧ its deep dive
 - **kdp find `<words>`**: find-example: ↩ opens the script in VS Code, ⌘ copies `playground run -f …`
 - **kdp history [words]**: replay a past run with its exact flags (Tab: re-run it)
 - **kdp plugin `<words>` [ver]**: pick a plugin, then a version, then info, changelog, source code, jars, CVEs

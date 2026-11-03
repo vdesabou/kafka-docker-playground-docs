@@ -38,6 +38,10 @@ Number of partitions for the topic. (default is 1)
 |-----------------|-------------
 | Default Value:  | `1`
 
+#### `--if-not-exists`
+
+✅ Do nothing, and succeed, when the topic already exists (default: fail)
+
 #### `--cluster CLUSTER`
 
 🌍 Cluster to use in an mdc-\* environment (us or europe)
@@ -53,6 +57,7 @@ Default: the `PLAYGROUND_CLUSTER` environment variable, else the value set with 
 ```bash
 playground topic create --topic atopic
 playground topic create --topic atopic --nb-partitions 8 --config retention.ms=30000 --config cleanup.policy=compact
+playground topic create --topic atopic --if-not-exists
 
 ```
 

@@ -39,7 +39,7 @@ playground topic consume [OPTIONS]
 
 Max number of messages to display (default is 100)
 
-You can use -1 to display all messages
+You can use -1 to display all messages. With `--grep`, every record is searched and this limits the matching records displayed.
 
 | Attributes      | &nbsp;
 |-----------------|-------------
@@ -61,7 +61,7 @@ Note: `--topic` should be specified in this case.
 
 Verify that topic content contains record which contains specified string
 
-It is searched in the records as displayed (decoded when base64 encoded), and the command fails when no record contains it.
+It is searched in every record of the topic, as displayed (decoded when base64 encoded), and the command fails when no record contains it (with `--count`, 0 is printed instead).
 
 | Attributes      | &nbsp;
 |-----------------|-------------
@@ -69,13 +69,9 @@ It is searched in the records as displayed (decoded when base64 encoded), and th
 
 #### `--timeout TIMEOUT`
 
-Max number of seconds to wait when `--min-expected-messages` is used.
+Max number of seconds to wait when `--min-expected-messages` is used: for the topic to be created, then for the records.
 
 Default is 60 seconds
-
-| Attributes      | &nbsp;
-|-----------------|-------------
-| Default Value:  | `60`
 
 #### `--tail`
 
@@ -99,7 +95,7 @@ Note: `--topic` should be specified in this case.
 
 #### `--max-characters MAX-CHARACTERS`
 
-Max characters per message to display (default is 3000, 0 for no limit)
+Max characters per message to display, the whole line: timestamp, headers, key and value (default is 3000, 0 for no limit)
 
 | Attributes      | &nbsp;
 |-----------------|-------------
@@ -108,6 +104,8 @@ Max characters per message to display (default is 3000, 0 for no limit)
 #### `--open, -o`
 
 🔖 Save full dump of topic to a file and open with text editor set with playground config editor `<editor>` (default is code)
+
+`--grep`, `--no-decode` and `--print-schema` apply to the dump. Needs `--topic`.
 
 | Attributes      | &nbsp;
 |-----------------|-------------
@@ -181,8 +179,8 @@ Example: playground topic consume `--topic` orders `--json` | jq -r '.value.id'
 
 #### `--count`
 
-🔢 Only print the number of records consumed (with `--grep`, the number of records containing that string),  
-on stdout: logs go to stderr. Without `--topic`, one "`<topic>` `<number>`" line per topic.
+🔢 Only print the number of records consumed (with `--grep`, the number of records containing that string,  
+0 included: not a failure), on stdout: logs go to stderr. Without `--topic`, one "`<topic>` `<number>`" line per topic.
 
 Unlike playground topic get-number-records, records are counted, not offsets (transaction markers,  
 compacted records and records that cannot be deserialized do not count)

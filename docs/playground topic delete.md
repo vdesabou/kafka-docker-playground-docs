@@ -9,7 +9,9 @@ Keep them with `--skip-delete-schema`. When the topic no longer exists,
 its leftover key and value subjects are still deleted.
 
 A regex is accepted, matched in full, to clean up a family of topics  
-at once.
+at once. A regex never matches the internal topics (_schemas,  
+__consumer_offsets, connect-configs…): give the exact name to delete  
+one of them.
 
 🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-topic-administration  
 🎬 Bite size session: https://kafka-docker-playground.io/#/sessions?id=%F0%9F%AA%9B-a-producer-gets-recordtoolargeexception

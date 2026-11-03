@@ -114,7 +114,7 @@ Cannot be used with `--derive-key-schema-as`.
 
 #### `--nb-messages NB-MESSAGES`
 
-💯 Number of messages to produce (default is 1)
+💯 Number of messages to produce (default is 1), greater than 0 or -1
 
 🎓  - if \> `<value of --max-nb-messages-per-batch>` (default 300000), messages will be sent in batches of `<value of --max-nb-messages-per-batch>` (default 300000) records
 
@@ -140,8 +140,8 @@ default is 300000
 
 - when protobuf is used, default is 50 as protobuf generation is really slow
 - when json or sql datagen format is used, default is 1000
-- when `--record-size` is set, default is 100
-- `--when` nb-messages is set to -1, default is 1000
+- when `--record-size` is set (avro, json-schema, datagen), default is 100
+- when `--nb-messages` is set to -1, default is 1000 (at most)
 - otherwise default is 100000
 
 #### `--sleep-time-between-batch SLEEP-TIME-BETWEEN-BATCH`
@@ -167,14 +167,10 @@ Useful with `--nb-messages` -1 to get a steady flow of records, for example:
 
 #### `--nb-partitions NB-PARTITIONS`
 
-🔢 Number of partitions for the topic. (default is 1)
+🔢 Number of partitions for the topic. (default is 1 when the topic is created)
 
 ❌ Important: if the topic exists with another number of partitions, it is re-created when it  
 is empty, and the command fails when it is not.
-
-| Attributes      | &nbsp;
-|-----------------|-------------
-| Default Value:  | `1`
 
 #### `--compression-codec COMPRESSION-CODEC`
 
@@ -221,7 +217,7 @@ Note: CP 7.2+ is required.
 
 #### `--forced-key FORCED-KEY`
 
-☢️ Key to use for all records.
+☢️ Key to use for all records. Without `--key`, it is sent as a string (no schema).
 
 🎓 Tip: use `--generate-only` first with avro, json-schema or protobuf to get skeleton of messages and then use `--forced-key` to send the message you need.
 
@@ -250,9 +246,9 @@ Note: CP 7.2+ is required.
 
 🎯 Include schema ID in kafka header.
 
-Uses HeaderSchemaIdSerializer for schema.id.seserializer
+Uses HeaderSchemaIdSerializer for value.schema.id.serializer
 
-Note: CP 8.1.1+ is required.
+Note: CP 8.1.1+ is required, and a value with a schema (avro, json-schema or protobuf).
 
 #### `--validate`
 

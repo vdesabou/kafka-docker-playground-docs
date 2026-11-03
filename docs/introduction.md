@@ -1,5 +1,5 @@
 # 🐳 kafka-docker-playground
-![success tests](https://img.shields.io/badge/success%20tests-870%2F1136-red)![connector tested](https://img.shields.io/badge/connector%20tested-145-green)![cp versions tested](https://img.shields.io/badge/cp%20version%20tested-8.4.0-green)![last run](https://img.shields.io/badge/last%20run-2026--11--03%2001:54-green)
+![success tests](https://img.shields.io/badge/success%20tests-868%2F1138-red)![connector tested](https://img.shields.io/badge/connector%20tested-145-green)![cp versions tested](https://img.shields.io/badge/cp%20version%20tested-8.4.0-green)![last run](https://img.shields.io/badge/last%20run-2026--11--03%2021:15-green)
 ![GitHub issues by-label](https://img.shields.io/github/issues/vdesabou/kafka-docker-playground/CI%20failing%20🔥)![GitHub issues by-label](https://img.shields.io/github/issues/vdesabou/kafka-docker-playground/enhancement%20✨)
 ![GitHub repo size](https://img.shields.io/github/repo-size/vdesabou/kafka-docker-playground)
 [![Add a star on GitHub](https://img.shields.io/github/stars/vdesabou/kafka-docker-playground?style=social)](https://github.com/vdesabou/kafka-docker-playground)
@@ -14,7 +14,7 @@
 - ♻️ Cluster Linking, Replicator and MirrorMaker 2 [examples](https://kafka-docker-playground.io/#/content?id=🌍-multi-data-center-deployments)
 - 🎯 Run examples with any Confluent Platform or connector [versions](https://kafka-docker-playground.io/#/how-to-use?id=🪄-specify-versions)
 - 🧠 Easily run commands with playground [CLI](https://kafka-docker-playground.io/#/cli)
-- 🎩 One keystroke away on macOS with the kdp [Alfred workflow](https://kafka-docker-playground.io/#/cli?id=%f0%9f%8e%a9-alfred-workflow-macos): find and run examples, pick a connector plugin version or a config key, act on the running connectors, output streamed right in Alfred
+- 🎩 One keystroke away on macOS with the kdp [Alfred workflow](https://kafka-docker-playground.io/#/cli?id=%f0%9f%8e%a9-alfred-workflow-macos): find the command that answers a question, find and run examples, pick a connector plugin version or a config key, act on the running connectors, output streamed right in Alfred
 - 📈 [Benchmark](https://kafka-docker-playground.io/#/toolkit-performance?id=%e2%8f%b1%ef%b8%8f-benchmark-a-connector) a connector: throughput, version comparison, and where the time of the tasks goes (Java Flight Recorder)
 - 📊 Find what is wrong with shareable [reports](https://kafka-docker-playground.io/#/reports): thread dumps, GC logs, flight recordings, network captures, connector benchmarks, SMT tests, Oracle XStream and CFK diagnostics
 - 🎬 Learn with [bite size sessions](https://kafka-docker-playground.io/#/sessions): short narrated videos, each about one thing the playground does for you, with the commands to copy

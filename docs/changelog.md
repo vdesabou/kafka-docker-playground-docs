@@ -3,6 +3,7 @@
 ## November 2026
 ##### 🌟 Enhancements
 
+- 🧠📚 Slim CLAUDE.md into on-demand skills and add playground find-command [#9989](https://github.com/vdesabou/kafka-docker-playground/issues/9989)
 - 👾💳 Add Stripe Source Fully Managed Connector example [#9971](https://github.com/vdesabou/kafka-docker-playground/issues/9971)
 - 🧠🏰 playground run shows the previous runs of the example from the history [#9970](https://github.com/vdesabou/kafka-docker-playground/issues/9970)
 - 🧠☁️ move cleanup-cloud-resources under cloud-resources [#9966](https://github.com/vdesabou/kafka-docker-playground/issues/9966)

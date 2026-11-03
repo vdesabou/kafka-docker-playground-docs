@@ -4,6 +4,7 @@
 ##### 🌟 Enhancements
 
 - 👾💳 Add Stripe Source Fully Managed Connector example [#9971](https://github.com/vdesabou/kafka-docker-playground/issues/9971)
+- 🧠🏰 playground run shows the previous runs of the example from the history [#9970](https://github.com/vdesabou/kafka-docker-playground/issues/9970)
 - 🧠☁️ move cleanup-cloud-resources under cloud-resources [#9966](https://github.com/vdesabou/kafka-docker-playground/issues/9966)
 - 🧠💰 cloud costs reports: the tiles follow the range selected in the cost per day chart [#9964](https://github.com/vdesabou/kafka-docker-playground/issues/9964)
 - 🧠📊 Zoomable charts over time in the HTML reports [#9960](https://github.com/vdesabou/kafka-docker-playground/issues/9960)
@@ -26,6 +27,7 @@
 
 ##### 🐛 Bugs
 
+- 🐛🧲 tcp-proxy deep-dive lab fails on Linux: open-ui prints Cannot open browser since open\_url [#9978](https://github.com/vdesabou/kafka-docker-playground/issues/9978)
 - 🐛🧮 playground run shows ksqlDB / Flink next steps after a fully managed example [#9974](https://github.com/vdesabou/kafka-docker-playground/issues/9974)
 - 🐛📦 Maven builds of a few examples still use \~/.m2/settings.xml (401 with an expired private mirror token) [#9968](https://github.com/vdesabou/kafka-docker-playground/issues/9968)
 - 🐛🔥 analyze logs: report header shows the last file link as escaped HTML [#9962](https://github.com/vdesabou/kafka-docker-playground/issues/9962)

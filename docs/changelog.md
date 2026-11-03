@@ -27,6 +27,7 @@
 
 ##### 🐛 Bugs
 
+- 🐛🔐 connector-plugin sourcecode --log: fall back to curl when gh api is refused [#9980](https://github.com/vdesabou/kafka-docker-playground/issues/9980)
 - 🐛🧲 tcp-proxy deep-dive lab fails on Linux: open-ui prints Cannot open browser since open\_url [#9978](https://github.com/vdesabou/kafka-docker-playground/issues/9978)
 - 🐛🧮 playground run shows ksqlDB / Flink next steps after a fully managed example [#9974](https://github.com/vdesabou/kafka-docker-playground/issues/9974)
 - 🐛📦 Maven builds of a few examples still use \~/.m2/settings.xml (401 with an expired private mirror token) [#9968](https://github.com/vdesabou/kafka-docker-playground/issues/9968)

@@ -10,7 +10,8 @@
 - **describe**: brokers, KRaft quorum, feature levels, API versions
 - **metrics**: key JMX metrics of each broker
 
-Not available on Confluent Cloud and multi data center environments.
+Not available on Confluent Cloud. In mdc-\* environments, pick the cluster  
+with `--cluster` us|europe.
 
 🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-broker
 

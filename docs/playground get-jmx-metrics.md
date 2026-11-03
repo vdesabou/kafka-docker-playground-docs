@@ -2,6 +2,15 @@
 
 🔢 Get JMX metrics from a container
 
+Dumps every attribute of the MBeans of a container (all domains, or the  
+ones of `--domain`), with jmxterm run inside the container: no local Java  
+needed. Works with any container that exposes JMX (broker, broker2,  
+connect, schema-registry, ksqldb-server, broker-us in mdc-\*  
+environments...) and with the pods of cfk.
+
+🎓 Tip: for a digest instead of raw MBeans, use 'playground broker  
+metrics' or `playground connector metrics`.
+
 👉 Check documentation https://kafka-docker-playground.io/#/how-to-use?id=%f0%9f%94%a2-jmx-metrics
 
 ## Usage
@@ -9,12 +18,6 @@
 ```bash
 playground get-jmx-metrics [OPTIONS]
 ```
-
-## Dependencies
-
-#### *java*
-
-visit https://openjdk.org/install/ to install
 
 ## Options
 

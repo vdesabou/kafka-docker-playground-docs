@@ -32,6 +32,10 @@ playground broker config get [OPTIONS]
 |-----------------|-------------
 | Conflicts With: | `--key`
 
+#### `--json`
+
+📗 Print the result as JSON, and nothing else: {key, brokers: [{broker, value, source, sensitive, from}]} with `--key`, {brokers: [{broker, configs}]} with `--all`, {cluster_wide, brokers} otherwise
+
 #### `--verbose, -v`
 
 🐞 Show command being ran.
@@ -60,13 +64,24 @@ playground broker config get --key num.io.threads
 playground broker config get --broker 1 --all
 ```
 
+```bash
+playground broker config get --key log.retention.ms --json | jq -r '.brokers[] | "\(.broker) \(.value // .from)"'
+```
+
 ## Example output
 
 ```text
 $ playground broker config get --key log.retention.ms
 15:02:10 ℹ️ 🔎 Value of log.retention.ms on each broker
-BROKER   VALUE                SOURCE
-1        60000                DYNAMIC_DEFAULT_BROKER_CONFIG
+BROKER  VALUE  SOURCE
+1       60000  DYNAMIC_DEFAULT_BROKER_CONFIG
+```
+
+```text
+$ playground broker config get --key log.roll.ms
+15:02:12 ℹ️ 🔎 Value of log.roll.ms on each broker
+BROKER  VALUE                               SOURCE
+1       (not set, from log.roll.hours=168)  -
 ```
 
 

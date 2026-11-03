@@ -56,6 +56,10 @@ connector-producer-`<connector>`-`<task>` for a source.
 |-----------------|-------------
 | Conflicts With: | `--client-id`, `--connector`
 
+#### `--json`
+
+📗 Print the quotas as JSON (one object per entity: user, client_id, quotas), and nothing else
+
 #### `--verbose, -v`
 
 🐞 Show command being ran.
@@ -82,6 +86,10 @@ playground quota get --connector filestream-sink
 
 ```bash
 playground quota get --user client --client-id my-app
+```
+
+```bash
+playground quota get --json | jq '.[] | select(.client_id != null) | .quotas'
 ```
 
 

@@ -32,11 +32,7 @@ playground broker transactions find-hanging [OPTIONS]
 
 #### `--max-transaction-timeout MINUTES`
 
-⏱️ transaction.max.timeout.ms of the brokers, in minutes: only the transactions open for longer are checked (default 15)
-
-| Attributes      | &nbsp;
-|-----------------|-------------
-| Default Value:  | `15`
+⏱️ Only the transactions open for longer than this, in minutes (default: transaction.max.timeout.ms of the brokers, 15 minutes unless changed)
 
 #### `--verbose, -v`
 

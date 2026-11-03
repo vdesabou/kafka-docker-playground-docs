@@ -259,31 +259,26 @@ visit https://docs.docker.com/get-docker to install
   - [assert](playground%20repro%20assert) - 🧪 End a reproduction model with its verdict: 🐞 REPRODUCED or ✅ NOT REPRODUCED
   - [bisect](playground%20repro%20bisect) - 🔀 Run a reproduction model on several versions: which one introduced or fixed the problem
 
-### Kafka commands
+### Container commands
 
 - [get-docker-compose](playground%20get-docker-compose) - 🐋 Get docker-compose
-- [get-jmx-metrics](playground%20get-jmx-metrics) - 🔢 Get JMX metrics from a container
-- [quota](playground%20quota) - 🚦 Client quota commands
-  - [get](playground%20quota%20get) - 🔎 Display client quotas
-  - [set](playground%20quota%20set) - 🚦 Set client quotas
-  - [delete](playground%20quota%20delete) - 🗑️ Remove client quotas
-- [broker](playground%20broker) - 🖥️ Broker commands
-  - [config](playground%20broker%20config) - ⚙️ Dynamic broker config commands
-    - [get](playground%20broker%20config%20get) - 🔎 Display dynamic broker configs
-    - [set](playground%20broker%20config%20set) - ⚙️ Set a dynamic broker config
-    - [delete](playground%20broker%20config%20delete) - 🗑️ Remove a dynamic broker config
-  - [health](playground%20broker%20health) - 🩺 Check the health of the cluster
-  - [stop](playground%20broker%20stop) - 🛑 Stop a broker
-  - [start](playground%20broker%20start) - ▶️ Start a broker stopped with `playground broker stop`
-  - [rolling-restart](playground%20broker%20rolling-restart) - 🔄 Restart the brokers one by one, like a rolling upgrade
-  - [transactions](playground%20broker%20transactions) - 💱 Transaction commands
-    - [list](playground%20broker%20transactions%20list) - 📋 List the transactional ids
-    - [describe](playground%20broker%20transactions%20describe) - 🔎 Describe a transactional id
-    - [describe-producers](playground%20broker%20transactions%20describe-producers) - 🏭 Describe the active producers of a topic
-    - [find-hanging](playground%20broker%20transactions%20find-hanging) - 🧟 Find hanging transactions
-    - [abort](playground%20broker%20transactions%20abort) - 🧹 Abort a hanging transaction
-  - [describe](playground%20broker%20describe) - 🗺️ Describe the cluster
-  - [metrics](playground%20broker%20metrics) - 📈 Display the key JMX metrics of the brokers
+- [container](playground%20container) - 🐳 Container commands
+  - [get-properties](playground%20container%20get-properties) - 📝 Get properties file from a container
+  - [recreate](playground%20container%20recreate) - 💫 Recreate container(s)
+  - [update](playground%20container%20update) - ✍️ Edit and apply runtime container/pod definition
+  - [get-ip-addresses](playground%20container%20get-ip-addresses) - 🖥️  Get ip address of running containers
+  - [kill-all](playground%20container%20kill-all) - 💀 Kill all containers and prune all volumes
+  - [logs](playground%20container%20logs) - 🕵️  Tail and follow container logs
+  - [display-error-all](playground%20container%20display-error-all) - 🔥 Display all ERROR/FATAL logs in all containers/pods. Useful for quick troubleshooting
+  - [ssh](playground%20container%20ssh) - 🛬 SSH into container
+  - [change-jdk](playground%20container%20change-jdk) - 🤎 Change java JDK version using Azul JDK (https://www.azul.com/downloads/#downloads-table-zulu)
+  - [exec](playground%20container%20exec) - 🪄 Execute command in a container
+  - [cp](playground%20container%20cp) - 🪄 Copy files between local filesystem and container
+  - [restart](playground%20container%20restart) - 🔁 Restart a container
+  - [pause](playground%20container%20pause) - ⏸️  Pause a container
+  - [resume](playground%20container%20resume) - ⏯️  Resume a container
+  - [kill](playground%20container%20kill) - 🔫 Kill a container
+  - [set-environment-variables](playground%20container%20set-environment-variables) - 📦  Set environment variable(s) for a container
 
 ### Schema commands
 
@@ -380,25 +375,30 @@ visit https://docs.docker.com/get-docker to install
     - [generate-bundle](playground%20debug%20cfk%20generate-bundle) - ⛑️ Generate a Support bundle
     - [sourcecode](playground%20debug%20cfk%20sourcecode) - 🧑‍💻 Source code of the CFK operator at the version of a cluster or of a support bundle
 
-### Container commands
+### Kafka commands
 
-- [container](playground%20container) - 🐳 Container commands
-  - [get-properties](playground%20container%20get-properties) - 📝 Get properties file from a container
-  - [recreate](playground%20container%20recreate) - 💫 Recreate container(s)
-  - [update](playground%20container%20update) - ✍️ Edit and apply runtime container/pod definition
-  - [get-ip-addresses](playground%20container%20get-ip-addresses) - 🖥️  Get ip address of running containers
-  - [kill-all](playground%20container%20kill-all) - 💀 Kill all containers and prune all volumes
-  - [logs](playground%20container%20logs) - 🕵️  Tail and follow container logs
-  - [display-error-all](playground%20container%20display-error-all) - 🔥 Display all ERROR/FATAL logs in all containers/pods. Useful for quick troubleshooting
-  - [ssh](playground%20container%20ssh) - 🛬 SSH into container
-  - [change-jdk](playground%20container%20change-jdk) - 🤎 Change java JDK version using Azul JDK (https://www.azul.com/downloads/#downloads-table-zulu)
-  - [exec](playground%20container%20exec) - 🪄 Execute command in a container
-  - [cp](playground%20container%20cp) - 🪄 Copy files between local filesystem and container
-  - [restart](playground%20container%20restart) - 🔁 Restart a container
-  - [pause](playground%20container%20pause) - ⏸️  Pause a container
-  - [resume](playground%20container%20resume) - ⏯️  Resume a container
-  - [kill](playground%20container%20kill) - 🔫 Kill a container
-  - [set-environment-variables](playground%20container%20set-environment-variables) - 📦  Set environment variable(s) for a container
+- [get-jmx-metrics](playground%20get-jmx-metrics) - 🔢 Get JMX metrics from a container
+- [quota](playground%20quota) - 🚦 Client quota commands
+  - [get](playground%20quota%20get) - 🔎 Display client quotas
+  - [set](playground%20quota%20set) - 🚦 Set client quotas
+  - [delete](playground%20quota%20delete) - 🗑️ Remove client quotas
+- [broker](playground%20broker) - 🖥️ Broker commands
+  - [config](playground%20broker%20config) - ⚙️ Dynamic broker config commands
+    - [get](playground%20broker%20config%20get) - 🔎 Display dynamic broker configs
+    - [set](playground%20broker%20config%20set) - ⚙️ Set a dynamic broker config
+    - [delete](playground%20broker%20config%20delete) - 🗑️ Remove a dynamic broker config
+  - [health](playground%20broker%20health) - 🩺 Check the health of the cluster
+  - [stop](playground%20broker%20stop) - 🛑 Stop a broker
+  - [start](playground%20broker%20start) - ▶️ Start a broker stopped with `playground broker stop`
+  - [rolling-restart](playground%20broker%20rolling-restart) - 🔄 Restart the brokers one by one, like a rolling upgrade
+  - [transactions](playground%20broker%20transactions) - 💱 Transaction commands
+    - [list](playground%20broker%20transactions%20list) - 📋 List the transactional ids
+    - [describe](playground%20broker%20transactions%20describe) - 🔎 Describe a transactional id
+    - [describe-producers](playground%20broker%20transactions%20describe-producers) - 🏭 Describe the active producers of a topic
+    - [find-hanging](playground%20broker%20transactions%20find-hanging) - 🧟 Find hanging transactions
+    - [abort](playground%20broker%20transactions%20abort) - 🧹 Abort a hanging transaction
+  - [describe](playground%20broker%20describe) - 🗺️ Describe the cluster
+  - [metrics](playground%20broker%20metrics) - 📈 Display the key JMX metrics of the brokers
 
 ### Topic commands
 

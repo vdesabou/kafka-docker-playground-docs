@@ -3,6 +3,7 @@
 ## November 2026
 ##### 🌟 Enhancements
 
+- 🧠👨‍🦳 cfk: ZooKeeper mode (Zookeeper CR) for CP < 8 [#10000](https://github.com/vdesabou/kafka-docker-playground/issues/10000)
 - 🧠🗳️ playground run --enable-multiple-controllers: 3 KRaft controllers or 3 ZooKeeper nodes [#9996](https://github.com/vdesabou/kafka-docker-playground/issues/9996)
 - 🧠🪄 kdp Alfred workflow: kdp how `<question>` finds the command (find-command) [#9992](https://github.com/vdesabou/kafka-docker-playground/issues/9992)
 - 🧠📚 Slim CLAUDE.md into on-demand skills and add playground find-command [#9989](https://github.com/vdesabou/kafka-docker-playground/issues/9989)

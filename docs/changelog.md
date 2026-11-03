@@ -3,6 +3,7 @@
 ## November 2026
 ##### 🌟 Enhancements
 
+- 🐛🖥️ Kafka commands: get-jmx-metrics, get-docker-compose, quota and broker fixes and improvements [#10002](https://github.com/vdesabou/kafka-docker-playground/issues/10002)
 - 🧠👨‍🦳 cfk: ZooKeeper mode (Zookeeper CR) for CP < 8 [#10000](https://github.com/vdesabou/kafka-docker-playground/issues/10000)
 - 🧠🗳️ playground run --enable-multiple-controllers: 3 KRaft controllers or 3 ZooKeeper nodes [#9996](https://github.com/vdesabou/kafka-docker-playground/issues/9996)
 - 🧠🪄 kdp Alfred workflow: kdp how `<question>` finds the command (find-command) [#9992](https://github.com/vdesabou/kafka-docker-playground/issues/9992)

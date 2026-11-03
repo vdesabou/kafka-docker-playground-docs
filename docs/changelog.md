@@ -3,6 +3,7 @@
 ## November 2026
 ##### 🌟 Enhancements
 
+- 🧠🕐 analyze logs: show the period the logs cover, and warn when the window is too short [#10008](https://github.com/vdesabou/kafka-docker-playground/issues/10008)
 - 🧠🎚️ analyze logs: the level, connector and period filters drive the whole HTML report [#10006](https://github.com/vdesabou/kafka-docker-playground/issues/10006)
 - 🐛🖥️ Kafka commands: get-jmx-metrics, get-docker-compose, quota and broker fixes and improvements [#10002](https://github.com/vdesabou/kafka-docker-playground/issues/10002)
 - 🧠👨‍🦳 cfk: ZooKeeper mode (Zookeeper CR) for CP < 8 [#10000](https://github.com/vdesabou/kafka-docker-playground/issues/10000)

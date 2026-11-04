@@ -9,6 +9,7 @@ running environment:
 - **read-parquet-file**: same, for parquet
 - **certs-create**: generate a keystore and truststore for a component
 - **redos-check**: check a topics.regex for catastrophic backtracking
+- **http-server**: drive the http test server of the http examples: set-response, reset, requests
 - **install-vscode-extension**: playground completion inside VS Code
 - **install-alfred-workflow**: kdp launcher for the playground CLI (macOS)
 
@@ -29,5 +30,12 @@ playground tools COMMAND
 - [read-parquet-file](playground%20tools%20read-parquet-file) - 🔖 Read provided parquet file
 - [certs-create](playground%20tools%20certs-create) - 🔐 Generate keys and certificates used for SSL
 - [redos-check](playground%20tools%20redos-check) - 🪖 Check topics.regex for ReDos vulnerabilities using recheck (https://github.com/makenowjust-labs/recheck)
+
+## Tools commands
+
+- [http-server](playground%20tools%20http-server) - 🌐 Drive the http test server of the http examples
+  - [set-response](playground%20tools%20http-server%20set-response) - 🎛️ Set how the http test server answers
+  - [reset](playground%20tools%20http-server%20reset) - 🔄 Reset the http test server
+  - [requests](playground%20tools%20http-server%20requests) - 📥 Show the requests received by the http test server
 
 

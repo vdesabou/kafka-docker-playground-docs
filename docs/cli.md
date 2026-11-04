@@ -340,6 +340,10 @@ visit https://docs.docker.com/get-docker to install
   - [read-parquet-file](playground%20tools%20read-parquet-file) - 🔖 Read provided parquet file
   - [certs-create](playground%20tools%20certs-create) - 🔐 Generate keys and certificates used for SSL
   - [redos-check](playground%20tools%20redos-check) - 🪖 Check topics.regex for ReDos vulnerabilities using recheck (https://github.com/makenowjust-labs/recheck)
+  - [http-server](playground%20tools%20http-server) - 🌐 Drive the http test server of the http examples
+    - [set-response](playground%20tools%20http-server%20set-response) - 🎛️ Set how the http test server answers
+    - [reset](playground%20tools%20http-server%20reset) - 🔄 Reset the http test server
+    - [requests](playground%20tools%20http-server%20requests) - 📥 Show the requests received by the http test server
 
 ### Analyze commands
 

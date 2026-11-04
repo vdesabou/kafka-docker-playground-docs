@@ -49,7 +49,7 @@ playground connector offsets get
 
 ```text
 $ playground connector offsets get
-17:22:15 ℹ️ 🏹 Getting offsets for 🌎onprem  connector filestream-sink
+17:22:15 ℹ️ 🏹 Getting offsets for 🌎onprem sink connector filestream-sink
 {
   "offsets": [
     {

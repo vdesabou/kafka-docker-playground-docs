@@ -241,15 +241,18 @@ playground connector create-or-update -c filestream-sink << EOF
 }
 EOF
 
-playground connector create-or-update -c filestream-sink --offsets '[{"partition":{"kafka_topic":"filestream","kafka_partition":0},"offset":{"kafka_offset":8}}]' << EOF
+# --offsets: fully managed connectors only (the sink starts consuming partition 0 of topic http-topic at offset 8)
+playground connector create-or-update -c HttpSink_$USER --offsets '[{"partition":{"kafka_topic":"http-topic","kafka_partition":0},"offset":{"kafka_offset":8}}]' << EOF
 {
-    "tasks.max": "1",
-    "connector.class": "org.apache.kafka.connect.file.FileStreamSinkConnector",
-    "topics": "filestream",
-    "file": "/tmp/output.json",
-    "key.converter": "org.apache.kafka.connect.storage.StringConverter",
-    "value.converter": "org.apache.kafka.connect.json.JsonConverter",
-    "value.converter.schemas.enable": "false"
+    "connector.class": "HttpSink",
+    "name": "HttpSink_$USER",
+    "kafka.auth.mode": "KAFKA_API_KEY",
+    "kafka.api.key": "$CLOUD_KEY",
+    "kafka.api.secret": "$CLOUD_SECRET",
+    "topics": "http-topic",
+    "input.data.format": "AVRO",
+    "http.api.url": "https://httpbin.org/post",
+    "tasks.max" : "1"
 }
 EOF
 

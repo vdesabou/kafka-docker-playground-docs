@@ -32,6 +32,30 @@ By default, for each connector, the current version is used (for Confluent emplo
 |-----------------|-------------
 | Repeatable:     |  ✓ Yes
 
+#### `--checkout-only`
+
+📂 Checkout the code at the right tag and print the path of the folder, nothing else
+
+No browser, no editor, no question (with several connectors in the example, the first one is used).  
+The path is the last line of the output.
+
+🎓 Tip: use it in scripts and from AI agents, which can then read the code
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Conflicts With: | `--compile`
+
+#### `--grep GREP`
+
+🔎 Grep the code at the version in use (or the `--connector-tag` one): checkout, file:line, 500 lines at most
+
+With 2 `--connector-tag`: only the commits between the two versions whose message matches (case insensitive).  
+Extended regular expression, for example "`BATCH_SIZE_DEFAULT`|batch.size"
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Conflicts With: | `--compile`
+
 ## Examples
 
 ```bash

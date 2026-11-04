@@ -16,7 +16,8 @@ get and CP 7.6 for alter and reset. On older CP the playground falls back
 to kafka-consumer-groups, which only covers sink connectors.
 
 The connector must not be running while its offsets change: alter and  
-reset stop it and resume it for you.
+reset stop it and resume it for you, also when the change is refused  
+(the command then exits 1).
 
 🎓 Tip: a sink that reprocesses everything and a source that re-snapshots  
 are usually offsets problems, not connector problems. Look here first.

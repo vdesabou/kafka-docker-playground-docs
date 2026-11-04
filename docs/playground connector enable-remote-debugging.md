@@ -22,6 +22,6 @@ playground connector enable-remote-debugging
 
 #### *git*
 
-visit https://docs.confluent.io/confluent-cli/current/overview.html to install
+visit https://git-scm.com/downloads to install
 
 

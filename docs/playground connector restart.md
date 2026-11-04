@@ -27,7 +27,7 @@ playground connector restart [OPTIONS]
 
 #### `--task-id, -t TASK_ID`
 
-🔧 Restart specific task ID only (instead of restarting entire connector)
+🔧 Restart specific task ID only (instead of restarting entire connector), needs `--connector`
 
 | Attributes      | &nbsp;
 |-----------------|-------------

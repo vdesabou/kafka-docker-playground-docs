@@ -3,6 +3,9 @@
 ## November 2026
 ##### 🌟 Enhancements
 
+- 🧹🚇 get\_ngrok\_url helper: one tunnel wait with a timeout instead of 81 copies of an endless loop [#10034](https://github.com/vdesabou/kafka-docker-playground/issues/10034)
+- 🧠🔑 connector-plugin config-key --since-version: search upstream Debezium releases when Confluent Hub has none with the key [#10032](https://github.com/vdesabou/kafka-docker-playground/issues/10032)
+- 🧠🔐 playground tools cert create|inspect|convert: explain and convert certificates, fix certs-create [#10030](https://github.com/vdesabou/kafka-docker-playground/issues/10030)
 - 🧠🌐 playground tools http-server set-response|reset|requests: drive the httpserver of the http examples [#10028](https://github.com/vdesabou/kafka-docker-playground/issues/10028)
 - 🧠🔍 playground db cdc-check: are the CDC prerequisites of the database met? (and drop the no-op XStream ARCHIVELOG block) [#10026](https://github.com/vdesabou/kafka-docker-playground/issues/10026)
 - 🧠🛢️ playground db sql and db wait-for-rows: run SQL in the database of the example, wait for a sink to write rows [#10023](https://github.com/vdesabou/kafka-docker-playground/issues/10023)

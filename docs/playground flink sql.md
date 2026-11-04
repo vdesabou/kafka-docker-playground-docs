@@ -20,6 +20,17 @@ streaming mode: add a LIMIT, or SET 'execution.runtime-mode' = 'batch'
 on a bounded source. Otherwise the client is stopped after  
 `--max-wait` seconds.
 
+☁️ Confluent Cloud (`--environment` ccloud): each statement is a  
+statement of the compute pool, created with 'confluent flink statement  
+create' in the environment (catalog) and Kafka cluster (database) of the  
+last ccloud example. The topics with a schema are tables already. SET  
+and USE are sent as properties of the next statements. The rows of a  
+query (SELECT, SHOW, DESCRIBE…) are read with the statement results REST  
+API (a Flink API key is created once, see `FLINK_API_KEY`) and printed  
+with the changelog applied, so an aggregation prints its final value; the  
+query statement is then deleted. An INSERT INTO keeps RUNNING: follow it  
+with `playground flink list-jobs`. `--max-wait` applies to each query.
+
 🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-flink
 
 ## Usage
@@ -29,6 +40,16 @@ playground flink sql [OPTIONS]
 ```
 
 ## Options
+
+#### `--environment ENVIRONMENT`
+
+🌍 local: the Flink cluster of `--enable-flink`. ccloud: a Confluent Cloud Flink compute pool
+
+ℹ️ Default: `PLAYGROUND_FLINK_ENVIRONMENT`, else ccloud when the last example ran on Confluent Cloud, else local
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Allowed Values: | `local`, `ccloud`
 
 #### `--file, -f FILE`
 
@@ -62,6 +83,12 @@ EOF
 
 ```bash
 playground flink sql --file ./queries.sql
+```
+
+```bash
+playground flink sql --environment ccloud << 'EOF'
+SELECT COUNT(*) AS nb_orders FROM flink_orders /*+ OPTIONS('scan.bounded.mode'='latest-offset') */;
+EOF
 ```
 
 ## Example output

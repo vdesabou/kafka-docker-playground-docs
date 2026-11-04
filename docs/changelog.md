@@ -3,6 +3,7 @@
 ## November 2026
 ##### 🌟 Enhancements
 
+- 🧠🛢️ playground db sql and db wait-for-rows: run SQL in the database of the example, wait for a sink to write rows [#10023](https://github.com/vdesabou/kafka-docker-playground/issues/10023)
 - 🐛🔌 playground connector commands: review fixes (bugs, consistency, --json, benchmark accuracy) [#10011](https://github.com/vdesabou/kafka-docker-playground/issues/10011)
 - 🧠🕐 analyze logs: show the period the logs cover, and warn when the window is too short [#10008](https://github.com/vdesabou/kafka-docker-playground/issues/10008)
 - 🧠🎚️ analyze logs: the level, connector and period filters drive the whole HTML report [#10006](https://github.com/vdesabou/kafka-docker-playground/issues/10006)

@@ -314,6 +314,7 @@ window.KDP_CLI_PAGES = [
   "/playground%20tools%20redos-check",
   "/playground%20tools",
   "/playground%20topic%20alter",
+  "/playground%20topic%20check-format",
   "/playground%20topic%20compare",
   "/playground%20topic%20consume",
   "/playground%20topic%20create",

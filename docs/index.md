@@ -292,6 +292,7 @@ visit https://docs.docker.com/get-docker to install
   - [reassign](playground%20topic%20reassign) - 🔀 Move the replicas of a topic to other brokers
   - [elect-leader](playground%20topic%20elect-leader) - 👑 Elect the leaders of a topic
   - [dump-log](playground%20topic%20dump-log) - 🔬 Dump the log segments of a partition: batches, producers, transactions
+  - [check-format](playground%20topic%20check-format) - 🧬 Check the format of the records of a topic, from their bytes
   - [set-schema-compatibility](playground%20topic%20set-schema-compatibility) - 🛡️ Change topic's schema compatibility
   - [consume](playground%20topic%20consume) - 📥 Consume topic from beginning
   - [produce](playground%20topic%20produce) - 📤 Produce to a topic

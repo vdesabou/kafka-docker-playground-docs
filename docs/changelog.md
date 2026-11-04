@@ -5,6 +5,7 @@
 
 - 🧠🚦 New example other/rbac-centralized-acls: MDS centralized ACLs with RBAC [#10043](https://github.com/vdesabou/kafka-docker-playground/issues/10043)
 - ⭐🔐 New environment sasl-oauthbearer: SASL/OAUTHBEARER (OAuth / OIDC) with Keycloak [#10041](https://github.com/vdesabou/kafka-docker-playground/issues/10041)
+- 🧠🧬 playground topic check-format: the format of each record of a topic and the converter to use [#10039](https://github.com/vdesabou/kafka-docker-playground/issues/10039)
 - 🧠🔬 playground topic dump-log: the batches of a partition on disk, producers, transactions and open transactions [#10036](https://github.com/vdesabou/kafka-docker-playground/issues/10036)
 - 🧹🚇 get\_ngrok\_url helper: one tunnel wait with a timeout instead of 81 copies of an endless loop [#10034](https://github.com/vdesabou/kafka-docker-playground/issues/10034)
 - 🧠🔑 connector-plugin config-key --since-version: search upstream Debezium releases when Confluent Hub has none with the key [#10032](https://github.com/vdesabou/kafka-docker-playground/issues/10032)
@@ -44,6 +45,7 @@
 
 ##### 🐛 Bugs
 
+- 🐛💱 topic produce --transactional-id fails on cfk: could not copy the transactional copier to connect-0 [#10037](https://github.com/vdesabou/kafka-docker-playground/issues/10037)
 - 🐛📥 playground topic consume --tail never shows the newest record (multi-line record parser waits for the next one) [#10021](https://github.com/vdesabou/kafka-docker-playground/issues/10021)
 - 🐛📥 lambda, datadog, servicenow, azure-functions and salesforce-bulkapi sinks fail: --timeout refused with --min-expected-messages 0 [#10019](https://github.com/vdesabou/kafka-docker-playground/issues/10019)
 - 🐛⏱️ cfk CI jobs hang until the 6 hours limit: the --verbose file descriptor of before.sh keeps the run-tests.sh pipe open [#10017](https://github.com/vdesabou/kafka-docker-playground/issues/10017)

@@ -323,6 +323,7 @@ window.KDP_CLI_PAGES = [
   "/playground%20topic%20dlq%20inspect",
   "/playground%20topic%20dlq%20replay",
   "/playground%20topic%20dlq",
+  "/playground%20topic%20dump-log",
   "/playground%20topic%20elect-leader",
   "/playground%20topic%20get-number-records",
   "/playground%20topic%20get-offsets",

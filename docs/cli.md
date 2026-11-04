@@ -420,6 +420,7 @@ visit https://docs.docker.com/get-docker to install
   - [describe](playground%20topic%20describe) - 🔬 Describe topic
   - [reassign](playground%20topic%20reassign) - 🔀 Move the replicas of a topic to other brokers
   - [elect-leader](playground%20topic%20elect-leader) - 👑 Elect the leaders of a topic
+  - [dump-log](playground%20topic%20dump-log) - 🔬 Dump the log segments of a partition: batches, producers, transactions
   - [set-schema-compatibility](playground%20topic%20set-schema-compatibility) - 🛡️ Change topic's schema compatibility
   - [consume](playground%20topic%20consume) - 📥 Consume topic from beginning
   - [produce](playground%20topic%20produce) - 📤 Produce to a topic

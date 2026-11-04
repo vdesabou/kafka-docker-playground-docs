@@ -3,6 +3,7 @@
 ## November 2026
 ##### 🌟 Enhancements
 
+- ⭐🔐 New environment sasl-oauthbearer: SASL/OAUTHBEARER (OAuth / OIDC) with Keycloak [#10041](https://github.com/vdesabou/kafka-docker-playground/issues/10041)
 - 🧠🔬 playground topic dump-log: the batches of a partition on disk, producers, transactions and open transactions [#10036](https://github.com/vdesabou/kafka-docker-playground/issues/10036)
 - 🧹🚇 get\_ngrok\_url helper: one tunnel wait with a timeout instead of 81 copies of an endless loop [#10034](https://github.com/vdesabou/kafka-docker-playground/issues/10034)
 - 🧠🔑 connector-plugin config-key --since-version: search upstream Debezium releases when Confluent Hub has none with the key [#10032](https://github.com/vdesabou/kafka-docker-playground/issues/10032)

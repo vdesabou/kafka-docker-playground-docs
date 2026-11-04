@@ -3,6 +3,7 @@
 ## November 2026
 ##### 🌟 Enhancements
 
+- 🧠🌐 playground tools http-server set-response|reset|requests: drive the httpserver of the http examples [#10028](https://github.com/vdesabou/kafka-docker-playground/issues/10028)
 - 🧠🔍 playground db cdc-check: are the CDC prerequisites of the database met? (and drop the no-op XStream ARCHIVELOG block) [#10026](https://github.com/vdesabou/kafka-docker-playground/issues/10026)
 - 🧠🛢️ playground db sql and db wait-for-rows: run SQL in the database of the example, wait for a sink to write rows [#10023](https://github.com/vdesabou/kafka-docker-playground/issues/10023)
 - 🐛🔌 playground connector commands: review fixes (bugs, consistency, --json, benchmark accuracy) [#10011](https://github.com/vdesabou/kafka-docker-playground/issues/10011)

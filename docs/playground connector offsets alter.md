@@ -11,6 +11,8 @@ The connector is stopped before the change and resumed after it. On
 Confluent Cloud the change is asynchronous, so the command then polls  
 get-offsets-request-status and prints the resulting offsets.
 
+☁️ Fully managed: supported (custom connectors too)
+
 See https://docs.confluent.io/cloud/current/connectors/offsets.html
 
 ## Usage
@@ -40,5 +42,11 @@ Default: the `PLAYGROUND_CLUSTER` environment variable, else the value set with 
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Allowed Values: | `us`, `europe`
+
+## Examples
+
+```bash
+playground connector offsets alter --connector filestream-sink
+```
 
 

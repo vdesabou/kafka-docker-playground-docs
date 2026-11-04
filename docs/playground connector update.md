@@ -4,7 +4,11 @@
 
 The quickest loop to try a configuration change: edit, save, close, and  
 the connector is updated. Nothing is applied if you close the file  
-without saving.
+without saving a change.
+
+☁️ Fully managed: the config comes from the last 'connector create-or-update'  
+of this machine. When only the REST API has it (secrets masked as \*\*\*\*),  
+the update is refused, so that the masks never replace the real values.
 
 | Attributes       | &nbsp;
 |------------------|-------------

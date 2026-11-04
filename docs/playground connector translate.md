@@ -10,6 +10,8 @@ and this tells you which before you promise a customer a migration.
 Only translates the configuration. To actually move the connector along  
 with its offsets, use `playground connector connect-migration-utility`.
 
+☁️ Fully managed: not applicable, it translates the config of a self managed connector (ccloud environment)
+
 See https://docs.confluent.io/cloud/current/api.html#tag/Managed-Connector-Plugins-(connectv1)/operation/translateConnectv1ConnectorPlugin
 
 The connector example should be ran with `--environment` flag set to `<ccloud>`
@@ -19,12 +21,6 @@ The connector example should be ran with `--environment` flag set to `<ccloud>`
 ```bash
 playground connector translate [OPTIONS]
 ```
-
-## Dependencies
-
-#### *confluent*
-
-visit https://docs.confluent.io/confluent-cli/current/overview.html to install
 
 ## Options
 
@@ -38,7 +34,7 @@ visit https://docs.confluent.io/confluent-cli/current/overview.html to install
 
 🐞 Show command being ran.
 
-#### `--connector-plugin CONNECTOR-PLUGIN`
+#### `--connector-plugin CONNECTOR_PLUGIN`
 
 🔌 Connector plugin name
 
@@ -47,5 +43,11 @@ visit https://docs.confluent.io/confluent-cli/current/overview.html to install
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Required:       | ✓ Yes
+
+## Examples
+
+```bash
+playground connector translate --connector filestream-sink --connector-plugin FileStreamSink
+```
 
 

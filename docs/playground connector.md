@@ -3,48 +3,71 @@
 🔗 Connector commands
 
 Everything you would otherwise do with curl on the Connect REST API, with  
-the right host, port and credentials already figured out. The same  
-commands work whether the connector is self managed in the connect  
-container or fully managed in Confluent Cloud.
+the right host, port and credentials already figured out. Most commands  
+work whether the connector is self managed in the connect container or  
+fully managed in Confluent Cloud: the "☁️ Fully managed" line of the help  
+of each command says whether it does.
 
 **🔍 Look at what is running**
 
-- **status**: is it RUNNING, and if not, the full stack trace
+- **diagnose**: status, errors, lag or offsets, next steps
+- **status**: is it RUNNING, and if not, the stack trace
 - **wait**: wait until it is RUNNING (or another state)
-- **error-recommendations**: suggested fixes for a failed fully managed connector
-- **show-config**: the configuration actually applied
-- **diff**: running config vs a file, another connector or the defaults
-- **logs**: tail connect logs, filtered and followed
-- **show-lag**: consumer lag of a sink, until it reaches zero
-- **benchmark**: records per second, compared with the previous run
+- **tasks**: state, worker, config, partitions of each task
+- **history**: states, failures, restarts, config changes
+- **metrics**: throughput, time and errors per task
+- **show-lag**: consumer lag of a sink (`--once`: a snapshot)
 - **offsets get**: where the connector is reading or writing
-- **smt test**: what a transform chain does to a record, step by step
+- **topics**: the topics a connector is using
+- **show-config**: the configuration actually applied
+- **diff**: config vs a file, a connector or the defaults
+- **logs**: connect logs, or the fully managed logs
+- **error-recommendations**: fixes for a failed fully managed connector
+- **display-metrics-api**: Telemetry API metrics (fully managed)
+- **display-metrics-api-with-grafana**: the same, plotted in Grafana
+- **display-leader-name**: the leader of the connect workers
+- **open-ccloud-connector-in-browser**: its page in the Confluent Cloud console
+- **benchmark**: records per second, vs the previous run
+- **smt test**: what a transform chain does to a record
 
 **🛠️ Change it**
 
 - **create-or-update**: create it, or apply a new config, from stdin
-- **validate**: check a config with the plugin, without creating it
+- **validate**: check a config with the plugin, create nothing
+- **convert**: a customer config (CFK, terraform...) to another format
 - **update**: edit the running config in your editor
 - **pause / resume / stop / restart / delete**
 - **offsets alter / reset**: rewind or fast-forward a connector
+- **offsets get-offsets-request-status**: did the last fully managed change apply
 
 **🧑‍🔬 Understand it**
 
 - **show-config-parameters**: every parameter the plugin accepts
 - **select-config**: pick parameters interactively
+- **snippets**: converter (or data format) and dlq config
+- **plugins**: plugins installed (`--all`: transforms...)
 - **versions**: installed version vs latest on Confluent Hub
-- **sourcecode**: open the source on GitHub, or diff two versions
+- **sourcecode**: the source on GitHub, grep it, diff versions
 - **open-docs**: open the Confluent documentation
-- **snippets**: ready-to-paste converter and dlq config
 
 **🐞 Dig deeper**
 
 - **log-level**: raise connect log level for this connector
-- **enable-remote-debugging attach a java debugger to the connector code**
+- **enable-remote-debugging / disable-remote-debugging**: attach a java debugger to the connector code
+- **oracle-cdc-xstream**: Oracle XStream queries and diagnostics report
+
+**🚚 Move it to Confluent Cloud**
+
 - **translate**: self managed config to fully managed config
+- **connect-migration-utility**: discovery, then migrate with the offsets
 
 Without `--connector`, commands apply to every connector of the example,  
 which is usually what you want since most examples run only one.
+
+🤖 For scripts and AI agents: status, wait, diagnose, validate, tasks,  
+topics, history, metrics, show-lag, offsets get, diff and smt test take  
+`--json` (only the JSON on stdout, the log lines on stderr), and status  
+and diagnose take `--fail-on-error` for an exit code.
 
 ## Usage
 
@@ -95,6 +118,9 @@ playground connector COMMAND
 - [snippets](playground%20connector%20snippets) - 🔌 useful snippets
 - [open-docs](playground%20connector%20open-docs) - 🧑‍🎓 Open connector documentation of currently running connector(s)
 - [log-level](playground%20connector%20log-level) - 🧬 Set connect log level
+- [logs](playground%20connector%20logs) - 🕵️  Tail and follow connect logs
+- [open-ccloud-connector-in-browser](playground%20connector%20open-ccloud-connector-in-browser) - 🤖 Open Fully Managed connector in browser (Confluent Cloud dashboard)
+- [display-leader-name](playground%20connector%20display-leader-name) - 👑 Display Connect Worker leader name using JMX MBean leader-name from kafka.connect:type=connect-worker-rebalance-metrics
 - [translate](playground%20connector%20translate) - 💱 Translate Self Managed Connector Plugin Configurations to Fully Managed Connector Plugin Configuration
 - [connect-migration-utility](playground%20connector%20connect-migration-utility) - 🧩 Run Kafka Connector Migration Utility (see https://github.com/confluentinc/connect-migration-utility/) on running connect cluster
   - [discovery](playground%20connector%20connect-migration-utility%20discovery) - 👨‍🔬 Discover connectors in the local connect cluster and export their configurations to files
@@ -102,16 +128,18 @@ playground connector COMMAND
 - [create-or-update](playground%20connector%20create-or-update) - 🧑‍🎨  Create or update connector
 - [update](playground%20connector%20update) - 🛠️ Update connector configuration by opening current connector config in text editor set with playground config editor `<editor>` (default is code). Once file is saved, the new configuration is updated.
 
-## Connect commands
-
-- [logs](playground%20connector%20logs) - 🕵️  Tail and follow connect logs
-- [open-ccloud-connector-in-browser](playground%20connector%20open-ccloud-connector-in-browser) - 🤖 Open Fully Managed connector in browser (Confluent Cloud dashboard)
-- [display-leader-name](playground%20connector%20display-leader-name) - 👑 Display Connect Worker leader name using JMX MBean leader-name from kafka.connect:type=connect-worker-rebalance-metrics
-
 ## Examples
 
 ```bash
+playground connector diagnose
+```
+
+```bash
 playground connector status
+```
+
+```bash
+playground connector status --json
 ```
 
 ```bash

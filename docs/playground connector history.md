@@ -23,6 +23,8 @@ are gone, only the last one of each connector and task is kept for
 sure. Self-managed connectors only (the topic names are read from the  
 worker properties, `--config-topic` and `--status-topic` to override them).
 
+☁️ Fully managed: not supported
+
 🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-connector-troubleshooting
 
 ## Usage
@@ -57,7 +59,7 @@ playground connector history [OPTIONS]
 
 #### `--json`
 
-🤖 Print the events and the summary as JSON
+🤖 Print the result as JSON on stdout, and nothing else (the log lines go to stderr)
 
 #### `--cluster CLUSTER`
 

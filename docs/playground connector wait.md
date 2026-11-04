@@ -29,6 +29,8 @@ RUNNING when only a task fails).
 🎓 Tip: 'connector create-or-update' already waits for RUNNING. Use  
 it for another state, or after 'connector create-or-update `--no-wait`'.
 
+☁️ Fully managed: supported (custom connectors too)
+
 🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-connector-create-or-update  
 🎬 Bite size session: https://kafka-docker-playground.io/#/sessions?id=%F0%9F%94%8C-the-sink-fails-right-after-it-is-deployed
 
@@ -67,7 +69,7 @@ playground connector wait [OPTIONS]
 
 #### `--max-wait MAX_WAIT`
 
-⏳ Max time in seconds to wait (default is 120)
+⏳ Max time to wait: seconds, or 30s, 5m, 1h (default is 120 seconds)
 
 | Attributes      | &nbsp;
 |-----------------|-------------
@@ -75,11 +77,15 @@ playground connector wait [OPTIONS]
 
 #### `--interval INTERVAL`
 
-🔁 Interval in seconds between status checks (default is 5)
+🔁 Interval between status checks: seconds, or 30s, 1m (default is 5 seconds)
 
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Default Value:  | `5`
+
+#### `--json`
+
+🤖 Print the result as JSON on stdout, and nothing else (the log lines go to stderr)
 
 #### `--cluster CLUSTER`
 
@@ -98,7 +104,11 @@ playground connector wait --connector filestream-sink
 ```
 
 ```bash
-playground connector wait --connector filestream-sink --state PAUSED --max-wait 60
+playground connector wait --connector filestream-sink --state PAUSED --max-wait 1m
+```
+
+```bash
+playground connector wait --connector filestream-sink --json
 ```
 
 ## Example output

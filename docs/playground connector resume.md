@@ -5,6 +5,8 @@
 Restarts processing after a pause or a stop, from the offsets where the  
 connector left off.
 
+☁️ Fully managed: supported (custom connectors too)
+
 | Attributes       | &nbsp;
 |------------------|-------------
 | Alias:           | unpause
@@ -36,5 +38,11 @@ Default: the `PLAYGROUND_CLUSTER` environment variable, else the value set with 
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Allowed Values: | `us`, `europe`
+
+## Examples
+
+```bash
+playground connector resume --connector filestream-sink
+```
 
 

@@ -10,6 +10,8 @@
 
 ⚠️ This does not work for fully and custom connectors.
 
+☁️ Fully managed: not supported
+
 🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-java-debugging
 
 ## Usage
@@ -23,5 +25,11 @@ playground connector enable-remote-debugging
 #### *git*
 
 visit https://git-scm.com/downloads to install
+
+## Examples
+
+```bash
+playground connector enable-remote-debugging
+```
 
 

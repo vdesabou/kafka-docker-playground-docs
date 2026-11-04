@@ -14,7 +14,8 @@ Takes about 15 minutes to read and run.
 
 | You want | Command |
 | --- | --- |
-| to follow the lag of a sink until it reaches 0 | `playground connector show-lag --connector <c>` (`--interval 5`, `--max-wait 120`) |
+| to follow the lag of a sink until it reaches 0 | `playground connector show-lag --connector <c>` (`--interval 5`, `--max-wait 2m`) |
+| the lag right now, once (scripts, agents) | `playground connector show-lag --connector <c> --once` (`--json`: lag per partition and total) |
 | the offsets of a source or a sink | `playground connector offsets get --connector <c>` |
 | to move them to a given point | `playground connector offsets alter --connector <c>` (edit, save, close) |
 | to start over from the beginning | `playground connector offsets reset --connector <c>` |
@@ -82,16 +83,20 @@ topic: filestream partition: 0   current-offset: 25         end-offset: 25      
 
 Gotchas:
 
-- **It only reads committed offsets** (`kafka-consumer-groups --describe --group connect-<c>`): see mental model #3.
+- **It only reads committed offsets** (`kafka-consumer-groups --describe --group connect-<c>`, or the group set with
+  `consumer.override.group.id`): see mental model #3.
   A lag that stays at the same value (🔸 `is still`) for **more than a minute** while the connector is RUNNING means
   stuck tasks. Under a minute, it's usually the commit interval: above, the 20 records were written within a second of
   the resume, and the lag only dropped to 0 at the next commit, 35 s later.
 - **It waits for the connector to be RUNNING first**, with a RUNNING task (60 s of checks; about 80 s in practice). A
   paused or failed connector ends with `❌ … instance is not in ✅ RUNNING state after 60s` (exit 1), whatever
-  `--max-wait`: resume or fix it before looking at the lag.
-- **`--max-wait` is not an assertion**: when the lag is not 0 after `--max-wait` seconds it logs
-  `🐢 the consumer lag is still not 0 after N seconds.` and exits **0**. In a script, check the lag with
-  `consumer-group describe` or the data with `topic consume --min-expected-messages`.
+  `--max-wait`: resume or fix it before looking at the lag. `--once` (and `--json`) skips that wait and reads the
+  committed offsets as they are.
+- **`--max-wait` is not an assertion by default**: when the lag is not 0 after `--max-wait` seconds it logs
+  `🐢 the consumer lag for … connector <c> is still not 0 after N seconds.`, goes on with the next connector and
+  exits **0**. Add `--fail-on-timeout` to exit 1 instead, or check the data with `topic consume --min-expected-messages`.
+- A group that can't be read (`does not exist`, broker error, empty output) is reported and retried at the next
+  interval, within `--max-wait`: it is never read as a lag of 0.
 - `lag: -` means the group has not committed anything yet on that partition (`🐢 consumer lag … is not available`).
 - A rebalance (`Warning: Consumer group … is rebalancing`) is shown and retried at the next interval.
 - Source connectors are skipped: `⏭️ Skipping source … connector …, it must be a sink to show the lag`.

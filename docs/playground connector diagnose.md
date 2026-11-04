@@ -15,6 +15,8 @@ safe to use from scripts and AI agents.
 
 🌐 Also writes a self-contained HTML report in `--output-dir`, to attach to a case, opened in the browser in an interactive terminal (`--no-open` to skip): verdict, findings, status and traces of the tasks, error records naming the connector, lag per partition or offsets, next steps, and the configuration (secrets masked).
 
+☁️ Fully managed: supported (custom connectors too)
+
 🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-connector-troubleshooting  
 🎬 Bite size session: https://kafka-docker-playground.io/#/sessions?id=%F0%9F%A9%BA-a-sink-is-running-but-writes-nothing
 
@@ -52,17 +54,21 @@ playground connector diagnose [OPTIONS]
 |-----------------|-------------
 | Default Value:  | `15`
 
+#### `--json`
+
+🤖 Print the result as JSON on stdout, and nothing else (the log lines go to stderr)
+
 #### `--output-dir, -o OUTPUT_DIR`
 
-📂 Output directory for the HTML report (default: /tmp/playground-diagnose)
-
-| Attributes      | &nbsp;
-|-----------------|-------------
-| Default Value:  | `/tmp/playground-diagnose`
+📂 Output directory for the HTML report (default: /tmp/playground-`<command>`, printed at the end)
 
 #### `--no-open`
 
-🙈 Do not open the HTML report in the browser
+🙈 Do not open the HTML report in the browser (it is still written, and its path printed)
+
+#### `--fail-on-error`
+
+❌ Exit 1 when a connector or one of its tasks is FAILED, or the connector is not found (by default the command exits 0, it only displays)
 
 #### `--cluster CLUSTER`
 
@@ -115,7 +121,7 @@ topic: filestream partition: 0   current-offset: 5          end-offset: 5       
    🐌 RUNNING but no progress? run this command again, then take a thread dump if lag or offsets do not move
    playground connector show-config --connector filestream-sink
    playground container logs -c connect --grep "filestream-sink" --no-follow --tail 200
-   playground debug log-level set --package <connector package> --level TRACE
+   playground connector log-level --connector filestream-sink --level TRACE
    playground debug thread-dump --container connect
 
 17:22:10 ℹ️ ✅ HTML report saved: /tmp/playground-diagnose/connector-diagnose-filestream-sink-20261013-172210.html

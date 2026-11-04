@@ -7,6 +7,8 @@ with the connector and task statuses, then every metric that is not
 zero. A fully managed connector gives you no jmx and little logging, so  
 this is how you tell whether it is actually doing work.
 
+☁️ Fully managed only (custom connectors: not supported)
+
 See https://api.telemetry.confluent.cloud/docs/descriptors/datasets/cloud
 
 ## Usage
@@ -23,12 +25,18 @@ playground connector display-metrics-api [OPTIONS]
 
 🎓 Tip: If not specified, the command will apply to all connectors
 
-#### `--open, -o`
+#### `--open`
 
 🔖 Save output to a file and open with text editor set with playground config editor `<editor>` (default is code)
 
 #### `--verbose, -v`
 
 🐞 Show command being ran.
+
+## Examples
+
+```bash
+playground connector display-metrics-api --connector MySinkConnector
+```
 
 

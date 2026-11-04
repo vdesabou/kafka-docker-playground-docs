@@ -5,9 +5,12 @@
 Prints the offsets json returned by the Connect REST API, or the  
 Confluent Cloud offsets API for a fully managed connector. For a sink  
 on CP older than 7.5, it falls back to kafka-consumer-groups  
-`--describe` on the connect-`<connector>` consumer group.
+`--describe` on the consumer group of the connector (connect-`<connector>`,  
+or the one set with consumer.override.group.id).
 
 Run it before and after alter or reset to check what really moved.
+
+☁️ Fully managed: supported (custom connectors too)
 
 See https://docs.confluent.io/cloud/current/connectors/offsets.html
 
@@ -29,6 +32,10 @@ playground connector offsets get [OPTIONS]
 
 🎓 Tip: If not specified, the command will apply to all connectors
 
+#### `--json`
+
+🤖 Print the result as JSON on stdout, and nothing else (the log lines go to stderr)
+
 #### `--cluster CLUSTER`
 
 🌍 Cluster to use in an mdc-\* environment (us or europe)
@@ -43,6 +50,10 @@ Default: the `PLAYGROUND_CLUSTER` environment variable, else the value set with 
 
 ```bash
 playground connector offsets get
+```
+
+```bash
+playground connector offsets get --connector filestream-sink --json
 ```
 
 ## Example output

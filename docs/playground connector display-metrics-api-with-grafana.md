@@ -12,6 +12,8 @@ does not interfere with the grafana of the example.
 
 Not supported for custom connectors.
 
+☁️ Fully managed only (custom connectors: not supported)
+
 ## Usage
 
 ```bash
@@ -25,5 +27,11 @@ playground connector display-metrics-api-with-grafana [OPTIONS]
 🔗 Connector name
 
 🎓 Tip: If not specified, the command will apply to all connectors
+
+## Examples
+
+```bash
+playground connector display-metrics-api-with-grafana --connector MySinkConnector
+```
 
 

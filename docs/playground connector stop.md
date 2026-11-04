@@ -6,6 +6,8 @@ Stronger than pause: the tasks are shut down and unassigned, so the
 connector consumes no resources at all. This is the state in which  
 offsets can be altered or reset.
 
+☁️ Fully managed: not supported (pause it instead)
+
 ## Usage
 
 ```bash
@@ -33,5 +35,11 @@ Default: the `PLAYGROUND_CLUSTER` environment variable, else the value set with 
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Allowed Values: | `us`, `europe`
+
+## Examples
+
+```bash
+playground connector stop --connector filestream-sink
+```
 
 

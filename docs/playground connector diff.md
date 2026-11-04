@@ -17,6 +17,8 @@ example to see right away what differs.
 
 🌐 Also writes a self-contained HTML report in `--output-dir`, opened in the browser in an interactive terminal (`--no-open` to skip): the keys side by side with the documentation, type and default of each one (from the configuration reference of the plugin), what the important differences mean (converters, error handling, transforms...), and the secrets masked.
 
+☁️ Fully managed: supported (custom connectors too)
+
 🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-connector-create-or-update
 
 ## Usage
@@ -39,7 +41,7 @@ playground connector diff [OPTIONS]
 
 #### `--file, -f FILE`
 
-📄 File with the config to compare with (json, a create-or-update heredoc, a CFK / Strimzi custom resource, terraform, .properties, a dump of GET /connectors?expand=info)
+📄 File with the config to compare with (json, a create-or-update heredoc, a CFK / Strimzi custom resource, terraform, .properties, a dump of GET /connectors?expand=info), @file works too
 
 #### `--with-connector WITH_CONNECTOR`
 
@@ -51,19 +53,15 @@ playground connector diff [OPTIONS]
 
 #### `--json`
 
-🤖 Print the result as JSON (no HTML report)
+🤖 Print the result as JSON on stdout, and nothing else (the log lines go to stderr)
 
 #### `--output-dir, -o OUTPUT_DIR`
 
-📂 Output directory for the HTML report (default: /tmp/playground-connector-diff)
-
-| Attributes      | &nbsp;
-|-----------------|-------------
-| Default Value:  | `/tmp/playground-connector-diff`
+📂 Output directory for the HTML report (default: /tmp/playground-`<command>`, printed at the end)
 
 #### `--no-open`
 
-🙈 Do not open the HTML report in the browser
+🙈 Do not open the HTML report in the browser (it is still written, and its path printed)
 
 #### `--cluster CLUSTER`
 

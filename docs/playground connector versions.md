@@ -11,10 +11,18 @@ For Confluent plugins, the last 5 versions come with their release notes
 version with the playground connector-plugin changelog command that lists  
 everything that changed since.
 
+☁️ Fully managed: the connector version shipped by each cc-connect image (playground connector-plugin fm-versions, Confluent employees); custom connectors: not supported
+
 🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-run-and-versions  
 🎬 Bite size session: https://kafka-docker-playground.io/#/sessions?id=%F0%9F%8E%AF-is-it-fixed-in-a-newer-version
 
 ## Usage
+
+```bash
+playground connector versions
+```
+
+## Examples
 
 ```bash
 playground connector versions

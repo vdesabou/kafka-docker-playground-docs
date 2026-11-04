@@ -4,6 +4,8 @@
 
 use `--force-rest-endpoint` to get results with REST API /config endpoint (https://docs.confluent.io/platform/current/connect/references/restapi.html#get--connectors-(string-name)-config)
 
+☁️ Fully managed: supported (custom connectors too)
+
 ## Usage
 
 ```bash
@@ -35,5 +37,15 @@ Default: the `PLAYGROUND_CLUSTER` environment variable, else the value set with 
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Allowed Values: | `us`, `europe`
+
+## Examples
+
+```bash
+playground connector show-config --connector filestream-sink
+```
+
+```bash
+playground connector show-config --connector filestream-sink --force-rest-endpoint
+```
 
 

@@ -15,6 +15,8 @@ with the topics used from then on.
 the worker, the default). `--reset` also needs  
 topic.tracking.allow.reset=true on the worker (the default).
 
+☁️ Fully managed: not supported
+
 ## Usage
 
 ```bash
@@ -43,7 +45,7 @@ playground connector topics [OPTIONS]
 
 #### `--json`
 
-🤖 Print the result as JSON
+🤖 Print the result as JSON on stdout, and nothing else (the log lines go to stderr)
 
 | Attributes      | &nbsp;
 |-----------------|-------------

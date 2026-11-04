@@ -6,6 +6,8 @@ Tasks stop processing but stay assigned, and the configuration is kept.
 Handy to let a backlog build up, or to freeze a connector while you  
 change the system it talks to. Resume with `playground connector resume`.
 
+☁️ Fully managed: supported (custom connectors too)
+
 ## Usage
 
 ```bash
@@ -33,5 +35,11 @@ Default: the `PLAYGROUND_CLUSTER` environment variable, else the value set with 
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Allowed Values: | `us`, `europe`
+
+## Examples
+
+```bash
+playground connector pause --connector filestream-sink
+```
 
 

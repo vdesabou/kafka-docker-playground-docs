@@ -7,6 +7,8 @@ managed or custom connector and suggests remediation steps. Nothing is
 returned for a healthy connector, or for one that only failed config  
 validation: `playground connector status` shows those errors.
 
+☁️ Fully managed only (fully managed and custom connectors)
+
 ## Usage
 
 ```bash

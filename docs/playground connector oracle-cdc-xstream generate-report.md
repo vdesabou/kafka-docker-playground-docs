@@ -9,11 +9,19 @@ individual query outputs.
 🔎 `playground analyze oracle-xstream-report -c oracle` generates it and  
 analyzes it in one go.
 
+☁️ Fully managed: not supported (needs the oracle container of a self managed example)
+
 See https://docs.confluent.io/kafka-connectors/oracle-xstream-cdc-source/current/troubleshooting.html#connector-diagnostics-script
 
 🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-oracle-cdc
 
 ## Usage
+
+```bash
+playground connector oracle-cdc-xstream generate-report
+```
+
+## Examples
 
 ```bash
 playground connector oracle-cdc-xstream generate-report

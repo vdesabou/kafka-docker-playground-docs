@@ -2,6 +2,8 @@
 
 👨‍🔬 Discover connectors in the local connect cluster and export their configurations to files
 
+☁️ Fully managed: not applicable, it reads the self managed connectors (ccloud environment)
+
 see https://github.com/confluentinc/connect-migration-utility/tree/master?tab=readme-ov-file#step-1-specify-the-connector-configuration
 
 ## Usage
@@ -15,5 +17,11 @@ playground connector connect-migration-utility discovery [OPTIONS]
 #### `--verbose, -v`
 
 🐞 Show command being ran.
+
+## Examples
+
+```bash
+playground connector connect-migration-utility discovery
+```
 
 

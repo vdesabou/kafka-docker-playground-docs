@@ -4,9 +4,11 @@
 
 This is useful when you have multiple connect workers and want to know which one is the leader.
 
-For onprem connectors, this is basically a shortcut for `playground container exec -c connect -- bash -c 'export JMX_PORT=9404; jmxterm -l localhost:9404 -n -v silent -u admin -p admin123 -e \`get -b kafka.connect:type=connect-worker-rebalance-metrics name=leader-name\"'", `--connector` flag is not relevant
+For self managed connectors, it reads the leader-name attribute with `playground get-jmx-metrics --container <worker> --domain kafka.connect` on each running connect worker (connect, connect2, connect3, or the connect-N pods on cfk) until one answers.
 
 For Fully Managed connectors, this is not available as JMX is not accessible.
+
+☁️ Fully managed: not supported
 
 ## Usage
 
@@ -25,5 +27,11 @@ Default: the `PLAYGROUND_CLUSTER` environment variable, else the value set with 
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Allowed Values: | `us`, `europe`
+
+## Examples
+
+```bash
+playground connector display-leader-name
+```
 
 

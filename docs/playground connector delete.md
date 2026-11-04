@@ -13,6 +13,8 @@ success-lcc-xxxx, error-lcc-xxxx, or the names set in the config with
 errors.deadletterqueue.topic.name, reporter.error.topic.name and  
 reporter.result.topic.name). Keep them with `--keep-related-topics`.
 
+☁️ Fully managed: supported (custom connectors too)
+
 ## Usage
 
 ```bash
@@ -44,5 +46,15 @@ Default: the `PLAYGROUND_CLUSTER` environment variable, else the value set with 
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Allowed Values: | `us`, `europe`
+
+## Examples
+
+```bash
+playground connector delete --connector filestream-sink
+```
+
+```bash
+playground connector delete --connector MySinkConnector --keep-related-topics
+```
 
 

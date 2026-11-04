@@ -45,6 +45,8 @@ config providers of the customer environment (${file:...}),
 terraform references and the keys still pointing to external systems  
 are listed. The heredocs of the examples are never changed.
 
+☁️ Fully managed: supported (custom connectors too), waited for with `--wait` only
+
 🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-connector-create-or-update  
 🎬 Bite size session: https://kafka-docker-playground.io/#/sessions?id=%F0%9F%94%8C-the-sink-fails-right-after-it-is-deployed  
 🎬 Bite size session: https://kafka-docker-playground.io/#/sessions?id=%F0%9F%8F%97%EF%B8%8F-deploy-a-fully-managed-connector-with-terraform
@@ -157,7 +159,7 @@ With fully managed connectors, it waits for the connector to be provisioned and 
 
 #### `--max-wait MAX_WAIT`
 
-⏳ Max time in seconds to wait for the connector (default is 120, or 600 for fully managed connectors with `--wait`)
+⏳ Max time to wait for the connector: seconds, or 30s, 5m, 1h (default is 120 seconds, or 600 for fully managed connectors with `--wait`)
 
 | Attributes      | &nbsp;
 |-----------------|-------------
@@ -179,7 +181,7 @@ This flag allows to skip this automatic configuration (only useful to reproduce 
 
 ⚠️ Only available for ccloud connectors, the connector should not really exists
 
-#### `--initial-state INITIAL-STATE`
+#### `--initial-state INITIAL_STATE`
 
 🪵 Create connector with specific status (https://cwiki.apache.org/confluence/display/KAFKA/KIP-980%3A+Allow+creating+connectors+in+a+stopped+state)
 
@@ -198,7 +200,7 @@ Only available if CP \> 7.7
 🌵 Print the final config (with the automatic configuration added for the environment, the CFK rewrites)  
 and the request that would be sent, without deploying anything
 
-With `--ccloud-service-account`, the service account and its ACLs are not created.
+With `PG_CCLOUD_SERVICE_ACCOUNT`=true (playground run `--ccloud-service-account`), the service account and its ACLs are not created.
 
 | Attributes      | &nbsp;
 |-----------------|-------------

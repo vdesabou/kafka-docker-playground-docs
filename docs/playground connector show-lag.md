@@ -7,7 +7,12 @@ see whether it is catching up, standing still or falling behind. A lag
 that does not move while the connector reports RUNNING means the tasks  
 are stuck rather than slow.
 
-It will run until all lag becomes 0 (press ctrl-c to exit)
+It will run until all lag becomes 0 (press ctrl-c to exit), or until  
+`--max-wait`. `--once` (or `--json`) takes a single snapshot instead. The  
+consumer group is connect-`<connector>`, or the one set with  
+consumer.override.group.id.
+
+☁️ Fully managed: supported (custom connectors too)
 
 🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-offsets-and-lag  
 🎬 Bite size session: https://kafka-docker-playground.io/#/sessions?id=%E2%8F%AA-the-lag-of-a-sink-is-stuck
@@ -32,7 +37,7 @@ playground connector show-lag [OPTIONS]
 
 #### `--interval INTERVAL`
 
-Interval between lag checks (default is 20 seconds).
+🔁 Interval between lag checks: seconds, or 30s, 1m (default is 20 seconds)
 
 | Attributes      | &nbsp;
 |-----------------|-------------
@@ -40,11 +45,27 @@ Interval between lag checks (default is 20 seconds).
 
 #### `--max-wait MAX_WAIT`
 
-⏳ Max time in seconds to wait for lag to become 0. If set to 0 (default), it will run until all lag becomes 0.
+⏳ Max time to wait for lag to become 0: seconds, or 30s, 5m, 1h. If set to 0 (default), it will run until all lag becomes 0.
 
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Default Value:  | `0`
+
+#### `--fail-on-timeout`
+
+❌ Exit 1 when the lag is still not 0 after `--max-wait` seconds (by default it logs a warning and exits 0)
+
+#### `--once`
+
+📸 Show the lag once and exit, without waiting for it to reach 0 (also when the tasks are not RUNNING: committed offsets)
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Conflicts With: | `--fail-on-timeout`
+
+#### `--json`
+
+🤖 Print the lag per partition and the total as JSON on stdout, and nothing else (implies `--once`, the log lines go to stderr)
 
 #### `--cluster CLUSTER`
 
@@ -60,6 +81,18 @@ Default: the `PLAYGROUND_CLUSTER` environment variable, else the value set with 
 
 ```bash
 playground connector show-lag
+```
+
+```bash
+playground connector show-lag --connector filestream-sink --once
+```
+
+```bash
+playground connector show-lag --connector filestream-sink --json
+```
+
+```bash
+playground connector show-lag --connector filestream-sink --interval 5 --max-wait 120 --fail-on-timeout
 ```
 
 ## Example output

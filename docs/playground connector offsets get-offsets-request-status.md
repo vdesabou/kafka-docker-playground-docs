@@ -9,6 +9,8 @@ is the only place the reason shows up.
 Only for fully managed and custom connectors, self managed connectors  
 apply the change synchronously.
 
+☁️ Fully managed only (fully managed and custom connectors)
+
 See https://docs.confluent.io/cloud/current/connectors/offsets.html
 
 ## Usage
@@ -28,5 +30,11 @@ playground connector offsets get-offsets-request-status [OPTIONS]
 🔗 Connector name
 
 🎓 Tip: If not specified, the command will apply to all connectors
+
+## Examples
+
+```bash
+playground connector offsets get-offsets-request-status --connector MySinkConnector
+```
 
 

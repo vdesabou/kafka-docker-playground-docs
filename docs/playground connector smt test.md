@@ -8,9 +8,11 @@ The transforms come from a running connector (`--connector`) or from a connector
 
 `--cp-version` runs the same test with the built-in transforms of other CP versions (throwaway cp-server-connect containers), `--smt-plugin` installs a Confluent Hub plugin for the test only (the worker is not changed), `--smt-jar` adds a jar (custom SMT development).
 
-An html report of the steps (the value after each step with the added, changed and removed fields highlighted, the schema diff, the predicates, the error with its stack trace, and with `--cp-version` a comparison of the versions) is written to /tmp/playground-smt-test, and opened in the browser in an interactive terminal.
+An html report of the steps (the value after each step with the added, changed and removed fields highlighted, the schema diff, the predicates, the error with its stack trace, and with `--cp-version` a comparison of the versions) is written to `--output-dir` (default /tmp/playground-smt-test), and opened in the browser in an interactive terminal.
 
 🎓 Tip: the connector config can be a whole connector config: only transforms.\*, predicates.\* and the converters are used.
+
+☁️ Fully managed: give the config with `--config` @file (the transforms run on a self managed worker, the result is indicative)
 
 ## Usage
 
@@ -38,7 +40,7 @@ playground connector smt test [OPTIONS]
 
 key and value are schemaless json, or {"schema": ..., "payload": ...} for a record with a schema. Headers are typed like the SimpleHeaderConverter does (string, int64, float64, boolean, map, array), or {"schema": ..., "payload": ...}; give them as a list [{"key": ..., "value": ...}] for several headers with the same key. Default: a schemaless record with a value {"id": 1, "name": "foo"}
 
-#### `--from-topic FROM-TOPIC`
+#### `--from-topic FROM_TOPIC`
 
 🗳 Read the record from this topic instead of `--record`, and convert it with the converters of the connector
 
@@ -66,7 +68,7 @@ key and value are schemaless json, or {"schema": ..., "payload": ...} for a reco
 |-----------------|-------------
 | Allowed Values: | `sink`, `source`
 
-#### `--cp-version CP-VERSION`
+#### `--cp-version CP_VERSION`
 
 🔢 Run the test with the built-in transforms of these CP versions (repeat the flag), in throwaway cp-server-connect containers, to compare them. The plugins of the running worker are not available there, only `--smt-plugin` and `--smt-jar`
 
@@ -74,7 +76,7 @@ key and value are schemaless json, or {"schema": ..., "payload": ...} for a reco
 |-----------------|-------------
 | Repeatable:     |  ✓ Yes
 
-#### `--smt-plugin SMT-PLUGIN`
+#### `--smt-plugin SMT_PLUGIN`
 
 🧩 Confluent Hub plugin with transforms, installed for the test only (owner/name:version), e.g. confluentinc/connect-transforms:1.6.2
 
@@ -82,7 +84,7 @@ key and value are schemaless json, or {"schema": ..., "payload": ...} for a reco
 |-----------------|-------------
 | Repeatable:     |  ✓ Yes
 
-#### `--smt-jar SMT-JAR`
+#### `--smt-jar SMT_JAR`
 
 ☕ Jar with transforms to add for the test (custom SMT development). Repeat it for the jars it depends on: they are loaded together, as one plugin
 
@@ -92,11 +94,15 @@ key and value are schemaless json, or {"schema": ..., "payload": ...} for a reco
 
 #### `--json`
 
-📄 Print the steps as json
+🤖 Print the result as JSON on stdout, and nothing else (the log lines go to stderr)
+
+#### `--output-dir, -o OUTPUT_DIR`
+
+📂 Output directory for the HTML report (default: /tmp/playground-`<command>`, printed at the end)
 
 #### `--no-open`
 
-🚫 Do not open the html report in the browser (it is still written, and its path printed)
+🙈 Do not open the HTML report in the browser (it is still written, and its path printed)
 
 #### `--cluster CLUSTER`
 

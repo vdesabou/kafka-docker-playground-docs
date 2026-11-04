@@ -8,6 +8,8 @@ connector without searching for it.
 
 Use `--only-show-url` to print the link instead, for pasting in a case.
 
+☁️ Fully managed: supported (custom connectors: not supported)
+
 ## Usage
 
 ```bash
@@ -19,5 +21,15 @@ playground connector open-docs [OPTIONS]
 #### `--only-show-url`
 
 🌐 Only show url
+
+## Examples
+
+```bash
+playground connector open-docs
+```
+
+```bash
+playground connector open-docs --only-show-url
+```
 
 

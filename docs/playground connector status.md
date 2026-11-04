@@ -6,6 +6,8 @@ The connector state, the state of each task, and for a failed task the
 full stack trace, which is the thing you actually need. Add `--verbose` to  
 see the underlying REST call.
 
+☁️ Fully managed: supported (custom connectors too)
+
 ## Usage
 
 ```bash
@@ -24,6 +26,14 @@ playground connector status [OPTIONS]
 
 🎓 Tip: If not specified, the command will apply to all connectors
 
+#### `--json`
+
+🤖 Print the result as JSON on stdout, and nothing else (the log lines go to stderr)
+
+#### `--fail-on-error`
+
+❌ Exit 1 when a connector or one of its tasks is FAILED, or the connector is not found (by default the command exits 0, it only displays)
+
 #### `--cluster CLUSTER`
 
 🌍 Cluster to use in an mdc-\* environment (us or europe)
@@ -38,6 +48,14 @@ Default: the `PLAYGROUND_CLUSTER` environment variable, else the value set with 
 
 ```bash
 playground connector status
+```
+
+```bash
+playground connector status --connector filestream-sink --json
+```
+
+```bash
+playground connector status --fail-on-error
 ```
 
 ## Example output

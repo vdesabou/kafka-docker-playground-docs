@@ -27,6 +27,8 @@ terraform, or compare their config with the running one with
 `playground connector diff --connector <c> --file <their file>` (any  
 of these formats).
 
+☁️ Fully managed: supported (works on files, no running connector needed: `--to` terraform writes a confluent_connector resource)
+
 🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-connector-create-or-update
 
 ## Usage

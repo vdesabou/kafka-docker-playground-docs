@@ -10,6 +10,8 @@ to discover the knob you need.
 Use `--open` to read it in your editor, `--only-show-json` to get it as  
 json.
 
+☁️ Fully managed: supported (custom connectors: not supported)
+
 ## Usage
 
 ```bash
@@ -28,7 +30,7 @@ playground connector show-config-parameters [OPTIONS]
 
 🎓 Tip: If not specified, the command will apply to all connectors
 
-#### `--open, -o`
+#### `--open`
 
 🔖 Save output to a file and open with text editor set with playground config editor `<editor>` (default is code)
 
@@ -49,5 +51,15 @@ Default: the `PLAYGROUND_CLUSTER` environment variable, else the value set with 
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Allowed Values: | `us`, `europe`
+
+## Examples
+
+```bash
+playground connector show-config-parameters --connector filestream-sink
+```
+
+```bash
+playground connector show-config-parameters --connector filestream-sink --only-show-json
+```
 
 

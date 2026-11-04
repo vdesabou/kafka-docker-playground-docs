@@ -12,6 +12,8 @@ you are after and just want the exact property names.
 
 🎓 Tip: use `<tab>` to select multiple config at once, then press `<enter>` to confirm
 
+☁️ Fully managed: supported (custom connectors: not supported)
+
 ## Usage
 
 ```bash
@@ -31,5 +33,11 @@ visit https://github.com/junegunn/fzf#installation to install
 🔗 Connector name
 
 🎓 Tip: If not specified, the command will apply to all connectors
+
+## Examples
+
+```bash
+playground connector select-config --connector filestream-sink
+```
 
 

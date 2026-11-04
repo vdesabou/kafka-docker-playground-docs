@@ -7,6 +7,8 @@ value converter properties for a given format with `--converter`, and the
 dead letter queue properties with `--dlq`. Saves you from looking up the  
 exact property names and the schema registry settings that go with them.
 
+☁️ Fully managed: supported, prints input.data.format / output.data.format instead of converters
+
 ## Usage
 
 ```bash

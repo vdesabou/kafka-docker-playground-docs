@@ -12,6 +12,8 @@ Answers "why does task 0 get all the tables, partitions or files?" and
 🎓 Tip: 'tasks.max' is a maximum, a source connector can create fewer  
 tasks (one JDBC task per table at most).
 
+☁️ Fully managed: supported (custom connectors: not supported)
+
 🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-connector-troubleshooting
 
 ## Usage
@@ -38,7 +40,7 @@ playground connector tasks [OPTIONS]
 
 #### `--json`
 
-🤖 Print the result as JSON
+🤖 Print the result as JSON on stdout, and nothing else (the log lines go to stderr)
 
 #### `--cluster CLUSTER`
 

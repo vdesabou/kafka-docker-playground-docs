@@ -6,6 +6,8 @@ You can compare different sourcecode versions by specifying `--connector-tag` tw
 
 💌 Confluent employees only: for fully managed connectors, use the cc-connect image version for the pcc. You must have a Confluent Github token set with `GITHUB_TOKEN` or `GH_TOKEN` environment variable and also be using Confluent VPN.
 
+☁️ Fully managed: supported (Confluent employees, see above); custom connectors: not supported
+
 ## Usage
 
 ```bash

@@ -7,6 +7,8 @@ The first thing to check when a connector fails to be created with
 asked for is not in this list, so the plugin was not installed or not  
 picked up from the plugin path.
 
+☁️ Fully managed: supported, without `--all` (the plugins available in Confluent Cloud)
+
 ## Usage
 
 ```bash
@@ -32,5 +34,15 @@ Default: the `PLAYGROUND_CLUSTER` environment variable, else the value set with 
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Allowed Values: | `us`, `europe`
+
+## Examples
+
+```bash
+playground connector plugins
+```
+
+```bash
+playground connector plugins --all
+```
 
 

@@ -19,8 +19,7 @@ The same automatic config as 'create-or-update' is added for the
 environment of the example (security settings on sasl-ssl...),  
 unless `--skip-automatic-connector-config` is set.
 
-🎓 Tip: works for fully managed connectors too, with the validate  
-endpoint of Confluent Cloud.
+☁️ Fully managed: supported, with the validate endpoint of Confluent Cloud (custom connectors too)
 
 🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-connector-create-or-update  
 🎬 Bite size session: https://kafka-docker-playground.io/#/sessions?id=%F0%9F%94%8C-the-sink-fails-right-after-it-is-deployed
@@ -58,6 +57,10 @@ stdin, the running connector whose config is validated.
 
 🤖 Do not add the automatic configuration of the environment (security settings on sasl-ssl...) before validating
 
+#### `--json`
+
+🤖 Print the result as JSON on stdout, and nothing else (the log lines go to stderr)
+
 #### `--cluster CLUSTER`
 
 🌍 Cluster to use in an mdc-\* environment (us or europe)
@@ -83,6 +86,10 @@ EOF
 
 ```bash
 playground connector validate --connector filestream-sink
+```
+
+```bash
+playground connector validate --connector filestream-sink --json
 ```
 
 ## Example output

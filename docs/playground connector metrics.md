@@ -29,6 +29,8 @@ benchmark' to measure the throughput.
 ⚠️ Not on cfk environments: use 'playground get-jmx-metrics -c connect-0  
 `--domain` kafka.connect'.
 
+☁️ Fully managed: supported, from the Confluent Cloud Telemetry API (custom connectors: not supported)
+
 🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-connector-troubleshooting
 
 ## Usage
@@ -49,13 +51,13 @@ playground connector metrics [OPTIONS]
 
 🎓 Tip: If not specified, the command will apply to all connectors
 
-#### `--watch, -w INTERVAL`
+#### `--watch INTERVAL`
 
 🔁 Refresh every `<interval>` (30, 30s, 5m) until ctrl-c
 
 #### `--json`
 
-🤖 Print the result as JSON
+🤖 Print the result as JSON on stdout, and nothing else (the log lines go to stderr)
 
 | Attributes      | &nbsp;
 |-----------------|-------------

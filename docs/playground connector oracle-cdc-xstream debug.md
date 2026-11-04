@@ -16,9 +16,17 @@ Read it top to bottom when a connector is RUNNING but idle: a capture
 process not in CAPTURING CHANGES, or an SCN that never moves, tells  
 you the problem is in the database and not in the connector.
 
+☁️ Fully managed: not supported (needs the oracle container of a self managed example)
+
 🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-oracle-cdc
 
 ## Usage
+
+```bash
+playground connector oracle-cdc-xstream debug
+```
+
+## Examples
 
 ```bash
 playground connector oracle-cdc-xstream debug

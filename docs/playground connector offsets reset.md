@@ -11,6 +11,8 @@ the reset.
 the target is idempotent. Use alter when you only want to move back  
 to a specific point.
 
+☁️ Fully managed: supported (custom connectors too)
+
 See https://docs.confluent.io/cloud/current/connectors/offsets.html
 
 ## Usage
@@ -40,5 +42,11 @@ Default: the `PLAYGROUND_CLUSTER` environment variable, else the value set with 
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Allowed Values: | `us`, `europe`
+
+## Examples
+
+```bash
+playground connector offsets reset --connector filestream-sink
+```
 
 

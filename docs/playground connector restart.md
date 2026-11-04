@@ -7,6 +7,8 @@ fixed the cause. Use `--task-id` to restart a single failed task and leave
 the healthy ones alone, or `--only-failed` to restart only what is FAILED,  
 in every connector when `--connector` is not set.
 
+☁️ Fully managed: supported (custom connectors: not supported)
+
 ## Usage
 
 ```bash
@@ -25,7 +27,7 @@ playground connector restart [OPTIONS]
 
 🎓 Tip: If not specified, the command will apply to all connectors
 
-#### `--task-id, -t TASK_ID`
+#### `--task-id TASK_ID`
 
 🔧 Restart specific task ID only (instead of restarting entire connector), needs `--connector`
 

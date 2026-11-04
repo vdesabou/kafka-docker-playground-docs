@@ -209,7 +209,10 @@ visit https://docs.docker.com/get-docker to install
   - [install-alfred-workflow](playground%20tools%20install-alfred-workflow) - 🎩 Install the "kafka-docker-playground (kdp)" Alfred workflow (macOS, Alfred 5 with the Powerpack)
   - [read-avro-file](playground%20tools%20read-avro-file) - 🔖 Read provided avro file
   - [read-parquet-file](playground%20tools%20read-parquet-file) - 🔖 Read provided parquet file
-  - [certs-create](playground%20tools%20certs-create) - 🔐 Generate keys and certificates used for SSL
+  - [cert](playground%20tools%20cert) - 🔐 Certificate commands
+    - [create](playground%20tools%20cert%20create) - 🔐 Generate keys and certificates used for SSL
+    - [inspect](playground%20tools%20cert%20inspect) - 🔍 Inspect certificates and explain what breaks TLS
+    - [convert](playground%20tools%20cert%20convert) - 🔄 Convert certificates and keystores between formats
   - [redos-check](playground%20tools%20redos-check) - 🪖 Check topics.regex for ReDos vulnerabilities using recheck (https://github.com/makenowjust-labs/recheck)
   - [http-server](playground%20tools%20http-server) - 🌐 Drive the http test server of the http examples
     - [set-response](playground%20tools%20http-server%20set-response) - 🎛️ Set how the http test server answers

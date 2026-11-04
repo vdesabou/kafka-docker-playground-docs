@@ -35,6 +35,7 @@
 
 ##### 🐛 Bugs
 
+- 🐛📥 lambda, datadog, servicenow, azure-functions and salesforce-bulkapi sinks fail: --timeout refused with --min-expected-messages 0 [#10019](https://github.com/vdesabou/kafka-docker-playground/issues/10019)
 - 🐛🗳 playground topic: wrong exit codes, consume/produce/count bugs, cfk topic admin [#9984](https://github.com/vdesabou/kafka-docker-playground/issues/9984)
 - 🐛🔐 connector-plugin sourcecode --log: fall back to curl when gh api is refused [#9980](https://github.com/vdesabou/kafka-docker-playground/issues/9980)
 - 🐛🧲 tcp-proxy deep-dive lab fails on Linux: open-ui prints Cannot open browser since open\_url [#9978](https://github.com/vdesabou/kafka-docker-playground/issues/9978)

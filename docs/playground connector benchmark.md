@@ -69,7 +69,11 @@ arguments, and `--enable-sql-datagen` uses it too.
 Throughput is read from the connect JMX metrics of the tasks  
 (sink-record-read-total: records read from kafka, including the ones  
 filtered or sent to the dlq; source-record-write-total), sampled every  
-`--interval`. Results are written to `--output-dir` (samples csv, result  
+`--interval` (each sample is timed at the middle of its read, and the  
+first and last samples of a drain are left out of its percentiles: the  
+restart of the tasks, the idle time after the backlog). The benchmark  
+fails at once when the first sample cannot read them (JMX not  
+reachable). Results are written to `--output-dir` (samples csv, result  
 json and an html report with the charts, opened in the browser at the  
 end in an interactive terminal) and appended to the benchmark-history  
 file, and the summary compares them with the previous benchmark of the  
@@ -126,7 +130,10 @@ commits them about every minute, so the end of a drain is known
 within one commit interval: a drain that sees less than 5 commits  
 is reported as a lower bound, and the summary gives the  
 `--nb-records` of a drain of 10 commits (within ~10%, usually 1M  
-records or more).
+records or more). When the first commit seen after the resume  
+already covers the whole backlog, the throughput is the backlog over  
+the time since the resume, a lower bound. A read of the offsets that  
+fails keeps the previous count (and is reported in the warnings).
 
 📈 After the measure of a fully managed connector, the benchmark  
 reads its per minute metrics in the Confluent Cloud Metrics API  
@@ -176,7 +183,7 @@ playground connector benchmark [OPTIONS]
 | Default Value:  | `drain`
 | Allowed Values: | `drain`, `steady`
 
-#### `--nb-records NB-RECORDS`
+#### `--nb-records NB_RECORDS`
 
 💯 Number of records of the backlog in drain mode (default is 100000)
 
@@ -199,7 +206,7 @@ A sequence of shapes, e.g. bulk,update,delete, runs one drain per shape on the s
 |-----------------|-------------
 | Default Value:  | `bulk`
 
-#### `--record-size RECORD-SIZE`
+#### `--record-size RECORD_SIZE`
 
 🏋️ Record size in bytes, passed to benchmark-load.bash (default is 0: size given by the load)
 
@@ -207,7 +214,7 @@ A sequence of shapes, e.g. bulk,update,delete, runs one drain per shape on the s
 |-----------------|-------------
 | Default Value:  | `0`
 
-#### `--load-command LOAD-COMMAND`
+#### `--load-command LOAD_COMMAND`
 
 📥 Command that loads the backlog in drain mode, instead of benchmark-load.bash (or of the replayed produce of a sink)
 
@@ -221,7 +228,7 @@ Examples:
 # source: your own script, which inserts the rows and prints `BENCHMARK_RECORDS`=`<n>`  
 `--load-command` "./load-my-table.sh 500000"
 
-#### `--stream-load-command STREAM-LOAD-COMMAND`
+#### `--stream-load-command STREAM_LOAD_COMMAND`
 
 🌊 Command that generates load continuously in steady mode, instead of benchmark-load.bash (or of the replayed produce of a sink)
 
@@ -235,7 +242,13 @@ A line `BENCHMARK_LATENCY_FIELD`=`<field>` tells which field of the records of a
 
 #### `--topic, -t TOPIC`
 
-🗳 Topics to count records in at the end of a drain, to check the result of a source connector (default is the topics of the connector)
+🗳 Topics of a source connector to count records in (default is the topics of the connector)
+
+- self managed: the records written during a drain (records in topics line), and the count when a restarted task resets its JMX counter
+- fully managed source: the topics whose end offsets are the records of every sample (no JMX)
+- the topics read for the end-to-end latency in `--mode` steady
+
+Setting it also stops the benchmark from reading the topics of the connector again during the run (a source can create topics, e.g. a new table).
 
 | Attributes      | &nbsp;
 |-----------------|-------------
@@ -265,7 +278,7 @@ A line `BENCHMARK_LATENCY_FIELD`=`<field>` tells which field of the records of a
 |-----------------|-------------
 | Default Value:  | `5s`
 
-#### `--max-wait MAX-WAIT`
+#### `--max-wait MAX_WAIT`
 
 ⏳ Max time to wait for the backlog to be processed in drain mode (default is 30m)
 
@@ -273,7 +286,7 @@ A line `BENCHMARK_LATENCY_FIELD`=`<field>` tells which field of the records of a
 |-----------------|-------------
 | Default Value:  | `30m`
 
-#### `--connector-tag CONNECTOR-TAG`
+#### `--connector-tag CONNECTOR_TAG`
 
 🧩 Benchmark these versions of the connector plugin one after the other (repeat the flag), and compare them
 
@@ -289,19 +302,27 @@ Example: `--connector-tag` 10.8.4 `--connector-tag` 10.9.9
 
 #### `--rounds ROUNDS`
 
-🔁 With `--connector-tag`, number of rounds over the versions (default is 1): 2 alternates them (A B A B), which shows a drift from one run to the next
+🔁 Number of times the benchmark runs (default is 1)
+
+Without `--connector-tag`: the same benchmark N times, then the records/s of each round and their mean, standard deviation and coefficient of variation (cv), to know how much the result varies on this machine: a difference between two configs or versions smaller than the cv is noise. Rounds that give a lower bound or do not finish are left out of the statistics. Not with a `--shape` sequence.
+
+With `--connector-tag`: number of rounds over the versions: 2 alternates them (A B A B), which shows a drift from one run to the next
 
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Default Value:  | `1`
 
-#### `--output-dir OUTPUT-DIR`
+#### `--output-dir, -o OUTPUT_DIR`
 
 📂 Folder for the samples csv, the result json and the html report (default is /tmp/playground-benchmark)
 
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Default Value:  | `/tmp/playground-benchmark`
+
+#### `--no-open`
+
+🙈 Do not open the HTML report in the browser (it is still written, and its path printed)
 
 #### `--compare COMPARE`
 
@@ -327,7 +348,7 @@ A drain splits `--nb-records` between them, steady mode gives each session batch
 
 The recording costs a few % of throughput: compare runs recorded the same way.
 
-#### `--latency-field LATENCY-FIELD`
+#### `--latency-field LATENCY_FIELD`
 
 ⏱️ Field of the records of a source connector that holds the time of the change in the source system, for the end-to-end latency measured in `--mode` steady (kafka record timestamp - this field)
 
@@ -351,7 +372,11 @@ Default: the field the load writes the time of the change to (`BENCHMARK_LATENCY
 
 #### `--json`
 
-📄 Print the result as json instead of the summary
+📄 Print the result as json instead of the summary (logs and warnings on stderr)
+
+The result has the throughput (records, seconds, records_per_second, lower_bound, rate_p50 / p95 / min), the requested_records, record_size and tasks_max of the run, the setup, the latency, the warnings of the summary (warnings) and the previous run it is compared with (previous).
+
+With `--connector-tag`, a `--shape` sequence or `--rounds`: a json array with the result of each run.
 
 ## Examples
 
@@ -385,6 +410,10 @@ playground connector benchmark --load-command "./my-load.sh" --json
 
 ```bash
 playground connector benchmark --nb-records 1000000 --connector-tag 10.8.4 --connector-tag 10.9.9 --rounds 2
+```
+
+```bash
+playground connector benchmark --nb-records 1000000 --rounds 3
 ```
 
 ```bash

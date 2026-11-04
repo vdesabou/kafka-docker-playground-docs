@@ -145,6 +145,7 @@ window.KDP_CLI_PAGES = [
   "/playground%20container%20update",
   "/playground%20container",
   "/playground%20cp-changelog",
+  "/playground%20db%20cdc-check",
   "/playground%20db%20sql",
   "/playground%20db%20wait-for-rows",
   "/playground%20db",

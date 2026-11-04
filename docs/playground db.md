@@ -8,6 +8,7 @@ line of each database.
 
 - **sql**: run statements (heredoc, `--file` or `--sql`) with the database client
 - **wait-for-rows**: wait until a table contains N rows
+- **cdc-check**: are the CDC prerequisites of the database met? (archivelog, wal_level, binlog...)
 
 Supported: Oracle (sqlplus), PostgreSQL (psql), MySQL and MariaDB (mysql /  
 mariadb), SQL Server (sqlcmd), IBM Db2 (db2) and MongoDB (mongosh).
@@ -35,5 +36,6 @@ playground db COMMAND
 
 - [sql](playground%20db%20sql) - 🛢️ Run SQL statements with the client of the database
 - [wait-for-rows](playground%20db%20wait-for-rows) - ⏳ Wait for a table to contain a minimum number of rows
+- [cdc-check](playground%20db%20cdc-check) - 🔍 Check the CDC prerequisites of the database
 
 

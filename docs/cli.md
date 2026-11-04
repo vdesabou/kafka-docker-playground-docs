@@ -456,6 +456,7 @@ visit https://docs.docker.com/get-docker to install
 - [db](playground%20db) - 🛢️ Database commands
   - [sql](playground%20db%20sql) - 🛢️ Run SQL statements with the client of the database
   - [wait-for-rows](playground%20db%20wait-for-rows) - ⏳ Wait for a table to contain a minimum number of rows
+  - [cdc-check](playground%20db%20cdc-check) - 🔍 Check the CDC prerequisites of the database
 
 ### RBAC commands
 

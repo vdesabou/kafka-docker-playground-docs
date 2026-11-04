@@ -123,6 +123,7 @@ visit https://github.com/junegunn/fzf#installation to install
 - ldap-authorizer-sasl-plain
 - ldap-sasl-plain
 - rbac-sasl-plain
+- sasl-oauthbearer
 - sasl-plain
 - sasl-scram
 - sasl-ssl
@@ -135,7 +136,7 @@ This is only supported when example is a connector example
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Allowed Values: | `ccloud`, `cfk`, `cfk-rbac`, `plaintext`, `sasl-ssl`, `sasl-plain`, `2way-ssl`, `sasl-scram`, `kerberos`, `ssl_kerberos`, `ldap-authorizer-sasl-plain`, `ldap-sasl-plain`, `rbac-sasl-plain`
+| Allowed Values: | `ccloud`, `cfk`, `cfk-rbac`, `plaintext`, `sasl-ssl`, `sasl-plain`, `2way-ssl`, `sasl-scram`, `kerberos`, `ssl_kerberos`, `ldap-authorizer-sasl-plain`, `ldap-sasl-plain`, `rbac-sasl-plain`, `sasl-oauthbearer`
 
 #### `--file, -f FILE`
 

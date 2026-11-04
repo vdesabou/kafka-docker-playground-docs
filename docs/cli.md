@@ -451,6 +451,12 @@ visit https://docs.docker.com/get-docker to install
   - [describe](playground%20ksqldb%20describe) - 🔎 Describe a stream or a table
   - [wait](playground%20ksqldb%20wait) - ⏳ Wait until the persistent queries are RUNNING and have no lag
 
+### Database commands
+
+- [db](playground%20db) - 🛢️ Database commands
+  - [sql](playground%20db%20sql) - 🛢️ Run SQL statements with the client of the database
+  - [wait-for-rows](playground%20db%20wait-for-rows) - ⏳ Wait for a table to contain a minimum number of rows
+
 ### RBAC commands
 
 - [rbac](playground%20rbac) - 🛡️ RBAC commands (rbac-sasl-plain and cfk-rbac environments, plus Confluent Cloud ACLs)

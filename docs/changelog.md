@@ -3,6 +3,7 @@
 ## November 2026
 ##### 🌟 Enhancements
 
+- 🧠🧰 analyze logs: read CSV exports of log events (Kibana / OpenSearch Discover, Splunk, Datadog, Grafana) [#10140](https://github.com/vdesabou/kafka-docker-playground/issues/10140)
 - 🧠☕ --client-version: TAB completion with the versions of the client the example builds [#10138](https://github.com/vdesabou/kafka-docker-playground/issues/10138)
 - 🧠🧰 analyze logs: read the logs of every Kafka client (librdkafka, Python, Go, .NET, JavaScript, Rust) [#10136](https://github.com/vdesabou/kafka-docker-playground/issues/10136)
 - ⭐🔐 New environment rbac-oauth: RBAC with OAuth / OIDC, MDS with Keycloak [#10134](https://github.com/vdesabou/kafka-docker-playground/issues/10134)

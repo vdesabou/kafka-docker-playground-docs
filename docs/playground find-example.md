@@ -14,7 +14,7 @@ Use `playground find-command` to find a command instead.
 ## Usage
 
 ```bash
-playground find-example QUERY [OPTIONS] [--] [MORE QUERY WORDS...]
+playground find-example [QUERY] [OPTIONS] [--] [MORE QUERY WORDS...]
 ```
 
 ## Arguments
@@ -23,9 +23,7 @@ playground find-example QUERY [OPTIONS] [--] [MORE QUERY WORDS...]
 
 🔤 Free-text query, e.g. "oracle cdc ssl", "fully managed s3 sink" or "jdbc source proxy"
 
-| Attributes      | &nbsp;
-|-----------------|-------------
-| Required:       | ✓ Yes
+Optional with `--category`: every example of the category is listed.
 
 #### *MORE QUERY WORDS...*
 
@@ -35,11 +33,34 @@ extra words are appended to the query, so quoting it is optional
 
 #### `--category CATEGORY`
 
-📂 Restrict the search to one top-level folder
+📂 Restrict the search to one top-level folder, or to one topic across all folders
+
+Topics, matched on the path, README title, default environment and  
+playground commands of the examples:
+
+- security: RBAC, LDAP, Kerberos, SASL, SSL / mTLS, OAuth, ACLs,
+
+audit logs, secrets, CSFLE, examples defaulting to a secured environment  
+or using playground rbac / tools cert
+
+- broker: brokers, topics, transactions, KRaft, tiered storage, quotas,
+
+reassignment, replication between clusters (multi-data-center/,  
+Cluster Linking, MirrorMaker 2, Replicator), examples using  
+playground broker
+
+- cfk: Confluent for Kubernetes, examples defaulting to the cfk or
+
+cfk-rbac environment (every connect/ example also runs with  
+`--environment` cfk)
+
+- client: producer / consumer and client examples (Java, .NET,
+
+JavaScript, Python, Go, JMS, kcat)
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Allowed Values: | `connect`, `ccloud`, `ksqldb`, `flink`, `schema-registry`, `rest-proxy`, `multi-data-center`, `other`, `operator`, `academy`, `environment`, `reproduction-models`
+| Allowed Values: | `connect`, `ccloud`, `ksqldb`, `flink`, `schema-registry`, `rest-proxy`, `multi-data-center`, `other`, `operator`, `academy`, `environment`, `reproduction-models`, `security`, `broker`, `cfk`, `client`
 
 #### `--limit LIMIT`
 
@@ -72,6 +93,14 @@ playground find-example debezium postgres fully managed
 
 ```bash
 playground find-example "oracle cdc ssl" --category connect --limit 3
+```
+
+```bash
+playground find-example --category security --limit 50
+```
+
+```bash
+playground find-example oauth --category security
 ```
 
 ```bash

@@ -213,6 +213,8 @@ It sets `CLIENT_VERSION` environment variable:
 
 It can differ from the brokers, a patch version included
 
+🎓 Tip: use `<tab>` completion to trigger fzf completion: it lists the published versions of the client that the example (-f, typed before, else the last run) builds
+
 🎓 Tip: the interactive menu only offers it for the examples that use it
 
 #### `--connector-tag CONNECTOR_TAG`

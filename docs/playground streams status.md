@@ -25,6 +25,9 @@ counted (and drawn in the timeline of `--html`).
 assignment, errors). The same view of a customer's log files is the  
 🌊 Kafka Streams section of `playground analyze logs`.
 
+`--sample` kafka_streams shows it on the logs shipped in  
+tools/log-analyzer/samples/kafka-streams (no running example needed).
+
 Exits with 1 when an instance is not RUNNING (or its container is  
 stopped), so that an example can check it.
 
@@ -45,6 +48,18 @@ playground streams status [OPTIONS]
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Repeatable:     |  ✓ Yes
+| Conflicts With: | `--sample`
+
+#### `--sample, -s SAMPLE`
+
+🧪 Read the logs of a sample instead of the running containers (no consumer group)
+
+- **kafka_streams**: the 3 instances of other/kafka-streams (serde-errors.sh): an application in ERROR after a poison pill, its dead stream thread, deserialization and production handler errors (tools/log-analyzer/samples/kafka-streams)
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Allowed Values: | `kafka_streams`
+| Conflicts With: | `--container`
 
 #### `--application-id, -a APPLICATION_ID`
 
@@ -58,8 +73,9 @@ applications of other/kafka-streams)
 #### `--html`
 
 📊 Also write an HTML report: the same view with a timeline of the state of each instance  
-(restarts and the time without logs), the task assignment (task × instance) and the  
-known errors with their advice, opened in the browser
+(restarts, the time without logs, a marker on each error), the Kafka Streams errors and  
+the rebalances over time, the task assignment (task × instance) and the known errors  
+with their advice, opened in the browser
 
 #### `--output-dir, -o OUTPUT_DIR`
 
@@ -89,6 +105,10 @@ playground streams status --container streams2
 
 ```bash
 playground streams status --html
+```
+
+```bash
+playground streams status --sample kafka_streams --html
 ```
 
 ```bash

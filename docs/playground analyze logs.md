@@ -68,6 +68,7 @@ playground analyze logs [OPTIONS]
 
 - **connect_task_failure**: Connect worker log: Oracle XStream connector with a wrong password, an unknown outbound server, and a task failing after the outbound server was stopped
 - **support_bundle**: .zip with that log and a gzipped broker log
+- **kafka_streams**: logs of the 3 instances of other/kafka-streams (serde-errors.sh): an application in ERROR after a poison pill, its dead stream thread, deserialization and production handler errors, the 🌊 Kafka Streams section (state, rebalances, tasks, timeline)
 - **cfk_bundle**: CFK support bundle: kafka-2 crash-looping on an expired certificate, pending volume, OOMKilled Connect pod, failed connector task, Schema Registry authentication failure, operator reconcile errors
 - **cfk_kraft_migration**: CFK support bundle: ZooKeeper to KRaft migration (KRaftMigrationJob) stuck for 3 days in SETUP, the KRaftController missing inter replication credentials
 - **cfk_rollout**: CFK support bundle: CP upgrade half done (KRaftController still blocked, Kafka roll stuck at 2/3), operator pod refused by the ResourceQuota, stale "Reconcile is blocked" conditions, operator log that starts after the last change
@@ -76,7 +77,7 @@ playground analyze logs [OPTIONS]
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Repeatable:     |  ✓ Yes
-| Allowed Values: | `connect_task_failure`, `support_bundle`, `cfk_bundle`, `cfk_kraft_migration`, `cfk_rollout`, `cfk_rollout_after`
+| Allowed Values: | `connect_task_failure`, `support_bundle`, `kafka_streams`, `cfk_bundle`, `cfk_kraft_migration`, `cfk_rollout`, `cfk_rollout_after`
 
 #### `--include-warnings`
 

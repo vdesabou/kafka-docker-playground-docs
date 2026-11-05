@@ -333,6 +333,11 @@ visit https://docs.docker.com/get-docker to install
   - [wait](playground%20ksqldb%20wait) - ⏳ Wait until the persistent queries are RUNNING and have no lag
   - [metrics](playground%20ksqldb%20metrics) - 📈 Display the key JMX metrics of the ksqlDB server
 
+### Kafka Streams commands
+
+- [streams](playground%20streams) - 🌊 Kafka Streams commands
+  - [status](playground%20streams%20status) - 🌊 Show the state of the Kafka Streams instances
+
 ### Database commands
 
 - [db](playground%20db) - 🛢️ Database commands

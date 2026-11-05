@@ -284,6 +284,8 @@ window.KDP_CLI_PAGES = [
   "/playground%20secrets",
   "/playground%20status",
   "/playground%20stop",
+  "/playground%20streams%20status",
+  "/playground%20streams",
   "/playground%20switch-back",
   "/playground%20switch-ccloud",
   "/playground%20switch-docker",

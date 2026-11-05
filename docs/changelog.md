@@ -46,6 +46,7 @@
 
 ##### 🐛 Bugs
 
+- 🐛🛢️ Debezium PostgreSQL incremental snapshot and fully managed XStream examples fail since db sql stops at the first error (duplicate CREATE FUNCTION, stray END; after orclcdc\_readiness.sql) [#10089](https://github.com/vdesabou/kafka-docker-playground/issues/10089)
 - 🐛💱 topic produce --transactional-id fails on cfk: could not copy the transactional copier to connect-0 [#10037](https://github.com/vdesabou/kafka-docker-playground/issues/10037)
 - 🐛📥 playground topic consume --tail never shows the newest record (multi-line record parser waits for the next one) [#10021](https://github.com/vdesabou/kafka-docker-playground/issues/10021)
 - 🐛📥 lambda, datadog, servicenow, azure-functions and salesforce-bulkapi sinks fail: --timeout refused with --min-expected-messages 0 [#10019](https://github.com/vdesabou/kafka-docker-playground/issues/10019)

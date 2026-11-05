@@ -3,6 +3,7 @@
 ## November 2026
 ##### 🌟 Enhancements
 
+- 🧹🐚 Modernize the KafkaJS client examples [#10111](https://github.com/vdesabou/kafka-docker-playground/issues/10111)
 - 👾🧩 Add Java, C, Go, Python and JavaScript client examples (onprem and Confluent Cloud) [#10109](https://github.com/vdesabou/kafka-docker-playground/issues/10109)
 - 👾🦀 Add Rust client example with Confluent Cloud [#10101](https://github.com/vdesabou/kafka-docker-playground/issues/10101)
 - 👾🦀 Add Rust client example [#10098](https://github.com/vdesabou/kafka-docker-playground/issues/10098)

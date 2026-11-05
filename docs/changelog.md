@@ -3,6 +3,7 @@
 ## November 2026
 ##### 🌟 Enhancements
 
+- 🧠🧰 analyze logs: read the logs of every Kafka client (librdkafka, Python, Go, .NET, JavaScript, Rust) [#10136](https://github.com/vdesabou/kafka-docker-playground/issues/10136)
 - ⭐🔐 New environment rbac-oauth: RBAC with OAuth / OIDC, MDS with Keycloak [#10134](https://github.com/vdesabou/kafka-docker-playground/issues/10134)
 - 🧠🌊 --sample kafka\_streams, Kafka Streams in the reports gallery and the logs deep dive [#10132](https://github.com/vdesabou/kafka-docker-playground/issues/10132)
 - 🧠🌊 playground streams status + Kafka Streams view in analyze logs [#10130](https://github.com/vdesabou/kafka-docker-playground/issues/10130)

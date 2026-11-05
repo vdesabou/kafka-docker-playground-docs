@@ -13,6 +13,8 @@ metrics' or `playground connector metrics`.
 
 👉 Check documentation https://kafka-docker-playground.io/#/how-to-use?id=%f0%9f%94%a2-jmx-metrics
 
+🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-observability
+
 ## Usage
 
 ```bash

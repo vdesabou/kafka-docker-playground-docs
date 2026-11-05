@@ -49,6 +49,7 @@ deep-dive-java-debugging.md
 deep-dive-jvm-diagnostics.md
 deep-dive-log-levels.md
 deep-dive-network-traffic.md
+deep-dive-observability.md
 deep-dive-offsets-and-lag.md
 deep-dive-oracle-cdc.md
 deep-dive-replication.md

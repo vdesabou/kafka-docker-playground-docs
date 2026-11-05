@@ -1,7 +1,7 @@
 #!/bin/bash
 # Regenerates the HTML reports and screenshots of docs/reports.md from the samples shipped with
 # kafka-docker-playground (playground analyze <cmd> --sample <name>, playground cloud-resources ccloud costs-history --sample <name>,
-# playground cloud-resources aws costs-history --sample <name>).
+# playground cloud-resources aws costs-history --sample <name>, playground streams status --sample kafka_streams).
 #
 # usage: scripts/generate-reports-gallery.sh [path of the kafka-docker-playground clone]
 #
@@ -59,6 +59,13 @@ echo "📊 playground cloud-resources aws costs-history --sample aws_dummy"
 "$PLAYGROUND" cloud-resources aws costs-history --sample aws_dummy --no-open --output-dir "$work/aws-costs" < /dev/null > "$work/aws-costs.log" 2>&1 || { cat "$work/aws-costs.log"; exit 1; }
 cp "$(find "$work/aws-costs" -name "*.html" | head -1)" "$DOCS/reports/aws-costs.html"
 
+# kafka streams: playground streams status on the logs of tools/log-analyzer/samples/kafka-streams, no running example. It
+# exits 1 (an instance of the sample is in ERROR): the report is still written
+echo "📊 playground streams status --sample kafka_streams --html"
+"$PLAYGROUND" streams status --sample kafka_streams --html --no-open --output-dir "$work/kafka-streams" < /dev/null > "$work/kafka-streams.log" 2>&1 || true
+[ -n "$(find "$work/kafka-streams" -name "*.html" 2>/dev/null)" ] || { cat "$work/kafka-streams.log"; exit 1; }
+cp "$(find "$work/kafka-streams" -name "*.html" | head -1)" "$DOCS/reports/kafka-streams.html"
+
 # reports of real runs: keep only the file name of the paths under a user folder (flight recorder analysis...)
 strip_user_paths() {
   perl -pe 's#"/(?:Users|home|private)/[^"]*/([^"/]+)"#"$1"#g' "$1" > "$2"
@@ -93,6 +100,11 @@ do
   if [ "$name" = "aws-costs" ]
   then
     perl -0pi -e 's#</head>#<style>.page>*:not(.header):not(\#s3-details){display:none}</style></head>#' "$work/screenshot-$name.html"
+  fi
+  # kafka streams: the advice under each finding pushes the timeline of the states out of the screenshot
+  if [ "$name" = "kafka-streams" ]
+  then
+    perl -0pi -e 's#</head>#<style>.rec-details{display:none}</style></head>#' "$work/screenshot-$name.html"
   fi
   "$CHROME" --headless=new --disable-gpu --hide-scrollbars --window-size=1400,900 --virtual-time-budget=4000 \
     --blink-settings=preferredColorScheme=1 --screenshot="$DOCS/images/reports/$name.png" "file://$work/screenshot-$name.html" > /dev/null 2>&1

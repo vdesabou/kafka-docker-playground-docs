@@ -53,6 +53,8 @@
 
 ##### 🐛 Bugs
 
+- 🐛⏱️ connect-gcp-bigquery-sink: poll BigQuery instead of a fixed sleep 125 [#10117](https://github.com/vdesabou/kafka-docker-playground/issues/10117)
+- 🐛☸️ cfk: the k3d node runs out of ephemeral storage and every following example of the job fails [#10116](https://github.com/vdesabou/kafka-docker-playground/issues/10116)
 - 🐛📜 analyze logs: no Occurrences over time chart and wrong period on journalctl logs [#10107](https://github.com/vdesabou/kafka-docker-playground/issues/10107)
 - 🐛⛅ run: a successful ccloud example exits 1 when no topic is left on the cluster [#10103](https://github.com/vdesabou/kafka-docker-playground/issues/10103)
 - 🐛🛢️ db sql: retry over TCP when MySQL refuses the socket (ERROR 2002) on cfk [#10092](https://github.com/vdesabou/kafka-docker-playground/issues/10092)

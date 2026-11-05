@@ -3,6 +3,7 @@
 ## November 2026
 ##### 🌟 Enhancements
 
+- 👾🪝 Add Webhook Source Fully Managed Connector example [#10087](https://github.com/vdesabou/kafka-docker-playground/issues/10087)
 - 🧠🚦 New example other/rbac-centralized-acls: MDS centralized ACLs with RBAC [#10043](https://github.com/vdesabou/kafka-docker-playground/issues/10043)
 - ⭐🔐 New environment sasl-oauthbearer: SASL/OAUTHBEARER (OAuth / OIDC) with Keycloak [#10041](https://github.com/vdesabou/kafka-docker-playground/issues/10041)
 - 🧠🧬 playground topic check-format: the format of each record of a topic and the converter to use [#10039](https://github.com/vdesabou/kafka-docker-playground/issues/10039)

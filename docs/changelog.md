@@ -3,6 +3,7 @@
 ## November 2026
 ##### 🌟 Enhancements
 
+- 👾🦀 Add Rust client example [#10098](https://github.com/vdesabou/kafka-docker-playground/issues/10098)
 - 🧠🔍 find-example --category security|broker|cfk|client: topic categories across folders [#10095](https://github.com/vdesabou/kafka-docker-playground/issues/10095)
 - 🧠📚 Add "start from your area" entry pages: brokers, schemas, platform and security [#10091](https://github.com/vdesabou/kafka-docker-playground/issues/10091)
 - 👾🪝 Add Webhook Source Fully Managed Connector example [#10087](https://github.com/vdesabou/kafka-docker-playground/issues/10087)

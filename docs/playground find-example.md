@@ -56,7 +56,7 @@ cfk-rbac environment (every connect/ example also runs with
 
 - client: producer / consumer and client examples (Java, .NET,
 
-JavaScript, Python, Go, JMS, kcat)
+JavaScript, Python, Go, Rust, C/librdkafka, JMS, kcat)
 
 | Attributes      | &nbsp;
 |-----------------|-------------

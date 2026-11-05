@@ -123,6 +123,7 @@ visit https://github.com/junegunn/fzf#installation to install
 - ldap-authorizer-sasl-plain
 - ldap-sasl-plain
 - rbac-sasl-plain
+- rbac-oauth
 - sasl-oauthbearer
 - sasl-plain
 - sasl-scram
@@ -136,7 +137,7 @@ This is only supported when example is a connector example
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Allowed Values: | `ccloud`, `cfk`, `cfk-rbac`, `plaintext`, `sasl-ssl`, `sasl-plain`, `2way-ssl`, `sasl-scram`, `kerberos`, `ssl_kerberos`, `ldap-authorizer-sasl-plain`, `ldap-sasl-plain`, `rbac-sasl-plain`, `sasl-oauthbearer`
+| Allowed Values: | `ccloud`, `cfk`, `cfk-rbac`, `plaintext`, `sasl-ssl`, `sasl-plain`, `2way-ssl`, `sasl-scram`, `kerberos`, `ssl_kerberos`, `ldap-authorizer-sasl-plain`, `ldap-sasl-plain`, `rbac-sasl-plain`, `rbac-oauth`, `sasl-oauthbearer`
 
 #### `--file, -f FILE`
 
@@ -211,6 +212,8 @@ It sets `CLIENT_VERSION` environment variable:
 - client examples (other/client-\*, ccloud/client-\*): the version of their Confluent client (librdkafka, confluent-kafka-go, confluent-kafka-python…), see their README
 
 It can differ from the brokers, a patch version included
+
+🎓 Tip: use `<tab>` completion to trigger fzf completion: it lists the published versions of the client that the example (-f, typed before, else the last run) builds
 
 🎓 Tip: the interactive menu only offers it for the examples that use it
 

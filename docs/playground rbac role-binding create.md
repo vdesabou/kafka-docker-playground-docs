@@ -60,7 +60,8 @@ Subject:orders-value, Connector:my-sink, TransactionalId:my-tx, Cluster:kafka-cl
 
 📄 Create all the role bindings of a file, one per line: `<principal>` `<role>` `<resource or ->` [prefix] [scope=`<scope>`]
 
-See environment/rbac-sasl-plain/role-bindings.txt (the default role bindings) for the format.
+See environment/rbac-sasl-plain/role-bindings.txt (the default role bindings) for the format  
+(environment/rbac-oauth/role-bindings.txt on rbac-oauth).
 
 #### `--verbose, -v`
 

@@ -40,8 +40,9 @@ Takes about 15 minutes to read and run.
 2. **The digest only trusts explicit levels, and groups records by message and root cause.** A record counts when its
    first line carries an explicit level: an uppercase token (` ERROR `, `[ERROR]`, `"ERROR"`), a logfmt / JSON field
    (`level=error`, `"level":"error"`) or a klog prefix (`E1012 …`), plus uncaught Java exceptions on level-less lines
-   (`Exception in thread …`, `java.lang.IllegalStateException: …`). INFO/DEBUG/TRACE records that mention "error",
-   and level-less lines with "failed", never count. Then:
+   (`Exception in thread …`, `java.lang.IllegalStateException: …`), and the levels and crashes of the other Kafka
+   clients (librdkafka `%3|…`, .NET `fail:`, Python tracebacks, Go and Rust panics… see 🧰 below). INFO/DEBUG/TRACE
+   records that mention "error", and level-less lines with "failed", never count. Then:
    - the stack trace is collapsed to its **chain** (first exception line + every `Caused by:`) and **3 frames of the
      deepest cause**;
    - records with the same message and the same deepest cause are **one finding**, whatever their timestamps and ids
@@ -160,6 +161,8 @@ playground analyze logs -f ./logs -f broker.log.gz --max-findings 10
 # try it on the shipped samples
 playground analyze logs --sample connect_task_failure     # a Connect worker log (Oracle XStream task failure)
 playground analyze logs --sample support_bundle           # a .zip with that log and a gzipped broker log
+playground analyze logs --sample kafka_streams            # the logs of 3 Kafka Streams instances (see 🌊 below)
+playground analyze logs --sample kafka_clients            # C/C++, Python, Go, .NET, JavaScript, KafkaJS, Rust clients (see 🧰 below)
 playground analyze logs --sample cfk_bundle               # a CFK support bundle (see below)
 playground analyze logs --sample cfk_kraft_migration      # a CFK support bundle with a stuck ZooKeeper to KRaft migration
 playground analyze logs --sample cfk_rollout              # a CFK support bundle with a half-done CP upgrade
@@ -174,10 +177,41 @@ What it does with what you give it:
 | `.zip`, `.tar`, `.tar.gz`, `.tgz`, `.tar.bz2`, `.tar.xz`, `.7z` | extracted to a temporary folder (deleted at the end), nested archives too. `.7z` needs `bsdtar` (the `tar` of macOS) or 7-Zip; `.rar`, `.xz`, `.zst`… are skipped with a warning: extract them first |
 | `.gz` | decompressed on the fly |
 | a JSON export of log events (`.json`, `.jsonl`, `.ndjson`, also gzipped): AWS CloudWatch Logs Insights (`[{"@timestamp": …, "@message": …}]`, console or `get-query-results`), CloudWatch `filter-log-events` / `get-log-events` (`{"events": [{"timestamp", "message"}]}`), Elasticsearch / OpenSearch hits (`_source.message`), structured JSON logs (`level`, `logger_name`, `message`, `stack_trace`) | converted back to log lines, **oldest first** (console exports are newest first), one event per line and its stack trace below it, then analyzed as a log file: `🔄 <file>: JSON export of <n> log events, analyzed as log lines (oldest first)`. The line numbers of the digest and of the HTML report are those of the converted file. Any other JSON is read as it is |
+| a CSV export of log events (`.csv`, also gzipped) with a header row: Kibana / OpenSearch Dashboards Discover (`"Oct 14, 2026 @ 19:13:28.977"` timestamps, `-` for an empty cell), Splunk, Datadog, Grafana / Loki | one event per row, the columns are its fields; a cell holding a JSON object (the `log` column with the ECS / logback JSON line of the container) is parsed and its `level`, `logger`, `message`, `error.stack_trace` win. Then converted like a JSON export: `🔄 <file>: CSV export of <n> log events, analyzed as log lines (oldest first)`. A CSV without a message-like column (`message`, `log`, `@message`, `line`, `_source`…) is read as it is |
+| JSON lines whatever the extension (`.log`, `.txt`: a fluentd / Kubernetes / logstash dump, `{"log":"[ERROR] 2026-10-14 …","kubernetes":{…}}` per line) | detected by their first character `{` and converted like a JSON export, **streamed** (a dump of 2.4 GB in about 10 s): `🔄 <file>: JSON lines export of <n> log events (2.2 GB), analyzed as log lines (oldest first)`. The digest then reads the messages instead of the metadata (7× less in a Kubernetes dump), and sees the level of `"log":"[ERROR] …"`, which it misses in the raw JSON. A message without its own time (the second part of a line split by Docker at 16 KB, a GC log line) gets the time of the event in front; the next lines of a multi-line message are indented, so a date in them is not taken as the time of the log |
 | a CFK support bundle (a folder with `cluster-details.txt`, or `cluster-resources/` + `operator/`; or a flat collection of `kubectl` outputs with a `confluent-operator-*.log` or the YAML of a `platform.confluent.io` custom resource at its top), alone or inside a folder or an archive | analyzed as a whole by the CFK analyzer (Docker): pods, custom resources, events, versions, recent changes and its logs, in its own HTML report. `--problem "<component, symptom, since when>"` matches it against the problem of the customer (🎯 verdict, issues that explain it first), and a 📥 Data to request section says what to ask the customer for next. See [the CFK deep dive](deep-dive-cfk.md). `--logs-only` gives the plain digest instead |
+| logs with Kafka Streams lines (`stream-client [`, `stream-thread [`) | the digest as for any log, plus a 🌊 **Kafka Streams** section (see below) |
 | a `.properties` file, a JSON file with connector configs | analyzed like a text file, and shown in the ⚙️ configuration section of the HTML report |
 | any other file | analyzed when it's text, **skipped when binary** (counted in the last line) |
 | a copy of a file or of a CFK support bundle already analyzed (an archive next to its extracted folder) | skipped (`⏭️ … same content as …` / `⏭️ … same CFK support bundle as …`, only one report), counted in the last line |
+
+🔭 **No finding is not a verdict.** When no file has an ERROR/FATAL record (ERROR/FATAL/WARN with
+`--include-warnings`), `analyze logs` prints an overview of what the logs contain instead of stopping at `✅ no
+ERROR/FATAL record found`: each file with its lines, the period covered and its records by level, the 10 most frequent
+messages (numbers masked as `N`, identifiers as `<hex>` / `<uuid>`) and the 5 most frequent loggers, then 👉 what to
+ask for next:
+
+```text
+🔭 Overview: no ERROR/FATAL record, what the logs contain
+   📄 export.csv: 17946 lines, 2026-10-14 19:13:24 → 19:13:28 (4 s), CSV export of 17833 events
+      INFO 17833
+   🔝 Top messages (N: a number, <hex> / <uuid>: an identifier)
+        2393× INFO  Ended stream task for key … at offset N, partition N, and topic …
+   👉 What to ask for next
+      🕐 export.csv: shorter than 10 min of logs. Ask for the whole incident window, from before the problem started to after it ended
+      🔇 only INFO records: the logs (or the export) may be filtered on a level or a component, or the problem is not logged here. …
+      📤 CSV export of a log console: Kibana / OpenSearch Dashboards Discover exports the newest rows first and stops at a size limit …
+```
+
+The same overview is the 🔭 **Overview** section of the HTML report and `.overview` of `--json` (`files`,
+`top_messages`, `top_loggers`, `hints`).
+
+⏳ **Large inputs.** A file of 20 MB or more shows a bar in the terminal while it is converted and read
+(`⏳ <file> ▕████████████████░░░░░░░░░▏  66% 202.0 MB/308.4 MB 19.2 MB/s ETA 0:05`). With 20 MB or more of input in an
+interactive terminal, the report is opened in the browser right away (`🌐 Opening <report> in browser: it shows the
+progress, then the report`): a page with the step, the MB read and the time elapsed, reloaded every 2 s, which becomes
+the report at the end (written next to it then renamed, so the page never loads half a report). The last line says how
+much was read and how long it took: `📊 1 file(s) with findings out of 2 scanned, 2.4 GB read in 0 min 28 s`.
 
 🔒 The digest, the HTML report and the JSON are **not sanitized by default**: `--sanitize` redacts them, before sharing
 them outside Confluent. Off by default because it can hide evidence (a dump of bytes taken for a secret, the IP of the
@@ -203,8 +237,74 @@ The output names each file with its path inside the archive, and only shows file
 …
 ✂️ 9 more distinct record(s) not shown, increase --max-findings
 
-📊 2 file(s) with findings out of 2 scanned (binary files skipped: 0)
+📊 2 file(s) with findings out of 2 scanned, 1.4 MB read in 0 min 3 s (binary files skipped: 0)
 ✅ HTML report saved: /home/me/log-analysis-output/support_bundle-log-report.html
+```
+
+### 🌊 Kafka Streams logs
+
+When files contain the lines the Kafka Streams library logs at INFO, `analyze logs` adds a 🌊 Kafka Streams section,
+after the digest, in the HTML report and in `--json` (`kafka_streams`): for each application (`application.id`) and
+each file (an instance), the state of the client and since when, the rebalances and the time spent in REBALANCING,
+the restarts, the threads with their active and standby tasks, the tasks not restored yet, the records restored, and
+the known Kafka Streams errors with their advice (task migrated, fenced producer, deserialization or production
+handler, missing source topic, topics not co-partitioned, state directory locked, uncaught exception). The HTML report
+draws the state of each instance over time (with a marker where each Kafka Streams error was logged), the Kafka
+Streams errors and the rebalances over time (zoomable, as 📈 Occurrences over time), and the task assignment
+(task × instance). The Kafka Streams errors are
+also known causes of the 🧭 summary. It reads the logs of any application, Kafka Streams 3.0+, as long as they are at
+INFO; `playground streams status` is the same view on the running instances of an example.
+
+```bash
+playground analyze logs --sample kafka_streams     # other/kafka-streams/serde-errors.sh: a demo application in ERROR
+```
+
+```text
+🌊 application streams-serde-errors-fail-on-poison-pill (Kafka Streams 4.4.0): 3 instance(s)
+  INSTANCE      STATE    SINCE     REBALANCES  THREADS    ACTIVE TASKS  STANDBY TASKS  NOT RESTORED
+  streams.log   ERROR    15:19:21  3 (0.5s)    1 DEAD     0_0           -              -
+  streams2.log  RUNNING  15:19:05  3 (0.5s)    1 RUNNING  0_1           -              -
+  streams3.log  RUNNING  15:19:06  2 (2.7s)    1 RUNNING  0_2           -              -
+  ❌ streams.log: the client is ERROR since 2026-11-05 15:19:21
+  🧪 Deserialization error x2 (streams.log, streams3.log, first 2026-11-05 15:19:20, last 2026-11-05 15:19:20)
+     👉 a record could not be deserialized with the configured serdes (poison pill, wrong format, schema not found): …
+```
+
+### 🧰 Logs of the other Kafka clients (C/C++, Python, Go, .NET, JavaScript, Rust)
+
+The digest reads the logs of every client of [the Confluent client list](https://docs.confluent.io/kafka-clients/overview.html),
+not only Java, the same way in `analyze logs`, `container logs --errors` (the `client-*` containers of
+`other/client-*`) and the other commands that write the digest:
+
+| Client | What is read |
+| --- | --- |
+| librdkafka: C/C++, and the Python, Go, .NET and JavaScript clients built on it | `%3\|1793896102.923\|FAIL\|rdkafka#producer-1\| [thrd:…]: …`: the level is the syslog level (0-2 FATAL, 3 ERROR, 4 WARN, 5-7 ignored), the timestamp the epoch seconds (UTC), wherever the line comes from (stderr of the client, a log framework that kept it). The same error of several clients is one record |
+| JavaScript (`@confluentinc/kafka-javascript`) | its default logger prints the librdkafka logs as Node.js objects without level (`{ message: '…', fac: 'FAIL', timestamp: 1793896130218, name: 'rdkafka#producer-1' }`): the `FAIL` and `ERROR` facilities are errors, written back as the librdkafka line |
+| Python | a `Traceback (most recent call last):`, alone or after a `logging.exception()` record, is one record with its chained tracebacks (`The above exception was the direct cause…`): the chain lists the outermost exception first and the **deepest cause last**, with the 3 last frames (`File "/app/client.py", line 57, in produce`) of the deepest cause; `KafkaError{code=…}` printed by the application counts as an error |
+| .NET | the console logger (`fail: Program[0]` / `crit:` / `warn:` and its indented message, joined), `` Unhandled exception. Confluent.Kafka.ProduceException`2[…]: … `` (FATAL), the inner exceptions (` ---> `) as `Caused by:`, the frames of the deepest one |
+| Go | `panic: …` and `fatal error: …` (FATAL) with the functions of the first goroutine, `2026/11/05 10:00:05` timestamps of the `log` package |
+| Rust (`confluent-kafka`, native) | the `tracing` lines (`2026-11-05T16:30:02.123456Z ERROR confluent_kafka::producer: …`), `thread 'main' panicked at src/producer.rs:45:10:` (FATAL) joined to its message, the `Error: …` of a `main` that returns an error |
+| Node.js (KafkaJS and the JavaScript client) | the JSON logs of KafkaJS (`"level":"ERROR"`), an uncaught error (`KafkaJSNonRetriableError: …`, `Error [ERR_X]: …`) with its `[cause]:` |
+
+The known causes include what these clients log: `Local: Message timed out` / `Expiring 3 record(s)` (⌛ records not
+delivered in time), `Local: Queue full` (📥 producer buffer full), `Application maximum poll interval` (🐢
+max.poll.interval.ms exceeded), `No such configuration property` (⚙️ invalid client configuration), `not present in
+metadata after` (🗺️ topic not found in the metadata), `might be caused by incorrect security.protocol` (🔀 wrong
+security.protocol), `N/N brokers are down`, `Failed to resolve`, `ECONNREFUSED` (🔌 connection failure), and
+`Disconnected (after 600013ms in state UP)` (💤 idle connection closed by the broker: low, usually harmless). A line an
+application prints without level (`delivery failed: Local: Message timed out`) is not a record, as for any log.
+
+```bash
+playground analyze logs --sample kafka_clients     # real logs of other/client-* against a broker that refuses connections
+```
+
+```text
+🧭 Summary: 207 occurrence(s) of 22 distinct record(s) in 12 file(s), 2026-11-05 16:28:22 → 2026-11-05 16:33:40
+🧠 Known causes
+   [HIGH] 🔌 Connection failure ×195 in 7 files (first at python-producer.log line 1, 2026-11-05 16:28:22)
+   [HIGH] ⚙️ Invalid client configuration ×1 in python-producer.log (first at line 34)
+   [HIGH] ⌛ Records not delivered in time ×5 in 2 files (first at python-producer.log line 27)
+   [HIGH] 🗺️ Topic not found in the metadata ×2 in 2 files (first at rust-producer.log line 1)
 ```
 
 ### 🧭 The summary, `--connector`, `--show-config`
@@ -455,6 +555,8 @@ playground stop
 | Situation | Command |
 | --- | --- |
 | a customer support bundle (`.zip`, `.tar.gz`, folders of rotated logs) | `playground analyze logs -f <bundle> --max-findings 15`, then `--include-warnings` if no ERROR explains it |
+| the logs of a Kafka Streams application that rebalances in a loop, restores forever or stops | `playground analyze logs -f <the logs of every instance>`: the 🌊 Kafka Streams section (state of each instance over time, rebalances, tasks, Streams errors). On a running example: `playground streams status --html` |
+| the logs of a Python, Go, .NET, JavaScript, C/C++ or Rust client application | `playground analyze logs -f <the logs>`: librdkafka lines, tracebacks, panics and unhandled exceptions are read (🧰). To reproduce, `other/client-<language>` runs that client against the playground |
 | a CI artifact or a log pasted in a ticket | save it to a file, `playground analyze logs -f <file>` |
 | "the connector failed during the night" (still running env) | `container logs -c connect --errors`: look at `xN` and *last seen line*, then `--grep "<connector name>" --no-follow` around it |
 | "is it the connector or the broker?" | `container logs -c connect -c broker --errors --since 30m` |

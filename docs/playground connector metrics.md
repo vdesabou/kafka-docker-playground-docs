@@ -55,6 +55,11 @@ playground connector metrics [OPTIONS]
 
 🔁 Refresh every `<interval>` (30, 30s, 5m) until ctrl-c
 
+#### `--worker`
+
+🏭 The connect workers instead of one connector: connectors and tasks  
+they run, startup failures, rebalances, heartbeats (one column per worker)
+
 #### `--json`
 
 🤖 Print the result as JSON on stdout, and nothing else (the log lines go to stderr)
@@ -71,6 +76,10 @@ playground connector metrics
 
 ```bash
 playground connector metrics --connector jdbc-sink --watch 10s
+```
+
+```bash
+playground connector metrics --worker
 ```
 
 ```bash

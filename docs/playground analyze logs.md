@@ -13,6 +13,18 @@ reported (" ERROR ", "[ERROR]", level=error, "level":"error"), plus
 uncaught java exceptions: records logged at INFO/DEBUG/TRACE, and  
 level-less lines that merely contain "error" or "failed", never are.
 
+🧰 The logs of every Kafka client of Confluent are read, not only Java:  
+the librdkafka lines of the C/C++, Python, Go, .NET and JavaScript  
+clients ("%3|1793896102.923|FAIL|rdkafka#producer-1| …", by their  
+syslog level, timestamp included, also the Node.js objects of the  
+JavaScript client logger), the .NET console logger ("fail:", "crit:")  
+and inner exceptions (" ---\> "), Python tracebacks (chained ones as one  
+record, deepest cause last) and KafkaError{code=…}, Go and Rust panics,  
+uncaught Node.js errors (KafkaJS, "[cause]:"), the tracing lines of the  
+Rust client. The known causes include the client ones (records not  
+delivered in time, producer buffer full, max.poll.interval.ms exceeded,  
+wrong security.protocol, idle connection closed by the broker).
+
 📂 Folders are scanned recursively. .zip, .tar, .tar.gz and .tgz files  
 are extracted in a temporary folder, .gz files are decompressed on the  
 fly, binary files are skipped, and so are the copies of a file or of a  
@@ -20,12 +32,27 @@ CFK support bundle already analyzed (an archive next to its extracted
 folder). A JSON export of log events (.json, .jsonl, .ndjson, also  
 gzipped: AWS CloudWatch Logs Insights @timestamp/@message, CloudWatch  
 events, Elasticsearch / OpenSearch hits, structured JSON logs with  
-level/logger_name/message/stack_trace) is converted back to log lines,  
-oldest first, and analyzed as a log file. Only files with findings are  
-shown. The HTML report also has  
+level/logger_name/message/stack_trace) and a CSV export of log events  
+(.csv, also gzipped: Kibana / OpenSearch Dashboards Discover, Splunk,  
+Datadog, Grafana: one event per row, a cell holding the JSON log line of  
+the container is parsed) are converted back to log lines, oldest first,  
+and analyzed as a log file. So are JSON lines whatever the extension (a  
+fluentd / Kubernetes / logstash dump saved as .log: streamed, a dump of  
+several GB is converted in seconds and the digest reads its messages,  
+not the metadata). Only files with findings are  
+shown. 🔭 When no file has findings, an overview says what the logs  
+contain (period covered, records by level, top messages and loggers) and  
+what to ask for next (a longer window, the logs of the component that  
+fails, a new export of a log console). The HTML report also has  
 the configuration: the configs logged at startup (KafkaConfig values:,  
 DistributedConfig, connector and client configs…) and the .properties  
 and connector JSON files of the input.
+
+⏳ A large file (20 MB or more) shows a progress bar in the terminal  
+(MB read, speed, ETA), and with 20 MB or more of input the report opens  
+in the browser right away as a progress page (step, MB read, elapsed  
+time) that becomes the report when the analysis ends. The last line  
+gives the size read and the time it took.
 
 ☸️ A Confluent for Kubernetes (CFK) support bundle (kubectl confluent support-bundle or playground debug cfk generate-bundle: a folder with cluster-details.txt, or with cluster-resources/ and operator/; or a flat collection of kubectl outputs with a confluent-operator-\*.log or the YAML of a platform.confluent.io custom resource at its top), alone or inside a folder or an archive, is detected and analyzed as a whole, in a Docker image built on first use: Warning events, pods (phase, waiting reasons, restarts, OOMKilled), every platform.confluent.io custom resource (phase/state, ready replicas, False conditions, failed connector tasks), the environment checked against the CFK support matrix (Kubernetes, CFK operator, CP and init container versions), the recent changes (who edited which CR and when, StatefulSet rollouts, pod restarts), the configuration (kafka.properties, zookeeper.properties, schemaregistry.properties, connect.properties and controlcenter.properties rendered by CFK, configOverrides, config logged at startup, connector configs from the Connector CRs and the config dumps of the logs), a JVM default truststore set without its password, and the ERROR/FATAL records of its logs, sorted into ~30 categories (pod failures, TLS, auth, MDS/RBAC, license, KRaft, replication, storage, scheduling…) with remediation steps. 📕 The log messages and events of known CFK problems (CFK triage table of Confluent support: roll blocked by the pre-roll checks, expired certificate, `INCONSISTENT_CLUSTER_ID`, ZooKeeper to KRaft migration, authorizer timeout, license secret…) are listed first, with what they mean and the KB / docs to read; `PLAYGROUND_CFK_RUNBOOKS_FILE` adds the internal runbook links of Confluent support (🔒 in the terminal, the HTML report and `--json`). 🔄 A CR whose image is not what its StatefulSet or pods run (operator did not apply it, roll not complete) is one finding, the exceeded quota events become one finding per ResourceQuota, each Warning event is counted once (event.txt and event.yaml) and a copy of the bundle inside the bundle is analyzed once. 🕰️ The time range of each log is listed, with a finding when a log starts long after its pod or after the last change of the CRs, and CRs that keep the "Reconcile is blocked" condition after the annotation was removed are one finding. 🕒 The changes of the CRs in the hour before the first critical / high issue are marked and listed in one finding. 🧩 A Connect whose spec.build.onDemand plugins cannot be installed (config-init-container failing, install error, slow init) and a Connector CR whose class is not installed are findings with next steps. 🔁 With several CFK bundles (-f a.tgz -f b.tgz), they are compared, sorted by collection time: same cluster or not, versions, changes of the CRs between them, issues fixed / new / still there, known CFK issues, with a verdict (HTML report, "comparison" in `--json`). 🚚 A ZooKeeper to KRaft migration gets its own finding: phase / sub-phase of the KRaftMigrationJob, how long it has been there (events, operator requeues), its last error and the next steps of that sub-phase (DUAL-WRITE waiting for the finalize annotation is low). Probe failures and back-offs of a pod that is Running and Ready in the bundle are low and marked transient. Each issue is attributed to a component and an instance (CR name), and to its connector: `--component` keeps some of them, the HTML report has Component / Instance / Connector filters. 🔒 `--sanitize` replaces secrets, IPs, hostnames, emails and LDAP DNs by placeholders (best effort: review before sharing). `--logs-only` gives the plain log digest instead. 🎯 `--problem` "\<component, symptom, since when\>" matches the bundle against what the customer reports: the issues that explain it first, a verdict (explained, not explained, not covered by the logs), the changes before the date. 📥 A Data to request section says what to ask the customer for next, with why and the command: from the gaps of the bundle (logs that start too late, previous logs of restarted containers, no events, no operator log), from its findings (OOMKilled, Pending pods, TLS, failed connectors) and from the symptoms of `--problem`.
 
@@ -68,6 +95,8 @@ playground analyze logs [OPTIONS]
 
 - **connect_task_failure**: Connect worker log: Oracle XStream connector with a wrong password, an unknown outbound server, and a task failing after the outbound server was stopped
 - **support_bundle**: .zip with that log and a gzipped broker log
+- **kafka_streams**: logs of the 3 instances of other/kafka-streams (serde-errors.sh): an application in ERROR after a poison pill, its dead stream thread, deserialization and production handler errors, the 🌊 Kafka Streams section (state, rebalances, tasks, timeline)
+- **kafka_clients**: logs of the non-Java clients (C/C++, Python, Go, .NET, JavaScript, KafkaJS, Rust) of other/client-\*: a broker that refuses connections or does not resolve, records timed out, an unknown property, and crashes (Python traceback, .NET unhandled exception, Go and Rust panics, uncaught Node.js error)
 - **cfk_bundle**: CFK support bundle: kafka-2 crash-looping on an expired certificate, pending volume, OOMKilled Connect pod, failed connector task, Schema Registry authentication failure, operator reconcile errors
 - **cfk_kraft_migration**: CFK support bundle: ZooKeeper to KRaft migration (KRaftMigrationJob) stuck for 3 days in SETUP, the KRaftController missing inter replication credentials
 - **cfk_rollout**: CFK support bundle: CP upgrade half done (KRaftController still blocked, Kafka roll stuck at 2/3), operator pod refused by the ResourceQuota, stale "Reconcile is blocked" conditions, operator log that starts after the last change
@@ -76,7 +105,7 @@ playground analyze logs [OPTIONS]
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Repeatable:     |  ✓ Yes
-| Allowed Values: | `connect_task_failure`, `support_bundle`, `cfk_bundle`, `cfk_kraft_migration`, `cfk_rollout`, `cfk_rollout_after`
+| Allowed Values: | `connect_task_failure`, `support_bundle`, `kafka_streams`, `kafka_clients`, `cfk_bundle`, `cfk_kraft_migration`, `cfk_rollout`, `cfk_rollout_after`
 
 #### `--include-warnings`
 

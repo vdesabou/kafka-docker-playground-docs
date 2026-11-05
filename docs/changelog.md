@@ -3,6 +3,7 @@
 ## November 2026
 ##### 🌟 Enhancements
 
+- 🧠📚 Add "start from your area" entry pages: brokers, schemas, platform and security [#10091](https://github.com/vdesabou/kafka-docker-playground/issues/10091)
 - 👾🪝 Add Webhook Source Fully Managed Connector example [#10087](https://github.com/vdesabou/kafka-docker-playground/issues/10087)
 - 🧠🚦 New example other/rbac-centralized-acls: MDS centralized ACLs with RBAC [#10043](https://github.com/vdesabou/kafka-docker-playground/issues/10043)
 - ⭐🔐 New environment sasl-oauthbearer: SASL/OAUTHBEARER (OAuth / OIDC) with Keycloak [#10041](https://github.com/vdesabou/kafka-docker-playground/issues/10041)
@@ -46,6 +47,7 @@
 
 ##### 🐛 Bugs
 
+- 🐛🛢️ db sql: retry over TCP when MySQL refuses the socket (ERROR 2002) on cfk [#10092](https://github.com/vdesabou/kafka-docker-playground/issues/10092)
 - 🐛🛢️ Debezium PostgreSQL incremental snapshot and fully managed XStream examples fail since db sql stops at the first error (duplicate CREATE FUNCTION, stray END; after orclcdc\_readiness.sql) [#10089](https://github.com/vdesabou/kafka-docker-playground/issues/10089)
 - 🐛💱 topic produce --transactional-id fails on cfk: could not copy the transactional copier to connect-0 [#10037](https://github.com/vdesabou/kafka-docker-playground/issues/10037)
 - 🐛📥 playground topic consume --tail never shows the newest record (multi-line record parser waits for the next one) [#10021](https://github.com/vdesabou/kafka-docker-playground/issues/10021)

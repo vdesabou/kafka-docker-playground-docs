@@ -3,6 +3,7 @@
 ## November 2026
 ##### 🌟 Enhancements
 
+- 🧠🔭 analyze logs: overview of what the logs contain when no record is found (period, levels, top messages, what to ask for next) [#10142](https://github.com/vdesabou/kafka-docker-playground/issues/10142)
 - 🧠🧰 analyze logs: read CSV exports of log events (Kibana / OpenSearch Discover, Splunk, Datadog, Grafana) [#10140](https://github.com/vdesabou/kafka-docker-playground/issues/10140)
 - 🧠☕ --client-version: TAB completion with the versions of the client the example builds [#10138](https://github.com/vdesabou/kafka-docker-playground/issues/10138)
 - 🧠🧰 analyze logs: read the logs of every Kafka client (librdkafka, Python, Go, .NET, JavaScript, Rust) [#10136](https://github.com/vdesabou/kafka-docker-playground/issues/10136)

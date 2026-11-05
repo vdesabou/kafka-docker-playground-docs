@@ -59,6 +59,9 @@ A binary search over the versions of Confluent Hub: each probed version is downl
 read without a worker, like playground connector-plugin config-diff (about 5 s per version, 6 or 7 versions).  
 Needs one connector (`--connector-class`). The plugin is found from the examples, or set with `--connector-plugin`.
 
+Debezium connectors (io.debezium.\*): when no Confluent Hub version has the key (a key of a newer upstream  
+release), the upstream Debezium releases of Maven Central (.Final) are searched the same way, from their jars.
+
 #### `--connector-plugin CONNECTOR-PLUGIN`
 
 🔌 Plugin of the connector for `--since-version` (owner/name), when the examples don't tell it
@@ -87,6 +90,10 @@ playground connector-plugin config-key -k errors.tolerance -c jdbc --max-example
 
 ```bash
 playground connector-plugin config-key -k batch.max.rows -c io.confluent.connect.jdbc.JdbcSourceConnector --since-version
+```
+
+```bash
+playground connector-plugin config-key -k offset.mismatch.strategy -c io.debezium.connector.postgresql.PostgresConnector --since-version
 ```
 
 ## Example output

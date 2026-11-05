@@ -209,7 +209,10 @@ visit https://docs.docker.com/get-docker to install
   - [install-alfred-workflow](playground%20tools%20install-alfred-workflow) - 🎩 Install the "kafka-docker-playground (kdp)" Alfred workflow (macOS, Alfred 5 with the Powerpack)
   - [read-avro-file](playground%20tools%20read-avro-file) - 🔖 Read provided avro file
   - [read-parquet-file](playground%20tools%20read-parquet-file) - 🔖 Read provided parquet file
-  - [certs-create](playground%20tools%20certs-create) - 🔐 Generate keys and certificates used for SSL
+  - [cert](playground%20tools%20cert) - 🔐 Certificate commands
+    - [create](playground%20tools%20cert%20create) - 🔐 Generate keys and certificates used for SSL
+    - [inspect](playground%20tools%20cert%20inspect) - 🔍 Inspect certificates and explain what breaks TLS
+    - [convert](playground%20tools%20cert%20convert) - 🔄 Convert certificates and keystores between formats
   - [redos-check](playground%20tools%20redos-check) - 🪖 Check topics.regex for ReDos vulnerabilities using recheck (https://github.com/makenowjust-labs/recheck)
   - [http-server](playground%20tools%20http-server) - 🌐 Drive the http test server of the http examples
     - [set-response](playground%20tools%20http-server%20set-response) - 🎛️ Set how the http test server answers
@@ -288,6 +291,8 @@ visit https://docs.docker.com/get-docker to install
   - [describe](playground%20topic%20describe) - 🔬 Describe topic
   - [reassign](playground%20topic%20reassign) - 🔀 Move the replicas of a topic to other brokers
   - [elect-leader](playground%20topic%20elect-leader) - 👑 Elect the leaders of a topic
+  - [dump-log](playground%20topic%20dump-log) - 🔬 Dump the log segments of a partition: batches, producers, transactions
+  - [check-format](playground%20topic%20check-format) - 🧬 Check the format of the records of a topic, from their bytes
   - [set-schema-compatibility](playground%20topic%20set-schema-compatibility) - 🛡️ Change topic's schema compatibility
   - [consume](playground%20topic%20consume) - 📥 Consume topic from beginning
   - [produce](playground%20topic%20produce) - 📤 Produce to a topic

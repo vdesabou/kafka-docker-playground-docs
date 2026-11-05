@@ -367,6 +367,7 @@ Using single cluster:
 - [PLAINTEXT](https://github.com/vdesabou/kafka-docker-playground/tree/master/environment/plaintext): no security :environment/plaintext:
 - [SASL/PLAIN](https://github.com/vdesabou/kafka-docker-playground/tree/master/environment/sasl-plain): no SSL encryption, SASL/PLAIN authentication :environment/sasl-plain:
 - [SASL/SCRAM](https://github.com/vdesabou/kafka-docker-playground/tree/master/environment/sasl-scram) no SSL encryption, SASL/SCRAM-SHA-256 authentication :environment/sasl-scram:
+- [SASL/OAUTHBEARER](https://github.com/vdesabou/kafka-docker-playground/tree/master/environment/sasl-oauthbearer) no SSL encryption, SASL/OAUTHBEARER (OAuth 2.0 / OIDC) authentication with Keycloak as identity provider :environment/sasl-oauthbearer:
 - [SASL/SSL](https://github.com/vdesabou/kafka-docker-playground/tree/master/environment/sasl-ssl): SSL encryption, SASL/PLAIN authentication :environment/sasl-ssl:
 - [2WAY/SSL](https://github.com/vdesabou/kafka-docker-playground/tree/master/environment/2way-ssl): SSL encryption, SSL authentication :environment/2way-ssl:
 - [KERBEROS](https://github.com/vdesabou/kafka-docker-playground/tree/master/environment/kerberos): no SSL encryption, Kerberos GSSAPI authentication :environment/kerberos:
@@ -405,6 +406,7 @@ Using Multi-Data-Center setup with 🇺🇸 and 🇪🇺 clusters
 - 🙊 [Secrets Management](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/secrets-management) with Connect :other/secrets-management:
 - ⛓ [Connect Secret Registry](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/connect-secret-registry) :other/connect-secret-registry:
 - 🧢 [RBAC with SR Basic Auth and ACLs](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/rbac-with-sr-basic-auth-acl) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
+- 🚦 [MDS centralized ACLs with RBAC](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/rbac-centralized-acls) centralized ACLs vs kafka-acls, DENY over a role binding, LDAP group ACLs :other/rbac-centralized-acls:
 - 🤿 [Anonymous SR-example with RBAC](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/rbac-with-anonymous-sr) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
 - 🖇️ [Monitoring cluster linking](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/monitoring-cluster-linking) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
 
@@ -439,6 +441,7 @@ All the examples below run their statements with `playground ksqldb sql`, and wa
 
 ## 🐿️ Flink
 - [Flink SQL with Kafka](https://github.com/vdesabou/kafka-docker-playground/tree/master/flink/flink-sql-kafka): streaming and batch Flink SQL on Kafka topics with `playground flink sql|list-jobs|cancel` :flink/flink-sql-kafka:
+- [Flink SQL on Confluent Cloud](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/flink-sql-kafka): a compute pool and Flink SQL statements on Confluent Cloud topics with `playground flink sql|list-jobs|cancel --environment ccloud` :ccloud/flink-sql-kafka:
 
 ## 🔰 Schema Registry
 - [How to use Data Contracts](https://github.com/vdesabou/kafka-docker-playground/tree/master/schema-registry/data-contracts) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)

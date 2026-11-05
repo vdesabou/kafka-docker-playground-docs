@@ -25,6 +25,7 @@ command works on plaintext, on sasl-ssl and on Confluent Cloud.
 
 - **list / describe / alter / delete**
 - **reassign / elect-leader**: move replicas between brokers, move leaders
+- **dump-log**: the batches of a partition on disk: producers, transactions, sizes
 - **dlq inspect / replay**: dead letter queue grouped by error, and replay
 - **set-schema-compatibility**: compatibility of the topic subjects
 - **tag**: stream catalog tags (Confluent Cloud only)
@@ -54,6 +55,8 @@ playground topic COMMAND
 - [describe](playground%20topic%20describe) - 🔬 Describe topic
 - [reassign](playground%20topic%20reassign) - 🔀 Move the replicas of a topic to other brokers
 - [elect-leader](playground%20topic%20elect-leader) - 👑 Elect the leaders of a topic
+- [dump-log](playground%20topic%20dump-log) - 🔬 Dump the log segments of a partition: batches, producers, transactions
+- [check-format](playground%20topic%20check-format) - 🧬 Check the format of the records of a topic, from their bytes
 - [set-schema-compatibility](playground%20topic%20set-schema-compatibility) - 🛡️ Change topic's schema compatibility
 - [consume](playground%20topic%20consume) - 📥 Consume topic from beginning
 - [produce](playground%20topic%20produce) - 📤 Produce to a topic

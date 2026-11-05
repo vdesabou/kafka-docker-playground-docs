@@ -1,4 +1,4 @@
-# playground tools certs-create
+# playground tools cert create
 
 🔐 Generate keys and certificates used for SSL
 
@@ -10,7 +10,7 @@ or to build a set for a container the playground does not know about.
 ## Usage
 
 ```bash
-playground tools certs-create [OPTIONS]
+playground tools cert create [OPTIONS]
 ```
 
 ## Options

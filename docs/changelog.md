@@ -3,6 +3,7 @@
 ## November 2026
 ##### 🌟 Enhancements
 
+- ⭐🔐 New environment rbac-oauth: RBAC with OAuth / OIDC, MDS with Keycloak [#10134](https://github.com/vdesabou/kafka-docker-playground/issues/10134)
 - 🧠🌊 playground streams status + Kafka Streams view in analyze logs [#10130](https://github.com/vdesabou/kafka-docker-playground/issues/10130)
 - 👾🌊 Kafka Streams examples: windowed, join, eos and serde-errors scenarios [#10125](https://github.com/vdesabou/kafka-docker-playground/issues/10125)
 - 👾🌊 Kafka Streams example, and playground run --client-version for the customer's client version [#10114](https://github.com/vdesabou/kafka-docker-playground/issues/10114)

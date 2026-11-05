@@ -1,6 +1,6 @@
 # playground rbac user delete
 
-🗑️ Delete an LDAP user, and remove it from its groups (the Keycloak client on rbac-oauth)
+🗑️ Delete an LDAP user, and remove it from its groups
 
 Its role bindings and ACLs are not deleted.
 

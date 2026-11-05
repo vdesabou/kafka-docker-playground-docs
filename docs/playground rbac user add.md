@@ -1,11 +1,10 @@
 # playground rbac user add
 
-➕ Add an LDAP user (a Keycloak client on rbac-oauth)
+➕ Add an LDAP user
 
 The user can connect right away. MDS picks up new group  
 memberships (for Group:`<name>` role bindings) within its LDAP  
-refresh interval (60 seconds by default). On rbac-oauth, the  
-groups are in the next token of the client.
+refresh interval (60 seconds by default).
 
 ## Usage
 
@@ -49,10 +48,6 @@ playground rbac user add --user bob
 
 ```bash
 playground rbac user add --user bob --password bob-pwd --group KafkaDevelopers
-```
-
-```bash
-playground rbac user add --user carol --group kafka-developers
 ```
 
 

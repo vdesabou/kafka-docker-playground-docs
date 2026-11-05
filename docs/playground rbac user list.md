@@ -1,6 +1,6 @@
 # playground rbac user list
 
-📋 List LDAP users and their groups (Keycloak clients, secrets and groups on rbac-oauth)
+📋 List LDAP users and their groups
 
 ## Usage
 

@@ -426,7 +426,7 @@ Docker images tags being used can be overridden by exporting following environme
 * ksqlDb (`CP_KSQL_TAG`) and ksqlDB CLI (`CP_KSQL_CLI_TAG`): `--ksqldb-tag` sets both
 * rest-proxy (`CP_REST_PROXY_TAG`)
 
-The java applications that some examples build (Kafka Streams, producers, consumers) use the Apache Kafka clients matching the CP version (`KAFKA_CLIENT_TAG`, CP 8.2 → 4.2.0). `--client-version 3.7.1` (`CLIENT_VERSION`) pins another version, a patch version included, for example the customer's Kafka Streams version. For the client examples (`other/client-*`, `ccloud/client-*`), it is the version of their client (librdkafka, confluent-kafka-python…). Press <kbd>TAB</kbd> after `--client-version` (with `-f` typed before it, otherwise the last example run is used) to pick one of the published versions of that client in fzf, releases first; the interactive menu offers the same list.
+The java applications that some examples build (Kafka Streams, producers, consumers) use the Apache Kafka clients matching the CP version (`KAFKA_CLIENT_TAG`, CP 8.2 → 4.2.0). `--client-version 3.7.1` (`CLIENT_VERSION`) pins another version, a patch version included, for example the customer's Kafka Streams version. For the client examples (`other/client-*`, `ccloud/client-*`), it is the version of their client (librdkafka, confluent-kafka-python…).
 
 *Example:* schema registry 7.9.1 with everything else on 8.3.2:
 
@@ -691,23 +691,32 @@ JMX metrics are available locally on those ports:
 * controller: `10005` (Kraft mode)
 * zookeeper: `9999` (CP < 8 only)
 
-For a digest instead of raw MBeans, one command per component, with ⚠️ on the values to look at:
-
-| Component | Command |
-| --- | --- |
-| brokers, and the controllers (KRaft) | [playground broker metrics](/playground%20broker%20metrics) (`--topic <t>`, `--controller` for the controller section only, `--json`) |
-| a connector, one column per task | [playground connector metrics](/playground%20connector%20metrics) (`--connector <c>`, `--watch 10s`, `--json`) |
-| the connect workers | `playground connector metrics --worker` |
-| Schema Registry | [playground schema metrics](/playground%20schema%20metrics) |
-| ksqlDB | [playground ksqldb metrics](/playground%20ksqldb%20metrics) |
-
-For the raw MBeans, use [playground get-jmx-metrics](/playground%20get-jmx-metrics). `--container` (`-c`) can be repeated (default is `connect`). Without a filter, it lists the JMX domains of the container: then `--domain` (`-d`) dumps one or several domains, `--mbean` (`-m`, repeatable) only the MBeans matching a name (a `*` is allowed in a value: `"kafka.server:type=ReplicaManager,*"`), and `--all` every MBean. `--open` (`-o`) saves the output to `/tmp/jmx_metrics-<container>.log` and opens it with your editor. It works with any container that exposes JMX (its port is read from the `*_JMX_PORT` environment variable of the container: `broker2`, `ksqldb-server`, `broker-us` in `mdc-*` environments…) and with the pods of `cfk`, and jmxterm runs inside the container: no local Java needed.
+In order to easily gather JMX metrics, you can use [playground get-jmx-metrics](/playground%20get-jmx-metrics) command. `--container` (`-c`) can be repeated (default is `connect`), `--domain` (`-d`) restricts the list of domains and `--open` (`-o`) saves the output to `/tmp/jmx_metrics-<container>.log` and opens it with your editor. It works with any container that exposes JMX (its port is read from the `*_JMX_PORT` environment variable of the container: `broker2`, `ksqldb-server`, `broker-us` in `mdc-*` environments…) and with the pods of `cfk`, and jmxterm runs inside the container: no local Java needed.
 
 ```bash
-playground get-jmx-metrics -c connect                                          # the domains of the container
 playground get-jmx-metrics -c connect -c broker --domain "kafka.server"
-playground get-jmx-metrics -c broker --mbean "kafka.server:type=ReplicaManager,*"
-playground get-jmx-metrics -c connect --all --open                             # everything, in your editor
+```
+
+Example (without specifying domain):
+
+```bash
+$ playground get-jmx-metrics -c connect
+17:35:35 ❗ You did not specify a list of domains, all domains will be exported!
+17:35:35 ℹ️ This is the list of domains for container connect
+JMImplementation
+com.sun.management
+java.lang
+java.nio
+java.util.logging
+jdk.management.jfr
+kafka.admin.client
+kafka.connect
+kafka.consumer
+kafka.producer
+####### domain ALL ########
+Welcome to JMX terminal. Type "help" for available commands.
+#mbean = JMImplementation:type=MBeanServerDelegate:
+…
 ```
 
 Example (specifying domain):
@@ -720,7 +729,8 @@ $ playground get-jmx-metrics -c connect -d "kafka.connect kafka.consumer kafka.p
 …
 ```
 
-The [observability deep dive](/deep-dive-observability.md) maps each support question to its metric.
+> [!TIP]
+> For a digest instead of raw MBeans: [playground broker metrics](/playground%20broker%20metrics) and [playground connector metrics](/playground%20connector%20metrics).
 
 ## 📝 See properties file
 

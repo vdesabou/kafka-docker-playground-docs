@@ -12,17 +12,7 @@ Answers "is the broker the bottleneck?", for example during a
 `playground connector benchmark`. With `--topic`, the rates and failed  
 requests are the ones of this topic.
 
-Then the controller section: active controller, offline partitions,  
-partitions and topics of the cluster, preferred replica imbalance, last  
-applied record lag, unclean leader elections. In KRaft these metrics are  
-the ones of the controller containers (controller, controller2,  
-controller3); with ZooKeeper, of the broker that is the active  
-controller. `--controller` shows only this section.
-
-🎓 Tip: every metric of a broker: playground get-jmx-metrics -c broker  
-`--domain` kafka.server
-
-🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-observability
+🎓 Tip: every metric of a broker: playground get-jmx-metrics -c broker
 
 ## Usage
 
@@ -40,15 +30,9 @@ playground broker metrics [OPTIONS]
 
 🗳 Rates and failed requests of this topic only
 
-#### `--controller`
-
-🗳️ Only the controller section (KRaft controllers, or the brokers with  
-ZooKeeper), with `--json` too
-
 #### `--json`
 
-📗 Print the raw values as JSON, one object per broker (per controller  
-with `--controller`), and nothing else
+📗 Print the raw values as JSON, one object per broker, and nothing else
 
 #### `--verbose, -v`
 
@@ -76,10 +60,6 @@ playground broker metrics --topic orders
 
 ```bash
 playground broker metrics --broker 1 --json
-```
-
-```bash
-playground broker metrics --controller
 ```
 
 

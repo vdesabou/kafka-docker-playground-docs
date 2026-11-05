@@ -2,16 +2,14 @@
 
 🔢 Get JMX metrics from a container
 
-Dumps every attribute of the MBeans of a container: the ones of `--domain`,  
-or of `--mbean`, or all of them with `--all`. Without any of them, it lists  
-the domains of the container. jmxterm runs inside the container: no local  
-Java needed. Works with any container that exposes JMX (broker, broker2,  
+Dumps every attribute of the MBeans of a container (all domains, or the  
+ones of `--domain`), with jmxterm run inside the container: no local Java  
+needed. Works with any container that exposes JMX (broker, broker2,  
 connect, schema-registry, ksqldb-server, broker-us in mdc-\*  
 environments...) and with the pods of cfk.
 
-🎓 Tip: for a digest instead of raw MBeans: `playground broker metrics`  
-(brokers and controllers), `playground connector metrics` (`--worker` for  
-the workers), `playground schema metrics`, `playground ksqldb metrics`.
+🎓 Tip: for a digest instead of raw MBeans, use 'playground broker  
+metrics' or `playground connector metrics`.
 
 👉 Check documentation https://kafka-docker-playground.io/#/how-to-use?id=%f0%9f%94%a2-jmx-metrics
 
@@ -44,21 +42,6 @@ playground get-jmx-metrics [OPTIONS]
 
 Domain name
 
-#### `--mbean, -m MBEAN`
-
-🫘 Only the MBeans matching this name (repeatable): a \* is allowed in a  
-value, the keys can be in any order
-
-Example: `--mbean` "kafka.server:type=ReplicaManager,\*"
-
-| Attributes      | &nbsp;
-|-----------------|-------------
-| Repeatable:     |  ✓ Yes
-
-#### `--all`
-
-📦 Every MBean of every domain (a large output: prefer `--domain` or `--mbean`)
-
 ## Examples
 
 ```bash
@@ -74,19 +57,11 @@ playground get-jmx-metrics -c broker
 ```
 
 ```bash
-playground get-jmx-metrics -c broker --mbean "kafka.server:type=ReplicaManager,*"
-```
-
-```bash
-playground get-jmx-metrics -c connect --all --open
-```
-
-```bash
 playground get-jmx-metrics -c connect -c broker
 ```
 
 ```bash
-playground get-jmx-metrics --container schema-registry --container ksqldb-server --domain "kafka.schema.registry io.confluent.ksql.metrics" --open
+playground get-jmx-metrics --container schema-registry --container ksqldb-server --open
 ```
 
 ```bash

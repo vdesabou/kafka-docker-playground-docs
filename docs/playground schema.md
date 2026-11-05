@@ -14,7 +14,6 @@ and the credentials yourself.
 - **get**: every version of a subject, or of all subjects
 - **get-compatibility**: the compatibility rule in force (subject or global)
 - **get-mode / get-alias**
-- **metrics**: the server: requests, errors, latency, schemas created and deleted
 
 **✍️ Write**
 
@@ -87,9 +86,5 @@ playground schema COMMAND
 - [derive-schema](playground%20schema%20derive-schema) - 🪄 Derive a schema based on payload
 - [set-alias](playground%20schema%20set-alias) - 🔯 Set a subject alias
 - [get-alias](playground%20schema%20get-alias) - 🔯 Get subject alias
-
-## Commands
-
-- [metrics](playground%20schema%20metrics) - 📈 Display the key JMX metrics of Schema Registry
 
 

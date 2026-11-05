@@ -200,6 +200,20 @@ With Control Center Next Gen (default), this is the version of the confluentinc/
 
 With `--enable-legacy-control-center`, this is a CP version (\< 8), by default the one of `--tag`
 
+#### `--client-version CLIENT_VERSION`
+
+☕ Version of the client library that the example builds, for example the customer's version
+
+It sets `CLIENT_VERSION` environment variable:
+
+- java applications built with the Apache Kafka clients (Kafka Streams, producers, consumers, for example other/kafka-streams-count): the Apache Kafka version (for example 3.7.1), used as `KAFKA_CLIENT_TAG` (mvn -Dkafka.client.tag) instead of the X.Y.0 matching the CP version
+
+- client examples (other/client-\*, ccloud/client-\*): the version of their Confluent client (librdkafka, confluent-kafka-go, confluent-kafka-python…), see their README
+
+It can differ from the brokers, a patch version included
+
+🎓 Tip: the interactive menu only offers it for the examples that use it
+
 #### `--connector-tag CONNECTOR_TAG`
 
 🔗 Connector version to use

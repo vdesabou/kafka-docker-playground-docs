@@ -3,6 +3,7 @@
 ## November 2026
 ##### 🌟 Enhancements
 
+- 👾🧩 Add Java, C, Go, Python and JavaScript client examples (onprem and Confluent Cloud) [#10109](https://github.com/vdesabou/kafka-docker-playground/issues/10109)
 - 👾🦀 Add Rust client example with Confluent Cloud [#10101](https://github.com/vdesabou/kafka-docker-playground/issues/10101)
 - 👾🦀 Add Rust client example [#10098](https://github.com/vdesabou/kafka-docker-playground/issues/10098)
 - 🧠🔍 find-example --category security|broker|cfk|client: topic categories across folders [#10095](https://github.com/vdesabou/kafka-docker-playground/issues/10095)

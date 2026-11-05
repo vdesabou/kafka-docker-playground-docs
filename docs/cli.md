@@ -314,6 +314,7 @@ visit https://docs.docker.com/get-docker to install
   - [derive-schema](playground%20schema%20derive-schema) - 🪄 Derive a schema based on payload
   - [set-alias](playground%20schema%20set-alias) - 🔯 Set a subject alias
   - [get-alias](playground%20schema%20get-alias) - 🔯 Get subject alias
+  - [metrics](playground%20schema%20metrics) - 📈 Display the key JMX metrics of Schema Registry
 
 ### TCP Proxy commands
 
@@ -459,6 +460,7 @@ visit https://docs.docker.com/get-docker to install
   - [list](playground%20ksqldb%20list) - 📋 List the streams, tables and persistent queries
   - [describe](playground%20ksqldb%20describe) - 🔎 Describe a stream or a table
   - [wait](playground%20ksqldb%20wait) - ⏳ Wait until the persistent queries are RUNNING and have no lag
+  - [metrics](playground%20ksqldb%20metrics) - 📈 Display the key JMX metrics of the ksqlDB server
 
 ### Database commands
 

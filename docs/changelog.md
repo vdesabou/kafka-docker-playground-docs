@@ -50,6 +50,7 @@
 
 ##### 🐛 Bugs
 
+- 🐛📜 analyze logs: no Occurrences over time chart and wrong period on journalctl logs [#10107](https://github.com/vdesabou/kafka-docker-playground/issues/10107)
 - 🐛⛅ run: a successful ccloud example exits 1 when no topic is left on the cluster [#10103](https://github.com/vdesabou/kafka-docker-playground/issues/10103)
 - 🐛🛢️ db sql: retry over TCP when MySQL refuses the socket (ERROR 2002) on cfk [#10092](https://github.com/vdesabou/kafka-docker-playground/issues/10092)
 - 🐛🛢️ Debezium PostgreSQL incremental snapshot and fully managed XStream examples fail since db sql stops at the first error (duplicate CREATE FUNCTION, stray END; after orclcdc\_readiness.sql) [#10089](https://github.com/vdesabou/kafka-docker-playground/issues/10089)

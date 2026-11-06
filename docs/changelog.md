@@ -3,6 +3,7 @@
 ## November 2026
 ##### 🌟 Enhancements
 
+- 🧠📚 Add an Open in GitHub Codespaces button: devcontainer + docs [#10180](https://github.com/vdesabou/kafka-docker-playground/issues/10180)
 - 🧠⚡ Add a one-line installer: curl -fsSL https://kafka-docker-playground.io/install.sh | bash [#10178](https://github.com/vdesabou/kafka-docker-playground/issues/10178)
 - 🧠📚 Organize the Content page by area, like Start from your area [#10174](https://github.com/vdesabou/kafka-docker-playground/issues/10174)
 - 👾🔰 Add Explicit Topic-Subject Associations example [#10172](https://github.com/vdesabou/kafka-docker-playground/issues/10172)

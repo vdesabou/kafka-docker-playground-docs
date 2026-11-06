@@ -62,6 +62,9 @@
 
 ##### 🐛 Bugs
 
+- 🐛⛅ other/cli: topic-produce-and-consume.sh consumes the topics of other CI jobs on Confluent Cloud, deleted meanwhile [#10162](https://github.com/vdesabou/kafka-docker-playground/issues/10162)
+- 🐛🧪 deep-dive lab container-logs.sh: root cause rows check fails since the rows have an id [#10161](https://github.com/vdesabou/kafka-docker-playground/issues/10161)
+- 🐛🔰 schema test-rules: every record fails with java.net.BindException since Schema Registry opens remote JMX on port 10001 [#10160](https://github.com/vdesabou/kafka-docker-playground/issues/10160)
 - 🐛🔍 analyze logs: JSON exports of log events (CloudWatch Logs Insights, OpenSearch) are not analyzed [#10127](https://github.com/vdesabou/kafka-docker-playground/issues/10127)
 - 🐛⏱️ connect-gcp-bigquery-sink: poll BigQuery instead of a fixed sleep 125 [#10117](https://github.com/vdesabou/kafka-docker-playground/issues/10117)
 - 🐛☸️ cfk: the k3d node runs out of ephemeral storage and every following example of the job fails [#10116](https://github.com/vdesabou/kafka-docker-playground/issues/10116)

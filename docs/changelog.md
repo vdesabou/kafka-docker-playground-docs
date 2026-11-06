@@ -71,6 +71,7 @@
 
 ##### 🐛 Bugs
 
+- 🐛☁️ ccloud/replicator and ccloud/mirrormaker2: KRaft source clusters, back in CI with CP 8 [#10218](https://github.com/vdesabou/kafka-docker-playground/issues/10218)
 - 🐛🧹 Fix and add to CI 39 untested examples (ksqlDB, REST Proxy, Schema Registry, LDAP, RBAC) [#10206](https://github.com/vdesabou/kafka-docker-playground/issues/10206)
 - 🐛📃 write-logs-to-topic: no logs sent to the topic with CP 8 (log4j2) nor CP 7 [#10192](https://github.com/vdesabou/kafka-docker-playground/issues/10192)
 - 🐛⛅ other/cli: topic-produce-and-consume.sh consumes the topics of other CI jobs on Confluent Cloud, deleted meanwhile [#10162](https://github.com/vdesabou/kafka-docker-playground/issues/10162)

@@ -1,7 +1,22 @@
 
 # 👾 Content
 
-## 🔗 Connectors
+The examples are grouped by area, the same way as [🗺️ Start from your area](/areas.md): each area page lists the questions you get, the command or example that answers each one, and the deep dives to read.
+
+| Area | Examples in this page |
+| --- | --- |
+| [🔗 Connect](/area-connect.md) | self-managed connectors, fully managed connectors, custom connectors and SMTs, the dead letter queue, Connect logs and monitoring |
+| [🖥️ Brokers, clients and observability](/area-core-observability.md) | brokers, transactions, partition reassignment, Tiered Storage, Cluster Linking, Replicator, MirrorMaker 2, Control Center, logs and monitoring, Java clients |
+| [🌊 Streams, schemas and non-Java clients](/area-streams-schema-registry.md) | Schema Registry and schema formats, ksqlDB, Flink, Kafka Streams, .NET / JavaScript / Python / Go / Rust / C clients, REST Proxy |
+| [🛡️ Platform, security and Cloud infra](/area-platform-security.md) | secured environments (SASL, SSL, Kerberos, LDAP, RBAC, OAuth), CFK, audit logs, security plugins, secrets, Confluent Cloud networking |
+
+Looking for Confluent Cloud or commercial features across all areas? See [☁️ Confluent Cloud](/content?id=☁%EF%B8%8F-confluent-cloud) and [💸 Confluent Commercial](/content?id=💸-confluent-commercial) at the end of the page.
+
+## 🔗 Connect
+
+📖 Questions, commands and deep dives of this area: [🔗 Connect](/area-connect.md).
+
+### 🔗 Connectors
 
 Onprem (self-managed) connector examples support both Docker Compose and CFK (Confluent for Kubernetes) environments.
 
@@ -172,18 +187,23 @@ Onprem (self-managed) connector examples support both Docker Compose and CFK (Co
 
 \* You can change default connector version by setting `CONNECTOR_TAG` environment variable before starting a test, get more details [here](https://kafka-docker-playground.io/#/how-to-use?id=🔗-for-connectors)
 
-### 🔂 Standalone connector examples
+#### 🔂 Standalone connector examples
 
 * <img src="https://github.com/vdesabou/kafka-docker-playground/raw/master/images/icons/sql_server.png" width="15"> Self Managed example with [Debezium CDC Microsoft SQL Server Source](https://github.com/vdesabou/kafka-docker-playground/blob/master/connect/connect-debezium-sqlserver-source/debezium-sqlserver-source-standalone-worker.sh)
 
-### ➕ Other connector examples
+#### ➕ Other connector examples
 
 - 👬 [Separate principals](https://docs.confluent.io/current/connect/security.html#separate-principals) when using connectors: [example with SFTP source](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/connect-override-policy-sftp-source) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/41935442164/job/126942616975)  
 - 🏦 [Connect Centralized License](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/connect-centralized-license)
 - 🍥 [SMT tests covering all Confluent Platform-supported transforms](https://github.com/vdesabou/kafka-docker-playground/tree/master/connect/connect-testing-smt)
 - 🧪 [Test a transform chain step by step with playground connector smt test](https://github.com/vdesabou/kafka-docker-playground/tree/master/connect/connect-testing-smt-filestream-sink)
-
-## ☁️ Confluent Cloud
+- 📬 [How to process DLQ records with a sink connector](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/reprocess-dlq-messages-with-sink-connector), or replay them with `playground topic dlq replay` &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/2/2-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/40414130977/job/121892021762)  
+- 📃 [How to write connect logs to a kafka topic](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/write-logs-to-topic) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
+- 🕵️‍♀️ [Kafka Connect Sink Monitoring Demo](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/monitoring-sink-latency) Showcase different Kafka Connect Sink troubleshooting scenarios ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
+- 💱 [Kafka Connect JSONata Transform](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/kafka-connect-jsonata) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/42130850118/job/127606767694)  
+- 👽 [KIP-1054: Support external schemas in JSONConverter](https://github.com/vdesabou/kafka-docker-playground/tree/master/connect/connect-external-schemas-in-json-converter)  ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
+- 👊 [Integrate syslogs to detect SSH failure connections](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/syslog-logstash-ksqldb) using Syslog source connector, LogStash and ksqlDB &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/41354954626/job/124992926811)  
+- 🧬 [Confluent Cloud example of connector getting data from Audit Log cluster](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/audit-log-connector/) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/40414130977/job/121892021243)  
 
 ### 🤖 Fully-Managed Connectors
 
@@ -306,41 +326,40 @@ Onprem (self-managed) connector examples support both Docker Compose and CFK (Co
   - [Pinecone Sink](https://docs.confluent.io/cloud/current/connectors/cc-pinecone-sink.html) as it is not a Fully Managed connector
   - [Amazon DocumentDB Sink](https://docs.confluent.io/cloud/current/connectors/cc-amazon-document-db-sink/cc-document-db-sink.html) as Amazon DocumentDB [does not allow external network connections from the internet](https://docs.confluent.io/cloud/current/connectors/cc-amazon-document-db-sink/cc-document-db-sink.html#private-networking-setup)
 
-
-### 🛃 Custom Connectors
+#### 🛃 Custom Connectors
 
   - <img src="https://github.com/vdesabou/kafka-docker-playground/raw/master/images/icons/s3.png" width="15"> [Amazon S3 Sink](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/custom-connector-connect-aws-s3-sink) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/40414130977/job/121892020772)  
   - <img src="https://github.com/vdesabou/kafka-docker-playground/raw/master/images/icons/tabular.png" width="15"> [Apache Iceberg Sink](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/custom-connector-connect-iceberg-sink) &nbsp;
 
-### 🚇 Custom SMT
+#### 🚇 Custom SMT
 
   - <img src="https://github.com/vdesabou/kafka-docker-playground/raw/master/images/icons/http.png" width="15"> [HTTP V2 Sink](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/fm-custom-smt-http-v2-sink) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI fail](https://img.shields.io/badge/0/1-fail!-red)](https://github.com/vdesabou/kafka-docker-playground/issues/10154)  
   - <img src="https://github.com/vdesabou/kafka-docker-playground/raw/master/images/icons/mysql.png" width="15"> [JDBC MySQL Sink](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/fm-custom-smt-jdbc-mysql-sink) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/42130850118/job/127606767299)   
 
-### 🔗 Self-Managed Connectors
+#### 💫 Self-Managed Connectors with Confluent Cloud
 
 💫 Any connector example can be run as *self-managed* by using `--environment ccloud` option when running it with [playground run](/playground%20run) command ! This is also the case for any other [environment](/content?id=%f0%9f%94%90-environments)
 
-### 🧩 Kafka Connector Migration Utility
+#### 🧩 Kafka Connector Migration Utility
 
 Test Self-Managed connector mugration to Fully Managed using [playground connector connect-migration-utility](https://kafka-docker-playground.io/#/playground%20connector%20connect-migration-utility) CLI
 
 * <img src="https://github.com/vdesabou/kafka-docker-playground/raw/master/images/icons/cloudwatch_logs.svg" width="15"> [Amazon CloudWatch Metrics Sink](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/connect-migration-utility) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/41935442164/job/126942617441)  
 
-### 🚀 And much more...
+## 🖥️ Brokers, clients and observability
 
-  - 🌨 Using [Confluent for Kubernetes](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/confluent-for-kubernetes/) with Confluent Cloud ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
-  - ♻️ Confluent Replicator [OnPrem to cloud and Cloud to Cloud examples](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/replicator) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
-  - 🗺️ [Multi-Cluster Schema Registry](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/multiple-sr-hybrid) with hybrid configuration (onprem/confluent cloud) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
-  - 🔑 [Confluent REST Proxy Security Plugin](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/rest-proxy-security-plugin) with Principal Propagation &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/41935442164/job/126942617441)  
-  - 🗝️ [Confluent Schema Registry Security Plugin](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/schema-registry-security-plugin) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/40414130977/job/121892021243)  
-  - 📦 [Migrate Schemas to Confluent Cloud](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/migrate-schemas-to-confluent-cloud) using Confluent Replicator ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
-  - 🔰 [Confluent Cloud Networking](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/haproxy) using HAProxy ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
-  - 🌎️ [Apache Mirror Maker 2](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/mirrormaker2) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
-  - ♻️ [Cluster Linking Quick Start with service account only](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/cluster-linking-with-service-accounts-only) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
-  - 🧬 [Confluent Cloud example of connector getting data from Audit Log cluster](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/audit-log-connector/) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/40414130977/job/121892021243)  
+📖 Questions, commands and deep dives of this area: [🖥️ Brokers, clients and observability](/area-core-observability.md).
 
-## 🌍 Multi-Data-Center deployments
+### 🩺 Brokers
+
+- 🩺 [Broker health, failures, rolling restart and transactions](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/broker-health-and-transactions) with `playground broker health`, `stop`, `start`, `rolling-restart`, `metrics` and `transactions`, on 3 brokers &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/40968166745/job/123777867749)  
+- 🔀 [Partition reassignment and leader election](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/topic-reassign-and-leader-election) with `playground topic reassign` and `playground topic elect-leader`, on 3 brokers &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/40925498897/job/123629785642)  
+- 👻 Testing [KIP-108](https://cwiki.apache.org/confluence/display/KAFKA/KIP-108%3A+Create+Topic+Policy) [Create Topic Policy](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/create-topic-policy) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
+- 💾 [Tiered storage with AWS S3](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/tiered-storage-with-aws) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/40414130977/job/121892021528)  
+- ⚖ [Confluent Rebalancer](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/rebalancer) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
+- 💬 [MQTT Proxy](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/mqtt-proxy) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
+
+### 🌍 Multi-Data-Center deployments
 
 Using Multi-Data-Center setup with 🇺🇸 and 🇪🇺 clusters
 
@@ -357,58 +376,57 @@ Using Multi-Data-Center setup with 🇺🇸 and 🇪🇺 clusters
 - ♻️ [Cluster Linking](https://github.com/vdesabou/kafka-docker-playground/tree/master/multi-data-center/cluster-linking) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/3/3-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/41244151256/job/124663973917)  
 - 🔗 [Schema Linking](https://github.com/vdesabou/kafka-docker-playground/tree/master/multi-data-center/schema-linking) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/41244151256/job/124663973917)  
 
-## 🔐 Environments
+With Confluent Cloud:
 
-Using single cluster:
+- ♻️ Confluent Replicator [OnPrem to cloud and Cloud to Cloud examples](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/replicator) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
+- 🌎️ [Apache Mirror Maker 2](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/mirrormaker2) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
+- ♻️ [Cluster Linking Quick Start with service account only](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/cluster-linking-with-service-accounts-only) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
 
-- [PLAINTEXT](https://github.com/vdesabou/kafka-docker-playground/tree/master/environment/plaintext): no security &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/42130850118/job/127606767546)  
-- [SASL/PLAIN](https://github.com/vdesabou/kafka-docker-playground/tree/master/environment/sasl-plain): no SSL encryption, SASL/PLAIN authentication &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/41626572573/job/125885320840)  
-- [SASL/SCRAM](https://github.com/vdesabou/kafka-docker-playground/tree/master/environment/sasl-scram) no SSL encryption, SASL/SCRAM-SHA-256 authentication &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/41626572573/job/125885320840)  
-- [SASL/OAUTHBEARER](https://github.com/vdesabou/kafka-docker-playground/tree/master/environment/sasl-oauthbearer) no SSL encryption, SASL/OAUTHBEARER (OAuth 2.0 / OIDC) authentication with Keycloak as identity provider &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/41865258396/job/126697767450)  
-- [SASL/SSL](https://github.com/vdesabou/kafka-docker-playground/tree/master/environment/sasl-ssl): SSL encryption, SASL/PLAIN authentication &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/41935442164/job/126942617257)  
-- [2WAY/SSL](https://github.com/vdesabou/kafka-docker-playground/tree/master/environment/2way-ssl): SSL encryption, SSL authentication &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/41935442164/job/126942617257)  
-- [KERBEROS](https://github.com/vdesabou/kafka-docker-playground/tree/master/environment/kerberos): no SSL encryption, Kerberos GSSAPI authentication &nbsp; ![arm64](https://img.shields.io/badge/arm64-emulation%20required-orange) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/41626572573/job/125885320840)  
-- [SSL/KERBEROS](https://github.com/vdesabou/kafka-docker-playground/tree/master/environment/ssl_kerberos) SSL encryption, Kerberos GSSAPI authentication &nbsp; ![arm64](https://img.shields.io/badge/arm64-emulation%20required-orange) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/41935442164/job/126942617257)  
-- [LDAP Authentication with SASL/PLAIN](https://github.com/vdesabou/kafka-docker-playground/tree/master/environment/ldap-sasl-plain) no SSL encryption, SASL/PLAIN authentication using LDAP &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/41626572573/job/125885320840)  
-- [LDAP Authorizer with SASL/PLAIN](https://github.com/vdesabou/kafka-docker-playground/tree/master/environment/ldap-authorizer-sasl-plain) no SSL encryption, SASL/PLAIN authentication, LDAP Authorizer for ACL authorization &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/41626572573/job/125885320840)  
-- [RBAC with SASL/PLAIN](https://github.com/vdesabou/kafka-docker-playground/tree/master/environment/rbac-sasl-plain) RBAC with no SSL encryption, SASL/PLAIN authentication &nbsp; ![arm64](https://img.shields.io/badge/arm64-emulation%20required-orange) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/42059283925/job/127356141778)  
-- [RBAC with OAuth/OIDC](https://github.com/vdesabou/kafka-docker-playground/tree/master/environment/rbac-oauth) RBAC with no SSL encryption, SASL/OAUTHBEARER authentication, MDS with Keycloak as identity provider (no LDAP) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/42058509855/job/127353395430)  
+Monitoring:
 
-Using Confluent for Kubernetes (CFK) on k3d
-
-- [CFK](https://github.com/vdesabou/kafka-docker-playground/tree/master/environment/cfk): no security
-- [CFK with RBAC](https://github.com/vdesabou/kafka-docker-playground/tree/master/environment/cfk-rbac): RBAC with no SSL encryption, SASL/PLAIN authentication against LDAP, configured with CFK resources (`ConfluentRolebinding`, `KafkaRestClass`)
-
-Using Multi-Data-Center setup with 🇺🇸 and 🇪🇺 clusters
-
-- [PLAINTEXT](https://github.com/vdesabou/kafka-docker-playground/tree/master/environment/mdc-plaintext): no security &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/41626572573/job/125885320840)  
-- [SASL/PLAIN](https://github.com/vdesabou/kafka-docker-playground/tree/master/environment/mdc-sasl-plain): no SSL encryption, SASL/PLAIN authentication &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/41626572573/job/125885320840)  
-- [KERBEROS](https://github.com/vdesabou/kafka-docker-playground/tree/master/environment/mdc-kerberos): no SSL encryption, Kerberos GSSAPI authentication &nbsp; ![arm64](https://img.shields.io/badge/arm64-emulation%20required-orange) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/41626572573/job/125885320840)  
-
-## 💸 Confluent Commercial
-
-- 💻 Control Center
-  - [Control Center in "Read-Only" mode](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/control-center-readonly-mode/) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
-  - [Configuring Control Center with LDAP authentication](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/control-center-ldap-auth) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
-- 💾 Tiered Storage
-  - [Tiered storage with AWS S3](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/tiered-storage-with-aws) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/40414130977/job/121892021528)  
-- ⚖ [Confluent Rebalancer](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/rebalancer) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
-- 👴 [JMS Client](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/jms-client) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
-- 🗃️ [Audit Logs](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/audit-logs) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/2/2-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/40414130977/job/121892021528)  
-- 🗝️ [Confluent Schema Registry Security Plugin](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/schema-registry-security-plugin) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/40414130977/job/121892021528)  
-- 🔒️ [Confluent REST Proxy Security Plugin](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/rest-proxy-security-plugin) with SASL/SSL and 2WAY/SSL Principal Propagation &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/3/3-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/40414130977/job/121892021528)  
-- ♻️ [Cluster Linking](https://github.com/vdesabou/kafka-docker-playground/tree/master/multi-data-center/cluster-linking) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/3/3-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/41244151256/job/124663973917)  
-- 🔗 [Schema Linking](https://github.com/vdesabou/kafka-docker-playground/tree/master/multi-data-center/schema-linking) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/41244151256/job/124663973917)  
-- 📒 [Testing RBAC with Azure AD](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/rbac-with-azure-ad) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
-- 🛂 [Schema Validation on Confluent Server](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/broker-schema-validation) Schema Validation on Confluent Server &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/2/2-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/40414130977/job/121892021528)  
-- 🙊 [Secrets Management](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/secrets-management) with Connect &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/40414130977/job/121892021528)  
-- ⛓ [Connect Secret Registry](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/connect-secret-registry) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/40593203486/job/122502421276)  
-- 🧢 [RBAC with SR Basic Auth and ACLs](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/rbac-with-sr-basic-auth-acl) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
-- 🚦 [MDS centralized ACLs with RBAC](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/rbac-centralized-acls) centralized ACLs vs kafka-acls, DENY over a role binding, LDAP group ACLs &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/41866867741/job/126703184895)  
-- 🤿 [Anonymous SR-example with RBAC](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/rbac-with-anonymous-sr) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
 - 🖇️ [Monitoring cluster linking](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/monitoring-cluster-linking) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
 
-## 🎏 KSQL
+### 💻 Control Center
+
+- [Control Center in "Read-Only" mode](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/control-center-readonly-mode/) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
+- [Configuring Control Center with LDAP authentication](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/control-center-ldap-auth) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
+
+### 📉 Logs and monitoring
+
+- 📃 [How to write logs to files when using docker-compose](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/write-logs-to-files) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/2/2-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/40414130977/job/121892021528)  
+- 📢 [Publish logs to kafka with Elastic Filebeat](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/filebeat-to-kafka) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/40414130977/job/121892021528)  
+- 📉 [Monitoring Demo](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/monitoring-demo) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
+- 🐶 [Monitor Confluent Platform with Datadog](https://github.com/vdesabou/kafka-docker-playground/tools/datadog) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
+
+### ☕ Java clients
+
+- ☕ Java producer and consumer, with Confluent Platform and Confluent Cloud: see the Java row of the [🧑‍💻 Clients](/content?id=%F0%9F%A7%91%F0%9F%92%BB-clients) table
+- 👴 [JMS Client](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/jms-client) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
+
+## 🌊 Streams, schemas and non-Java clients
+
+📖 Questions, commands and deep dives of this area: [🌊 Streams, schemas and non-Java clients](/area-streams-schema-registry.md).
+
+### 🔰 Schema Registry
+
+- [Explicit Topic-Subject Associations](https://github.com/vdesabou/kafka-docker-playground/tree/master/schema-registry/explicit-topic-subject-associations): native (STRONG) and shared (WEAK) schemas linked to topics with `confluent.value.association` (CP 8.4+) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/42203173060/job/127843234544)  
+- [How to use Data Contracts](https://github.com/vdesabou/kafka-docker-playground/tree/master/schema-registry/data-contracts) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
+- [How to produce Avro records via kafka-avro-console-producer with Union](https://github.com/vdesabou/kafka-docker-playground/tree/master/schema-registry/kafka-avro-console-producer-union) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
+- [Multiple Event Types in the Same Topic](https://github.com/vdesabou/kafka-docker-playground/tree/master/schema-registry/multiple-event-types-in-topic) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
+- [How to use different Key and Value serializer with kafka-avro-console-producer](https://github.com/vdesabou/kafka-docker-playground/tree/master/schema-registry/use-diffrent-key-value-serializer-console-producer) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
+- 🕹 [AVRO examples](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/schema-format-avro) including a JAVA producer &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/40336056844/job/121617830127)  
+- 🧩 [Protobuf examples](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/schema-format-protobuf) including a JAVA producer &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/40414130977/job/121892021528)  
+- 🎱 [JSON Schema examples](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/schema-format-json-schema) including a JAVA producer &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/40414130977/job/121892021528)  
+- 🚏 [How to use kafka-avro-console-producer and kafka-avro-console-consumer when Schema Registry is behind a proxy](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/http-proxy-schema-registry) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
+- 🪦 [Recovery from schema hard deletion](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/recover-from-schema-hard-deletion) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
+- 🛂 [Schema Validation on Confluent Server](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/broker-schema-validation) Schema Validation on Confluent Server &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/2/2-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/40414130977/job/121892021528)  
+- 🔗 [Schema Linking](https://github.com/vdesabou/kafka-docker-playground/tree/master/multi-data-center/schema-linking) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/41244151256/job/124663973917)  
+- 🗺️ [Multi-Cluster Schema Registry](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/multiple-sr-hybrid) with hybrid configuration (onprem/confluent cloud) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
+- 📦 [Migrate Schemas to Confluent Cloud](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/migrate-schemas-to-confluent-cloud) using Confluent Replicator ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
+- 🧢 [RBAC with SR Basic Auth and ACLs](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/rbac-with-sr-basic-auth-acl) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
+- 🤿 [Anonymous SR-example with RBAC](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/rbac-with-anonymous-sr) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
+
+### 🎏 KSQL
 
 All the examples below run their statements with `playground ksqldb sql`, and wait for their queries with `playground ksqldb wait`.
 
@@ -437,21 +455,12 @@ All the examples below run their statements with `playground ksqldb sql`, and wa
 - [Why tombstone is not propagated to table derived from CTAS in ksqlDB](https://github.com/vdesabou/kafka-docker-playground/tree/master/ksqldb/tombstone-propagated-table) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
 - [How to use Protobuf without Schema Registry](https://github.com/vdesabou/kafka-docker-playground/tree/master/ksqldb/protobuf-without-schema-registry) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
 
-## 🐿️ Flink
+### 🐿️ Flink
+
 - [Flink SQL with Kafka](https://github.com/vdesabou/kafka-docker-playground/tree/master/flink/flink-sql-kafka): streaming and batch Flink SQL on Kafka topics with `playground flink sql|list-jobs|cancel` &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/40884185725/job/123483379382)  
 - [Flink SQL on Confluent Cloud](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/flink-sql-kafka): a compute pool and Flink SQL statements on Confluent Cloud topics with `playground flink sql|list-jobs|cancel --environment ccloud` &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/41869358926/job/126711898420)  
 
-## 🔰 Schema Registry
-- [How to use Data Contracts](https://github.com/vdesabou/kafka-docker-playground/tree/master/schema-registry/data-contracts) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
-- [How to produce Avro records via kafka-avro-console-producer with Union](https://github.com/vdesabou/kafka-docker-playground/tree/master/schema-registry/kafka-avro-console-producer-union) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
-- [Multiple Event Types in the Same Topic](https://github.com/vdesabou/kafka-docker-playground/tree/master/schema-registry/multiple-event-types-in-topic) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
-- [How to use different Key and Value serializer with kafka-avro-console-producer](https://github.com/vdesabou/kafka-docker-playground/tree/master/schema-registry/use-diffrent-key-value-serializer-console-producer) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
-
-## 🧲 REST Proxy
-- [Quickstart example](https://github.com/vdesabou/kafka-docker-playground/tree/master/rest-proxy/quickstart-example) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
-- [How to reset an offset for a specific consumer group using the REST Proxy](https://github.com/vdesabou/kafka-docker-playground/tree/master/rest-proxy/reset-offset-consumer-group) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
-
-## 🧑‍💻 Clients
+### 🧑‍💻 Clients
 
 A producer and a consumer for each [Confluent client](https://docs.confluent.io/kafka-clients/overview.html), the same way in every language: one program, `produce|consume|produce-avro|consume-avro <topic> <config file> [n]`, against a local cluster (`other/`) or Confluent Cloud (`ccloud/`, same image).
 
@@ -470,29 +479,87 @@ A producer and a consumer for each [Confluent client](https://docs.confluent.io/
 
 📦 Run the customer's client version with `playground run -f <example> --client-version <version>`, or `CLIENT_VERSION=<version>` (the client examples: see their README; Java and Kafka Streams: the Apache Kafka version, for example 3.7.1). 🔍 All client examples, JMS and console tools included: `playground find-example --category client`.
 
+### 🧲 REST Proxy
+
+- [Quickstart example](https://github.com/vdesabou/kafka-docker-playground/tree/master/rest-proxy/quickstart-example) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
+- [How to reset an offset for a specific consumer group using the REST Proxy](https://github.com/vdesabou/kafka-docker-playground/tree/master/rest-proxy/reset-offset-consumer-group) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
+
+## 🛡️ Platform, security and Cloud infra
+
+📖 Questions, commands and deep dives of this area: [🛡️ Platform, security and Cloud infra](/area-platform-security.md).
+
+### 🔐 Environments
+
+Using single cluster:
+
+- [PLAINTEXT](https://github.com/vdesabou/kafka-docker-playground/tree/master/environment/plaintext): no security &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/42130850118/job/127606767546)  
+- [SASL/PLAIN](https://github.com/vdesabou/kafka-docker-playground/tree/master/environment/sasl-plain): no SSL encryption, SASL/PLAIN authentication &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/41626572573/job/125885320840)  
+- [SASL/SCRAM](https://github.com/vdesabou/kafka-docker-playground/tree/master/environment/sasl-scram) no SSL encryption, SASL/SCRAM-SHA-256 authentication &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/41626572573/job/125885320840)  
+- [SASL/OAUTHBEARER](https://github.com/vdesabou/kafka-docker-playground/tree/master/environment/sasl-oauthbearer) no SSL encryption, SASL/OAUTHBEARER (OAuth 2.0 / OIDC) authentication with Keycloak as identity provider &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/41865258396/job/126697767450)  
+- [SASL/SSL](https://github.com/vdesabou/kafka-docker-playground/tree/master/environment/sasl-ssl): SSL encryption, SASL/PLAIN authentication &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/41935442164/job/126942617257)  
+- [2WAY/SSL](https://github.com/vdesabou/kafka-docker-playground/tree/master/environment/2way-ssl): SSL encryption, SSL authentication &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/41935442164/job/126942617257)  
+- [KERBEROS](https://github.com/vdesabou/kafka-docker-playground/tree/master/environment/kerberos): no SSL encryption, Kerberos GSSAPI authentication &nbsp; ![arm64](https://img.shields.io/badge/arm64-emulation%20required-orange) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/41626572573/job/125885320840)  
+- [SSL/KERBEROS](https://github.com/vdesabou/kafka-docker-playground/tree/master/environment/ssl_kerberos) SSL encryption, Kerberos GSSAPI authentication &nbsp; ![arm64](https://img.shields.io/badge/arm64-emulation%20required-orange) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/41935442164/job/126942617257)  
+- [LDAP Authentication with SASL/PLAIN](https://github.com/vdesabou/kafka-docker-playground/tree/master/environment/ldap-sasl-plain) no SSL encryption, SASL/PLAIN authentication using LDAP &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/41626572573/job/125885320840)  
+- [LDAP Authorizer with SASL/PLAIN](https://github.com/vdesabou/kafka-docker-playground/tree/master/environment/ldap-authorizer-sasl-plain) no SSL encryption, SASL/PLAIN authentication, LDAP Authorizer for ACL authorization &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/41626572573/job/125885320840)  
+- [RBAC with SASL/PLAIN](https://github.com/vdesabou/kafka-docker-playground/tree/master/environment/rbac-sasl-plain) RBAC with no SSL encryption, SASL/PLAIN authentication &nbsp; ![arm64](https://img.shields.io/badge/arm64-emulation%20required-orange) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/42059283925/job/127356141778)  
+- [RBAC with OAuth/OIDC](https://github.com/vdesabou/kafka-docker-playground/tree/master/environment/rbac-oauth) RBAC with no SSL encryption, SASL/OAUTHBEARER authentication, MDS with Keycloak as identity provider (no LDAP) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/42058509855/job/127353395430)  
+
+Using Confluent for Kubernetes (CFK) on k3d
+
+- [CFK](https://github.com/vdesabou/kafka-docker-playground/tree/master/environment/cfk): no security
+- [CFK with RBAC](https://github.com/vdesabou/kafka-docker-playground/tree/master/environment/cfk-rbac): RBAC with no SSL encryption, SASL/PLAIN authentication against LDAP, configured with CFK resources (`ConfluentRolebinding`, `KafkaRestClass`)
+
+Using Multi-Data-Center setup with 🇺🇸 and 🇪🇺 clusters
+
+- [PLAINTEXT](https://github.com/vdesabou/kafka-docker-playground/tree/master/environment/mdc-plaintext): no security &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/41626572573/job/125885320840)  
+- [SASL/PLAIN](https://github.com/vdesabou/kafka-docker-playground/tree/master/environment/mdc-sasl-plain): no SSL encryption, SASL/PLAIN authentication &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/41626572573/job/125885320840)  
+- [KERBEROS](https://github.com/vdesabou/kafka-docker-playground/tree/master/environment/mdc-kerberos): no SSL encryption, Kerberos GSSAPI authentication &nbsp; ![arm64](https://img.shields.io/badge/arm64-emulation%20required-orange) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/41626572573/job/125885320840)  
+
+### 🔑 Security features
+
+- 🗃️ [Audit Logs](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/audit-logs) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/2/2-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/40414130977/job/121892021528)  
+- 🚦 [MDS centralized ACLs with RBAC](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/rbac-centralized-acls) centralized ACLs vs kafka-acls, DENY over a role binding, LDAP group ACLs &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/41866867741/job/126703184895)  
+- 📒 [Testing RBAC with Azure AD](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/rbac-with-azure-ad) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
+- 🗝️ [Confluent Schema Registry Security Plugin](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/schema-registry-security-plugin) with Confluent Platform &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/40414130977/job/121892021528)  
+- 🗝️ [Confluent Schema Registry Security Plugin](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/schema-registry-security-plugin) with Confluent Cloud &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/40414130977/job/121892021243)  
+- 🔒️ [Confluent REST Proxy Security Plugin](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/rest-proxy-security-plugin) with Confluent Platform, SASL/SSL and 2WAY/SSL Principal Propagation &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/3/3-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/40414130977/job/121892021528)  
+- 🔑 [Confluent REST Proxy Security Plugin](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/rest-proxy-security-plugin) with Confluent Cloud, Principal Propagation &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/41935442164/job/126942617441)  
+- 🙊 [Secrets Management](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/secrets-management) with Connect &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/40414130977/job/121892021528)  
+- ⛓ [Connect Secret Registry](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/connect-secret-registry) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/40593203486/job/122502421276)  
+- 📶 [How to ensure high availability of LDAP using DNS SRV Records](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/ldap-authorizer-with-ldap-failover) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
+- 🗝️ [Redact Confluent Logs in Confluent Platform](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/confluent-log-redactor-plugin) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/40414130977/job/121892021156)  
+
+### 🌐 Confluent Cloud infra
+
+- 🌨 Using [Confluent for Kubernetes](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/confluent-for-kubernetes/) with Confluent Cloud ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
+- 🔰 [Confluent Cloud Networking](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/haproxy) using HAProxy ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
+
 ## 👾 Other Playgrounds
 
-- 📃 [How to write logs to files when using docker-compose](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/write-logs-to-files) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/2/2-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/40414130977/job/121892021528)  
-- 📃 [How to write connect logs to a kafka topic](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/write-logs-to-topic) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
-- 📢 [Publish logs to kafka with Elastic Filebeat](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/filebeat-to-kafka) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/40414130977/job/121892021528)  
-- 🔀 [Partition reassignment and leader election](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/topic-reassign-and-leader-election) with `playground topic reassign` and `playground topic elect-leader`, on 3 brokers &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/40925498897/job/123629785642)  
-- 🩺 [Broker health, failures, rolling restart and transactions](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/broker-health-and-transactions) with `playground broker health`, `stop`, `start`, `rolling-restart`, `metrics` and `transactions`, on 3 brokers &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/40968166745/job/123777867749)  
-- 📬 [How to process DLQ records with a sink connector](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/reprocess-dlq-messages-with-sink-connector), or replay them with `playground topic dlq replay` &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/2/2-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/40414130977/job/121892021762)  
-- 🍪 [Deep dive labs](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/deep-dive-labs): the hands-on labs of the [Deep dives](https://kafka-docker-playground.io/#/deep-dives), with assertions on the outputs the pages quote &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI fail](https://img.shields.io/badge/25/28-fail!-red)](https://github.com/vdesabou/kafka-docker-playground/issues/10156)  [![CP 8.4.0](https://img.shields.io/badge/1/28-CP%208.4.0-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/42130850118/job/127606770667) 
-- 🐶 [Monitor Confluent Platform with Datadog](https://github.com/vdesabou/kafka-docker-playground/tools/datadog) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
-- 👻 Testing [KIP-108](https://cwiki.apache.org/confluence/display/KAFKA/KIP-108%3A+Create+Topic+Policy) [Create Topic Policy](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/create-topic-policy) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
-- 📉 [Monitoring Demo](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/monitoring-demo) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
-- 🕵️‍♀️ [Kafka Connect Sink Monitoring Demo](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/monitoring-sink-latency) Showcase different Kafka Connect Sink troubleshooting scenarios ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
-- 👊 [Integrate syslogs to detect SSH failure connections](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/syslog-logstash-ksqldb) using Syslog source connector, LogStash and ksqlDB &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/41354954626/job/124992926811)  
-- 📶 [How to ensure high availability of LDAP using DNS SRV Records](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/ldap-authorizer-with-ldap-failover) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
-- 🕹 [AVRO examples](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/schema-format-avro) including a JAVA producer &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/40336056844/job/121617830127)  
-- 🧩 [Protobuf examples](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/schema-format-protobuf) including a JAVA producer &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/40414130977/job/121892021528)  
-- 🎱 [JSON Schema examples](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/schema-format-json-schema) including a JAVA producer &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/40414130977/job/121892021528)  
-- 🚏 [How to use kafka-avro-console-producer and kafka-avro-console-consumer when Schema Registry is behind a proxy](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/http-proxy-schema-registry) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
-- 🪦 [Recovery from schema hard deletion](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/recover-from-schema-hard-deletion) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
-- 🔍 [ksqlDB Schema Inference with ID](https://github.com/vdesabou/kafka-docker-playground/tree/master/ksqldb/schema-inference-with-id) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
-- 💬 [MQTT Proxy](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/mqtt-proxy) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
-- 💱 [Kafka Connect JSONata Transform](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/kafka-connect-jsonata) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/42130850118/job/127606767694)  
 - 🧠 [CLI examples](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/cli) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI fail](https://img.shields.io/badge/3/4-fail!-red)](https://github.com/vdesabou/kafka-docker-playground/issues/10155)  
-- 👽 [KIP-1054: Support external schemas in JSONConverter](https://github.com/vdesabou/kafka-docker-playground/tree/master/connect/connect-external-schemas-in-json-converter)  ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
-- 🗝️ [Redact Confluent Logs in Confluent Platform](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/confluent-log-redactor-plugin) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/40414130977/job/121892021156)  
+- 🍪 [Deep dive labs](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/deep-dive-labs): the hands-on labs of the [Deep dives](https://kafka-docker-playground.io/#/deep-dives), with assertions on the outputs the pages quote &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI fail](https://img.shields.io/badge/25/28-fail!-red)](https://github.com/vdesabou/kafka-docker-playground/issues/10156)  [![CP 8.4.0](https://img.shields.io/badge/1/28-CP%208.4.0-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/42130850118/job/127606770667) 
+
+## ☁️ Confluent Cloud
+
+The Confluent Cloud examples are in the area they belong to:
+
+- 🤖 [Fully-Managed Connectors](/content?id=🤖-fully-managed-connectors), [Custom Connectors](/content?id=🛃-custom-connectors), [Custom SMT](/content?id=🚇-custom-smt) and the [Kafka Connector Migration Utility](/content?id=🧩-kafka-connector-migration-utility)
+- 💫 Any self-managed connector example runs against Confluent Cloud with `playground run -f <example> --environment ccloud`
+- 🧑‍💻 A producer and a consumer for each client: the Confluent Cloud column of the [Clients](/content?id=%F0%9F%A7%91%F0%9F%92%BB-clients) table
+- 🐿️ [Flink SQL on Confluent Cloud](/content?id=🐿️-flink)
+- ♻️ Replicator, MirrorMaker 2 and Cluster Linking: [Multi-Data-Center deployments](/content?id=🌍-multi-data-center-deployments)
+- 🔰 Multi-cluster Schema Registry and schema migration: [Schema Registry](/content?id=🔰-schema-registry)
+- 🔑 Schema Registry and REST Proxy security plugins: [Security features](/content?id=🔑-security-features)
+- 🌨 CFK with Confluent Cloud and networking with HAProxy: [Confluent Cloud infra](/content?id=🌐-confluent-cloud-infra)
+
+## 💸 Confluent Commercial
+
+The examples of Confluent commercial features are in the area they belong to:
+
+- 💻 [Control Center](/content?id=💻-control-center)
+- 💾 Tiered Storage, ⚖ Confluent Rebalancer: [Brokers](/content?id=🩺-brokers)
+- ♻️ Cluster Linking, 🔗 Schema Linking, Replicator: [Multi-Data-Center deployments](/content?id=🌍-multi-data-center-deployments)
+- 🛂 Schema Validation on Confluent Server: [Schema Registry](/content?id=🔰-schema-registry)
+- 🗃️ Audit Logs, RBAC, centralized ACLs, Schema Registry and REST Proxy security plugins, 🙊 Secrets Management, ⛓ Connect Secret Registry, 🗝️ log redactor: [Security features](/content?id=🔑-security-features)
+- 👴 JMS Client: [Java clients](/content?id=☕-java-clients)

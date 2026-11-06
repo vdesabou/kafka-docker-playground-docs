@@ -33,6 +33,10 @@ reports=(
   "cfk-bundle|cfk-bundle --sample synthetic"
   "tcp-dump|tcp-dump --sample kafka_and_network_errors"
   "logs|logs --sample support_bundle --include-warnings"
+  # the examples of the analyze logs deep dive (docs/deep-dive-analyze-logs.md of kafka-docker-playground)
+  "logs-connect|logs --sample connect_task_failure"
+  "logs-clients|logs --sample kafka_clients"
+  "logs-compare|logs --sample compare_fix"
   "heap-dump|heap-dump --sample leak_growth"
   "jscissors|jscissors --sample filestream_sink_bad_json"
 )
@@ -47,6 +51,15 @@ do
   # the report of the playground, at the top of the output folder: not the pages of Eclipse MAT in its subfolders
   # (heap-dump: */index.html, */toc.html...)
   cp "$(find "$work/$name" -maxdepth 1 -name "*.html" ! -name index.html | head -1)" "$DOCS/reports/$name.html"
+  # analyze logs: the pages of the files next to the report (<sample>-log-report-files/), so that its 📄 links work on
+  # the website (the copies of the files written there for the editor are left out)
+  for files in "$work/$name"/*-log-report-files
+  do
+    [ -d "$files" ] || continue
+    rm -rf "$DOCS/reports/$(basename "$files")"
+    mkdir -p "$DOCS/reports/$(basename "$files")"
+    cp "$files"/*.html "$DOCS/reports/$(basename "$files")/"
+  done
 done
 
 # cloud costs: from the dummy billing data of tools/cloud-costs/samples, no Confluent Cloud call
@@ -81,9 +94,17 @@ strip_user_paths() {
 # the ✏️ links that open a file of the report in the local editor (vscode://file/<temporary folder of the run>/...):
 # useless on the website, and they hold a local path
 perl -0pi -e 's#<a\b[^>]*\bhref=["\x27]vscode://[^>]*>.*?</a>##gs' "$DOCS"/reports/*.html
+# the file pages of analyze logs: their ✏️ button (data-url='vscode://…'), and the folder of the kafka-docker-playground
+# clone in the paths of the samples (…/tools/log-analyzer/samples/connect.log → tools/log-analyzer/samples/connect.log)
+for page in "$DOCS"/reports/*-log-report-files/*.html
+do
+  [ -f "$page" ] || continue
+  perl -0pi -e 's#<a\b[^>]*\bdata-url=["\x27]vscode://[^>]*>.*?</a>##gs' "$page"
+done
+grep -rlF "$KDP/" "$DOCS/reports" | while read -r f; do perl -pi -e "s#\Q$KDP/\E##g" "$f"; done
 
 # the reports are published: no path of a user folder must leak (/tmp paths of a benchmark run are fine)
-if grep -lE "/Users/|/home/|/private/|vscode://" "$DOCS"/reports/*.html
+if grep -rlE "/Users/|/home/|/private/|vscode://" "$DOCS/reports"
 then
   echo "❌ the files above contain a local path, fix them before publishing"
   exit 1

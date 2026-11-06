@@ -1,5 +1,5 @@
 # 🐳 kafka-docker-playground
-![success tests](https://img.shields.io/badge/success%20tests-892%2F1192-red)![connector tested](https://img.shields.io/badge/connector%20tested-145-green)![cp versions tested](https://img.shields.io/badge/cp%20version%20tested-8.4.0-green)![last run](https://img.shields.io/badge/last%20run-2026--11--06%2011:47-green)
+![success tests](https://img.shields.io/badge/success%20tests-892%2F1192-red)![connector tested](https://img.shields.io/badge/connector%20tested-145-green)![cp versions tested](https://img.shields.io/badge/cp%20version%20tested-8.4.0-green)![last run](https://img.shields.io/badge/last%20run-2026--11--06%2013:15-green)
 ![GitHub issues by-label](https://img.shields.io/github/issues/vdesabou/kafka-docker-playground/CI%20failing%20🔥)![GitHub issues by-label](https://img.shields.io/github/issues/vdesabou/kafka-docker-playground/enhancement%20✨)
 ![GitHub repo size](https://img.shields.io/github/repo-size/vdesabou/kafka-docker-playground)
 [![Add a star on GitHub](https://img.shields.io/github/stars/vdesabou/kafka-docker-playground?style=social)](https://github.com/vdesabou/kafka-docker-playground)
@@ -22,7 +22,7 @@
 - 🤖 Use it with [Claude Code](https://kafka-docker-playground.io/#/claude-code): project guide, skills to add examples, review PRs, change the CLI or analyze Oracle XStream reports
 - 🎓 Learn how the playground [works](https://kafka-docker-playground.io/#/how-it-works)
 - 🧰 Build your own examples or reproduction models with the [reproduction toolkit](https://kafka-docker-playground.io/#/reusables)
-- 🌐 Try it in your browser, nothing to install, with [GitHub Codespaces](https://kafka-docker-playground.io/#/how-to-use?id=%f0%9f%8c%90-in-your-browser-github-codespaces)
+- 🌐 Try it in your browser, nothing to install, with [GitHub Codespaces](https://kafka-docker-playground.io/#/how-to-use?id=%f0%9f%8c%90-in-your-browser-github-codespaces), or manage them from the terminal with [playground codespace](https://kafka-docker-playground.io/#/playground%20codespace)
 - ✨ Work remotely with VS Code using [playground ec2](https://kafka-docker-playground.io/#/playground%20ec2) CLI command
 - 🦭 Run examples with [Podman](https://kafka-docker-playground.io/#/how-to-use?id=%f0%9f%a6%ad-using-podman-instead-of-docker) through its Docker-compatible API
 - 🤖 Automated testing using Github Actions [CI](https://kafka-docker-playground.io/#/how-it-works?id=🤖-how-ci-works)

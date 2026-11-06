@@ -444,6 +444,17 @@ visit https://docs.docker.com/get-docker to install
     - [ec2-to-local](playground%20ec2%20sync-repro-folder%20ec2-to-local) - 👈 Sync ec2 instance reproduction-models folder to local
   - [push-secrets](playground%20ec2%20push-secrets) - 🔐 Send the secrets store to an ec2 instance
 
+### Codespace commands
+
+- [codespace](playground%20codespace) - ☁️ Create and manage GitHub Codespaces to run kafka-docker-playground
+  - [create](playground%20codespace%20create) - 👷 Create a GitHub Codespace of kafka-docker-playground, then open it
+  - [list](playground%20codespace%20list) - 🔘 List your kafka-docker-playground codespaces
+  - [open](playground%20codespace%20open) - 👨‍💻 Open a codespace in Visual Studio Code
+  - [ssh](playground%20codespace%20ssh) - 🐚 Open a shell in a codespace, or run one command in it
+  - [stop](playground%20codespace%20stop) - 🔴 Stop a codespace
+  - [start](playground%20codespace%20start) - 🟢 Start a codespace
+  - [delete](playground%20codespace%20delete) - ❌ Delete a codespace
+
 ## Options
 
 #### `--vvv, -v`

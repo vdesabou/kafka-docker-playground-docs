@@ -27,6 +27,7 @@
 - 🧠🔍 find-example --category security|broker|cfk|client: topic categories across folders [#10095](https://github.com/vdesabou/kafka-docker-playground/issues/10095)
 - 🧠📚 Add "start from your area" entry pages: brokers, schemas, platform and security [#10091](https://github.com/vdesabou/kafka-docker-playground/issues/10091)
 - 👾🪝 Add Webhook Source Fully Managed Connector example [#10087](https://github.com/vdesabou/kafka-docker-playground/issues/10087)
+- 🧠🐿️ playground flink sql|list-jobs|cancel on Confluent Cloud statements (--environment ccloud) + ccloud/flink-sql-kafka example [#10045](https://github.com/vdesabou/kafka-docker-playground/issues/10045)
 - 🧠🚦 New example other/rbac-centralized-acls: MDS centralized ACLs with RBAC [#10043](https://github.com/vdesabou/kafka-docker-playground/issues/10043)
 - ⭐🔐 New environment sasl-oauthbearer: SASL/OAUTHBEARER (OAuth / OIDC) with Keycloak [#10041](https://github.com/vdesabou/kafka-docker-playground/issues/10041)
 - 🧠🧬 playground topic check-format: the format of each record of a topic and the converter to use [#10039](https://github.com/vdesabou/kafka-docker-playground/issues/10039)

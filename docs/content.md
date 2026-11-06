@@ -354,7 +354,7 @@ Test Self-Managed connector mugration to Fully Managed using [playground connect
 
 - 🩺 [Broker health, failures, rolling restart and transactions](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/broker-health-and-transactions) with `playground broker health`, `stop`, `start`, `rolling-restart`, `metrics` and `transactions`, on 3 brokers &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/40968166745/job/123777867749)  
 - 🔀 [Partition reassignment and leader election](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/topic-reassign-and-leader-election) with `playground topic reassign` and `playground topic elect-leader`, on 3 brokers &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/40925498897/job/123629785642)  
-- 👻 Testing [KIP-108](https://cwiki.apache.org/confluence/display/KAFKA/KIP-108%3A+Create+Topic+Policy) [Create Topic Policy](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/create-topic-policy) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green)   
+- 👻 Testing [KIP-108](https://cwiki.apache.org/confluence/display/KAFKA/KIP-108%3A+Create+Topic+Policy) [Create Topic Policy](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/create-topic-policy) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
 - 💾 [Tiered storage with AWS S3](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/tiered-storage-with-aws) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/40414130977/job/121892021528)  
 - 💬 [MQTT Proxy](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/mqtt-proxy) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
 
@@ -377,8 +377,8 @@ Using Multi-Data-Center setup with 🇺🇸 and 🇪🇺 clusters
 
 With Confluent Cloud:
 
-- ♻️ Confluent Replicator [OnPrem to Confluent Cloud examples](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/replicator) (strings, Avro, Schema Registry with basic auth) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green)   
-- 🌎️ [Apache Mirror Maker 2](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/mirrormaker2) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green)   
+- ♻️ Confluent Replicator [OnPrem to cloud and Cloud to Cloud examples](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/replicator) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
+- 🌎️ [Apache Mirror Maker 2](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/mirrormaker2) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
 
 Monitoring: 📊 `--enable-jmx-grafana` works with the `mdc-plaintext` examples above: Kafka cluster, Kafka Connect cluster (Replicator, MirrorMaker 2 connectors), Cluster Linking and Kafka Lag Exporter dashboards, for each cluster
 
@@ -395,6 +395,7 @@ Monitoring: 📊 `--enable-jmx-grafana` works with the `mdc-plaintext` examples 
 ### ☕ Java clients
 
 - ☕ Java producer and consumer, with Confluent Platform and Confluent Cloud: see the Java row of the [🧑‍💻 Clients](/content?id=%F0%9F%A7%91%F0%9F%92%BB-clients) table
+- 👴 [JMS Client](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/jms-client) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
 
 ## 🌊 Streams, schemas and non-Java clients
 
@@ -403,50 +404,48 @@ Monitoring: 📊 `--enable-jmx-grafana` works with the `mdc-plaintext` examples 
 ### 🔰 Schema Registry
 
 - [Explicit Topic-Subject Associations](https://github.com/vdesabou/kafka-docker-playground/tree/master/schema-registry/explicit-topic-subject-associations): native (STRONG) and shared (WEAK) schemas linked to topics with `confluent.value.association` (CP 8.4+) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/42203173060/job/127843234544)  
-- [How to use Data Contracts](https://github.com/vdesabou/kafka-docker-playground/tree/master/schema-registry/data-contracts) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green)   
-- [kafka-avro-console-producer recipes](https://github.com/vdesabou/kafka-docker-playground/tree/master/schema-registry/kafka-avro-console-producer): an optional field (Avro union), a String key with an Avro value &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green)   
+- [How to use Data Contracts](https://github.com/vdesabou/kafka-docker-playground/tree/master/schema-registry/data-contracts) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
+- [How to produce Avro records via kafka-avro-console-producer with Union](https://github.com/vdesabou/kafka-docker-playground/tree/master/schema-registry/kafka-avro-console-producer-union) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
 - [Multiple Event Types in the Same Topic](https://github.com/vdesabou/kafka-docker-playground/tree/master/schema-registry/multiple-event-types-in-topic) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
+- [How to use different Key and Value serializer with kafka-avro-console-producer](https://github.com/vdesabou/kafka-docker-playground/tree/master/schema-registry/use-diffrent-key-value-serializer-console-producer) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
 - 🕹 [AVRO examples](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/schema-format-avro) including a JAVA producer &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/40336056844/job/121617830127)  
 - 🧩 [Protobuf examples](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/schema-format-protobuf) including a JAVA producer &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/40414130977/job/121892021528)  
 - 🎱 [JSON Schema examples](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/schema-format-json-schema) including a JAVA producer &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/40414130977/job/121892021528)  
-- 🚏 [How to use kafka-avro-console-producer and kafka-avro-console-consumer when Schema Registry is behind a proxy](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/http-proxy-schema-registry) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green)   
-- 🪦 [Recovery from schema hard deletion](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/recover-from-schema-hard-deletion) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green)   
+- 🚏 [How to use kafka-avro-console-producer and kafka-avro-console-consumer when Schema Registry is behind a proxy](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/http-proxy-schema-registry) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
+- 🪦 [Recovery from schema hard deletion](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/recover-from-schema-hard-deletion) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
 - 🛂 [Schema Validation on Confluent Server](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/broker-schema-validation) Schema Validation on Confluent Server &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/2/2-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/40414130977/job/121892021528)  
 - 🔗 [Schema Linking](https://github.com/vdesabou/kafka-docker-playground/tree/master/multi-data-center/schema-linking) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/41244151256/job/124663973917)  
-- 🧢 [RBAC with SR Basic Auth and ACLs](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/rbac-with-sr-basic-auth-acl) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green)   
-- 🤿 [Anonymous SR-example with RBAC](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/rbac-with-anonymous-sr) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green)   
+- 🧢 [RBAC with SR Basic Auth and ACLs](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/rbac-with-sr-basic-auth-acl) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
+- 🤿 [Anonymous SR-example with RBAC](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/rbac-with-anonymous-sr) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
 
 ### 🎏 KSQL
 
 All the examples below run their statements with `playground ksqldb sql`, and wait for their queries with `playground ksqldb wait`.
 
-- [Quickstart example](https://github.com/vdesabou/kafka-docker-playground/tree/master/ksqldb/quickstart-example) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green)   
-- [Simple examples using a vanilla Java producer/consumer (JSON, Avro, Proto, JSON_SR)](https://github.com/vdesabou/kafka-docker-playground/tree/master/ksqldb/simple-example-vanilla-producer) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green)   
-- [How to join a stream and a stream](https://github.com/vdesabou/kafka-docker-playground/tree/master/ksqldb/stream-stream-join) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green)   
-- [How to join a stream and a table](https://github.com/vdesabou/kafka-docker-playground/tree/master/ksqldb/stream-table-join#how-to-join-a-stream-and-a-lookup-table) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green)   
-- [How to join a table and a table](https://github.com/vdesabou/kafka-docker-playground/tree/master/ksqldb/table-table-join) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green)   
-- [Stream-Table join failure due to timestamp](https://github.com/vdesabou/kafka-docker-playground/tree/master/ksqldb/stream-table-join-timestamp-based-join-failure) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green)   
-- [Foreign-key table-table joins](https://github.com/vdesabou/kafka-docker-playground/tree/master/ksqldb/foreign-key-table-table-join) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green)   
-- [How to perform a Many to Many join](https://github.com/vdesabou/kafka-docker-playground/tree/master/ksqldb/many-many-join) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green)   
-- [ksqlDB Schema Inference with ID](https://github.com/vdesabou/kafka-docker-playground/tree/master/ksqldb/schema-inference-with-id) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green)   
-- [how ksqlDB handles schema evolution](https://github.com/vdesabou/kafka-docker-playground/tree/master/ksqldb/schema-evolution) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green)   
-- [How to create tumbling windows](https://github.com/vdesabou/kafka-docker-playground/tree/master/ksqldb/tumbling-windows) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green)   
-- [How to create session windows](https://github.com/vdesabou/kafka-docker-playground/tree/master/ksqldb/session-windows) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green)   
-- [How to create hopping windows](https://github.com/vdesabou/kafka-docker-playground/tree/master/ksqldb/hopping-windows) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green)   
-- [KsqlDB UDF Logging examples](https://github.com/vdesabou/kafka-docker-playground/tree/master/ksqldb/udf-logging) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green)   
-- [How to rekey a stream with a value](https://github.com/vdesabou/kafka-docker-playground/tree/master/ksqldb/rekey-stream-with-value) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green)   
-- [How to aggregate the last 3 transactions for each unique customer id](https://github.com/vdesabou/kafka-docker-playground/tree/master/ksqldb/aggregate-last-events-by-customer) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green)   
-- [Working with a nested Json](https://github.com/vdesabou/kafka-docker-playground/tree/master/ksqldb/nested-json) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green)   
-- [How to handle NULL value with COALESCE](https://github.com/vdesabou/kafka-docker-playground/tree/master/ksqldb/handle-null-value-coalesce) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green)   
-- [How to handle empty array or null value within EXPLODE function using CASE](https://github.com/vdesabou/kafka-docker-playground/tree/master/ksqldb/handle-empty-array-explode) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green)   
-- [How to find the records that ksqlDB could not deserialize (processing log)](https://github.com/vdesabou/kafka-docker-playground/tree/master/ksqldb/manage-deserialization-errors) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green)   
-- [Materialized view/cache example](https://github.com/vdesabou/kafka-docker-playground/tree/master/ksqldb/materialized-view) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green)   
-- [Select Query from Materialized table by composite Primary key](https://github.com/vdesabou/kafka-docker-playground/tree/master/ksqldb/composite-pkey-materialized-table) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green)   
-- [Why tombstone is not propagated to table derived from CTAS in ksqlDB](https://github.com/vdesabou/kafka-docker-playground/tree/master/ksqldb/tombstone-propagated-table) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green)   
-- [How to use Protobuf without Schema Registry](https://github.com/vdesabou/kafka-docker-playground/tree/master/ksqldb/protobuf-without-schema-registry) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green)   
-- [How to join multiple streams or tables together](https://github.com/vdesabou/kafka-docker-playground/tree/master/ksqldb/multi-join) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green)   
-- [JSON_SR: required fields, default values and null](https://github.com/vdesabou/kafka-docker-playground/tree/master/ksqldb/json-schema-required-default-value) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green)   
-- [Benchmark ksqlDB queries](https://github.com/vdesabou/kafka-docker-playground/tree/master/ksqldb/benchmarking-scenarios): throughput of 5 queries (joins, aggregations) on orders, shipments, products and customers &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green)   
+- [Quickstart example](https://github.com/vdesabou/kafka-docker-playground/tree/master/ksqldb/quickstart-example) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
+- [Simple examples using a vanilla Java producer/consumer (JSON, Avro, Proto, JSON_SR)](https://github.com/vdesabou/kafka-docker-playground/tree/master/ksqldb/simple-example-vanilla-producer) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
+- [How to join a stream and a stream](https://github.com/vdesabou/kafka-docker-playground/tree/master/ksqldb/stream-stream-join) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
+- [How to join a stream and a table](https://github.com/vdesabou/kafka-docker-playground/tree/master/ksqldb/stream-table-join#how-to-join-a-stream-and-a-lookup-table) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
+- [How to join a table and a table](https://github.com/vdesabou/kafka-docker-playground/tree/master/ksqldb/table-table-join) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
+- [Stream-Table join failure due to timestamp](https://github.com/vdesabou/kafka-docker-playground/tree/master/ksqldb/stream-table-join-timestamp-based-join-failure) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
+- [Foreign-key table-table joins](https://github.com/vdesabou/kafka-docker-playground/tree/master/ksqldb/foreign-key-table-table-join) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
+- [How to perform a Many to Many join](https://github.com/vdesabou/kafka-docker-playground/tree/master/ksqldb/many-many-join) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
+- [ksqlDB Schema Inference with ID](https://github.com/vdesabou/kafka-docker-playground/tree/master/ksqldb/schema-inference-with-id) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
+- [how ksqlDB handles schema evolution](https://github.com/vdesabou/kafka-docker-playground/tree/master/ksqldb/schema-evolution) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
+- [How to create tumbling windows](https://github.com/vdesabou/kafka-docker-playground/tree/master/ksqldb/tumbling-windows) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
+- [How to create session windows](https://github.com/vdesabou/kafka-docker-playground/tree/master/ksqldb/session-windows) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
+- [How to create hopping windows](https://github.com/vdesabou/kafka-docker-playground/tree/master/ksqldb/hopping-windows) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
+- [KsqlDB UDF Logging examples](https://github.com/vdesabou/kafka-docker-playground/tree/master/ksqldb/udf-logging) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
+- [How to rekey a stream with a value](https://github.com/vdesabou/kafka-docker-playground/tree/master/ksqldb/rekey-stream-with-value) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
+- [How to aggregate the last 3 transactions for each unique customer id](https://github.com/vdesabou/kafka-docker-playground/tree/master/ksqldb/aggregate-last-events-by-customer) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
+- [Working with a nested Json](https://github.com/vdesabou/kafka-docker-playground/tree/master/ksqldb/nested-json) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
+- [How to handle NULL value with COALESCE](https://github.com/vdesabou/kafka-docker-playground/tree/master/ksqldb/handle-null-value-coalesce) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
+- [How to handle empty array or null value within EXPLODE function using CASE](https://github.com/vdesabou/kafka-docker-playground/tree/master/ksqldb/handle-empty-array-explode) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
+- [How to find the records that ksqlDB could not deserialize (processing log)](https://github.com/vdesabou/kafka-docker-playground/tree/master/ksqldb/manage-deserialization-errors) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
+- [Materialized view/cache example](https://github.com/vdesabou/kafka-docker-playground/tree/master/ksqldb/materialized-view) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
+- [Select Query from Materialized table by composite Primary key](https://github.com/vdesabou/kafka-docker-playground/tree/master/ksqldb/composite-pkey-materialized-table) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
+- [Why tombstone is not propagated to table derived from CTAS in ksqlDB](https://github.com/vdesabou/kafka-docker-playground/tree/master/ksqldb/tombstone-propagated-table) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
+- [How to use Protobuf without Schema Registry](https://github.com/vdesabou/kafka-docker-playground/tree/master/ksqldb/protobuf-without-schema-registry) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
 
 ### 🐿️ Flink
 
@@ -474,8 +473,8 @@ A producer and a consumer for each [Confluent client](https://docs.confluent.io/
 
 ### 🧲 REST Proxy
 
-- [Quickstart example](https://github.com/vdesabou/kafka-docker-playground/tree/master/rest-proxy/quickstart-example) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green)   
-- [How to reset an offset for a specific consumer group using the REST Proxy](https://github.com/vdesabou/kafka-docker-playground/tree/master/rest-proxy/reset-offset-consumer-group) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green)   
+- [Quickstart example](https://github.com/vdesabou/kafka-docker-playground/tree/master/rest-proxy/quickstart-example) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
+- [How to reset an offset for a specific consumer group using the REST Proxy](https://github.com/vdesabou/kafka-docker-playground/tree/master/rest-proxy/reset-offset-consumer-group) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
 
 ## 🛡️ Platform, security and Cloud infra
 
@@ -519,7 +518,7 @@ Using Multi-Data-Center setup with 🇺🇸 and 🇪🇺 clusters
 - 🔑 [Confluent REST Proxy Security Plugin](https://github.com/vdesabou/kafka-docker-playground/tree/master/ccloud/rest-proxy-security-plugin) with Confluent Cloud, Principal Propagation &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/41935442164/job/126942617441)  
 - 🙊 [Secrets Management](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/secrets-management) with Connect &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/40414130977/job/121892021528)  
 - ⛓ [Connect Secret Registry](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/connect-secret-registry) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/40593203486/job/122502421276)  
-- 📶 [How to ensure high availability of LDAP using DNS SRV Records](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/ldap-authorizer-with-ldap-failover) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green)   
+- 📶 [How to ensure high availability of LDAP using DNS SRV Records](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/ldap-authorizer-with-ldap-failover) ![not tested](https://img.shields.io/badge/CI-not%20tested!-violet)
 - 🗝️ [Redact Confluent Logs in Confluent Platform](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/confluent-log-redactor-plugin) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/1/1-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/40414130977/job/121892021156)  
 
 ### 🌐 Confluent Cloud infra

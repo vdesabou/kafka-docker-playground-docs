@@ -13,6 +13,8 @@ examples that do not work on ARM64 run.
 - **create**: create a codespace and open it
 - **open**: open it in VS Code (or the browser with `--web`)
 - **ssh**: a shell, or one command, in it
+- **push-secrets**: send your credentials to its secrets store
+- **sync-repro-folder**: keep reproduction-models in step, both directions
 - **list / start / stop / delete**
 
 A thin layer over 'gh codespace': it needs the GitHub CLI with the  
@@ -24,7 +26,8 @@ minutes idle; `playground codespace stop` when you pause, and
 `playground codespace delete` when you are done (a stopped codespace  
 still uses storage).
 
-🔐 The private reproduction-models submodule is not cloned in a codespace.
+🔐 The private reproduction-models submodule is not cloned in a codespace:  
+`playground codespace sync-repro-folder local-to-codespace` copies yours.
 
 ## Usage
 
@@ -47,5 +50,9 @@ playground codespace COMMAND
 - [stop](playground%20codespace%20stop) - 🔴 Stop a codespace
 - [start](playground%20codespace%20start) - 🟢 Start a codespace
 - [delete](playground%20codespace%20delete) - ❌ Delete a codespace
+- [push-secrets](playground%20codespace%20push-secrets) - 🔐 Send the secrets store to a codespace
+- [sync-repro-folder](playground%20codespace%20sync-repro-folder) - ↔️ Synchronize reproduction-models folder between local and a codespace
+  - [local-to-codespace](playground%20codespace%20sync-repro-folder%20local-to-codespace) - 👉 Sync local reproduction-models folder to a codespace
+  - [codespace-to-local](playground%20codespace%20sync-repro-folder%20codespace-to-local) - 👈 Sync a codespace reproduction-models folder to local
 
 

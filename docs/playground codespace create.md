@@ -58,6 +58,14 @@ if not set, the name is pg-`<username>`-\<6 random characters\>
 
 🙈 do not open the codespace in VS Code once it is created
 
+#### `--push-secrets`
+
+🔐 once it is available, send your secrets store to it (playground codespace push-secrets)
+
+#### `--sync-repro-folder`
+
+👉 once it is available, copy your reproduction-models folder to it (playground codespace sync-repro-folder local-to-codespace)
+
 ## Examples
 
 ```bash
@@ -70,6 +78,10 @@ playground codespace create --suffix 123456 --machine 8-core
 
 ```bash
 playground codespace create --branch my-feature --no-open
+```
+
+```bash
+playground codespace create --suffix 123456 --push-secrets --sync-repro-folder
 ```
 
 

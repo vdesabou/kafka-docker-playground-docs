@@ -121,9 +121,21 @@ playground analyze logs [OPTIONS]
 | Repeatable:     |  ✓ Yes
 | Allowed Values: | `connect_task_failure`, `support_bundle`, `kafka_streams`, `kafka_clients`, `cfk_bundle`, `cfk_kraft_migration`, `cfk_rollout`, `cfk_rollout_after`
 
+#### `--errors-only`
+
+🔴 Only the ERROR/FATAL records: the WARN records are reported by default (the Kafka clients log some real problems at WARN: consumer poll timeout, records expiring in the producer, network errors), sorted after the errors
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Conflicts With: | `--include-warnings`
+
 #### `--include-warnings`
 
-🟠 Also report WARN records
+🟠 Kept for compatibility: the WARN records are reported by default (`--errors-only` to leave them out). With a CFK support bundle, also the WARN log records that match no known category
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Conflicts With: | `--errors-only`
 
 #### `--max-findings MAX_FINDINGS`
 
@@ -209,7 +221,7 @@ playground analyze logs --sample connect_task_failure
 ```
 
 ```bash
-playground analyze logs --sample support_bundle --include-warnings
+playground analyze logs --sample support_bundle
 ```
 
 ```bash
@@ -217,7 +229,7 @@ playground analyze logs --file connect.log
 ```
 
 ```bash
-playground analyze logs --file connect-logs.zip --include-warnings
+playground analyze logs --file connect-logs.zip --errors-only
 ```
 
 ```bash

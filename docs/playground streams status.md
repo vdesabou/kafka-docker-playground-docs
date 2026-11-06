@@ -37,6 +37,12 @@ stopped), so that an example can check it.
 playground streams status [OPTIONS]
 ```
 
+## Dependencies
+
+#### *python3*
+
+visit https://www.python.org/downloads/ to install
+
 ## Options
 
 #### `--container, -c CONTAINER`

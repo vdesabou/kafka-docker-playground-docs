@@ -26,6 +26,12 @@ diff' are hidden (`--include-temporary` to show them).
 playground schema history [OPTIONS]
 ```
 
+## Dependencies
+
+#### *python3*
+
+visit https://www.python.org/downloads/ to install
+
 ## Options
 
 #### `--subject SUBJECT`

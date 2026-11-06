@@ -39,6 +39,12 @@ included.
 playground topic check-format [OPTIONS]
 ```
 
+## Dependencies
+
+#### *python3*
+
+visit https://www.python.org/downloads/ to install
+
 ## Options
 
 #### `--topic, -t TOPIC`

@@ -24,6 +24,12 @@
 playground analyze tcp-dump [OPTIONS]
 ```
 
+## Dependencies
+
+#### *python3*
+
+visit https://www.python.org/downloads/ to install
+
 ## Options
 
 #### `--file, -f FILE`

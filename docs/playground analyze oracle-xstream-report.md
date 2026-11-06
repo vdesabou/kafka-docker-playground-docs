@@ -27,6 +27,12 @@
 playground analyze oracle-xstream-report [OPTIONS]
 ```
 
+## Dependencies
+
+#### *python3*
+
+visit https://www.python.org/downloads/ to install
+
 ## Options
 
 #### `--file, -f FILE`

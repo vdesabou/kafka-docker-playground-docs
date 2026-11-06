@@ -22,6 +22,12 @@ version before it (the latest one when `--to` is a file).
 playground schema diff [OPTIONS]
 ```
 
+## Dependencies
+
+#### *python3*
+
+visit https://www.python.org/downloads/ to install
+
 ## Options
 
 #### `--subject SUBJECT`

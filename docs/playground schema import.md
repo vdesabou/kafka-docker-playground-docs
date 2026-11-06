@@ -29,6 +29,12 @@ refused (42205): import into a fresh registry, or use `--new-ids`.
 playground schema import [OPTIONS]
 ```
 
+## Dependencies
+
+#### *python3*
+
+visit https://www.python.org/downloads/ to install
+
 ## Options
 
 #### `--file, -f FILE`

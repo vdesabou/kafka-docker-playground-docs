@@ -20,6 +20,12 @@ Exit code: 0 identical, 1 different.
 playground schema compare [OPTIONS]
 ```
 
+## Dependencies
+
+#### *python3*
+
+visit https://www.python.org/downloads/ to install
+
 ## Options
 
 #### `--from CLUSTER`

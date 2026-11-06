@@ -81,6 +81,12 @@ one opened. Several CFK bundles are analyzed in parallel, 4 at a time
 playground analyze logs [OPTIONS]
 ```
 
+## Dependencies
+
+#### *python3*
+
+visit https://www.python.org/downloads/ to install
+
 ## Environment Variables
 
 #### `PLAYGROUND_CFK_PARALLELISM`

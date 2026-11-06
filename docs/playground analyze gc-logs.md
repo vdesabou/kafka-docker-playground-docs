@@ -23,6 +23,12 @@
 playground analyze gc-logs [OPTIONS]
 ```
 
+## Dependencies
+
+#### *python3*
+
+visit https://www.python.org/downloads/ to install
+
 ## Options
 
 #### `--file, -f FILE`

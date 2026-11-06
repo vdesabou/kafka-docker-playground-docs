@@ -114,6 +114,15 @@ visit https://www.python.org/downloads/ to install
 |-----------------|-------------
 | Repeatable:     |  ✓ Yes
 
+#### `--compare BEFORE`
+
+🔁 Compare with another input: the logs before a fix, another worker, the day before. A log file, folder or archive  
+(analyzed with the same `--connector`, `--with-worker`, `--errors-only` and `--sanitize`), or a JSON written by `--json`
+
+The report says what is new, gone, growing or shrinking: root causes, known causes, connectors and the totals by level  
+(per hour when the two inputs cover different periods), in a 🔁 Comparison section, the terminal summary and  
+.comparison of `--json`
+
 #### `--sample, -s SAMPLE`
 
 🧪 Sample of tools/log-analyzer/samples and cfk-analysis/samples
@@ -194,7 +203,7 @@ visit https://www.python.org/downloads/ to install
 
 #### `--json-sections SECTIONS`
 
-🗂️ With `--json`, only these sections, comma separated: summary, findings, known_causes, root_causes, files, files_without_findings, coverage, configuration, timeline, connectors (default: all). For example `--json-sections` summary,findings,root_causes
+🗂️ With `--json`, only these sections, comma separated: summary, findings, known_causes, root_causes, files, files_without_findings, coverage, configuration, timeline, connectors, comparison (default: all). For example `--json-sections` summary,findings,root_causes
 
 #### `--component COMPONENT`
 

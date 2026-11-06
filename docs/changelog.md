@@ -3,6 +3,7 @@
 ## November 2026
 ##### 🌟 Enhancements
 
+- 🧠⚡ Add a one-line installer: curl -fsSL https://kafka-docker-playground.io/install.sh | bash [#10178](https://github.com/vdesabou/kafka-docker-playground/issues/10178)
 - 🧠📚 Organize the Content page by area, like Start from your area [#10174](https://github.com/vdesabou/kafka-docker-playground/issues/10174)
 - 👾🔰 Add Explicit Topic-Subject Associations example [#10172](https://github.com/vdesabou/kafka-docker-playground/issues/10172)
 - 🐛⏳ analyze logs: JSON lines dumps saved as .log missed errors and took 10 min (streamed conversion, progress bar and live report page) [#10147](https://github.com/vdesabou/kafka-docker-playground/issues/10147)

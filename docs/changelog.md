@@ -68,6 +68,7 @@
 
 ##### 🐛 Bugs
 
+- 🐛📃 write-logs-to-topic: no logs sent to the topic with CP 8 (log4j2) nor CP 7 [#10192](https://github.com/vdesabou/kafka-docker-playground/issues/10192)
 - 🐛⛅ other/cli: topic-produce-and-consume.sh consumes the topics of other CI jobs on Confluent Cloud, deleted meanwhile [#10162](https://github.com/vdesabou/kafka-docker-playground/issues/10162)
 - 🐛🧪 deep-dive lab container-logs.sh: root cause rows check fails since the rows have an id [#10161](https://github.com/vdesabou/kafka-docker-playground/issues/10161)
 - 🐛🔰 schema test-rules: every record fails with java.net.BindException since Schema Registry opens remote JMX on port 10001 [#10160](https://github.com/vdesabou/kafka-docker-playground/issues/10160)

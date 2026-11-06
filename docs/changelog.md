@@ -3,6 +3,7 @@
 ## November 2026
 ##### 🌟 Enhancements
 
+- 🧠📚 docs: kdp-kb-review skill can create KB articles [#10197](https://github.com/vdesabou/kafka-docker-playground/issues/10197)
 - 🧠📊 --enable-jmx-grafana with mdc-plaintext, remove monitoring-demo and monitoring-cluster-linking [#10194](https://github.com/vdesabou/kafka-docker-playground/issues/10194)
 - 🧹📦 Remove 7 obsolete untested examples [#10189](https://github.com/vdesabou/kafka-docker-playground/issues/10189)
 - 🧠☁️ Add playground codespace commands, like playground ec2 [#10188](https://github.com/vdesabou/kafka-docker-playground/issues/10188)

@@ -77,7 +77,7 @@ one opened. Several CFK bundles are analyzed in parallel, 4 at a time
 
 🌐 Also writes a self-contained HTML report in `--output-dir`, opened in the browser in an interactive terminal: verdict, known causes (task killed, errors.tolerance exceeded, authentication, TLS, wrong security.protocol, unknown magic byte, OutOfMemoryError, fenced producer, rebalances, throttling, offsets not committed in time, task not stopped in time...), an incident timeline (all files merged: first occurrence of each error and known cause, restarts, connectors reconfigured, config changes), a card per connector (errors, task killed, known causes, config changes), occurrences over time, root causes (deepest exception of each record), files with findings, and every distinct record. Everything below the filter bar is one view of the same records: the level chips, the component chips, the connector picker, the search box and the period selected by dragging over the occurrences chart (all kept in the URL: 🔗 Link to this view opens the report on the same view) all recount the two charts, the root causes, the files with findings and the record cards (double-click the chart, or ⤺ whole period, to go back). The findings keep the figures of the whole report and only say how much of each of them is in the selection.
 
-🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-container-logs  
+🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-analyze-logs  
 🎬 Bite size session: https://kafka-docker-playground.io/#/sessions?id=%F0%9F%95%B5%EF%B8%8F-a-connector-failed-read-the-logs-live-or-from-a-customer-bundle
 
 ## Usage
@@ -130,6 +130,7 @@ The report says what is new, gone, growing or shrinking: root causes, known caus
 - **connect_task_failure**: Connect worker log: Oracle XStream connector with a wrong password, an unknown outbound server, and a task failing after the outbound server was stopped
 - **support_bundle**: .zip with that log and a gzipped broker log
 - **kafka_streams**: logs of the 3 instances of other/kafka-streams (serde-errors.sh): an application in ERROR after a poison pill, its dead stream thread, deserialization and production handler errors, the 🌊 Kafka Streams section (state, rebalances, tasks, timeline)
+- **compare_fix**: the log of a Connect worker the day after a fix, compared with the day before (`--compare`): errors gone, a new one, rebalances growing
 - **kafka_clients**: logs of the non-Java clients (C/C++, Python, Go, .NET, JavaScript, KafkaJS, Rust) of other/client-\*: a broker that refuses connections or does not resolve, records timed out, an unknown property, and crashes (Python traceback, .NET unhandled exception, Go and Rust panics, uncaught Node.js error)
 - **cfk_bundle**: CFK support bundle: kafka-2 crash-looping on an expired certificate, pending volume, OOMKilled Connect pod, failed connector task, Schema Registry authentication failure, operator reconcile errors
 - **cfk_kraft_migration**: CFK support bundle: ZooKeeper to KRaft migration (KRaftMigrationJob) stuck for 3 days in SETUP, the KRaftController missing inter replication credentials
@@ -139,7 +140,7 @@ The report says what is new, gone, growing or shrinking: root causes, known caus
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Repeatable:     |  ✓ Yes
-| Allowed Values: | `connect_task_failure`, `support_bundle`, `kafka_streams`, `kafka_clients`, `cfk_bundle`, `cfk_kraft_migration`, `cfk_rollout`, `cfk_rollout_after`
+| Allowed Values: | `connect_task_failure`, `support_bundle`, `kafka_streams`, `kafka_clients`, `compare_fix`, `cfk_bundle`, `cfk_kraft_migration`, `cfk_rollout`, `cfk_rollout_after`
 
 #### `--errors-only`
 

@@ -39,7 +39,12 @@ the container is parsed) are converted back to log lines, oldest first,
 and analyzed as a log file. So are JSON lines whatever the extension (a  
 fluentd / Kubernetes / logstash dump saved as .log: streamed, a dump of  
 several GB is converted in seconds and the digest reads its messages,  
-not the metadata). Only files with findings are  
+not the metadata). ⚠️ An input not fully read (a truncated or  
+corrupt .gz, an archive that does not fully extract) is listed at the  
+end, in the HTML report and in `--json` (.summary.incomplete_inputs):  
+never a silent ✅, and exit code 1 when nothing could be read at all.  
+Bytes that are not UTF-8 (a Latin-1 character) are read as they are.  
+Only files with findings are  
 shown. 🔭 When no file has findings, an overview says what the logs  
 contain (period covered, records by level, top messages and loggers) and  
 what to ask for next (a longer window, the logs of the component that  
@@ -70,10 +75,11 @@ one opened. Several CFK bundles are analyzed in parallel, 4 at a time
 
 🧭 After the digest of each file, a short summary: time range, occurrences by connector, known causes with what to do, root causes no known cause explains, and the configuration logged at startup (connectors, components, clients) with the keys changed between restarts. `--connector` keeps one connector, `--show-config` prints a configuration.
 
-🌐 Also writes a self-contained HTML report in `--output-dir`, opened in the browser in an interactive terminal: verdict, known causes (task killed, authentication, TLS, unknown magic byte, OutOfMemoryError...), occurrences over time, root causes (deepest exception of each record), files with findings, and every distinct record. Everything below the filter bar is one view of the same records: the level chips, the connector picker and the period selected by dragging over the occurrences chart all recount the two charts, the root causes, the files with findings and the record cards (double-click the chart, or ⤺ whole period, to go back). The findings keep the figures of the whole report and only say how much of each of them is in the selection.
+🌐 Also writes a self-contained HTML report in `--output-dir`, opened in the browser in an interactive terminal: verdict, known causes (task killed, errors.tolerance exceeded, authentication, TLS, wrong security.protocol, unknown magic byte, OutOfMemoryError, fenced producer, rebalances, throttling, offsets not committed in time, task not stopped in time...), an incident timeline (all files merged: first occurrence of each error and known cause, restarts, connectors reconfigured, config changes), a card per connector (errors, task killed, known causes, config changes), occurrences over time, root causes (deepest exception of each record), files with findings, and every distinct record. Everything below the filter bar is one view of the same records: the level chips, the component chips, the connector picker, the search box and the period selected by dragging over the occurrences chart (all kept in the URL: 🔗 Link to this view opens the report on the same view) all recount the two charts, the root causes, the files with findings and the record cards (double-click the chart, or ⤺ whole period, to go back). The findings keep the figures of the whole report, say how much of each of them is in the selection, and the ones with nothing in it are hidden (show them brings them back). With a connector picked, the 🔌 Connectors section keeps its card only.
 
-🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-container-logs  
-🎬 Bite size session: https://kafka-docker-playground.io/#/sessions?id=%F0%9F%95%B5%EF%B8%8F-a-connector-failed-read-the-logs-live-or-from-a-customer-bundle
+🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-analyze-logs  
+🎬 Bite size session: https://kafka-docker-playground.io/#/sessions?id=%F0%9F%95%B5%EF%B8%8F-a-connector-failed-read-the-logs-live-or-from-a-customer-bundle  
+🎬 Bite size session (`--compare`): https://kafka-docker-playground.io/#/sessions?id=%F0%9F%94%81-did-the-fix-work-analyze-the-logs-before-and-after-it
 
 ## Usage
 
@@ -109,6 +115,15 @@ visit https://www.python.org/downloads/ to install
 |-----------------|-------------
 | Repeatable:     |  ✓ Yes
 
+#### `--compare BEFORE`
+
+🔁 Compare with another input: the logs before a fix, another worker, the day before. A log file, folder or archive  
+(analyzed with the same `--connector`, `--with-worker`, `--errors-only` and `--sanitize`), or a JSON written by `--json`
+
+The report says what is new, gone, growing or shrinking: root causes, known causes, connectors and the totals by level  
+(per hour when the two inputs cover different periods), in a 🔁 Comparison section, the terminal summary and  
+.comparison of `--json`
+
 #### `--sample, -s SAMPLE`
 
 🧪 Sample of tools/log-analyzer/samples and cfk-analysis/samples
@@ -116,6 +131,7 @@ visit https://www.python.org/downloads/ to install
 - **connect_task_failure**: Connect worker log: Oracle XStream connector with a wrong password, an unknown outbound server, and a task failing after the outbound server was stopped
 - **support_bundle**: .zip with that log and a gzipped broker log
 - **kafka_streams**: logs of the 3 instances of other/kafka-streams (serde-errors.sh): an application in ERROR after a poison pill, its dead stream thread, deserialization and production handler errors, the 🌊 Kafka Streams section (state, rebalances, tasks, timeline)
+- **compare_fix**: the log of a Connect worker the day after a fix, compared with the day before (`--compare`): errors gone, a new one, rebalances growing
 - **kafka_clients**: logs of the non-Java clients (C/C++, Python, Go, .NET, JavaScript, KafkaJS, Rust) of other/client-\*: a broker that refuses connections or does not resolve, records timed out, an unknown property, and crashes (Python traceback, .NET unhandled exception, Go and Rust panics, uncaught Node.js error)
 - **cfk_bundle**: CFK support bundle: kafka-2 crash-looping on an expired certificate, pending volume, OOMKilled Connect pod, failed connector task, Schema Registry authentication failure, operator reconcile errors
 - **cfk_kraft_migration**: CFK support bundle: ZooKeeper to KRaft migration (KRaftMigrationJob) stuck for 3 days in SETUP, the KRaftController missing inter replication credentials
@@ -125,7 +141,7 @@ visit https://www.python.org/downloads/ to install
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Repeatable:     |  ✓ Yes
-| Allowed Values: | `connect_task_failure`, `support_bundle`, `kafka_streams`, `kafka_clients`, `cfk_bundle`, `cfk_kraft_migration`, `cfk_rollout`, `cfk_rollout_after`
+| Allowed Values: | `connect_task_failure`, `support_bundle`, `kafka_streams`, `kafka_clients`, `compare_fix`, `cfk_bundle`, `cfk_kraft_migration`, `cfk_rollout`, `cfk_rollout_after`
 
 #### `--errors-only`
 
@@ -189,7 +205,7 @@ visit https://www.python.org/downloads/ to install
 
 #### `--json-sections SECTIONS`
 
-🗂️ With `--json`, only these sections, comma separated: summary, findings, known_causes, root_causes, files, files_without_findings, configuration (default: all). For example `--json-sections` summary,findings,root_causes
+🗂️ With `--json`, only these sections, comma separated: summary, findings, known_causes, root_causes, files, files_without_findings, coverage, configuration, timeline, connectors, comparison (default: all). For example `--json-sections` summary,findings,root_causes
 
 #### `--component COMPONENT`
 

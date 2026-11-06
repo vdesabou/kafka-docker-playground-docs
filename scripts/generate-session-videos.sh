@@ -46,7 +46,7 @@ fi
 #               that cost money)
 #   stills      images shown after the terminal part instead of a report (screenshots of an IDE...):
 #               "<image>:<seconds>" items, each fitted to the frame on the background color of the terminal
-ALL_SESSIONS=(run secured-environments repro-models versions container-lifecycle offsets-and-lag create-or-update log-levels container-logs schema topic-administration thread-dump gc-logs flight-recorder jscissors oracle-xstream-report cfk-bundle sourcecode remote-debugging dlq smt-test topic-produce topic-consume benchmark network-traffic connect-migration terraform ccloud-service-account)
+ALL_SESSIONS=(run secured-environments repro-models versions container-lifecycle offsets-and-lag create-or-update log-levels container-logs analyze-logs schema topic-administration thread-dump gc-logs flight-recorder jscissors oracle-xstream-report cfk-bundle sourcecode remote-debugging dlq smt-test topic-produce topic-consume benchmark network-traffic connect-migration terraform ccloud-service-account)
 session_settings() {
   report="" scroll="" page_height=4100 docker="" setup="" teardown="" stills=""
   case "$1" in
@@ -100,6 +100,12 @@ session_settings() {
     thread-dump)
       report="/tmp/thread-dump/*-thread-report.html"
       scroll="4:0 7:960 6:2560"
+      ;;
+    analyze-logs)
+      report="/tmp/analyze-logs/compare_fix-log-report.html"
+      scroll="5:0 6:900 6:1800 5:2700"
+      setup=setup_analyze_logs
+      teardown=teardown_analyze_logs
       ;;
     gc-logs)
       report="/tmp/gc-logs/*-gc-report.html"
@@ -493,6 +499,22 @@ EOF
   rm -rf /tmp/jscissors
 }
 # a recording stopped in the middle leaves the route to postgres cut and the agent tracing
+# analyze logs: no container, the samples of the clone. /tmp/partial.log.gz is a log gzipped then cut at 2 KB (3000
+# INFO lines, then the error), a download that stopped: shown on camera, it says ⚠️ not fully read instead of ✅
+setup_analyze_logs() {
+  rm -rf /tmp/analyze-logs /tmp/analyze-logs-partial /tmp/partial.log.gz
+  { for i in $(seq 1 3000); do echo "2026-11-06 10:00:00,000 INFO [s3-sink|task-0] batch $i written"; done
+    echo "2026-11-06 10:59:00,000 ERROR [s3-sink|task-0] the error you are looking for"; } | gzip > /tmp/full-session.log.gz
+  head -c 2000 /tmp/full-session.log.gz > /tmp/partial.log.gz
+  rm -f /tmp/full-session.log.gz
+}
+
+# the report of the comparison (/tmp/analyze-logs) stays: the end of the video scrolls through it
+teardown_analyze_logs() {
+  rm -rf /tmp/analyze-logs-partial /tmp/partial.log.gz
+  return 0
+}
+
 teardown_jscissors() {
   playground debug block-traffic -c connect --destination postgres --action stop >> /tmp/kdp-session-setup.log 2>&1
   playground debug jscissors -c connect --action stop --no-analyze --output-dir /tmp/kdp-session-jscissors-trace >> /tmp/kdp-session-setup.log 2>&1

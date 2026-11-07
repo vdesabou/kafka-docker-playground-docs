@@ -124,6 +124,13 @@ The report says what is new, gone, growing or shrinking: root causes, known caus
 (per hour when the two inputs cover different periods), in a 🔁 Comparison section, the terminal summary and  
 .comparison of `--json`
 
+🎓 Tip: can be set several times, oldest first (-f day3 `--compare` day1 `--compare` day2): the comparison is with the last  
+one, and a 📈 Trend gives the totals and the main root causes of every input in order (.trend of `--json`)
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Repeatable:     |  ✓ Yes
+
 #### `--sample, -s SAMPLE`
 
 🧪 Sample of tools/log-analyzer/samples and cfk-analysis/samples
@@ -167,6 +174,16 @@ The report says what is new, gone, growing or shrinking: root causes, known caus
 |-----------------|-------------
 | Default Value:  | `40`
 
+#### `--since SINCE`
+
+⏱️ Only the lines logged at or after this time: "2026-11-06 10:00", "2026-11-06T10:00:00" or "2026-11-06". The times  
+are compared as written in the logs; a line without its own time (a stack frame) follows the line before it. The  
+line numbers of the digest and of the report stay those of the files
+
+#### `--until UNTIL`
+
+⏱️ Only the lines logged before this time (same formats as `--since`)
+
 #### `--output-dir, -o OUTPUT_DIR`
 
 📂 Output directory for the HTML report (default: ./log-analysis-output), with a `<report>`-files/ folder next to it: a page per file with findings, which the file names and line numbers of the report open (✏️ in the editor of playground config editor)
@@ -205,7 +222,7 @@ The report says what is new, gone, growing or shrinking: root causes, known caus
 
 #### `--json-sections SECTIONS`
 
-🗂️ With `--json`, only these sections, comma separated: summary, findings, known_causes, root_causes, files, files_without_findings, coverage, configuration, timeline, connectors, comparison (default: all). For example `--json-sections` summary,findings,root_causes
+🗂️ With `--json`, only these sections, comma separated: summary, findings, known_causes, root_causes, files, files_without_findings, coverage, configuration, timeline, connectors, comparison, trend, lifecycle, config_lint (default: all). For example `--json-sections` summary,findings,root_causes
 
 #### `--component COMPONENT`
 

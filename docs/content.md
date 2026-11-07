@@ -528,7 +528,7 @@ Using Multi-Data-Center setup with 🇺🇸 and 🇪🇺 clusters
 
 ## 👾 Other Playgrounds
 
-- 🧠 [CLI examples](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/cli) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI fail](https://img.shields.io/badge/3/4-fail!-red)](https://github.com/vdesabou/kafka-docker-playground/issues/10155)  
+- 🧠 [CLI examples](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/cli) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI fail](https://img.shields.io/badge/3/4-fail!-red)](https://github.com/vdesabou/kafka-docker-playground/issues/)  
 - 🍪 [Deep dive labs](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/deep-dive-labs): the hands-on labs of the [Deep dives](https://kafka-docker-playground.io/#/deep-dives), with assertions on the outputs the pages quote &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/29/29-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/42309720059/job/128207867574)  [![CP 8.4.0](https://img.shields.io/badge/1/29-CP%208.4.0-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/42309720059/job/128207873237) 
 
 ## ☁️ Confluent Cloud

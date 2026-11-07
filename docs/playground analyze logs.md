@@ -73,7 +73,7 @@ one opened. Several CFK bundles are analyzed in parallel, 4 at a time
 
 🔒 With `--sanitize`, passwords and other secrets (password=…, JAAS configs, tokens, keys, credentials in URLs), IPs, hostnames, emails and LDAP DNs are replaced by placeholders (`<REDACTED>`, `<IP-1>`, `<HOST-1>`…, the same in the digest, the report and the JSON). Off by default: use it before sharing the output outside Confluent, and review it anyway (best effort).
 
-🧭 After the digest of each file, a short summary: time range, occurrences by connector, known causes with what to do, root causes no known cause explains, and the configuration logged at startup (connectors, components, clients) with the keys changed between restarts. `--connector` keeps one connector, `--show-config` prints a configuration.
+🧭 After the digest of each file, a short summary: time range, occurrences by connector, known causes with what to do (📚 and a Confluent knowledge-base article for many of them), root causes no known cause explains, and the configuration logged at startup (connectors, components, clients) with the keys changed between restarts. Also: 🏷️ the version of each connector plugin (with the playground connector-plugin changelog command since that version) and of Kafka, 🔄 the restarts, worker rebalances and consumer rejoins counted from the INFO lines (🌀 a storm when they repeat), 🔗 the errors that came right after a change (config key, restart) of the same connector, and 🧪 a config lint of each connector (errors.tolerance=all without a DLQ, a DLQ with replication factor 1, max.poll.records too high for max.poll.interval.ms, acks not all…). `--connector` keeps one connector, `--show-config` prints a configuration, `--since` / `--until` keep a window of time. 📋 `<input>`-ticket.md, next to the report: the same summary in Markdown, always sanitized, to paste in a ticket (also in 📤 Share of the report). 📈 With `--compare` repeated (oldest first), a trend over every input.
 
 🌐 Also writes a self-contained HTML report in `--output-dir`, opened in the browser in an interactive terminal: verdict, known causes (task killed, errors.tolerance exceeded, authentication, TLS, wrong security.protocol, unknown magic byte, OutOfMemoryError, fenced producer, rebalances, throttling, offsets not committed in time, task not stopped in time...), an incident timeline (all files merged: first occurrence of each error and known cause, restarts, connectors reconfigured, config changes), a card per connector (errors, task killed, known causes, config changes), occurrences over time, root causes (deepest exception of each record), files with findings, and every distinct record. Everything below the filter bar is one view of the same records: the level chips, the component chips, the connector picker, the search box and the period selected by dragging over the occurrences chart (all kept in the URL: 🔗 Link to this view opens the report on the same view) all recount the two charts, the root causes, the files with findings and the record cards (double-click the chart, or ⤺ whole period, to go back). The findings keep the figures of the whole report, say how much of each of them is in the selection, and the ones with nothing in it are hidden (show them brings them back). With a connector picked, the 🔌 Connectors section keeps its card only.
 
@@ -94,6 +94,10 @@ playground analyze logs [OPTIONS]
 visit https://www.python.org/downloads/ to install
 
 ## Environment Variables
+
+#### `PLAYGROUND_LOG_PARALLELISM`
+
+⚡ Files digested at the same time, merged in the order of the input (default 4; 1: one at a time, with the progress bar of a large file)
 
 #### `PLAYGROUND_CFK_PARALLELISM`
 

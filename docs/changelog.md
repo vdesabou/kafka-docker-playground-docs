@@ -71,6 +71,7 @@
 
 ##### 🐛 Bugs
 
+- 🐛🧭 find-command: a page with many rows repeating one word of the question outranks the right command (docker logs → analyze logs) [#10231](https://github.com/vdesabou/kafka-docker-playground/issues/10231)
 - 🐛🧮 ksqlDB examples with 2019/2020 event times: the broker deletes the topics of the persistent queries, push queries return nothing [#10230](https://github.com/vdesabou/kafka-docker-playground/issues/10230)
 - 🐛☁️ ccloud stop: never destroy a cluster the playground did not create, stop.sh from any folder [#10222](https://github.com/vdesabou/kafka-docker-playground/issues/10222)
 - 🐛☁️ ccloud/replicator and ccloud/mirrormaker2: KRaft source clusters, back in CI with CP 8 [#10218](https://github.com/vdesabou/kafka-docker-playground/issues/10218)

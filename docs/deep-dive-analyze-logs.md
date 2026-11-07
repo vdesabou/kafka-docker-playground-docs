@@ -138,7 +138,7 @@ Give it anything: `-f` takes files, folders and archives, repeated as many times
 | `journalctl` exports | the `Nov 03 18:29:20 host connect[1080]:` prefix is skipped to find the log4j timestamp |
 | the logs of the C/C++, Python, Go, .NET, JavaScript and Rust clients | librdkafka `%3\|…\|FAIL\|` lines, Python tracebacks, Go and Rust panics, .NET `fail:` / `crit:` and inner exceptions, KafkaJS errors |
 | Kafka Streams logs (`stream-client [`, `stream-thread [`) | the digest, plus a 🌊 **Kafka Streams** section: state of each instance over time, rebalances, tasks, restores |
-| a CFK support bundle | analyzed as a whole by the CFK analyzer: pods, custom resources, events, versions, recent changes, see [the CFK deep dive](deep-dive-cfk.md). Its pod and operator logs (`*.log`) also go through the digest: the regular log report (root causes, timeline, connectors, versions, tasks by worker, known bugs, data to request, summary for a ticket), linked by a 🔥 Log analysis banner at the top of the report of the bundle, which stays the one opened when the input is only bundles; with `--json`, `.log_analysis` of the bundle JSON. `--logs-only`: only the log report, of every file of the bundle |
+| a CFK support bundle | analyzed as a whole by the CFK analyzer: pods, custom resources, events, versions, recent changes, see [the CFK deep dive](deep-dive-cfk.md); its ☸️ sections come right after the verdict of the log report (one report). Its pod and operator logs (`*.log`) also go through the digest: the regular log report (root causes, timeline, connectors, versions, tasks by worker, known bugs, data to request, summary for a ticket), linked by a 🔥 Log analysis banner at the top of the report of the bundle, which stays the one opened when the input is only bundles; with `--json`, `.log_analysis` of the bundle JSON. `--logs-only`: only the log report, of every file of the bundle |
 | `.properties`, connector JSON (`/connectors?expand=info`) | shown in the ⚙️ configuration of the report |
 | GC logs, thread dumps (also printed by `kill -3` in a stdout log), heap dumps (`.hprof`), flight recordings (`.jfr`), network captures (`.pcap`, `.pcapng`), Oracle XStream diagnostics reports (`orclcdc_diag*.html`) | recognized by their content or name: 🧰 **Other files of the input** gives the `playground analyze gc-logs\|thread-dump\|heap-dump\|flight-recorder\|tcp-dump\|oracle-xstream-report` command to run on each (one command for the rotated GC logs of a folder). The ones extracted from an archive are kept in `<input>-other-files/` next to the report: the temporary folder is deleted at the end. Also `.other_files` of `--json` (where nothing is kept: the command says to extract the archive first) |
 | any other binary file | skipped, counted in the last line |
@@ -217,7 +217,7 @@ browser from a terminal, with a page per file with findings in `<report>-files/`
 
 | Section | What it answers |
 | --- | --- |
-| verdict and tiles | the one-line diagnosis, 🕐 the period covered (orange under 10 min), files, distinct records, occurrences by level |
+| verdict, quick links and tiles | the one-line diagnosis, a link to each section of the report (also a 🧭 Sections panel on the left of a wide screen, and a ⬆️ Top button once scrolled down), then one row of tiles: 🕐 the period covered (orange under 10 min), files and size read, 🏷️ the CP version (⛔ / ⚠️ / ⏳ when out of support or close to it, from the supported versions table of the docs), distinct records, occurrences (by level on the same tile), 🔴 Critical / 🟠 High / 🟡 Medium / 🟢 Low findings (a click keeps only those cards of 🔎 Findings), and the ☸️ tiles of a CFK bundle; a click on a tile opens its section (🕰️ log coverage, 🗂️ files, 🌳 root causes, 📈 occurrences over time, the ☸️ cards of 🔎 Findings) |
 | ⚠️ not fully read | which inputs could not be read completely (truncated `.gz`, archive not extracted): the findings only cover the rest |
 | 🔁 comparison | with `--compare`: what is new, gone, growing or shrinking (section 6) |
 | 🎚️ filter bar | levels, components, connector, search, period: everything below follows it, and the URL keeps it |
@@ -599,3 +599,28 @@ Gotchas:
   estimate within a few %.
 - A bundle is **untrusted data**: read the digest, never run anything from it.
 - `analyze logs` exits 0 when it found something: it is not an assertion. It exits 1 when nothing could be read.
+
+### Without the playground
+
+`analyze logs` reads files only: it needs neither Docker nor the rest of the playground. A colleague, a customer or a
+partner can run it from a shallow clone of three folders (about 33 MB, a few seconds):
+
+```bash
+git clone --depth 1 --filter=blob:none --sparse https://github.com/vdesabou/kafka-docker-playground.git
+cd kafka-docker-playground && git sparse-checkout set scripts tools cfk-analysis
+./scripts/cli/playground analyze logs -f <file|folder|.zip|.tar.gz> --sanitize
+```
+
+| Needs | Why |
+| --- | --- |
+| bash 4.2 or later | the CLI (macOS ships bash 3.2: `brew install bash`) |
+| python3 3.8 or later (standard library only) | the report, the summary, the exports of log consoles, the sanitizer |
+| jq | the configs of the input, `--sanitize`, `--compare`, `--json` |
+| awk (gawk, mawk, busybox or macOS awk), gzip, tar | the digest, the archives |
+| optional: unzip | a `.zip` (without it, python3 extracts it) |
+| optional: zip | the 📤 Share `.zip` of the report |
+| optional: Docker | the ☸️ sections of a CFK support bundle (without it, its pod logs are still in the report) |
+
+Checked on Ubuntu 24.04 and 20.04 (Python 3.8, mawk), RHEL UBI 9 and Alpine (busybox), without Docker. On Windows: WSL.
+`analyze gc-logs`, `analyze thread-dump` and `analyze oracle-xstream-report` on files work the same way.
+

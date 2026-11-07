@@ -18,12 +18,6 @@
 playground [OPTIONS] COMMAND
 ```
 
-### Dependencies
-
-*docker*
-
-visit https://docs.docker.com/get-docker to install
-
 ### Environment Variables
 
 #### `PLAYGROUND_CLUSTER`

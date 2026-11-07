@@ -150,12 +150,6 @@ CLI can be configured using [playground config](/playground%20config), or from t
 playground [OPTIONS] COMMAND
 ```
 
-### Dependencies
-
-*docker*
-
-visit https://docs.docker.com/get-docker to install
-
 ### Environment Variables
 
 #### `PLAYGROUND_CLUSTER`

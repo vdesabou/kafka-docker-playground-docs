@@ -203,13 +203,28 @@ playground analyze logs -f /tmp/cfk-support-bundle/<bundle>.tar.gz --output-dir 
   needed, `~/.local/bin` as a last resort). It only works on a running `cfk` / `cfk-rbac` environment.
 - `analyze logs` detects a CFK support bundle (a folder with `cluster-details.txt`, or with `cluster-resources/` and
   `operator/`, or a flat collection of `kubectl` outputs made by hand with a `confluent-operator-*.log` or the YAML of a
-  `platform.confluent.io` custom resource at its top, alone or inside a folder or an archive: `--logs-only` to get the plain log digest instead) and works offline on any bundle made by `kubectl confluent support-bundle`: a customer's one, or
+  `platform.confluent.io` custom resource at its top, alone or inside a folder or an archive: `--logs-only` to get only the regular log report instead) and works offline on any bundle made by `kubectl confluent support-bundle`: a customer's one, or
   yours. It prints the environment (Kubernetes and CFK versions, images, checked against the support matrix), the
   recent changes, and the issues by category (pod failures, resources, TLS, auth, connect…) with the next steps. Its
   HTML report also shows the **configuration** of Kafka, ZooKeeper, Schema Registry, Connect and Control Center: the
   properties CFK renders (`kafka.properties`, `connect.properties`… of the `<cr>-shared-config` ConfigMaps,
   `configOverrides`, `jvm.config`, `log4j.properties`, the effective config logged at startup) and the config of each
   connector (`Connector` CRs, `…ConnectorConfig values:` dumps of the Connect logs), with a key / value filter.
+- The pod and operator logs of the bundle also go through the regular log digest of `analyze logs`: its log report
+  (`<input>-log-report.html`, next to the report of the bundle) has every distinct error with its root cause, the
+  incident timeline, a card per connector with its plugin version, restarts and rebalances, known bugs fixed in a later
+  version, which pod ran which task (`connect-0`, `connect-1`… are the workers), the data to request and a summary for a
+  ticket. A 🔥 **Log analysis** banner at the top of the report of the bundle gives its key lines and links it; with
+  `--json`, it is `.log_analysis` of the bundle JSON. The issues of the log records of the bundle report come from the
+  same records (the digest passes them to the CFK analyzer). The ☸️ changes of the cluster (pods terminated or restarted
+  with their reason, custom resources edited, StatefulSet rollouts) are events of the 🗓️ incident timeline of the log
+  report: 🔗 links a first error to the edit of a CR 10 minutes before it at most, 💥 the burst of errors right after a
+  pod restart.
+- One output for the case: the summary for a ticket (`<input>-ticket.md`, 📤 Copy for a ticket) has a ☸️ section per
+  bundle (environment, issues by severity, the known CFK issues with their public links, never the 🔒 internal ones, the
+  critical and high issues), and the 📥 data to request of the bundle joins the one of the logs. `analyze logs -f
+  <after bundle> --compare <before bundle>` compares the bundles (the comparison report, opened) and the pod logs (🔁 in
+  the log report, `.log_analysis.comparison` and `.cfk_comparison` with `--json`).
   **📕 Known CFK issues**: the log messages and events of the CFK triage table of Confluent support (roll blocked by
   the pre-roll checks, expired certificate, `INCONSISTENT_CLUSTER_ID`, ZooKeeper to KRaft migration, authorizer that
   doesn't start, license secret, `Could not obtain JAAS context`…) are matched on every issue, and on the INFO lines of

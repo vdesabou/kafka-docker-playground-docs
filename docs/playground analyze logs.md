@@ -155,6 +155,7 @@ one, and a 📈 Trend gives the totals and the main root causes of every input i
 🧪 Sample of tools/log-analyzer/samples and cfk-analysis/samples
 
 - **connect_task_failure**: Connect worker log: Oracle XStream connector with a wrong password, an unknown outbound server, and a task failing after the outbound server was stopped
+- **connect_many_connectors**: Connect worker (CP 8.1.2) with 8 connectors: JDBC Oracle sink killed on ORA-00942, JDBC PostgreSQL source refused, S3 Access Denied, Elasticsearch malformed documents, Debezium MySQL binlog purged, HTTP 503, ServiceNow 429, a custom connector; 3 of them below the minimum version supported on CP 8.1 (🛟), icons, connector cards
 - **support_bundle**: .zip with that log and a gzipped broker log
 - **kafka_streams**: logs of the 3 instances of other/kafka-streams (serde-errors.sh): an application in ERROR after a poison pill, its dead stream thread, deserialization and production handler errors, the 🌊 Kafka Streams section (state, rebalances, tasks, timeline)
 - **compare_fix**: the log of a Connect worker the day after a fix, compared with the day before (`--compare`): errors gone, a new one, rebalances growing
@@ -167,7 +168,7 @@ one, and a 📈 Trend gives the totals and the main root causes of every input i
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Repeatable:     |  ✓ Yes
-| Allowed Values: | `connect_task_failure`, `support_bundle`, `kafka_streams`, `kafka_clients`, `compare_fix`, `cfk_bundle`, `cfk_kraft_migration`, `cfk_rollout`, `cfk_rollout_after`
+| Allowed Values: | `connect_task_failure`, `connect_many_connectors`, `support_bundle`, `kafka_streams`, `kafka_clients`, `compare_fix`, `cfk_bundle`, `cfk_kraft_migration`, `cfk_rollout`, `cfk_rollout_after`
 
 #### `--errors-only`
 
@@ -276,6 +277,10 @@ Matched against the bundle (keywords and dates, no AI): the components and CR / 
 
 ```bash
 playground analyze logs --sample connect_task_failure
+```
+
+```bash
+playground analyze logs --sample connect_many_connectors
 ```
 
 ```bash

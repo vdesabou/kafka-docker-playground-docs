@@ -72,6 +72,9 @@
 
 ##### 🐛 Bugs
 
+- 🐛🦭 ldap-authorizer-with-ldap-failover: podman refuses the bind image (invalid port proto "TCP" in "53/TCP") [#10281](https://github.com/vdesabou/kafka-docker-playground/issues/10281)
+- 🐛🧪 deep-dive lab container-logs.sh: root cause rows check fails since the rows have a class per level [#10279](https://github.com/vdesabou/kafka-docker-playground/issues/10279)
+- 🐛🧭 find-command: with one specific term, every row containing its stem gets the bonus (working → worker: analyze logs before connector diagnose) [#10277](https://github.com/vdesabou/kafka-docker-playground/issues/10277)
 - 🐛🧭 find-command: a page with many rows repeating one word of the question outranks the right command (docker logs → analyze logs) [#10231](https://github.com/vdesabou/kafka-docker-playground/issues/10231)
 - 🐛🧮 ksqlDB examples with 2019/2020 event times: the broker deletes the topics of the persistent queries, push queries return nothing [#10230](https://github.com/vdesabou/kafka-docker-playground/issues/10230)
 - 🐛☁️ ccloud stop: never destroy a cluster the playground did not create, stop.sh from any folder [#10222](https://github.com/vdesabou/kafka-docker-playground/issues/10222)

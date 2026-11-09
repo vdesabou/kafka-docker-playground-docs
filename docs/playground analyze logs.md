@@ -48,10 +48,12 @@ Datadog, Grafana: one event per row, a cell holding the JSON log line of
 the container is parsed) are converted back to log lines, oldest first,  
 and analyzed as a log file. Logs pasted in a Word document (.docx, .odt)  
 or exported to a spreadsheet (.xlsx, .xlsm, .ods: the columns of the  
-export, Excel dates converted) are converted the same way; the pictures  
-of a document, the screenshots, the PDF and the old .doc / .xls / .pptx  
-files are not analyzed: 🧰 Other files of the input lists them with what  
-to do. So are JSON lines whatever the extension (a  
+export, Excel dates converted) are converted the same way. 📷 With  
+`--ocr`, the screenshots (and the pictures of a document) are read by OCR  
+(the Vision framework of macOS, else tesseract, else tesseract in a  
+container) and analyzed as "`<picture>` (📷 OCR)", approximate lines;  
+without it, and for the PDF and the old .doc / .xls / .pptx files,  
+🧰 Other files of the input lists them with what to do. So are JSON lines whatever the extension (a  
 fluentd / Kubernetes / logstash dump saved as .log: streamed, a dump of  
 several GB is converted in seconds and the digest reads its messages,  
 not the metadata). ⚠️ An input not fully read (a truncated or  
@@ -213,6 +215,10 @@ one, and a 📈 Trend gives the totals and the main root causes of every input i
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Conflicts With: | `--include-warnings`
+
+#### `--ocr`
+
+📷 Read the screenshots of the input by OCR (.png, .jpg, .gif, .bmp, .tiff, .webp, .heic, and the pictures of a Word document): the Vision framework of macOS (offline, compiled once into ~/.cache/playground), else tesseract (brew install tesseract, apt install tesseract-ocr), else tesseract in a container built on first use. Their lines are digested as "`<picture>` (📷 OCR)": approximate, a character can be misread, check the picture before quoting a value. Without it, the screenshots are listed in 🧰 Other files of the input
 
 #### `--include-harmless`
 

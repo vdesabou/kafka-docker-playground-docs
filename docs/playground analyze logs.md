@@ -62,10 +62,13 @@ end, in the HTML report and in `--json` (.summary.incomplete_inputs):
 never a silent ✅, and exit code 1 when nothing could be read at all.  
 Bytes that are not UTF-8 (a Latin-1 character) are read as they are.  
 🌍 It works offline, without Docker: bash 4.2+, python3 3.8+, jq, awk,  
-gzip and tar are enough (a CFK bundle then has no ☸️ sections, its pod  
-logs are still read). Without the playground: a sparse clone of  
-scripts/, tools/ and cfk-analysis/ (see the deep dive, "Without the  
-playground").  
+gzip and tar are enough (a CFK bundle gets its ☸️ sections when PyYAML  
+is installed, else its pod logs are still read). Without the  
+playground: a sparse clone of scripts/, tools/ and cfk-analysis/, or  
+with nothing installed but Docker, the ghcr.io/vdesabou/kdp-analyze-logs  
+image: docker run `--rm` `--network` none -v "\$PWD":/data -e  
+`KDP_HOST_DIR`="\$PWD" ghcr.io/vdesabou/kdp-analyze-logs -f bundle.zip  
+(see the deep dive, "Without the playground").  
 🧰 The files of the input that another analyzer reads better (GC logs,  
 thread dumps, heap dumps, flight recordings, network captures, Oracle  
 XStream diagnostics reports, found by their content or name) are listed  
@@ -129,7 +132,7 @@ visit https://www.python.org/downloads/ to install
 
 #### `PLAYGROUND_CFK_PARALLELISM`
 
-⚡ CFK support bundles analyzed at the same time, a container each (default 4)
+⚡ CFK support bundles analyzed at the same time, a container each, or a python3 process with `CFK_ANALYSIS_LOCAL` (default 4)
 
 #### `PLAYGROUND_LOG_RUNBOOKS_FILE`
 
@@ -138,6 +141,10 @@ visit https://www.python.org/downloads/ to install
 #### `PLAYGROUND_CFK_RUNBOOKS_FILE`
 
 📕 CFK support bundle: JSON file with the internal runbook links of the known CFK issues, shown with a 🔒 in the terminal, the HTML report and `--json` (default reproduction-models/_miscellaneous/cfk-analysis/runbooks-internal.json, format in cfk-analysis/runbooks.py)
+
+#### `CFK_ANALYSIS_LOCAL`
+
+☸️ CFK support bundle: 1 runs cfk-analysis with the python3 of the machine (PyYAML needed) instead of its Docker image, 0 always in the image (default: the image, the local python3 when there is no container engine and PyYAML is installed; 1 in the kdp-analyze-logs image)
 
 ## Options
 

@@ -13,7 +13,15 @@ traces are collapsed to the exception chain ("Caused by:") plus a few
 frames of the deepest cause. Only records with an explicit level are  
 reported (" ERROR ", "[ERROR]", level=error, "level":"error"), plus  
 uncaught java exceptions: records logged at INFO/DEBUG/TRACE, and  
-level-less lines that merely contain "error" or "failed", never are.
+level-less lines that merely contain "error" or "failed", never are.  
+🙈 Known harmless records (telemetry not set up, Self-Balancing on a  
+KRaft controller node, Jersey startup notices) and the warnings of the  
+JDK launcher on stderr ("WARNING: sun.misc.Unsafe::…") are left out  
+(`--include-harmless` keeps the first ones); 🌅 the connection failures of  
+a component that starts before the broker, and stop once it is up, are  
+a LOW known cause of their own, not the HIGH 🔌 Connection failure.  
+✅ Every connector of the logs gets its card, the ones without an  
+error too, and ☕ the JDK is shown when the logs give it.
 
 🧰 The logs of every Kafka client of Confluent are read, not only Java:  
 the librdkafka lines of the C/C++, Python, Go, .NET and JavaScript  
@@ -143,7 +151,7 @@ visit https://www.python.org/downloads/ to install
 
 #### `--from-containers`
 
-🐳 Analyze the logs of the running example: the logs of its containers (the pods of the namespace confluent with the cfk environment, previous logs of restarted pods included) are saved in /tmp/playground-container-logs-`<example>`-`<date>`/, one `<container>`.log each, then analyzed as a folder: the full report (restarts, rebalances, configs, connectors, `--connector`, `--since`...), not only the digest of `playground container logs --errors`
+🐳 Analyze the logs of the running example: the logs of its containers (the pods of the namespace confluent with the cfk environment, previous logs of restarted pods included) are saved in /tmp/playground-container-logs-`<example>`-`<date>`/, one `<container>`.log each, then analyzed as a folder: the full report (restarts, rebalances, configs, connectors, `--connector`, `--since`...), not only the digest of `playground container logs --errors`. ☕ The JDK of each container (java -version) joins the one the logs give
 
 🎓 Tip: `--container` keeps some of them. The folder is kept: give it to `--compare` after a fix, or to a colleague
 
@@ -205,6 +213,10 @@ one, and a 📈 Trend gives the totals and the main root causes of every input i
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Conflicts With: | `--include-warnings`
+
+#### `--include-harmless`
+
+🙈 Keep the known harmless records (telemetry not set up, Self-Balancing on a KRaft controller node, Jersey startup notices…): left out by default, counted in a 🙈 Known harmless section of the report and in .harmless of `--json`
 
 #### `--include-warnings`
 

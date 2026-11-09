@@ -4,7 +4,9 @@
 
 The offline counterpart of `playground container logs --errors`, for  
 logs that do not come from a running container: a customer support  
-bundle, a CI artifact, a log file you were sent.
+bundle, a CI artifact, a log file you were sent. 🐳 `--from-containers`  
+gives the same full report for the running example: the logs of its  
+containers are saved in a folder, then analyzed.
 
 Repeated records are de-duplicated with an occurrence count, stack  
 traces are collapsed to the exception chain ("Caused by:") plus a few  
@@ -139,6 +141,26 @@ visit https://www.python.org/downloads/ to install
 |-----------------|-------------
 | Repeatable:     |  ✓ Yes
 
+#### `--from-containers`
+
+🐳 Analyze the logs of the running example: the logs of its containers (the pods of the namespace confluent with the cfk environment, previous logs of restarted pods included) are saved in /tmp/playground-container-logs-`<example>`-`<date>`/, one `<container>`.log each, then analyzed as a folder: the full report (restarts, rebalances, configs, connectors, `--connector`, `--since`...), not only the digest of `playground container logs --errors`
+
+🎓 Tip: `--container` keeps some of them. The folder is kept: give it to `--compare` after a fix, or to a colleague
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Conflicts With: | `--sample`
+
+#### `--container CONTAINER`
+
+🐳 With `--from-containers`, only the logs of this container (or pod with the cfk environment), instead of all of them
+
+🎓 Tip: can be set several times
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Repeatable:     |  ✓ Yes
+
 #### `--compare BEFORE`
 
 🔁 Compare with another input: the logs before a fix, another worker, the day before. A log file, folder or archive  
@@ -174,6 +196,7 @@ one, and a 📈 Trend gives the totals and the main root causes of every input i
 |-----------------|-------------
 | Repeatable:     |  ✓ Yes
 | Allowed Values: | `connect_task_failure`, `connect_many_connectors`, `support_bundle`, `kafka_streams`, `kafka_clients`, `compare_fix`, `cfk_bundle`, `cfk_kraft_migration`, `cfk_rollout`, `cfk_rollout_after`
+| Conflicts With: | `--from-containers`
 
 #### `--errors-only`
 
@@ -294,6 +317,14 @@ playground analyze logs --sample support_bundle
 
 ```bash
 playground analyze logs --file connect.log
+```
+
+```bash
+playground analyze logs --from-containers
+```
+
+```bash
+playground analyze logs --from-containers --container connect --container broker --connector my-jdbc-sink
 ```
 
 ```bash

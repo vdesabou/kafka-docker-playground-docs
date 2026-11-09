@@ -41,6 +41,8 @@ playground container display-error-all [OPTIONS]
 
 🌐 Also write a self-contained HTML report of all the containers in /tmp/playground-log-reports (known causes, zoomable timeline, root causes, every distinct record), opened in the browser in an interactive terminal
 
+🎓 Tip: for the full report of playground analyze logs (restarts, rebalances, configs, connector cards, `--compare`), use playground analyze logs `--from-containers`
+
 ## Examples
 
 ```bash

@@ -3,6 +3,7 @@
 ## November 2026
 ##### 🌟 Enhancements
 
+- 🧠🐳 analyze logs: a container image, with nothing installed but Docker [#10291](https://github.com/vdesabou/kafka-docker-playground/issues/10291)
 - 🧠📦 repro export: a README.md at the top of the bundle (install the playground in one command, import, run, then the hand-off report) [#10249](https://github.com/vdesabou/kafka-docker-playground/issues/10249)
 - 🧠📚 docs: kdp-kb-review skill can create KB articles [#10197](https://github.com/vdesabou/kafka-docker-playground/issues/10197)
 - 🧠📊 --enable-jmx-grafana with mdc-plaintext, remove monitoring-demo and monitoring-cluster-linking [#10194](https://github.com/vdesabou/kafka-docker-playground/issues/10194)

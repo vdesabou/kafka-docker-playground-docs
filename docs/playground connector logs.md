@@ -14,7 +14,13 @@ connector are kept.
 
 For Fully Managed connectors, the logs come from the confluent CLI ('confluent connect logs', last 71 hours),  
 limitations apply (see https://docs.confluent.io/cloud/current/connectors/logging-cloud-connectors.html#using-ccloud-cli):  
-`--errors` keeps the ERROR level, `--grep` is a search text, and `--wait-for-log` polls until the text is found or `--max-wait`.
+`--errors` keeps the ERROR level, `--grep` is a search text, and `--wait-for-log` polls until the text is found or `--max-wait`.  
+Every page is fetched (`--output-file` of the CLI, JSON lines, kept in /tmp/playground-connector-logs-`<connector>`-`<date>`.jsonl)  
+and shown as log lines with the [connector|task-0] context of a Connect worker (the .log next to it).
+
+🔥 `--analyze` gives the full report of `playground analyze logs` instead (known causes, timeline, connector card,  
+restarts, configs): the logs of the Connect worker (`--from-containers`, kept to `--connector` when it is given) for a  
+self managed connector, the log lines above for a fully managed one.
 
 🎓 Tip: from a script or an AI agent, always pass `--no-follow`, `--errors` or `--wait-for-log`, otherwise the command never returns for a self managed connector.
 
@@ -40,7 +46,7 @@ playground connector logs [OPTIONS]
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Conflicts With: | `--wait-for-log`, `--grep`, `--errors`
+| Conflicts With: | `--wait-for-log`, `--grep`, `--errors`, `--analyze`
 
 #### `--wait-for-log, -w LOG`
 
@@ -48,7 +54,7 @@ playground connector logs [OPTIONS]
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Conflicts With: | `--open`, `--grep`, `--errors`
+| Conflicts With: | `--open`, `--grep`, `--errors`, `--analyze`
 
 #### `--max-wait, -m MAX_WAIT`
 
@@ -64,7 +70,7 @@ playground connector logs [OPTIONS]
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Conflicts With: | `--open`, `--wait-for-log`, `--errors`
+| Conflicts With: | `--open`, `--wait-for-log`, `--errors`, `--analyze`
 
 #### `--since SINCE`
 
@@ -72,7 +78,7 @@ playground connector logs [OPTIONS]
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Conflicts With: | `--open`, `--wait-for-log`
+| Conflicts With: | `--open`, `--wait-for-log`, `--analyze`
 
 #### `--tail LINES`
 
@@ -80,7 +86,7 @@ playground connector logs [OPTIONS]
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Conflicts With: | `--open`, `--wait-for-log`
+| Conflicts With: | `--open`, `--wait-for-log`, `--analyze`
 
 #### `--no-follow`
 
@@ -88,15 +94,27 @@ playground connector logs [OPTIONS]
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Conflicts With: | `--open`, `--wait-for-log`
+| Conflicts With: | `--open`, `--wait-for-log`, `--analyze`
 
 #### `--errors`
 
-🔥 Only show a digest of ERROR/FATAL records, then exit (fully managed: only the ERROR level)
+🔥 Only show a digest of ERROR/FATAL records, then exit (fully managed: only the ERROR level). With `--analyze`: the report of the ERROR records only
 
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Conflicts With: | `--open`, `--wait-for-log`, `--grep`
+
+#### `--analyze`
+
+🔬 The full report of `playground analyze logs` on the logs of the connector, self managed (the Connect worker) or fully managed (every page of the last 71 hours)
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Conflicts With: | `--open`, `--wait-for-log`, `--grep`, `--since`, `--tail`, `--no-follow`
+
+#### `--output-dir OUTPUT_DIR`
+
+📁 With `--analyze`, the folder of the HTML report (default: the one of playground analyze logs)
 
 #### `--verbose, -v`
 
@@ -128,6 +146,14 @@ playground connector logs --connector filestream-sink --since 10m --no-follow
 
 ```bash
 playground connector logs --wait-for-log "Started FileStreamSinkTask" --max-wait 120
+```
+
+```bash
+playground connector logs --connector my-sink --analyze
+```
+
+```bash
+playground connector logs --analyze --errors --output-dir /tmp/reports
 ```
 
 

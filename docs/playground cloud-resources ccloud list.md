@@ -17,7 +17,10 @@ and whether they still exist
 
 A running connector is what costs the most (billed per task-hour),  
 then a cluster: those are summed up at the end. The 🧹 column tells  
-what `playground cloud-resources cleanup --resource ccloud` deletes.
+what `playground cloud-resources cleanup --resource ccloud` deletes:  
+it scans the same way, and never deletes a service account or an API  
+key in use on this machine (\*_CLUSTER_CREDS, `SCHEMA_REGISTRY_CREDS`,  
+exported or in the secrets store, playground.ini, .ccloud/).
 
 🎓 Tip: in a shared org, run it before leaving for the day.
 

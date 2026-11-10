@@ -3,6 +3,9 @@
 ## November 2026
 ##### 🌟 Enhancements
 
+- 🧠🔑 No service account just for the Schema Registry API key [#10331](https://github.com/vdesabou/kafka-docker-playground/issues/10331)
+- 🧠🌤️ playground cloud-resources ccloud list: what is still running for you, org-wide [#10329](https://github.com/vdesabou/kafka-docker-playground/issues/10329)
+- 🧠⚡ Cache Confluent Cloud configs per cluster [#10327](https://github.com/vdesabou/kafka-docker-playground/issues/10327)
 - 🧠📚 docs: validate a hotfix image from engineering, recipe + lab [#10325](https://github.com/vdesabou/kafka-docker-playground/issues/10325)
 - 🧠📚 docs: Confluent Cloud connectivity, a client-side checklist in the network deep dive [#10322](https://github.com/vdesabou/kafka-docker-playground/issues/10322)
 - 👾🪪 Add mTLS principal mapping example: a certificate renewal breaks the ACLs [#10321](https://github.com/vdesabou/kafka-docker-playground/issues/10321)

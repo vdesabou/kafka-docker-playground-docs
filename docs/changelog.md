@@ -3,6 +3,7 @@
 ## November 2026
 ##### 🌟 Enhancements
 
+- 🧠🧵 analyze logs: thread dumps analyzed in the report, broker signals, cluster layout, and a Share button on every report [#10302](https://github.com/vdesabou/kafka-docker-playground/issues/10302)
 - 🧠🐳 analyze logs: a container image, with nothing installed but Docker [#10291](https://github.com/vdesabou/kafka-docker-playground/issues/10291)
 - 🧠📦 repro export: a README.md at the top of the bundle (install the playground in one command, import, run, then the hand-off report) [#10249](https://github.com/vdesabou/kafka-docker-playground/issues/10249)
 - 🧠📚 docs: kdp-kb-review skill can create KB articles [#10197](https://github.com/vdesabou/kafka-docker-playground/issues/10197)

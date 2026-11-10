@@ -18,7 +18,6 @@ cleanup. Takes about 15 minutes to read, and the lab costs a few cents.
 | You want | Command |
 | --- | --- |
 | run a fully managed example | `playground run -f ccloud/fm-datagen-source/fully-managed-datagen-source.sh` |
-| your own environment and one cluster per cloud, stored in a secrets profile | `playground ccloud setup` (`--profile emea`, `--cloud aws --cloud azure`, `--dry-run`) |
 | reuse your own cluster instead of creating one | `export ENVIRONMENT=… CLUSTER_NAME=… CLUSTER_CLOUD=… CLUSTER_REGION=… CLUSTER_CREDS=…` before the run |
 | forget the cached cluster details | `playground cleanup-cloud-details` (nothing is deleted in Confluent Cloud) |
 | create / update and wait for RUNNING | `playground connector create-or-update -c DatagenSource_$USER --wait << EOF … EOF` |
@@ -31,7 +30,6 @@ cleanup. Takes about 15 minutes to read, and the lab costs a few cents.
 | the fully managed equivalent of a self-managed config | `playground connector translate`, `playground connector connect-migration-utility discovery\|migrate` |
 | deploy it with Terraform | `playground connector create-or-update -c <name> --terraform << EOF … EOF` |
 | run it with a service account and the ACLs of the documentation | `playground run -f <example> --ccloud-service-account`, then `playground rbac acl list\|delete\|create --connector <name>` |
-| what is still running and billing for you, org-wide | `playground cloud-resources ccloud list` |
 | what you spent | `playground cloud-resources ccloud costs-history`, `playground cloud-resources ccloud costs` |
 | delete what the playground created | `playground stop` in the example folder (`maybe_delete_ccloud_environment`), `playground cloud-resources cleanup` |
 
@@ -42,24 +40,13 @@ cleanup. Takes about 15 minutes to read, and the lab costs a few cents.
 1. **One cluster per machine, cached.** `bootstrap_ccloud_environment` (the first line of every `ccloud/fm-*` example,
    instead of `start-environment`) either reuses a cluster or creates a full stack:
    - **your cluster**: `CLUSTER_NAME`, `ENVIRONMENT`, `CLUSTER_CLOUD`, `CLUSTER_REGION` and `CLUSTER_CREDS`
-     (`<api key>:<secret>`, optionally `SCHEMA_REGISTRY_CREDS`) exported before the run. Without
-     `SCHEMA_REGISTRY_CREDS`, the Schema Registry key of another cached cluster of the same environment is reused
-     (`🔑 SCHEMA_REGISTRY_CREDS is not set: reusing the Schema Registry API key …`), else one key **owned by you** is
-     created (`kafka-docker-playground SCHEMA_REGISTRY_CREDS (<user>)`, no service account): store it with
-     `playground secrets set SCHEMA_REGISTRY_CREDS` to reuse it everywhere;
+     (`<api key>:<secret>`, optionally `SCHEMA_REGISTRY_CREDS`) exported before the run;
    - **otherwise a new stack**: a service account, an environment `pg-${USER}-<service account>-<example>`, a **basic**
      cluster `pg-${USER}-cluster-<service account>` on **AWS `eu-west-2`** unless `CLUSTER_CLOUD` / `CLUSTER_REGION`
      are set, its API keys with full ACLs, and Schema Registry;
    - **the previous one**: the details are saved in `playground.ini` (`[ccloud]`) and the client configs in `.ccloud/`
-     (`env.delta`, `librdkafka.delta`, `ak-tools-ccloud.delta`…). Without `CLUSTER_NAME`, the next example asks
+     (`env.delta`, `librdkafka.delta`, `ak-tools-ccloud.delta`…). The next example asks
      `🙋 Use previously used ccloud cluster: … Continue (y/n)?`.
-
-   The client configs are also cached **per cluster** in `.ccloud/clusters/<lkc-id>/`, keyed on `ENVIRONMENT`,
-   `CLUSTER_NAME` and a hash of `CLUSTER_CREDS` (and of `SCHEMA_REGISTRY_CREDS` when set). Going back to a cluster
-   already used (a `fm-gcp*` example, then a generic one on `CLUSTER_NAME`, then `fm-gcp*` again) skips the stack
-   bootstrap: `⚡ using the cached configs of cluster gcp (lkc-xxxxx), no bootstrap needed`, a few seconds instead of
-   a full bootstrap. A cached cluster that no longer exists is detected (`🗑️ cached configs of cluster … are stale`)
-   and its configs are generated again.
 
    Some examples need a given cloud or region (`bootstrap_ccloud_environment "aws" "us-east-1"`): with a cached cluster
    elsewhere, the example stops and tells you what to set. `playground cleanup-cloud-details` drops the cache when
@@ -124,17 +111,9 @@ Gotchas:
   cluster is missing:` and the five values).
 - **The cache wins over your intent**: a cluster deleted from the UI, another organization, an API key revoked: run
   `playground cleanup-cloud-details` and start again. Nothing is deleted in Confluent Cloud by it.
-- **`playground ccloud setup` sets all of this up for you**: an environment `pg-<user>`, one Basic cluster
-  `pg-<user>-<cloud>` per `--cloud`, one Kafka key per cluster and one Schema Registry key owned by you (no service
-  account), all stored in a secrets profile (`--profile`, `CLUSTER_*` for `--default-cloud`). Idempotent: run it again,
-  existing resources and the keys of the profile that still belong to them are kept. It stores the values with the
-  secrets store directly, never pushed to GitHub, and warns when exported variables would hide them. The
-  `pg-<user>-*` cluster names let `cloud-resources cleanup` delete all their topics, never the clusters nor the
-  environment.
 - **Per-cloud clusters**: `AWS_CLUSTER_NAME`, `GCP_CLUSTER_NAME`, `AZURE_CLUSTER_NAME` (with their `*_REGION`,
   `*_CLOUD`, `*_CREDS`) are used automatically for the `fm-aws*`, `fm-gcp*`, `fm-azure*` examples: set them once to
-  keep a cluster per cloud. Switching between them uses the per-cluster cache, and an exported `CLUSTER_NAME` is
-  never replaced by the `Use previously used ccloud cluster` question.
+  keep a cluster per cloud.
 - A new stack takes several minutes (cluster provisioning, API keys propagation, ACLs, Schema Registry); the wait for
   the cluster to be ready can take much longer when the `confluent` CLI is not logged in (`Error: not logged in`,
   then `giving up after 1 attempt` retries): run `confluent login --save` first.
@@ -188,12 +167,11 @@ Gotchas:
 ## 4. Costs and cleanup
 
 ```bash
-playground cloud-resources ccloud list           # your connectors, pg-<user>-* environments, clusters, service accounts, API keys, recorded topics (read-only, whole org)
 playground cloud-resources ccloud costs-history  # total per month since last year (--detailed for the lines) + HTML report
 playground cloud-resources ccloud costs --start-date 2026-10-01 --end-date 2026-10-23   # one range of dates (one month max) + HTML report
 playground connector delete --connector DatagenSource_$USER
 playground stop                                 # in the example folder: maybe_delete_ccloud_environment
-playground cloud-resources cleanup              # resources left behind by examples (buckets, functions, connectors…); --resource ccloud: the whole org, --dry-run first
+playground cloud-resources cleanup              # resources left behind by examples (buckets, functions, connectors…)
 ```
 
 Gotchas:
@@ -220,14 +198,6 @@ Gotchas:
 - **External resources are the example's job**: buckets, tables, queues created by an `fm-*` example are deleted by
   its `cleanup_cloud_resources` trap at the end; an interrupted run can leave them: `playground cloud-resources cleanup`
   (needs the cloud credentials of each provider).
-- **`playground cloud-resources cleanup --resource ccloud` covers the whole organization**: like `cloud-resources
-  ccloud list`, it scans every environment and cluster (no bootstrap, so `--dry-run` always works and no cluster is
-  ever created) and deletes, after a confirmation each: connectors `*_<user>` on any cluster with their
-  dlq/success/error topics, `pg-<user>-sa-*` environments, all topics of your other `pg-<user>-*` clusters, only the
-  topics recorded by your runs on any other (shared) cluster, `pg-<user>-conn-*` service accounts, and
-  `pg-<user>-app-*` service accounts and the Schema Registry keys created for you **unless one of their keys is used
-  on this machine** (`*_CLUSTER_CREDS`, `SCHEMA_REGISTRY_CREDS`, exported or in the secrets store, `playground.ini`,
-  `.ccloud/`). In CI, the clusters of the variables are cleaned up one by one instead.
 - The connector is billed while it exists, RUNNING or not: delete it, don't just pause it.
 
 ---
@@ -311,8 +281,6 @@ playground stop                                                              # d
 | "which version of the connector runs in Confluent Cloud?" | `connector-plugin sourcecode -c confluentinc/<Type> --only-show-url` (employees, see the [connector plugins deep dive](/deep-dive-connector-plugin.md)) |
 | "is the fix of connector version X in a cc-connect image yet? what changed in the last images?" | `connector-plugin fm-versions -c confluentinc/<Type> --find-first X` / `--last 50 --with-log` (employees) |
 | "the example uses the wrong cluster" | `playground cleanup-cloud-details`, then export `CLUSTER_NAME`… or `CLUSTER_CLOUD` / `CLUSTER_REGION` |
-| "set up my own clusters in the shared org" | `playground ccloud setup --profile <org> --dry-run`, then without `--dry-run`, then `playground secrets profile <org>` |
-| "what did I leave running in the shared org?" | `playground cloud-resources ccloud list` (every environment and cluster: connectors `*_<user>` with status and age, `pg-<user>-*` resources, what `cleanup` deletes) |
 | "how much did that test cost?" | `playground cloud-resources ccloud costs --start-date <day before> --end-date <day after>` (72 h delay), its HTML report for the resources billed that day and the ones still billing; `cloud-resources ccloud costs-history` for the trend |
 
 ---
@@ -329,12 +297,11 @@ playground connector status|logs|show-config|delete -c <name>
 playground connector error-recommendations|display-metrics-api|open-ccloud-connector-in-browser -c <name>
 playground connector offsets get|alter|reset -c <name>    # + offsets get-offsets-request-status
 playground topic dlq inspect --connector <name>           # dlq-<lcc id>
-playground cloud-resources ccloud list [--json]           # what still runs for you, org-wide
 playground cloud-resources ccloud costs-history [--detailed]
 playground stop                                           # in the ccloud/fm-* folder
 ```
 
-- One cached cluster per machine (`playground.ini` `[ccloud]`, `.ccloud/`), plus the configs of each cluster used (`.ccloud/clusters/<lkc-id>/`); `cleanup-cloud-details` to forget them.
+- One cached cluster per machine (`playground.ini` `[ccloud]`, `.ccloud/`); `cleanup-cloud-details` to forget it.
 - Same `connector` commands, Confluent Cloud APIs: wait only with `--wait` (600 s), asynchronous offsets, no worker
   commands (`stop`, `log-level`, `debug`).
 - Billed by the hour: delete the connector, `playground stop` deletes only what the playground created.

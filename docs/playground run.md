@@ -48,7 +48,7 @@ In case you want to use your own existing cluster, you need to setup, in additio
 
 - `--cluster-name` (or `CLUSTER_NAME` environment variable): The cluster name
 - `--cluster-creds` (or `CLUSTER_CREDS` environment variable): The Kafka api key and secret to use, it should be separated with colon (example: `<API_KEY>:<API_KEY_SECRET>`)
-- `--cluster-schema-registry-creds` (or `SCHEMA_REGISTRY_CREDS` environment variable) (optional, if not set, the key of another cluster of the same environment is reused, else a new one owned by you is created): The Schema Registry api key and secret to use, it should be separated with colon (example: `<SR_API_KEY>:<SR_API_KEY_SECRET>`)
+- `--cluster-schema-registry-creds` (or `SCHEMA_REGISTRY_CREDS` environment variable) (optional, if not set, new one will be created): The Schema Registry api key and secret to use, it should be separated with colon (example: `<SR_API_KEY>:<SR_API_KEY_SECRET>`)
 
 📄 Run log  
 The output is also written to a text file, passwords, api keys and  
@@ -507,7 +507,7 @@ Example: `--connect-log-level` "io.confluent.connect.s3=TRACE,org.apache.kafka.c
 
 🔒 The Schema Registry api key and secret to use, it should be separated with colon (example: `<SR_API_KEY>:<SR_API_KEY_SECRET>`)
 
-ℹ️ Optional, if not set, the key of another cluster of the same environment already used on this machine is reused, else a new API key owned by you is created (no service account)
+ℹ️ Optional, if not set, new credentials will be created
 
 ❣️ Only required if you want to use your own existing cluster
 

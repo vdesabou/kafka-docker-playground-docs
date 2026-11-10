@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang='en'><head><meta charset='UTF-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>CFK bundle comparison</title><style>
+<!DOCTYPE html><html lang='en'><head><meta charset='UTF-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>server.log</title><style>
 :focus-visible{outline:2px solid #2a78d6;outline-offset:2px}
 .lv-edit{text-decoration:none;margin-left:5px}
 *{box-sizing:border-box;margin:0;padding:0}
@@ -100,16 +100,30 @@ html[data-theme=dark] .quick-links a[data-count]::after,html[data-theme=dark] .s
 /* how far down the report: a thin bar at the top of the window */
 .pg-progress{position:fixed;left:0;top:0;height:3px;width:0;z-index:40;background:linear-gradient(90deg,#6366f1,#ec4899,#f59e0b);
 box-shadow:0 0 8px rgba(236,72,153,.6);pointer-events:none}
-h3{font-size:.95rem;font-weight:600;margin:14px 0 8px;color:#334155}
-.kpi-value{word-break:break-word}
-details{border-top:1px solid #f1f5f9;padding:2px 0}
-details summary{font-size:.84rem;font-weight:normal}
-.st{white-space:nowrap}
-.st.fatal,.st.failed{background:#fee2e2;color:#dc2626}.st.error{background:#ffedd5;color:#c2410c}.st.warn,.st.paused,.st.unassigned{background:#fef3c7;color:#b45309}
-.st.running{background:#dcfce7;color:#15803d}.st.mine{background:#dbeafe;color:#1d4ed8}
-pre{margin:4px 0 8px}
-.diff-a{background:#fee2e2}.diff-b{background:#dcfce7}.muted{color:#94a3b8}
-code{font-family:'SFMono-Regular',Consolas,Menlo,monospace;font-size:.8rem;background:#f1f5f9;padding:1px 5px;border-radius:4px}
+.page{max-width:none}
+.lv-bar{position:sticky;top:0;z-index:5;display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:8px 12px;margin-bottom:12px;
+border-radius:8px;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.08);font-size:.8rem;color:#475569}
+a.lv-edit{text-decoration:none;margin-left:4px;opacity:.75}a.lv-edit:hover{opacity:1}
+.lv-bar button,.lv-bar a.lv-btn{font-family:inherit;font-size:.78rem;padding:3px 10px;border-radius:6px;border:1px solid #cbd5e1;
+background:#f8fafc;color:#1e293b;cursor:pointer;text-decoration:none}
+.lv-bar button:hover,.lv-bar a.lv-btn:hover{background:#e2e8f0}
+.lv{background:#fff;border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.07);padding:8px 0;overflow-x:auto;
+font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.76rem;line-height:1.45}
+.lv .l{display:flex;white-space:pre;scroll-margin-top:90px}
+.lv .l:hover{background:#f1f5f9}
+.lv .n{flex:0 0 auto;min-width:5.5em;padding:0 10px;text-align:right;color:#94a3b8;user-select:none;text-decoration:none;
+border-right:1px solid #e2e8f0;margin-right:10px}
+.lv .n:hover{color:#2563eb}
+.lv .l.hit{background:#fef3c7}.lv .l.hit .n{color:#b45309;font-weight:600}
+.lv .l:target,.lv .l.cur{background:#fde68a;box-shadow:inset 4px 0 0 #d97706}
+.lv .gap{padding:4px 16px;color:#64748b;font-style:italic;background:#f8fafc;border-top:1px dashed #cbd5e1;border-bottom:1px dashed #cbd5e1}
+html[data-theme=dark] .lv-bar,html[data-theme=dark] .lv{background:#1e293b;color:#cbd5e1}
+html[data-theme=dark] .lv-bar button,html[data-theme=dark] .lv-bar a.lv-btn{background:#0f172a;color:#cbd5e1;border-color:#334155}
+html[data-theme=dark] .lv .l:hover{background:#0f172a}
+html[data-theme=dark] .lv .n{border-right-color:#334155}
+html[data-theme=dark] .lv .l.hit{background:#422006}
+html[data-theme=dark] .lv .l:target,html[data-theme=dark] .lv .l.cur{background:#713f12}
+html[data-theme=dark] .lv .gap{background:#0f172a;border-color:#334155}
 html[data-theme="dark"] body{background:#0f172a;color:#e2e8f0}
 html[data-theme="dark"] h2,html[data-theme="dark"] h3,html[data-theme="dark"] .section-title,html[data-theme="dark"] .rec-text,html[data-theme="dark"] .verdict{color:#cbd5e1}
 html[data-theme="dark"] .kpi-card,html[data-theme="dark"] .chart-card,html[data-theme="dark"] .rec-card,html[data-theme="dark"] .table-card,html[data-theme="dark"] .verdict{background:#1e293b;box-shadow:none}
@@ -524,64 +538,43 @@ html[data-theme="dark"] .theme-toggle{color:#cbd5e1;background:#1e293b;border-co
     });
   }, {passive: true});
 })();
-</script></head><body><div class='page'><div class='header'><h1><a class='lr-brand' href='https://kafka-docker-playground.io/' title='kafka-docker-playground: the playground CLI that generated this report'><span class='lr-whale'>🐳</span> kafka-docker-playground</a><span class='lr-title'>🔁 CFK bundle comparison</span><span class='lr-status ok'>🔁 cfk-support-bundle-rollout → cfk-support-bundle-rollout-after</span></h1><div class='header-meta'><span>2 CFK support bundles, each compared with the previous one (sorted by collection time)</span><span>Generated: 2026-11-09 16:54:53</span></div></div><style>
-.header:has(.lr-title){position:relative;overflow:hidden;border-radius:18px;padding:26px 32px 22px;
-background:radial-gradient(1200px 300px at 0% 0%,rgba(56,189,248,.35),transparent 60%),
-radial-gradient(800px 260px at 100% 100%,rgba(236,72,153,.35),transparent 60%),
-linear-gradient(120deg,#0f172a 0%,#312e81 45%,#6d28d9 75%,#a21caf 100%);box-shadow:0 10px 30px rgba(49,46,129,.35)}
-/* the verdict tints the header: red with ERROR/FATAL, amber with WARN only, green without error (the progress page keeps the default) */
-.header:has(.lr-status.danger){background:radial-gradient(1200px 300px at 0% 0%,rgba(251,113,133,.30),transparent 60%),
-radial-gradient(800px 260px at 100% 100%,rgba(249,115,22,.40),transparent 60%),
-linear-gradient(120deg,#0f172a 0%,#4c0519 45%,#9f1239 75%,#c2410c 100%);box-shadow:0 10px 30px rgba(159,18,57,.35)}
-.header:has(.lr-status.warn){background:radial-gradient(1200px 300px at 0% 0%,rgba(253,224,71,.22),transparent 60%),
-radial-gradient(800px 260px at 100% 100%,rgba(251,191,36,.35),transparent 60%),
-linear-gradient(120deg,#0f172a 0%,#422006 45%,#92400e 75%,#d97706 100%);box-shadow:0 10px 30px rgba(146,64,14,.35)}
-.header:has(.lr-status.ok){background:radial-gradient(1200px 300px at 0% 0%,rgba(110,231,183,.25),transparent 60%),
-radial-gradient(800px 260px at 100% 100%,rgba(45,212,191,.35),transparent 60%),
-linear-gradient(120deg,#0f172a 0%,#064e3b 45%,#047857 75%,#0d9488 100%);box-shadow:0 10px 30px rgba(4,120,87,.35)}
-.header:has(.lr-title) h1{display:grid;grid-template-columns:1fr auto;align-items:center;gap:6px 18px;margin:0 0 12px}
-.lr-title{font-size:1.75rem;font-weight:800;letter-spacing:-.01em;line-height:1.2}
-.lr-plus{opacity:.55;margin:0 4px}
-.lr-sub{grid-column:1 / -1;font-size:.86rem;font-weight:500;opacity:.82}
-.lr-status{justify-self:end;font-size:.85rem;font-weight:700;padding:6px 14px;border-radius:999px;white-space:nowrap;
-background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);backdrop-filter:blur(4px)}
-.lr-status.danger{background:rgba(239,68,68,.28);border-color:rgba(254,202,202,.6)}
-.lr-status.warn{background:rgba(245,158,11,.28);border-color:rgba(253,230,138,.6)}
-.lr-status.ok{background:rgba(34,197,94,.28);border-color:rgba(187,247,208,.6)}
-.header:has(.lr-title) .header-meta{display:flex;flex-wrap:wrap;gap:8px}
-.header:has(.lr-title) .header-meta span{font-size:.78rem;padding:4px 11px;border-radius:999px;background:rgba(255,255,255,.12);
-border:1px solid rgba(255,255,255,.2);margin:0}
-.header:has(.lr-title) .header-meta a{color:#fff}
-.lr-brand{grid-column:1 / -1;justify-self:start;display:inline-flex;align-items:center;gap:7px;font-size:.78rem;font-weight:700;
-letter-spacing:.04em;color:#fff;text-decoration:none;padding:3px 12px 3px 6px;border-radius:999px;background:rgba(255,255,255,.12);
-border:1px solid rgba(255,255,255,.22);transition:background .15s}
-.lr-brand:hover{background:rgba(255,255,255,.22)}
-.lr-whale{font-size:1.25rem;line-height:1;display:inline-block;animation:lr-swim 4s ease-in-out infinite}
-@keyframes lr-swim{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-2px) rotate(-6deg)}}
-@media (prefers-reduced-motion:reduce){.lr-whale{animation:none}}
-.header:has(.lr-title) .header-meta span:has(.lr-howto){background:rgba(56,189,248,.22);border-color:rgba(125,211,252,.55)}
-.lr-howto{text-decoration:none;font-weight:600}.lr-howto:hover{text-decoration:underline}
-</style><div class='verdict ok'>🔁 cfk-support-bundle-rollout → cfk-support-bundle-rollout-after: better: 4 critical / high issue(s) gone, none new</div><div class='kpi-grid'><div class="kpi-card "><div class="kpi-label">Issues</div><div class="kpi-value">15 → 6</div><div class="kpi-unit">before → after</div></div><div class="kpi-card "><div class="kpi-label">Critical / high</div><div class="kpi-value">5 → 1</div><div class="kpi-unit">before → after</div></div><div class="kpi-card "><div class="kpi-label">Fixed</div><div class="kpi-value">11</div><div class="kpi-unit">issues gone</div></div><div class="kpi-card "><div class="kpi-label">New</div><div class="kpi-value">2</div><div class="kpi-unit">issues</div></div></div><script>
+</script></head><body><div class='page'><div class='lv-bar'><a class='lv-btn' href='../broker_pressure-log-report.html'>⬅️ Report</a><button type='button' id='lv-prev' title='previous finding (p)'>▲ Previous</button><button type='button' id='lv-next' title='next finding (n)'>▼ Next</button><span>finding <span id='lv-pos'>– / 16</span></span><span class='mono'>· broker-2/server.log · 20 lines · whole file</span></div><div class='lv'><div class='l hit' id='L1'><a class='n' href='#L1'>1</a><span>[<span class="lh-ts">2026-11-09 14:00:00,000</span>] <span class="lh-lvl lh-info">INFO</span> [BrokerServer id=2] Transition from STARTING to STARTED <span class="lh-logger">(kafka.server.BrokerServer)</span></span></div><div class='l' id='L2'><a class='n' href='#L2'>2</a><span>[<span class="lh-ts">2026-11-09 14:00:01,037</span>] <span class="lh-lvl lh-info">INFO</span> Kafka version: 8.1.0-ce <span class="lh-logger">(org.apache.kafka.common.utils.AppInfoParser)</span></span></div><div class='l hit' id='L3'><a class='n' href='#L3'>3</a><span>[<span class="lh-ts">2026-11-09 14:20:37,769</span>] <span class="lh-lvl lh-info">INFO</span> [Partition payments-0 broker=2] Shrinking ISR from 2,3,1 to 2,1. Leader: (highWatermark: 1000, endOffset: 1200). Out of sync replicas: (brokerId: 3, endOffset: 990, lastCaughtUpTimeMs: 1762696800000). <span class="lh-logger">(kafka.cluster.Partition)</span></span></div><div class='l hit' id='L4'><a class='n' href='#L4'>4</a><span>[<span class="lh-ts">2026-11-09 14:20:40,880</span>] <span class="lh-lvl lh-info">INFO</span> [Partition payments-0 broker=2] Expanding ISR from 2,1 to 2,1,3 <span class="lh-logger">(kafka.cluster.Partition)</span></span></div><div class='l hit' id='L5'><a class='n' href='#L5'>5</a><span>[<span class="lh-ts">2026-11-09 14:24:55,315</span>] <span class="lh-lvl lh-info">INFO</span> [Partition orders-4 broker=2] Shrinking ISR from 2,3,1 to 2,1. Leader: (highWatermark: 1052, endOffset: 1252). Out of sync replicas: (brokerId: 3, endOffset: 1042, lastCaughtUpTimeMs: 1762696800000). <span class="lh-logger">(kafka.cluster.Partition)</span></span></div><div class='l hit' id='L6'><a class='n' href='#L6'>6</a><span>[<span class="lh-ts">2026-11-09 14:28:29,233</span>] <span class="lh-lvl lh-info">INFO</span> [Partition orders-8 broker=2] Shrinking ISR from 2,3,1 to 2,1. Leader: (highWatermark: 1104, endOffset: 1304). Out of sync replicas: (brokerId: 3, endOffset: 1094, lastCaughtUpTimeMs: 1762696800000). <span class="lh-logger">(kafka.cluster.Partition)</span></span></div><div class='l hit' id='L7'><a class='n' href='#L7'>7</a><span>[<span class="lh-ts">2026-11-09 14:32:14,558</span>] <span class="lh-lvl lh-info">INFO</span> [Partition payments-0 broker=2] Shrinking ISR from 2,3,1 to 2,1. Leader: (highWatermark: 1156, endOffset: 1356). Out of sync replicas: (brokerId: 3, endOffset: 1146, lastCaughtUpTimeMs: 1762696800000). <span class="lh-logger">(kafka.cluster.Partition)</span></span></div><div class='l hit' id='L8'><a class='n' href='#L8'>8</a><span>[<span class="lh-ts">2026-11-09 14:32:17,669</span>] <span class="lh-lvl lh-info">INFO</span> [Partition payments-0 broker=2] Expanding ISR from 2,1 to 2,1,3 <span class="lh-logger">(kafka.cluster.Partition)</span></span></div><div class='l hit' id='L9'><a class='n' href='#L9'>9</a><span>[<span class="lh-ts">2026-11-09 14:36:10,290</span>] <span class="lh-lvl lh-info">INFO</span> [Partition orders-4 broker=2] Shrinking ISR from 2,3,1 to 2,1. Leader: (highWatermark: 1208, endOffset: 1408). Out of sync replicas: (brokerId: 3, endOffset: 1198, lastCaughtUpTimeMs: 1762696800000). <span class="lh-logger">(kafka.cluster.Partition)</span></span></div><div class='l hit' id='L10'><a class='n' href='#L10'>10</a><span>[<span class="lh-ts">2026-11-09 14:40:17,429</span>] <span class="lh-lvl lh-info">INFO</span> [Partition orders-8 broker=2] Shrinking ISR from 2,3,1 to 2,1. Leader: (highWatermark: 1260, endOffset: 1460). Out of sync replicas: (brokerId: 3, endOffset: 1250, lastCaughtUpTimeMs: 1762696800000). <span class="lh-logger">(kafka.cluster.Partition)</span></span></div><div class='l hit' id='L11'><a class='n' href='#L11'>11</a><span>[<span class="lh-ts">2026-11-09 14:44:35,975</span>] <span class="lh-lvl lh-info">INFO</span> [Partition payments-0 broker=2] Shrinking ISR from 2,3,1 to 2,1. Leader: (highWatermark: 1312, endOffset: 1512). Out of sync replicas: (brokerId: 3, endOffset: 1302, lastCaughtUpTimeMs: 1762696800000). <span class="lh-logger">(kafka.cluster.Partition)</span></span></div><div class='l hit' id='L12'><a class='n' href='#L12'>12</a><span>[<span class="lh-ts">2026-11-09 14:44:38,086</span>] <span class="lh-lvl lh-info">INFO</span> [Partition payments-0 broker=2] Expanding ISR from 2,1 to 2,1,3 <span class="lh-logger">(kafka.cluster.Partition)</span></span></div><div class='l hit' id='L13'><a class='n' href='#L13'>13</a><span>[<span class="lh-ts">2026-11-09 14:48:09,893</span>] <span class="lh-lvl lh-info">INFO</span> [Partition orders-4 broker=2] Shrinking ISR from 2,3,1 to 2,1. Leader: (highWatermark: 1364, endOffset: 1564). Out of sync replicas: (brokerId: 3, endOffset: 1354, lastCaughtUpTimeMs: 1762696800000). <span class="lh-logger">(kafka.cluster.Partition)</span></span></div><div class='l hit' id='L14'><a class='n' href='#L14'>14</a><span>[<span class="lh-ts">2026-11-09 14:50:00,000</span>] <span class="lh-lvl lh-error">ERROR</span> [kafka-log-cleaner-thread-0]: Error due to <span class="lh-logger">(kafka.log.LogCleaner)</span></span></div><div class='l' id='L15'><a class='n' href='#L15'>15</a><span><span class="lh-exc">java.lang.IllegalStateException</span>: Log segment size 2147483650 is larger than the maximum segment size</span></div><div class='l' id='L16'><a class='n' href='#L16'>16</a><span><span class="lh-frame">	at org.apache.kafka.storage.internals.log.Cleaner.cleanSegments(Cleaner.java:250)</span></span></div><div class='l' id='L17'><a class='n' href='#L17'>17</a><span>[<span class="lh-ts">2026-11-09 14:50:01,037</span>] <span class="lh-lvl lh-info">INFO</span> [kafka-log-cleaner-thread-0]: Stopped <span class="lh-logger">(kafka.log.LogCleaner)</span></span></div><div class='l hit' id='L18'><a class='n' href='#L18'>18</a><span>[<span class="lh-ts">2026-11-09 14:51:54,218</span>] <span class="lh-lvl lh-info">INFO</span> [Partition orders-8 broker=2] Shrinking ISR from 2,3,1 to 2,1. Leader: (highWatermark: 1416, endOffset: 1616). Out of sync replicas: (brokerId: 3, endOffset: 1406, lastCaughtUpTimeMs: 1762696800000). <span class="lh-logger">(kafka.cluster.Partition)</span></span></div><div class='l hit' id='L19'><a class='n' href='#L19'>19</a><span>[<span class="lh-ts">2026-11-09 14:55:50,950</span>] <span class="lh-lvl lh-info">INFO</span> [Partition payments-0 broker=2] Shrinking ISR from 2,3,1 to 2,1. Leader: (highWatermark: 1468, endOffset: 1668). Out of sync replicas: (brokerId: 3, endOffset: 1458, lastCaughtUpTimeMs: 1762696800000). <span class="lh-logger">(kafka.cluster.Partition)</span></span></div><div class='l hit' id='L20'><a class='n' href='#L20'>20</a><span>[<span class="lh-ts">2026-11-09 14:55:53,061</span>] <span class="lh-lvl lh-info">INFO</span> [Partition payments-0 broker=2] Expanding ISR from 2,1 to 2,1,3 <span class="lh-logger">(kafka.cluster.Partition)</span></span></div></div></div><script>
 (function () {
-  if (window.pgKpiCount) return;
-  window.pgKpiCount = true;
-  document.addEventListener("DOMContentLoaded", function () {
-    // not on a page that reloads itself (the 🔄 progress page of analyze logs): it would count up every 2 s
-    if (document.querySelector("meta[http-equiv=refresh]")) return;
-    if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    document.querySelectorAll(".kpi-grid .kpi-value").forEach(function (el) {
-      const m = el.textContent.trim().match(/^([^0-9]*)([0-9][0-9,]*)([^0-9.,:\/]*)$/);
-      if (!m) return;
-      const target = parseInt(m[2].replace(/,/g, ""), 10);
-      if (!(target > 9)) return;
-      const t0 = performance.now(), dur = 900;
-      function frame(now) {
-        const k = Math.min(1, (now - t0) / dur), v = Math.round(target * (1 - Math.pow(1 - k, 3)));
-        el.textContent = m[1] + v.toLocaleString("en-US") + m[3];
-        if (k < 1) requestAnimationFrame(frame);
-      }
-      requestAnimationFrame(frame);
-    });
+  const hits = [...document.querySelectorAll(".lv .l.hit")];
+  let cur = -1;
+  function show(i) {
+    if (!hits.length) return;
+    cur = (i + hits.length) % hits.length;
+    document.querySelectorAll(".lv .l.cur").forEach(l => l.classList.remove("cur"));
+    hits[cur].classList.add("cur");
+    hits[cur].scrollIntoView({block: "center"});
+    history.replaceState(null, "", "#" + hits[cur].id);
+    document.getElementById("lv-pos").textContent = (cur + 1) + " / " + hits.length;
+    editAt();
+  }
+  function editAt() {
+    const edit = document.getElementById("lv-edit");
+    const line = location.hash.startsWith("#L") ? location.hash.slice(2) : "1";
+    if (edit) edit.href = edit.dataset.url.replace("{line}", line);
+  }
+  function fromHash() {
+    editAt();
+    const line = document.getElementById(location.hash.slice(1));
+    if (!line) return;
+    const n = +line.id.slice(1);
+    cur = hits.findIndex(h => +h.id.slice(1) >= n);
+    if (cur < 0) cur = hits.length - 1;
+    if (hits.length) document.getElementById("lv-pos").textContent = (cur + 1) + " / " + hits.length;
+    line.scrollIntoView({block: "center"});
+  }
+  document.getElementById("lv-prev").addEventListener("click", () => show(cur < 0 ? hits.length - 1 : cur - 1));
+  document.getElementById("lv-next").addEventListener("click", () => show(cur + 1));
+  document.addEventListener("keydown", ev => {
+    if (ev.target.closest("input,textarea") || ev.metaKey || ev.ctrlKey || ev.altKey) return;
+    if (ev.key === "n") show(cur + 1);
+    if (ev.key === "p") show(cur < 0 ? hits.length - 1 : cur - 1);
   });
+  window.addEventListener("hashchange", fromHash);
+  fromHash();
 })();
-</script><div class='table-card'><h2>🧭 Before / after</h2><table><tr><th></th><th>cfk-support-bundle-rollout</th><th>cfk-support-bundle-rollout-after</th></tr><tr><td>Collected (about)</td><td>2026-10-16 09:45:01</td><td>2026-10-17 09:45:00</td></tr></table></div><div class='table-card'><h2>📕 Known CFK issues</h2><table><tr><th></th><th>Known issue</th></tr><tr><td>✅ gone</td><td>Roll blocked by the pre-roll checks</td></tr></table></div><div class='table-card'><h2>🕒 Changes between the two bundles (1)</h2><table><tr><th>Time</th><th>Object</th><th>Change</th></tr><tr><td>2026-10-16T14:02:30Z</td><td>KRaftController/kraftcontroller</td><td>Update by kubectl-annotate: metadata</td></tr></table></div><div class='table-card'><h2>✅ Fixed: in the older bundle only (11)</h2><table><tr><th>Severity</th><th>Category</th><th>Issue</th></tr><tr><td>🟠 high</td><td>Resource Issues</td><td><span class='mono'>ReplicaSet/confluent-operator-78f46f99dc cannot create its pods: ResourceQuota confluent-quota exceeded (limits.cpu: requested 4, used 76 of 76; limits.memory: requested 16Gi, used 208Gi of 216Gi; requests.cpu: requested 4, used 76 of 76; requests.memory: requested 16Gi, used 208Gi of 216Gi), 930 refusal(s) from 2026-10-16T05:30:40Z to 2026-10-16T09:44:40Z. It is the CFK operator: while the quo...</span></td></tr><tr><td>🟠 high</td><td>Health Check Issues</td><td><span class='mono'>Unhealthy: Readiness probe failed: dial tcp 10.128.4.17:9071: connect: connection refused (Pod/kafka-1)</span></td></tr><tr><td>🟠 high</td><td>Rollout Issues</td><td><span class='mono'>Kafka/kafka asks for 7.9.10 (image tag 7.9.10); kafka-0 runs 7.4.1 (image of the pod); StatefulSet kafka: 2/3 replicas updated, 2/3 ready, roll from revision kafka-d8d5865d5 to kafka-5ccfbb6954 not complete</span></td></tr><tr><td>🟠 high</td><td>Rollout Issues</td><td><span class='mono'>KRaftController/kraftcontroller asks for 7.9.10 (image tag 7.9.10); its StatefulSet still has 7.4.1: the operator did not apply the CR; kraftcontroller-0, kraftcontroller-1, kraftcontroller-2 run 7.4.1 (image of the pod); StatefulSet kraftcontroller: 3/3 replicas updated, 3/3 ready; KRaftController/kraftcontroller has platform.confluent.io/block-reconcile=true</span></td></tr><tr><td>🟡 medium</td><td>Operator Issues</td><td><span class='mono'>Operator: {&quot;level&quot;:&quot;INFO&quot;,&quot;time&quot;:&quot;2026-10-16T07:00:00.000Z&quot;,&quot;name&quot;:&quot;kafka&quot;,&quot;caller&quot;:&quot;roll/roll_handler.go:119&quot;,&quot;msg&quot;:&quot;cluster not rollable from roll pre checks&quot;,&quot;namespace&quot;:&quot;confluent&quot;}</span></td></tr><tr><td>🟡 medium</td><td>Other Errors (Unclassified)</td><td><span class='mono'>Error: [2026-10-16 09:44:48,120] ERROR [BrokerLifecycleManager id=1] Shutting down because we were unable to register with the controller quorum. (kafka.server.BrokerLifecycleManager)</span></td></tr><tr><td>🟡 medium</td><td>Network Issues</td><td><span class='mono'>Connection Refused: [2026-10-16 05:40:31,551] WARN [RaftManager id=1] Connection to node 9991 (kraftcontroller-0.kraftcontroller.confluent.svc.cluster.local/10.128.2.11:9074) could not be established. Node may not be available. (org.apache.kafka.clients.NetworkClient)</span></td></tr><tr><td>🟡 medium</td><td>Recent Changes</td><td><span class='mono'>1 change(s) in the hour before the first high issue (2026-10-16 05:41, Health Check Issues: Unhealthy: Readiness probe failed: dial tcp 10.128.4.17:9071: connect: connection refused (Pod/kafka-1)): Kafka/kafka at 2026-10-16 05:31, 9 minute(s) before (Update by kubectl-client-side-apply: spec.image)</span></td></tr><tr><td>🟢 low</td><td>Reconciliation Blocked</td><td><span class='mono'>{&quot;level&quot;:&quot;INFO&quot;,&quot;time&quot;:&quot;2026-10-16T07:00:01.000Z&quot;,&quot;name&quot;:&quot;kraftcontroller&quot;,&quot;caller&quot;:&quot;log/log.go:49&quot;,&quot;msg&quot;:&quot;reconcile is blocked&quot;,&quot;name&quot;:&quot;kraftcontroller&quot;,&quot;namespace&quot;:&quot;confluent&quot;,&quot;annotation&quot;:&quot;platform.confluent.io/block-reconcile&quot;}</span></td></tr><tr><td>🟢 low</td><td>Reconciliation Blocked</td><td><span class='mono'>KRaftController/kraftcontroller has platform.confluent.io/block-reconcile=true</span></td></tr><tr><td>🟢 low</td><td>Bundle Coverage</td><td><span class='mono'>Some logs start too late to explain what happened before: operator/confluent-operator-6b7f54d485-gs6hj.log starts at 2026-10-16 07:00, 2 day(s) 15 hour(s) after its pod started (2026-10-13 16:00); the last change of the CRs (Kafka/kafka at 2026-10-16 05:31) is before the start of the operator log operator/confluent-operator-6b7f54d485-gs6hj.log (2026-10-16 07:00): how the operator applied it is...</span></td></tr></table></div><div class='table-card'><h2>🆕 New: in the newer bundle only (2)</h2><table><tr><th>Severity</th><th>Category</th><th>Issue</th></tr><tr><td>🟢 low</td><td>Pod Failures</td><td><span class='mono'>BackOff: Back-off restarting failed container connect in pod connect-1 (Pod/connect-1) [transient: pod connect-1 is Running and Ready in the bundle, 2 restart(s)]</span></td></tr><tr><td>🟢 low</td><td>Bundle Coverage</td><td><span class='mono'>Some logs start too late to explain what happened before: operator/confluent-operator-78f46f99dc-k2lpq.log starts at 2026-10-17 07:00, 17 hour(s) 5 minute(s) after its pod started (2026-10-16 13:55); the last change of the CRs (KRaftController/kraftcontroller at 2026-10-16 14:02) is before the start of the operator log operator/confluent-operator-78f46f99dc-k2lpq.log (2026-10-17 07:00): how the...</span></td></tr></table></div><div class='table-card'><h2>⏳ Still there (4)</h2><table><tr><th>Severity</th><th>Occurrences</th><th>Category</th><th>Issue</th></tr><tr><td>🟠 high</td><td>×1 → ×1</td><td>Compatibility</td><td><span class='mono'>connect runs Confluent Platform 7.4.1, outside the range supported by CFK 3.3.0: 7.5 - 8.3 (7.4.1)</span></td></tr><tr><td>🟡 medium</td><td>×1 → ×1</td><td>Compatibility</td><td><span class='mono'>connect uses confluent-init-container 2.6.1 with CFK operator 3.3.0: the init container must be on the same version as the operator</span></td></tr><tr><td>🟢 low</td><td>×1 → ×1</td><td>Reconciliation Blocked</td><td><span class='mono'>3 CR(s) still have the condition platform.confluent.io/block-reconcile = True (&quot;Reconcile is blocked.&quot;) without the annotation: Connect/connect (since 2026-10-15T18:02:11Z), Kafka/kafka (since 2026-10-15T18:02:11Z), KRaftController/kraftcontroller (since 2026-10-15T18:02:11Z). The annotation was removed, so the operator reconciles them again: the condition is not cleared when the annotation goe...</span></td></tr><tr><td>🟢 low</td><td>×1 → ×1</td><td>Compatibility</td><td><span class='mono'>Components run different Confluent Platform versions: 7.4.1 (connect), 7.9.10 (kafka, kraftcontroller)</span></td></tr></table></div><div class='footer'>Generated by <strong>playground analyze logs</strong> · sanitized like the analysis of each bundle</div></div></body></html>
+</script></body></html>

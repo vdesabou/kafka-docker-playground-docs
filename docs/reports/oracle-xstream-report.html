@@ -577,4 +577,287 @@ border:1px solid rgba(255,255,255,.22);transition:background .15s}
 @media (prefers-reduced-motion:reduce){.lr-whale{animation:none}}
 .header:has(.lr-title) .header-meta span:has(.lr-howto){background:rgba(56,189,248,.22);border-color:rgba(125,211,252,.55)}
 .lr-howto{text-decoration:none;font-weight:600}.lr-howto:hover{text-decoration:underline}
-</style><div class='verdict critical'>🚨 4 critical findings, 4 high: start with Database is in NOARCHIVELOG mode: XStream needs ARCHIVELOG.</div><div class='kpi-grid'><div class="kpi-card danger"><div class="kpi-label">📸 Capture</div><div class="kpi-value">ABORTED</div><div class="kpi-unit">PAUSED FOR FLOW CONTROL</div></div><div class="kpi-card ok"><div class="kpi-label">⏱️ Capture latency</div><div class="kpi-value">17s</div><div class="kpi-unit">worst capture</div></div><div class="kpi-card ok"><div class="kpi-label">📤 Outbound server</div><div class="kpi-value">ATTACHED</div><div class="kpi-unit">XOUT</div></div><div class="kpi-card danger"><div class="kpi-label">💾 LogMiner memory</div><div class="kpi-value">97%</div><div class="kpi-unit">of max</div></div><div class="kpi-card "><div class="kpi-label">🚀 LCRs sent</div><div class="kpi-value">14</div><div class="kpi-unit">since outbound start</div></div><div class="kpi-card "><div class="kpi-label">🔄 Open transactions</div><div class="kpi-value">0</div><div class="kpi-unit">capture + apply</div></div><div class="kpi-card ok"><div class="kpi-label">💧 Spilled</div><div class="kpi-value">0</div><div class="kpi-unit">messages (apply reader)</div></div></div><div class='section-title'>🔎 Findings</div><div class='recs-list'><div class="rec-card critical"><span class="rec-badge critical">🔴 CRITICAL</span><div class="rec-text">Database is in NOARCHIVELOG mode: XStream needs ARCHIVELOG<div class="rec-meta">§ Overview: Database · pattern G: Database prerequisite missing (archivelog, supplemental logging)</div><div class="rec-meta mono">Log Mode=NOARCHIVELOG</div><div class="rec-action">SHUTDOWN IMMEDIATE; STARTUP MOUNT; ALTER DATABASE ARCHIVELOG; ALTER DATABASE OPEN;</div></div></div><div class="rec-card critical"><span class="rec-badge critical">🔴 CRITICAL</span><div class="rec-text">Minimal supplemental logging is not enabled<div class="rec-meta">§ Overview: Database · pattern G: Database prerequisite missing (archivelog, supplemental logging)</div><div class="rec-meta mono">Supplemental Log (MIN)=NO</div><div class="rec-action">ALTER DATABASE ADD SUPPLEMENTAL LOG DATA;</div></div></div><div class="rec-card critical"><span class="rec-badge critical">🔴 CRITICAL</span><div class="rec-text">Capture CAP$_XOUT_1 is ABORTED: ORA-01291: missing logfile<div class="rec-meta">§ Capture Process: Status · pattern H: XStream component disabled or aborted</div><div class="rec-meta mono">Status=ABORTED  Error Number=1291  Error Message=ORA-01291: missing logfile</div><div class="rec-action">Fix the error, then EXEC DBMS_CAPTURE_ADM.START_CAPTURE(&#x27;CAP$_XOUT_1&#x27;);</div></div></div><div class="rec-card critical"><span class="rec-badge critical">🔴 CRITICAL</span><div class="rec-text">LogMiner session of CAP$_XOUT_1 uses 97% of its memory<div class="rec-meta">§ LogMiner: Statistics · pattern E: LogMiner memory pressure</div><div class="rec-meta mono">Used Memory (MB)=5.56  Max Memory (MB)=30  Used Memory (%)=97.10</div><div class="rec-action">Raise the capture MAX_SGA_SIZE / streams_pool_size, look for large LOB transactions</div></div></div><div class="rec-card high"><span class="rec-badge high">🟠 HIGH</span><div class="rec-text">Capture CAP$_XOUT_1 is PAUSED FOR FLOW CONTROL: the outbound server / connector does not consume fast enough<div class="rec-meta">§ Capture Process: Statistics · pattern C: Flow control (capture paused)</div><div class="rec-meta mono">State=PAUSED FOR FLOW CONTROL</div></div></div><div class="rec-card high"><span class="rec-badge high">🟠 HIGH</span><div class="rec-text">Oracle estimates 5,000 spills at the current streams pool size (64 MB)<div class="rec-meta">§ Streams Pool: Size advice · pattern A: Undersized streams pool / SGA (spills, memory pressure)</div><div class="rec-meta mono">Pool Size Estimate (MB)=64  Estimated Spill Count=5,000  smallest size without spill (MB)=96</div><div class="rec-action">ALTER SYSTEM SET streams_pool_size=96M SCOPE=BOTH;</div></div></div><div class="rec-card high"><span class="rec-badge high">🟠 HIGH</span><div class="rec-text">Warning alert x2: STREAMS capture process CAP$_XOUT_1 aborted with ORA-01291<div class="rec-meta">§ Alerts: In last 7 days</div><div class="rec-meta mono">Suggested Action=Restore the missing archived log  first=2026-10-14 09:10:00  last=2026-10-14 09:15:00</div></div></div><div class="rec-card high"><span class="rec-badge high">🟠 HIGH</span><div class="rec-text">CAP$_XOUT_1: ORA-01291: missing logfile (x1)<div class="rec-meta">§ Events: Recent history (last 7 days)</div><div class="rec-meta mono">Event Name=ABORT  first=2026-10-14 09:10:00  last=2026-10-14 09:10:00</div></div></div><div class="rec-card medium"><span class="rec-badge medium">🟡 MEDIUM</span><div class="rec-text">streams_pool_size is not set explicitly<div class="rec-meta">§ Overview: Initialization parameters · pattern A: Undersized streams pool / SGA (spills, memory pressure)</div><div class="rec-meta mono">streams_pool_size=0  sga_target=8824815616  memory_target=0</div><div class="rec-action">ALTER SYSTEM SET streams_pool_size=&lt;size, see Streams Pool: Size advice&gt; SCOPE=BOTH;</div></div></div><div class="rec-card info"><span class="rec-badge info">ℹ️ INFO</span><div class="rec-text">Applied SCN of CAP$_XOUT_1 is 37,615 SCNs behind the captured SCN: after a restart, capture mines redo again from the applied SCN, and the logs from there must be kept<div class="rec-meta">§ Capture Process: Status</div><div class="rec-meta mono">Captured SCN=1220736  Applied SCN=1183121  Status Change Time=2026-10-14 09:16:30</div></div></div><div class="rec-card info"><span class="rec-badge info">ℹ️ INFO</span><div class="rec-text">Capture CAP$_XOUT_1 enqueued 61 of 32,454 captured messages (filtered by rules, or staging bottleneck)<div class="rec-meta">§ Capture Process: Statistics</div><div class="rec-meta mono">Total Messages Captured=32,454  Total Messages Enqueued=61</div></div></div></div><div class='table-card'><h2>🧩 Matched patterns</h2><ul style='margin-left:18px'><li><b>A</b>. Undersized streams pool / SGA (spills, memory pressure) (2 finding(s))</li><li><b>C</b>. Flow control (capture paused) (1 finding(s))</li><li><b>E</b>. LogMiner memory pressure (1 finding(s))</li><li><b>G</b>. Database prerequisite missing (archivelog, supplemental logging) (2 finding(s))</li><li><b>H</b>. XStream component disabled or aborted (1 finding(s))</li></ul></div><div class='table-card'><h2>✅ Prerequisites</h2><table><tr><th>Check</th><th>Value</th><th>Status</th><th>Note</th></tr><tr><td>ARCHIVELOG mode</td><td>NOARCHIVELOG</td><td><span class='st FAIL'>FAIL</span></td><td></td></tr><tr><td>Minimal supplemental logging</td><td>NO</td><td><span class='st FAIL'>FAIL</span></td><td></td></tr><tr><td>Database-level ALL column supplemental logging</td><td>YES</td><td><span class='st PASS'>PASS</span></td><td></td></tr><tr><td>streams_pool_size</td><td>0</td><td><span class='st WARNING'>WARNING</span></td><td>auto-managed by sga_target/memory_target</td></tr><tr><td>pga_aggregate_target</td><td>2,803 MB</td><td><span class='st INFO'>INFO</span></td><td></td></tr><tr><td>MAX_SGA_SIZE (capture)</td><td>INFINITE</td><td><span class='st CHECK'>CHECK</span></td><td>INFINITE: bounded only by the streams pool</td></tr><tr><td>MAX_SGA_SIZE (apply (outbound))</td><td>INFINITE</td><td><span class='st CHECK'>CHECK</span></td><td>INFINITE: bounded only by the streams pool</td></tr></table></div><div class='table-card'><h2>📸 Capture</h2><table><tr><th>Name</th><th>Status</th><th>State</th><th>Latency</th><th>Start SCN</th><th>Captured SCN</th><th>Captured SCN time</th><th>Applied SCN</th><th>Gap to current</th><th>Captured / enqueued</th><th>Redo mined (MB)</th><th>SGA used / allocated / max (MB)</th></tr><tr><td>CAP$_XOUT_1</td><td>ABORTED</td><td>PAUSED FOR FLOW CONTROL</td><td>17s</td><td>1,183,121</td><td>1,220,736</td><td>-</td><td>1,183,121</td><td>54</td><td>32,454 / 61</td><td>150.87</td><td>6 / 31 / INFINITE</td></tr></table></div><div class='table-card'><h2>⛏️ LogMiner</h2><table><tr><th>Session</th><th>Capture</th><th>State</th><th>Used (MB)</th><th>Max (MB)</th><th>Used %</th></tr><tr><td>1</td><td>CAP$_XOUT_1</td><td>ACTIVE</td><td>5.56</td><td>30</td><td>97.10</td></tr></table></div><div class='table-card'><h2>📤 Outbound server</h2><table><tr><th>Name</th><th>Status</th><th>State</th><th>Connect user</th><th>Transactions sent</th><th>LCRs sent</th><th>Last sent LCR</th><th>Before the report</th></tr><tr><td>XOUT</td><td>ATTACHED</td><td>IDLE</td><td>C##CFLTUSER</td><td>5</td><td>14</td><td>2026-10-14 09:16:48</td><td>3m36s</td></tr></table></div><div class='table-card'><h2>📥 Apply reader</h2><table><tr><th>Apply</th><th>State</th><th>Latency</th><th>Dequeued</th><th>Spilled</th><th>Spill thresholds</th></tr><tr><td>XOUT</td><td>IDLE</td><td>3s</td><td>61</td><td>0</td><td>10,000 LCRs, 15m00s</td></tr></table></div><div class='table-card'><h2>📦 Buffered queue</h2><table><tr><th>Queue</th><th>State</th><th>Messages</th><th>Spilled</th><th>Cumulative spilled</th><th>Spill ratio</th></tr><tr><td>Q$_XOUT_2</td><td>NORMAL</td><td>0</td><td>0</td><td>0</td><td>0</td></tr></table></div><div class='chart-card'><h2>🏊 Streams pool advice: estimated spills per pool size (current 64 MB, allocated 18.50 MB)</h2><svg viewBox="0 0 560 390" xmlns="http://www.w3.org/2000/svg"><text x="114" y="18" font-size="10" text-anchor="end">64 MB (current)</text><rect x="120" y="8" width="360.0" height="13" fill="#2563eb"/><text x="485.0" y="18" font-size="10" fill="#475569">5,000 spills</text><text x="114" y="38" font-size="10" text-anchor="end">640 MB</text><rect x="120" y="28" width="1.0" height="13" fill="#16a34a"/><text x="125.0" y="38" font-size="10" fill="#475569">0 spills</text><text x="114" y="58" font-size="10" text-anchor="end">128 MB</text><rect x="120" y="48" width="1.0" height="13" fill="#16a34a"/><text x="125.0" y="58" font-size="10" fill="#475569">0 spills</text><text x="114" y="78" font-size="10" text-anchor="end">160 MB</text><rect x="120" y="68" width="1.0" height="13" fill="#16a34a"/><text x="125.0" y="78" font-size="10" fill="#475569">0 spills</text><text x="114" y="98" font-size="10" text-anchor="end">192 MB</text><rect x="120" y="88" width="1.0" height="13" fill="#16a34a"/><text x="125.0" y="98" font-size="10" fill="#475569">0 spills</text><text x="114" y="118" font-size="10" text-anchor="end">224 MB</text><rect x="120" y="108" width="1.0" height="13" fill="#16a34a"/><text x="125.0" y="118" font-size="10" fill="#475569">0 spills</text><text x="114" y="138" font-size="10" text-anchor="end">256 MB</text><rect x="120" y="128" width="1.0" height="13" fill="#16a34a"/><text x="125.0" y="138" font-size="10" fill="#475569">0 spills</text><text x="114" y="158" font-size="10" text-anchor="end">288 MB</text><rect x="120" y="148" width="1.0" height="13" fill="#16a34a"/><text x="125.0" y="158" font-size="10" fill="#475569">0 spills</text><text x="114" y="178" font-size="10" text-anchor="end">320 MB</text><rect x="120" y="168" width="1.0" height="13" fill="#16a34a"/><text x="125.0" y="178" font-size="10" fill="#475569">0 spills</text><text x="114" y="198" font-size="10" text-anchor="end">352 MB</text><rect x="120" y="188" width="1.0" height="13" fill="#16a34a"/><text x="125.0" y="198" font-size="10" fill="#475569">0 spills</text><text x="114" y="218" font-size="10" text-anchor="end">384 MB</text><rect x="120" y="208" width="1.0" height="13" fill="#16a34a"/><text x="125.0" y="218" font-size="10" fill="#475569">0 spills</text><text x="114" y="238" font-size="10" text-anchor="end">416 MB</text><rect x="120" y="228" width="1.0" height="13" fill="#16a34a"/><text x="125.0" y="238" font-size="10" fill="#475569">0 spills</text><text x="114" y="258" font-size="10" text-anchor="end">448 MB</text><rect x="120" y="248" width="1.0" height="13" fill="#16a34a"/><text x="125.0" y="258" font-size="10" fill="#475569">0 spills</text><text x="114" y="278" font-size="10" text-anchor="end">480 MB</text><rect x="120" y="268" width="1.0" height="13" fill="#16a34a"/><text x="125.0" y="278" font-size="10" fill="#475569">0 spills</text><text x="114" y="298" font-size="10" text-anchor="end">512 MB</text><rect x="120" y="288" width="1.0" height="13" fill="#16a34a"/><text x="125.0" y="298" font-size="10" fill="#475569">0 spills</text><text x="114" y="318" font-size="10" text-anchor="end">544 MB</text><rect x="120" y="308" width="1.0" height="13" fill="#16a34a"/><text x="125.0" y="318" font-size="10" fill="#475569">0 spills</text><text x="114" y="338" font-size="10" text-anchor="end">576 MB</text><rect x="120" y="328" width="1.0" height="13" fill="#16a34a"/><text x="125.0" y="338" font-size="10" fill="#475569">0 spills</text><text x="114" y="358" font-size="10" text-anchor="end">608 MB</text><rect x="120" y="348" width="1.0" height="13" fill="#16a34a"/><text x="125.0" y="358" font-size="10" fill="#475569">0 spills</text><text x="114" y="378" font-size="10" text-anchor="end">96 MB</text><rect x="120" y="368" width="1.0" height="13" fill="#16a34a"/><text x="125.0" y="378" font-size="10" fill="#475569">0 spills</text></svg></div><div class='table-card'><h2>⚙️ Capture rules</h2><table><tr><th>Capture</th><th>Global</th><th>Schemas</th><th>Tables</th><th>DDL</th></tr><tr><td>CAP$_XOUT_1</td><td></td><td></td><td>C##CFLTUSER.CUSTOMERS</td><td>yes</td></tr></table></div><div class='footer'>🛠️ Generated by playground analyze oracle-xstream-report (kafka-docker-playground) from orclcdc_diag.sql report(s)</div></div></body></html>
+</style><div class='verdict critical'>🚨 4 critical findings, 4 high: start with Database is in NOARCHIVELOG mode: XStream needs ARCHIVELOG.</div><div class='kpi-grid'><div class="kpi-card danger"><div class="kpi-label">📸 Capture</div><div class="kpi-value">ABORTED</div><div class="kpi-unit">PAUSED FOR FLOW CONTROL</div></div><div class="kpi-card ok"><div class="kpi-label">⏱️ Capture latency</div><div class="kpi-value">17s</div><div class="kpi-unit">worst capture</div></div><div class="kpi-card ok"><div class="kpi-label">📤 Outbound server</div><div class="kpi-value">ATTACHED</div><div class="kpi-unit">XOUT</div></div><div class="kpi-card danger"><div class="kpi-label">💾 LogMiner memory</div><div class="kpi-value">97%</div><div class="kpi-unit">of max</div></div><div class="kpi-card "><div class="kpi-label">🚀 LCRs sent</div><div class="kpi-value">14</div><div class="kpi-unit">since outbound start</div></div><div class="kpi-card "><div class="kpi-label">🔄 Open transactions</div><div class="kpi-value">0</div><div class="kpi-unit">capture + apply</div></div><div class="kpi-card ok"><div class="kpi-label">💧 Spilled</div><div class="kpi-value">0</div><div class="kpi-unit">messages (apply reader)</div></div></div><div class='section-title'>🔎 Findings</div><div class='recs-list'><div class="rec-card critical"><span class="rec-badge critical">🔴 CRITICAL</span><div class="rec-text">Database is in NOARCHIVELOG mode: XStream needs ARCHIVELOG<div class="rec-meta">§ Overview: Database · pattern G: Database prerequisite missing (archivelog, supplemental logging)</div><div class="rec-meta mono">Log Mode=NOARCHIVELOG</div><div class="rec-action">SHUTDOWN IMMEDIATE; STARTUP MOUNT; ALTER DATABASE ARCHIVELOG; ALTER DATABASE OPEN;</div></div></div><div class="rec-card critical"><span class="rec-badge critical">🔴 CRITICAL</span><div class="rec-text">Minimal supplemental logging is not enabled<div class="rec-meta">§ Overview: Database · pattern G: Database prerequisite missing (archivelog, supplemental logging)</div><div class="rec-meta mono">Supplemental Log (MIN)=NO</div><div class="rec-action">ALTER DATABASE ADD SUPPLEMENTAL LOG DATA;</div></div></div><div class="rec-card critical"><span class="rec-badge critical">🔴 CRITICAL</span><div class="rec-text">Capture CAP$_XOUT_1 is ABORTED: ORA-01291: missing logfile<div class="rec-meta">§ Capture Process: Status · pattern H: XStream component disabled or aborted</div><div class="rec-meta mono">Status=ABORTED  Error Number=1291  Error Message=ORA-01291: missing logfile</div><div class="rec-action">Fix the error, then EXEC DBMS_CAPTURE_ADM.START_CAPTURE(&#x27;CAP$_XOUT_1&#x27;);</div></div></div><div class="rec-card critical"><span class="rec-badge critical">🔴 CRITICAL</span><div class="rec-text">LogMiner session of CAP$_XOUT_1 uses 97% of its memory<div class="rec-meta">§ LogMiner: Statistics · pattern E: LogMiner memory pressure</div><div class="rec-meta mono">Used Memory (MB)=5.56  Max Memory (MB)=30  Used Memory (%)=97.10</div><div class="rec-action">Raise the capture MAX_SGA_SIZE / streams_pool_size, look for large LOB transactions</div></div></div><div class="rec-card high"><span class="rec-badge high">🟠 HIGH</span><div class="rec-text">Capture CAP$_XOUT_1 is PAUSED FOR FLOW CONTROL: the outbound server / connector does not consume fast enough<div class="rec-meta">§ Capture Process: Statistics · pattern C: Flow control (capture paused)</div><div class="rec-meta mono">State=PAUSED FOR FLOW CONTROL</div></div></div><div class="rec-card high"><span class="rec-badge high">🟠 HIGH</span><div class="rec-text">Oracle estimates 5,000 spills at the current streams pool size (64 MB)<div class="rec-meta">§ Streams Pool: Size advice · pattern A: Undersized streams pool / SGA (spills, memory pressure)</div><div class="rec-meta mono">Pool Size Estimate (MB)=64  Estimated Spill Count=5,000  smallest size without spill (MB)=96</div><div class="rec-action">ALTER SYSTEM SET streams_pool_size=96M SCOPE=BOTH;</div></div></div><div class="rec-card high"><span class="rec-badge high">🟠 HIGH</span><div class="rec-text">Warning alert x2: STREAMS capture process CAP$_XOUT_1 aborted with ORA-01291<div class="rec-meta">§ Alerts: In last 7 days</div><div class="rec-meta mono">Suggested Action=Restore the missing archived log  first=2026-10-14 09:10:00  last=2026-10-14 09:15:00</div></div></div><div class="rec-card high"><span class="rec-badge high">🟠 HIGH</span><div class="rec-text">CAP$_XOUT_1: ORA-01291: missing logfile (x1)<div class="rec-meta">§ Events: Recent history (last 7 days)</div><div class="rec-meta mono">Event Name=ABORT  first=2026-10-14 09:10:00  last=2026-10-14 09:10:00</div></div></div><div class="rec-card medium"><span class="rec-badge medium">🟡 MEDIUM</span><div class="rec-text">streams_pool_size is not set explicitly<div class="rec-meta">§ Overview: Initialization parameters · pattern A: Undersized streams pool / SGA (spills, memory pressure)</div><div class="rec-meta mono">streams_pool_size=0  sga_target=8824815616  memory_target=0</div><div class="rec-action">ALTER SYSTEM SET streams_pool_size=&lt;size, see Streams Pool: Size advice&gt; SCOPE=BOTH;</div></div></div><div class="rec-card info"><span class="rec-badge info">ℹ️ INFO</span><div class="rec-text">Applied SCN of CAP$_XOUT_1 is 37,615 SCNs behind the captured SCN: after a restart, capture mines redo again from the applied SCN, and the logs from there must be kept<div class="rec-meta">§ Capture Process: Status</div><div class="rec-meta mono">Captured SCN=1220736  Applied SCN=1183121  Status Change Time=2026-10-14 09:16:30</div></div></div><div class="rec-card info"><span class="rec-badge info">ℹ️ INFO</span><div class="rec-text">Capture CAP$_XOUT_1 enqueued 61 of 32,454 captured messages (filtered by rules, or staging bottleneck)<div class="rec-meta">§ Capture Process: Statistics</div><div class="rec-meta mono">Total Messages Captured=32,454  Total Messages Enqueued=61</div></div></div></div><div class='table-card'><h2>🧩 Matched patterns</h2><ul style='margin-left:18px'><li><b>A</b>. Undersized streams pool / SGA (spills, memory pressure) (2 finding(s))</li><li><b>C</b>. Flow control (capture paused) (1 finding(s))</li><li><b>E</b>. LogMiner memory pressure (1 finding(s))</li><li><b>G</b>. Database prerequisite missing (archivelog, supplemental logging) (2 finding(s))</li><li><b>H</b>. XStream component disabled or aborted (1 finding(s))</li></ul></div><div class='table-card'><h2>✅ Prerequisites</h2><table><tr><th>Check</th><th>Value</th><th>Status</th><th>Note</th></tr><tr><td>ARCHIVELOG mode</td><td>NOARCHIVELOG</td><td><span class='st FAIL'>FAIL</span></td><td></td></tr><tr><td>Minimal supplemental logging</td><td>NO</td><td><span class='st FAIL'>FAIL</span></td><td></td></tr><tr><td>Database-level ALL column supplemental logging</td><td>YES</td><td><span class='st PASS'>PASS</span></td><td></td></tr><tr><td>streams_pool_size</td><td>0</td><td><span class='st WARNING'>WARNING</span></td><td>auto-managed by sga_target/memory_target</td></tr><tr><td>pga_aggregate_target</td><td>2,803 MB</td><td><span class='st INFO'>INFO</span></td><td></td></tr><tr><td>MAX_SGA_SIZE (capture)</td><td>INFINITE</td><td><span class='st CHECK'>CHECK</span></td><td>INFINITE: bounded only by the streams pool</td></tr><tr><td>MAX_SGA_SIZE (apply (outbound))</td><td>INFINITE</td><td><span class='st CHECK'>CHECK</span></td><td>INFINITE: bounded only by the streams pool</td></tr></table></div><div class='table-card'><h2>📸 Capture</h2><table><tr><th>Name</th><th>Status</th><th>State</th><th>Latency</th><th>Start SCN</th><th>Captured SCN</th><th>Captured SCN time</th><th>Applied SCN</th><th>Gap to current</th><th>Captured / enqueued</th><th>Redo mined (MB)</th><th>SGA used / allocated / max (MB)</th></tr><tr><td>CAP$_XOUT_1</td><td>ABORTED</td><td>PAUSED FOR FLOW CONTROL</td><td>17s</td><td>1,183,121</td><td>1,220,736</td><td>-</td><td>1,183,121</td><td>54</td><td>32,454 / 61</td><td>150.87</td><td>6 / 31 / INFINITE</td></tr></table></div><div class='table-card'><h2>⛏️ LogMiner</h2><table><tr><th>Session</th><th>Capture</th><th>State</th><th>Used (MB)</th><th>Max (MB)</th><th>Used %</th></tr><tr><td>1</td><td>CAP$_XOUT_1</td><td>ACTIVE</td><td>5.56</td><td>30</td><td>97.10</td></tr></table></div><div class='table-card'><h2>📤 Outbound server</h2><table><tr><th>Name</th><th>Status</th><th>State</th><th>Connect user</th><th>Transactions sent</th><th>LCRs sent</th><th>Last sent LCR</th><th>Before the report</th></tr><tr><td>XOUT</td><td>ATTACHED</td><td>IDLE</td><td>C##CFLTUSER</td><td>5</td><td>14</td><td>2026-10-14 09:16:48</td><td>3m36s</td></tr></table></div><div class='table-card'><h2>📥 Apply reader</h2><table><tr><th>Apply</th><th>State</th><th>Latency</th><th>Dequeued</th><th>Spilled</th><th>Spill thresholds</th></tr><tr><td>XOUT</td><td>IDLE</td><td>3s</td><td>61</td><td>0</td><td>10,000 LCRs, 15m00s</td></tr></table></div><div class='table-card'><h2>📦 Buffered queue</h2><table><tr><th>Queue</th><th>State</th><th>Messages</th><th>Spilled</th><th>Cumulative spilled</th><th>Spill ratio</th></tr><tr><td>Q$_XOUT_2</td><td>NORMAL</td><td>0</td><td>0</td><td>0</td><td>0</td></tr></table></div><div class='chart-card'><h2>🏊 Streams pool advice: estimated spills per pool size (current 64 MB, allocated 18.50 MB)</h2><svg viewBox="0 0 560 390" xmlns="http://www.w3.org/2000/svg"><text x="114" y="18" font-size="10" text-anchor="end">64 MB (current)</text><rect x="120" y="8" width="360.0" height="13" fill="#2563eb"/><text x="485.0" y="18" font-size="10" fill="#475569">5,000 spills</text><text x="114" y="38" font-size="10" text-anchor="end">640 MB</text><rect x="120" y="28" width="1.0" height="13" fill="#16a34a"/><text x="125.0" y="38" font-size="10" fill="#475569">0 spills</text><text x="114" y="58" font-size="10" text-anchor="end">128 MB</text><rect x="120" y="48" width="1.0" height="13" fill="#16a34a"/><text x="125.0" y="58" font-size="10" fill="#475569">0 spills</text><text x="114" y="78" font-size="10" text-anchor="end">160 MB</text><rect x="120" y="68" width="1.0" height="13" fill="#16a34a"/><text x="125.0" y="78" font-size="10" fill="#475569">0 spills</text><text x="114" y="98" font-size="10" text-anchor="end">192 MB</text><rect x="120" y="88" width="1.0" height="13" fill="#16a34a"/><text x="125.0" y="98" font-size="10" fill="#475569">0 spills</text><text x="114" y="118" font-size="10" text-anchor="end">224 MB</text><rect x="120" y="108" width="1.0" height="13" fill="#16a34a"/><text x="125.0" y="118" font-size="10" fill="#475569">0 spills</text><text x="114" y="138" font-size="10" text-anchor="end">256 MB</text><rect x="120" y="128" width="1.0" height="13" fill="#16a34a"/><text x="125.0" y="138" font-size="10" fill="#475569">0 spills</text><text x="114" y="158" font-size="10" text-anchor="end">288 MB</text><rect x="120" y="148" width="1.0" height="13" fill="#16a34a"/><text x="125.0" y="158" font-size="10" fill="#475569">0 spills</text><text x="114" y="178" font-size="10" text-anchor="end">320 MB</text><rect x="120" y="168" width="1.0" height="13" fill="#16a34a"/><text x="125.0" y="178" font-size="10" fill="#475569">0 spills</text><text x="114" y="198" font-size="10" text-anchor="end">352 MB</text><rect x="120" y="188" width="1.0" height="13" fill="#16a34a"/><text x="125.0" y="198" font-size="10" fill="#475569">0 spills</text><text x="114" y="218" font-size="10" text-anchor="end">384 MB</text><rect x="120" y="208" width="1.0" height="13" fill="#16a34a"/><text x="125.0" y="218" font-size="10" fill="#475569">0 spills</text><text x="114" y="238" font-size="10" text-anchor="end">416 MB</text><rect x="120" y="228" width="1.0" height="13" fill="#16a34a"/><text x="125.0" y="238" font-size="10" fill="#475569">0 spills</text><text x="114" y="258" font-size="10" text-anchor="end">448 MB</text><rect x="120" y="248" width="1.0" height="13" fill="#16a34a"/><text x="125.0" y="258" font-size="10" fill="#475569">0 spills</text><text x="114" y="278" font-size="10" text-anchor="end">480 MB</text><rect x="120" y="268" width="1.0" height="13" fill="#16a34a"/><text x="125.0" y="278" font-size="10" fill="#475569">0 spills</text><text x="114" y="298" font-size="10" text-anchor="end">512 MB</text><rect x="120" y="288" width="1.0" height="13" fill="#16a34a"/><text x="125.0" y="298" font-size="10" fill="#475569">0 spills</text><text x="114" y="318" font-size="10" text-anchor="end">544 MB</text><rect x="120" y="308" width="1.0" height="13" fill="#16a34a"/><text x="125.0" y="318" font-size="10" fill="#475569">0 spills</text><text x="114" y="338" font-size="10" text-anchor="end">576 MB</text><rect x="120" y="328" width="1.0" height="13" fill="#16a34a"/><text x="125.0" y="338" font-size="10" fill="#475569">0 spills</text><text x="114" y="358" font-size="10" text-anchor="end">608 MB</text><rect x="120" y="348" width="1.0" height="13" fill="#16a34a"/><text x="125.0" y="358" font-size="10" fill="#475569">0 spills</text><text x="114" y="378" font-size="10" text-anchor="end">96 MB</text><rect x="120" y="368" width="1.0" height="13" fill="#16a34a"/><text x="125.0" y="378" font-size="10" fill="#475569">0 spills</text></svg></div><div class='table-card'><h2>⚙️ Capture rules</h2><table><tr><th>Capture</th><th>Global</th><th>Schemas</th><th>Tables</th><th>DDL</th></tr><tr><td>CAP$_XOUT_1</td><td></td><td></td><td>C##CFLTUSER.CUSTOMERS</td><td>yes</td></tr></table></div><div class='footer'>🛠️ Generated by playground analyze oracle-xstream-report (kafka-docker-playground) from orclcdc_diag.sql report(s)</div></div><style>
+.share-open{font:inherit;cursor:pointer}
+.share-hero{font-size:.85rem;font-weight:700;padding:6px 16px;border-radius:999px;border:0;background:#fff;color:#4c1d95;
+box-shadow:0 4px 14px rgba(15,23,42,.25);transition:transform .1s;white-space:nowrap}.share-hero:hover{transform:translateY(-1px);background:#f5f3ff}
+.header-meta .share-hero{margin-left:auto}
+.share-next{margin-left:auto;align-self:flex-start}
+/* below the fixed Toggle theme of the page (top right of the window) */
+.share-corner{position:absolute;top:44px;right:24px;z-index:2}
+.share-float{position:fixed;top:12px;right:16px;z-index:30;font-size:.8rem;font-weight:700;padding:5px 12px;border-radius:999px;border:0;background:#7c3aed;color:#fff}
+.share-dlg{border:0;border-radius:18px;padding:0;width:min(660px,92vw);max-width:660px;max-height:88vh;overflow:auto;
+box-shadow:0 30px 80px rgba(15,23,42,.45);background:#fff;color:#1e293b;position:fixed;inset:0;margin:auto;height:fit-content;
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.45}
+.share-dlg[open]{animation:sd-in .22s cubic-bezier(.22,1,.36,1)}
+@keyframes sd-in{from{opacity:0;transform:translateY(14px) scale(.97)}to{opacity:1;transform:none}}
+.share-dlg::backdrop{background:rgba(15,23,42,.6);backdrop-filter:blur(3px)}
+.sd-head{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;color:#fff;
+background:radial-gradient(500px 120px at 0% 0%,rgba(56,189,248,.35),transparent 60%),linear-gradient(120deg,#312e81,#6d28d9 60%,#a21caf)}
+.sd-head h3{font-size:1.1rem;margin:0;color:#fff!important;border:0;padding:0}
+.sd-x{border:0!important;background:rgba(255,255,255,.16)!important;color:#fff!important;width:30px;height:30px;padding:0!important;border-radius:50%!important;font-size:.9rem}
+.sd-x:hover{background:rgba(255,255,255,.3)!important}
+.sd-body{padding:16px 20px 6px}
+.share-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0 4px}
+.share-card{display:flex;align-items:center;gap:12px;width:100%;text-align:left;font:inherit;color:inherit;text-decoration:none;cursor:pointer;
+padding:12px 14px;border-radius:14px;border:1px solid #e2e8f0;background:#f8fafc;transition:transform .12s,box-shadow .12s,border-color .12s,background .12s}
+.share-card:hover{transform:translateY(-2px);border-color:#a78bfa;box-shadow:0 10px 24px -12px rgba(109,40,217,.5);background:#faf5ff}
+.share-card:focus-visible{outline:2px solid #7c3aed;outline-offset:2px}
+.sc-icon{flex:none;display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:12px;font-size:1.25rem;
+background:linear-gradient(135deg,#ede9fe,#e0f2fe)}
+.sc-body{display:flex;flex-direction:column;gap:2px;min-width:0}
+.sc-body b{font-size:.9rem}.sc-body small{font-size:.74rem;color:#64748b;line-height:1.35}
+.sc-go{margin-left:auto;font-size:1.3rem;color:#a78bfa;transition:transform .12s}.share-card:hover .sc-go{transform:translateX(3px)}
+.share-card.sc-primary{color:#fff;border:0;padding:14px 16px;background:linear-gradient(120deg,#2563eb,#7c3aed);box-shadow:0 12px 28px -14px rgba(37,99,235,.8)}
+.share-card.sc-primary:hover{background:linear-gradient(120deg,#1d4ed8,#6d28d9)}
+.share-card.sc-primary .sc-icon{background:rgba(255,255,255,.18)}.share-card.sc-primary small{color:rgba(255,255,255,.85)}
+.share-card.sc-primary .sc-go{color:#fff}
+.share-card.sc-done{border-color:#22c55e!important;background:#f0fdf4!important}
+.share-card.sc-done .sc-icon{background:#bbf7d0}
+.share-done{min-height:1.4em;margin:8px 0 0;font-size:.82rem;font-weight:600;color:#15803d}
+.sd-foot{display:flex;align-items:center;justify-content:space-between;padding:10px 20px 16px}
+.sd-meta{font-size:.75rem;color:#64748b}
+@media (max-width:560px){.share-grid{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.share-dlg[open]{animation:none}.share-card{transition:none}}
+.share-warn{background:#fef3c7;color:#92400e;border-radius:12px;padding:10px 14px;font-size:.82rem;border-left:4px solid #f59e0b;margin:0 0 12px}
+.share-close{font:inherit;font-size:.8rem;padding:3px 12px;border-radius:6px;border:1px solid #cbd5e1;background:transparent;color:inherit;cursor:pointer}
+html[data-theme=dark] .share-hero{background:#ede9fe;color:#4c1d95}
+html[data-theme=dark] .share-dlg{background:#1e293b;color:#e2e8f0}
+html[data-theme=dark] .share-card{background:#0f172a;border-color:#334155}
+html[data-theme=dark] .share-card:hover{background:#1e1b4b;border-color:#7c3aed}
+html[data-theme=dark] .sc-icon{background:linear-gradient(135deg,#312e81,#0c4a6e)}
+html[data-theme=dark] .sc-body small,html[data-theme=dark] .sd-meta{color:#94a3b8}
+html[data-theme=dark] .share-card.sc-primary{background:linear-gradient(120deg,#2563eb,#7c3aed)}
+html[data-theme=dark] .share-card.sc-primary small{color:rgba(255,255,255,.85)}
+html[data-theme=dark] .share-card.sc-done{background:#052e16!important}
+html[data-theme=dark] .share-done{color:#86efac}
+html[data-theme=dark] .share-warn{background:#422006;color:#fcd34d}
+html[data-theme=dark] .share-close{border-color:#334155}
+</style><script type='text/plain' id='pg-share-summary'>📄 orclcdc_diag_synthetic_failures.html  (generated 2026-10-14 09:20:24)
+🗄️  ORCLCDB  role=PRIMARY  open=READ WRITE  cdb=YES  platform=Linux OS (AARCH64)  current SCN=1,220,790
+   Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production Version 19.19.0.0.0
+🔴 Overall health: CRITICAL  🔴 4 critical  🟠 4 high  🟡 1 medium  ⚪ 2 info
+
+✅ Prerequisites
+   ❌ ARCHIVELOG mode                                  NOARCHIVELOG
+   ❌ Minimal supplemental logging                     NO
+   ✅ Database-level ALL column supplemental logging   YES
+   ⚠️  streams_pool_size                                0  (auto-managed by sga_target/memory_target)
+   ℹ️  pga_aggregate_target                             2,803 MB
+   🔎 MAX_SGA_SIZE (capture)                           INFINITE  (INFINITE: bounded only by the streams pool)
+   🔎 MAX_SGA_SIZE (apply (outbound))                  INFINITE  (INFINITE: bounded only by the streams pool)
+
+📸 Capture
+   CAP$_XOUT_1: status=ABORTED state=PAUSED FOR FLOW CONTROL latency=17s SGA=used 6 MB, allocated 31 MB, max INFINITE
+      SCN start=1,183,121 captured=1,220,736 applied=1,183,121 gap to current=54  messages captured=32,454 enqueued=61  redo mined=150.87 MB
+   registered log files: 2 (2 still needed, oldest 2023-08-09 15:43:28, newest 2026-10-14 09:16:14)
+      thread 1: sequences 2 → 3, newest 2026-10-14 09:16:14
+   LogMiner session 1 (CAP$_XOUT_1): state=ACTIVE memory=5.56/30 MB (97.10%)
+
+📤 Outbound server
+   XOUT: status=ATTACHED state=IDLE user=C##CFLTUSER capture=CAP$_XOUT_1
+      transactions sent=5 LCRs sent=14 last sent=2026-10-14 09:16:48 (3m36s before the report)
+   apply reader XOUT: state=IDLE latency=3s dequeued=61 spilled=0 (spill thresholds: 10,000 LCRs, 15m00s)
+   queue Q$_XOUT_2: state=NORMAL messages=0 spilled=0 cumulative spilled=0
+   streams pool: current=64 MB allocated=18.50 MB
+   open transactions: capture=0 apply=0 database > 30 min=0
+   rules of CAP$_XOUT_1: tables: C##CFLTUSER.CUSTOMERS (DDL captured)
+
+🔎 Findings
+   🔴 CRITICAL Database is in NOARCHIVELOG mode: XStream needs ARCHIVELOG
+      § Overview: Database  [pattern G]
+      Log Mode=NOARCHIVELOG
+      👉 SHUTDOWN IMMEDIATE; STARTUP MOUNT; ALTER DATABASE ARCHIVELOG; ALTER DATABASE OPEN;
+   🔴 CRITICAL Minimal supplemental logging is not enabled
+      § Overview: Database  [pattern G]
+      Supplemental Log (MIN)=NO
+      👉 ALTER DATABASE ADD SUPPLEMENTAL LOG DATA;
+   🔴 CRITICAL Capture CAP$_XOUT_1 is ABORTED: ORA-01291: missing logfile
+      § Capture Process: Status  [pattern H]
+      Status=ABORTED  Error Number=1291  Error Message=ORA-01291: missing logfile
+      👉 Fix the error, then EXEC DBMS_CAPTURE_ADM.START_CAPTURE('CAP$_XOUT_1');
+   🔴 CRITICAL LogMiner session of CAP$_XOUT_1 uses 97% of its memory
+      § LogMiner: Statistics  [pattern E]
+      Used Memory (MB)=5.56  Max Memory (MB)=30  Used Memory (%)=97.10
+      👉 Raise the capture MAX_SGA_SIZE / streams_pool_size, look for large LOB transactions
+   🟠 HIGH     Capture CAP$_XOUT_1 is PAUSED FOR FLOW CONTROL: the outbound server / connector does not consume fast enough
+      § Capture Process: Statistics  [pattern C]
+      State=PAUSED FOR FLOW CONTROL
+   🟠 HIGH     Oracle estimates 5,000 spills at the current streams pool size (64 MB)
+      § Streams Pool: Size advice  [pattern A]
+      Pool Size Estimate (MB)=64  Estimated Spill Count=5,000  smallest size without spill (MB)=96
+      👉 ALTER SYSTEM SET streams_pool_size=96M SCOPE=BOTH;
+   🟠 HIGH     Warning alert x2: STREAMS capture process CAP$_XOUT_1 aborted with ORA-01291
+      § Alerts: In last 7 days
+      Suggested Action=Restore the missing archived log  first=2026-10-14 09:10:00  last=2026-10-14 09:15:00
+   🟠 HIGH     CAP$_XOUT_1: ORA-01291: missing logfile (x1)
+      § Events: Recent history (last 7 days)
+      Event Name=ABORT  first=2026-10-14 09:10:00  last=2026-10-14 09:10:00
+   🟡 MEDIUM   streams_pool_size is not set explicitly
+      § Overview: Initialization parameters  [pattern A]
+      streams_pool_size=0  sga_target=8824815616  memory_target=0
+      👉 ALTER SYSTEM SET streams_pool_size=\u003csize, see Streams Pool: Size advice> SCOPE=BOTH;
+   ⚪ INFO     Applied SCN of CAP$_XOUT_1 is 37,615 SCNs behind the captured SCN: after a restart, capture mines redo again from the applied SCN, and the logs from there must be kept
+      § Capture Process: Status
+      Captured SCN=1220736  Applied SCN=1183121  Status Change Time=2026-10-14 09:16:30
+   ⚪ INFO     Capture CAP$_XOUT_1 enqueued 61 of 32,454 captured messages (filtered by rules, or staging bottleneck)
+      § Capture Process: Statistics
+      Total Messages Captured=32,454  Total Messages Enqueued=61
+
+🧩 Matched patterns
+   A. Undersized streams pool / SGA (spills, memory pressure) (2 finding(s))
+   C. Flow control (capture paused) (1 finding(s))
+   E. LogMiner memory pressure (1 finding(s))
+   G. Database prerequisite missing (archivelog, supplemental logging) (2 finding(s))
+   H. XStream component disabled or aborted (1 finding(s))
+
+</script><script type='text/plain' id='pg-share-ticket'>## Oracle XStream diagnostics analysis — orclcdc_diag_synthetic_failures.html
+
+**Verdict:** 🚨 4 critical findings, 4 high: start with Database is in NOARCHIVELOG mode: XStream needs ARCHIVELOG.
+
+### Findings
+
+| Severity | Finding |
+| --- | --- |
+| 🔴 CRITICAL | Database is in NOARCHIVELOG mode: XStream needs ARCHIVELOG |
+| 🔴 CRITICAL | Minimal supplemental logging is not enabled |
+| 🔴 CRITICAL | Capture CAP$_XOUT_1 is ABORTED: ORA-01291: missing logfile |
+| 🔴 CRITICAL | LogMiner session of CAP$_XOUT_1 uses 97% of its memory |
+| 🟠 HIGH | Capture CAP$_XOUT_1 is PAUSED FOR FLOW CONTROL: the outbound server / connector does not consume fast enough |
+| 🟠 HIGH | Oracle estimates 5,000 spills at the current streams pool size (64 MB) |
+| 🟠 HIGH | Warning alert x2: STREAMS capture process CAP$_XOUT_1 aborted with ORA-01291 |
+| 🟠 HIGH | CAP$_XOUT_1: ORA-01291: missing logfile (x1) |
+| 🟡 MEDIUM | streams_pool_size is not set explicitly |
+| ℹ️ INFO | Applied SCN of CAP$_XOUT_1 is 37,615 SCNs behind the captured SCN: after a restart, capture mines redo again from the applied SCN, and the logs from there must be kept |
+| ℹ️ INFO | Capture CAP$_XOUT_1 enqueued 61 of 32,454 captured messages (filtered by rules, or staging bottleneck) |
+
+_Generated by `playground analyze oracle-xstream-report` (kafka-docker-playground)._
+</script><script type='text/plain' id='pg-share-slack'>*Oracle XStream diagnostics analysis — orclcdc_diag_synthetic_failures.html*
+
+*Verdict:* 🚨 4 critical findings, 4 high: start with Database is in NOARCHIVELOG mode: XStream needs ARCHIVELOG.
+
+*Findings*
+• 🔴 CRITICAL · Database is in NOARCHIVELOG mode: XStream needs ARCHIVELOG
+• 🔴 CRITICAL · Minimal supplemental logging is not enabled
+• 🔴 CRITICAL · Capture CAP$_XOUT_1 is ABORTED: ORA-01291: missing logfile
+• 🔴 CRITICAL · LogMiner session of CAP$_XOUT_1 uses 97% of its memory
+• 🟠 HIGH · Capture CAP$_XOUT_1 is PAUSED FOR FLOW CONTROL: the outbound server / connector does not consume fast enough
+• 🟠 HIGH · Oracle estimates 5,000 spills at the current streams pool size (64 MB)
+• 🟠 HIGH · Warning alert x2: STREAMS capture process CAP$_XOUT_1 aborted with ORA-01291
+• 🟠 HIGH · CAP$_XOUT_1: ORA-01291: missing logfile (x1)
+• 🟡 MEDIUM · streams_pool_size is not set explicitly
+• ℹ️ INFO · Applied SCN of CAP$_XOUT_1 is 37,615 SCNs behind the captured SCN: after a restart, capture mines redo again from the applied SCN, and the logs from there must be kept
+• ℹ️ INFO · Capture CAP$_XOUT_1 enqueued 61 of 32,454 captured messages (filtered by rules, or staging bottleneck)
+
+_Generated by `playground analyze oracle-xstream-report` (kafka-docker-playground)._
+</script><script type='text/plain' id='pg-share-html'>\u003cdiv style='font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;font-size:14px;line-height:1.45;color:#111827'>\u003ch2 style='font-size:18px;margin:12px 0 6px'>Oracle XStream diagnostics analysis — orclcdc_diag_synthetic_failures.html\u003c/h2>\u003cp style='margin:4px 0'>\u003cb>Verdict:\u003c/b> 🚨 4 critical findings, 4 high: start with Database is in NOARCHIVELOG mode: XStream needs ARCHIVELOG.\u003c/p>\u003ch3 style='font-size:15px;margin:14px 0 6px'>Findings\u003c/h3>\u003ctable style='border-collapse:collapse;margin:4px 0 8px;font-size:13px'>\u003ctr>\u003cth style='border:1px solid #d1d5db;padding:4px 8px;background:#f3f4f6;text-align:left;font-weight:600'>Severity\u003c/th>\u003cth style='border:1px solid #d1d5db;padding:4px 8px;background:#f3f4f6;text-align:left;font-weight:600'>Finding\u003c/th>\u003c/tr>\u003ctr>\u003ctd style='border:1px solid #d1d5db;padding:4px 8px;vertical-align:top'>🔴 CRITICAL\u003c/td>\u003ctd style='border:1px solid #d1d5db;padding:4px 8px;vertical-align:top'>Database is in NOARCHIVELOG mode: XStream needs ARCHIVELOG\u003c/td>\u003c/tr>\u003ctr>\u003ctd style='border:1px solid #d1d5db;padding:4px 8px;vertical-align:top'>🔴 CRITICAL\u003c/td>\u003ctd style='border:1px solid #d1d5db;padding:4px 8px;vertical-align:top'>Minimal supplemental logging is not enabled\u003c/td>\u003c/tr>\u003ctr>\u003ctd style='border:1px solid #d1d5db;padding:4px 8px;vertical-align:top'>🔴 CRITICAL\u003c/td>\u003ctd style='border:1px solid #d1d5db;padding:4px 8px;vertical-align:top'>Capture CAP$_XOUT_1 is ABORTED: ORA-01291: missing logfile\u003c/td>\u003c/tr>\u003ctr>\u003ctd style='border:1px solid #d1d5db;padding:4px 8px;vertical-align:top'>🔴 CRITICAL\u003c/td>\u003ctd style='border:1px solid #d1d5db;padding:4px 8px;vertical-align:top'>LogMiner session of CAP$_XOUT_1 uses 97% of its memory\u003c/td>\u003c/tr>\u003ctr>\u003ctd style='border:1px solid #d1d5db;padding:4px 8px;vertical-align:top'>🟠 HIGH\u003c/td>\u003ctd style='border:1px solid #d1d5db;padding:4px 8px;vertical-align:top'>Capture CAP$_XOUT_1 is PAUSED FOR FLOW CONTROL: the outbound server / connector does not consume fast enough\u003c/td>\u003c/tr>\u003ctr>\u003ctd style='border:1px solid #d1d5db;padding:4px 8px;vertical-align:top'>🟠 HIGH\u003c/td>\u003ctd style='border:1px solid #d1d5db;padding:4px 8px;vertical-align:top'>Oracle estimates 5,000 spills at the current streams pool size (64 MB)\u003c/td>\u003c/tr>\u003ctr>\u003ctd style='border:1px solid #d1d5db;padding:4px 8px;vertical-align:top'>🟠 HIGH\u003c/td>\u003ctd style='border:1px solid #d1d5db;padding:4px 8px;vertical-align:top'>Warning alert x2: STREAMS capture process CAP$_XOUT_1 aborted with ORA-01291\u003c/td>\u003c/tr>\u003ctr>\u003ctd style='border:1px solid #d1d5db;padding:4px 8px;vertical-align:top'>🟠 HIGH\u003c/td>\u003ctd style='border:1px solid #d1d5db;padding:4px 8px;vertical-align:top'>CAP$_XOUT_1: ORA-01291: missing logfile (x1)\u003c/td>\u003c/tr>\u003ctr>\u003ctd style='border:1px solid #d1d5db;padding:4px 8px;vertical-align:top'>🟡 MEDIUM\u003c/td>\u003ctd style='border:1px solid #d1d5db;padding:4px 8px;vertical-align:top'>streams_pool_size is not set explicitly\u003c/td>\u003c/tr>\u003ctr>\u003ctd style='border:1px solid #d1d5db;padding:4px 8px;vertical-align:top'>ℹ️ INFO\u003c/td>\u003ctd style='border:1px solid #d1d5db;padding:4px 8px;vertical-align:top'>Applied SCN of CAP$_XOUT_1 is 37,615 SCNs behind the captured SCN: after a restart, capture mines redo again from the applied SCN, and the logs from there must be kept\u003c/td>\u003c/tr>\u003ctr>\u003ctd style='border:1px solid #d1d5db;padding:4px 8px;vertical-align:top'>ℹ️ INFO\u003c/td>\u003ctd style='border:1px solid #d1d5db;padding:4px 8px;vertical-align:top'>Capture CAP$_XOUT_1 enqueued 61 of 32,454 captured messages (filtered by rules, or staging bottleneck)\u003c/td>\u003c/tr>\u003c/table>\u003cp style='margin:4px 0'>_Generated by \u003ccode style='font-family:Menlo,Consolas,monospace;font-size:12px;background:#f3f4f6;padding:1px 4px;border-radius:3px'>playground analyze oracle-xstream-report\u003c/code> (kafka-docker-playground)._\u003c/p>\u003c/div></script><dialog class='share-dlg' aria-labelledby='pg-share-h' data-title='Oracle XStream diagnostics analysis — orclcdc_diag_synthetic_failures.html'><div class='sd-head'><h3 id='pg-share-h'>📤 Share this report</h3><button type='button' class='share-close sd-x' aria-label='close'>✕</button></div><div class='sd-body'><p class='share-warn'>⚠️ Internal to Confluent: the report can contain hostnames, IPs and other details of its input. Review it before sending it outside.</p><button type='button' class='share-card sc-primary' data-share='download'><span class='sc-icon'>💾</span><span class='sc-body'><b>Download this report (.html)</b><small>one self-contained file: attach it to a ticket, a mail or a Slack message</small></span><span class='sc-go' aria-hidden='true'>›</span></button><div class='share-grid'><button type='button' class='share-card' data-share='summary'><span class='sc-icon'>💬</span><span class='sc-body'><b>Copy the summary</b><small>the verdict and the findings as plain text, like the terminal</small></span><span class='sc-go' aria-hidden='true'>›</span></button><button type='button' class='share-card' data-share='ticket'><span class='sc-icon'>🎫</span><span class='sc-body'><b>Copy for a ticket</b><small>Markdown with a table of the findings: paste it in Zendesk or Jira</small></span><span class='sc-go' aria-hidden='true'>›</span></button><button type='button' class='share-card' data-share='slack'><span class='sc-icon'>🧵</span><span class='sc-body'><b>Copy for Slack</b><small>the same, in Slack formatting: paste it in a Slack message</small></span><span class='sc-go' aria-hidden='true'>›</span></button><button type='button' class='share-card' data-share='html'><span class='sc-icon'>📝</span><span class='sc-body'><b>Copy as rich text (HTML)</b><small>the same with real tables: paste it in Zendesk, Gmail, Confluence or Google Docs</small></span><span class='sc-go' aria-hidden='true'>›</span></button><button type='button' class='share-card' data-share='path'><span class='sc-icon'>🔗</span><span class='sc-body'><b>Copy the path</b><small>where the report is on this machine</small></span><span class='sc-go' aria-hidden='true'>›</span></button><button type='button' class='share-card' data-share='mail'><span class='sc-icon'>✉️</span><span class='sc-body'><b>Email the summary</b><small>a new mail with the summary: attach the downloaded .html</small></span><span class='sc-go' aria-hidden='true'>›</span></button></div><p class='share-done' aria-live='polite'></p></div><div class='sd-foot'><span class='sd-meta'>S opens this dialog, Esc closes it</span><button type='button' class='share-close'>Close</button></div></dialog><script>
+(function () {
+  const dlg = document.querySelector(".share-dlg");
+  if (!dlg) return;
+  // 💾 the page as it was loaded: taken now (this script runs at the end of the body, before the DOMContentLoaded
+  // handlers of the report fill or change the page), without the open dialog; the copy has its dialog too
+  const snapshot = "<!DOCTYPE html>\n" + document.documentElement.outerHTML;
+  function addOpen(where, cls, before) {
+    if (!where) return null;
+    const b = document.createElement("button");
+    b.type = "button"; b.className = "share-open " + cls; b.textContent = "📤 Share";
+    b.title = "send this report to a colleague: download it, copy the summary for Slack or a ticket, an email (S)";
+    b.setAttribute("aria-haspopup", "dialog");
+    b.addEventListener("click", () => dlg.showModal());
+    if (before) where.insertBefore(b, before); else where.appendChild(b);
+    return b;
+  }
+  function place() {
+    if (document.querySelector(".share-open")) return;
+    // the header of report_html (header_html / page): in its meta pills
+    const meta = document.querySelector(".header .header-meta");
+    if (meta) { addOpen(meta, "share-hero"); return; }
+    // a <header> of its own (benchmark, flight recorder, SMT test, CFK bundle): next to its Toggle theme, else top right
+    const header = document.querySelector("header");
+    if (header) {
+      const toggle = header.querySelector(".theme-toggle");
+      if (toggle && toggle.parentElement === header) { addOpen(header, "share-hero share-next", toggle); return; }
+      if (getComputedStyle(header).position === "static") header.style.position = "relative";
+      addOpen(header, "share-hero share-corner");
+      return;
+    }
+    addOpen(document.body, "share-float");
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", place); else place();
+  document.addEventListener("keydown", function (ev) {
+    if ((ev.key === "s" || ev.key === "S") && !ev.metaKey && !ev.ctrlKey && !ev.altKey
+        && !(ev.target && ev.target.closest && ev.target.closest("input, textarea, select, [contenteditable]")) && !dlg.open) {
+      ev.preventDefault();
+      dlg.showModal();
+    }
+  });
+  const done = dlg.querySelector(".share-done");
+  function embedded(id) { const el = document.getElementById(id); return el ? el.textContent.replace(/\\u003c/g, "<") : ""; }
+  const summary = embedded("pg-share-summary");
+  const said = what => { done.textContent = "✅ " + what; };
+  function fallback(text, what) {
+    const ta = document.createElement("textarea");
+    ta.value = text; dlg.appendChild(ta); ta.select();
+    try { document.execCommand("copy"); said(what + " copied to the clipboard"); }
+    catch (e) { done.textContent = "the copy failed: select the text and copy it"; return; }
+    ta.remove();
+  }
+  function copy(text, what) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(() => said(what + " copied to the clipboard"), () => fallback(text, what));
+    } else fallback(text, what);
+  }
+  function fallbackRich(htmlText, what) {
+    const box = document.createElement("div");
+    box.contentEditable = "true";
+    box.style.cssText = "position:fixed;left:-9999px;top:0";
+    box.innerHTML = htmlText;
+    dlg.appendChild(box);
+    const range = document.createRange(), sel = window.getSelection();
+    range.selectNodeContents(box); sel.removeAllRanges(); sel.addRange(range);
+    try { document.execCommand("copy"); said(what + " copied to the clipboard"); }
+    catch (e) { done.textContent = "the copy failed: use 🎫 Copy for a ticket"; }
+    sel.removeAllRanges();
+    box.remove();
+  }
+  // rich text: text/html for the editors that take it (Zendesk, Gmail, Confluence, Docs), the Markdown as text/plain
+  function copyRich(htmlText, plain, what) {
+    if (navigator.clipboard && navigator.clipboard.write && window.ClipboardItem) {
+      navigator.clipboard.write([new ClipboardItem({"text/html": new Blob([htmlText], {type: "text/html"}),
+                                                    "text/plain": new Blob([plain], {type: "text/plain"})})])
+        .then(() => said(what + " copied to the clipboard"), () => fallbackRich(htmlText, what));
+    } else fallbackRich(htmlText, what);
+  }
+  function fileName() {
+    const page = decodeURIComponent(location.pathname).split("/").pop();
+    if (/\.html?$/i.test(page)) return page;
+    return (dlg.dataset.title || "report").replace(/[^\w.-]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 80) + ".html";
+  }
+  dlg.addEventListener("click", function (ev) {
+    if (ev.target.closest(".share-close") || ev.target === dlg) { dlg.close(); return; }
+    const b = ev.target.closest("[data-share]");
+    if (!b) return;
+    b.classList.add("sc-done"); setTimeout(() => b.classList.remove("sc-done"), 1600);
+    const path = decodeURIComponent(location.pathname);
+    const what = b.dataset.share;
+    if (what === "download") {
+      const url = URL.createObjectURL(new Blob([snapshot], {type: "text/html"}));
+      const a = document.createElement("a");
+      a.href = url; a.download = fileName(); document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 4000);
+      said(fileName() + " downloaded");
+    }
+    else if (what === "summary") copy(summary, "the summary");
+    else if (what === "ticket") copy(embedded("pg-share-ticket"), "the summary for a ticket");
+    else if (what === "slack") copy(embedded("pg-share-slack"), "the summary for Slack");
+    else if (what === "html") copyRich(embedded("pg-share-html"), embedded("pg-share-ticket"), "the summary as rich text");
+    else if (what === "path") copy(path, "the path");
+    else if (what === "mail") {
+      const body = "Report: " + path.split("/").pop() + " (attached)\n\n" + summary;
+      location.href = "mailto:?subject=" + encodeURIComponent("📤 " + (dlg.dataset.title || "playground report"))
+        // cut by code points: a cut in the middle of an emoji (a surrogate pair) makes encodeURIComponent throw
+        + "&body=" + encodeURIComponent(Array.from(body).length > 1800 ? Array.from(body).slice(0, 1800).join("") + "\n…" : body);
+    }
+  });
+})();
+</script></body></html>

@@ -75,6 +75,7 @@
 
 ##### 🐛 Bugs
 
+- 🐛🐳 remove-cp-docker-images removes images of running containers and quits on 'n' [#10312](https://github.com/vdesabou/kafka-docker-playground/issues/10312)
 - 🐛🔒 analyze logs --sanitize: raw lines in the 📦 share zip, and secrets the sanitizer misses [#10306](https://github.com/vdesabou/kafka-docker-playground/issues/10306)
 - 🐛⏱️ container wait-for-connect-rest-api-ready: curls without --max-time can hang for 60 minutes (podman) [#10300](https://github.com/vdesabou/kafka-docker-playground/issues/10300)
 - 🐛🧪 deep-dive lab broker.sh: topics with 1 replica go offline when the lab kills broker 3 (\_\_internal\_confluent\_only\_broker\_info, filestream) [#10298](https://github.com/vdesabou/kafka-docker-playground/issues/10298)

@@ -1,15 +1,27 @@
 # playground remove-cp-docker-images
 
-🧹 Remove all Confluent Platform docker images related to a version installed locally (a confirmation will be required for every version present)
+🧹 Remove the Confluent Platform docker images of the versions you no longer use (a table of the versions installed locally, then a selection)
 
 Each Confluent Platform version you have ever run keeps a dozen images on  
-disk, so this is usually where the space went. You are asked before every  
-version (y remove, n skip it, a all remaining, q quit), unless you name one  
-with `--version`.
+disk, so this is usually where the space went. The command first prints a  
+table of the versions installed locally: number of images, size, last used  
+(last run with `--tag`, or last pull), and why a version is kept.
+
+Without a selection flag, you pick the versions to remove in a list  
+(fzf, tab to select several), or are asked before every version  
+(y remove, n skip it, a all remaining, q quit) when fzf is not installed.  
+With a selection flag (`--version`, `--all`, `--keep-latest-patch`, `--older-than`),  
+one confirmation is asked for the whole plan, none with `--yes`.
 
 Never proposed for removal: the default version used by the playground, the  
 version of the current run (`--tag`), and any version used by a container,  
-running or stopped (another session, for example).
+running or stopped (another session, for example). Only the tags x.y.z are  
+listed, the Control Center next-gen images (cp-enterprise-\*) are left out.
+
+At the end, the space freed is reported (docker system df).
+
+🎓 Tip: `playground remove-cp-docker-images --keep-latest-patch --dry-run`  
+shows what keeping only the last patch of each minor version would remove.
 
 ## Usage
 
@@ -21,6 +33,54 @@ playground remove-cp-docker-images [OPTIONS]
 
 #### `--version VERSION`
 
-🔢 Specific version to remove (refused when a container uses it)
+🔢 Version to remove, exact (7.9.1) or a prefix selecting every patch (7.9 = all 7.9.x). Can be repeated.
+
+An exact version is removed even if it is the default or the current run TAG, never when a container uses it.
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Repeatable:     |  ✓ Yes
+
+#### `--all`
+
+🧹 Remove every version except the protected ones (default TAG, current run TAG, used by a container)
+
+#### `--keep-latest-patch`
+
+🔝 Keep only the highest patch installed of each major.minor version (7.9.10 is kept, 7.9.0 to 7.9.9 are removed)
+
+#### `--older-than DAYS`
+
+📅 Only versions not used for this number of days (last run with `--tag` in playground-run-history, or last pull)
+
+#### `--dry-run`
+
+🔎 Print the plan and the docker rmi commands, remove nothing
+
+#### `--yes, -y`
+
+✅ Do not ask for confirmation
+
+## Examples
+
+```bash
+playground remove-cp-docker-images
+```
+
+```bash
+playground remove-cp-docker-images --keep-latest-patch --dry-run
+```
+
+```bash
+playground remove-cp-docker-images --older-than 90 --yes
+```
+
+```bash
+playground remove-cp-docker-images --version 7.9 --version 8.0.0
+```
+
+```bash
+playground remove-cp-docker-images --all
+```
 
 

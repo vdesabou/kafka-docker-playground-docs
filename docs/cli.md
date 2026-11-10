@@ -215,7 +215,8 @@ playground [OPTIONS] COMMAND
     - [list](playground%20cloud-resources%20azure%20list) - 📋 List all active resources
     - [costs](playground%20cloud-resources%20azure%20costs) - 💰 Show azure costs
     - [costs-history](playground%20cloud-resources%20azure%20costs-history) - 👛  Retrieve azure costs for each month since last year
-  - [ccloud](playground%20cloud-resources%20ccloud) - ☁️ What Confluent Cloud costs you
+  - [ccloud](playground%20cloud-resources%20ccloud) - ☁️ What is still running in Confluent Cloud, and what it costs
+    - [list](playground%20cloud-resources%20ccloud%20list) - 📋 List what the playground left running for you in Confluent Cloud, across the whole organization
     - [costs](playground%20cloud-resources%20ccloud%20costs) - 💰  Retrieve ccloud costs for a range of dates
     - [costs-history](playground%20cloud-resources%20ccloud%20costs-history) - 👛  Retrieve ccloud costs for each month since last year
   - [cleanup](playground%20cloud-resources%20cleanup) - 🧹 Cleanup cloud resources that were created by running examples from the playground

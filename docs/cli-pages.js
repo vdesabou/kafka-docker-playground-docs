@@ -37,6 +37,7 @@ window.KDP_CLI_PAGES = [
   "/playground%20cloud-resources%20azure",
   "/playground%20cloud-resources%20ccloud%20costs-history",
   "/playground%20cloud-resources%20ccloud%20costs",
+  "/playground%20cloud-resources%20ccloud%20list",
   "/playground%20cloud-resources%20ccloud",
   "/playground%20cloud-resources%20cleanup",
   "/playground%20cloud-resources",

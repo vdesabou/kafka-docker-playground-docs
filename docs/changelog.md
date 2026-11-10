@@ -73,6 +73,7 @@
 
 ##### 🐛 Bugs
 
+- 🐛⏱️ container wait-for-connect-rest-api-ready: curls without --max-time can hang for 60 minutes (podman) [#10300](https://github.com/vdesabou/kafka-docker-playground/issues/10300)
 - 🐛🧪 deep-dive lab broker.sh: topics with 1 replica go offline when the lab kills broker 3 (\_\_internal\_confluent\_only\_broker\_info, filestream) [#10298](https://github.com/vdesabou/kafka-docker-playground/issues/10298)
 - 🐛🦭 ldap-authorizer-with-ldap-failover: podman refuses the bind image (invalid port proto "TCP" in "53/TCP") [#10281](https://github.com/vdesabou/kafka-docker-playground/issues/10281)
 - 🐛🧪 deep-dive lab container-logs.sh: root cause rows check fails since the rows have a class per level [#10279](https://github.com/vdesabou/kafka-docker-playground/issues/10279)

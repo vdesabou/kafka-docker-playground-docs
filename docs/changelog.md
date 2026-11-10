@@ -3,6 +3,7 @@
 ## November 2026
 ##### 🌟 Enhancements
 
+- 🧠📚 docs: validate a hotfix image from engineering, recipe + lab [#10325](https://github.com/vdesabou/kafka-docker-playground/issues/10325)
 - 🧠📚 docs: Confluent Cloud connectivity, a client-side checklist in the network deep dive [#10322](https://github.com/vdesabou/kafka-docker-playground/issues/10322)
 - 👾🪪 Add mTLS principal mapping example: a certificate renewal breaks the ACLs [#10321](https://github.com/vdesabou/kafka-docker-playground/issues/10321)
 - 🧠🐳 remove-cp-docker-images: summary table, --all, --keep-latest-patch, --older-than, --dry-run, fzf selection [#10313](https://github.com/vdesabou/kafka-docker-playground/issues/10313)

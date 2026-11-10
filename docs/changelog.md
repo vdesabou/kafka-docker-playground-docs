@@ -3,6 +3,7 @@
 ## November 2026
 ##### 🌟 Enhancements
 
+- 🧠🧹 cloud-resources cleanup: sweep the whole Confluent Cloud organization [#10333](https://github.com/vdesabou/kafka-docker-playground/issues/10333)
 - 🧠🔑 No service account just for the Schema Registry API key [#10331](https://github.com/vdesabou/kafka-docker-playground/issues/10331)
 - 🧠🌤️ playground cloud-resources ccloud list: what is still running for you, org-wide [#10329](https://github.com/vdesabou/kafka-docker-playground/issues/10329)
 - 🧠⚡ Cache Confluent Cloud configs per cluster [#10327](https://github.com/vdesabou/kafka-docker-playground/issues/10327)

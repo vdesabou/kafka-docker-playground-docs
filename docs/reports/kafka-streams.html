@@ -524,7 +524,7 @@ html[data-theme="dark"] .theme-toggle{color:#cbd5e1;background:#1e293b;border-co
     });
   }, {passive: true});
 })();
-</script></head><body><div class='page'><div class='header'><h1><a class='lr-brand' href='https://kafka-docker-playground.io/' title='kafka-docker-playground: the playground CLI that generated this report'><span class='lr-whale'>🐳</span> kafka-docker-playground</a><span class='lr-title'>🌊 Kafka Streams status</span></h1><div class='header-meta'><span>2 application(s)</span><span>6 instance(s)</span><span>Generated: 2026-11-09 17:54:57</span></div></div><style>
+</script></head><body><div class='page'><div class='header'><h1><a class='lr-brand' href='https://kafka-docker-playground.io/' title='kafka-docker-playground: the playground CLI that generated this report'><span class='lr-whale'>🐳</span> kafka-docker-playground</a><span class='lr-title'>🌊 Kafka Streams status</span></h1><div class='header-meta'><span>2 application(s)</span><span>6 instance(s)</span><span>Generated: 2026-11-10 10:04:23</span></div></div><style>
 .header:has(.lr-title){position:relative;overflow:hidden;border-radius:18px;padding:26px 32px 22px;
 background:radial-gradient(1200px 300px at 0% 0%,rgba(56,189,248,.35),transparent 60%),
 radial-gradient(800px 260px at 100% 100%,rgba(236,72,153,.35),transparent 60%),
@@ -627,4 +627,201 @@ if (!window.pgFindingsFilter) {
     });
   });
 })();
-</script><div class='findings'><div class='section-title'>🔎 Findings</div><div class='recs-list'><div class="rec-card high" data-sev="HIGH"><span class="rec-badge high">🟠 HIGH</span><span class="rec-text">📤 Production error x2 (streams2, first 2026-11-05 15:19:30, last 2026-11-05 15:19:30)<ul class='rec-details'><li>a record could not be written to an output, repartition or changelog topic (too large, authorization, timeout): production.exception.handler (default.production.exception.handler before 4.0) decides whether the thread fails or continues</li><li>[2026-11-05 15:19:30,725] ERROR stream-thread [streams-serde-errors-cede8e7a-cd0c-4224-8f73-e9f82ba075ec-StreamThread-1] stream-task [0_1] Error encountered sending record to topic payments-processed for task 0_1 due to:</li></ul></span></div></div></div><div class='table-card'><h2>🕐 State of the instances over time</h2><div class='st-legend'><span><i style='background:#16a34a'></i>RUNNING</span><span><i style='background:#f59e0b'></i>REBALANCING</span><span><i style='background:#dc2626;clip-path:polygon(0 0,100% 0,50% 100%)'></i>📤 Production error</span></div><div class='st-timeline'><svg viewBox='0 0 1000 124' role='img' aria-label='state of each Kafka Streams instance over time' font-size='11'><line x1='110.0' y1='18' x2='110.0' y2='104' stroke='#cbd5e1' stroke-dasharray='2,3'/><text x='110.0' y='118' text-anchor='middle' fill='#64748b'>15:18:59</text><line x1='280.0' y1='18' x2='280.0' y2='104' stroke='#cbd5e1' stroke-dasharray='2,3'/><text x='280.0' y='118' text-anchor='middle' fill='#64748b'>15:19:06</text><line x1='450.0' y1='18' x2='450.0' y2='104' stroke='#cbd5e1' stroke-dasharray='2,3'/><text x='450.0' y='118' text-anchor='middle' fill='#64748b'>15:19:13</text><line x1='620.0' y1='18' x2='620.0' y2='104' stroke='#cbd5e1' stroke-dasharray='2,3'/><text x='620.0' y='118' text-anchor='middle' fill='#64748b'>15:19:20</text><line x1='790.0' y1='18' x2='790.0' y2='104' stroke='#cbd5e1' stroke-dasharray='2,3'/><text x='790.0' y='118' text-anchor='middle' fill='#64748b'>15:19:27</text><line x1='960.0' y1='18' x2='960.0' y2='104' stroke='#cbd5e1' stroke-dasharray='2,3'/><text x='960.0' y='118' text-anchor='middle' fill='#64748b'>15:19:34</text><text x='102' y='39.0' text-anchor='end' fill='currentColor'>streams</text><rect x='110.1' y='25' width='13.0' height='18' rx='2' fill='#f59e0b'><title>REBALANCING: 2026-11-05 15:18:59 → 2026-11-05 15:19:00 (1s)</title></rect><rect x='123.1' y='25' width='69.4' height='18' rx='2' fill='#16a34a'><title>RUNNING: 2026-11-05 15:19:00 → 2026-11-05 15:19:02 (3s)</title></rect><rect x='192.5' y='25' width='1.7' height='18' rx='2' fill='#f59e0b'><title>REBALANCING: 2026-11-05 15:19:02 → 2026-11-05 15:19:03 (0s)</title></rect><rect x='194.2' y='25' width='1.5' height='18' rx='2' fill='#16a34a'><title>RUNNING: 2026-11-05 15:19:03 → 2026-11-05 15:19:03 (0s)</title></rect><rect x='194.8' y='25' width='1.9' height='18' rx='2' fill='#f59e0b'><title>REBALANCING: 2026-11-05 15:19:03 → 2026-11-05 15:19:03 (0s)</title></rect><rect x='196.6' y='25' width='440.8' height='18' rx='2' fill='#16a34a'><title>RUNNING: 2026-11-05 15:19:03 → 2026-11-05 15:19:21 (18s)</title></rect><text x='102' y='65.0' text-anchor='end' fill='currentColor'>streams2</text><rect x='110.0' y='51' width='12.8' height='18' rx='2' fill='#f59e0b'><title>REBALANCING: 2026-11-05 15:18:59 → 2026-11-05 15:19:00 (1s)</title></rect><rect x='122.8' y='51' width='69.7' height='18' rx='2' fill='#16a34a'><title>RUNNING: 2026-11-05 15:19:00 → 2026-11-05 15:19:02 (3s)</title></rect><rect x='192.5' y='51' width='1.6' height='18' rx='2' fill='#f59e0b'><title>REBALANCING: 2026-11-05 15:19:02 → 2026-11-05 15:19:03 (0s)</title></rect><rect x='194.0' y='51' width='1.5' height='18' rx='2' fill='#16a34a'><title>RUNNING: 2026-11-05 15:19:03 → 2026-11-05 15:19:03 (0s)</title></rect><rect x='194.8' y='51' width='1.8' height='18' rx='2' fill='#f59e0b'><title>REBALANCING: 2026-11-05 15:19:03 → 2026-11-05 15:19:03 (0s)</title></rect><rect x='196.6' y='51' width='763.4' height='18' rx='2' fill='#16a34a'><title>RUNNING: 2026-11-05 15:19:03 → 2026-11-05 15:19:34 (31s)</title></rect><path d='M861.9,49 L869.9,49 L865.9,56' fill='#dc2626' stroke='#fff' stroke-width='0.6'><title>📤 Production error: 2026-11-05 15:19:30</title></path><path d='M861.9,49 L869.9,49 L865.9,56' fill='#dc2626' stroke='#fff' stroke-width='0.6'><title>📤 Production error: 2026-11-05 15:19:30</title></path><text x='102' y='91.0' text-anchor='end' fill='currentColor'>streams3</text><rect x='130.1' y='77' width='64.1' height='18' rx='2' fill='#f59e0b'><title>REBALANCING: 2026-11-05 15:19:00 → 2026-11-05 15:19:03 (3s)</title></rect><rect x='194.2' y='77' width='1.5' height='18' rx='2' fill='#16a34a'><title>RUNNING: 2026-11-05 15:19:03 → 2026-11-05 15:19:03 (0s)</title></rect><rect x='195.1' y='77' width='4.4' height='18' rx='2' fill='#f59e0b'><title>REBALANCING: 2026-11-05 15:19:03 → 2026-11-05 15:19:03 (0s)</title></rect><rect x='199.6' y='77' width='538.0' height='18' rx='2' fill='#16a34a'><title>RUNNING: 2026-11-05 15:19:03 → 2026-11-05 15:19:25 (22s)</title></rect></svg></div></div><div class='charts-grid'><div class='chart-card'><h2>📈 Kafka Streams errors and rebalances over time</h2><div class='zoom-chart' data-chart='{&quot;type&quot;:&quot;events&quot;,&quot;series&quot;:[{&quot;label&quot;:&quot;\ud83d\udce4 Production error&quot;,&quot;color&quot;:&quot;#dc2626&quot;},{&quot;label&quot;:&quot;\ud83d\udd00 Rebalances (all instances)&quot;,&quot;color&quot;:&quot;#f59e0b&quot;}],&quot;times&quot;:[[1793891970.725,1793891970.725],[1793891939.558,1793891939.563,1793891940.386,1793891942.958,1793891942.959,1793891943.053,1793891943.053,1793891943.068]],&quot;W&quot;:600,&quot;H&quot;:190,&quot;L&quot;:44,&quot;note&quot;:&quot;&quot;,&quot;ms&quot;:true,&quot;xmin&quot;:1793891939.558,&quot;xmax&quot;:1793891970.725}'><div class='zoom-bar' hidden><button type='button' data-zoom='prev' title='Previous window'>◀</button><button type='button' data-zoom='next' title='Next window'>▶</button><button type='button' data-zoom='all'>All</button><span class='zoom-info'></span></div><div class='zoom-svg'><div class='legend'><i style='background:#dc2626'></i>📤 Production error<i style='background:#f59e0b'></i>🔀 Rebalances (all instances) · per 1s</div><svg viewBox="0 0 600 190" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="occurrences over time"><line x1="44" x2="590" y1="164.0" y2="164.0" stroke="#e2e8f0" stroke-width="1"/><text x="38" y="167.0" font-size="10" fill="#64748b" text-anchor="end">0</text><line x1="44" x2="590" y1="86.0" y2="86.0" stroke="#e2e8f0" stroke-width="1"/><text x="38" y="89.0" font-size="10" fill="#64748b" text-anchor="end">2</text><line x1="44" x2="590" y1="8.0" y2="8.0" stroke="#e2e8f0" stroke-width="1"/><text x="38" y="11.0" font-size="10" fill="#64748b" text-anchor="end">4</text><rect x="52.5" y="86.0" width="7.5" height="78.0" rx="1" fill="#f59e0b"><title>2026-11-05 15:18:59: 2 🔀 Rebalances (all instances)</title></rect><rect x="69.6" y="125.0" width="7.5" height="39.0" rx="1" fill="#f59e0b"><title>2026-11-05 15:19:00: 1 🔀 Rebalances (all instances)</title></rect><rect x="103.7" y="86.0" width="7.5" height="78.0" rx="1" fill="#f59e0b"><title>2026-11-05 15:19:02: 2 🔀 Rebalances (all instances)</title></rect><rect x="120.8" y="47.0" width="7.5" height="117.0" rx="1" fill="#f59e0b"><title>2026-11-05 15:19:03: 3 🔀 Rebalances (all instances)</title></rect><rect x="573.9" y="86.0" width="7.5" height="78.0" rx="1" fill="#dc2626"><title>2026-11-05 15:19:30: 2 📤 Production error</title></rect><text x="52.5" y="182" font-size="10" fill="#64748b" text-anchor="middle">15:18:59</text><text x="137.8" y="182" font-size="10" fill="#64748b" text-anchor="middle">15:19:04</text><text x="223.2" y="182" font-size="10" fill="#64748b" text-anchor="middle">15:19:09</text><text x="308.5" y="182" font-size="10" fill="#64748b" text-anchor="middle">15:19:14</text><text x="393.8" y="182" font-size="10" fill="#64748b" text-anchor="middle">15:19:19</text><text x="479.1" y="182" font-size="10" fill="#64748b" text-anchor="middle">15:19:24</text><text x="564.4" y="182" font-size="10" fill="#64748b" text-anchor="middle">15:19:29</text></svg></div><div class='zoom-hint' hidden>🔍 Drag over the chart to zoom on a range, double-click to zoom out.</div></div></div></div><div class='table-card'><h2>🧩 Instances</h2><table><tr><th>Instance</th><th>State</th><th>Since</th><th class='num'>Rebalances</th><th class='num'>Restarts</th><th>Threads</th><th>Active tasks</th><th>Standby tasks</th><th>Not restored / restoring</th><th class='num'>Restored records / changelogs</th></tr><tr><td>streams</td><td><span class='st running'>RUNNING</span></td><td>2026-11-05 15:19:03</td><td class='num'>3 (0.7s)</td><td class='num'>0</td><td>StreamThread-1 <span class='st running'>RUNNING</span></td><td>0_2</td><td>-</td><td>-</td><td class='num'>0 / 0</td></tr><tr><td>streams2</td><td><span class='st running'>RUNNING</span></td><td>2026-11-05 15:19:03</td><td class='num'>3 (0.7s)</td><td class='num'>0</td><td>StreamThread-1 <span class='st running'>RUNNING</span></td><td>0_1</td><td>-</td><td>-</td><td class='num'>0 / 0</td></tr><tr><td>streams3</td><td><span class='st running'>RUNNING</span></td><td>2026-11-05 15:19:03</td><td class='num'>2 (2.8s)</td><td class='num'>0</td><td>StreamThread-1 <span class='st running'>RUNNING</span></td><td>0_0</td><td>-</td><td>-</td><td class='num'>0 / 0</td></tr></table></div><div class='table-card'><h2>📋 Task assignment</h2><div class='st-tasks'><table><tr><th>Task</th><th>streams</th><th>streams2</th><th>streams3</th></tr><tr><td><code>0_0</code></td><td class='n'>·</td><td class='n'>·</td><td class='a'>active</td></tr><tr><td><code>0_1</code></td><td class='n'>·</td><td class='a'>active</td><td class='n'>·</td></tr><tr><td><code>0_2</code></td><td class='a'>active</td><td class='n'>·</td><td class='n'>·</td></tr></table></div></div><div class='footer'>From the INFO lines of the Kafka Streams library (State transition, Handle new assignment, Restored and ready to run, Finished restoring changelog) — tools/streams-analyzer</div></div></body></html>
+</script><div class='findings'><div class='section-title'>🔎 Findings</div><div class='recs-list'><div class="rec-card high" data-sev="HIGH"><span class="rec-badge high">🟠 HIGH</span><span class="rec-text">📤 Production error x2 (streams2, first 2026-11-05 15:19:30, last 2026-11-05 15:19:30)<ul class='rec-details'><li>a record could not be written to an output, repartition or changelog topic (too large, authorization, timeout): production.exception.handler (default.production.exception.handler before 4.0) decides whether the thread fails or continues</li><li>[2026-11-05 15:19:30,725] ERROR stream-thread [streams-serde-errors-cede8e7a-cd0c-4224-8f73-e9f82ba075ec-StreamThread-1] stream-task [0_1] Error encountered sending record to topic payments-processed for task 0_1 due to:</li></ul></span></div></div></div><div class='table-card'><h2>🕐 State of the instances over time</h2><div class='st-legend'><span><i style='background:#16a34a'></i>RUNNING</span><span><i style='background:#f59e0b'></i>REBALANCING</span><span><i style='background:#dc2626;clip-path:polygon(0 0,100% 0,50% 100%)'></i>📤 Production error</span></div><div class='st-timeline'><svg viewBox='0 0 1000 124' role='img' aria-label='state of each Kafka Streams instance over time' font-size='11'><line x1='110.0' y1='18' x2='110.0' y2='104' stroke='#cbd5e1' stroke-dasharray='2,3'/><text x='110.0' y='118' text-anchor='middle' fill='#64748b'>15:18:59</text><line x1='280.0' y1='18' x2='280.0' y2='104' stroke='#cbd5e1' stroke-dasharray='2,3'/><text x='280.0' y='118' text-anchor='middle' fill='#64748b'>15:19:06</text><line x1='450.0' y1='18' x2='450.0' y2='104' stroke='#cbd5e1' stroke-dasharray='2,3'/><text x='450.0' y='118' text-anchor='middle' fill='#64748b'>15:19:13</text><line x1='620.0' y1='18' x2='620.0' y2='104' stroke='#cbd5e1' stroke-dasharray='2,3'/><text x='620.0' y='118' text-anchor='middle' fill='#64748b'>15:19:20</text><line x1='790.0' y1='18' x2='790.0' y2='104' stroke='#cbd5e1' stroke-dasharray='2,3'/><text x='790.0' y='118' text-anchor='middle' fill='#64748b'>15:19:27</text><line x1='960.0' y1='18' x2='960.0' y2='104' stroke='#cbd5e1' stroke-dasharray='2,3'/><text x='960.0' y='118' text-anchor='middle' fill='#64748b'>15:19:34</text><text x='102' y='39.0' text-anchor='end' fill='currentColor'>streams</text><rect x='110.1' y='25' width='13.0' height='18' rx='2' fill='#f59e0b'><title>REBALANCING: 2026-11-05 15:18:59 → 2026-11-05 15:19:00 (1s)</title></rect><rect x='123.1' y='25' width='69.4' height='18' rx='2' fill='#16a34a'><title>RUNNING: 2026-11-05 15:19:00 → 2026-11-05 15:19:02 (3s)</title></rect><rect x='192.5' y='25' width='1.7' height='18' rx='2' fill='#f59e0b'><title>REBALANCING: 2026-11-05 15:19:02 → 2026-11-05 15:19:03 (0s)</title></rect><rect x='194.2' y='25' width='1.5' height='18' rx='2' fill='#16a34a'><title>RUNNING: 2026-11-05 15:19:03 → 2026-11-05 15:19:03 (0s)</title></rect><rect x='194.8' y='25' width='1.9' height='18' rx='2' fill='#f59e0b'><title>REBALANCING: 2026-11-05 15:19:03 → 2026-11-05 15:19:03 (0s)</title></rect><rect x='196.6' y='25' width='440.8' height='18' rx='2' fill='#16a34a'><title>RUNNING: 2026-11-05 15:19:03 → 2026-11-05 15:19:21 (18s)</title></rect><text x='102' y='65.0' text-anchor='end' fill='currentColor'>streams2</text><rect x='110.0' y='51' width='12.8' height='18' rx='2' fill='#f59e0b'><title>REBALANCING: 2026-11-05 15:18:59 → 2026-11-05 15:19:00 (1s)</title></rect><rect x='122.8' y='51' width='69.7' height='18' rx='2' fill='#16a34a'><title>RUNNING: 2026-11-05 15:19:00 → 2026-11-05 15:19:02 (3s)</title></rect><rect x='192.5' y='51' width='1.6' height='18' rx='2' fill='#f59e0b'><title>REBALANCING: 2026-11-05 15:19:02 → 2026-11-05 15:19:03 (0s)</title></rect><rect x='194.0' y='51' width='1.5' height='18' rx='2' fill='#16a34a'><title>RUNNING: 2026-11-05 15:19:03 → 2026-11-05 15:19:03 (0s)</title></rect><rect x='194.8' y='51' width='1.8' height='18' rx='2' fill='#f59e0b'><title>REBALANCING: 2026-11-05 15:19:03 → 2026-11-05 15:19:03 (0s)</title></rect><rect x='196.6' y='51' width='763.4' height='18' rx='2' fill='#16a34a'><title>RUNNING: 2026-11-05 15:19:03 → 2026-11-05 15:19:34 (31s)</title></rect><path d='M861.9,49 L869.9,49 L865.9,56' fill='#dc2626' stroke='#fff' stroke-width='0.6'><title>📤 Production error: 2026-11-05 15:19:30</title></path><path d='M861.9,49 L869.9,49 L865.9,56' fill='#dc2626' stroke='#fff' stroke-width='0.6'><title>📤 Production error: 2026-11-05 15:19:30</title></path><text x='102' y='91.0' text-anchor='end' fill='currentColor'>streams3</text><rect x='130.1' y='77' width='64.1' height='18' rx='2' fill='#f59e0b'><title>REBALANCING: 2026-11-05 15:19:00 → 2026-11-05 15:19:03 (3s)</title></rect><rect x='194.2' y='77' width='1.5' height='18' rx='2' fill='#16a34a'><title>RUNNING: 2026-11-05 15:19:03 → 2026-11-05 15:19:03 (0s)</title></rect><rect x='195.1' y='77' width='4.4' height='18' rx='2' fill='#f59e0b'><title>REBALANCING: 2026-11-05 15:19:03 → 2026-11-05 15:19:03 (0s)</title></rect><rect x='199.6' y='77' width='538.0' height='18' rx='2' fill='#16a34a'><title>RUNNING: 2026-11-05 15:19:03 → 2026-11-05 15:19:25 (22s)</title></rect></svg></div></div><div class='charts-grid'><div class='chart-card'><h2>📈 Kafka Streams errors and rebalances over time</h2><div class='zoom-chart' data-chart='{&quot;type&quot;:&quot;events&quot;,&quot;series&quot;:[{&quot;label&quot;:&quot;\ud83d\udce4 Production error&quot;,&quot;color&quot;:&quot;#dc2626&quot;},{&quot;label&quot;:&quot;\ud83d\udd00 Rebalances (all instances)&quot;,&quot;color&quot;:&quot;#f59e0b&quot;}],&quot;times&quot;:[[1793891970.725,1793891970.725],[1793891939.558,1793891939.563,1793891940.386,1793891942.958,1793891942.959,1793891943.053,1793891943.053,1793891943.068]],&quot;W&quot;:600,&quot;H&quot;:190,&quot;L&quot;:44,&quot;note&quot;:&quot;&quot;,&quot;ms&quot;:true,&quot;xmin&quot;:1793891939.558,&quot;xmax&quot;:1793891970.725}'><div class='zoom-bar' hidden><button type='button' data-zoom='prev' title='Previous window'>◀</button><button type='button' data-zoom='next' title='Next window'>▶</button><button type='button' data-zoom='all'>All</button><span class='zoom-info'></span></div><div class='zoom-svg'><div class='legend'><i style='background:#dc2626'></i>📤 Production error<i style='background:#f59e0b'></i>🔀 Rebalances (all instances) · per 1s</div><svg viewBox="0 0 600 190" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="occurrences over time"><line x1="44" x2="590" y1="164.0" y2="164.0" stroke="#e2e8f0" stroke-width="1"/><text x="38" y="167.0" font-size="10" fill="#64748b" text-anchor="end">0</text><line x1="44" x2="590" y1="86.0" y2="86.0" stroke="#e2e8f0" stroke-width="1"/><text x="38" y="89.0" font-size="10" fill="#64748b" text-anchor="end">2</text><line x1="44" x2="590" y1="8.0" y2="8.0" stroke="#e2e8f0" stroke-width="1"/><text x="38" y="11.0" font-size="10" fill="#64748b" text-anchor="end">4</text><rect x="52.5" y="86.0" width="7.5" height="78.0" rx="1" fill="#f59e0b"><title>2026-11-05 15:18:59: 2 🔀 Rebalances (all instances)</title></rect><rect x="69.6" y="125.0" width="7.5" height="39.0" rx="1" fill="#f59e0b"><title>2026-11-05 15:19:00: 1 🔀 Rebalances (all instances)</title></rect><rect x="103.7" y="86.0" width="7.5" height="78.0" rx="1" fill="#f59e0b"><title>2026-11-05 15:19:02: 2 🔀 Rebalances (all instances)</title></rect><rect x="120.8" y="47.0" width="7.5" height="117.0" rx="1" fill="#f59e0b"><title>2026-11-05 15:19:03: 3 🔀 Rebalances (all instances)</title></rect><rect x="573.9" y="86.0" width="7.5" height="78.0" rx="1" fill="#dc2626"><title>2026-11-05 15:19:30: 2 📤 Production error</title></rect><text x="52.5" y="182" font-size="10" fill="#64748b" text-anchor="middle">15:18:59</text><text x="137.8" y="182" font-size="10" fill="#64748b" text-anchor="middle">15:19:04</text><text x="223.2" y="182" font-size="10" fill="#64748b" text-anchor="middle">15:19:09</text><text x="308.5" y="182" font-size="10" fill="#64748b" text-anchor="middle">15:19:14</text><text x="393.8" y="182" font-size="10" fill="#64748b" text-anchor="middle">15:19:19</text><text x="479.1" y="182" font-size="10" fill="#64748b" text-anchor="middle">15:19:24</text><text x="564.4" y="182" font-size="10" fill="#64748b" text-anchor="middle">15:19:29</text></svg></div><div class='zoom-hint' hidden>🔍 Drag over the chart to zoom on a range, double-click to zoom out.</div></div></div></div><div class='table-card'><h2>🧩 Instances</h2><table><tr><th>Instance</th><th>State</th><th>Since</th><th class='num'>Rebalances</th><th class='num'>Restarts</th><th>Threads</th><th>Active tasks</th><th>Standby tasks</th><th>Not restored / restoring</th><th class='num'>Restored records / changelogs</th></tr><tr><td>streams</td><td><span class='st running'>RUNNING</span></td><td>2026-11-05 15:19:03</td><td class='num'>3 (0.7s)</td><td class='num'>0</td><td>StreamThread-1 <span class='st running'>RUNNING</span></td><td>0_2</td><td>-</td><td>-</td><td class='num'>0 / 0</td></tr><tr><td>streams2</td><td><span class='st running'>RUNNING</span></td><td>2026-11-05 15:19:03</td><td class='num'>3 (0.7s)</td><td class='num'>0</td><td>StreamThread-1 <span class='st running'>RUNNING</span></td><td>0_1</td><td>-</td><td>-</td><td class='num'>0 / 0</td></tr><tr><td>streams3</td><td><span class='st running'>RUNNING</span></td><td>2026-11-05 15:19:03</td><td class='num'>2 (2.8s)</td><td class='num'>0</td><td>StreamThread-1 <span class='st running'>RUNNING</span></td><td>0_0</td><td>-</td><td>-</td><td class='num'>0 / 0</td></tr></table></div><div class='table-card'><h2>📋 Task assignment</h2><div class='st-tasks'><table><tr><th>Task</th><th>streams</th><th>streams2</th><th>streams3</th></tr><tr><td><code>0_0</code></td><td class='n'>·</td><td class='n'>·</td><td class='a'>active</td></tr><tr><td><code>0_1</code></td><td class='n'>·</td><td class='a'>active</td><td class='n'>·</td></tr><tr><td><code>0_2</code></td><td class='a'>active</td><td class='n'>·</td><td class='n'>·</td></tr></table></div></div><div class='footer'>From the INFO lines of the Kafka Streams library (State transition, Handle new assignment, Restored and ready to run, Finished restoring changelog) — tools/streams-analyzer</div></div><style>
+.share-open{font:inherit;cursor:pointer}
+.share-hero{font-size:.85rem;font-weight:700;padding:6px 16px;border-radius:999px;border:0;background:#fff;color:#4c1d95;
+box-shadow:0 4px 14px rgba(15,23,42,.25);transition:transform .1s;white-space:nowrap}.share-hero:hover{transform:translateY(-1px);background:#f5f3ff}
+.header-meta .share-hero{margin-left:auto}
+.share-next{margin-left:auto;align-self:flex-start}
+/* below the fixed Toggle theme of the page (top right of the window) */
+.share-corner{position:absolute;top:44px;right:24px;z-index:2}
+.share-float{position:fixed;top:12px;right:16px;z-index:30;font-size:.8rem;font-weight:700;padding:5px 12px;border-radius:999px;border:0;background:#7c3aed;color:#fff}
+.share-dlg{border:0;border-radius:18px;padding:0;width:min(660px,92vw);max-width:660px;max-height:88vh;overflow:auto;
+box-shadow:0 30px 80px rgba(15,23,42,.45);background:#fff;color:#1e293b;position:fixed;inset:0;margin:auto;height:fit-content;
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.45}
+.share-dlg[open]{animation:sd-in .22s cubic-bezier(.22,1,.36,1)}
+@keyframes sd-in{from{opacity:0;transform:translateY(14px) scale(.97)}to{opacity:1;transform:none}}
+.share-dlg::backdrop{background:rgba(15,23,42,.6);backdrop-filter:blur(3px)}
+.sd-head{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;color:#fff;
+background:radial-gradient(500px 120px at 0% 0%,rgba(56,189,248,.35),transparent 60%),linear-gradient(120deg,#312e81,#6d28d9 60%,#a21caf)}
+.sd-head h3{font-size:1.1rem;margin:0;color:#fff!important;border:0;padding:0}
+.sd-x{border:0!important;background:rgba(255,255,255,.16)!important;color:#fff!important;width:30px;height:30px;padding:0!important;border-radius:50%!important;font-size:.9rem}
+.sd-x:hover{background:rgba(255,255,255,.3)!important}
+.sd-body{padding:16px 20px 6px}
+.share-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0 4px}
+.share-card{display:flex;align-items:center;gap:12px;width:100%;text-align:left;font:inherit;color:inherit;text-decoration:none;cursor:pointer;
+padding:12px 14px;border-radius:14px;border:1px solid #e2e8f0;background:#f8fafc;transition:transform .12s,box-shadow .12s,border-color .12s,background .12s}
+.share-card:hover{transform:translateY(-2px);border-color:#a78bfa;box-shadow:0 10px 24px -12px rgba(109,40,217,.5);background:#faf5ff}
+.share-card:focus-visible{outline:2px solid #7c3aed;outline-offset:2px}
+.sc-icon{flex:none;display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:12px;font-size:1.25rem;
+background:linear-gradient(135deg,#ede9fe,#e0f2fe)}
+.sc-body{display:flex;flex-direction:column;gap:2px;min-width:0}
+.sc-body b{font-size:.9rem}.sc-body small{font-size:.74rem;color:#64748b;line-height:1.35}
+.sc-go{margin-left:auto;font-size:1.3rem;color:#a78bfa;transition:transform .12s}.share-card:hover .sc-go{transform:translateX(3px)}
+.share-card.sc-primary{color:#fff;border:0;padding:14px 16px;background:linear-gradient(120deg,#2563eb,#7c3aed);box-shadow:0 12px 28px -14px rgba(37,99,235,.8)}
+.share-card.sc-primary:hover{background:linear-gradient(120deg,#1d4ed8,#6d28d9)}
+.share-card.sc-primary .sc-icon{background:rgba(255,255,255,.18)}.share-card.sc-primary small{color:rgba(255,255,255,.85)}
+.share-card.sc-primary .sc-go{color:#fff}
+.share-card.sc-done{border-color:#22c55e!important;background:#f0fdf4!important}
+.share-card.sc-done .sc-icon{background:#bbf7d0}
+.share-done{min-height:1.4em;margin:8px 0 0;font-size:.82rem;font-weight:600;color:#15803d}
+.sd-foot{display:flex;align-items:center;justify-content:space-between;padding:10px 20px 16px}
+.sd-meta{font-size:.75rem;color:#64748b}
+@media (max-width:560px){.share-grid{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.share-dlg[open]{animation:none}.share-card{transition:none}}
+.share-warn{background:#fef3c7;color:#92400e;border-radius:12px;padding:10px 14px;font-size:.82rem;border-left:4px solid #f59e0b;margin:0 0 12px}
+.share-close{font:inherit;font-size:.8rem;padding:3px 12px;border-radius:6px;border:1px solid #cbd5e1;background:transparent;color:inherit;cursor:pointer}
+html[data-theme=dark] .share-hero{background:#ede9fe;color:#4c1d95}
+html[data-theme=dark] .share-dlg{background:#1e293b;color:#e2e8f0}
+html[data-theme=dark] .share-card{background:#0f172a;border-color:#334155}
+html[data-theme=dark] .share-card:hover{background:#1e1b4b;border-color:#7c3aed}
+html[data-theme=dark] .sc-icon{background:linear-gradient(135deg,#312e81,#0c4a6e)}
+html[data-theme=dark] .sc-body small,html[data-theme=dark] .sd-meta{color:#94a3b8}
+html[data-theme=dark] .share-card.sc-primary{background:linear-gradient(120deg,#2563eb,#7c3aed)}
+html[data-theme=dark] .share-card.sc-primary small{color:rgba(255,255,255,.85)}
+html[data-theme=dark] .share-card.sc-done{background:#052e16!important}
+html[data-theme=dark] .share-done{color:#86efac}
+html[data-theme=dark] .share-warn{background:#422006;color:#fcd34d}
+html[data-theme=dark] .share-close{border-color:#334155}
+</style><script type='text/plain' id='pg-share-summary'>Kafka Streams status
+
+Findings (5):
+  🔴 CRITICAL: ❌ streams: the client is ERROR since 2026-11-05 15:19:21
+  🟠 HIGH: 🧪 Deserialization error x2 (streams, streams3, first 2026-11-05 15:19:20, last 2026-11-05 15:19:20)
+  🟠 HIGH: 💀 Uncaught exception in a stream thread x2 (streams, first 2026-11-05 15:19:20, last 2026-11-05 15:19:20)
+  🟠 HIGH: 📤 Production error x2 (streams2, first 2026-11-05 15:19:30, last 2026-11-05 15:19:30)
+  🟠 HIGH: 📤 Production error x2 (streams2, first 2026-11-05 15:19:30, last 2026-11-05 15:19:30)
+</script><script type='text/plain' id='pg-share-ticket'>## Kafka Streams status
+
+### Findings
+
+| Severity | Finding |
+| --- | --- |
+| 🔴 CRITICAL | ❌ streams: the client is ERROR since 2026-11-05 15:19:21 |
+| 🟠 HIGH | 🧪 Deserialization error x2 (streams, streams3, first 2026-11-05 15:19:20, last 2026-11-05 15:19:20) |
+| 🟠 HIGH | 💀 Uncaught exception in a stream thread x2 (streams, first 2026-11-05 15:19:20, last 2026-11-05 15:19:20) |
+| 🟠 HIGH | 📤 Production error x2 (streams2, first 2026-11-05 15:19:30, last 2026-11-05 15:19:30) |
+| 🟠 HIGH | 📤 Production error x2 (streams2, first 2026-11-05 15:19:30, last 2026-11-05 15:19:30) |
+
+_Generated by kafka-docker-playground._
+</script><script type='text/plain' id='pg-share-slack'>*Kafka Streams status*
+
+*Findings*
+• 🔴 CRITICAL · ❌ streams: the client is ERROR since 2026-11-05 15:19:21
+• 🟠 HIGH · 🧪 Deserialization error x2 (streams, streams3, first 2026-11-05 15:19:20, last 2026-11-05 15:19:20)
+• 🟠 HIGH · 💀 Uncaught exception in a stream thread x2 (streams, first 2026-11-05 15:19:20, last 2026-11-05 15:19:20)
+• 🟠 HIGH · 📤 Production error x2 (streams2, first 2026-11-05 15:19:30, last 2026-11-05 15:19:30)
+• 🟠 HIGH · 📤 Production error x2 (streams2, first 2026-11-05 15:19:30, last 2026-11-05 15:19:30)
+
+_Generated by kafka-docker-playground._
+</script><script type='text/plain' id='pg-share-html'>\u003cdiv style='font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;font-size:14px;line-height:1.45;color:#111827'>\u003ch2 style='font-size:18px;margin:12px 0 6px'>Kafka Streams status\u003c/h2>\u003ch3 style='font-size:15px;margin:14px 0 6px'>Findings\u003c/h3>\u003ctable style='border-collapse:collapse;margin:4px 0 8px;font-size:13px'>\u003ctr>\u003cth style='border:1px solid #d1d5db;padding:4px 8px;background:#f3f4f6;text-align:left;font-weight:600'>Severity\u003c/th>\u003cth style='border:1px solid #d1d5db;padding:4px 8px;background:#f3f4f6;text-align:left;font-weight:600'>Finding\u003c/th>\u003c/tr>\u003ctr>\u003ctd style='border:1px solid #d1d5db;padding:4px 8px;vertical-align:top'>🔴 CRITICAL\u003c/td>\u003ctd style='border:1px solid #d1d5db;padding:4px 8px;vertical-align:top'>❌ streams: the client is ERROR since 2026-11-05 15:19:21\u003c/td>\u003c/tr>\u003ctr>\u003ctd style='border:1px solid #d1d5db;padding:4px 8px;vertical-align:top'>🟠 HIGH\u003c/td>\u003ctd style='border:1px solid #d1d5db;padding:4px 8px;vertical-align:top'>🧪 Deserialization error x2 (streams, streams3, first 2026-11-05 15:19:20, last 2026-11-05 15:19:20)\u003c/td>\u003c/tr>\u003ctr>\u003ctd style='border:1px solid #d1d5db;padding:4px 8px;vertical-align:top'>🟠 HIGH\u003c/td>\u003ctd style='border:1px solid #d1d5db;padding:4px 8px;vertical-align:top'>💀 Uncaught exception in a stream thread x2 (streams, first 2026-11-05 15:19:20, last 2026-11-05 15:19:20)\u003c/td>\u003c/tr>\u003ctr>\u003ctd style='border:1px solid #d1d5db;padding:4px 8px;vertical-align:top'>🟠 HIGH\u003c/td>\u003ctd style='border:1px solid #d1d5db;padding:4px 8px;vertical-align:top'>📤 Production error x2 (streams2, first 2026-11-05 15:19:30, last 2026-11-05 15:19:30)\u003c/td>\u003c/tr>\u003ctr>\u003ctd style='border:1px solid #d1d5db;padding:4px 8px;vertical-align:top'>🟠 HIGH\u003c/td>\u003ctd style='border:1px solid #d1d5db;padding:4px 8px;vertical-align:top'>📤 Production error x2 (streams2, first 2026-11-05 15:19:30, last 2026-11-05 15:19:30)\u003c/td>\u003c/tr>\u003c/table>\u003cp style='margin:4px 0'>\u003ci>Generated by kafka-docker-playground.\u003c/i>\u003c/p>\u003c/div></script><dialog class='share-dlg' aria-labelledby='pg-share-h' data-title='Kafka Streams status'><div class='sd-head'><h3 id='pg-share-h'>📤 Share this report</h3><button type='button' class='share-close sd-x' aria-label='close'>✕</button></div><div class='sd-body'><p class='share-warn'>⚠️ Internal to Confluent: the report can contain hostnames, IPs and other details of its input. Review it before sending it outside.</p><button type='button' class='share-card sc-primary' data-share='download'><span class='sc-icon'>💾</span><span class='sc-body'><b>Download this report (.html)</b><small>one self-contained file: attach it to a ticket, a mail or a Slack message</small></span><span class='sc-go' aria-hidden='true'>›</span></button><div class='share-grid'><button type='button' class='share-card' data-share='summary'><span class='sc-icon'>💬</span><span class='sc-body'><b>Copy the summary</b><small>the verdict and the findings as plain text, like the terminal</small></span><span class='sc-go' aria-hidden='true'>›</span></button><button type='button' class='share-card' data-share='ticket'><span class='sc-icon'>🎫</span><span class='sc-body'><b>Copy for a ticket</b><small>Markdown with a table of the findings: paste it in Zendesk or Jira</small></span><span class='sc-go' aria-hidden='true'>›</span></button><button type='button' class='share-card' data-share='slack'><span class='sc-icon'>🧵</span><span class='sc-body'><b>Copy for Slack</b><small>the same, in Slack formatting: paste it in a Slack message</small></span><span class='sc-go' aria-hidden='true'>›</span></button><button type='button' class='share-card' data-share='html'><span class='sc-icon'>📝</span><span class='sc-body'><b>Copy as rich text (HTML)</b><small>the same with real tables: paste it in Zendesk, Gmail, Confluence or Google Docs</small></span><span class='sc-go' aria-hidden='true'>›</span></button><button type='button' class='share-card' data-share='path'><span class='sc-icon'>🔗</span><span class='sc-body'><b>Copy the path</b><small>where the report is on this machine</small></span><span class='sc-go' aria-hidden='true'>›</span></button><button type='button' class='share-card' data-share='mail'><span class='sc-icon'>✉️</span><span class='sc-body'><b>Email the summary</b><small>a new mail with the summary: attach the downloaded .html</small></span><span class='sc-go' aria-hidden='true'>›</span></button></div><p class='share-done' aria-live='polite'></p></div><div class='sd-foot'><span class='sd-meta'>S opens this dialog, Esc closes it</span><button type='button' class='share-close'>Close</button></div></dialog><script>
+(function () {
+  const dlg = document.querySelector(".share-dlg");
+  if (!dlg) return;
+  // 💾 the page as it was loaded: taken now (this script runs at the end of the body, before the DOMContentLoaded
+  // handlers of the report fill or change the page), without the open dialog; the copy has its dialog too
+  const snapshot = "<!DOCTYPE html>\n" + document.documentElement.outerHTML;
+  function addOpen(where, cls, before) {
+    if (!where) return null;
+    const b = document.createElement("button");
+    b.type = "button"; b.className = "share-open " + cls; b.textContent = "📤 Share";
+    b.title = "send this report to a colleague: download it, copy the summary for Slack or a ticket, an email (S)";
+    b.setAttribute("aria-haspopup", "dialog");
+    b.addEventListener("click", () => dlg.showModal());
+    if (before) where.insertBefore(b, before); else where.appendChild(b);
+    return b;
+  }
+  function place() {
+    if (document.querySelector(".share-open")) return;
+    // the header of report_html (header_html / page): in its meta pills
+    const meta = document.querySelector(".header .header-meta");
+    if (meta) { addOpen(meta, "share-hero"); return; }
+    // a <header> of its own (benchmark, flight recorder, SMT test, CFK bundle): next to its Toggle theme, else top right
+    const header = document.querySelector("header");
+    if (header) {
+      const toggle = header.querySelector(".theme-toggle");
+      if (toggle && toggle.parentElement === header) { addOpen(header, "share-hero share-next", toggle); return; }
+      if (getComputedStyle(header).position === "static") header.style.position = "relative";
+      addOpen(header, "share-hero share-corner");
+      return;
+    }
+    addOpen(document.body, "share-float");
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", place); else place();
+  document.addEventListener("keydown", function (ev) {
+    if ((ev.key === "s" || ev.key === "S") && !ev.metaKey && !ev.ctrlKey && !ev.altKey
+        && !(ev.target && ev.target.closest && ev.target.closest("input, textarea, select, [contenteditable]")) && !dlg.open) {
+      ev.preventDefault();
+      dlg.showModal();
+    }
+  });
+  const done = dlg.querySelector(".share-done");
+  function embedded(id) { const el = document.getElementById(id); return el ? el.textContent.replace(/\\u003c/g, "<") : ""; }
+  const summary = embedded("pg-share-summary");
+  const said = what => { done.textContent = "✅ " + what; };
+  function fallback(text, what) {
+    const ta = document.createElement("textarea");
+    ta.value = text; dlg.appendChild(ta); ta.select();
+    try { document.execCommand("copy"); said(what + " copied to the clipboard"); }
+    catch (e) { done.textContent = "the copy failed: select the text and copy it"; return; }
+    ta.remove();
+  }
+  function copy(text, what) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(() => said(what + " copied to the clipboard"), () => fallback(text, what));
+    } else fallback(text, what);
+  }
+  function fallbackRich(htmlText, what) {
+    const box = document.createElement("div");
+    box.contentEditable = "true";
+    box.style.cssText = "position:fixed;left:-9999px;top:0";
+    box.innerHTML = htmlText;
+    dlg.appendChild(box);
+    const range = document.createRange(), sel = window.getSelection();
+    range.selectNodeContents(box); sel.removeAllRanges(); sel.addRange(range);
+    try { document.execCommand("copy"); said(what + " copied to the clipboard"); }
+    catch (e) { done.textContent = "the copy failed: use 🎫 Copy for a ticket"; }
+    sel.removeAllRanges();
+    box.remove();
+  }
+  // rich text: text/html for the editors that take it (Zendesk, Gmail, Confluence, Docs), the Markdown as text/plain
+  function copyRich(htmlText, plain, what) {
+    if (navigator.clipboard && navigator.clipboard.write && window.ClipboardItem) {
+      navigator.clipboard.write([new ClipboardItem({"text/html": new Blob([htmlText], {type: "text/html"}),
+                                                    "text/plain": new Blob([plain], {type: "text/plain"})})])
+        .then(() => said(what + " copied to the clipboard"), () => fallbackRich(htmlText, what));
+    } else fallbackRich(htmlText, what);
+  }
+  function fileName() {
+    const page = decodeURIComponent(location.pathname).split("/").pop();
+    if (/\.html?$/i.test(page)) return page;
+    return (dlg.dataset.title || "report").replace(/[^\w.-]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 80) + ".html";
+  }
+  dlg.addEventListener("click", function (ev) {
+    if (ev.target.closest(".share-close") || ev.target === dlg) { dlg.close(); return; }
+    const b = ev.target.closest("[data-share]");
+    if (!b) return;
+    b.classList.add("sc-done"); setTimeout(() => b.classList.remove("sc-done"), 1600);
+    const path = decodeURIComponent(location.pathname);
+    const what = b.dataset.share;
+    if (what === "download") {
+      const url = URL.createObjectURL(new Blob([snapshot], {type: "text/html"}));
+      const a = document.createElement("a");
+      a.href = url; a.download = fileName(); document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 4000);
+      said(fileName() + " downloaded");
+    }
+    else if (what === "summary") copy(summary, "the summary");
+    else if (what === "ticket") copy(embedded("pg-share-ticket"), "the summary for a ticket");
+    else if (what === "slack") copy(embedded("pg-share-slack"), "the summary for Slack");
+    else if (what === "html") copyRich(embedded("pg-share-html"), embedded("pg-share-ticket"), "the summary as rich text");
+    else if (what === "path") copy(path, "the path");
+    else if (what === "mail") {
+      const body = "Report: " + path.split("/").pop() + " (attached)\n\n" + summary;
+      location.href = "mailto:?subject=" + encodeURIComponent("📤 " + (dlg.dataset.title || "playground report"))
+        // cut by code points: a cut in the middle of an emoji (a surrogate pair) makes encodeURIComponent throw
+        + "&body=" + encodeURIComponent(Array.from(body).length > 1800 ? Array.from(body).slice(0, 1800).join("") + "\n…" : body);
+    }
+  });
+})();
+</script></body></html>

@@ -60,6 +60,8 @@ log_reports=(
   "logs-clients|--sample kafka_clients"
   "logs-streams|--sample kafka_streams"
   "logs-compare|--sample compare_fix"
+  "logs-jvm-dumps|--sample jvm_dumps"
+  "logs-broker-pressure|--sample broker_pressure"
   "cfk-bundle|--sample cfk_bundle"
   "logs-cfk-rollout|--sample cfk_rollout --sample cfk_rollout_after"
   "logs-cfk-kraft-migration|--sample cfk_kraft_migration"
@@ -78,6 +80,8 @@ do
   mkdir -p "$DOCS/reports/$name"
   cp "$main" "$DOCS/reports/$name/"
   find "$work/$name" -maxdepth 1 -name "cfk-bundles-comparison-*.html" -exec cp {} "$DOCS/reports/$name/" \;
+  # 🧵 the full thread report of the thread dumps of the input, linked from the JVM dumps card by its name
+  find "$work/$name" -maxdepth 1 -name "*-thread-dumps*.html" -exec cp {} "$DOCS/reports/$name/" \;
   for files in "$work/$name"/*-log-report-files "$work/$name"/*-cfk-files
   do
     [ -d "$files" ] || continue
@@ -213,5 +217,8 @@ shoot logs-tour-file-page "$(file_page logs-connect)" "" "" "document.getElement
 shoot logs-tour-compare "$(logs_page logs-compare)" "" "~🔁 Comparison" "" ""
 shoot logs-tour-streams "$(logs_page logs-streams)" "" "~🌊 Kafka Streams" "" ""
 shoot logs-tour-cfk "$(logs_page cfk-bundle)" "" ".cfk-card" "" ""
+shoot logs-tour-jvm-dumps "$(logs_page logs-jvm-dumps)" "" "#jvm-dumps" "" ""
+shoot logs-tour-broker-signals "$(logs_page logs-broker-pressure)" "" "~🔄 Restarts and rebalances" "" ""
+shoot logs-tour-cluster-layout "$(logs_page logs-broker-pressure)" "" "#cluster-layout" "" ""
 shoot logs-tour-cfk-compare "$(logs_page logs-cfk-rollout 'cfk-bundles-comparison-*.html')" "" "" "" ""
 echo "✅ done, preview with: docsify serve $DOCS"

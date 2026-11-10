@@ -75,6 +75,22 @@ XStream diagnostics reports, found by their content or name) are listed
 with the playground analyze command to run on each, in the summary, the  
 HTML report and `--json` (.other_files); the ones extracted from an  
 archive are kept next to the report (`<input>`-other-files/).  
+🧵 The thread dumps of the input are analyzed right away by the thread  
+dump analyzer (deadlocks, lock contention, stuck threads, CPU per thread  
+between dumps, growing pools): 🧵 🔬 JVM dumps of the input, right after  
+the verdict, each dump on the incident timeline, the full thread report  
+next to the report (`<input>`-thread-dumps.html, .thread_dumps of `--json`).  
+🔬 A heap dump is not (Eclipse MAT, Docker, memory): its playground  
+analyze heap-dump command is at the top of the report and in the verdict  
+(.heap_dumps). 🗺️ The outputs of kafka-topics `--describe` and kafka-log-dirs  
+`--describe` of the input give the Cluster layout: replicas, leaders and  
+disk per broker, leader imbalance and skew, offline / under-replicated /  
+under min ISR partitions, replication factor 1, log dirs offline, disk  
+skew (.cluster_layout). 🐢 The signals of a broker under pressure, read  
+from INFO / WARN lines (ISR shrinks and expands per broker and partition,  
+followers failing to fetch, requests timed out, log cleaner failures,  
+quota throttling, responses to clients already gone), are counted by  
+broker with their storms, and their bursts are on the incident timeline.  
 Only files with findings are  
 shown. 🔭 When no file has findings, an overview says what the logs  
 contain (period covered, records by level, top messages and loggers) and  
@@ -201,6 +217,8 @@ one, and a 📈 Trend gives the totals and the main root causes of every input i
 - **connect_task_failure**: Connect worker log: Oracle XStream connector with a wrong password, an unknown outbound server, and a task failing after the outbound server was stopped
 - **connect_many_connectors**: Connect worker (CP 8.1.2) with 8 connectors: JDBC Oracle sink killed on ORA-00942, JDBC PostgreSQL source refused, S3 Access Denied, Elasticsearch malformed documents, Debezium MySQL binlog purged, HTTP 503, ServiceNow 429, a custom connector; 3 of them below the minimum version supported on CP 8.1 (🛟), icons, connector cards
 - **support_bundle**: .zip with that log and a gzipped broker log
+- **broker_pressure**: logs of 3 brokers while broker 3 falls behind (ISR shrink storm, fetch errors and request timeouts of its followers, log cleaner died, responses to clients already gone) with their kafka-topics `--describe` and kafka-log-dirs outputs: 🐢 broker signals on the timeline, 🗺️ cluster layout (leader skew, under-replicated partitions, a log dir offline, disk skew)
+- **jvm_dumps**: that Connect log with 3 thread dumps of a JVM (deadlock, contention, stuck task, CPU-hungry thread, growing pool) and a heap dump: 🧵 thread dumps analyzed in the report, 🔬 the heap dump command at the top
 - **kafka_streams**: logs of the 3 instances of other/kafka-streams (serde-errors.sh): an application in ERROR after a poison pill, its dead stream thread, deserialization and production handler errors, the 🌊 Kafka Streams section (state, rebalances, tasks, timeline)
 - **compare_fix**: the log of a Connect worker the day after a fix, compared with the day before (`--compare`): errors gone, a new one, rebalances growing
 - **kafka_clients**: logs of the non-Java clients (C/C++, Python, Go, .NET, JavaScript, KafkaJS, Rust) of other/client-\*: a broker that refuses connections or does not resolve, records timed out, an unknown property, and crashes (Python traceback, .NET unhandled exception, Go and Rust panics, uncaught Node.js error)
@@ -212,7 +230,7 @@ one, and a 📈 Trend gives the totals and the main root causes of every input i
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Repeatable:     |  ✓ Yes
-| Allowed Values: | `connect_task_failure`, `connect_many_connectors`, `support_bundle`, `kafka_streams`, `kafka_clients`, `compare_fix`, `cfk_bundle`, `cfk_kraft_migration`, `cfk_rollout`, `cfk_rollout_after`
+| Allowed Values: | `connect_task_failure`, `connect_many_connectors`, `support_bundle`, `broker_pressure`, `jvm_dumps`, `kafka_streams`, `kafka_clients`, `compare_fix`, `cfk_bundle`, `cfk_kraft_migration`, `cfk_rollout`, `cfk_rollout_after`
 | Conflicts With: | `--from-containers`
 
 #### `--errors-only`
@@ -297,7 +315,7 @@ of the digest and of the report stay those of the files
 
 #### `--json-sections SECTIONS`
 
-🗂️ With `--json`, only these sections, comma separated: summary, findings, known_causes, root_causes, files, files_without_findings, coverage, configuration, timeline, connectors, comparison, trend, lifecycle, config_lint, other_files, fixed_bugs, task_workers, data_to_request, config_drift (default: all). For example `--json-sections` summary,findings,root_causes
+🗂️ With `--json`, only these sections, comma separated: summary, findings, known_causes, root_causes, files, files_without_findings, coverage, configuration, timeline, connectors, comparison, trend, lifecycle, config_lint, other_files, thread_dumps, heap_dumps, cluster_layout, fixed_bugs, task_workers, data_to_request, config_drift (default: all). For example `--json-sections` summary,findings,root_causes
 
 #### `--component COMPONENT`
 

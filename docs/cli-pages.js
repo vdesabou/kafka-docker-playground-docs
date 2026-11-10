@@ -26,6 +26,8 @@ window.KDP_CLI_PAGES = [
   "/playground%20broker%20transactions%20list",
   "/playground%20broker%20transactions",
   "/playground%20broker",
+  "/playground%20ccloud%20setup",
+  "/playground%20ccloud",
   "/playground%20cleanup-cloud-details",
   "/playground%20cloud-resources%20aws%20costs-history",
   "/playground%20cloud-resources%20aws%20costs",

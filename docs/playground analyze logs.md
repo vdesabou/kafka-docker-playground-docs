@@ -35,8 +35,9 @@ Rust client. The known causes include the client ones (records not
 delivered in time, producer buffer full, max.poll.interval.ms exceeded,  
 wrong security.protocol, idle connection closed by the broker).
 
-📂 Folders are scanned recursively. .zip, .tar, .tar.gz and .tgz files  
-are extracted in a temporary folder, .gz files are decompressed on the  
+📂 Folders are scanned recursively. .zip, .tar, .tar.gz, .tgz,  
+.tar.bz2, .tbz2, .tar.xz, .txz and .7z (bsdtar or 7-Zip) files are  
+extracted in a temporary folder, .gz files are decompressed on the  
 fly, binary files are skipped, and so are the copies of a file or of a  
 CFK support bundle already analyzed (an archive next to its extracted  
 folder). A JSON export of log events (.json, .jsonl, .ndjson, also  
@@ -198,7 +199,8 @@ visit https://www.python.org/downloads/ to install
 #### `--compare BEFORE`
 
 🔁 Compare with another input: the logs before a fix, another worker, the day before. A log file, folder or archive  
-(analyzed with the same `--connector`, `--with-worker`, `--errors-only` and `--sanitize`), or a JSON written by `--json`
+(analyzed with the same `--connector`, `--with-worker`, `--errors-only`, `--include-harmless`, `--include-warnings`, `--ocr` and  
+`--sanitize`, not `--since` / `--until`: it covers another period), or a JSON written by `--json`
 
 The report says what is new, gone, growing or shrinking: root causes, known causes, connectors and the totals by level  
 (per hour when the two inputs cover different periods), in a 🔁 Comparison section, the terminal summary and  
@@ -316,7 +318,7 @@ of the digest and of the report stay those of the files
 
 #### `--json-sections SECTIONS`
 
-🗂️ With `--json`, only these sections, comma separated: summary, findings, known_causes, root_causes, files, files_without_findings, coverage, configuration, timeline, connectors, comparison, trend, lifecycle, config_lint, other_files, thread_dumps, heap_dumps, cluster_layout, fixed_bugs, task_workers, data_to_request, config_drift (default: all). For example `--json-sections` summary,findings,root_causes
+🗂️ With `--json`, only these sections, comma separated: summary, findings, known_causes, root_causes, files, files_without_findings, coverage, configuration, timeline, connectors, comparison, trend, lifecycle, config_lint, other_files, thread_dumps, heap_dumps, cluster_layout, fixed_bugs, task_workers, data_to_request, config_drift, harmless, redaction_summary, kafka_streams, overview, cfk_bundles, cfk_comparison (default: all). For example `--json-sections` summary,findings,root_causes
 
 #### `--component COMPONENT`
 

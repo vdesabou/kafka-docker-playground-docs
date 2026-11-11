@@ -84,6 +84,8 @@
 
 ##### 🐛 Bugs
 
+- 🐛🦭 ldap-authorizer-with-ldap-failover: the mounted resolv.conf uses Docker's DNS 127.0.0.11, which podman does not have [#10353](https://github.com/vdesabou/kafka-docker-playground/issues/10353)
+- 🐛📥 Vertica examples: the vertica.com client download now redirects to a Rocket Software page [#10351](https://github.com/vdesabou/kafka-docker-playground/issues/10351)
 - 🐛🔄 analyze logs: no progress page for a compressed archive under 20 MB of a large bundle [#10318](https://github.com/vdesabou/kafka-docker-playground/issues/10318)
 - 🐛🐳 remove-cp-docker-images removes images of running containers and quits on 'n' [#10312](https://github.com/vdesabou/kafka-docker-playground/issues/10312)
 - 🐛🔒 analyze logs --sanitize: raw lines in the 📦 share zip, and secrets the sanitizer misses [#10306](https://github.com/vdesabou/kafka-docker-playground/issues/10306)

@@ -72,24 +72,10 @@ playground [OPTIONS] COMMAND
   - [setup](playground%20salesforce%20setup) - 🛠️ Configure a Salesforce org for the Salesforce examples
   - [check](playground%20salesforce%20check) - 🩺 Check that the stored Salesforce credentials work
 
-### Cloud Resources commands
-
-- [cloud-resources](playground%20cloud-resources) - ☁️ What the playground left behind in your cloud accounts, what it costs, and cleaning it up
-  - [aws](playground%20cloud-resources%20aws) - ☁️ What is still running in AWS, and what it costs
-    - [list](playground%20cloud-resources%20aws%20list) - 📋 List all active resources
-    - [costs](playground%20cloud-resources%20aws%20costs) - 💰 Show aws costs
-    - [costs-history](playground%20cloud-resources%20aws%20costs-history) - 👛  Retrieve aws costs for each month since last year
-  - [azure](playground%20cloud-resources%20azure) - ☁️ What is still running in Azure, and what it costs
-    - [list](playground%20cloud-resources%20azure%20list) - 📋 List all active resources
-    - [costs](playground%20cloud-resources%20azure%20costs) - 💰 Show azure costs
-    - [costs-history](playground%20cloud-resources%20azure%20costs-history) - 👛  Retrieve azure costs for each month since last year
-  - [ccloud](playground%20cloud-resources%20ccloud) - ☁️ What Confluent Cloud costs you
-    - [costs](playground%20cloud-resources%20ccloud%20costs) - 💰  Retrieve ccloud costs for a range of dates
-    - [costs-history](playground%20cloud-resources%20ccloud%20costs-history) - 👛  Retrieve ccloud costs for each month since last year
-  - [cleanup](playground%20cloud-resources%20cleanup) - 🧹 Cleanup cloud resources that were created by running examples from the playground
-
 ### Run commands
 
+- [ccloud](playground%20ccloud) - 🌤️ Set up your own Confluent Cloud clusters for the fully managed examples
+  - [setup](playground%20ccloud%20setup) - 🏗️ Create (or complete) your personal environment and clusters, and store them in a secrets profile
 - [run](playground%20run) - 🕹️ Run any example !
 - [re-run](playground%20re-run) - ⚡ Simply re-run last example you ran with `<playground run>`
 - [get-ci-result](playground%20get-ci-result) - 🤖 get CI result for current example
@@ -110,6 +96,23 @@ playground [OPTIONS] COMMAND
 - [open-docs](playground%20open-docs) - 🧑‍🎓 Open Confluent documentation of currently running example
 - [open-changelog](playground%20open-changelog) - 📜 Open playground changelog (https://kafka-docker-playground.io/#/changelog)
 - [cp-changelog](playground%20cp-changelog) - 📜 Show what changed in Confluent Platform between two versions
+
+### Cloud Resources commands
+
+- [cloud-resources](playground%20cloud-resources) - ☁️ What the playground left behind in your cloud accounts, what it costs, and cleaning it up
+  - [aws](playground%20cloud-resources%20aws) - ☁️ What is still running in AWS, and what it costs
+    - [list](playground%20cloud-resources%20aws%20list) - 📋 List all active resources
+    - [costs](playground%20cloud-resources%20aws%20costs) - 💰 Show aws costs
+    - [costs-history](playground%20cloud-resources%20aws%20costs-history) - 👛  Retrieve aws costs for each month since last year
+  - [azure](playground%20cloud-resources%20azure) - ☁️ What is still running in Azure, and what it costs
+    - [list](playground%20cloud-resources%20azure%20list) - 📋 List all active resources
+    - [costs](playground%20cloud-resources%20azure%20costs) - 💰 Show azure costs
+    - [costs-history](playground%20cloud-resources%20azure%20costs-history) - 👛  Retrieve azure costs for each month since last year
+  - [ccloud](playground%20cloud-resources%20ccloud) - ☁️ What is still running in Confluent Cloud, and what it costs
+    - [list](playground%20cloud-resources%20ccloud%20list) - 📋 List what the playground left running for you in Confluent Cloud, across the whole organization
+    - [costs](playground%20cloud-resources%20ccloud%20costs) - 💰  Retrieve ccloud costs for a range of dates
+    - [costs-history](playground%20cloud-resources%20ccloud%20costs-history) - 👛  Retrieve ccloud costs for each month since last year
+  - [cleanup](playground%20cloud-resources%20cleanup) - 🧹 Cleanup cloud resources that were created by running examples from the playground
 
 ### Repro commands
 

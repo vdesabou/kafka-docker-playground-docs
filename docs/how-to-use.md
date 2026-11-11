@@ -403,11 +403,19 @@ You can configure the new cluster by using flags with [playground run](/playgrou
 * `--cluster-region` (or `CLUSTER_REGION` environment variable): The Cloud region (use `confluent kafka region list` to get the list, default `eu-west-2` for aws, `westeurope` for azure and `europe-west2` for gcp)
 * `--cluster-environment` (or `ENVIRONMENT` environment variable) (optional): The environment id where want your new cluster (example: `txxxxx`) 
 
+> [!TIP]
+> The simplest way to use your own clusters, in your organization or one shared by your team: [playground ccloud setup](/playground%20ccloud%20setup) creates an environment `pg-<user>` with one Basic cluster per cloud (`pg-<user>-aws`, `pg-<user>-gcp`, `pg-<user>-azure`) and their API keys, owned by you, and stores all the variables below in a [secrets profile](/deep-dive-secrets.md) (`--profile emea`, `--dry-run` first). Run it again any time: what exists is reused.
+>
+> ```bash
+> playground ccloud setup --dry-run
+> playground ccloud setup --profile emea --cloud aws --cloud azure
+> ```
+
 In case you want to use your own existing cluster, you need to setup, in addition to previous ones:
 
 * `--cluster-name` (or `CLUSTER_NAME` environment variable): The cluster name
 * `--cluster-creds` (or `CLUSTER_CREDS` environment variable): The Kafka api key and secret to use, it should be separated with colon (example: `<API_KEY>:<API_KEY_SECRET>`)
-* `--cluster-schema-registry-creds` (or `SCHEMA_REGISTRY_CREDS` environment variable) (optional, if not set, new one will be created): The Schema Registry api key and secret to use, it should be separated with colon (example: `<SR_API_KEY>:<SR_API_KEY_SECRET>`)
+* `--cluster-schema-registry-creds` (or `SCHEMA_REGISTRY_CREDS` environment variable) (optional, if not set, the key of another cluster of the same environment already used on this machine is reused, else a new one owned by you is created): The Schema Registry api key and secret to use, it should be separated with colon (example: `<SR_API_KEY>:<SR_API_KEY_SECRET>`)
 
 🤖 For [Fully Managed connectors](/content?id=%f0%9f%a4%96-fully-managed-connectors), as examples are [dependent of cloud providers](https://docs.confluent.io/cloud/current/connectors/index.html#cloud-platforms-support), you have the possibility to define specific existing clusters per cloud provider:
 

@@ -140,6 +140,63 @@ report on that section and try it (filters, zoom, search, links to the lines).
 
 All the reports of the playground are in the [📊 reports gallery](reports.md).
 
+## 👀 Every download analyzed, without typing anything
+
+Support work is a loop: download the attachment of a case, type `playground analyze logs -f ~/Downloads/<file>`, open
+the report. `playground analyze watch` does it for you: it watches `~/Downloads` (or `--folder`), and every log file,
+bundle, dump, capture or report that lands there is analyzed **as soon as the download is complete**, its report opened
+in the browser, with a macOS notification.
+
+```bash
+playground analyze watch                                       # in a terminal, Ctrl-C to stop
+playground analyze watch --exclude Archives --install-launch-agent   # macOS: once, it then starts at every login
+tail -f ~/Library/Logs/playground-analyze-watch.log            # what the LaunchAgent does (a copy in the watched folder is never analyzed)
+playground analyze watch --since 30 --once                     # what you downloaded in the last 30 minutes, then exit
+```
+
+What it prints for a Connect log, a capture, an XStream diagnostics report and a text file (`--once --no-open`, the
+samples of the playground):
+
+```text
+🔥 connect.log: log file, running playground analyze logs (report in ~/playground-log-reports/connect.log-20261112-181140)
+📊 connect.log: ~/playground-log-reports/connect.log-20261112-181140/connect-log-report.html
+🧰 capture.pcap: network_capture, running playground analyze tcp-dump (report in ~/playground-log-reports/capture.pcap-20261112-181142)
+🧰 orclcdc_diag_healthy.html: xstream_report, running playground analyze oracle-xstream-report (report in …)
+🙈 notes.txt: no logs, dumps, captures or reports found, ignored
+```
+
+Each kind of file goes to its analyzer, recognized like the 🧰 Other files of the log report:
+
+| Downloaded | Analyzed by |
+| --- | --- |
+| a log file (`.log`, `.log.1`, `.log.gz`, `.out`, `stdout`…), a `.txt` / `.json` / `.csv` / extension-less file whose first lines are log records, logs pasted in a `.docx` / `.xlsx` | `analyze logs` |
+| a heap dump (`.hprof`, `.hprof.gz`) | `analyze heap-dump` (Eclipse MAT in Docker) |
+| a flight recording (`.jfr`) | `analyze flight-recorder` |
+| a network capture (`.pcap`, `.pcapng`) | `analyze tcp-dump` |
+| an Oracle XStream diagnostics report (`orclcdc_diag*.html`) | `analyze oracle-xstream-report` |
+| a GC log, a thread dump | `analyze gc-logs`, `analyze thread-dump` (a log file holding a `kill -3` dump stays a log file: the dump is analyzed in the log report) |
+| an archive (`.zip`, `.tar.gz`, `.7z`…) or a folder | `analyze logs` when it holds logs, then the analyzer of each other kind of file inside it, one report each |
+| a picture, a PDF, an installer, anything else | nothing (`🙈 … ignored`) |
+
+Good to know:
+
+- **Only new downloads**: what is already in the folder when it starts is never analyzed (`--since <minutes>` picks the
+  entries created in the last minutes), and only the top of the folder is watched: moving a file into
+  `~/Downloads/Archives` triggers nothing. `--exclude <name>` (wildcards allowed) never analyzes an entry, even renamed
+  or re-created.
+- **A download in progress is waited for**: `.crdownload`, `.download`, `.part` and a size that still changes.
+- **No duplicates**: what Safari or Archive Utility extracts next to an archive or a compressed file already analyzed
+  (`x.zip` → `x/`, `x.hprof.gz` → `x.hprof`) is skipped.
+- **Reports**: one folder per download in `~/playground-log-reports/<name>-<date>/` (`--output-dir`, refused inside the
+  watched folder); `--no-open` keeps them closed, `--logs-only` runs `analyze logs` only, `--analyze-logs-args
+  "--errors-only --sanitize"` passes flags to every `analyze logs`.
+- **macOS LaunchAgent**: it runs the `playground` of your checkout with the `PATH` of the shell that installed it; macOS
+  asks once to let `bash` read the Documents (the checkout) and Downloads folders. After a `git pull` that changes
+  `analyze watch`, restart it: `launchctl kickstart -k gui/$(id -u)/io.kafka-docker-playground.analyze-watch`.
+  `--uninstall-launch-agent` removes it.
+- Downloads are **untrusted data**: they are only read, never run, and archives are only listed until `analyze logs`
+  extracts them in its temporary folder.
+
 ---
 
 ## 1. Mental model (the 4 things to remember)
@@ -172,7 +229,12 @@ All the reports of the playground are in the [📊 reports gallery](reports.md).
    known`) and how many were served from the negative cache of the JVM (`UnknownHostException: <host>` alone: one
    failed lookup handed to every client of the process for `networkaddress.cache.negative.ttl`), and the Java clients
    that could not be created (`No resolvable bootstrap urls given in bootstrap.servers`, thrown by the constructor and
-   not retried: it kills the Oracle CDC source, which commits its redo log offsets with a new consumer). 🧹 **Clients
+   not retried: it kills the Oracle CDC source, which commits its redo log offsets with a new consumer). 🧬 **Not
+   enough replicas** lists the partitions refused with their window (first → last, duration), ISR and min.isr, most
+   refused first, and spots a single replica in sync while min.isr is 2: either the other replicas fell out of sync, or
+   the topic has fewer replicas than `min.insync.replicas` (RF=1 with `min.insync.replicas=2` works until a replica is
+   added by an RF increase, a reassignment or a Self-Balancing move, then every `acks=all` write is refused until the
+   new replica has caught up). 🧹 **Clients
    aborted while a task stopped** (`Failed to close fetcher with a timeout`, `Producer is closed forcefully.`) is LOW:
    a consequence of the stop, not a root cause.
 3. **The HTML report is the deliverable.** The terminal digest is bounded (`--max-findings` per file); the report holds
@@ -369,7 +431,7 @@ browser from a terminal, with a page per file with findings in `<report>-files/`
 | 🔎 findings | the known causes with what to do and their exception chains, then the most frequent errors no known cause explains; each card says how much of it is in the current selection |
 | 📥 data to request | what to ask the customer for next, with why and how: a complete copy of a file not fully read, a longer window (under 10 min), the logs since the last restart of a Connect worker or broker whose startup is not in the input (its config and plugin versions are missing), the configuration of the connectors whose class is unknown or only inferred (`curl -s "http://<worker>:8083/connectors?expand=info&expand=status"`) and the plugins installed when their version is unknown (`curl -s http://<worker>:8083/connector-plugins`), both read by the next analysis, the broker or Schema Registry logs when the findings point there (not for a database login failure), and a heap dump, GC logs, thread dumps or the certificates (the chain the server sends, the truststore) for the known causes they explain (unless 🧰 found them in the input). Never logs at DEBUG. A numbered card per request, 📋 copies each command. Also in the summary for a ticket |
 | 🩹 known bugs fixed in a later version | an error of the logs that matches a bug of the connector plugin fixed in a later version (`tools/report-common/fixed_bugs.py`: from the changelog and the pull request of the fix), with a verdict from the version each connector runs: ⛔ affected (upgrade to the first fixed version of its line), ✅ it runs a version with the fix (another cause, or a regression), ❔ the logs do not give its version. Also on the 🔌 card of the connector and in the summary for a ticket |
-| 🗓️ incident timeline | *what happened first?*: all files merged, the first occurrence of each error and known cause, restarts, connectors reconfigured, config changed between restarts, ✕ processes stopped (`shutting down`, `SHUTTING_DOWN`, `Kafka Connect stopping`), active controller changes, 🚪 the members of a consumer group removed by the group coordinator (the first 20), the 20 longest GC pauses of 1 s or more (from the GC logs of the input, unified or legacy format), 🐢 the bursts of broker signals (one row per burst of a kind on a broker: `📉 30 ISR shrinks on broker 1 in 37 min 55 s (orders-4, orders-8, payments-3 +1)`, events less than 5 min apart; from 1 ISR shrink or log cleaner failure, 3 of the others) and 🧵 each thread dump of the input (its time is the one the JVM printed, without time zone). With a CFK support bundle, its ☸️ cluster changes too: a pod terminated or restarted (✕, its reason: `OOMKilled`, `Error exitCode=1`), a custom resource edited and a StatefulSet rollout (changes for 🔗). 💥 under one of them: the ERROR / WARN of every file in the next 60 s, when they are 3 times the usual rate of the logs (5 at least), by known cause or exception. A chart above the table places them in time, one lane per component (the long gaps cut ⫽, hover a mark for its time and Δ, click it for its row, 🔍 drag over it to zoom, double-click or ⟲ All to zoom out, ⤢ to make that period the one of the whole report), and the Δ column gives the time since the previous event (the biggest gaps in bold) |
+| 🗓️ incident timeline | *what happened first?*: all files merged, the first occurrence of each error and known cause, restarts, connectors reconfigured, config changed between restarts, ⚙️ broker configs changed live (KRaft `DynamicConfigPublisher`, one row per minute for all brokers, with what a replication throttle means; the `KafkaConfig` dumped again is not a restart), ♻️ replicas moved under a throttle (topics given throttled replicas, one row per burst: a reassignment, a Self-Balancing move), ✕ processes stopped (`shutting down`, `SHUTTING_DOWN`, `Kafka Connect stopping`), active controller changes, 🚪 the members of a consumer group removed by the group coordinator (the first 20), the 20 longest GC pauses of 1 s or more (from the GC logs of the input, unified or legacy format), 🐢 the bursts of broker signals (one row per burst of a kind on a broker: `📉 30 ISR shrinks on broker 1 in 37 min 55 s (orders-4, orders-8, payments-3 +1)`, events less than 5 min apart; from 1 ISR shrink or log cleaner failure, 3 of the others) and 🧵 each thread dump of the input (its time is the one the JVM printed, without time zone). With a CFK support bundle, its ☸️ cluster changes too: a pod terminated or restarted (✕, its reason: `OOMKilled`, `Error exitCode=1`), a custom resource edited and a StatefulSet rollout (changes for 🔗). 💥 under one of them: the ERROR / WARN of every file in the next 60 s, when they are 3 times the usual rate of the logs (5 at least), by known cause or exception. A chart above the table places them in time, one lane per component (the long gaps cut ⫽, hover a mark for its time and Δ, click it for its row, 🔍 drag over it to zoom, double-click or ⟲ All to zoom out, ⤢ to make that period the one of the whole report), and the Δ column gives the time since the previous event (the biggest gaps in bold) |
 | 🔄 restarts and rebalances | from the INFO lines (the digest only keeps ERROR / WARN): the rebalances of the worker groups, the rejoins of the consumer groups with their reason, the connectors and tasks started, the workers and brokers (re)started and stopped, the active controller changes, the GC pauses of 1 s or more, 🚪 the members of a consumer group removed by the group coordinator of a broker (`has failed, removing it from the group`: session timeout; `removed dynamic members who haven't joined`: rebalance timeout, one line per round, which a grep of the first message misses; `on pending sync request expiration`: joined but did not sync), each counted with its rate per hour (logs that cover less than an hour: the count over the period they cover, `10 in 5 min`, rather than an extrapolated rate). 🌀 **storm**: 10 or more at 6 or more per hour (a consumer that leaves on purpose, `pro-actively leaving the group`, is not one, counted over the whole file: the short-lived consumers an Oracle CDC connector opens per table every 30 s or so, the schema history consumer of Debezium; their groups come last); also on the 🔌 cards and in the 🗓️ timeline. 🔁 **restart loop**: a worker that failed to start 3 times or more (`ERROR Failed to start Connect`, its rotated files merged), or a worker / broker stopped 4 times or more every 30 min or less: a red banner at the top of the section (`🔁 Restart loop: Kafka Connect (connect.log) failed to start 20 times, … a new attempt every ~5 min 40 s`), a badge on its rows, a line in the terminal summary and a sentence in the verdict, because a low rate per hour over a long bundle hides it. A chart shows them over time (drag to zoom) and each row has a swimlane of its occurrences on the period of the table; a click on a row shows it alone in the chart, zoomed on its period, and lists its occurrences under it, each with a link to its line in the log file (the first 100 noted). A connector picked in the filter keeps its rows, the worker group rebalances and process starts (every connector of the worker) stay |
 | 🐢 broker signals | in the same table and chart as 🔄, and their own block in the terminal and the summary for a ticket: the signals of a broker under pressure, read from INFO / WARN lines that the digest of the errors misses: 📉 ISR shrinks and 📈 expands (`[Partition orders-0 broker=1] Shrinking ISR from 1,2,3 to 1,3`), 🪝 followers failing to fetch (`[ReplicaFetcher replicaId=3, leaderId=2, fetcherId=0] Error sending fetch request`, `Error in response for fetch request`, by the leader they fetch from; not the same line of a consumer, `[Consumer clientId=…]`, logged on every broker restart), ⏱️ requests timed out (`Disconnecting from node 2 due to request timeout`, by the broker that did not answer), 🧽 the log cleaner that died or skipped a partition (also the 🧽 Log cleaner stopped known cause), 🚦 requests throttled by a quota (librdkafka `THROTTLE`, `ThrottlingQuotaExceededException`), 📭 responses to clients already gone (`no open connection, connection id`). One row per kind and broker (a line without broker id: its file), with the partitions or peers they happen to most; 🌀 storm as the rebalances. 📥 then asks for the JMX metrics of the brokers (request handler and network idle ratio, request queue, produce / fetch latency, ISR shrinks) |
 | 🗺️ cluster layout | from the `kafka-topics --describe` / `kafka-log-dirs` outputs of the input (section 3): the findings, a row per broker (replicas, leaders, disk, log dirs) and the lists of offline, under-replicated, under min ISR and non-preferred-leader partitions, biggest partitions and topics |
@@ -631,7 +693,7 @@ playground analyze logs -f lint.log
 ```
 
 The `acks = 1` of `jdbc-src-license-manager` is not reported: only the clients of the connector itself are. The keys **changed between restarts**
-are listed in the summary (`🔁 changed between restarts`) and in the ⚙️ section of the report. Only a real restart counts
+are listed in the summary (`🔁 changed between restarts`, `🔧 changed live, no restart` for a broker config changed while it runs) and in the ⚙️ section of the report. Only a real restart counts
 (a `started` / `stopping` line, or the start config of the component, `DistributedConfig`, `KafkaConfig`,
 `SchemaRegistryConfig`…, dumped again 30 s or more later): two dumps of the same class in one run are two instances (two
 telemetry exporters of a broker, the readiness check of the image then the worker, the key and value converters), not a
@@ -834,7 +896,12 @@ playground analyze logs -f <file|folder|.zip|.tar.gz|.7z|.gz|export.json|export.
                         [--json [--json-sections summary,known_causes,root_causes,timeline,connectors,comparison]]
                         [--sanitize] [--logs-only]
 playground analyze logs --sample connect_task_failure|support_bundle|broker_pressure|jvm_dumps|kafka_streams|kafka_clients|compare_fix
+playground analyze watch [--folder ~/Downloads] [--output-dir ~/playground-log-reports] [--since <minutes> [--once]]
+                         [--exclude Archives] [--no-open] [--logs-only] [--analyze-logs-args "--errors-only --sanitize"]
+                         [--install-launch-agent | --uninstall-launch-agent]
 ```
+
+👀 `playground analyze watch`: every download analyzed, see [Every download analyzed, without typing anything](/deep-dive-analyze-logs?id=%f0%9f%91%80-every-download-analyzed-without-typing-anything).
 
 Gotchas:
 

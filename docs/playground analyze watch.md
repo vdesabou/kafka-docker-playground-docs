@@ -1,6 +1,6 @@
 # playground analyze watch
 
-👀 Watch a folder (default: ~/Downloads) and run `playground analyze logs` on every new file or folder holding logs, report opened in the browser
+👀 Watch a folder (default: ~/Downloads) and analyze every new log file, bundle, dump, capture or report, report opened in the browser
 
 Leave it running in a terminal: when a log file, a support bundle or a  
 folder of logs lands in the folder (a download from Zendesk, Slack, a  
@@ -18,6 +18,17 @@ timestamp and a level, librdkafka lines, JSON records with a level),
 an archive (.zip, .tar, .tar.gz, .tgz, .tar.bz2, .tar.xz, .7z) or a  
 folder that contains such files. Pictures, PDFs, installers and other  
 files are ignored (logged once).
+
+🧰 The other files support asks for get their own analyzer (unless  
+`--logs-only`), recognized as in the 🧰 Other files of 'analyze logs':  
+a heap dump (analyze heap-dump), a flight recording (analyze  
+flight-recorder), a network capture (analyze tcp-dump), an Oracle  
+XStream diagnostics report (analyze oracle-xstream-report), a GC log  
+(analyze gc-logs), a thread dump (analyze thread-dump; a log file  
+holding a kill -3 thread dump stays a log file: analyze logs analyzes  
+the dump in its report). In an archive or a folder, 'analyze logs'  
+runs first (thread dumps analyzed in its report), then the analyzer  
+of each other kind of file, one report each.
 
 Only the entries that appear after the start are analyzed, at the  
 top of the folder (a file moved into a sub-folder never is): `--since`  
@@ -93,9 +104,13 @@ visit https://www.python.org/downloads/ to install
 
 ➕ Extra flags passed to every `playground analyze logs` call, as one string (for example "`--errors-only` `--sanitize`")
 
+#### `--logs-only`
+
+🔥 Only run `playground analyze logs` (on files holding logs), never the analyzers of heap dumps, flight recordings, captures, XStream reports, GC logs and thread dumps
+
 #### `--install-launch-agent`
 
-🔁 macOS: install a LaunchAgent that starts this watch (with `--folder`, `--output-dir`, `--exclude`, `--interval`, `--no-open`, `--analyze-logs-args`) at every login, output in ~/Library/Logs/playground-analyze-watch.log
+🔁 macOS: install a LaunchAgent that starts this watch (with `--folder`, `--output-dir`, `--exclude`, `--interval`, `--no-open`, `--logs-only`, `--analyze-logs-args`) at every login, output in ~/Library/Logs/playground-analyze-watch.log
 
 | Attributes      | &nbsp;
 |-----------------|-------------

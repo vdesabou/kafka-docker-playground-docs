@@ -3,6 +3,8 @@
 ## November 2026
 ##### 🌟 Enhancements
 
+- 🧠🌙 playground cloud-resources nightly-cleanup: delete what your examples left in Confluent Cloud, every night [#10361](https://github.com/vdesabou/kafka-docker-playground/issues/10361)
+- 🧠🌤️ Use the per-cloud cluster of the cloud an example requires [#10360](https://github.com/vdesabou/kafka-docker-playground/issues/10360)
 - 🧠🏗️ ccloud setup: regions from the profile, opt-in Databricks cluster [#10358](https://github.com/vdesabou/kafka-docker-playground/issues/10358)
 - 🧠📖 analyze logs: What happened timeline, selectable text and drag to pick the period [#10354](https://github.com/vdesabou/kafka-docker-playground/issues/10354)
 - 🧠🏎️ analyze logs: read the logs with mawk when it is installed, 2.5x faster on macOS [#10337](https://github.com/vdesabou/kafka-docker-playground/issues/10337)

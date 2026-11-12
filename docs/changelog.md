@@ -3,6 +3,7 @@
 ## November 2026
 ##### 🌟 Enhancements
 
+- 🧠🏗️ ccloud setup: regions from the profile, opt-in Databricks cluster [#10358](https://github.com/vdesabou/kafka-docker-playground/issues/10358)
 - 🧠📖 analyze logs: What happened timeline, selectable text and drag to pick the period [#10354](https://github.com/vdesabou/kafka-docker-playground/issues/10354)
 - 🧠🏎️ analyze logs: read the logs with mawk when it is installed, 2.5x faster on macOS [#10337](https://github.com/vdesabou/kafka-docker-playground/issues/10337)
 - 🧠🏗️ playground ccloud setup: your own environment and clusters, stored in a secrets profile [#10335](https://github.com/vdesabou/kafka-docker-playground/issues/10335)

@@ -27,9 +27,12 @@ Names matter for the cleanup: 'cloud-resources cleanup `--resource` ccloud'
 deletes all the topics of clusters named pg-`<user>`-\* (yours), never the  
 clusters, and never the environment pg-`<user>` nor the keys stored here.
 
-🎓 Tip: one profile per organization (`--profile` emea, `--profile` personal),  
-then `playground secrets profile <name>` to switch, and 'confluent login  
-`--organization` `<id>` `--save`' for the confluent CLI.
+🌙 Next: `playground cloud-resources nightly-cleanup enable` deletes, every  
+night, the connectors your examples leave running (your clusters are kept).
+
+🎓 Tip: one profile per organization (`--profile` `<org>`), then 'playground  
+secrets profile `<name>`' to switch, and 'confluent login `--organization`  
+`<id>` `--save`' for the confluent CLI.
 
 ## Usage
 

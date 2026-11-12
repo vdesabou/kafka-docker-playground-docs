@@ -8,6 +8,9 @@ The examples then run on these clusters with no bootstrap to wait for. To
 see what is still running, or delete it: 'playground cloud-resources ccloud  
 list' and `playground cloud-resources cleanup --resource ccloud`.
 
+🌙 Then let the playground delete what your examples leave running, every  
+night: `playground cloud-resources nightly-cleanup enable`.
+
 ## Usage
 
 ```bash

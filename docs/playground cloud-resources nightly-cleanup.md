@@ -24,6 +24,9 @@ macOS: a launchd agent (~/Library/LaunchAgents), which also runs when the
 Mac wakes up if it was asleep at that time. Linux: a crontab line. The  
 `confluent CLI must stay logged in: 'confluent login --save'.`
 
+🏗️ Works best with your own clusters, set up once: 'playground ccloud  
+setup'. `playground cloud-resources ccloud list` shows what is left.
+
 ## Usage
 
 ```bash

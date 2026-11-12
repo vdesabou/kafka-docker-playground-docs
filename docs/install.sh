@@ -7,8 +7,7 @@
 # What it does, asking before each change:
 #   1. checks git, bash 4+, fzf, python3, docker + compose v2 (or podman), free disk space, and changes nothing
 #   2. installs what is missing with brew (macOS) or the package manager (Linux): bash, fzf, git, python3, unzip, and the
-#      Confluent CLI (used by the Confluent Cloud examples), plus mawk on macOS (playground analyze logs reads the logs
-#      2.5x faster with it). On macOS without Homebrew, offers to install it first
+#      Confluent CLI (used by the Confluent Cloud examples). On macOS without Homebrew, offers to install it first
 #      (official installer from https://brew.sh), only when a tool or a container engine needs it
 #   3. clones the repository (--depth 1), or updates an existing clone
 #   4. when no container engine is installed at all, offers to install one: Podman or Docker Desktop on macOS,
@@ -242,8 +241,6 @@ rc_files_for_shell() {
 # ---------------------------------------------------------------------------------------------------------------------
 
 missing_packages=""
-# nice to have, installed together with missing_packages, never a reason to install Homebrew on their own
-optional_packages=""
 confluent_missing=0
 # set when the Confluent CLI is in ~/.local/bin and that folder is not in the PATH: the shell block adds it
 confluent_bin_dir=""
@@ -311,19 +308,6 @@ check_prerequisites() {
   then
     logwarn "unzip is missing (used by playground connector-plugin search-jar, schema import...)"
     missing_packages="$missing_packages unzip"
-  fi
-
-  # macOS: playground analyze logs reads the logs with mawk when it is installed, 2.5x faster than the awk of macOS
-  # with the same report. Not on Linux: there the awks are close, and mawk is already the awk of Debian / Ubuntu
-  if [ "$os" = "macos" ]
-  then
-    if command -v mawk > /dev/null 2>&1
-    then
-      log_ok "mawk $(mawk -W version 2>&1 | awk 'NR == 1 { print $2 }')"
-    else
-      log "mawk is not installed (optional: playground analyze logs reads the logs 2.5x faster with it)"
-      optional_packages="$optional_packages mawk"
-    fi
   fi
 
   check_confluent_cli
@@ -577,16 +561,6 @@ ensure_brew() {
 install_missing() {
   title "📦 2/6 Missing tools"
   missing_packages="$(echo "$missing_packages" | xargs)"
-  optional_packages="$(echo "$optional_packages" | xargs)"
-  if [ -n "$optional_packages" ]
-  then
-    if [ -n "$missing_packages" ] || [ -n "$brew_bin" ]
-    then
-      missing_packages="$(echo "$missing_packages $optional_packages" | xargs)"
-    else
-      log "not installing $optional_packages: optional, and Homebrew is not installed (later: brew install $optional_packages)"
-    fi
-  fi
   if [ -z "$missing_packages" ]
   then
     log_ok "nothing to install"
@@ -744,18 +718,10 @@ detect_engine() {
   fi
   if command -v docker > /dev/null 2>&1
   then
-    # macOS: every engine was looked for above, so a docker CLI alone is not one (for example left by
-    # 'brew uninstall podman' after this installer ran 'brew install podman docker docker-compose'): offer to
-    # install one, unless DOCKER_HOST points at an engine elsewhere
-    if [ "$os" = "macos" ] && [ -z "${DOCKER_HOST:-}" ]
-    then
-      log "only the docker CLI is installed ($(command -v docker)), no container engine"
-      return 0
-    fi
     engine_state="stopped"
     if [ "$os" = "macos" ]
     then
-      engine_hint="the docker CLI is installed but no engine answers at DOCKER_HOST=${DOCKER_HOST:-}: start it, or unset DOCKER_HOST"
+      engine_hint="the docker CLI is installed but no engine answers: start Docker Desktop, OrbStack, Colima or the podman machine"
     elif [ -S /var/run/docker.sock ] && ! id -nG 2> /dev/null | grep -qw docker && [ "$(id -u)" != "0" ]
     then
       if getent group docker 2> /dev/null | cut -d: -f4 | tr ',' '\n' | grep -qx "${USER:-}"
@@ -879,91 +845,6 @@ install_engine_docker_linux() {
   fi
 }
 
-# podman refuses to run when ~/.config (or its own folders under ~/.local/share) is not owned by the user:
-#   path "/Users/<you>/.config" exists and it is not owned by the current user
-# it happens when a command run with sudo created it (sudo keeps HOME on macOS): offer to give them back
-fix_home_dirs_owner() {
-  local dir bad=""
-  for dir in "$HOME/.config" "$HOME/.local" "$HOME/.local/share"
-  do
-    [ -e "$dir" ] || continue
-    if [ -n "$(find "$dir" -maxdepth 3 ! -user "$(id -u)" -print -quit 2> /dev/null)" ]
-    then
-      bad="$bad $dir"
-    fi
-  done
-  bad="$(echo "$bad" | xargs)"
-  [ -n "$bad" ] || return 0
-  logwarn "not owned by $(id -un), podman refuses to run: $(for dir in $bad; do printf '%s (owner %s) ' "$dir" "$(stat -f %Su "$dir" 2> /dev/null)"; done)"
-  if ! confirm "give them back to $(id -un) (sudo chown -R $(id -un):$(id -gn) $bad)?"
-  then
-    logwarn "skipped: run 'sudo chown -R $(id -un):$(id -gn) $bad', then this installer again"
-    return 1
-  fi
-  local tty=/dev/null
-  { : < /dev/tty; } 2> /dev/null && tty=/dev/tty
-  # shellcheck disable=SC2086
-  run /usr/bin/sudo chown -R "$(id -un):$(id -gn)" $bad < "$tty" \
-    || { logwarn "chown failed: run 'sudo chown -R $(id -un):$(id -gn) $bad', then this installer again"; return 1; }
-}
-
-# Apple silicon: amd64-only images (SQL Server, Oracle, Db2...) run with Rosetta in the podman machine, else with QEMU
-# emulation, under which some hang or crash. Needs Rosetta 2 installed on macOS (not there on a new Mac) and
-# 'rosetta = true' in the [machine] table of ~/.config/containers/containers.conf, before the machine starts.
-rosetta_installed() {
-  arch -x86_64 /usr/bin/true > /dev/null 2>&1
-}
-
-setup_podman_rosetta() {
-  local conf="$HOME/.config/containers/containers.conf"
-  [ "$arch" = "arm64" ] || return 0
-  if rosetta_installed
-  then
-    log_ok "Rosetta 2 is installed"
-  elif confirm "install Rosetta 2, so that the podman machine runs amd64-only images (SQL Server, Oracle...) with it instead of QEMU (sudo softwareupdate --install-rosetta --agree-to-license)?"
-  then
-    local tty=/dev/null
-    { : < /dev/tty; } 2> /dev/null && tty=/dev/tty
-    if [ "$opt_dry_run" != "1" ] && [ "$tty" = "/dev/tty" ] && ! /usr/bin/sudo -n -v 2> /dev/null
-    then
-      log "enter your macOS password to install Rosetta 2 (sudo)"
-    fi
-    run /usr/bin/sudo softwareupdate --install-rosetta --agree-to-license < "$tty" \
-      || logwarn "the Rosetta 2 install failed: amd64-only images will run with QEMU. Install it later with: softwareupdate --install-rosetta --agree-to-license"
-  else
-    logwarn "skipped: amd64-only images will run with QEMU. Install Rosetta 2 later with: softwareupdate --install-rosetta --agree-to-license"
-  fi
-
-  # podman reads it when the machine starts
-  if [ -f "$conf" ] && awk '/^\[/ { in_machine = ($0 == "[machine]") } in_machine && /^[[:space:]]*rosetta[[:space:]]*=/ { found = 1 } END { exit !found }' "$conf"
-  then
-    grep -Eq '^[[:space:]]*rosetta[[:space:]]*=[[:space:]]*true' "$conf" \
-      || logwarn "$conf sets rosetta to something else than true, leaving it as it is"
-    return 0
-  fi
-  if [ -f "$conf" ] && grep -qx '\[machine\]' "$conf"
-  then
-    # add the key right after the existing [machine] table header
-    if [ "$opt_dry_run" = "1" ]
-    then
-      run sed -i '' '/^\[machine\]$/a\
-rosetta = true' "$conf"
-    else
-      cp -p "$conf" "$conf.bak.$(date +%Y%m%d%H%M%S)" && sed -i '' '/^\[machine\]$/a\
-rosetta = true
-' "$conf" && log_ok "rosetta = true added to the [machine] table of $conf"
-    fi
-  else
-    run mkdir -p "$(dirname "$conf")"
-    if [ "$opt_dry_run" = "1" ]
-    then
-      printf '%s\n' "   ${C_YELLOW}[dry-run] would add to $conf:${C_RESET} [machine] rosetta = true"
-    else
-      printf '\n[machine]\nrosetta = true\n' >> "$conf" && log_ok "rosetta = true added to $conf"
-    fi
-  fi
-}
-
 install_engine_podman_macos() {
   local mem_gb cpus machine_mb prefix
   mem_gb=$(( $(sysctl -n hw.memsize 2> /dev/null || echo 0) / 1024 / 1024 / 1024 ))
@@ -987,9 +868,6 @@ install_engine_podman_macos() {
   run mkdir -p "$HOME/.docker/cli-plugins"
   run ln -sfn "$prefix/lib/docker/cli-plugins/docker-compose" "$HOME/.docker/cli-plugins/docker-compose"
   hash -r 2> /dev/null || true
-
-  fix_home_dirs_owner || return 1
-  setup_podman_rosetta
 
   if [ "$opt_dry_run" = "1" ] || ! podman machine inspect podman-machine-default > /dev/null 2>&1
   then

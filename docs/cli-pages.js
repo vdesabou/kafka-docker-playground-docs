@@ -8,7 +8,6 @@ window.KDP_CLI_PAGES = [
   "/playground%20analyze%20oracle-xstream-report",
   "/playground%20analyze%20tcp-dump",
   "/playground%20analyze%20thread-dump",
-  "/playground%20analyze%20watch",
   "/playground%20analyze",
   "/playground%20broker%20config%20delete",
   "/playground%20broker%20config%20get",

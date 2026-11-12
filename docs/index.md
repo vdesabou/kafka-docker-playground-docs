@@ -227,7 +227,6 @@ playground [OPTIONS] COMMAND
   - [thread-dump](playground%20analyze%20thread-dump) - 🧵 Analyze java thread dumps: deadlocks, lock contention, stuck and CPU-hungry threads
   - [heap-dump](playground%20analyze%20heap-dump) - 🔬 Analyze a heap dump with Eclipse Memory Analyzer (MAT), run headless in Docker
   - [logs](playground%20analyze%20logs) - 🔥 Show a digest of ERROR/FATAL records found in log files, folders or zip bundles
-  - [watch](playground%20analyze%20watch) - 👀 Watch a folder (default: ~/Downloads) and analyze every new log file, bundle, dump, capture or report, report opened in the browser
   - [gc-logs](playground%20analyze%20gc-logs) - 📈 Analyze JVM Garbage Collection logs
   - [oracle-xstream-report](playground%20analyze%20oracle-xstream-report) - 🅾️ Analyze Oracle XStream CDC diagnostics reports (orclcdc_diag.sql)
   - [flight-recorder](playground%20analyze%20flight-recorder) - 🛩️ Analyze a Java Flight Recorder recording: where the time of the connector tasks goes

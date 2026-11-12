@@ -58,7 +58,7 @@ curl -fsSL https://kafka-docker-playground.io/install.sh | bash
 It asks before each change, and only does this:
 
 1. **checks** your machine and changes nothing: git, bash 4+, fzf, python3, docker + compose v2 (or Podman), free disk space
-2. **installs what is missing** (bash, fzf, git, python3 for the support commands like `playground analyze`, unzip, and on macOS the optional `mawk` with which [playground analyze logs](/playground%20analyze%20logs) reads the logs 2.5x faster) with Homebrew on macOS (on a Mac without Homebrew, it offers to install it first with the [official installer](https://brew.sh), only when a tool or a container engine needs it) or the package manager on Linux, and the [Confluent CLI](https://docs.confluent.io/confluent-cli/current/overview.html) used by the Confluent Cloud examples (Homebrew on macOS, else the official installer into `~/.local/bin`, or the latest archive downloaded directly, SHA-256 checked, when that installer fails)
+2. **installs what is missing** (bash, fzf, git, python3 for the support commands like `playground analyze`, unzip) with Homebrew on macOS (on a Mac without Homebrew, it offers to install it first with the [official installer](https://brew.sh), only when a tool or a container engine needs it) or the package manager on Linux, and the [Confluent CLI](https://docs.confluent.io/confluent-cli/current/overview.html) used by the Confluent Cloud examples (Homebrew on macOS, else the official installer into `~/.local/bin`, or the latest archive downloaded directly, SHA-256 checked, when that installer fails)
 3. **clones** the repository into `~/kafka-docker-playground` (latest version only), or updates the clone you already have
 4. **offers to install a container engine**, only when none is installed at all (see below)
 5. **adds one block** to `~/.zshrc` (or `~/.bashrc`, `~/.bash_profile`), with a backup of the file, so that `playground` and its completion are in your `PATH`:
@@ -80,7 +80,7 @@ When no engine answers and none is installed, the installer asks which one to in
 
 | Platform | Choices | What it runs |
 | --- | --- | --- |
-| macOS | 🦭 **Podman** (default): free, installed and started for you | `brew install podman docker docker-compose`, links the compose plugin into `~/.docker/cli-plugins`, gives `~/.config` / `~/.local` back to you if a command run with `sudo` made them root-owned (Podman refuses to run otherwise), on Apple silicon installs Rosetta 2 if missing (`sudo softwareupdate --install-rosetta --agree-to-license`) and sets `rosetta = true` in `~/.config/containers/containers.conf` so that amd64-only images (SQL Server, Oracle…) don't run with QEMU, `podman machine init --rootful --cpus 4 --memory 12288 --disk-size 100` (less memory on a Mac with less than 16GB), then [playground switch-podman](/playground%20switch-podman) |
+| macOS | 🦭 **Podman** (default): free, installed and started for you | `brew install podman docker docker-compose`, links the compose plugin into `~/.docker/cli-plugins`, `podman machine init --rootful --cpus 4 --memory 12288 --disk-size 100` (less memory on a Mac with less than 16GB), then [playground switch-podman](/playground%20switch-podman) |
 | macOS | 🐳 **Docker Desktop** | `brew install --cask docker-desktop` and `open -a Docker`: accept its agreement in the window, the installer waits for the engine. Give it at least 8GB of memory in Settings > Resources |
 | Linux | 🐳 **Docker Engine**: free | Docker's installer (`https://get.docker.com`, Ubuntu, Debian, Fedora, CentOS, RHEL), `sudo systemctl enable --now docker`, and adds you to the `docker` group (applies to your next login) |
 | Windows WSL 2 | none | install [Docker Desktop for Windows with the WSL 2 integration](https://docs.docker.com/desktop/features/wsl/). With systemd enabled in the distribution, Docker Engine is offered as on Linux |
@@ -88,7 +88,7 @@ When no engine answers and none is installed, the installer asks which one to in
 > [!WARNING]
 > Docker Desktop needs a [paid subscription](https://www.docker.com/pricing/faq/) in companies with more than 250 employees or more than $10 million revenue: check that yours has one, or pick Podman.
 
-- An engine already installed but stopped (Docker Desktop, OrbStack, Rancher Desktop, Colima, Podman) is never replaced: the installer tells you how to start it. On macOS, a `docker` CLI alone (for example left by `brew uninstall podman`) is not an engine: the installer offers to install one.
+- An engine already installed but stopped (Docker Desktop, OrbStack, Rancher Desktop, Colima, Podman) is never replaced: the installer tells you how to start it.
 - `--yes` alone never installs an engine: pass `--engine podman`, `--engine docker-desktop` (macOS), `--engine docker` (Linux) or `--engine none`.
 - `--uninstall` leaves the engine installed.
 

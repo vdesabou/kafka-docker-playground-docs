@@ -7,7 +7,8 @@ created on every run, or a team cluster where everybody's topics collide,
 you get, in the organization your confluent CLI is logged into:
 
 🌐 an environment pg-`<user>` (Stream Governance essentials)  
-🎰 one Basic cluster pg-`<user>`-`<cloud>` per `--cloud` (aws, gcp, azure)  
+🎰 one Basic cluster pg-`<user>`-`<cloud>` per `--cloud` (aws, gcp, azure,  
+and databricks only when asked)  
 🔑 one Kafka API key per cluster and one Schema Registry API key, owned  
 by you (no service account)
 
@@ -48,15 +49,20 @@ visit https://docs.confluent.io/confluent-cli/current/overview.html to install
 
 🌤️ Cloud provider of a cluster to create (repeat it for several)
 
+databricks is never created by default: an AWS cluster  
+pg-`<user>`-databricks (`--databricks-region`, default us-east-2) stored as  
+AWS_DATABRICKS_CLUSTER_\*, the cluster of fm-databricks-delta-lake-sink.  
+Add it with `--cloud` databricks (alone, the other clusters are kept).
+
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Repeatable:     |  ✓ Yes
 | Default Value:  | `aws`, `gcp`, `azure`
-| Allowed Values: | `aws`, `gcp`, `azure`
+| Allowed Values: | `aws`, `gcp`, `azure`, `databricks`
 
 #### `--aws-region REGION`
 
-🗺️ Region of the AWS cluster (default: `AWS_REGION`, else eu-west-2)
+🗺️ Region of the AWS cluster (default: `AWS_REGION`, exported or in the profile, else eu-west-2)
 
 Examples that need a given region stop when the cluster is elsewhere:  
 keep `AWS_REGION` equal to it.
@@ -67,11 +73,15 @@ keep `AWS_REGION` equal to it.
 
 #### `--azure-region REGION`
 
-🗺️ Region of the Azure cluster (default: `AZURE_REGION`, else westeurope)
+🗺️ Region of the Azure cluster (default: `AZURE_REGION`, exported or in the profile, else westeurope)
+
+#### `--databricks-region REGION`
+
+🗺️ Region of the Databricks cluster, with `--cloud` databricks (default: us-east-2)
 
 #### `--default-cloud CLOUD`
 
-🎯 Cluster used by the examples that need no specific cloud (CLUSTER_\*), default: the first `--cloud`
+🎯 Cluster used by the examples that need no specific cloud (CLUSTER_\*), default: the first `--cloud` (not databricks)
 
 | Attributes      | &nbsp;
 |-----------------|-------------
@@ -101,6 +111,10 @@ playground ccloud setup --profile emea --cloud aws --cloud azure
 
 ```bash
 playground ccloud setup --cloud gcp --gcp-region europe-west1 --default-cloud gcp
+```
+
+```bash
+playground ccloud setup --cloud databricks
 ```
 
 

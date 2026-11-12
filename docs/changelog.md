@@ -89,6 +89,7 @@
 
 ##### 🐛 Bugs
 
+- 🐛🔐 secrets: op backend shows the 1Password sign in popup when OP\_SERVICE\_ACCOUNT\_TOKEN is not exported (launchd, GUI sessions) [#10373](https://github.com/vdesabou/kafka-docker-playground/issues/10373)
 - 🐛🧱 databricks delta lake sink examples fail with INSUFFICIENT\_PERMISSIONS on the shared pageviews table [#10371](https://github.com/vdesabou/kafka-docker-playground/issues/10371)
 - 🐛🔐 secrets: op backend says 'not signed in to 1Password' with the desktop app integration until op signin is run [#10369](https://github.com/vdesabou/kafka-docker-playground/issues/10369)
 - 🐛🏆 analyze logs: Top causes overview ranked by occurrences, not severity [#10364](https://github.com/vdesabou/kafka-docker-playground/issues/10364)

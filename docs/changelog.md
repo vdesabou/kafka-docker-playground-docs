@@ -3,6 +3,7 @@
 ## November 2026
 ##### 🌟 Enhancements
 
+- 🧠☁️ ccloud setup: store the profile with playground secrets set [#10377](https://github.com/vdesabou/kafka-docker-playground/issues/10377)
 - 🧠🌙 playground cloud-resources nightly-cleanup: delete what your examples left in Confluent Cloud, every night [#10361](https://github.com/vdesabou/kafka-docker-playground/issues/10361)
 - 🧠🌤️ Use the per-cloud cluster of the cloud an example requires [#10360](https://github.com/vdesabou/kafka-docker-playground/issues/10360)
 - 🧠🏗️ ccloud setup: regions from the profile, opt-in Databricks cluster [#10358](https://github.com/vdesabou/kafka-docker-playground/issues/10358)

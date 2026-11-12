@@ -3,6 +3,7 @@
 ## November 2026
 ##### 🌟 Enhancements
 
+- 🧠👀 analyze watch: analyze the logs downloaded in \~/Downloads automatically [#10400](https://github.com/vdesabou/kafka-docker-playground/issues/10400)
 - 🧠🍺 install.sh: offer to install Homebrew on macOS when it is missing [#10388](https://github.com/vdesabou/kafka-docker-playground/issues/10388)
 - 🧠☁️ ccloud setup: store the profile with playground secrets set [#10377](https://github.com/vdesabou/kafka-docker-playground/issues/10377)
 - 🧠🌙 playground cloud-resources nightly-cleanup: delete what your examples left in Confluent Cloud, every night [#10361](https://github.com/vdesabou/kafka-docker-playground/issues/10361)

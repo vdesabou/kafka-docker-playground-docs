@@ -91,6 +91,7 @@
 
 ##### 🐛 Bugs
 
+- 🐛☁️ install.sh: Confluent CLI install fails on Linux when its installer cannot resolve the latest version [#10390](https://github.com/vdesabou/kafka-docker-playground/issues/10390)
 - 🐛🧱 databricks delta lake sink examples report SUCCESS when COPY INTO fails [#10375](https://github.com/vdesabou/kafka-docker-playground/issues/10375)
 - 🐛🔐 secrets: op backend shows the 1Password sign in popup when OP\_SERVICE\_ACCOUNT\_TOKEN is not exported (launchd, GUI sessions) [#10373](https://github.com/vdesabou/kafka-docker-playground/issues/10373)
 - 🐛🧱 databricks delta lake sink examples fail with INSUFFICIENT\_PERMISSIONS on the shared pageviews table [#10371](https://github.com/vdesabou/kafka-docker-playground/issues/10371)

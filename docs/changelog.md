@@ -89,6 +89,7 @@
 
 ##### 🐛 Bugs
 
+- 🐛🧱 databricks delta lake sink examples fail with INSUFFICIENT\_PERMISSIONS on the shared pageviews table [#10371](https://github.com/vdesabou/kafka-docker-playground/issues/10371)
 - 🐛🔐 secrets: op backend says 'not signed in to 1Password' with the desktop app integration until op signin is run [#10369](https://github.com/vdesabou/kafka-docker-playground/issues/10369)
 - 🐛🏆 analyze logs: Top causes overview ranked by occurrences, not severity [#10364](https://github.com/vdesabou/kafka-docker-playground/issues/10364)
 - 🐛🦭 ldap-authorizer-with-ldap-failover: the mounted resolv.conf uses Docker's DNS 127.0.0.11, which podman does not have [#10353](https://github.com/vdesabou/kafka-docker-playground/issues/10353)

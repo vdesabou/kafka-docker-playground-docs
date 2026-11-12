@@ -62,7 +62,9 @@ corrupt .gz, an archive that does not fully extract) is listed at the
 end, in the HTML report and in `--json` (.summary.incomplete_inputs):  
 never a silent ✅, and exit code 1 when nothing could be read at all.  
 Bytes that are not UTF-8 (a Latin-1 character) are read as they are.  
-🌍 It works offline, without Docker: bash 4.2+, python3 3.8+, jq, awk,  
+🌍 It works offline, without Docker: bash 4.2+, python3 3.8+, jq, awk  
+(🏎️ mawk when installed: on macOS, brew install mawk reads the logs  
+2.5x faster than the awk of the system, same report),  
 gzip and tar are enough (a CFK bundle gets its ☸️ sections when PyYAML  
 is installed, else its pod logs are still read). Without the  
 playground: a sparse clone of scripts/, tools/ and cfk-analysis/, or  
@@ -148,6 +150,10 @@ visit https://www.python.org/downloads/ to install
 #### `PLAYGROUND_LOG_PARALLELISM`
 
 ⚡ Files digested at the same time, merged in the order of the input (default 4; 1: one at a time, with the progress bar of a large file)
+
+#### `PLAYGROUND_AWK`
+
+🏎️ The awk that reads every line (the digest, `--since` / `--until`): mawk when it is installed (2.5x faster than the awk of macOS, same records: brew install mawk), else awk. awk forces the awk of PATH, gawk or "busybox awk" another one
 
 #### `PLAYGROUND_CFK_PARALLELISM`
 

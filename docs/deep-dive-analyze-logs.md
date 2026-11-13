@@ -134,6 +134,9 @@ report on that section and try it (filters, zoom, search, links to the lines).
 | 🧰 Non-Java clients | librdkafka, Python, Go, .NET, JavaScript and Rust clients, their versions | `playground analyze logs --sample kafka_clients` | [open](reports/logs-clients/kafka_clients-log-report.html) |
 | 🌊 Kafka Streams instances | the states of three instances, a poison pill, a stream thread that died | `playground analyze logs --sample kafka_streams` | [open](reports/logs-streams/kafka_streams-log-report.html) |
 | 🔁 Did the fix work? | the day after a fix compared with the day before | `playground analyze logs --sample compare_fix` | [open](reports/logs-compare/compare_fix-log-report.html) |
+| 🧟 Two workers, a task that did not stop | lines logged twice, thread dumps of 2 JVMs with a lock stall, a zombie task, an HDFS sink livelock, a REST status dump | `playground analyze logs --sample connect_workers` | [open](reports/logs-connect-workers/connect_workers-log-report.html) |
+| 📜 A Grafana / Loki export | a text export, newest first, put back in the order of time | `playground analyze logs --sample loki_export` | [open](reports/logs-loki-export/loki_export-log-report.html) |
+| 📄 A Connector CR and a .txt log | one CFK custom resource next to the log of the worker: read as logs, not as a CFK bundle | `playground analyze logs --sample connector_cr` | [open](reports/logs-connector-cr/connector_cr-log-report.html) |
 | ☸️ A CFK support bundle | the ☸️ issues of the cluster and the errors of the pods in one report | `playground analyze logs --sample cfk_bundle` | [open](reports/cfk-bundle/cfk_bundle-log-report.html) |
 | 🔀 Two CFK bundles of a rollout | the bundles before and after a rollout compared | `playground analyze logs --sample cfk_rollout --sample cfk_rollout_after` | [open](reports/logs-cfk-rollout/cfk_rollout-log-report.html) |
 | 🦘 A CFK KRaft migration | a ZooKeeper to KRaft migration that does not finish | `playground analyze logs --sample cfk_kraft_migration` | [open](reports/logs-cfk-kraft-migration/cfk_kraft_migration-log-report.html) |
@@ -418,6 +421,66 @@ playground analyze logs --sample kafka_streams
 One instance is ERROR with a dead thread after a poison pill; the HTML report draws the state of each instance over
 time ([🌊 the same view](reports/kafka-streams.html), from `playground streams status`).
 
+### Shapes of customer files
+
+Three synthetic samples have the shapes that customer files have and the other samples don't (written by
+`tools/log-analyzer/samples/generate_synthetic_shapes.py`, no customer content). `connect_workers` is the folder of a
+case with 2 Connect workers: worker B writes each line twice (two appenders), the graceful stop of its task
+`orders-cdc-0` fails at 10:30:24 and the task goes on logging errors there while worker A runs it again, 2 thread dumps
+of each worker are in one folder, an HDFS sink of worker A rotates with empty offsets, and `connectors-status.txt` is
+the output of `/connectors?expand=status` saved with its shell prompt, with the FAILED task of a third worker whose logs
+are not there:
+
+```bash
+playground analyze logs --sample connect_workers
+```
+
+```text
+🔌 …/connect-workers/connectors-status.txt: Kafka Connect REST API output: 3 connector status(es) with 1 FAILED connector(s) / task(s) (their trace read as ERROR records), 0 other JSON document(s) (plugins, configs)
+ERROR [payments-sink|task-0] REST status: task payments-sink-0 is FAILED on worker 10.0.0.13:8083 (sink connector), trace: (org.apache.kafka.connect.runtime.rest.resources.ConnectorsResource)
+   ⚠️ 19 duplicated line(s) collapsed (the same line logged twice in a row: two appenders?) in connect.log: the counts are of the events, once each
+   🧵 Thread dumps in …/connect-workers/thread-dumps/: 2 dump(s) in 2 file(s), 2 of the same JVM 60.0s apart · OpenJDK 64-Bit Server VM (17.0.15+6-LTS mixed mode, sharing) · JVM 1 of 2: worker-a-dump-1.txt, worker-a-dump-2.txt
+      [OK] No deadlock, lock contention or stuck thread found.
+   🧵 Thread dumps in …/connect-workers/thread-dumps/: 2 dump(s) in 2 file(s), 2 of the same JVM 60.0s apart · OpenJDK 64-Bit Server VM (17.0.15+6-LTS mixed mode, sharing) · JVM 2 of 2: worker-b-dump-1.txt, worker-b-dump-2.txt
+      [HIGH] Lock stall, the same in all 2 dumps (60.0s apart): "blc-keepalive-db.example.com:3306" (WAITING) waits for the j.u.c lock <0x00000000aaaa0001> (java.util.concurrent.locks.ReentrantLock$NonfairSync) in sun.security.ssl.SSLSocketImpl.closeNotify(Unknown Source), held by "blc-db.example.com:3306" (RUNNABLE, blocked in a socket write over TLS (a TLS 1.3 KeyUpdate): sun.nio.ch.FileDispatcherImpl.write0, in com.github.shyiko.mysql.binlog.io.ByteArrayInputStream.read(Unknown Source)), both on the same frames in every dump, the holder using no CPU. Neither progresses until the holder returns (a socket write that does not complete: the peer does not read, or the connection is dead without a reset; only the TCP retransmission timeout or a restart ends it).
+   🔌 by connector: orders-cdc 8, payments-sink 1
+   [HIGH] 🧲 Unknown magic byte ×1 in connectors-status.txt (first at line 1)
+   🔂 LIVELOCK archive-sink: 20 sink rotations with empty offsets (start offsets {} and end offsets {}), 29.9/h · events-0 · no Committed line: the sink keeps rotating without data to commit (empty offsets) and never logs Committed: a put() loop that does not progress · 2026-11-10 10:02:00 → 10:40:00
+🧟 orders-cdc-0 still runs on worker-b/connect.log
+   graceful stop failed 2026-11-10 10:30:24 (connect.log:27)
+   5 ERROR/FATAL of the task on that worker afterwards, 2026-11-10 10:32:05 → 2026-11-10 10:40:05
+   🔀 started again on worker-a/connect.log (2026-11-10 10:30:24)
+```
+
+The counts of worker B are those of the events (`orders-cdc 8`, not 16), the dumps of the two JVMs are analyzed apart
+(the stall is in worker B, the one where the stopped task still runs), and the trace of the REST output is a record
+with its known causes. `loki_export` is a Grafana Explore "Download as txt" of a Loki query (its header, then
+`<epoch in ns>\t<UTC time>Z\t` before each line, the newest line first):
+
+```bash
+playground analyze logs --sample loki_export
+```
+
+```text
+🔎 3 distinct record(s), 6 occurrence(s), in 17 lines
+   🕐 Period covered: 2026-11-10 10:30:00 → 11:04:06 (34 min 6 s)
+   ⚠️ newest-first export (the times go down from line to line) in grafana-loki-export.txt: first and last seen are given in the order of time
+   [HIGH] ☁️ Cloud credentials or permission refused ×5 in grafana-loki-export.txt (first at line 15, 2026-11-10 11:00:05)
+```
+
+`connector_cr` is a folder with one CFK `Connector` custom resource next to `kubectl logs connect-0 > connect-0.txt`:
+not a CFK support bundle (no `📦 CFK support bundle detected`), both files are read as logs:
+
+```bash
+playground analyze logs --sample connector_cr
+```
+
+```text
+📊 1 file(s) with findings out of 2 scanned, 5 KB read in 0 min 1 s (binary files skipped: 0)
+   [HIGH] 🔌 Connection failure ×3 in connect-0.txt (first at line 17, 2026-11-10 09:40:09)
+   orders-sink: 1 ERROR/FATAL, 3 WARN, 🧨 1 task kill(s), 🏷️ 10.8.4 (JdbcSinkConnector), 🗄️ PostgreSQL (from org.postgresql.util.PSQLException) · 🧨 A connector task was killed, 🔌 Connection failure
+```
+
 ---
 
 ## 4. The HTML report, section by section
@@ -428,14 +491,14 @@ browser from a terminal, with a page per file with findings in `<report>-files/`
 
 | Section | What it answers |
 | --- | --- |
-| verdict, quick links and tiles | the one-line diagnosis, a link to each section of the report (also a 🧭 Sections panel on the left of a wide screen, and a ⬆️ Top button once scrolled down), then one row of tiles: 🕐 the period covered (orange under 10 min), files and size read, 🏷️ the CP version (green ✅ when supported, amber ⏳ when support ends within 6 months or ⚠️ Platinum only, red ⛔ past end of support with a banner at the top of the report; 🏷️ CP Community for a `-ccs` version, with the Community end of support; from the supported versions table of the docs), ☕ the JDK of the components (`jvm.spec` of a Connect worker, `java.version=`, a GC log, a thread dump; with `--from-containers`, `java -version` of each container), 📡 the Apache Kafka Java client and librdkafka versions of the logs with their support, 🛟 the connector versions below the minimum supported on the CP release of their worker (supported-connector-version page of the docs, also on each 🔌 card), distinct records, occurrences (by level on the same tile), 🔴 Critical / 🟠 High / 🟡 Medium / 🟢 Low findings (a click keeps only those cards of 🔎 Findings), and the ☸️ tiles of a CFK bundle; a click on a tile opens its section (🕰️ log coverage, 🗂️ files, 🌳 root causes, 📈 occurrences over time, the ☸️ cards of 🔎 Findings) |
+| verdict, quick links and tiles | the one-line diagnosis (with 🤔 when more than half of the errors have no known cause: read 🌳 below), a link to each section of the report (also a 🧭 Sections panel on the left of a wide screen, and a ⬆️ Top button once scrolled down), then one row of tiles: 🕐 the period covered (orange under 10 min), files and size read, 🏷️ the CP version (green ✅ when supported, amber ⏳ when support ends within 6 months or ⚠️ Platinum only, red ⛔ past end of support with a banner at the top of the report; 🏷️ CP Community for a `-ccs` version, with the Community end of support; from the supported versions table of the docs), ☕ the JDK of the components (`jvm.spec` of a Connect worker, `java.version=`, a GC log, a thread dump; with `--from-containers`, `java -version` of each container), 📡 the Apache Kafka Java client and librdkafka versions of the logs with their support, 🛟 the connector versions below the minimum supported on the CP release of their worker (supported-connector-version page of the docs, also on each 🔌 card), distinct records, occurrences (by level on the same tile), 🔴 Critical / 🟠 High / 🟡 Medium / 🟢 Low findings (a click keeps only those cards of 🔎 Findings), and the ☸️ tiles of a CFK bundle; a click on a tile opens its section (🕰️ log coverage, 🗂️ files, 🌳 root causes, 📈 occurrences over time, the ☸️ cards of 🔎 Findings) |
 | ⚠️ not fully read | which inputs could not be read completely (truncated `.gz`, archive not extracted): the findings only cover the rest |
 | 🧵 🔬 JVM dumps of the input | right after the verdict: the findings of the thread dumps of the input (severity, the CPU each thread used between the dumps, 🌐 a link to the full thread report), and the heap dumps with the `playground analyze heap-dump` command to run (📋 copy). Section 3 |
 | 🔁 comparison | with `--compare`: what is new, gone, growing or shrinking (section 6) |
 | 🎚️ filter bar | levels, components, connector, search, period: everything below follows it, and the URL keeps it. Click a connector name anywhere in the report to pick it (again: all the connectors) |
 | 🔎 findings | the known causes with what to do and their exception chains, then the most frequent errors no known cause explains; each card says how much of it is in the current selection |
 | 📥 data to request | what to ask the customer for next, with why and how: a complete copy of a file not fully read, a longer window (under 10 min), the logs since the last restart of a Connect worker or broker whose startup is not in the input (its config and plugin versions are missing), the configuration of the connectors whose class is unknown or only inferred (`curl -s "http://<worker>:8083/connectors?expand=info&expand=status"`) and the plugins installed when their version is unknown (`curl -s http://<worker>:8083/connector-plugins`), both read by the next analysis, the broker or Schema Registry logs when the findings point there (not for a database login failure; with brokers on Confluent Cloud, `*.confluent.cloud` in the logs, the API key, its service account and the audit log of the organization instead), Connect logs over a longer window when a worker's logs cover less than 2 minutes (also a ⚠️ line of the summary), and a heap dump, GC logs, thread dumps or the certificates (the chain the server sends, the truststore) for the known causes they explain (unless 🧰 found them in the input). Never logs at DEBUG. A numbered card per request, 📋 copies each command. Also in the summary for a ticket |
-| 🩹 known bugs fixed in a later version | an error of the logs that matches a bug of the connector plugin fixed in a later version (`tools/report-common/fixed_bugs.py`: from the changelog and the pull request of the fix), with a verdict from the version each connector runs (for a bug of the Connect runtime, such as KAFKA-19697, the Confluent Platform version of the worker): ⛔ affected (upgrade to the first fixed version of its line), ✅ it runs a version with the fix (another cause, or a regression), ❔ the logs do not give its version. Also on the 🔌 card of the connector and in the summary for a ticket |
+| 🩹 known bugs fixed in a later version | an error of the logs that matches a bug of the connector plugin fixed in a later version (`tools/report-common/fixed_bugs.py`: 37 bugs whose release note names a log symptom, Oracle CDC, JDBC, S3, Salesforce, BigQuery, IBM MQ… and MirrorMaker 2 / Connect runtime / broker, each checked in the code of the fix), with a verdict from the version each connector runs (for a bug of Confluent Platform, such as KAFKA-19697, the Confluent Platform version of the worker or broker; a regression does not affect the versions before it): ⛔ affected (upgrade to the first fixed version of its line), ✅ it runs a version with the fix (another cause, or a regression), ❔ the logs do not give its version. Also on the 🔌 card of the connector and in the summary for a ticket |
 | 🗓️ incident timeline | *what happened first?*: all files merged, the first occurrence of each error and known cause (an error a known cause covers has no row of its own, except where that known cause starts), restarts, connectors reconfigured, config changed between restarts, ⚙️ broker configs changed live (KRaft `DynamicConfigPublisher`, one row per minute for all brokers, with what a replication throttle means; the `KafkaConfig` dumped again is not a restart), ♻️ replicas moved under a throttle (topics given throttled replicas, one row per burst: a reassignment, a Self-Balancing move), ✕ processes stopped (`shutting down`, `SHUTTING_DOWN`, `Kafka Connect stopping`), active controller changes, 🚪 the members of a consumer group removed by the group coordinator (the first 20), the 20 longest GC pauses of 1 s or more (from the GC logs of the input, unified or legacy format), 🐢 the bursts of broker signals (one row per burst of a kind on a broker: `📉 30 ISR shrinks on broker 1 in 37 min 55 s (orders-4, orders-8, payments-3 +1)`, events less than 5 min apart; from 1 ISR shrink or log cleaner failure, 3 of the others) and 🧵 each thread dump of the input (its time is the one the JVM printed, without time zone). With a CFK support bundle, its ☸️ cluster changes too: a pod terminated or restarted (✕, its reason: `OOMKilled`, `Error exitCode=1`), a custom resource edited and a StatefulSet rollout (changes for 🔗). 💥 under one of them: the ERROR / WARN of every file in the next 60 s, when they are 3 times the usual rate of the logs (5 at least), by known cause or exception. A chart above the table places them in time, one lane per component (the long gaps cut ⫽, hover a mark for its time and Δ, click it for its row, 🔍 drag over it to zoom, double-click or ⟲ All to zoom out, ⤢ to make that period the one of the whole report), and the Δ column gives the time since the previous event (the biggest gaps in bold) |
 | 🔄 restarts and rebalances | from the INFO lines (the digest only keeps ERROR / WARN): the rebalances of the worker groups, the rejoins of the consumer groups with their reason, the connectors and tasks started, the workers and brokers (re)started and stopped, the active controller changes, the GC pauses of 1 s or more, 🚪 the members of a consumer group removed by the group coordinator of a broker (`has failed, removing it from the group`: session timeout; `removed dynamic members who haven't joined`: rebalance timeout, one line per round, which a grep of the first message misses; `on pending sync request expiration`: joined but did not sync), 🔂 a sink of files (HDFS) that keeps logging `Starting commit and rotation for topic partition orders-0 with start offsets {} and end offsets {}` and never `Committed <file> for <partition>` (10 at least: **LIVELOCK**, a put() loop that does not progress), each counted with its rate per hour (logs that cover less than an hour: the count over the period they cover, `10 in 5 min`, rather than an extrapolated rate). 🌀 **storm**: 10 or more at 6 or more per hour (a consumer that leaves on purpose, `pro-actively leaving the group`, is not one, counted over the whole file: the short-lived consumers an Oracle CDC connector opens per table every 30 s or so, the schema history consumer of Debezium; their groups come last); also on the 🔌 cards and in the 🗓️ timeline. 🔁 **restart loop**: a worker that failed to start 3 times or more (`ERROR Failed to start Connect`, its rotated files merged), or a worker / broker stopped 4 times or more every 30 min or less: a red banner at the top of the section (`🔁 Restart loop: Kafka Connect (connect.log) failed to start 20 times, … a new attempt every ~5 min 40 s`), a badge on its rows, a line in the terminal summary and a sentence in the verdict, because a low rate per hour over a long bundle hides it. A chart shows them over time (drag to zoom) and each row has a swimlane of its occurrences on the period of the table; a click on a row shows it alone in the chart, zoomed on its period, and lists its occurrences under it, each with a link to its line in the log file (the first 100 noted). A connector picked in the filter keeps its rows, the worker group rebalances and process starts (every connector of the worker) stay |
 | 🐢 broker signals | in the same table and chart as 🔄, and their own block in the terminal and the summary for a ticket: the signals of a broker under pressure, read from INFO / WARN lines that the digest of the errors misses: 📉 ISR shrinks and 📈 expands (`[Partition orders-0 broker=1] Shrinking ISR from 1,2,3 to 1,3`), 🪝 followers failing to fetch (`[ReplicaFetcher replicaId=3, leaderId=2, fetcherId=0] Error sending fetch request`, `Error in response for fetch request`, by the leader they fetch from; not the same line of a consumer, `[Consumer clientId=…]`, logged on every broker restart), ⏱️ requests timed out (`Disconnecting from node 2 due to request timeout`, by the broker that did not answer), 🧽 the log cleaner that died or skipped a partition (also the 🧽 Log cleaner stopped known cause), 🚦 requests throttled by a quota (librdkafka `THROTTLE`, `ThrottlingQuotaExceededException`), 📭 responses to clients already gone (`no open connection, connection id`), 🚷 failed client authentications seen by the broker (`[SocketServer listenerType=BROKER, nodeId=1] Failed authentication with /10.0.0.1 (channelId=…) (errorMessage=…)`, `Failed re-authentication with`, INFO: the broker side of an authentication incident, with the exact count per client IP and error message). One row per kind and broker (a line without broker id: its file), with the partitions or peers they happen to most; 🌀 storm as the rebalances. 📥 then asks for the JMX metrics of the brokers (request handler and network idle ratio, request queue, produce / fetch latency, ISR shrinks) |
@@ -566,7 +629,8 @@ change (everything after it would follow it), nor the first start of a worker.
 
 Two samples show them: `jvm_dumps` (the Connect log of section 2 with 3 thread dumps of a JVM and a heap dump, from the
 samples of the thread and heap analyzers) and `broker_pressure` (the logs of 3 brokers while broker 3 falls behind,
-with their `kafka-topics --describe` and `kafka-log-dirs` outputs).
+with their `kafka-topics --describe` and `kafka-log-dirs` outputs). The dumps of 2 JVMs in one folder, with a lock
+stall, are in `connect_workers` ([Shapes of customer files](#shapes-of-customer-files)).
 
 ```bash
 playground analyze logs --sample jvm_dumps
@@ -840,6 +904,10 @@ playground analyze logs --sample connect_task_failure --show-config cdc-xstream-
 # 3. the non-Java clients, then the Kafka Streams instances (section 3)
 playground analyze logs --sample kafka_clients
 playground analyze logs --sample kafka_streams
+# 3b. the shapes of customer files: 2 workers, a Grafana / Loki export, a Connector CR next to a .txt log (section 3)
+playground analyze logs --sample connect_workers
+playground analyze logs --sample loki_export
+playground analyze logs --sample connector_cr
 # 4. did the fix work? (section 6)
 playground analyze logs --sample compare_fix
 # 5. a truncated download: 3000 INFO lines then the error, gzipped, and only the first 2 KB of it received
@@ -900,7 +968,7 @@ playground analyze logs -f <file|folder|.zip|.tar.gz|.7z|.gz|export.json|export.
                         [--compare <before: file|folder|archive|JSON of --json>]
                         [--json [--json-sections summary,known_causes,root_causes,timeline,connectors,comparison]]
                         [--sanitize] [--logs-only]
-playground analyze logs --sample connect_task_failure|support_bundle|broker_pressure|jvm_dumps|kafka_streams|kafka_clients|compare_fix
+playground analyze logs --sample connect_task_failure|support_bundle|broker_pressure|jvm_dumps|kafka_streams|kafka_clients|compare_fix|connect_workers|loki_export|connector_cr
 playground analyze watch [--folder ~/Downloads] [--output-dir ~/playground-log-reports] [--since <minutes> [--once]]
                          [--exclude Archives] [--no-open] [--logs-only] [--analyze-logs-args "--errors-only --sanitize"]
                          [--install-launch-agent | --uninstall-launch-agent]

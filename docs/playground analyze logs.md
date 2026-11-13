@@ -241,6 +241,9 @@ one, and a 📈 Trend gives the totals and the main root causes of every input i
 - **kafka_streams**: logs of the 3 instances of other/kafka-streams (serde-errors.sh): an application in ERROR after a poison pill, its dead stream thread, deserialization and production handler errors, the 🌊 Kafka Streams section (state, rebalances, tasks, timeline)
 - **compare_fix**: the log of a Connect worker the day after a fix, compared with the day before (`--compare`): errors gone, a new one, rebalances growing
 - **kafka_clients**: logs of the non-Java clients (C/C++, Python, Go, .NET, JavaScript, KafkaJS, Rust) of other/client-\*: a broker that refuses connections or does not resolve, records timed out, an unknown property, and crashes (Python traceback, .NET unhandled exception, Go and Rust panics, uncaught Node.js error)
+- **connect_workers**: 2 Connect workers (one logging each line twice: ⚠️ duplicated lines collapsed), 2 thread dumps of each (🧵 per JVM: a lock stall of the binlog keepalive thread behind a TLS socket write), a task whose graceful stop failed and that still runs (🧟), an HDFS sink rotating with empty offsets (🔂 livelock) and a /connectors?expand=status output whose FAILED task trace becomes a record
+- **loki_export**: Grafana / Loki text export (header, epoch and UTC time before each line, newest first) of an S3 sink denied by S3: prefix removed, put back in the order of time
+- **connector_cr**: a folder with one CFK Connector custom resource and the log of its worker saved as .txt: read as log files, not as a CFK support bundle
 - **cfk_bundle**: CFK support bundle: kafka-2 crash-looping on an expired certificate, pending volume, OOMKilled Connect pod, failed connector task, Schema Registry authentication failure, operator reconcile errors
 - **cfk_kraft_migration**: CFK support bundle: ZooKeeper to KRaft migration (KRaftMigrationJob) stuck for 3 days in SETUP, the KRaftController missing inter replication credentials
 - **cfk_rollout**: CFK support bundle: CP upgrade half done (KRaftController still blocked, Kafka roll stuck at 2/3), operator pod refused by the ResourceQuota, stale "Reconcile is blocked" conditions, operator log that starts after the last change
@@ -249,7 +252,7 @@ one, and a 📈 Trend gives the totals and the main root causes of every input i
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Repeatable:     |  ✓ Yes
-| Allowed Values: | `connect_task_failure`, `connect_many_connectors`, `support_bundle`, `broker_pressure`, `jvm_dumps`, `kafka_streams`, `kafka_clients`, `compare_fix`, `cfk_bundle`, `cfk_kraft_migration`, `cfk_rollout`, `cfk_rollout_after`
+| Allowed Values: | `connect_task_failure`, `connect_many_connectors`, `support_bundle`, `broker_pressure`, `jvm_dumps`, `kafka_streams`, `kafka_clients`, `compare_fix`, `connect_workers`, `loki_export`, `connector_cr`, `cfk_bundle`, `cfk_kraft_migration`, `cfk_rollout`, `cfk_rollout_after`
 | Conflicts With: | `--from-containers`
 
 #### `--errors-only`
@@ -377,6 +380,10 @@ playground analyze logs --sample connect_many_connectors
 
 ```bash
 playground analyze logs --sample support_bundle
+```
+
+```bash
+playground analyze logs --sample connect_workers
 ```
 
 ```bash

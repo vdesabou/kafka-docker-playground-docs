@@ -530,7 +530,7 @@ Using Multi-Data-Center setup with 🇺🇸 and 🇪🇺 clusters
 ## 👾 Other Playgrounds
 
 - 🧠 [CLI examples](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/cli) &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/4/4-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/43330574135/job/131573946274)  
-- 🍪 [Deep dive labs](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/deep-dive-labs): the hands-on labs of the [Deep dives](https://kafka-docker-playground.io/#/deep-dives), with assertions on the outputs the pages quote &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI fail](https://img.shields.io/badge/28/29-fail!-red)](https://github.com/vdesabou/kafka-docker-playground/issues/10414)  [![CP 8.4.1](https://img.shields.io/badge/1/29-CP%208.4.1-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/43330574135/job/131573951499) 
+- 🍪 [Deep dive labs](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/deep-dive-labs): the hands-on labs of the [Deep dives](https://kafka-docker-playground.io/#/deep-dives), with assertions on the outputs the pages quote &nbsp; ![arm64](https://img.shields.io/badge/arm64-native%20support-green) [![CI ok](https://img.shields.io/badge/29/29-ok!-green)](https://github.com/vdesabou/kafka-docker-playground/actions/runs/43445071043/job/131952274105)  
 
 ## ☁️ Confluent Cloud
 

@@ -93,6 +93,8 @@
 
 ##### 🐛 Bugs
 
+- 🐛⏱️ aws lambda sink examples fail when Lambda cannot assume the IAM role just created [#10423](https://github.com/vdesabou/kafka-docker-playground/issues/10423)
+- 🐛👀 analyze watch ignores dumps, captures and reports on Linux (mktemp: too few X's in template) [#10421](https://github.com/vdesabou/kafka-docker-playground/issues/10421)
 - 🐛💯 playground topic get-number-records returns 0 on some Confluent Cloud clusters (kcat 1.7.0: API version not supported) [#10406](https://github.com/vdesabou/kafka-docker-playground/issues/10406)
 - 🐛☁️ install.sh: Confluent CLI install fails on Linux when its installer cannot resolve the latest version [#10390](https://github.com/vdesabou/kafka-docker-playground/issues/10390)
 - 🐛🧱 databricks delta lake sink examples report SUCCESS when COPY INTO fails [#10375](https://github.com/vdesabou/kafka-docker-playground/issues/10375)

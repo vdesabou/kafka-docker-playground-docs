@@ -93,6 +93,8 @@
 
 ##### 🐛 Bugs
 
+- 🐛🛌 ServiceNow wake-up: wait for the REST API when the portal status can't be read or the instance answers 502 [#10442](https://github.com/vdesabou/kafka-docker-playground/issues/10442)
+- 🐛👷 CI: ubuntu-26.04 runner image without Ubuntu apt sources, Unable to locate package expect [#10441](https://github.com/vdesabou/kafka-docker-playground/issues/10441)
 - 🐛⏱️ aws lambda sink examples fail when Lambda cannot assume the IAM role just created [#10423](https://github.com/vdesabou/kafka-docker-playground/issues/10423)
 - 🐛👀 analyze watch ignores dumps, captures and reports on Linux (mktemp: too few X's in template) [#10421](https://github.com/vdesabou/kafka-docker-playground/issues/10421)
 - 🐛💯 playground topic get-number-records returns 0 on some Confluent Cloud clusters (kcat 1.7.0: API version not supported) [#10406](https://github.com/vdesabou/kafka-docker-playground/issues/10406)

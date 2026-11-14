@@ -3,6 +3,7 @@
 ## November 2026
 ##### 🌟 Enhancements
 
+- ⭐🅰️ cp-ansible environment: Confluent Platform deployed by the cp-ansible playbooks (--environment ansible) [#10445](https://github.com/vdesabou/kafka-docker-playground/issues/10445)
 - 🧠🧰 analyze watch: heap dumps, flight recordings, captures, XStream reports, GC logs and thread dumps get their own analyzer [#10402](https://github.com/vdesabou/kafka-docker-playground/issues/10402)
 - 🧠👀 analyze watch: analyze the logs downloaded in \~/Downloads automatically [#10400](https://github.com/vdesabou/kafka-docker-playground/issues/10400)
 - 🧠🍺 install.sh: offer to install Homebrew on macOS when it is missing [#10388](https://github.com/vdesabou/kafka-docker-playground/issues/10388)

@@ -94,6 +94,7 @@
 
 ##### 🐛 Bugs
 
+- 🐛🧪 deep-dive lab replication.sh: consumer group offsets check fails when the no active members warning splits the row [#10452](https://github.com/vdesabou/kafka-docker-playground/issues/10452)
 - 🐛🛌 ServiceNow wake-up: wait for the REST API when the portal status can't be read or the instance answers 502 [#10442](https://github.com/vdesabou/kafka-docker-playground/issues/10442)
 - 🐛👷 CI: ubuntu-26.04 runner image without Ubuntu apt sources, Unable to locate package expect [#10441](https://github.com/vdesabou/kafka-docker-playground/issues/10441)
 - 🐛⏱️ aws lambda sink examples fail when Lambda cannot assume the IAM role just created [#10423](https://github.com/vdesabou/kafka-docker-playground/issues/10423)

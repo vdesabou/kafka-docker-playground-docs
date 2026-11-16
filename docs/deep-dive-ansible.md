@@ -14,7 +14,10 @@ about 15 minutes to read, and about 12 minutes to run the lab.
 | a connector example on it | `playground run -f <connect/ example> --environment ansible [--ansible-inventory …]` |
 | other versions | `--tag` (CP), `ANSIBLE_CP_VERSION` (collection), `ANSIBLE_CORE_VERSION`, `ANSIBLE_INSTALLATION_METHOD=package` |
 | more hosts | `--enable-multiple-brokers`, `--enable-multiple-controllers`, `--enable-multiple-connect-workers`, `--enable-ksqldb`, `--enable-rest-proxy`, `--enable-control-center` |
-| change a variable and deploy again | edit `environment/ansible/inventory/hosts.yml`, then `docker exec -it ansible-controller ansible-playbook -i /inventory/hosts.yml confluent.platform.all [--limit connect] [--tags …] [-vvv]` |
+| change a variable and deploy again | `playground ansible inventory set <yq path> <value>`, then `playground ansible playbook --rolling [--limit connect] [--tags …] [--verbose]` |
+| upgrade Confluent Platform | `playground ansible upgrade --to <version>` (archive, collection, playbook rolling) |
+| add brokers, workers, controllers (dynamic quorum) | `playground ansible add-host <host>…`, then `playground ansible playbook --limit <hosts>` |
+| day-2 changes with a workload running through them (upgrade, SASL_SSL, scale out, KRaft quorum) | `playground run -f other/cp-ansible-day2/<example>.sh` |
 | what cp-ansible rendered | `playground container get-properties -c broker`, `docker exec broker systemctl status confluent-server` |
 | the playbook output | `/tmp/playground-ansible-playbook.log` |
 
@@ -137,7 +140,7 @@ whole lab 11 min 31 s; the CP archive is downloaded once to `~/.playground-ansib
 playground start-environment --environment ansible --docker-compose-override-file "$PWD/other/deep-dive-labs/docker-compose.plaintext.yml"
 # 🖥️ hosts: controller broker schema-registry connect
 # 🧩 translating the example's docker compose override docker-compose.plaintext.yml into inventory variables
-#    connect: plugin.path=/opt/confluent/confluent-8.4.1/share/filestream-connectors (kafka_connect_custom_properties)   <- CONNECT_PLUGIN_PATH of the override
+#    connect: plugin.path=/opt/confluent/confluent-{{ confluent_package_version }}/share/filestream-connectors (kafka_connect_custom_properties)   <- CONNECT_PLUGIN_PATH of the override, follows an upgrade
 # ▶️ Running the playbook (a few minutes): docker exec ansible-controller ansible-playbook -i /inventory/hosts.yml confluent.platform.all
 # PLAY RECAP *********************************************************************
 # broker                     : ok=127  changed=27   unreachable=0    failed=0    skipped=180  rescued=0    ignored=0
@@ -172,7 +175,7 @@ playground debug thread-dump -c connect
 # 👻 thread dump is available at /tmp/thread-dump-connect-2026-11-13-19-55-50.log      <- kill -3 on the MainPID of the service
 playground container recreate
 # ❌ container recreate is not supported in ansible mode: a recreated host loses what the playbook installed, run the playbook again instead
-#     docker exec -it ansible-controller ansible-playbook -i /inventory/hosts.yml confluent.platform.all
+#     playground ansible playbook (playground ansible inventory set <path> <value> to change a variable first)
 playground container set-environment-variables -c connect --env "KAFKA_OPTS: -verbose:class"
 # this command is not available with ansible: the containers are hosts where cp-ansible installed Confluent Platform, recreating them deletes the installation. Change the inventory …
 ```
@@ -180,8 +183,8 @@ playground container set-environment-variables -c connect --env "KAFKA_OPTS: -ve
 **Step 3: change the inventory, run the playbook again**
 
 ```bash
-yq -i '.all.children.kafka_connect.vars.kafka_connect_custom_properties["consumer.max.poll.records"] = 100' environment/ansible/inventory/hosts.yml
-docker exec -it ansible-controller ansible-playbook -i /inventory/hosts.yml confluent.platform.all --limit connect
+playground ansible inventory set '.all.children.kafka_connect.vars.kafka_connect_custom_properties["consumer.max.poll.records"]' 100
+playground ansible playbook --limit connect
 # connect                    : ok=122  changed=7    unreachable=0    failed=0    skipped=242  rescued=0    ignored=0   <- about a minute
 playground container get-properties -c connect
 # consumer.max.poll.records=100
@@ -235,8 +238,8 @@ EOF
 
 | Case | Recipe |
 | --- | --- |
-| "the cp-ansible playbook fails on a task" | `playground run -f <connect/ example> --environment ansible --ansible-inventory <their hosts.yml>` with `ANSIBLE_CP_VERSION` / `ANSIBLE_CORE_VERSION` of the case: the error of each host is printed (`❌ <host>: <message>`); then `docker exec -it ansible-controller ansible-playbook -i /inventory/hosts.yml confluent.platform.all -vvv --tags <tag>` |
-| "this cp-ansible variable renders a wrong properties file" | `playground container get-properties -c <host>` after deploying their inventory, change the variable in `environment/ansible/inventory/hosts.yml`, `ansible-playbook … --limit <host>`, compare |
-| "the cp-ansible upgrade breaks" | `playground run -f <example> --environment ansible --ansible-inventory <hosts.yml>` with the old `confluent_package_version`, then the new one (and `confluent_archive_file_source` to the new archive in `/cache`) and the playbook again |
+| "the cp-ansible playbook fails on a task" | `playground run -f <connect/ example> --environment ansible --ansible-inventory <their hosts.yml>` with `ANSIBLE_CP_VERSION` / `ANSIBLE_CORE_VERSION` of the case: the error of each host is printed (`❌ <host>: <message>`); then `playground ansible playbook --verbose --tags <tag>` |
+| "this cp-ansible variable renders a wrong properties file" | `playground container get-properties -c <host>` after deploying their inventory, `playground ansible inventory set <path> <value>`, `playground ansible playbook --limit <host>`, compare |
+| "the cp-ansible upgrade breaks" | `playground run -f <example> --environment ansible --ansible-inventory <hosts.yml>` with the old `confluent_package_version`, then `playground ansible upgrade --to <new version>` (see [other/cp-ansible-day2](https://github.com/vdesabou/kafka-docker-playground/tree/master/other/cp-ansible-day2)) |
 | "the connector fails on our cluster deployed by cp-ansible" | `playground run -f <example> --environment ansible --ansible-inventory <their hosts.yml>` |
 | "is it cp-ansible or Kafka?" | `playground run -f <example>` on `--environment plaintext` (cp images), then `--environment ansible` |

@@ -3,6 +3,7 @@
 ## November 2026
 ##### 🌟 Enhancements
 
+- 🧠☁️ Codespaces: podman 5 ready for playground switch-podman, plus python3 and the Confluent CLI [#10454](https://github.com/vdesabou/kafka-docker-playground/issues/10454)
 - ⭐🅰️ cp-ansible environment: Confluent Platform deployed by the cp-ansible playbooks (--environment ansible) [#10445](https://github.com/vdesabou/kafka-docker-playground/issues/10445)
 - 🧠🧰 analyze watch: heap dumps, flight recordings, captures, XStream reports, GC logs and thread dumps get their own analyzer [#10402](https://github.com/vdesabou/kafka-docker-playground/issues/10402)
 - 🧠👀 analyze watch: analyze the logs downloaded in \~/Downloads automatically [#10400](https://github.com/vdesabou/kafka-docker-playground/issues/10400)

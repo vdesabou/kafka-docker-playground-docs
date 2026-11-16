@@ -95,6 +95,7 @@
 
 ##### 🐛 Bugs
 
+- 🐛🦭 Codespaces: podman containers have no internet access (FORWARD DROP of docker-in-docker) [#10464](https://github.com/vdesabou/kafka-docker-playground/issues/10464)
 - 🐛🦭 ansible environment on podman: the controller uses the docker socket instead of the podman context [#10461](https://github.com/vdesabou/kafka-docker-playground/issues/10461)
 - 🐛🧑‍💻 Codespaces: the ansible environment fails without yq (docker yq fallback), install yq [#10459](https://github.com/vdesabou/kafka-docker-playground/issues/10459)
 - 🐛🧪 deep-dive lab replication.sh: consumer group offsets check fails when the no active members warning splits the row [#10452](https://github.com/vdesabou/kafka-docker-playground/issues/10452)

@@ -13,10 +13,12 @@ have, or one that must run for hours.
 - **push-secrets**: send your credentials to it, over ssh
 - **sync-repro-folder**: keep reproduction-models in step, both directions
 - **list / status / start / stop / delete**
+- **auto-stop**: stop the instances left running, every evening
 
 💰 The instance is billed while it runs. Use `playground ec2 stop` when  
 you pause, and `playground ec2 delete` when you are done;  
-`playground status` reminds you when one is still up.
+`playground status` reminds you when one is still up, and  
+`playground ec2 auto-stop enable` stops them every evening if idle.
 
 🔐 A pem file is created at the root of the repository when the instance  
 is created. Back it up, it is the only way in, and only your current  
@@ -37,6 +39,11 @@ playground ec2 COMMAND
 - [open](playground%20ec2%20open) - 👨‍💻 Open an EC2 instance using Visual Studio code
 - [list](playground%20ec2%20list) - 🔘 List all EC2 instance
 - [stop](playground%20ec2%20stop) - 🔴 Stop an EC2 instance
+- [auto-stop](playground%20ec2%20auto-stop) - ⏰ Stop your EC2 instances left running, every evening, automatically
+  - [enable](playground%20ec2%20auto-stop%20enable) - ⏰ Schedule the auto-stop, then show what tonight's run would stop
+  - [disable](playground%20ec2%20auto-stop%20disable) - 🛑 Remove the auto-stop schedule
+  - [status](playground%20ec2%20auto-stop%20status) - 🔎 Is the auto-stop scheduled, at what time, and what did its last runs do
+  - [run](playground%20ec2%20auto-stop%20run) - ⏰ Stop now your idle EC2 instances still running, as the scheduled job does
 - [start](playground%20ec2%20start) - 🟢 Start an EC2 instance
 - [sync-repro-folder](playground%20ec2%20sync-repro-folder) - ↔️ Synchronize reproduction-models folder between local and ec2 instance
   - [local-to-ec2](playground%20ec2%20sync-repro-folder%20local-to-ec2) - 👉 Sync local reproduction-models folder to ec2 instance

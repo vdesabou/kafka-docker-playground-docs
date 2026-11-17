@@ -16,7 +16,8 @@ The same three exist for azure and ccloud (Confluent Cloud).
 
 - **cloud-resources cleanup**: delete the leftovers in aws, gcp, azure, ccloud and salesforce (`--resource`, `--dry-run` first)
 
-🌙 and it can run by itself every night, for Confluent Cloud:
+🌙 and it can run by itself every night (Confluent Cloud, and AWS, GCP, Azure  
+with `--resource`):
 
 cloud-resources nightly-cleanup enable|disable|status
 
@@ -41,7 +42,7 @@ playground cloud-resources COMMAND
   - [costs](playground%20cloud-resources%20ccloud%20costs) - 💰  Retrieve ccloud costs for a range of dates
   - [costs-history](playground%20cloud-resources%20ccloud%20costs-history) - 👛  Retrieve ccloud costs for each month since last year
 - [cleanup](playground%20cloud-resources%20cleanup) - 🧹 Cleanup cloud resources that were created by running examples from the playground
-- [nightly-cleanup](playground%20cloud-resources%20nightly-cleanup) - 🌙 Delete what your fully managed examples left running in Confluent Cloud, every night, automatically
+- [nightly-cleanup](playground%20cloud-resources%20nightly-cleanup) - 🌙 Delete what your examples left running in Confluent Cloud (and AWS, GCP, Azure with `--resource`), every night, automatically
   - [enable](playground%20cloud-resources%20nightly-cleanup%20enable) - 🌙 Schedule the nightly cleanup, then show what tonight's run would delete
   - [disable](playground%20cloud-resources%20nightly-cleanup%20disable) - 🛑 Remove the nightly cleanup schedule
   - [status](playground%20cloud-resources%20nightly-cleanup%20status) - 🔎 Is the nightly cleanup scheduled, at what time, and what did its last runs do

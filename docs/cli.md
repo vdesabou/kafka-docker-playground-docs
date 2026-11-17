@@ -245,7 +245,7 @@ playground [OPTIONS] COMMAND
     - [costs](playground%20cloud-resources%20ccloud%20costs) - 💰  Retrieve ccloud costs for a range of dates
     - [costs-history](playground%20cloud-resources%20ccloud%20costs-history) - 👛  Retrieve ccloud costs for each month since last year
   - [cleanup](playground%20cloud-resources%20cleanup) - 🧹 Cleanup cloud resources that were created by running examples from the playground
-  - [nightly-cleanup](playground%20cloud-resources%20nightly-cleanup) - 🌙 Delete what your fully managed examples left running in Confluent Cloud, every night, automatically
+  - [nightly-cleanup](playground%20cloud-resources%20nightly-cleanup) - 🌙 Delete what your examples left running in Confluent Cloud (and AWS, GCP, Azure with `--resource`), every night, automatically
     - [enable](playground%20cloud-resources%20nightly-cleanup%20enable) - 🌙 Schedule the nightly cleanup, then show what tonight's run would delete
     - [disable](playground%20cloud-resources%20nightly-cleanup%20disable) - 🛑 Remove the nightly cleanup schedule
     - [status](playground%20cloud-resources%20nightly-cleanup%20status) - 🔎 Is the nightly cleanup scheduled, at what time, and what did its last runs do
@@ -592,6 +592,11 @@ playground [OPTIONS] COMMAND
   - [open](playground%20ec2%20open) - 👨‍💻 Open an EC2 instance using Visual Studio code
   - [list](playground%20ec2%20list) - 🔘 List all EC2 instance
   - [stop](playground%20ec2%20stop) - 🔴 Stop an EC2 instance
+  - [auto-stop](playground%20ec2%20auto-stop) - ⏰ Stop your EC2 instances left running, every evening, automatically
+    - [enable](playground%20ec2%20auto-stop%20enable) - ⏰ Schedule the auto-stop, then show what tonight's run would stop
+    - [disable](playground%20ec2%20auto-stop%20disable) - 🛑 Remove the auto-stop schedule
+    - [status](playground%20ec2%20auto-stop%20status) - 🔎 Is the auto-stop scheduled, at what time, and what did its last runs do
+    - [run](playground%20ec2%20auto-stop%20run) - ⏰ Stop now your idle EC2 instances still running, as the scheduled job does
   - [start](playground%20ec2%20start) - 🟢 Start an EC2 instance
   - [sync-repro-folder](playground%20ec2%20sync-repro-folder) - ↔️ Synchronize reproduction-models folder between local and ec2 instance
     - [local-to-ec2](playground%20ec2%20sync-repro-folder%20local-to-ec2) - 👉 Sync local reproduction-models folder to ec2 instance

@@ -1,6 +1,6 @@
 # playground cloud-resources nightly-cleanup
 
-🌙 Delete what your fully managed examples left running in Confluent Cloud, every night, automatically
+🌙 Delete what your examples left running in Confluent Cloud (and AWS, GCP, Azure with `--resource`), every night, automatically
 
 - **enable**: schedule it (default 02:00), then show what tonight's run would delete
 - **disable**: remove the schedule
@@ -19,6 +19,25 @@ It keeps your own clusters and their topics (playground ccloud setup),
 and never deletes service accounts or API keys: the secrets store may be  
 locked at night, so the keys in use can't be told apart. Run  
 `playground cloud-resources cleanup --resource ccloud` yourself for those.
+
+☁️ 'enable `--resource` aws `--resource` gcp `--resource` azure' adds what  
+`playground cloud-resources cleanup` deletes in those clouds (Kinesis  
+streams, SQS queues, Redshift clusters, DynamoDB tables, Azure resource  
+groups, GCS buckets, BigQuery datasets, Spanner and Bigtable instances…,  
+named pg…`<user>`…). Nothing interactive at night: a cloud whose  
+credentials can't be read without a prompt is skipped, with a  
+notification, and the others still run:  
+aws      ~/.aws/credentials, or `AWS_ACCESS_KEY_ID` and  
+`AWS_SECRET_ACCESS_KEY` in the secrets store  
+azure    `AZ_CLIENT_ID`, `AZ_CLIENT_SECRET` and `AZ_TENANT_ID` (service  
+principal) in the secrets store, or a saved 'az login'  
+session; `AZURE_SUBSCRIPTION_NAME` for a confluent.io account  
+gcp      `GCP_PROJECT` and `GCP_KEYFILE_CONTENT` in the secrets store, and  
+Docker running  
+The secrets store is read at night unless it is 1Password without a  
+service account token (it would wait for Touch ID).  
+⚠️ Like the connectors in Confluent Cloud, the resources of an example  
+still running at that time are deleted too: pick a time you don't use.
 
 macOS: a launchd agent (~/Library/LaunchAgents), which also runs when the  
 Mac wakes up if it was asleep at that time. Linux: a crontab line. The  

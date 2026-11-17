@@ -13,7 +13,7 @@ applied by the next `playground ansible playbook`.
 playground ansible inventory COMMAND
 ```
 
-## Run commands
+## Ansible commands
 
 - [get](playground%20ansible%20inventory%20get) - 🔎 Display the inventory, or the value of a yq path
 - [set](playground%20ansible%20inventory%20set) - ✏️ Set the value of a yq path, and print the change

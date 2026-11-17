@@ -22,7 +22,7 @@ security of each host, CA of the https REST APIs).
 playground ansible COMMAND
 ```
 
-## Run commands
+## Ansible commands
 
 - [playbook](playground%20ansible%20playbook) - ▶️ Run the playbook again on the hosts
 - [inventory](playground%20ansible%20inventory) - 📋 Read and change the inventory of the ansible environment

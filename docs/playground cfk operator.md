@@ -8,7 +8,7 @@
 playground cfk operator COMMAND
 ```
 
-## Run commands
+## CFK commands
 
 - [upgrade](playground%20cfk%20operator%20upgrade) - ⬆️ Upgrade the CFK operator, with the CFK upgrade procedure
 

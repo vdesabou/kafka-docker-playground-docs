@@ -24,7 +24,7 @@ pods since the change.
 playground cfk COMMAND
 ```
 
-## Run commands
+## CFK commands
 
 - [patch](playground%20cfk%20patch) - 🩹 Change a custom resource and wait for CFK to roll it
 - [roll](playground%20cfk%20roll) - 🔁 Restart the pods of a custom resource, the way CFK supports

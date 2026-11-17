@@ -96,20 +96,6 @@ playground [OPTIONS] COMMAND
 - [open-docs](playground%20open-docs) - 🧑‍🎓 Open Confluent documentation of currently running example
 - [open-changelog](playground%20open-changelog) - 📜 Open playground changelog (https://kafka-docker-playground.io/#/changelog)
 - [cp-changelog](playground%20cp-changelog) - 📜 Show what changed in Confluent Platform between two versions
-- [ansible](playground%20ansible) - 🅰️ cp-ansible commands (ansible and ansible-sasl-ssl environments)
-  - [playbook](playground%20ansible%20playbook) - ▶️ Run the playbook again on the hosts
-  - [inventory](playground%20ansible%20inventory) - 📋 Read and change the inventory of the ansible environment
-    - [get](playground%20ansible%20inventory%20get) - 🔎 Display the inventory, or the value of a yq path
-    - [set](playground%20ansible%20inventory%20set) - ✏️ Set the value of a yq path, and print the change
-    - [delete](playground%20ansible%20inventory%20delete) - 🗑️ Remove a yq path from the inventory, and print the change
-  - [add-host](playground%20ansible%20add-host) - 🖥️ Add hosts to the running cluster
-  - [upgrade](playground%20ansible%20upgrade) - ⬆️ Upgrade (or downgrade) Confluent Platform with cp-ansible
-- [cfk](playground%20cfk) - ☸️ Confluent for Kubernetes commands (cfk and cfk-rbac environments)
-  - [patch](playground%20cfk%20patch) - 🩹 Change a custom resource and wait for CFK to roll it
-  - [roll](playground%20cfk%20roll) - 🔁 Restart the pods of a custom resource, the way CFK supports
-  - [upgrade](playground%20cfk%20upgrade) - ⬆️ Move every custom resource to another Confluent Platform version
-  - [operator](playground%20cfk%20operator) - ☸️ The CFK operator
-    - [upgrade](playground%20cfk%20operator%20upgrade) - ⬆️ Upgrade the CFK operator, with the CFK upgrade procedure
 
 ### Cloud Resources commands
 
@@ -332,6 +318,26 @@ playground [OPTIONS] COMMAND
   - [describe](playground%20consumer-group%20describe) - 🔬 Describe consumer group
   - [reset-offsets](playground%20consumer-group%20reset-offsets) - ⏪ Reset the committed offsets of a consumer group
   - [delete](playground%20consumer-group%20delete) - 🗑️ Delete a consumer group, or its offsets for one topic
+
+### Ansible commands
+
+- [ansible](playground%20ansible) - 🅰️ cp-ansible commands (ansible and ansible-sasl-ssl environments)
+  - [playbook](playground%20ansible%20playbook) - ▶️ Run the playbook again on the hosts
+  - [inventory](playground%20ansible%20inventory) - 📋 Read and change the inventory of the ansible environment
+    - [get](playground%20ansible%20inventory%20get) - 🔎 Display the inventory, or the value of a yq path
+    - [set](playground%20ansible%20inventory%20set) - ✏️ Set the value of a yq path, and print the change
+    - [delete](playground%20ansible%20inventory%20delete) - 🗑️ Remove a yq path from the inventory, and print the change
+  - [add-host](playground%20ansible%20add-host) - 🖥️ Add hosts to the running cluster
+  - [upgrade](playground%20ansible%20upgrade) - ⬆️ Upgrade (or downgrade) Confluent Platform with cp-ansible
+
+### CFK commands
+
+- [cfk](playground%20cfk) - ☸️ Confluent for Kubernetes commands (cfk and cfk-rbac environments)
+  - [patch](playground%20cfk%20patch) - 🩹 Change a custom resource and wait for CFK to roll it
+  - [roll](playground%20cfk%20roll) - 🔁 Restart the pods of a custom resource, the way CFK supports
+  - [upgrade](playground%20cfk%20upgrade) - ⬆️ Move every custom resource to another Confluent Platform version
+  - [operator](playground%20cfk%20operator) - ☸️ The CFK operator
+    - [upgrade](playground%20cfk%20operator%20upgrade) - ⬆️ Upgrade the CFK operator, with the CFK upgrade procedure
 
 ### Flink commands
 

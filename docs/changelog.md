@@ -3,6 +3,7 @@
 ## November 2026
 ##### 🌟 Enhancements
 
+- 🧠⏰ Scheduled jobs: nightly cleanup of AWS/GCP/Azure and ec2 auto-stop [#10475](https://github.com/vdesabou/kafka-docker-playground/issues/10475)
 - ⭐☸️ CFK day-2 operations: playground cfk commands and examples (CP upgrade, operator upgrade) [#10468](https://github.com/vdesabou/kafka-docker-playground/issues/10468)
 - ⭐🅰️ cp-ansible day-2 operations: playground ansible commands and examples (upgrade, security, scale out) [#10455](https://github.com/vdesabou/kafka-docker-playground/issues/10455)
 - 🧠☁️ Codespaces: podman 5 ready for playground switch-podman, plus python3 and the Confluent CLI [#10454](https://github.com/vdesabou/kafka-docker-playground/issues/10454)

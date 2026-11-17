@@ -23,6 +23,9 @@ At the end, the space freed is reported (docker system df).
 🎓 Tip: `playground remove-cp-docker-images --keep-latest-patch --dry-run`  
 shows what keeping only the last patch of each minor version would remove.
 
+🎓 Tip: `playground docker-cleanup enable` runs it every week (`--older-than`),  
+with the dangling images and the build cache.
+
 ## Usage
 
 ```bash

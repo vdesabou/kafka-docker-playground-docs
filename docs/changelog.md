@@ -3,6 +3,7 @@
 ## November 2026
 ##### 🌟 Enhancements
 
+- 🧠🎫 Kerberos ticket expiry example and analyze logs causes [#10491](https://github.com/vdesabou/kafka-docker-playground/issues/10491)
 - 🧠📚 One docs page for cleanup and scheduled jobs [#10485](https://github.com/vdesabou/kafka-docker-playground/issues/10485)
 - ⭐☸️ CFK day-2: KRaft migration, SASL\_SSL and scale out examples [#10481](https://github.com/vdesabou/kafka-docker-playground/issues/10481)
 - 🧠🧽 Weekly docker-cleanup: old CP images, dangling images, build cache [#10479](https://github.com/vdesabou/kafka-docker-playground/issues/10479)

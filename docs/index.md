@@ -104,6 +104,12 @@ playground [OPTIONS] COMMAND
     - [delete](playground%20ansible%20inventory%20delete) - 🗑️ Remove a yq path from the inventory, and print the change
   - [add-host](playground%20ansible%20add-host) - 🖥️ Add hosts to the running cluster
   - [upgrade](playground%20ansible%20upgrade) - ⬆️ Upgrade (or downgrade) Confluent Platform with cp-ansible
+- [cfk](playground%20cfk) - ☸️ Confluent for Kubernetes commands (cfk and cfk-rbac environments)
+  - [patch](playground%20cfk%20patch) - 🩹 Change a custom resource and wait for CFK to roll it
+  - [roll](playground%20cfk%20roll) - 🔁 Restart the pods of a custom resource, the way CFK supports
+  - [upgrade](playground%20cfk%20upgrade) - ⬆️ Move every custom resource to another Confluent Platform version
+  - [operator](playground%20cfk%20operator) - ☸️ The CFK operator
+    - [upgrade](playground%20cfk%20operator%20upgrade) - ⬆️ Upgrade the CFK operator, with the CFK upgrade procedure
 
 ### Cloud Resources commands
 

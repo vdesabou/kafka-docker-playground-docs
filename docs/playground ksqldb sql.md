@@ -19,6 +19,8 @@ LIMIT `<n>`, or `--query-timeout`. Otherwise the cli is stopped after
 `--max-wait` seconds. To wait for a CREATE ... AS SELECT to process its  
 input before querying it, use `playground ksqldb wait` instead of a sleep.
 
+🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-ksqldb
+
 ## Usage
 
 ```bash

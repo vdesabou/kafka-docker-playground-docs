@@ -50,6 +50,7 @@ deep-dive-flink.md
 deep-dive-fully-managed.md
 deep-dive-java-debugging.md
 deep-dive-jvm-diagnostics.md
+deep-dive-ksqldb.md
 deep-dive-log-levels.md
 deep-dive-network-traffic.md
 deep-dive-observability.md

@@ -7,6 +7,10 @@ query) is RUNNING and has committed all the records of its input
 topics, so that its result is complete: use it instead of a sleep  
 after a CREATE ... AS SELECT and the records it reads.
 
+A source table (CREATE SOURCE TABLE) is waited for too: its CST_ query  
+materializes it for pull queries and has no sink, its lag is read from  
+its consumer group (_confluent-ksql-`<service id>`query_`<query id>`).
+
 A query that has not committed any offset yet is done when its input  
 topics are empty, or when it is still without commit after 20 seconds  
 RUNNING: it has nothing to process from where it started (a CREATE  
@@ -14,6 +18,8 @@ sent without SET 'auto.offset.reset' = 'earliest' reads from the end
 of its topics), and a warning says so.
 
 Exits with code 1 when a query is in ERROR, or after `--max-wait` seconds.
+
+🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-ksqldb
 
 ## Usage
 
@@ -27,7 +33,7 @@ playground ksqldb wait [OPTIONS]
 
 🧮 Only wait for the queries writing to this stream or table (repeatable)
 
-ℹ️ If not set, all persistent queries
+ℹ️ If not set, all persistent queries (and the source tables)
 
 | Attributes      | &nbsp;
 |-----------------|-------------

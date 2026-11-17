@@ -15,6 +15,8 @@ examples enable it), without docker exec or curl.
 🎓 Tip: the REST API of ksqldb-server is published on http://localhost:8088.  
 The records that fail a query are in the `KSQL_PROCESSING_LOG` stream.
 
+🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-ksqldb
+
 ## Usage
 
 ```bash

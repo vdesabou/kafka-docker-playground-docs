@@ -49,183 +49,6 @@ playground [OPTIONS] COMMAND
   - [cleanup-ccloud-resources-after-run](playground%20config%20cleanup-ccloud-resources-after-run) - 🧹 delete the Confluent Cloud resources left by the last ccloud example
   - [check-and-update-repo-version](playground%20config%20check-and-update-repo-version) - when running an example, always check if repo version is older than 3 days, if disabled, it will skip this check.
 
-### Secrets commands
-
-- [secrets](playground%20secrets) - 🔐 Credentials required by examples
-  - [set](playground%20secrets%20set) - 🔐 Store a credential
-  - [get](playground%20secrets%20get) - 🔍 Show a stored credential (masked unless `--reveal` is used)
-  - [unset](playground%20secrets%20unset) - 🗑️ Remove a stored credential
-  - [list](playground%20secrets%20list) - 📋 List stored credentials
-  - [link](playground%20secrets%20link) - 🔗 Point a variable at a secret manager, without storing any value
-  - [check](playground%20secrets%20check) - ✅ Show what an example needs, and what is missing
-  - [env](playground%20secrets%20env) - 🐚 Export what an example needs into the current shell
-  - [import](playground%20secrets%20import) - 📥 Import an existing secret.properties / variable.properties file
-  - [export](playground%20secrets%20export) - 📤 Write every credential of a profile to a file, in clear text
-  - [edit](playground%20secrets%20edit) - ✏️ Open the store in your editor
-  - [backend](playground%20secrets%20backend) - 🏦 Show or change where secrets are kept
-  - [profile](playground%20secrets%20profile) - 🗂️ Show or switch the active profile
-  - [scan](playground%20secrets%20scan) - 🔎 Look for stored credentials in clear text in the repository
-
-### Salesforce commands
-
-- [salesforce](playground%20salesforce) - ☁️ Set up a Salesforce org for the Salesforce examples, and check it
-  - [setup](playground%20salesforce%20setup) - 🛠️ Configure a Salesforce org for the Salesforce examples
-  - [check](playground%20salesforce%20check) - 🩺 Check that the stored Salesforce credentials work
-
-### Run commands
-
-- [ccloud](playground%20ccloud) - 🌤️ Set up your own Confluent Cloud clusters for the fully managed examples
-  - [setup](playground%20ccloud%20setup) - 🏗️ Create (or complete) your personal environment and clusters, and store them in a secrets profile
-- [run](playground%20run) - 🕹️ Run any example !
-- [re-run](playground%20re-run) - ⚡ Simply re-run last example you ran with `<playground run>`
-- [get-ci-result](playground%20get-ci-result) - 🤖 get CI result for current example
-- [history](playground%20history) - 🏰 Get an history of the examples which were run with run command and run it again
-- [find-example](playground%20find-example) - 🔎 Find examples matching a free-text query, without the interactive picker
-- [find-command](playground%20find-command) - 🧭 Find the playground command that answers a question, without reading the docs
-- [switch-ccloud](playground%20switch-ccloud) - 🌩️  Switch to ccloud environment.
-- [switch-back](playground%20switch-back) - 💺  Switch back from previous environment before switch-ccloud was called.
-- [switch-podman](playground%20switch-podman) - 🦭 Switch the container engine to Podman
-- [switch-docker](playground%20switch-docker) - 🐳 Switch the container engine back to Docker
-- [update-version](playground%20update-version) - ✨ Update current confluent platform components (all with `--tag` or only connect with `--connect-tag`) or connector(s) with new version(s)
-- [open](playground%20open) - 👐 When `--file` is not provided, simply open last example you ran with `<playground run>`
-- [stop](playground%20stop) - 🛑 Stop currently running example
-- [remove-all-docker-images](playground%20remove-all-docker-images) - 🧨 Remove all docker images (including docker volumes)
-- [remove-cp-docker-images](playground%20remove-cp-docker-images) - 🧹 Remove the Confluent Platform docker images of the versions you no longer use (a table of the versions installed locally, then a selection)
-- [docker-cleanup](playground%20docker-cleanup) - 🧽 Free the disk of the container engine every week, automatically: old Confluent Platform images, dangling images, old build cache
-  - [enable](playground%20docker-cleanup%20enable) - 🧽 Schedule the weekly cleanup, then show what it would remove now
-  - [disable](playground%20docker-cleanup%20disable) - 🛑 Remove the weekly cleanup schedule
-  - [status](playground%20docker-cleanup%20status) - 🔎 Is the weekly cleanup scheduled, when, and what did its last runs free
-  - [run](playground%20docker-cleanup%20run) - 🧽 Free the disk of the container engine now, as the weekly job does
-- [refresh-cp-docker-images](playground%20refresh-cp-docker-images) - 🔄 Refresh (pull from Docker) all Confluent Platform docker images related to a version installed locally
-- [cleanup-cloud-details](playground%20cleanup-cloud-details) - 🧼 playground is actively caching ccloud details (https://kafka-docker-playground.io/#/how-to-use?id=%f0%9f%8c%a4%ef%b8%8f-confluent-cloud-examples)
-- [open-docs](playground%20open-docs) - 🧑‍🎓 Open Confluent documentation of currently running example
-- [open-changelog](playground%20open-changelog) - 📜 Open playground changelog (https://kafka-docker-playground.io/#/changelog)
-- [cp-changelog](playground%20cp-changelog) - 📜 Show what changed in Confluent Platform between two versions
-
-### Cloud Resources commands
-
-- [cloud-resources](playground%20cloud-resources) - ☁️ What the playground left behind in your cloud accounts, what it costs, and cleaning it up
-  - [aws](playground%20cloud-resources%20aws) - ☁️ What is still running in AWS, and what it costs
-    - [list](playground%20cloud-resources%20aws%20list) - 📋 List all active resources
-    - [costs](playground%20cloud-resources%20aws%20costs) - 💰 Show aws costs
-    - [costs-history](playground%20cloud-resources%20aws%20costs-history) - 👛  Retrieve aws costs for each month since last year
-  - [azure](playground%20cloud-resources%20azure) - ☁️ What is still running in Azure, and what it costs
-    - [list](playground%20cloud-resources%20azure%20list) - 📋 List all active resources
-    - [costs](playground%20cloud-resources%20azure%20costs) - 💰 Show azure costs
-    - [costs-history](playground%20cloud-resources%20azure%20costs-history) - 👛  Retrieve azure costs for each month since last year
-  - [ccloud](playground%20cloud-resources%20ccloud) - ☁️ What is still running in Confluent Cloud, and what it costs
-    - [list](playground%20cloud-resources%20ccloud%20list) - 📋 List what the playground left running for you in Confluent Cloud, across the whole organization
-    - [costs](playground%20cloud-resources%20ccloud%20costs) - 💰  Retrieve ccloud costs for a range of dates
-    - [costs-history](playground%20cloud-resources%20ccloud%20costs-history) - 👛  Retrieve ccloud costs for each month since last year
-  - [cleanup](playground%20cloud-resources%20cleanup) - 🧹 Cleanup cloud resources that were created by running examples from the playground
-  - [nightly-cleanup](playground%20cloud-resources%20nightly-cleanup) - 🌙 Delete what your examples left running in Confluent Cloud (and AWS, GCP, Azure with `--resource`), every night, automatically
-    - [enable](playground%20cloud-resources%20nightly-cleanup%20enable) - 🌙 Schedule the nightly cleanup, then show what tonight's run would delete
-    - [disable](playground%20cloud-resources%20nightly-cleanup%20disable) - 🛑 Remove the nightly cleanup schedule
-    - [status](playground%20cloud-resources%20nightly-cleanup%20status) - 🔎 Is the nightly cleanup scheduled, at what time, and what did its last runs do
-
-### Repro commands
-
-- [repro](playground%20repro) - 👷‍♂️ Reproduction model commands
-  - [export](playground%20repro%20export) - 📤 Export reproduction models as a self-contained tgz bundle
-  - [check](playground%20repro%20check) - 🕵️ Scan reproduction models for secrets and customer data before they are committed
-  - [import](playground%20repro%20import) - 📥 Import a tgz bundle created by `playground repro export`
-  - [bootstrap](playground%20repro%20bootstrap) - 🛠  Bootstrap reproduction model, just run `<playground repro bootstrap>` !
-  - [status](playground%20repro%20status) - 🩹 Show or update what a reproduction model proves, from its header
-  - [diff](playground%20repro%20diff) - 🔀 Show what a reproduction model changes compared with its base example
-  - [list](playground%20repro%20list) - 📋 List the reproduction models, newest first, with their case, status and last verdict
-  - [assert](playground%20repro%20assert) - 🧪 End a reproduction model with its verdict: 🐞 REPRODUCED or ✅ NOT REPRODUCED
-  - [bisect](playground%20repro%20bisect) - 🔀 Run a reproduction model on several versions: which one introduced or fixed the problem
-
-### Container commands
-
-- [get-docker-compose](playground%20get-docker-compose) - 🐋 Get docker-compose
-- [container](playground%20container) - 🐳 Container commands
-  - [get-properties](playground%20container%20get-properties) - 📝 Get properties file from a container
-  - [recreate](playground%20container%20recreate) - 💫 Recreate container(s)
-  - [update](playground%20container%20update) - ✍️ Edit and apply runtime container/pod definition
-  - [get-ip-addresses](playground%20container%20get-ip-addresses) - 🖥️  Get ip address of running containers
-  - [kill-all](playground%20container%20kill-all) - 💀 Kill all containers and prune all volumes
-  - [logs](playground%20container%20logs) - 🕵️  Tail and follow container logs
-  - [display-error-all](playground%20container%20display-error-all) - 🔥 Display all ERROR/FATAL logs in all containers/pods. Useful for quick troubleshooting
-  - [ssh](playground%20container%20ssh) - 🛬 SSH into container
-  - [change-jdk](playground%20container%20change-jdk) - 🤎 Change java JDK version using Azul JDK (https://www.azul.com/downloads/#downloads-table-zulu)
-  - [exec](playground%20container%20exec) - 🪄 Execute command in a container
-  - [cp](playground%20container%20cp) - 🪄 Copy files between local filesystem and container
-  - [restart](playground%20container%20restart) - 🔁 Restart a container
-  - [pause](playground%20container%20pause) - ⏸️  Pause a container
-  - [resume](playground%20container%20resume) - ⏯️  Resume a container
-  - [kill](playground%20container%20kill) - 🔫 Kill a container
-  - [set-environment-variables](playground%20container%20set-environment-variables) - 📦  Set environment variable(s) for a container
-
-### Schema commands
-
-- [schema](playground%20schema) - 🔰 Schema commands
-  - [list](playground%20schema%20list) - 📋 List the subjects of the registry
-  - [get](playground%20schema%20get) - 🔰 Get all schemas versions for specified subject (if `--subject` is not specified, all subjects will be used)
-  - [register](playground%20schema%20register) - ⏺️ Register a schema in specified subject
-  - [check-compatibility](playground%20schema%20check-compatibility) - 🧪 Check whether a schema would be accepted, without registering it
-  - [diff](playground%20schema%20diff) - 🔀 Compare two schemas field by field, with the verdict of each compatibility rule
-  - [describe](playground%20schema%20describe) - 🔎 Everything about one subject, or one schema id, in one call
-  - [history](playground%20schema%20history) - 📜 Timeline of the Schema Registry, from its _schemas topic
-  - [export](playground%20schema%20export) - 📦 Export the subjects of the registry to a folder
-  - [import](playground%20schema%20import) - 📥 Import schemas into the registry, keeping their ids
-  - [test-rules](playground%20schema%20test-rules) - 📏 Test the data contract rules of a subject against records
-  - [contexts](playground%20schema%20contexts) - 🗂️ List the contexts of the registry, with their number of subjects and mode
-  - [compare](playground%20schema%20compare) - 🔀 Compare the subjects of two registries (or two contexts)
-  - [exporter](playground%20schema%20exporter) - 🔗 Schema Linking: exporters that copy subjects to another registry
-    - [create](playground%20schema%20exporter%20create) - 🔗 Create an exporter, then wait until it runs
-    - [list](playground%20schema%20exporter%20list) - 📋 List the exporters of the registry, with their state
-    - [status](playground%20schema%20exporter%20status) - 🚦 State of an exporter (RUNNING, PAUSED, ERROR with its trace), offset and number of objects exported
-    - [pause](playground%20schema%20exporter%20pause) - ⏸️ Pause an exporter
-    - [resume](playground%20schema%20exporter%20resume) - ▶️ Resume a paused exporter
-    - [reset](playground%20schema%20exporter%20reset) - ⏮️ Reset a paused exporter: it exports everything again
-    - [delete](playground%20schema%20exporter%20delete) - 🗑️ Delete a paused exporter (the exported schemas stay in the destination)
-  - [validate](playground%20schema%20validate) - 🧪 Register schemas in a throwaway Schema Registry of each CP version, and compare the verdicts
-  - [get-compatibility](playground%20schema%20get-compatibility) - 🛡️ Get the compatibility rule in force
-  - [set-compatibility](playground%20schema%20set-compatibility) - 🛡️ Set the compatibility rule of a subject (`--subject`), or of the whole registry (`--global`)
-  - [get-mode](playground%20schema%20get-mode) - 🔏 Get the mode in force
-  - [set-mode](playground%20schema%20set-mode) - 🔏 Set the mode of a subject (`--subject`), or of the whole registry (`--global`)
-  - [set-normalize](playground%20schema%20set-normalize) - 🧽 Set normalize at schema registry level
-  - [validate-new-schemas](playground%20schema%20validate-new-schemas) - 🩺 Validate new schemas (default is true since CP 8.2.0)
-  - [delete](playground%20schema%20delete) - 🧟 Delete schema
-  - [derive-schema](playground%20schema%20derive-schema) - 🪄 Derive a schema based on payload
-  - [set-alias](playground%20schema%20set-alias) - 🔯 Set a subject alias
-  - [get-alias](playground%20schema%20get-alias) - 🔯 Get subject alias
-  - [metrics](playground%20schema%20metrics) - 📈 Display the key JMX metrics of Schema Registry
-
-### TCP Proxy commands
-
-- [tcp-proxy](playground%20tcp-proxy) - 🏚 Zazkia TCP Proxy commands
-  - [start](playground%20tcp-proxy%20start) - 💗 Start the TCP proxy and automatically replace connector config with zazkia hostname and port 49998
-  - [get-connections](playground%20tcp-proxy%20get-connections) - 🧲 Get Zazkia active TCP connections config and stats
-  - [delay](playground%20tcp-proxy%20delay) - ⏲️ Add milliseconds delay to service response.
-  - [break](playground%20tcp-proxy%20break) - 💔 Break sending the response to the client.
-  - [close-connection](playground%20tcp-proxy%20close-connection) - ❌ Close the Zazkia active TCP connections
-  - [close-all-connection-with-error](playground%20tcp-proxy%20close-all-connection-with-error) - 🧹 Close all Zazkia TCP connections which are in error state
-  - [toggle-accept-connections](playground%20tcp-proxy%20toggle-accept-connections) - 🙅‍♂️ Change whether new connections can be accepted
-  - [toggle-reads-client](playground%20tcp-proxy%20toggle-reads-client) - ✅ Change whether reading data from the client is enabled.
-  - [toggle-reads-service](playground%20tcp-proxy%20toggle-reads-service) - ✅ Change whether reading data from the service is enabled.
-  - [toggle-writes-client](playground%20tcp-proxy%20toggle-writes-client) - ✅ Change whether writing data to the client is enabled.
-  - [toggle-writes-service](playground%20tcp-proxy%20toggle-writes-service) - ✅ Change whether writing data to the service is enabled.
-  - [open-ui](playground%20tcp-proxy%20open-ui) - 🌐 Just open Zazkia UI (http://localhost:9191) in your browser
-
-### Tools commands
-
-- [tools](playground%20tools) - 🧰 Tools commands
-  - [install-vscode-extension](playground%20tools%20install-vscode-extension) - 🪄 Install a slightly modified version of "Shell Script Command Completion" Visual Studio Code extension (https://marketplace.visualstudio.com/items?itemName=tetradresearch.vscode-h2o)
-  - [install-alfred-workflow](playground%20tools%20install-alfred-workflow) - 🎩 Install the "kafka-docker-playground (kdp)" Alfred workflow (macOS, Alfred 5 with the Powerpack)
-  - [read-avro-file](playground%20tools%20read-avro-file) - 🔖 Read provided avro file
-  - [read-parquet-file](playground%20tools%20read-parquet-file) - 🔖 Read provided parquet file
-  - [cert](playground%20tools%20cert) - 🔐 Certificate commands
-    - [create](playground%20tools%20cert%20create) - 🔐 Generate keys and certificates used for SSL
-    - [inspect](playground%20tools%20cert%20inspect) - 🔍 Inspect certificates and explain what breaks TLS
-    - [convert](playground%20tools%20cert%20convert) - 🔄 Convert certificates and keystores between formats
-  - [redos-check](playground%20tools%20redos-check) - 🪖 Check topics.regex for ReDos vulnerabilities using recheck (https://github.com/makenowjust-labs/recheck)
-  - [http-server](playground%20tools%20http-server) - 🌐 Drive the http test server of the http examples
-    - [set-response](playground%20tools%20http-server%20set-response) - 🎛️ Set how the http test server answers
-    - [reset](playground%20tools%20http-server%20reset) - 🔄 Reset the http test server
-    - [requests](playground%20tools%20http-server%20requests) - 📥 Show the requests received by the http test server
-
 ### Analyze commands
 
 - [analyze](playground%20analyze) - 🔎 Analyze commands
@@ -238,91 +61,6 @@ playground [OPTIONS] COMMAND
   - [flight-recorder](playground%20analyze%20flight-recorder) - 🛩️ Analyze a Java Flight Recorder recording: where the time of the connector tasks goes
   - [jscissors](playground%20analyze%20jscissors) - ✂️ Analyze a jscissors trace: what the traced methods did, call by call
   - [tcp-dump](playground%20analyze%20tcp-dump) - 🦈 Analyze a network capture (.pcap, .pcapng): refused and reset connections, retransmissions, TLS alerts, DNS errors, Kafka and HTTP errors and response times
-
-### Debug commands
-
-- [debug](playground%20debug) - 🐞 Debug commands
-  - [enable-remote-debugging](playground%20debug%20enable-remote-debugging) - ✨ Enable java remote debugging for container
-  - [disable-remote-debugging](playground%20debug%20disable-remote-debugging) - 🛑 Disable java remote debugging for container
-  - [testssl](playground%20debug%20testssl) - 🔐 Testing TLS/SSL encryption using https://testssl.sh/
-  - [generate-diagnostics](playground%20debug%20generate-diagnostics) - ⛑️ Generate a diagnostic bundle with Diagnostics Bundle Tool
-  - [thread-dump](playground%20debug%20thread-dump) - 🎯 Take a java thread dump
-  - [heap-dump](playground%20debug%20heap-dump) - 👻 Take a heap dump
-  - [tcp-dump](playground%20debug%20tcp-dump) - 🕵️‍♂️ Take a tcp dump (sniffing network)
-  - [block-traffic](playground%20debug%20block-traffic) - 🚫 Blocking traffic using iptables
-  - [degrade-traffic](playground%20debug%20degrade-traffic) - 🐌 Add latency, packet loss, corruption or a bandwidth limit using tc
-  - [java-debug](playground%20debug%20java-debug) - 🤎 JVM arguments for SSL, Kerberos or Class Loading
-  - [jscissors](playground%20debug%20jscissors) - ✂️ Trace the calls of any method of a running JVM: arguments, return values, durations, exceptions, call tree
-  - [flight-recorder](playground%20debug%20flight-recorder) - 🛩️ Record a JVM with Java Flight Recorder, from `--action` start to `--action` stop
-  - [log-level](playground%20debug%20log-level) - 🧬 Set log level for any package
-    - [get](playground%20debug%20log-level%20get) - Get log levels
-    - [set](playground%20debug%20log-level%20set) - Set log level for specific logger
-  - [cfk](playground%20debug%20cfk) - 🧱 CFK debug sub-commands
-    - [generate-bundle](playground%20debug%20cfk%20generate-bundle) - ⛑️ Generate a Support bundle
-    - [sourcecode](playground%20debug%20cfk%20sourcecode) - 🧑‍💻 Source code of the CFK operator at the version of a cluster or of a support bundle
-
-### Kafka commands
-
-- [get-jmx-metrics](playground%20get-jmx-metrics) - 🔢 Get JMX metrics from a container
-- [quota](playground%20quota) - 🚦 Client quota commands
-  - [get](playground%20quota%20get) - 🔎 Display client quotas
-  - [set](playground%20quota%20set) - 🚦 Set client quotas
-  - [delete](playground%20quota%20delete) - 🗑️ Remove client quotas
-- [broker](playground%20broker) - 🖥️ Broker commands
-  - [config](playground%20broker%20config) - ⚙️ Dynamic broker config commands
-    - [get](playground%20broker%20config%20get) - 🔎 Display dynamic broker configs
-    - [set](playground%20broker%20config%20set) - ⚙️ Set a dynamic broker config
-    - [delete](playground%20broker%20config%20delete) - 🗑️ Remove a dynamic broker config
-  - [health](playground%20broker%20health) - 🩺 Check the health of the cluster
-  - [stop](playground%20broker%20stop) - 🛑 Stop a broker
-  - [start](playground%20broker%20start) - ▶️ Start a broker stopped with `playground broker stop`
-  - [rolling-restart](playground%20broker%20rolling-restart) - 🔄 Restart the brokers one by one, like a rolling upgrade
-  - [transactions](playground%20broker%20transactions) - 💱 Transaction commands
-    - [list](playground%20broker%20transactions%20list) - 📋 List the transactional ids
-    - [describe](playground%20broker%20transactions%20describe) - 🔎 Describe a transactional id
-    - [describe-producers](playground%20broker%20transactions%20describe-producers) - 🏭 Describe the active producers of a topic
-    - [find-hanging](playground%20broker%20transactions%20find-hanging) - 🧟 Find hanging transactions
-    - [abort](playground%20broker%20transactions%20abort) - 🧹 Abort a hanging transaction
-  - [describe](playground%20broker%20describe) - 🗺️ Describe the cluster
-  - [metrics](playground%20broker%20metrics) - 📈 Display the key JMX metrics of the brokers
-
-### Topic commands
-
-- [topic](playground%20topic) - 🗳 Topic commands
-  - [get-number-records](playground%20topic%20get-number-records) - 💯 Get number of records in a topic
-  - [wait-for-records](playground%20topic%20wait-for-records) - ⏳ Wait for a topic to contain a minimum number of records
-  - [get-offsets](playground%20topic%20get-offsets) - 📍 Get earliest and latest offsets per partition of a topic
-  - [compare](playground%20topic%20compare) - 🔀 Compare a topic with its replica: is everything replicated?
-  - [display-consumer-offsets](playground%20topic%20display-consumer-offsets) - 📭 Display content of __consumer_offsets topic
-  - [list](playground%20topic%20list) - 🔘 List topics
-  - [get-size](playground%20topic%20get-size) - 📏 Get size of topics
-  - [describe](playground%20topic%20describe) - 🔬 Describe topic
-  - [reassign](playground%20topic%20reassign) - 🔀 Move the replicas of a topic to other brokers
-  - [elect-leader](playground%20topic%20elect-leader) - 👑 Elect the leaders of a topic
-  - [dump-log](playground%20topic%20dump-log) - 🔬 Dump the log segments of a partition: batches, producers, transactions
-  - [check-format](playground%20topic%20check-format) - 🧬 Check the format of the records of a topic, from their bytes
-  - [set-schema-compatibility](playground%20topic%20set-schema-compatibility) - 🛡️ Change topic's schema compatibility
-  - [consume](playground%20topic%20consume) - 📥 Consume topic from beginning
-  - [produce](playground%20topic%20produce) - 📤 Produce to a topic
-  - [create](playground%20topic%20create) - 🆕 Create topic
-  - [delete](playground%20topic%20delete) - ❌ Delete topic and associated schema/subject if applicable
-  - [alter](playground%20topic%20alter) - 🪛 Alter topic config
-  - [dlq](playground%20topic%20dlq) - 📬 Dead letter queue commands
-    - [inspect](playground%20topic%20dlq%20inspect) - 🩺 Show what is in a dead letter queue, grouped by error
-    - [replay](playground%20topic%20dlq%20replay) - 🔁 Produce the records of a dead letter queue again
-  - [tag](playground%20topic%20tag) - 🏷️ Stream Catalog tags (Confluent Cloud only)
-    - [list](playground%20topic%20tag%20list) - 🏷️ List tag definitions
-    - [create](playground%20topic%20tag%20create) - 🆕 Create a tag definition
-    - [delete](playground%20topic%20tag%20delete) - ❌ Delete a tag definition
-    - [add](playground%20topic%20tag%20add) - 🏷️ Assign a tag to a topic
-    - [remove](playground%20topic%20tag%20remove) - 🧽 Remove a tag from a topic
-    - [show](playground%20topic%20tag%20show) - 🔎 Show tags assigned to a topic
-    - [search](playground%20topic%20tag%20search) - 🔎 Search topics having a tag
-- [consumer-group](playground%20consumer-group) - 👥 Consumer group commands
-  - [list](playground%20consumer-group%20list) - 👥 List consumer groups
-  - [describe](playground%20consumer-group%20describe) - 🔬 Describe consumer group
-  - [reset-offsets](playground%20consumer-group%20reset-offsets) - ⏪ Reset the committed offsets of a consumer group
-  - [delete](playground%20consumer-group%20delete) - 🗑️ Delete a consumer group, or its offsets for one topic
 
 ### Ansible commands
 
@@ -349,64 +87,41 @@ playground [OPTIONS] COMMAND
     - [finalize](playground%20cfk%20kraft-migration%20finalize) - 🏁 Finalize the migration (irreversible) and wait for COMPLETE
     - [release-lock](playground%20cfk%20kraft-migration%20release-lock) - 🔓 Release the locks of the migration on the CRs
 
-### Flink commands
+### Cloud Resources commands
 
-- [flink](playground%20flink) - 🐿️ Flink commands
-  - [sql](playground%20flink%20sql) - 🐿️ Run Flink SQL statements with the SQL client
-  - [list-jobs](playground%20flink%20list-jobs) - 📋 List the jobs of the Flink cluster
-  - [cancel](playground%20flink%20cancel) - 🛑 Cancel a Flink job
+- [cloud-resources](playground%20cloud-resources) - ☁️ What the playground left behind in your cloud accounts, what it costs, and cleaning it up
+  - [aws](playground%20cloud-resources%20aws) - ☁️ What is still running in AWS, and what it costs
+    - [list](playground%20cloud-resources%20aws%20list) - 📋 List all active resources
+    - [costs](playground%20cloud-resources%20aws%20costs) - 💰 Show aws costs
+    - [costs-history](playground%20cloud-resources%20aws%20costs-history) - 👛  Retrieve aws costs for each month since last year
+  - [azure](playground%20cloud-resources%20azure) - ☁️ What is still running in Azure, and what it costs
+    - [list](playground%20cloud-resources%20azure%20list) - 📋 List all active resources
+    - [costs](playground%20cloud-resources%20azure%20costs) - 💰 Show azure costs
+    - [costs-history](playground%20cloud-resources%20azure%20costs-history) - 👛  Retrieve azure costs for each month since last year
+  - [ccloud](playground%20cloud-resources%20ccloud) - ☁️ What is still running in Confluent Cloud, and what it costs
+    - [list](playground%20cloud-resources%20ccloud%20list) - 📋 List what the playground left running for you in Confluent Cloud, across the whole organization
+    - [costs](playground%20cloud-resources%20ccloud%20costs) - 💰  Retrieve ccloud costs for a range of dates
+    - [costs-history](playground%20cloud-resources%20ccloud%20costs-history) - 👛  Retrieve ccloud costs for each month since last year
+  - [cleanup](playground%20cloud-resources%20cleanup) - 🧹 Cleanup cloud resources that were created by running examples from the playground
+  - [nightly-cleanup](playground%20cloud-resources%20nightly-cleanup) - 🌙 Delete what your examples left running in Confluent Cloud (and AWS, GCP, Azure with `--resource`), every night, automatically
+    - [enable](playground%20cloud-resources%20nightly-cleanup%20enable) - 🌙 Schedule the nightly cleanup, then show what tonight's run would delete
+    - [disable](playground%20cloud-resources%20nightly-cleanup%20disable) - 🛑 Remove the nightly cleanup schedule
+    - [status](playground%20cloud-resources%20nightly-cleanup%20status) - 🔎 Is the nightly cleanup scheduled, at what time, and what did its last runs do
 
-### ksqlDB commands
+### Codespace commands
 
-- [ksqldb](playground%20ksqldb) - 🧮 ksqlDB commands
-  - [sql](playground%20ksqldb%20sql) - 🧮 Run ksqlDB statements with the ksql cli
-  - [list](playground%20ksqldb%20list) - 📋 List the streams, tables and persistent queries
-  - [describe](playground%20ksqldb%20describe) - 🔎 Describe a stream or a table
-  - [wait](playground%20ksqldb%20wait) - ⏳ Wait until the persistent queries are RUNNING and have no lag
-  - [metrics](playground%20ksqldb%20metrics) - 📈 Display the key JMX metrics of the ksqlDB server
-
-### Kafka Streams commands
-
-- [streams](playground%20streams) - 🌊 Kafka Streams commands
-  - [status](playground%20streams%20status) - 🌊 Show the state of the Kafka Streams instances
-
-### Database commands
-
-- [db](playground%20db) - 🛢️ Database commands
-  - [sql](playground%20db%20sql) - 🛢️ Run SQL statements with the client of the database
-  - [wait-for-rows](playground%20db%20wait-for-rows) - ⏳ Wait for a table to contain a minimum number of rows
-  - [cdc-check](playground%20db%20cdc-check) - 🔍 Check the CDC prerequisites of the database
-
-### RBAC commands
-
-- [rbac](playground%20rbac) - 🛡️ RBAC commands (rbac-sasl-plain, rbac-oauth and cfk-rbac environments, plus Confluent Cloud ACLs)
-  - [role-binding](playground%20rbac%20role-binding) - 🔐 Role binding commands
-    - [create](playground%20rbac%20role-binding%20create) - 🔐 Create a role binding
-    - [delete](playground%20rbac%20role-binding%20delete) - 🗑️ Delete a role binding
-    - [list](playground%20rbac%20role-binding%20list) - 📋 List role bindings
-  - [user](playground%20rbac%20user) - 🧑 LDAP user commands (Keycloak clients on rbac-oauth)
-    - [add](playground%20rbac%20user%20add) - ➕ Add an LDAP user (a Keycloak client on rbac-oauth)
-    - [delete](playground%20rbac%20user%20delete) - 🗑️ Delete an LDAP user, and remove it from its groups (the Keycloak client on rbac-oauth)
-    - [list](playground%20rbac%20user%20list) - 📋 List LDAP users and their groups (Keycloak clients, secrets and groups on rbac-oauth)
-  - [acl](playground%20rbac%20acl) - 🚦 ACL commands
-    - [create](playground%20rbac%20acl%20create) - 🚦 Create ACLs, one per `--operation`
-    - [delete](playground%20rbac%20acl%20delete) - 🗑️ Delete ACLs, one per `--operation`
-    - [list](playground%20rbac%20acl%20list) - 📋 List ACLs
-
-### Connector-Plugin commands
-
-- [connector-plugin](playground%20connector-plugin) - 🔌 Connector-plugin commands
-  - [search-jar](playground%20connector-plugin%20search-jar) - ☕ List jars for a connector plugin from confluent hub https://www.confluent.io/hub/
-  - [dependencies](playground%20connector-plugin%20dependencies) - 📚 Libraries bundled in a connector plugin, and what changed between two versions
-  - [cve-scan](playground%20connector-plugin%20cve-scan) - 🛡️ Known vulnerabilities (CVE) of the jars of a connector plugin version
-  - [fm-versions](playground%20connector-plugin%20fm-versions) - ☁️ Fully managed connector: the connector version shipped by each cc-connect image (Confluent employees)
-  - [versions](playground%20connector-plugin%20versions) - 💯 List versions for a connector plugin from confluent hub https://www.confluent.io/hub/
-  - [info](playground%20connector-plugin%20info) - 🪪 One page on a connector plugin of Confluent Hub
-  - [changelog](playground%20connector-plugin%20changelog) - 📜 Show the release notes of a connector plugin between two versions
-  - [display-last-updated](playground%20connector-plugin%20display-last-updated) - 🆕 List last updated connector plugins from confluent hub https://www.confluent.io/hub/
-  - [config-diff](playground%20connector-plugin%20config-diff) - 🔧 Configuration keys added, removed or changed between two versions of a plugin
-  - [config-key](playground%20connector-plugin%20config-key) - 🔑 Explain a connector configuration key: documentation, type, default, since when, and which examples set it
-  - [sourcecode](playground%20connector-plugin%20sourcecode) - 🧑‍💻 Open source code url in your browser (or in your editor when used with `--open`)
+- [codespace](playground%20codespace) - ☁️ Create and manage GitHub Codespaces to run kafka-docker-playground
+  - [create](playground%20codespace%20create) - 👷 Create a GitHub Codespace of kafka-docker-playground, then open it
+  - [list](playground%20codespace%20list) - 🔘 List your kafka-docker-playground codespaces
+  - [open](playground%20codespace%20open) - 👨‍💻 Open a codespace in Visual Studio Code
+  - [ssh](playground%20codespace%20ssh) - 🐚 Open a shell in a codespace, or run one command in it
+  - [stop](playground%20codespace%20stop) - 🔴 Stop a codespace
+  - [start](playground%20codespace%20start) - 🟢 Start a codespace
+  - [delete](playground%20codespace%20delete) - ❌ Delete a codespace
+  - [push-secrets](playground%20codespace%20push-secrets) - 🔐 Send the secrets store to a codespace
+  - [sync-repro-folder](playground%20codespace%20sync-repro-folder) - ↔️ Synchronize reproduction-models folder between local and a codespace
+    - [local-to-codespace](playground%20codespace%20sync-repro-folder%20local-to-codespace) - 👉 Sync local reproduction-models folder to a codespace
+    - [codespace-to-local](playground%20codespace%20sync-repro-folder%20codespace-to-local) - 👈 Sync a codespace reproduction-models folder to local
 
 ### Connector commands
 
@@ -462,6 +177,71 @@ playground [OPTIONS] COMMAND
   - [create-or-update](playground%20connector%20create-or-update) - 🧑‍🎨  Create or update connector
   - [update](playground%20connector%20update) - 🛠️ Update connector configuration by opening current connector config in text editor set with playground config editor `<editor>` (default is code). Once file is saved, the new configuration is updated.
 
+### Connector-Plugin commands
+
+- [connector-plugin](playground%20connector-plugin) - 🔌 Connector-plugin commands
+  - [search-jar](playground%20connector-plugin%20search-jar) - ☕ List jars for a connector plugin from confluent hub https://www.confluent.io/hub/
+  - [dependencies](playground%20connector-plugin%20dependencies) - 📚 Libraries bundled in a connector plugin, and what changed between two versions
+  - [cve-scan](playground%20connector-plugin%20cve-scan) - 🛡️ Known vulnerabilities (CVE) of the jars of a connector plugin version
+  - [fm-versions](playground%20connector-plugin%20fm-versions) - ☁️ Fully managed connector: the connector version shipped by each cc-connect image (Confluent employees)
+  - [versions](playground%20connector-plugin%20versions) - 💯 List versions for a connector plugin from confluent hub https://www.confluent.io/hub/
+  - [info](playground%20connector-plugin%20info) - 🪪 One page on a connector plugin of Confluent Hub
+  - [changelog](playground%20connector-plugin%20changelog) - 📜 Show the release notes of a connector plugin between two versions
+  - [display-last-updated](playground%20connector-plugin%20display-last-updated) - 🆕 List last updated connector plugins from confluent hub https://www.confluent.io/hub/
+  - [config-diff](playground%20connector-plugin%20config-diff) - 🔧 Configuration keys added, removed or changed between two versions of a plugin
+  - [config-key](playground%20connector-plugin%20config-key) - 🔑 Explain a connector configuration key: documentation, type, default, since when, and which examples set it
+  - [sourcecode](playground%20connector-plugin%20sourcecode) - 🧑‍💻 Open source code url in your browser (or in your editor when used with `--open`)
+
+### Container commands
+
+- [get-docker-compose](playground%20get-docker-compose) - 🐋 Get docker-compose
+- [container](playground%20container) - 🐳 Container commands
+  - [get-properties](playground%20container%20get-properties) - 📝 Get properties file from a container
+  - [recreate](playground%20container%20recreate) - 💫 Recreate container(s)
+  - [update](playground%20container%20update) - ✍️ Edit and apply runtime container/pod definition
+  - [get-ip-addresses](playground%20container%20get-ip-addresses) - 🖥️  Get ip address of running containers
+  - [kill-all](playground%20container%20kill-all) - 💀 Kill all containers and prune all volumes
+  - [logs](playground%20container%20logs) - 🕵️  Tail and follow container logs
+  - [display-error-all](playground%20container%20display-error-all) - 🔥 Display all ERROR/FATAL logs in all containers/pods. Useful for quick troubleshooting
+  - [ssh](playground%20container%20ssh) - 🛬 SSH into container
+  - [change-jdk](playground%20container%20change-jdk) - 🤎 Change java JDK version using Azul JDK (https://www.azul.com/downloads/#downloads-table-zulu)
+  - [exec](playground%20container%20exec) - 🪄 Execute command in a container
+  - [cp](playground%20container%20cp) - 🪄 Copy files between local filesystem and container
+  - [restart](playground%20container%20restart) - 🔁 Restart a container
+  - [pause](playground%20container%20pause) - ⏸️  Pause a container
+  - [resume](playground%20container%20resume) - ⏯️  Resume a container
+  - [kill](playground%20container%20kill) - 🔫 Kill a container
+  - [set-environment-variables](playground%20container%20set-environment-variables) - 📦  Set environment variable(s) for a container
+
+### Database commands
+
+- [db](playground%20db) - 🛢️ Database commands
+  - [sql](playground%20db%20sql) - 🛢️ Run SQL statements with the client of the database
+  - [wait-for-rows](playground%20db%20wait-for-rows) - ⏳ Wait for a table to contain a minimum number of rows
+  - [cdc-check](playground%20db%20cdc-check) - 🔍 Check the CDC prerequisites of the database
+
+### Debug commands
+
+- [debug](playground%20debug) - 🐞 Debug commands
+  - [enable-remote-debugging](playground%20debug%20enable-remote-debugging) - ✨ Enable java remote debugging for container
+  - [disable-remote-debugging](playground%20debug%20disable-remote-debugging) - 🛑 Disable java remote debugging for container
+  - [testssl](playground%20debug%20testssl) - 🔐 Testing TLS/SSL encryption using https://testssl.sh/
+  - [generate-diagnostics](playground%20debug%20generate-diagnostics) - ⛑️ Generate a diagnostic bundle with Diagnostics Bundle Tool
+  - [thread-dump](playground%20debug%20thread-dump) - 🎯 Take a java thread dump
+  - [heap-dump](playground%20debug%20heap-dump) - 👻 Take a heap dump
+  - [tcp-dump](playground%20debug%20tcp-dump) - 🕵️‍♂️ Take a tcp dump (sniffing network)
+  - [block-traffic](playground%20debug%20block-traffic) - 🚫 Blocking traffic using iptables
+  - [degrade-traffic](playground%20debug%20degrade-traffic) - 🐌 Add latency, packet loss, corruption or a bandwidth limit using tc
+  - [java-debug](playground%20debug%20java-debug) - 🤎 JVM arguments for SSL, Kerberos or Class Loading
+  - [jscissors](playground%20debug%20jscissors) - ✂️ Trace the calls of any method of a running JVM: arguments, return values, durations, exceptions, call tree
+  - [flight-recorder](playground%20debug%20flight-recorder) - 🛩️ Record a JVM with Java Flight Recorder, from `--action` start to `--action` stop
+  - [log-level](playground%20debug%20log-level) - 🧬 Set log level for any package
+    - [get](playground%20debug%20log-level%20get) - Get log levels
+    - [set](playground%20debug%20log-level%20set) - Set log level for specific logger
+  - [cfk](playground%20debug%20cfk) - 🧱 CFK debug sub-commands
+    - [generate-bundle](playground%20debug%20cfk%20generate-bundle) - ⛑️ Generate a Support bundle
+    - [sourcecode](playground%20debug%20cfk%20sourcecode) - 🧑‍💻 Source code of the CFK operator at the version of a cluster or of a support bundle
+
 ### EC2 commands
 
 - [ec2](playground%20ec2) - ✨ Create and manage AWS EC2 instances (using Cloud Formation) to run kafka-docker-playground
@@ -481,20 +261,240 @@ playground [OPTIONS] COMMAND
     - [ec2-to-local](playground%20ec2%20sync-repro-folder%20ec2-to-local) - 👈 Sync ec2 instance reproduction-models folder to local
   - [push-secrets](playground%20ec2%20push-secrets) - 🔐 Send the secrets store to an ec2 instance
 
-### Codespace commands
+### Flink commands
 
-- [codespace](playground%20codespace) - ☁️ Create and manage GitHub Codespaces to run kafka-docker-playground
-  - [create](playground%20codespace%20create) - 👷 Create a GitHub Codespace of kafka-docker-playground, then open it
-  - [list](playground%20codespace%20list) - 🔘 List your kafka-docker-playground codespaces
-  - [open](playground%20codespace%20open) - 👨‍💻 Open a codespace in Visual Studio Code
-  - [ssh](playground%20codespace%20ssh) - 🐚 Open a shell in a codespace, or run one command in it
-  - [stop](playground%20codespace%20stop) - 🔴 Stop a codespace
-  - [start](playground%20codespace%20start) - 🟢 Start a codespace
-  - [delete](playground%20codespace%20delete) - ❌ Delete a codespace
-  - [push-secrets](playground%20codespace%20push-secrets) - 🔐 Send the secrets store to a codespace
-  - [sync-repro-folder](playground%20codespace%20sync-repro-folder) - ↔️ Synchronize reproduction-models folder between local and a codespace
-    - [local-to-codespace](playground%20codespace%20sync-repro-folder%20local-to-codespace) - 👉 Sync local reproduction-models folder to a codespace
-    - [codespace-to-local](playground%20codespace%20sync-repro-folder%20codespace-to-local) - 👈 Sync a codespace reproduction-models folder to local
+- [flink](playground%20flink) - 🐿️ Flink commands
+  - [sql](playground%20flink%20sql) - 🐿️ Run Flink SQL statements with the SQL client
+  - [list-jobs](playground%20flink%20list-jobs) - 📋 List the jobs of the Flink cluster
+  - [cancel](playground%20flink%20cancel) - 🛑 Cancel a Flink job
+
+### Kafka commands
+
+- [get-jmx-metrics](playground%20get-jmx-metrics) - 🔢 Get JMX metrics from a container
+- [quota](playground%20quota) - 🚦 Client quota commands
+  - [get](playground%20quota%20get) - 🔎 Display client quotas
+  - [set](playground%20quota%20set) - 🚦 Set client quotas
+  - [delete](playground%20quota%20delete) - 🗑️ Remove client quotas
+- [broker](playground%20broker) - 🖥️ Broker commands
+  - [config](playground%20broker%20config) - ⚙️ Dynamic broker config commands
+    - [get](playground%20broker%20config%20get) - 🔎 Display dynamic broker configs
+    - [set](playground%20broker%20config%20set) - ⚙️ Set a dynamic broker config
+    - [delete](playground%20broker%20config%20delete) - 🗑️ Remove a dynamic broker config
+  - [health](playground%20broker%20health) - 🩺 Check the health of the cluster
+  - [stop](playground%20broker%20stop) - 🛑 Stop a broker
+  - [start](playground%20broker%20start) - ▶️ Start a broker stopped with `playground broker stop`
+  - [rolling-restart](playground%20broker%20rolling-restart) - 🔄 Restart the brokers one by one, like a rolling upgrade
+  - [transactions](playground%20broker%20transactions) - 💱 Transaction commands
+    - [list](playground%20broker%20transactions%20list) - 📋 List the transactional ids
+    - [describe](playground%20broker%20transactions%20describe) - 🔎 Describe a transactional id
+    - [describe-producers](playground%20broker%20transactions%20describe-producers) - 🏭 Describe the active producers of a topic
+    - [find-hanging](playground%20broker%20transactions%20find-hanging) - 🧟 Find hanging transactions
+    - [abort](playground%20broker%20transactions%20abort) - 🧹 Abort a hanging transaction
+  - [describe](playground%20broker%20describe) - 🗺️ Describe the cluster
+  - [metrics](playground%20broker%20metrics) - 📈 Display the key JMX metrics of the brokers
+
+### Kafka Streams commands
+
+- [streams](playground%20streams) - 🌊 Kafka Streams commands
+  - [status](playground%20streams%20status) - 🌊 Show the state of the Kafka Streams instances
+
+### ksqlDB commands
+
+- [ksqldb](playground%20ksqldb) - 🧮 ksqlDB commands
+  - [sql](playground%20ksqldb%20sql) - 🧮 Run ksqlDB statements with the ksql cli
+  - [list](playground%20ksqldb%20list) - 📋 List the streams, tables and persistent queries
+  - [describe](playground%20ksqldb%20describe) - 🔎 Describe a stream or a table
+  - [wait](playground%20ksqldb%20wait) - ⏳ Wait until the persistent queries are RUNNING and have no lag
+  - [metrics](playground%20ksqldb%20metrics) - 📈 Display the key JMX metrics of the ksqlDB server
+
+### RBAC commands
+
+- [rbac](playground%20rbac) - 🛡️ RBAC commands (rbac-sasl-plain, rbac-oauth and cfk-rbac environments, plus Confluent Cloud ACLs)
+  - [role-binding](playground%20rbac%20role-binding) - 🔐 Role binding commands
+    - [create](playground%20rbac%20role-binding%20create) - 🔐 Create a role binding
+    - [delete](playground%20rbac%20role-binding%20delete) - 🗑️ Delete a role binding
+    - [list](playground%20rbac%20role-binding%20list) - 📋 List role bindings
+  - [user](playground%20rbac%20user) - 🧑 LDAP user commands (Keycloak clients on rbac-oauth)
+    - [add](playground%20rbac%20user%20add) - ➕ Add an LDAP user (a Keycloak client on rbac-oauth)
+    - [delete](playground%20rbac%20user%20delete) - 🗑️ Delete an LDAP user, and remove it from its groups (the Keycloak client on rbac-oauth)
+    - [list](playground%20rbac%20user%20list) - 📋 List LDAP users and their groups (Keycloak clients, secrets and groups on rbac-oauth)
+  - [acl](playground%20rbac%20acl) - 🚦 ACL commands
+    - [create](playground%20rbac%20acl%20create) - 🚦 Create ACLs, one per `--operation`
+    - [delete](playground%20rbac%20acl%20delete) - 🗑️ Delete ACLs, one per `--operation`
+    - [list](playground%20rbac%20acl%20list) - 📋 List ACLs
+
+### Repro commands
+
+- [repro](playground%20repro) - 👷‍♂️ Reproduction model commands
+  - [export](playground%20repro%20export) - 📤 Export reproduction models as a self-contained tgz bundle
+  - [check](playground%20repro%20check) - 🕵️ Scan reproduction models for secrets and customer data before they are committed
+  - [import](playground%20repro%20import) - 📥 Import a tgz bundle created by `playground repro export`
+  - [bootstrap](playground%20repro%20bootstrap) - 🛠  Bootstrap reproduction model, just run `<playground repro bootstrap>` !
+  - [status](playground%20repro%20status) - 🩹 Show or update what a reproduction model proves, from its header
+  - [diff](playground%20repro%20diff) - 🔀 Show what a reproduction model changes compared with its base example
+  - [list](playground%20repro%20list) - 📋 List the reproduction models, newest first, with their case, status and last verdict
+  - [assert](playground%20repro%20assert) - 🧪 End a reproduction model with its verdict: 🐞 REPRODUCED or ✅ NOT REPRODUCED
+  - [bisect](playground%20repro%20bisect) - 🔀 Run a reproduction model on several versions: which one introduced or fixed the problem
+
+### Run commands
+
+- [ccloud](playground%20ccloud) - 🌤️ Set up your own Confluent Cloud clusters for the fully managed examples
+  - [setup](playground%20ccloud%20setup) - 🏗️ Create (or complete) your personal environment and clusters, and store them in a secrets profile
+- [run](playground%20run) - 🕹️ Run any example !
+- [re-run](playground%20re-run) - ⚡ Simply re-run last example you ran with `<playground run>`
+- [get-ci-result](playground%20get-ci-result) - 🤖 get CI result for current example
+- [history](playground%20history) - 🏰 Get an history of the examples which were run with run command and run it again
+- [find-example](playground%20find-example) - 🔎 Find examples matching a free-text query, without the interactive picker
+- [find-command](playground%20find-command) - 🧭 Find the playground command that answers a question, without reading the docs
+- [switch-ccloud](playground%20switch-ccloud) - 🌩️  Switch to ccloud environment.
+- [switch-back](playground%20switch-back) - 💺  Switch back from previous environment before switch-ccloud was called.
+- [switch-podman](playground%20switch-podman) - 🦭 Switch the container engine to Podman
+- [switch-docker](playground%20switch-docker) - 🐳 Switch the container engine back to Docker
+- [update-version](playground%20update-version) - ✨ Update current confluent platform components (all with `--tag` or only connect with `--connect-tag`) or connector(s) with new version(s)
+- [open](playground%20open) - 👐 When `--file` is not provided, simply open last example you ran with `<playground run>`
+- [stop](playground%20stop) - 🛑 Stop currently running example
+- [remove-all-docker-images](playground%20remove-all-docker-images) - 🧨 Remove all docker images (including docker volumes)
+- [remove-cp-docker-images](playground%20remove-cp-docker-images) - 🧹 Remove the Confluent Platform docker images of the versions you no longer use (a table of the versions installed locally, then a selection)
+- [docker-cleanup](playground%20docker-cleanup) - 🧽 Free the disk of the container engine every week, automatically: old Confluent Platform images, dangling images, old build cache
+  - [enable](playground%20docker-cleanup%20enable) - 🧽 Schedule the weekly cleanup, then show what it would remove now
+  - [disable](playground%20docker-cleanup%20disable) - 🛑 Remove the weekly cleanup schedule
+  - [status](playground%20docker-cleanup%20status) - 🔎 Is the weekly cleanup scheduled, when, and what did its last runs free
+  - [run](playground%20docker-cleanup%20run) - 🧽 Free the disk of the container engine now, as the weekly job does
+- [refresh-cp-docker-images](playground%20refresh-cp-docker-images) - 🔄 Refresh (pull from Docker) all Confluent Platform docker images related to a version installed locally
+- [cleanup-cloud-details](playground%20cleanup-cloud-details) - 🧼 playground is actively caching ccloud details (https://kafka-docker-playground.io/#/how-to-use?id=%f0%9f%8c%a4%ef%b8%8f-confluent-cloud-examples)
+- [open-docs](playground%20open-docs) - 🧑‍🎓 Open Confluent documentation of currently running example
+- [open-changelog](playground%20open-changelog) - 📜 Open playground changelog (https://kafka-docker-playground.io/#/changelog)
+- [cp-changelog](playground%20cp-changelog) - 📜 Show what changed in Confluent Platform between two versions
+
+### Salesforce commands
+
+- [salesforce](playground%20salesforce) - ☁️ Set up a Salesforce org for the Salesforce examples, and check it
+  - [setup](playground%20salesforce%20setup) - 🛠️ Configure a Salesforce org for the Salesforce examples
+  - [check](playground%20salesforce%20check) - 🩺 Check that the stored Salesforce credentials work
+
+### Schema commands
+
+- [schema](playground%20schema) - 🔰 Schema commands
+  - [list](playground%20schema%20list) - 📋 List the subjects of the registry
+  - [get](playground%20schema%20get) - 🔰 Get all schemas versions for specified subject (if `--subject` is not specified, all subjects will be used)
+  - [register](playground%20schema%20register) - ⏺️ Register a schema in specified subject
+  - [check-compatibility](playground%20schema%20check-compatibility) - 🧪 Check whether a schema would be accepted, without registering it
+  - [diff](playground%20schema%20diff) - 🔀 Compare two schemas field by field, with the verdict of each compatibility rule
+  - [describe](playground%20schema%20describe) - 🔎 Everything about one subject, or one schema id, in one call
+  - [history](playground%20schema%20history) - 📜 Timeline of the Schema Registry, from its _schemas topic
+  - [export](playground%20schema%20export) - 📦 Export the subjects of the registry to a folder
+  - [import](playground%20schema%20import) - 📥 Import schemas into the registry, keeping their ids
+  - [test-rules](playground%20schema%20test-rules) - 📏 Test the data contract rules of a subject against records
+  - [contexts](playground%20schema%20contexts) - 🗂️ List the contexts of the registry, with their number of subjects and mode
+  - [compare](playground%20schema%20compare) - 🔀 Compare the subjects of two registries (or two contexts)
+  - [exporter](playground%20schema%20exporter) - 🔗 Schema Linking: exporters that copy subjects to another registry
+    - [create](playground%20schema%20exporter%20create) - 🔗 Create an exporter, then wait until it runs
+    - [list](playground%20schema%20exporter%20list) - 📋 List the exporters of the registry, with their state
+    - [status](playground%20schema%20exporter%20status) - 🚦 State of an exporter (RUNNING, PAUSED, ERROR with its trace), offset and number of objects exported
+    - [pause](playground%20schema%20exporter%20pause) - ⏸️ Pause an exporter
+    - [resume](playground%20schema%20exporter%20resume) - ▶️ Resume a paused exporter
+    - [reset](playground%20schema%20exporter%20reset) - ⏮️ Reset a paused exporter: it exports everything again
+    - [delete](playground%20schema%20exporter%20delete) - 🗑️ Delete a paused exporter (the exported schemas stay in the destination)
+  - [validate](playground%20schema%20validate) - 🧪 Register schemas in a throwaway Schema Registry of each CP version, and compare the verdicts
+  - [get-compatibility](playground%20schema%20get-compatibility) - 🛡️ Get the compatibility rule in force
+  - [set-compatibility](playground%20schema%20set-compatibility) - 🛡️ Set the compatibility rule of a subject (`--subject`), or of the whole registry (`--global`)
+  - [get-mode](playground%20schema%20get-mode) - 🔏 Get the mode in force
+  - [set-mode](playground%20schema%20set-mode) - 🔏 Set the mode of a subject (`--subject`), or of the whole registry (`--global`)
+  - [set-normalize](playground%20schema%20set-normalize) - 🧽 Set normalize at schema registry level
+  - [validate-new-schemas](playground%20schema%20validate-new-schemas) - 🩺 Validate new schemas (default is true since CP 8.2.0)
+  - [delete](playground%20schema%20delete) - 🧟 Delete schema
+  - [derive-schema](playground%20schema%20derive-schema) - 🪄 Derive a schema based on payload
+  - [set-alias](playground%20schema%20set-alias) - 🔯 Set a subject alias
+  - [get-alias](playground%20schema%20get-alias) - 🔯 Get subject alias
+  - [metrics](playground%20schema%20metrics) - 📈 Display the key JMX metrics of Schema Registry
+
+### Secrets commands
+
+- [secrets](playground%20secrets) - 🔐 Credentials required by examples
+  - [set](playground%20secrets%20set) - 🔐 Store a credential
+  - [get](playground%20secrets%20get) - 🔍 Show a stored credential (masked unless `--reveal` is used)
+  - [unset](playground%20secrets%20unset) - 🗑️ Remove a stored credential
+  - [list](playground%20secrets%20list) - 📋 List stored credentials
+  - [link](playground%20secrets%20link) - 🔗 Point a variable at a secret manager, without storing any value
+  - [check](playground%20secrets%20check) - ✅ Show what an example needs, and what is missing
+  - [env](playground%20secrets%20env) - 🐚 Export what an example needs into the current shell
+  - [import](playground%20secrets%20import) - 📥 Import an existing secret.properties / variable.properties file
+  - [export](playground%20secrets%20export) - 📤 Write every credential of a profile to a file, in clear text
+  - [edit](playground%20secrets%20edit) - ✏️ Open the store in your editor
+  - [backend](playground%20secrets%20backend) - 🏦 Show or change where secrets are kept
+  - [profile](playground%20secrets%20profile) - 🗂️ Show or switch the active profile
+  - [scan](playground%20secrets%20scan) - 🔎 Look for stored credentials in clear text in the repository
+
+### TCP Proxy commands
+
+- [tcp-proxy](playground%20tcp-proxy) - 🏚 Zazkia TCP Proxy commands
+  - [start](playground%20tcp-proxy%20start) - 💗 Start the TCP proxy and automatically replace connector config with zazkia hostname and port 49998
+  - [get-connections](playground%20tcp-proxy%20get-connections) - 🧲 Get Zazkia active TCP connections config and stats
+  - [delay](playground%20tcp-proxy%20delay) - ⏲️ Add milliseconds delay to service response.
+  - [break](playground%20tcp-proxy%20break) - 💔 Break sending the response to the client.
+  - [close-connection](playground%20tcp-proxy%20close-connection) - ❌ Close the Zazkia active TCP connections
+  - [close-all-connection-with-error](playground%20tcp-proxy%20close-all-connection-with-error) - 🧹 Close all Zazkia TCP connections which are in error state
+  - [toggle-accept-connections](playground%20tcp-proxy%20toggle-accept-connections) - 🙅‍♂️ Change whether new connections can be accepted
+  - [toggle-reads-client](playground%20tcp-proxy%20toggle-reads-client) - ✅ Change whether reading data from the client is enabled.
+  - [toggle-reads-service](playground%20tcp-proxy%20toggle-reads-service) - ✅ Change whether reading data from the service is enabled.
+  - [toggle-writes-client](playground%20tcp-proxy%20toggle-writes-client) - ✅ Change whether writing data to the client is enabled.
+  - [toggle-writes-service](playground%20tcp-proxy%20toggle-writes-service) - ✅ Change whether writing data to the service is enabled.
+  - [open-ui](playground%20tcp-proxy%20open-ui) - 🌐 Just open Zazkia UI (http://localhost:9191) in your browser
+
+### Tools commands
+
+- [tools](playground%20tools) - 🧰 Tools commands
+  - [install-vscode-extension](playground%20tools%20install-vscode-extension) - 🪄 Install a slightly modified version of "Shell Script Command Completion" Visual Studio Code extension (https://marketplace.visualstudio.com/items?itemName=tetradresearch.vscode-h2o)
+  - [install-alfred-workflow](playground%20tools%20install-alfred-workflow) - 🎩 Install the "kafka-docker-playground (kdp)" Alfred workflow (macOS, Alfred 5 with the Powerpack)
+  - [read-avro-file](playground%20tools%20read-avro-file) - 🔖 Read provided avro file
+  - [read-parquet-file](playground%20tools%20read-parquet-file) - 🔖 Read provided parquet file
+  - [cert](playground%20tools%20cert) - 🔐 Certificate commands
+    - [create](playground%20tools%20cert%20create) - 🔐 Generate keys and certificates used for SSL
+    - [inspect](playground%20tools%20cert%20inspect) - 🔍 Inspect certificates and explain what breaks TLS
+    - [convert](playground%20tools%20cert%20convert) - 🔄 Convert certificates and keystores between formats
+  - [redos-check](playground%20tools%20redos-check) - 🪖 Check topics.regex for ReDos vulnerabilities using recheck (https://github.com/makenowjust-labs/recheck)
+  - [http-server](playground%20tools%20http-server) - 🌐 Drive the http test server of the http examples
+    - [set-response](playground%20tools%20http-server%20set-response) - 🎛️ Set how the http test server answers
+    - [reset](playground%20tools%20http-server%20reset) - 🔄 Reset the http test server
+    - [requests](playground%20tools%20http-server%20requests) - 📥 Show the requests received by the http test server
+
+### Topic commands
+
+- [topic](playground%20topic) - 🗳 Topic commands
+  - [get-number-records](playground%20topic%20get-number-records) - 💯 Get number of records in a topic
+  - [wait-for-records](playground%20topic%20wait-for-records) - ⏳ Wait for a topic to contain a minimum number of records
+  - [get-offsets](playground%20topic%20get-offsets) - 📍 Get earliest and latest offsets per partition of a topic
+  - [compare](playground%20topic%20compare) - 🔀 Compare a topic with its replica: is everything replicated?
+  - [display-consumer-offsets](playground%20topic%20display-consumer-offsets) - 📭 Display content of __consumer_offsets topic
+  - [list](playground%20topic%20list) - 🔘 List topics
+  - [get-size](playground%20topic%20get-size) - 📏 Get size of topics
+  - [describe](playground%20topic%20describe) - 🔬 Describe topic
+  - [reassign](playground%20topic%20reassign) - 🔀 Move the replicas of a topic to other brokers
+  - [elect-leader](playground%20topic%20elect-leader) - 👑 Elect the leaders of a topic
+  - [dump-log](playground%20topic%20dump-log) - 🔬 Dump the log segments of a partition: batches, producers, transactions
+  - [check-format](playground%20topic%20check-format) - 🧬 Check the format of the records of a topic, from their bytes
+  - [set-schema-compatibility](playground%20topic%20set-schema-compatibility) - 🛡️ Change topic's schema compatibility
+  - [consume](playground%20topic%20consume) - 📥 Consume topic from beginning
+  - [produce](playground%20topic%20produce) - 📤 Produce to a topic
+  - [create](playground%20topic%20create) - 🆕 Create topic
+  - [delete](playground%20topic%20delete) - ❌ Delete topic and associated schema/subject if applicable
+  - [alter](playground%20topic%20alter) - 🪛 Alter topic config
+  - [dlq](playground%20topic%20dlq) - 📬 Dead letter queue commands
+    - [inspect](playground%20topic%20dlq%20inspect) - 🩺 Show what is in a dead letter queue, grouped by error
+    - [replay](playground%20topic%20dlq%20replay) - 🔁 Produce the records of a dead letter queue again
+  - [tag](playground%20topic%20tag) - 🏷️ Stream Catalog tags (Confluent Cloud only)
+    - [list](playground%20topic%20tag%20list) - 🏷️ List tag definitions
+    - [create](playground%20topic%20tag%20create) - 🆕 Create a tag definition
+    - [delete](playground%20topic%20tag%20delete) - ❌ Delete a tag definition
+    - [add](playground%20topic%20tag%20add) - 🏷️ Assign a tag to a topic
+    - [remove](playground%20topic%20tag%20remove) - 🧽 Remove a tag from a topic
+    - [show](playground%20topic%20tag%20show) - 🔎 Show tags assigned to a topic
+    - [search](playground%20topic%20tag%20search) - 🔎 Search topics having a tag
+- [consumer-group](playground%20consumer-group) - 👥 Consumer group commands
+  - [list](playground%20consumer-group%20list) - 👥 List consumer groups
+  - [describe](playground%20consumer-group%20describe) - 🔬 Describe consumer group
+  - [reset-offsets](playground%20consumer-group%20reset-offsets) - ⏪ Reset the committed offsets of a consumer group
+  - [delete](playground%20consumer-group%20delete) - 🗑️ Delete a consumer group, or its offsets for one topic
 
 ## Options
 

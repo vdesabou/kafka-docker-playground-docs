@@ -54,6 +54,10 @@ topic.
 playground schema COMMAND
 ```
 
+## Commands
+
+- [metrics](playground%20schema%20metrics) - 📈 Display the key JMX metrics of Schema Registry
+
 ## Schema commands
 
 - [list](playground%20schema%20list) - 📋 List the subjects of the registry
@@ -87,9 +91,5 @@ playground schema COMMAND
 - [derive-schema](playground%20schema%20derive-schema) - 🪄 Derive a schema based on payload
 - [set-alias](playground%20schema%20set-alias) - 🔯 Set a subject alias
 - [get-alias](playground%20schema%20get-alias) - 🔯 Get subject alias
-
-## Commands
-
-- [metrics](playground%20schema%20metrics) - 📈 Display the key JMX metrics of Schema Registry
 
 

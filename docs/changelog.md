@@ -3,6 +3,7 @@
 ## November 2026
 ##### 🌟 Enhancements
 
+- 🧠🧽 Weekly docker-cleanup: old CP images, dangling images, build cache [#10479](https://github.com/vdesabou/kafka-docker-playground/issues/10479)
 - 🧠📚 ksqlDB deep dive and lab, ksqldb wait waits for source tables [#10476](https://github.com/vdesabou/kafka-docker-playground/issues/10476)
 - 🧠⏰ Scheduled jobs: nightly cleanup of AWS/GCP/Azure and ec2 auto-stop [#10475](https://github.com/vdesabou/kafka-docker-playground/issues/10475)
 - ⭐☸️ CFK day-2 operations: playground cfk commands and examples (CP upgrade, operator upgrade) [#10468](https://github.com/vdesabou/kafka-docker-playground/issues/10468)

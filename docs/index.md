@@ -87,6 +87,17 @@ playground [OPTIONS] COMMAND
     - [finalize](playground%20cfk%20kraft-migration%20finalize) - 🏁 Finalize the migration (irreversible) and wait for COMPLETE
     - [release-lock](playground%20cfk%20kraft-migration%20release-lock) - 🔓 Release the locks of the migration on the CRs
 
+### Cleanup commands
+
+- [remove-all-docker-images](playground%20remove-all-docker-images) - 🧨 Remove all docker images (including docker volumes)
+- [remove-cp-docker-images](playground%20remove-cp-docker-images) - 🧹 Remove the Confluent Platform docker images of the versions you no longer use (a table of the versions installed locally, then a selection)
+- [docker-cleanup](playground%20docker-cleanup) - 🧽 Free the disk of the container engine every week, automatically: old Confluent Platform images, dangling images, old build cache
+  - [enable](playground%20docker-cleanup%20enable) - 🧽 Schedule the weekly cleanup, then show what it would remove now
+  - [disable](playground%20docker-cleanup%20disable) - 🛑 Remove the weekly cleanup schedule
+  - [status](playground%20docker-cleanup%20status) - 🔎 Is the weekly cleanup scheduled, when, and what did its last runs free
+  - [run](playground%20docker-cleanup%20run) - 🧽 Free the disk of the container engine now, as the weekly job does
+- [cleanup-cloud-details](playground%20cleanup-cloud-details) - 🧼 playground is actively caching ccloud details (https://kafka-docker-playground.io/#/how-to-use?id=%f0%9f%8c%a4%ef%b8%8f-confluent-cloud-examples)
+
 ### Cloud Resources commands
 
 - [cloud-resources](playground%20cloud-resources) - ☁️ What the playground left behind in your cloud accounts, what it costs, and cleaning it up
@@ -353,15 +364,7 @@ playground [OPTIONS] COMMAND
 - [update-version](playground%20update-version) - ✨ Update current confluent platform components (all with `--tag` or only connect with `--connect-tag`) or connector(s) with new version(s)
 - [open](playground%20open) - 👐 When `--file` is not provided, simply open last example you ran with `<playground run>`
 - [stop](playground%20stop) - 🛑 Stop currently running example
-- [remove-all-docker-images](playground%20remove-all-docker-images) - 🧨 Remove all docker images (including docker volumes)
-- [remove-cp-docker-images](playground%20remove-cp-docker-images) - 🧹 Remove the Confluent Platform docker images of the versions you no longer use (a table of the versions installed locally, then a selection)
-- [docker-cleanup](playground%20docker-cleanup) - 🧽 Free the disk of the container engine every week, automatically: old Confluent Platform images, dangling images, old build cache
-  - [enable](playground%20docker-cleanup%20enable) - 🧽 Schedule the weekly cleanup, then show what it would remove now
-  - [disable](playground%20docker-cleanup%20disable) - 🛑 Remove the weekly cleanup schedule
-  - [status](playground%20docker-cleanup%20status) - 🔎 Is the weekly cleanup scheduled, when, and what did its last runs free
-  - [run](playground%20docker-cleanup%20run) - 🧽 Free the disk of the container engine now, as the weekly job does
 - [refresh-cp-docker-images](playground%20refresh-cp-docker-images) - 🔄 Refresh (pull from Docker) all Confluent Platform docker images related to a version installed locally
-- [cleanup-cloud-details](playground%20cleanup-cloud-details) - 🧼 playground is actively caching ccloud details (https://kafka-docker-playground.io/#/how-to-use?id=%f0%9f%8c%a4%ef%b8%8f-confluent-cloud-examples)
 - [open-docs](playground%20open-docs) - 🧑‍🎓 Open Confluent documentation of currently running example
 - [open-changelog](playground%20open-changelog) - 📜 Open playground changelog (https://kafka-docker-playground.io/#/changelog)
 - [cp-changelog](playground%20cp-changelog) - 📜 Show what changed in Confluent Platform between two versions

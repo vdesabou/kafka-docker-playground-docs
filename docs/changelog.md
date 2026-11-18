@@ -103,6 +103,8 @@
 
 ##### 🐛 Bugs
 
+- 🐛⏱️ CI kills the cp-ansible examples after 60 min on podman [#10508](https://github.com/vdesabou/kafka-docker-playground/issues/10508)
+- 🐛🧪 deep-dive ansible lab expects the old playbook log line [#10506](https://github.com/vdesabou/kafka-docker-playground/issues/10506)
 - 🐛🦭 Codespaces: podman containers have no internet access (FORWARD DROP of docker-in-docker) [#10464](https://github.com/vdesabou/kafka-docker-playground/issues/10464)
 - 🐛🦭 ansible environment on podman: the controller uses the docker socket instead of the podman context [#10461](https://github.com/vdesabou/kafka-docker-playground/issues/10461)
 - 🐛🧑‍💻 Codespaces: the ansible environment fails without yq (docker yq fallback), install yq [#10459](https://github.com/vdesabou/kafka-docker-playground/issues/10459)

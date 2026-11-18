@@ -228,6 +228,11 @@ playground [OPTIONS] COMMAND
   - [disable](playground%20docker-cleanup%20disable) - 🛑 Remove the weekly cleanup schedule
   - [status](playground%20docker-cleanup%20status) - 🔎 Is the weekly cleanup scheduled, when, and what did its last runs free
   - [run](playground%20docker-cleanup%20run) - 🧽 Free the disk of the container engine now, as the weekly job does
+- [forgotten-environment](playground%20forgotten-environment) - 🔔 Get a macOS notification every evening when a local environment was left running with nobody using it. It never stops anything
+  - [enable](playground%20forgotten-environment%20enable) - 🔔 Schedule the evening check of a forgotten local environment, then run it once now
+  - [disable](playground%20forgotten-environment%20disable) - 🛑 Remove the schedule of the forgotten environment check
+  - [status](playground%20forgotten-environment%20status) - 🔎 Is the forgotten environment check scheduled, when, and what did its last checks find
+  - [run](playground%20forgotten-environment%20run) - 🔔 Check now whether a local environment runs with nobody using it, as the scheduled job does
 - [cleanup-cloud-details](playground%20cleanup-cloud-details) - 🧼 playground is actively caching ccloud details (https://kafka-docker-playground.io/#/how-to-use?id=%f0%9f%8c%a4%ef%b8%8f-confluent-cloud-examples)
 
 ### Cloud Resources commands

@@ -21,7 +21,6 @@ of each command says whether it does.
 - **topics**: the topics a connector is using
 - **show-config**: the configuration actually applied
 - **diff**: config vs a file, a connector or the defaults
-- **reconcile**: did every record reach the table? lost, duplicated, different rows
 - **logs**: connect logs, or the fully managed logs
 - **error-recommendations**: fixes for a failed fully managed connector
 - **display-metrics-api**: Telemetry API metrics (fully managed)
@@ -82,7 +81,6 @@ playground connector COMMAND
 - [wait](playground%20connector%20wait) - ⏳ Wait for connectors to reach a state
 - [validate](playground%20connector%20validate) - ✅ Validate a connector config without creating the connector
 - [diff](playground%20connector%20diff) - 🔀 Diff the config of a running connector with another config
-- [reconcile](playground%20connector%20reconcile) - 🧮 Compare the records of the topic with the rows of the table: lost, duplicated, different?
 - [convert](playground%20connector%20convert) - 🔄 Convert a connector config from the format a customer sent to another one
 - [error-recommendations](playground%20connector%20error-recommendations) - 💡 Show error recommendations for fully managed connectors
 - [oracle-cdc-xstream](playground%20connector%20oracle-cdc-xstream) - 🅾️ Specific Oracle CDC Xstream commands

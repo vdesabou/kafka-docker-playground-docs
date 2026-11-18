@@ -21,6 +21,10 @@ with `--resource`):
 
 cloud-resources nightly-cleanup enable|disable|status
 
+💸 and a weekly reminder of what it cost and what still runs (read-only):
+
+cloud-resources cost-reminder enable|disable|status|run
+
 ## Usage
 
 ```bash
@@ -46,5 +50,10 @@ playground cloud-resources COMMAND
   - [enable](playground%20cloud-resources%20nightly-cleanup%20enable) - 🌙 Schedule the nightly cleanup, then show what tonight's run would delete
   - [disable](playground%20cloud-resources%20nightly-cleanup%20disable) - 🛑 Remove the nightly cleanup schedule
   - [status](playground%20cloud-resources%20nightly-cleanup%20status) - 🔎 Is the nightly cleanup scheduled, at what time, and what did its last runs do
+- [cost-reminder](playground%20cloud-resources%20cost-reminder) - 💸 Every week, a notification when your cloud spend went above a threshold, or something billed is still running for you. Read-only, it never deletes anything
+  - [enable](playground%20cloud-resources%20cost-reminder%20enable) - 💸 Schedule the weekly cost reminder, then run it once now
+  - [disable](playground%20cloud-resources%20cost-reminder%20disable) - 🛑 Remove the weekly cost reminder schedule
+  - [status](playground%20cloud-resources%20cost-reminder%20status) - 🔎 Is the weekly cost reminder scheduled, when, and what did its last runs find
+  - [run](playground%20cloud-resources%20cost-reminder%20run) - 💸 Check now what your clouds cost over the last `--days` days and what still runs for you, as the weekly job does
 
 

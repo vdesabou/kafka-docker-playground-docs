@@ -512,6 +512,7 @@ playground [OPTIONS] COMMAND
 - [open-docs](playground%20open-docs) - 🧑‍🎓 Open Confluent documentation of currently running example
 - [open-changelog](playground%20open-changelog) - 📜 Open playground changelog (https://kafka-docker-playground.io/#/changelog)
 - [cp-changelog](playground%20cp-changelog) - 📜 Show what changed in Confluent Platform between two versions
+- [ccloud-changelog](playground%20ccloud-changelog) - 📰 Search the Confluent Cloud release notes by date, connector, category or text
 
 ### Salesforce commands
 

@@ -36,6 +36,7 @@ window.KDP_CLI_PAGES = [
   "/playground%20broker%20transactions",
   "/playground%20broker",
   "/playground%20ccloud%20setup",
+  "/playground%20ccloud-changelog",
   "/playground%20ccloud",
   "/playground%20cfk%20kraft-migration%20finalize",
   "/playground%20cfk%20kraft-migration%20release-lock",

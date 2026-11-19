@@ -134,6 +134,7 @@ window.KDP_CLI_PAGES = [
   "/playground%20connector%20oracle-cdc-xstream",
   "/playground%20connector%20pause",
   "/playground%20connector%20plugins",
+  "/playground%20connector%20reconcile",
   "/playground%20connector%20restart",
   "/playground%20connector%20resume",
   "/playground%20connector%20select-config",

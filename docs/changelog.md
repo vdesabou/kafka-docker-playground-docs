@@ -3,6 +3,7 @@
 ## November 2026
 ##### 🌟 Enhancements
 
+- 🧠⏰ debug clock: shift the clock of a container (libfaketime) to reproduce expiries, time based partitioning and clock skew [#10518](https://github.com/vdesabou/kafka-docker-playground/issues/10518)
 - 🧠🧮 connector reconcile: compare the records of the topic with the rows of the table (lost, duplicated, different) [#10514](https://github.com/vdesabou/kafka-docker-playground/issues/10514)
 - 🧠💸 Weekly cloud cost reminder [#10512](https://github.com/vdesabou/kafka-docker-playground/issues/10512)
 - 🧠🔔 Notify when a local environment is forgotten running [#10510](https://github.com/vdesabou/kafka-docker-playground/issues/10510)

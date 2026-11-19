@@ -23,6 +23,10 @@ fly when missing, and their output is brought back to your machine.
 - **degrade-traffic**: add latency, packet loss or corruption with tc
 - **java-debug**: turn on the JVM SSL, Kerberos or class loading traces
 
+**⏰ It depends on the time**
+
+- **clock**: shift the clock of a container (libfaketime)
+
 **🔬 It is in the code**
 
 - **log-level set**: raise the level of any package, without a restart
@@ -54,6 +58,7 @@ playground debug COMMAND
 - [tcp-dump](playground%20debug%20tcp-dump) - 🕵️‍♂️ Take a tcp dump (sniffing network)
 - [block-traffic](playground%20debug%20block-traffic) - 🚫 Blocking traffic using iptables
 - [degrade-traffic](playground%20debug%20degrade-traffic) - 🐌 Add latency, packet loss, corruption or a bandwidth limit using tc
+- [clock](playground%20debug%20clock) - ⏰ Shift the clock of a container: token, ticket and certificate expiry, time based partitioning
 - [java-debug](playground%20debug%20java-debug) - 🤎 JVM arguments for SSL, Kerberos or Class Loading
 - [jscissors](playground%20debug%20jscissors) - ✂️ Trace the calls of any method of a running JVM: arguments, return values, durations, exceptions, call tree
 - [flight-recorder](playground%20debug%20flight-recorder) - 🛩️ Record a JVM with Java Flight Recorder, from `--action` start to `--action` stop

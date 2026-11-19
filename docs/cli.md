@@ -386,6 +386,7 @@ playground [OPTIONS] COMMAND
   - [tcp-dump](playground%20debug%20tcp-dump) - 🕵️‍♂️ Take a tcp dump (sniffing network)
   - [block-traffic](playground%20debug%20block-traffic) - 🚫 Blocking traffic using iptables
   - [degrade-traffic](playground%20debug%20degrade-traffic) - 🐌 Add latency, packet loss, corruption or a bandwidth limit using tc
+  - [clock](playground%20debug%20clock) - ⏰ Shift the clock of a container: token, ticket and certificate expiry, time based partitioning
   - [java-debug](playground%20debug%20java-debug) - 🤎 JVM arguments for SSL, Kerberos or Class Loading
   - [jscissors](playground%20debug%20jscissors) - ✂️ Trace the calls of any method of a running JVM: arguments, return values, durations, exceptions, call tree
   - [flight-recorder](playground%20debug%20flight-recorder) - 🛩️ Record a JVM with Java Flight Recorder, from `--action` start to `--action` stop

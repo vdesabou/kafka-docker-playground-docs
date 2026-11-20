@@ -153,17 +153,55 @@ default is 0
 |-----------------|-------------
 | Default Value:  | `0`
 
-#### `--throughput THROUGHPUT`
+#### `--throughput, --rate THROUGHPUT`
 
-🐢 Maximum number of records per second (default is 0, no limit)
+🐢 Maximum number of records per second (default is 0, no limit), alias `--rate`
 
-Useful with `--nb-messages` -1 to get a steady flow of records, for example:
+Useful with `--nb-messages` -1 or `--duration` to get a steady flow of records, for example:
 
 `playground topic produce -t a-topic --nb-messages -1 --throughput 10 --value '{"id": %g}'`
 
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Default Value:  | `0`
+
+#### `--duration DURATION`
+
+⏱️ Stop producing after this time: seconds, or a number with a unit s, m or h (e.g. 90s, 10m, 1h)
+
+Without `--nb-messages`, the records are produced until then (`--nb-messages` -1). With  
+`--nb-messages` N, the first of the two ends it.
+
+#### `--background`
+
+🌙 Produce in the background: the command returns once the schemas are registered and the  
+topic is created, the records flow until `--duration`, `--nb-messages` or `--stop` (without  
+`--nb-messages`, until `--duration` or `--stop`)
+
+Steady traffic while you inject a fault (broker rolling-restart, debug block-traffic,  
+debug dns, debug clock...), then judge the result with connector reconcile or topic consume.  
+The log, the progress and how to stop it are printed.
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Conflicts With: | `--stop`, `--status`
+
+#### `--stop`
+
+🛑 Stop the background producers of `--topic`, and print what they produced (also collects  
+the result of the ones that already ended)
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Conflicts With: | `--background`, `--status`
+
+#### `--status`
+
+🔎 The background producers of `--topic`: running or ended, records sent so far, rate, log
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Conflicts With: | `--background`, `--stop`
 
 #### `--nb-partitions NB-PARTITIONS`
 
@@ -387,6 +425,12 @@ Default: the `PLAYGROUND_CLUSTER` environment variable, else the value set with 
 ## Examples
 
 ```bash
+
+playground topic produce -t orders --value '{"id": %g}' --rate 100 --duration 10m --background
+
+playground topic produce -t orders --status
+
+playground topic produce -t orders --stop
 
 playground topic produce --tombstone --topic a-topic --key mykey
 
@@ -842,6 +886,28 @@ playground topic produce --topic tocpic --derive-value-schema-as PROTOBUF --deri
 {"name": "Foo", "Age": {"int": 12}}
 EOF
 
+```
+
+## Example output
+
+```text
+$ playground topic produce -t lab-steady --value '{"id": %g}' --rate 20 --duration 10m --background
+12:12:35 ℹ️ 🌙 producing in the background to topic lab-steady (pid 51746, id lab-steady-20261120-121235-51091)
+12:12:35 ℹ️    📄 log:     tail -f /tmp/playground-topic-produce/lab-steady-20261120-121235-51091.log
+12:12:35 ℹ️    🔎 status:  playground topic produce --topic lab-steady --status
+12:12:35 ℹ️    🛑 stop:    playground topic produce --topic lab-steady --stop
+```
+
+```text
+$ playground topic produce -t lab-steady --status
+12:12:46 ℹ️ 🌙 lab-steady-20261120-121235-51091: 🟢 running, 205 records sent, rate 20/s, since 2026-11-20 12:12:35, for 10m
+12:12:46 ℹ️    📄 log: /tmp/playground-topic-produce/lab-steady-20261120-121235-51091.log
+```
+
+```text
+$ playground topic produce -t lab-steady --stop
+12:12:49 ℹ️ 🛑 stopping background producer lab-steady-20261120-121235-51091 (pid 51746)
+12:12:51 ℹ️ ✅ lab-steady-20261120-121235-51091: 📤 produced 308 records to topic lab-steady (stopped with --stop), took: 0min 17sec
 ```
 
 

@@ -26,9 +26,9 @@ playground consumer-group COMMAND
 
 ## Topic commands
 
-- [list](playground%20consumer-group%20list) - 👥 List consumer groups
-- [describe](playground%20consumer-group%20describe) - 🔬 Describe consumer group
-- [reset-offsets](playground%20consumer-group%20reset-offsets) - ⏪ Reset the committed offsets of a consumer group
 - [delete](playground%20consumer-group%20delete) - 🗑️ Delete a consumer group, or its offsets for one topic
+- [describe](playground%20consumer-group%20describe) - 🔬 Describe consumer group
+- [list](playground%20consumer-group%20list) - 👥 List consumer groups
+- [reset-offsets](playground%20consumer-group%20reset-offsets) - ⏪ Reset the committed offsets of a consumer group
 
 

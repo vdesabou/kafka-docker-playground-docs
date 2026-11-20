@@ -50,14 +50,14 @@ visit https://github.com/junegunn/fzf#installation to install
 
 ## Commands
 
-- [export](playground%20repro%20export) - 📤 Export reproduction models as a self-contained tgz bundle
-- [check](playground%20repro%20check) - 🕵️ Scan reproduction models for secrets and customer data before they are committed
-- [import](playground%20repro%20import) - 📥 Import a tgz bundle created by `playground repro export`
-- [bootstrap](playground%20repro%20bootstrap) - 🛠  Bootstrap reproduction model, just run `<playground repro bootstrap>` !
-- [status](playground%20repro%20status) - 🩹 Show or update what a reproduction model proves, from its header
-- [diff](playground%20repro%20diff) - 🔀 Show what a reproduction model changes compared with its base example
-- [list](playground%20repro%20list) - 📋 List the reproduction models, newest first, with their case, status and last verdict
 - [assert](playground%20repro%20assert) - 🧪 End a reproduction model with its verdict: 🐞 REPRODUCED or ✅ NOT REPRODUCED
 - [bisect](playground%20repro%20bisect) - 🔀 Run a reproduction model on several versions: which one introduced or fixed the problem
+- [bootstrap](playground%20repro%20bootstrap) - 🛠  Bootstrap reproduction model, just run `<playground repro bootstrap>` !
+- [check](playground%20repro%20check) - 🕵️ Scan reproduction models for secrets and customer data before they are committed
+- [diff](playground%20repro%20diff) - 🔀 Show what a reproduction model changes compared with its base example
+- [export](playground%20repro%20export) - 📤 Export reproduction models as a self-contained tgz bundle
+- [import](playground%20repro%20import) - 📥 Import a tgz bundle created by `playground repro export`
+- [list](playground%20repro%20list) - 📋 List the reproduction models, newest first, with their case, status and last verdict
+- [status](playground%20repro%20status) - 🩹 Show or update what a reproduction model proves, from its header
 
 

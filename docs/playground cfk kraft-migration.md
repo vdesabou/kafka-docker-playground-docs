@@ -21,9 +21,9 @@ playground cfk kraft-migration COMMAND
 
 ## CFK commands
 
-- [start](playground%20cfk%20kraft-migration%20start) - 🚚 Start the migration and wait for DUAL-WRITE
-- [status](playground%20cfk%20kraft-migration%20status) - 🔎 Phase, sub-phase, the CRs, the locks and what to do next
 - [finalize](playground%20cfk%20kraft-migration%20finalize) - 🏁 Finalize the migration (irreversible) and wait for COMPLETE
 - [release-lock](playground%20cfk%20kraft-migration%20release-lock) - 🔓 Release the locks of the migration on the CRs
+- [start](playground%20cfk%20kraft-migration%20start) - 🚚 Start the migration and wait for DUAL-WRITE
+- [status](playground%20cfk%20kraft-migration%20status) - 🔎 Phase, sub-phase, the CRs, the locks and what to do next
 
 

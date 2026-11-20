@@ -60,36 +60,36 @@ playground schema COMMAND
 
 ## Schema commands
 
-- [list](playground%20schema%20list) - 📋 List the subjects of the registry
-- [get](playground%20schema%20get) - 🔰 Get all schemas versions for specified subject (if `--subject` is not specified, all subjects will be used)
-- [register](playground%20schema%20register) - ⏺️ Register a schema in specified subject
 - [check-compatibility](playground%20schema%20check-compatibility) - 🧪 Check whether a schema would be accepted, without registering it
-- [diff](playground%20schema%20diff) - 🔀 Compare two schemas field by field, with the verdict of each compatibility rule
-- [describe](playground%20schema%20describe) - 🔎 Everything about one subject, or one schema id, in one call
-- [history](playground%20schema%20history) - 📜 Timeline of the Schema Registry, from its _schemas topic
-- [export](playground%20schema%20export) - 📦 Export the subjects of the registry to a folder
-- [import](playground%20schema%20import) - 📥 Import schemas into the registry, keeping their ids
-- [test-rules](playground%20schema%20test-rules) - 📏 Test the data contract rules of a subject against records
-- [contexts](playground%20schema%20contexts) - 🗂️ List the contexts of the registry, with their number of subjects and mode
 - [compare](playground%20schema%20compare) - 🔀 Compare the subjects of two registries (or two contexts)
-- [exporter](playground%20schema%20exporter) - 🔗 Schema Linking: exporters that copy subjects to another registry
-  - [create](playground%20schema%20exporter%20create) - 🔗 Create an exporter, then wait until it runs
-  - [list](playground%20schema%20exporter%20list) - 📋 List the exporters of the registry, with their state
-  - [status](playground%20schema%20exporter%20status) - 🚦 State of an exporter (RUNNING, PAUSED, ERROR with its trace), offset and number of objects exported
-  - [pause](playground%20schema%20exporter%20pause) - ⏸️ Pause an exporter
-  - [resume](playground%20schema%20exporter%20resume) - ▶️ Resume a paused exporter
-  - [reset](playground%20schema%20exporter%20reset) - ⏮️ Reset a paused exporter: it exports everything again
-  - [delete](playground%20schema%20exporter%20delete) - 🗑️ Delete a paused exporter (the exported schemas stay in the destination)
-- [validate](playground%20schema%20validate) - 🧪 Register schemas in a throwaway Schema Registry of each CP version, and compare the verdicts
-- [get-compatibility](playground%20schema%20get-compatibility) - 🛡️ Get the compatibility rule in force
-- [set-compatibility](playground%20schema%20set-compatibility) - 🛡️ Set the compatibility rule of a subject (`--subject`), or of the whole registry (`--global`)
-- [get-mode](playground%20schema%20get-mode) - 🔏 Get the mode in force
-- [set-mode](playground%20schema%20set-mode) - 🔏 Set the mode of a subject (`--subject`), or of the whole registry (`--global`)
-- [set-normalize](playground%20schema%20set-normalize) - 🧽 Set normalize at schema registry level
-- [validate-new-schemas](playground%20schema%20validate-new-schemas) - 🩺 Validate new schemas (default is true since CP 8.2.0)
+- [contexts](playground%20schema%20contexts) - 🗂️ List the contexts of the registry, with their number of subjects and mode
 - [delete](playground%20schema%20delete) - 🧟 Delete schema
 - [derive-schema](playground%20schema%20derive-schema) - 🪄 Derive a schema based on payload
-- [set-alias](playground%20schema%20set-alias) - 🔯 Set a subject alias
+- [describe](playground%20schema%20describe) - 🔎 Everything about one subject, or one schema id, in one call
+- [diff](playground%20schema%20diff) - 🔀 Compare two schemas field by field, with the verdict of each compatibility rule
+- [export](playground%20schema%20export) - 📦 Export the subjects of the registry to a folder
+- [exporter](playground%20schema%20exporter) - 🔗 Schema Linking: exporters that copy subjects to another registry
+  - [create](playground%20schema%20exporter%20create) - 🔗 Create an exporter, then wait until it runs
+  - [delete](playground%20schema%20exporter%20delete) - 🗑️ Delete a paused exporter (the exported schemas stay in the destination)
+  - [list](playground%20schema%20exporter%20list) - 📋 List the exporters of the registry, with their state
+  - [pause](playground%20schema%20exporter%20pause) - ⏸️ Pause an exporter
+  - [reset](playground%20schema%20exporter%20reset) - ⏮️ Reset a paused exporter: it exports everything again
+  - [resume](playground%20schema%20exporter%20resume) - ▶️ Resume a paused exporter
+  - [status](playground%20schema%20exporter%20status) - 🚦 State of an exporter (RUNNING, PAUSED, ERROR with its trace), offset and number of objects exported
+- [get](playground%20schema%20get) - 🔰 Get all schemas versions for specified subject (if `--subject` is not specified, all subjects will be used)
 - [get-alias](playground%20schema%20get-alias) - 🔯 Get subject alias
+- [get-compatibility](playground%20schema%20get-compatibility) - 🛡️ Get the compatibility rule in force
+- [get-mode](playground%20schema%20get-mode) - 🔏 Get the mode in force
+- [history](playground%20schema%20history) - 📜 Timeline of the Schema Registry, from its _schemas topic
+- [import](playground%20schema%20import) - 📥 Import schemas into the registry, keeping their ids
+- [list](playground%20schema%20list) - 📋 List the subjects of the registry
+- [register](playground%20schema%20register) - ⏺️ Register a schema in specified subject
+- [set-alias](playground%20schema%20set-alias) - 🔯 Set a subject alias
+- [set-compatibility](playground%20schema%20set-compatibility) - 🛡️ Set the compatibility rule of a subject (`--subject`), or of the whole registry (`--global`)
+- [set-mode](playground%20schema%20set-mode) - 🔏 Set the mode of a subject (`--subject`), or of the whole registry (`--global`)
+- [set-normalize](playground%20schema%20set-normalize) - 🧽 Set normalize at schema registry level
+- [test-rules](playground%20schema%20test-rules) - 📏 Test the data contract rules of a subject against records
+- [validate](playground%20schema%20validate) - 🧪 Register schemas in a throwaway Schema Registry of each CP version, and compare the verdicts
+- [validate-new-schemas](playground%20schema%20validate-new-schemas) - 🩺 Validate new schemas (default is true since CP 8.2.0)
 
 

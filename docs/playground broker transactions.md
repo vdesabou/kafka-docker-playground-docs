@@ -27,10 +27,10 @@ playground broker transactions COMMAND
 
 ## Kafka commands
 
-- [list](playground%20broker%20transactions%20list) - 📋 List the transactional ids
+- [abort](playground%20broker%20transactions%20abort) - 🧹 Abort a hanging transaction
 - [describe](playground%20broker%20transactions%20describe) - 🔎 Describe a transactional id
 - [describe-producers](playground%20broker%20transactions%20describe-producers) - 🏭 Describe the active producers of a topic
 - [find-hanging](playground%20broker%20transactions%20find-hanging) - 🧟 Find hanging transactions
-- [abort](playground%20broker%20transactions%20abort) - 🧹 Abort a hanging transaction
+- [list](playground%20broker%20transactions%20list) - 📋 List the transactional ids
 
 

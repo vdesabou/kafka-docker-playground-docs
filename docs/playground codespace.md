@@ -44,15 +44,15 @@ playground codespace COMMAND
 ## Commands
 
 - [create](playground%20codespace%20create) - 👷 Create a GitHub Codespace of kafka-docker-playground, then open it
+- [delete](playground%20codespace%20delete) - ❌ Delete a codespace
 - [list](playground%20codespace%20list) - 🔘 List your kafka-docker-playground codespaces
 - [open](playground%20codespace%20open) - 👨‍💻 Open a codespace in Visual Studio Code
-- [ssh](playground%20codespace%20ssh) - 🐚 Open a shell in a codespace, or run one command in it
-- [stop](playground%20codespace%20stop) - 🔴 Stop a codespace
-- [start](playground%20codespace%20start) - 🟢 Start a codespace
-- [delete](playground%20codespace%20delete) - ❌ Delete a codespace
 - [push-secrets](playground%20codespace%20push-secrets) - 🔐 Send the secrets store to a codespace
+- [ssh](playground%20codespace%20ssh) - 🐚 Open a shell in a codespace, or run one command in it
+- [start](playground%20codespace%20start) - 🟢 Start a codespace
+- [stop](playground%20codespace%20stop) - 🔴 Stop a codespace
 - [sync-repro-folder](playground%20codespace%20sync-repro-folder) - ↔️ Synchronize reproduction-models folder between local and a codespace
-  - [local-to-codespace](playground%20codespace%20sync-repro-folder%20local-to-codespace) - 👉 Sync local reproduction-models folder to a codespace
   - [codespace-to-local](playground%20codespace%20sync-repro-folder%20codespace-to-local) - 👈 Sync a codespace reproduction-models folder to local
+  - [local-to-codespace](playground%20codespace%20sync-repro-folder%20local-to-codespace) - 👉 Sync local reproduction-models folder to a codespace
 
 

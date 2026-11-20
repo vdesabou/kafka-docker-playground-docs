@@ -18,8 +18,8 @@ playground tools cert COMMAND
 
 ## Commands
 
+- [convert](playground%20tools%20cert%20convert) - 🔄 Convert certificates and keystores between formats
 - [create](playground%20tools%20cert%20create) - 🔐 Generate keys and certificates used for SSL
 - [inspect](playground%20tools%20cert%20inspect) - 🔍 Inspect certificates and explain what breaks TLS
-- [convert](playground%20tools%20cert%20convert) - 🔄 Convert certificates and keystores between formats
 
 

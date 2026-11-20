@@ -22,8 +22,8 @@ playground tools http-server COMMAND
 
 ## Commands
 
-- [set-response](playground%20tools%20http-server%20set-response) - 🎛️ Set how the http test server answers
-- [reset](playground%20tools%20http-server%20reset) - 🔄 Reset the http test server
 - [requests](playground%20tools%20http-server%20requests) - 📥 Show the requests received by the http test server
+- [reset](playground%20tools%20http-server%20reset) - 🔄 Reset the http test server
+- [set-response](playground%20tools%20http-server%20set-response) - 🎛️ Set how the http test server answers
 
 

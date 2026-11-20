@@ -24,12 +24,12 @@ playground ansible COMMAND
 
 ## Ansible commands
 
-- [playbook](playground%20ansible%20playbook) - ▶️ Run the playbook again on the hosts
+- [add-host](playground%20ansible%20add-host) - 🖥️ Add hosts to the running cluster
 - [inventory](playground%20ansible%20inventory) - 📋 Read and change the inventory of the ansible environment
+  - [delete](playground%20ansible%20inventory%20delete) - 🗑️ Remove a yq path from the inventory, and print the change
   - [get](playground%20ansible%20inventory%20get) - 🔎 Display the inventory, or the value of a yq path
   - [set](playground%20ansible%20inventory%20set) - ✏️ Set the value of a yq path, and print the change
-  - [delete](playground%20ansible%20inventory%20delete) - 🗑️ Remove a yq path from the inventory, and print the change
-- [add-host](playground%20ansible%20add-host) - 🖥️ Add hosts to the running cluster
+- [playbook](playground%20ansible%20playbook) - ▶️ Run the playbook again on the hosts
 - [upgrade](playground%20ansible%20upgrade) - ⬆️ Upgrade (or downgrade) Confluent Platform with cp-ansible
 
 

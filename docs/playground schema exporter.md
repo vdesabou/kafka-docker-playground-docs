@@ -28,11 +28,11 @@ playground schema exporter COMMAND
 ## Commands
 
 - [create](playground%20schema%20exporter%20create) - 🔗 Create an exporter, then wait until it runs
-- [list](playground%20schema%20exporter%20list) - 📋 List the exporters of the registry, with their state
-- [status](playground%20schema%20exporter%20status) - 🚦 State of an exporter (RUNNING, PAUSED, ERROR with its trace), offset and number of objects exported
-- [pause](playground%20schema%20exporter%20pause) - ⏸️ Pause an exporter
-- [resume](playground%20schema%20exporter%20resume) - ▶️ Resume a paused exporter
-- [reset](playground%20schema%20exporter%20reset) - ⏮️ Reset a paused exporter: it exports everything again
 - [delete](playground%20schema%20exporter%20delete) - 🗑️ Delete a paused exporter (the exported schemas stay in the destination)
+- [list](playground%20schema%20exporter%20list) - 📋 List the exporters of the registry, with their state
+- [pause](playground%20schema%20exporter%20pause) - ⏸️ Pause an exporter
+- [reset](playground%20schema%20exporter%20reset) - ⏮️ Reset a paused exporter: it exports everything again
+- [resume](playground%20schema%20exporter%20resume) - ▶️ Resume a paused exporter
+- [status](playground%20schema%20exporter%20status) - 🚦 State of an exporter (RUNNING, PAUSED, ERROR with its trace), offset and number of objects exported
 
 

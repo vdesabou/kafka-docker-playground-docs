@@ -40,9 +40,9 @@ playground cloud-resources cost-reminder COMMAND
 
 ## Commands
 
-- [enable](playground%20cloud-resources%20cost-reminder%20enable) - 💸 Schedule the weekly cost reminder, then run it once now
 - [disable](playground%20cloud-resources%20cost-reminder%20disable) - 🛑 Remove the weekly cost reminder schedule
-- [status](playground%20cloud-resources%20cost-reminder%20status) - 🔎 Is the weekly cost reminder scheduled, when, and what did its last runs find
+- [enable](playground%20cloud-resources%20cost-reminder%20enable) - 💸 Schedule the weekly cost reminder, then run it once now
 - [run](playground%20cloud-resources%20cost-reminder%20run) - 💸 Check now what your clouds cost over the last `--days` days and what still runs for you, as the weekly job does
+- [status](playground%20cloud-resources%20cost-reminder%20status) - 🔎 Is the weekly cost reminder scheduled, when, and what did its last runs find
 
 

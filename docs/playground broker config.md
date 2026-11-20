@@ -28,8 +28,8 @@ playground broker config COMMAND
 
 ## Kafka commands
 
+- [delete](playground%20broker%20config%20delete) - 🗑️ Remove a dynamic broker config
 - [get](playground%20broker%20config%20get) - 🔎 Display dynamic broker configs
 - [set](playground%20broker%20config%20set) - ⚙️ Set a dynamic broker config
-- [delete](playground%20broker%20config%20delete) - 🗑️ Remove a dynamic broker config
 
 

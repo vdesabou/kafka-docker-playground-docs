@@ -25,10 +25,10 @@ playground ksqldb COMMAND
 
 ## ksqlDB commands
 
-- [sql](playground%20ksqldb%20sql) - 🧮 Run ksqlDB statements with the ksql cli
-- [list](playground%20ksqldb%20list) - 📋 List the streams, tables and persistent queries
 - [describe](playground%20ksqldb%20describe) - 🔎 Describe a stream or a table
-- [wait](playground%20ksqldb%20wait) - ⏳ Wait until the persistent queries are RUNNING and have no lag
+- [list](playground%20ksqldb%20list) - 📋 List the streams, tables and persistent queries
 - [metrics](playground%20ksqldb%20metrics) - 📈 Display the key JMX metrics of the ksqlDB server
+- [sql](playground%20ksqldb%20sql) - 🧮 Run ksqlDB statements with the ksql cli
+- [wait](playground%20ksqldb%20wait) - ⏳ Wait until the persistent queries are RUNNING and have no lag
 
 

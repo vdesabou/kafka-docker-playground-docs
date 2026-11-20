@@ -46,8 +46,8 @@ created once for the environment and region, kept in the playground secrets stor
 
 ## Flink commands
 
-- [sql](playground%20flink%20sql) - 🐿️ Run Flink SQL statements with the SQL client
-- [list-jobs](playground%20flink%20list-jobs) - 📋 List the jobs of the Flink cluster
 - [cancel](playground%20flink%20cancel) - 🛑 Cancel a Flink job
+- [list-jobs](playground%20flink%20list-jobs) - 📋 List the jobs of the Flink cluster
+- [sql](playground%20flink%20sql) - 🐿️ Run Flink SQL statements with the SQL client
 
 

@@ -45,34 +45,34 @@ playground topic COMMAND
 
 ## Topic commands
 
-- [get-number-records](playground%20topic%20get-number-records) - 💯 Get number of records in a topic
-- [wait-for-records](playground%20topic%20wait-for-records) - ⏳ Wait for a topic to contain a minimum number of records
-- [get-offsets](playground%20topic%20get-offsets) - 📍 Get earliest and latest offsets per partition of a topic
-- [compare](playground%20topic%20compare) - 🔀 Compare a topic with its replica: is everything replicated?
-- [display-consumer-offsets](playground%20topic%20display-consumer-offsets) - 📭 Display content of __consumer_offsets topic
-- [list](playground%20topic%20list) - 🔘 List topics
-- [get-size](playground%20topic%20get-size) - 📏 Get size of topics
-- [describe](playground%20topic%20describe) - 🔬 Describe topic
-- [reassign](playground%20topic%20reassign) - 🔀 Move the replicas of a topic to other brokers
-- [elect-leader](playground%20topic%20elect-leader) - 👑 Elect the leaders of a topic
-- [dump-log](playground%20topic%20dump-log) - 🔬 Dump the log segments of a partition: batches, producers, transactions
+- [alter](playground%20topic%20alter) - 🪛 Alter topic config
 - [check-format](playground%20topic%20check-format) - 🧬 Check the format of the records of a topic, from their bytes
-- [set-schema-compatibility](playground%20topic%20set-schema-compatibility) - 🛡️ Change topic's schema compatibility
+- [compare](playground%20topic%20compare) - 🔀 Compare a topic with its replica: is everything replicated?
 - [consume](playground%20topic%20consume) - 📥 Consume topic from beginning
-- [produce](playground%20topic%20produce) - 📤 Produce to a topic
 - [create](playground%20topic%20create) - 🆕 Create topic
 - [delete](playground%20topic%20delete) - ❌ Delete topic and associated schema/subject if applicable
-- [alter](playground%20topic%20alter) - 🪛 Alter topic config
+- [describe](playground%20topic%20describe) - 🔬 Describe topic
+- [display-consumer-offsets](playground%20topic%20display-consumer-offsets) - 📭 Display content of __consumer_offsets topic
 - [dlq](playground%20topic%20dlq) - 📬 Dead letter queue commands
   - [inspect](playground%20topic%20dlq%20inspect) - 🩺 Show what is in a dead letter queue, grouped by error
   - [replay](playground%20topic%20dlq%20replay) - 🔁 Produce the records of a dead letter queue again
+- [dump-log](playground%20topic%20dump-log) - 🔬 Dump the log segments of a partition: batches, producers, transactions
+- [elect-leader](playground%20topic%20elect-leader) - 👑 Elect the leaders of a topic
+- [get-number-records](playground%20topic%20get-number-records) - 💯 Get number of records in a topic
+- [get-offsets](playground%20topic%20get-offsets) - 📍 Get earliest and latest offsets per partition of a topic
+- [get-size](playground%20topic%20get-size) - 📏 Get size of topics
+- [list](playground%20topic%20list) - 🔘 List topics
+- [produce](playground%20topic%20produce) - 📤 Produce to a topic
+- [reassign](playground%20topic%20reassign) - 🔀 Move the replicas of a topic to other brokers
+- [set-schema-compatibility](playground%20topic%20set-schema-compatibility) - 🛡️ Change topic's schema compatibility
 - [tag](playground%20topic%20tag) - 🏷️ Stream Catalog tags (Confluent Cloud only)
-  - [list](playground%20topic%20tag%20list) - 🏷️ List tag definitions
+  - [add](playground%20topic%20tag%20add) - 🏷️ Assign a tag to a topic
   - [create](playground%20topic%20tag%20create) - 🆕 Create a tag definition
   - [delete](playground%20topic%20tag%20delete) - ❌ Delete a tag definition
-  - [add](playground%20topic%20tag%20add) - 🏷️ Assign a tag to a topic
+  - [list](playground%20topic%20tag%20list) - 🏷️ List tag definitions
   - [remove](playground%20topic%20tag%20remove) - 🧽 Remove a tag from a topic
-  - [show](playground%20topic%20tag%20show) - 🔎 Show tags assigned to a topic
   - [search](playground%20topic%20tag%20search) - 🔎 Search topics having a tag
+  - [show](playground%20topic%20tag%20show) - 🔎 Show tags assigned to a topic
+- [wait-for-records](playground%20topic%20wait-for-records) - ⏳ Wait for a topic to contain a minimum number of records
 
 

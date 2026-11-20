@@ -25,6 +25,10 @@ playground rbac COMMAND
 
 ## RBAC commands
 
+- [acl](playground%20rbac%20acl) - 🚦 ACL commands
+  - [create](playground%20rbac%20acl%20create) - 🚦 Create ACLs, one per `--operation`
+  - [delete](playground%20rbac%20acl%20delete) - 🗑️ Delete ACLs, one per `--operation`
+  - [list](playground%20rbac%20acl%20list) - 📋 List ACLs
 - [role-binding](playground%20rbac%20role-binding) - 🔐 Role binding commands
   - [create](playground%20rbac%20role-binding%20create) - 🔐 Create a role binding
   - [delete](playground%20rbac%20role-binding%20delete) - 🗑️ Delete a role binding
@@ -33,9 +37,5 @@ playground rbac COMMAND
   - [add](playground%20rbac%20user%20add) - ➕ Add an LDAP user (a Keycloak client on rbac-oauth)
   - [delete](playground%20rbac%20user%20delete) - 🗑️ Delete an LDAP user, and remove it from its groups (the Keycloak client on rbac-oauth)
   - [list](playground%20rbac%20user%20list) - 📋 List LDAP users and their groups (Keycloak clients, secrets and groups on rbac-oauth)
-- [acl](playground%20rbac%20acl) - 🚦 ACL commands
-  - [create](playground%20rbac%20acl%20create) - 🚦 Create ACLs, one per `--operation`
-  - [delete](playground%20rbac%20acl%20delete) - 🗑️ Delete ACLs, one per `--operation`
-  - [list](playground%20rbac%20acl%20list) - 📋 List ACLs
 
 

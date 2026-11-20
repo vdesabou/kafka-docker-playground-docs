@@ -78,57 +78,57 @@ playground connector COMMAND
 
 ## Commands
 
-- [status](playground%20connector%20status) - 🧩 Show status of all connectors
-- [wait](playground%20connector%20wait) - ⏳ Wait for connectors to reach a state
-- [validate](playground%20connector%20validate) - ✅ Validate a connector config without creating the connector
-- [diff](playground%20connector%20diff) - 🔀 Diff the config of a running connector with another config
-- [reconcile](playground%20connector%20reconcile) - 🧮 Compare the records of the topic with the rows of the table: lost, duplicated, different?
-- [convert](playground%20connector%20convert) - 🔄 Convert a connector config from the format a customer sent to another one
-- [error-recommendations](playground%20connector%20error-recommendations) - 💡 Show error recommendations for fully managed connectors
-- [oracle-cdc-xstream](playground%20connector%20oracle-cdc-xstream) - 🅾️ Specific Oracle CDC Xstream commands
-  - [generate-report](playground%20connector%20oracle-cdc-xstream%20generate-report) - ⚙️ Generate and open oracle cdc xstream connector diagnostics
-  - [debug](playground%20connector%20oracle-cdc-xstream%20debug) - 🐞 Execute various SQL commands to debug xstream components
-- [smt](playground%20connector%20smt) - 🧪 Single message transforms (SMT)
-  - [test](playground%20connector%20smt%20test) - 🧪 Apply the transform chain (SMT) of a connector to a record, step by step
-- [offsets](playground%20connector%20offsets) - 💈 Handle source and sink connectors offsets
-  - [get](playground%20connector%20offsets%20get) - 🏹 Get current offsets for source and sink connectors
-  - [reset](playground%20connector%20offsets%20reset) - 🆕 Reset offsets for source and sink connectors
-  - [alter](playground%20connector%20offsets%20alter) - ⛏️ Alter offsets for source and sink connectors
-  - [get-offsets-request-status](playground%20connector%20offsets%20get-offsets-request-status) - 👁️‍🗨️ Get the status of the previous offset request
-- [plugins](playground%20connector%20plugins) - 🎨 Show all connector plugins installed. You can also display transforms, converters and predicates using `--all` flag
-- [pause](playground%20connector%20pause) - ⏸️  Pause connector
-- [versions](playground%20connector%20versions) - 🧞 Get current and latest versions available on Confluent Hub for connector(s) used in example
-- [sourcecode](playground%20connector%20sourcecode) - 🧑‍💻 open source code url for connector(s) used in example
-- [enable-remote-debugging](playground%20connector%20enable-remote-debugging) - ✨ Enable java remote debugging for the connector.
-- [disable-remote-debugging](playground%20connector%20disable-remote-debugging) - 🛑 Disable java remote debugging for the connector.
-- [restart](playground%20connector%20restart) - ♻️  Restart connector
-- [tasks](playground%20connector%20tasks) - 🧵 Show the tasks of a connector: state, worker, config and partitions
-- [topics](playground%20connector%20topics) - 📚 Show the topics a connector is using, or reset that list
-- [stop](playground%20connector%20stop) - 🛑 Stop connector (only available since CP 7.5)
-- [resume](playground%20connector%20resume) - ⏯️  Resume connector
-- [delete](playground%20connector%20delete) - 🗑️  Delete connector
-- [diagnose](playground%20connector%20diagnose) - 🩺 Diagnose a connector in one call: status, errors and progress
-- [history](playground%20connector%20history) - 🕰️ Show the history of a connector: state changes, failures, restarts and config changes
-- [show-lag](playground%20connector%20show-lag) - 🐢 Show lag of sink connector
 - [benchmark](playground%20connector%20benchmark) - 🏎️ Benchmark the throughput of a connector
-- [show-config](playground%20connector%20show-config) - 🧰 Show current connector config that was applied
-- [show-config-parameters](playground%20connector%20show-config-parameters) - 🔩 Show all possible configuration parameters of connector
-- [metrics](playground%20connector%20metrics) - 📈 Show the metrics of a connector: throughput, time, errors, and the metrics of the connector itself
-- [display-metrics-api](playground%20connector%20display-metrics-api) - 〽️ Display metrics api for fully managed connector
-- [display-metrics-api-with-grafana](playground%20connector%20display-metrics-api-with-grafana) - 📊 Display metrics api for fully managed connector in Grafana dashboard
-- [select-config](playground%20connector%20select-config) - 🗜️ Easily select config from all possible configuration parameters of connector
-- [snippets](playground%20connector%20snippets) - 🔌 useful snippets
-- [open-docs](playground%20connector%20open-docs) - 🧑‍🎓 Open connector documentation of currently running connector(s)
-- [log-level](playground%20connector%20log-level) - 🧬 Set connect log level
-- [logs](playground%20connector%20logs) - 🕵️  Tail and follow connect logs
-- [open-ccloud-connector-in-browser](playground%20connector%20open-ccloud-connector-in-browser) - 🤖 Open Fully Managed connector in browser (Confluent Cloud dashboard)
-- [display-leader-name](playground%20connector%20display-leader-name) - 👑 Display Connect Worker leader name using JMX MBean leader-name from kafka.connect:type=connect-worker-rebalance-metrics
-- [translate](playground%20connector%20translate) - 💱 Translate Self Managed Connector Plugin Configurations to Fully Managed Connector Plugin Configuration
 - [connect-migration-utility](playground%20connector%20connect-migration-utility) - 🧩 Run Kafka Connector Migration Utility (see https://github.com/confluentinc/connect-migration-utility/) on running connect cluster
   - [discovery](playground%20connector%20connect-migration-utility%20discovery) - 👨‍🔬 Discover connectors in the local connect cluster and export their configurations to files
   - [migrate](playground%20connector%20connect-migration-utility%20migrate) - 🪄 Migrate discovered connectors to fully managed connectors
+- [convert](playground%20connector%20convert) - 🔄 Convert a connector config from the format a customer sent to another one
 - [create-or-update](playground%20connector%20create-or-update) - 🧑‍🎨  Create or update connector
+- [delete](playground%20connector%20delete) - 🗑️  Delete connector
+- [diagnose](playground%20connector%20diagnose) - 🩺 Diagnose a connector in one call: status, errors and progress
+- [diff](playground%20connector%20diff) - 🔀 Diff the config of a running connector with another config
+- [disable-remote-debugging](playground%20connector%20disable-remote-debugging) - 🛑 Disable java remote debugging for the connector.
+- [display-leader-name](playground%20connector%20display-leader-name) - 👑 Display Connect Worker leader name using JMX MBean leader-name from kafka.connect:type=connect-worker-rebalance-metrics
+- [display-metrics-api](playground%20connector%20display-metrics-api) - 〽️ Display metrics api for fully managed connector
+- [display-metrics-api-with-grafana](playground%20connector%20display-metrics-api-with-grafana) - 📊 Display metrics api for fully managed connector in Grafana dashboard
+- [enable-remote-debugging](playground%20connector%20enable-remote-debugging) - ✨ Enable java remote debugging for the connector.
+- [error-recommendations](playground%20connector%20error-recommendations) - 💡 Show error recommendations for fully managed connectors
+- [history](playground%20connector%20history) - 🕰️ Show the history of a connector: state changes, failures, restarts and config changes
+- [log-level](playground%20connector%20log-level) - 🧬 Set connect log level
+- [logs](playground%20connector%20logs) - 🕵️  Tail and follow connect logs
+- [metrics](playground%20connector%20metrics) - 📈 Show the metrics of a connector: throughput, time, errors, and the metrics of the connector itself
+- [offsets](playground%20connector%20offsets) - 💈 Handle source and sink connectors offsets
+  - [alter](playground%20connector%20offsets%20alter) - ⛏️ Alter offsets for source and sink connectors
+  - [get](playground%20connector%20offsets%20get) - 🏹 Get current offsets for source and sink connectors
+  - [get-offsets-request-status](playground%20connector%20offsets%20get-offsets-request-status) - 👁️‍🗨️ Get the status of the previous offset request
+  - [reset](playground%20connector%20offsets%20reset) - 🆕 Reset offsets for source and sink connectors
+- [open-ccloud-connector-in-browser](playground%20connector%20open-ccloud-connector-in-browser) - 🤖 Open Fully Managed connector in browser (Confluent Cloud dashboard)
+- [open-docs](playground%20connector%20open-docs) - 🧑‍🎓 Open connector documentation of currently running connector(s)
+- [oracle-cdc-xstream](playground%20connector%20oracle-cdc-xstream) - 🅾️ Specific Oracle CDC Xstream commands
+  - [debug](playground%20connector%20oracle-cdc-xstream%20debug) - 🐞 Execute various SQL commands to debug xstream components
+  - [generate-report](playground%20connector%20oracle-cdc-xstream%20generate-report) - ⚙️ Generate and open oracle cdc xstream connector diagnostics
+- [pause](playground%20connector%20pause) - ⏸️  Pause connector
+- [plugins](playground%20connector%20plugins) - 🎨 Show all connector plugins installed. You can also display transforms, converters and predicates using `--all` flag
+- [reconcile](playground%20connector%20reconcile) - 🧮 Compare the records of the topic with the rows of the table: lost, duplicated, different?
+- [restart](playground%20connector%20restart) - ♻️  Restart connector
+- [resume](playground%20connector%20resume) - ⏯️  Resume connector
+- [select-config](playground%20connector%20select-config) - 🗜️ Easily select config from all possible configuration parameters of connector
+- [show-config](playground%20connector%20show-config) - 🧰 Show current connector config that was applied
+- [show-config-parameters](playground%20connector%20show-config-parameters) - 🔩 Show all possible configuration parameters of connector
+- [show-lag](playground%20connector%20show-lag) - 🐢 Show lag of sink connector
+- [smt](playground%20connector%20smt) - 🧪 Single message transforms (SMT)
+  - [test](playground%20connector%20smt%20test) - 🧪 Apply the transform chain (SMT) of a connector to a record, step by step
+- [snippets](playground%20connector%20snippets) - 🔌 useful snippets
+- [sourcecode](playground%20connector%20sourcecode) - 🧑‍💻 open source code url for connector(s) used in example
+- [status](playground%20connector%20status) - 🧩 Show status of all connectors
+- [stop](playground%20connector%20stop) - 🛑 Stop connector (only available since CP 7.5)
+- [tasks](playground%20connector%20tasks) - 🧵 Show the tasks of a connector: state, worker, config and partitions
+- [topics](playground%20connector%20topics) - 📚 Show the topics a connector is using, or reset that list
+- [translate](playground%20connector%20translate) - 💱 Translate Self Managed Connector Plugin Configurations to Fully Managed Connector Plugin Configuration
 - [update](playground%20connector%20update) - 🛠️ Update connector configuration by opening current connector config in text editor set with playground config editor `<editor>` (default is code). Once file is saved, the new configuration is updated.
+- [validate](playground%20connector%20validate) - ✅ Validate a connector config without creating the connector
+- [versions](playground%20connector%20versions) - 🧞 Get current and latest versions available on Confluent Hub for connector(s) used in example
+- [wait](playground%20connector%20wait) - ⏳ Wait for connectors to reach a state
 
 ## Examples
 

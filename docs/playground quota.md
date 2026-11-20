@@ -31,8 +31,8 @@ playground quota COMMAND
 
 ## Kafka commands
 
+- [delete](playground%20quota%20delete) - 🗑️ Remove client quotas
 - [get](playground%20quota%20get) - 🔎 Display client quotas
 - [set](playground%20quota%20set) - 🚦 Set client quotas
-- [delete](playground%20quota%20delete) - 🗑️ Remove client quotas
 
 

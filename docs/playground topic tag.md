@@ -25,12 +25,12 @@ playground topic tag COMMAND
 
 ## Commands
 
-- [list](playground%20topic%20tag%20list) - 🏷️ List tag definitions
+- [add](playground%20topic%20tag%20add) - 🏷️ Assign a tag to a topic
 - [create](playground%20topic%20tag%20create) - 🆕 Create a tag definition
 - [delete](playground%20topic%20tag%20delete) - ❌ Delete a tag definition
-- [add](playground%20topic%20tag%20add) - 🏷️ Assign a tag to a topic
+- [list](playground%20topic%20tag%20list) - 🏷️ List tag definitions
 - [remove](playground%20topic%20tag%20remove) - 🧽 Remove a tag from a topic
-- [show](playground%20topic%20tag%20show) - 🔎 Show tags assigned to a topic
 - [search](playground%20topic%20tag%20search) - 🔎 Search topics having a tag
+- [show](playground%20topic%20tag%20show) - 🔎 Show tags assigned to a topic
 
 

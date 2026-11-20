@@ -35,9 +35,9 @@ playground forgotten-environment COMMAND
 
 ## Commands
 
-- [enable](playground%20forgotten-environment%20enable) - 🔔 Schedule the evening check of a forgotten local environment, then run it once now
 - [disable](playground%20forgotten-environment%20disable) - 🛑 Remove the schedule of the forgotten environment check
-- [status](playground%20forgotten-environment%20status) - 🔎 Is the forgotten environment check scheduled, when, and what did its last checks find
+- [enable](playground%20forgotten-environment%20enable) - 🔔 Schedule the evening check of a forgotten local environment, then run it once now
 - [run](playground%20forgotten-environment%20run) - 🔔 Check now whether a local environment runs with nobody using it, as the scheduled job does
+- [status](playground%20forgotten-environment%20status) - 🔎 Is the forgotten environment check scheduled, when, and what did its last checks find
 
 

@@ -15,8 +15,8 @@ playground ansible inventory COMMAND
 
 ## Ansible commands
 
+- [delete](playground%20ansible%20inventory%20delete) - 🗑️ Remove a yq path from the inventory, and print the change
 - [get](playground%20ansible%20inventory%20get) - 🔎 Display the inventory, or the value of a yq path
 - [set](playground%20ansible%20inventory%20set) - ✏️ Set the value of a yq path, and print the change
-- [delete](playground%20ansible%20inventory%20delete) - 🗑️ Remove a yq path from the inventory, and print the change
 
 

@@ -19,7 +19,7 @@ playground salesforce COMMAND
 
 ## Commands
 
-- [setup](playground%20salesforce%20setup) - 🛠️ Configure a Salesforce org for the Salesforce examples
 - [check](playground%20salesforce%20check) - 🩺 Check that the stored Salesforce credentials work
+- [setup](playground%20salesforce%20setup) - 🛠️ Configure a Salesforce org for the Salesforce examples
 
 

@@ -33,16 +33,16 @@ playground connector-plugin COMMAND
 
 ## Commands
 
-- [search-jar](playground%20connector-plugin%20search-jar) - ☕ List jars for a connector plugin from confluent hub https://www.confluent.io/hub/
-- [dependencies](playground%20connector-plugin%20dependencies) - 📚 Libraries bundled in a connector plugin, and what changed between two versions
-- [cve-scan](playground%20connector-plugin%20cve-scan) - 🛡️ Known vulnerabilities (CVE) of the jars of a connector plugin version
-- [fm-versions](playground%20connector-plugin%20fm-versions) - ☁️ Fully managed connector: the connector version shipped by each cc-connect image (Confluent employees)
-- [versions](playground%20connector-plugin%20versions) - 💯 List versions for a connector plugin from confluent hub https://www.confluent.io/hub/
-- [info](playground%20connector-plugin%20info) - 🪪 One page on a connector plugin of Confluent Hub
 - [changelog](playground%20connector-plugin%20changelog) - 📜 Show the release notes of a connector plugin between two versions
-- [display-last-updated](playground%20connector-plugin%20display-last-updated) - 🆕 List last updated connector plugins from confluent hub https://www.confluent.io/hub/
 - [config-diff](playground%20connector-plugin%20config-diff) - 🔧 Configuration keys added, removed or changed between two versions of a plugin
 - [config-key](playground%20connector-plugin%20config-key) - 🔑 Explain a connector configuration key: documentation, type, default, since when, and which examples set it
+- [cve-scan](playground%20connector-plugin%20cve-scan) - 🛡️ Known vulnerabilities (CVE) of the jars of a connector plugin version
+- [dependencies](playground%20connector-plugin%20dependencies) - 📚 Libraries bundled in a connector plugin, and what changed between two versions
+- [display-last-updated](playground%20connector-plugin%20display-last-updated) - 🆕 List last updated connector plugins from confluent hub https://www.confluent.io/hub/
+- [fm-versions](playground%20connector-plugin%20fm-versions) - ☁️ Fully managed connector: the connector version shipped by each cc-connect image (Confluent employees)
+- [info](playground%20connector-plugin%20info) - 🪪 One page on a connector plugin of Confluent Hub
+- [search-jar](playground%20connector-plugin%20search-jar) - ☕ List jars for a connector plugin from confluent hub https://www.confluent.io/hub/
 - [sourcecode](playground%20connector-plugin%20sourcecode) - 🧑‍💻 Open source code url in your browser (or in your editor when used with `--open`)
+- [versions](playground%20connector-plugin%20versions) - 💯 List versions for a connector plugin from confluent hub https://www.confluent.io/hub/
 
 

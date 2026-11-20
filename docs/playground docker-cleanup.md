@@ -41,9 +41,9 @@ playground docker-cleanup COMMAND
 
 ## Commands
 
-- [enable](playground%20docker-cleanup%20enable) - 🧽 Schedule the weekly cleanup, then show what it would remove now
 - [disable](playground%20docker-cleanup%20disable) - 🛑 Remove the weekly cleanup schedule
-- [status](playground%20docker-cleanup%20status) - 🔎 Is the weekly cleanup scheduled, when, and what did its last runs free
+- [enable](playground%20docker-cleanup%20enable) - 🧽 Schedule the weekly cleanup, then show what it would remove now
 - [run](playground%20docker-cleanup%20run) - 🧽 Free the disk of the container engine now, as the weekly job does
+- [status](playground%20docker-cleanup%20status) - 🔎 Is the weekly cleanup scheduled, when, and what did its last runs free
 
 

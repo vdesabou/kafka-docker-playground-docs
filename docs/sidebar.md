@@ -1,7 +1,6 @@
 - **Getting Started**
 - [🐳 Introduction](/introduction.md)
-- [👾 Examples](/examples.md)
-  - [📋 Full list](/content.md)
+- [👾 Content](/content.md)
 - [🚀 How to Use](/how-to-use.md)
 - [☁️ Salesforce examples](/salesforce.md)
 - [🧠 CLI](/cli.md)

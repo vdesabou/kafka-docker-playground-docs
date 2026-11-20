@@ -8,8 +8,7 @@ and script body. Every word of the query must match somewhere; matches in
 the path and connector class rank higher than matches in the body.
 
 Prints the ready-to-paste `playground run -f` command for each hit, best  
-first. Use `playground run` instead to browse examples interactively, or  
-`--browse` for the examples explorer page.  
+first. Use `playground run` instead to browse examples interactively.  
 Use `playground find-command` to find a command instead.
 
 ## Usage
@@ -71,24 +70,6 @@ JavaScript, Python, Go, Rust, C/librdkafka, JMS, kcat)
 |-----------------|-------------
 | Default Value:  | `10`
 
-#### `--browse`
-
-🧭 Open the examples explorer instead: a page with every example to search and filter (category, security, brokers, CFK, clients, no credentials needed), and for the one you pick its README, Confluent docs and deep dive, the options of `playground run` (environment, CP and connector versions, `--enable-*` flags) turning into the command to copy, the `playground repro bootstrap` command, and a link to the pipeline builder
-
-The query, when given, prefills the search. Also on the website: https://kafka-docker-playground.io/examples-explorer.html (with the CI status of each example)
-
-| Attributes      | &nbsp;
-|-----------------|-------------
-| Conflicts With: | `--json`
-
-#### `--output-dir, -o OUTPUT_DIR`
-
-📂 Output directory for the HTML report (default: /tmp/playground-`<command>`, printed at the end)
-
-#### `--no-open`
-
-🙈 Do not open the HTML report in the browser (it is still written, and its path printed)
-
 #### `--json`
 
 📗 Print the hits as a JSON array, best first, and nothing else
@@ -99,10 +80,6 @@ No hit prints [] and exits with code 1.
 
 🎓 Tip: use it in scripts and from AI agents, for example with  
 jq -r '.[0].script'
-
-| Attributes      | &nbsp;
-|-----------------|-------------
-| Conflicts With: | `--browse`
 
 ## Examples
 

@@ -246,6 +246,7 @@ window.KDP_CLI_PAGES = [
   "/playground%20flink%20list-jobs",
   "/playground%20flink%20sql",
   "/playground%20flink%20table-ddl",
+  "/playground%20flink%20ui",
   "/playground%20flink",
   "/playground%20forgotten-environment%20disable",
   "/playground%20forgotten-environment%20enable",

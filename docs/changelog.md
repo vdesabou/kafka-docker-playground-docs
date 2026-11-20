@@ -3,6 +3,7 @@
 ## November 2026
 ##### 🌟 Enhancements
 
+- 🧠🧭 Examples explorer: every example with its playground run command, on the website and with find-example --browse [#10538](https://github.com/vdesabou/kafka-docker-playground/issues/10538)
 - 🧠🐿️ repro bootstrap --pipeline-step flink, playground flink table-ddl [#10536](https://github.com/vdesabou/kafka-docker-playground/issues/10536)
 - 🧠🔗 repro bootstrap --pipeline: reliable pipelines, pipeline builder page, connector flow [#10534](https://github.com/vdesabou/kafka-docker-playground/issues/10534)
 - 🧠📤 topic produce: --rate, --duration, --background, --status and --stop for steady background traffic [#10532](https://github.com/vdesabou/kafka-docker-playground/issues/10532)

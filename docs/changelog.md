@@ -3,6 +3,7 @@
 ## November 2026
 ##### 🌟 Enhancements
 
+- 🧠🔗 repro bootstrap --pipeline: reliable pipelines, pipeline builder page, connector flow [#10534](https://github.com/vdesabou/kafka-docker-playground/issues/10534)
 - 🧠📤 topic produce: --rate, --duration, --background, --status and --stop for steady background traffic [#10532](https://github.com/vdesabou/kafka-docker-playground/issues/10532)
 - 🧠💥 debug dns and debug resources: break the name resolution, limit cpu and memory, fill a disk [#10530](https://github.com/vdesabou/kafka-docker-playground/issues/10530)
 - 🧠🧮 connector reconcile: exit 2 when it could not compare, asserted in 8 examples [#10523](https://github.com/vdesabou/kafka-docker-playground/issues/10523)

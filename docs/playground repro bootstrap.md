@@ -135,9 +135,11 @@ Default: the topic the source example checks (playground topic consume `--topic`
 
 ksqldb: ksqlDB is enabled, a stream reads the topic of the source and writes `<topic>`_ksqldb, the topic the sinks read. The values need a schema (Avro, Protobuf or JSON Schema).
 
+flink: a Flink cluster is started (plaintext environment), and a job copies the topic of the source to `<topic>`_flink, the topic the sinks read: INSERT INTO pipeline_step SELECT \* FROM pipeline_source, the two tables written at run time from the Avro value schema of the source (playground flink table-ddl). The values must be Avro; the records of `<topic>`_flink have no key.
+
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Allowed Values: | `ksqldb`
+| Allowed Values: | `ksqldb`, `flink`
 
 #### `--no-run`
 
@@ -172,6 +174,10 @@ playground repro bootstrap -f "$PWD/connect/connect-debezium-mysql-source/debezi
 
 ```bash
 playground repro bootstrap -f "$PWD/connect/connect-debezium-mysql-source/debezium-mysql-source.sh" -d "123456 cdc through ksqldb" --pipeline "$PWD/connect/connect-elasticsearch-sink/elasticsearch-sink.sh" --pipeline-step ksqldb --no-run
+```
+
+```bash
+playground repro bootstrap -f "$PWD/connect/connect-debezium-mysql-source/debezium-mysql-source.sh" -d "123456 cdc through flink" --pipeline "$PWD/connect/connect-jdbc-postgresql-sink/postgres-sink.sh" --pipeline-step flink --no-run
 ```
 
 ```bash

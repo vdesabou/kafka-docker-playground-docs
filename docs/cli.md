@@ -425,6 +425,7 @@ playground [OPTIONS] COMMAND
   - [cancel](playground%20flink%20cancel) - 🛑 Cancel a Flink job
   - [list-jobs](playground%20flink%20list-jobs) - 📋 List the jobs of the Flink cluster
   - [sql](playground%20flink%20sql) - 🐿️ Run Flink SQL statements with the SQL client
+  - [table-ddl](playground%20flink%20table-ddl) - 🧱 Print the Flink SQL CREATE TABLE of a Kafka topic, its columns read from the Avro value schema in Schema Registry
 
 ### Kafka commands
 

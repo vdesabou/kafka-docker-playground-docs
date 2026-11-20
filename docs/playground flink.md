@@ -8,6 +8,7 @@ the statements of a Confluent Cloud Flink compute pool (`--environment` ccloud,
 the default after a ccloud example).
 
 - **sql**: run Flink SQL statements (stdin or `--file`) with the SQL client
+- **table-ddl**: CREATE TABLE of a topic, columns from its Avro schema in Schema Registry
 - **list-jobs**: jobs of the cluster with their state, start time and duration
 - **cancel**: cancel a job, or all running jobs
 
@@ -49,5 +50,6 @@ created once for the environment and region, kept in the playground secrets stor
 - [cancel](playground%20flink%20cancel) - 🛑 Cancel a Flink job
 - [list-jobs](playground%20flink%20list-jobs) - 📋 List the jobs of the Flink cluster
 - [sql](playground%20flink%20sql) - 🐿️ Run Flink SQL statements with the SQL client
+- [table-ddl](playground%20flink%20table-ddl) - 🧱 Print the Flink SQL CREATE TABLE of a Kafka topic, its columns read from the Avro value schema in Schema Registry
 
 

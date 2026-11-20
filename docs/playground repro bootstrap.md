@@ -108,16 +108,36 @@ found, type, paste or drag the path of the file.
 
 #### `--pipeline SINK_FILE`
 
-🔖 Sink example file to use for creating a pipeline. multiple `--pipeline` flags can be used to create a pipeline with multiple sinks.
+🔗 Sink example to chain after the example of `--file`, in one model. Repeat it for several sinks.
+
+`--file` is a source example (source -\> sinks), or a sink example (fan-out: its producer feeds the other sinks too). All self-managed (connect/) or all fully managed (ccloud/fm-\*).
+
+For each sink: its producers are removed, it reads the topic of the base example (the old topic name is replaced in its checks too), its converters (or input.data.format) are the ones of the base, a duplicated connector name is renamed, the docker compose services are added (lists such as volumes are joined), and the compatibility rules apply (ExtractNewRecordState for a Debezium envelope, warnings for a schemaless source into a sink that needs a schema...). After the sink connector, the model waits until it has consumed every record (playground connector show-lag); the checks of the sink example follow under set +e. The chain is written in the header (# 🔗 pipeline:).
 
 ❕ It must be absolute full path.
 
-🎓 Tip: use `<tab>` completion to trigger fzf completion
+🎓 Tip: use `<tab>` completion to trigger fzf completion, or pick the examples in the pipeline builder page (playground repro pipeline-builder)
 
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Repeatable:     |  ✓ Yes
 | Conflicts With: | `--producer`
+
+#### `--pipeline-topic TOPIC`
+
+🗳 Topic the sinks of `--pipeline` read
+
+Default: the topic the source example checks (playground topic consume `--topic` ...), else its kafka.topic. Needed when the source writes several topics or builds the name at run time.
+
+#### `--pipeline-step STEP`
+
+🧪 Processing step between the source and the sinks of `--pipeline` (self-managed only)
+
+ksqldb: ksqlDB is enabled, a stream reads the topic of the source and writes `<topic>`_ksqldb, the topic the sinks read. The values need a schema (Avro, Protobuf or JSON Schema).
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Allowed Values: | `ksqldb`
 
 #### `--no-run`
 
@@ -144,6 +164,18 @@ playground repro bootstrap --config ~/Downloads/customer-connector.yaml -d "1234
 
 ```bash
 playground repro bootstrap -f "$PWD/connect/connect-http-sink/http_no_auth.sh" -d "123456 dlq not working" --expected "bad records go to the DLQ" --actual "the task fails with Unknown magic byte" --jira CC-1234 --no-run
+```
+
+```bash
+playground repro bootstrap -f "$PWD/connect/connect-debezium-mysql-source/debezium-mysql-source.sh" -d "123456 cdc to postgres and s3" --pipeline "$PWD/connect/connect-jdbc-postgresql-sink/postgres-sink.sh" --pipeline "$PWD/connect/connect-aws-s3-sink/s3-sink.sh" --no-run
+```
+
+```bash
+playground repro bootstrap -f "$PWD/connect/connect-debezium-mysql-source/debezium-mysql-source.sh" -d "123456 cdc through ksqldb" --pipeline "$PWD/connect/connect-elasticsearch-sink/elasticsearch-sink.sh" --pipeline-step ksqldb --no-run
+```
+
+```bash
+playground repro bootstrap -f "$PWD/ccloud/fm-datagen-source/fully-managed-datagen-source.sh" -d "123456 datagen to s3" --pipeline "$PWD/ccloud/fm-aws-s3-sink/fully-managed-s3-sink.sh" --no-run
 ```
 
 

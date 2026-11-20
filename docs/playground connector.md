@@ -93,6 +93,7 @@ playground connector COMMAND
 - [display-metrics-api-with-grafana](playground%20connector%20display-metrics-api-with-grafana) - 📊 Display metrics api for fully managed connector in Grafana dashboard
 - [enable-remote-debugging](playground%20connector%20enable-remote-debugging) - ✨ Enable java remote debugging for the connector.
 - [error-recommendations](playground%20connector%20error-recommendations) - 💡 Show error recommendations for fully managed connectors
+- [flow](playground%20connector%20flow) - 🗺️ Show the flow of the running connectors: source → topic → sinks, with the records, the lag and the DLQ
 - [history](playground%20connector%20history) - 🕰️ Show the history of a connector: state changes, failures, restarts and config changes
 - [log-level](playground%20connector%20log-level) - 🧬 Set connect log level
 - [logs](playground%20connector%20logs) - 🕵️  Tail and follow connect logs

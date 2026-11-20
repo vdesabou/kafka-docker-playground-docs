@@ -294,6 +294,7 @@ playground [OPTIONS] COMMAND
   - [display-metrics-api-with-grafana](playground%20connector%20display-metrics-api-with-grafana) - 📊 Display metrics api for fully managed connector in Grafana dashboard
   - [enable-remote-debugging](playground%20connector%20enable-remote-debugging) - ✨ Enable java remote debugging for the connector.
   - [error-recommendations](playground%20connector%20error-recommendations) - 💡 Show error recommendations for fully managed connectors
+  - [flow](playground%20connector%20flow) - 🗺️ Show the flow of the running connectors: source → topic → sinks, with the records, the lag and the DLQ
   - [history](playground%20connector%20history) - 🕰️ Show the history of a connector: state changes, failures, restarts and config changes
   - [log-level](playground%20connector%20log-level) - 🧬 Set connect log level
   - [logs](playground%20connector%20logs) - 🕵️  Tail and follow connect logs
@@ -491,6 +492,7 @@ playground [OPTIONS] COMMAND
   - [export](playground%20repro%20export) - 📤 Export reproduction models as a self-contained tgz bundle
   - [import](playground%20repro%20import) - 📥 Import a tgz bundle created by `playground repro export`
   - [list](playground%20repro%20list) - 📋 List the reproduction models, newest first, with their case, status and last verdict
+  - [pipeline-builder](playground%20repro%20pipeline-builder) - 🔗 Open the pipeline builder: pick a source and sink examples, see the flow, copy the bootstrap command
   - [status](playground%20repro%20status) - 🩹 Show or update what a reproduction model proves, from its header
 
 ### Run commands

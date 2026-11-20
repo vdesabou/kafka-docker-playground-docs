@@ -6,6 +6,7 @@ A reproduction model is an example written to demonstrate one specific
 problem, so that anyone can reproduce it with a single command.
 
 - **bootstrap**: scaffold one from an existing example, then edit it
+- **pipeline-builder**: pick a source and sinks in a page, copy the bootstrap `--pipeline` command
 - **list**: find models by case, status, verdict, base example, author, date
 - **diff**: what a model changes compared with its base example
 - **status**: show or update what a model proves: expected, actual, jira, status
@@ -58,6 +59,7 @@ visit https://github.com/junegunn/fzf#installation to install
 - [export](playground%20repro%20export) - 📤 Export reproduction models as a self-contained tgz bundle
 - [import](playground%20repro%20import) - 📥 Import a tgz bundle created by `playground repro export`
 - [list](playground%20repro%20list) - 📋 List the reproduction models, newest first, with their case, status and last verdict
+- [pipeline-builder](playground%20repro%20pipeline-builder) - 🔗 Open the pipeline builder: pick a source and sink examples, see the flow, copy the bootstrap command
 - [status](playground%20repro%20status) - 🩹 Show or update what a reproduction model proves, from its header
 
 

@@ -131,7 +131,7 @@ Default: the topic the source example checks (playground topic consume `--topic`
 
 #### `--pipeline-step STEP`
 
-🧪 Processing step between the source and the sinks of `--pipeline` (self-managed only)
+⚙️ Processing step between the source and the sinks of `--pipeline` (self-managed only)
 
 ksqldb: ksqlDB is enabled, a stream reads the topic of the source and writes `<topic>`_ksqldb, the topic the sinks read. The values need a schema (Avro, Protobuf or JSON Schema).
 

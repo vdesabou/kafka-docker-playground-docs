@@ -3,6 +3,7 @@
 ## November 2026
 ##### 🌟 Enhancements
 
+- 🧠💥 debug dns and debug resources: break the name resolution, limit cpu and memory, fill a disk [#10530](https://github.com/vdesabou/kafka-docker-playground/issues/10530)
 - 🧠🧮 connector reconcile: exit 2 when it could not compare, asserted in 8 examples [#10523](https://github.com/vdesabou/kafka-docker-playground/issues/10523)
 - 🧠📰 ccloud-changelog: search the Confluent Cloud release notes (RSS feed) by date, connector, category [#10521](https://github.com/vdesabou/kafka-docker-playground/issues/10521)
 - 🧠⏰ debug clock: shift the clock of a container (libfaketime) to reproduce expiries, time based partitioning and clock skew [#10518](https://github.com/vdesabou/kafka-docker-playground/issues/10518)

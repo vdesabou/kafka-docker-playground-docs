@@ -3,6 +3,7 @@
 ## November 2026
 ##### 🌟 Enhancements
 
+- 🧠☁️ playground account for the SaaS examples: Zendesk, Jira, Marketo, ClickHouse, Couchbase, MongoDB Atlas, PagerDuty [#10577](https://github.com/vdesabou/kafka-docker-playground/issues/10577)
 - 🧠☁️ playground account databricks: SQL warehouse, token and staging bucket of the Databricks examples, and check [#10572](https://github.com/vdesabou/kafka-docker-playground/issues/10572)
 - 🧠☁️ playground account servicenow: wake up, validate and check the developer instance of the ServiceNow examples [#10570](https://github.com/vdesabou/kafka-docker-playground/issues/10570)
 - 🧠☁️ playground account aws: validate the AWS credentials of the AWS examples, assume-role setup, and check [#10568](https://github.com/vdesabou/kafka-docker-playground/issues/10568)

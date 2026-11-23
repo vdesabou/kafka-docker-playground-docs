@@ -115,6 +115,7 @@
 
 ##### 🐛 Bugs
 
+- 🐛🦭 resource-faults: podman rejects the uid=1000 tmpfs option of the broker log dir [#10556](https://github.com/vdesabou/kafka-docker-playground/issues/10556)
 - 🐛🦭 debug resources --cpus has no effect on podman [#10555](https://github.com/vdesabou/kafka-docker-playground/issues/10555)
 - 🐛🧭 find-command lab: debug resources now ranks first for "memory issue with connector" [#10554](https://github.com/vdesabou/kafka-docker-playground/issues/10554)
 - 🐛⏱️ CI kills the cp-ansible examples after 60 min on podman [#10508](https://github.com/vdesabou/kafka-docker-playground/issues/10508)

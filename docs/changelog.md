@@ -3,6 +3,9 @@
 ## November 2026
 ##### 🌟 Enhancements
 
+- 🧠☁️ playground account databricks: SQL warehouse, token and staging bucket of the Databricks examples, and check [#10572](https://github.com/vdesabou/kafka-docker-playground/issues/10572)
+- 🧠☁️ playground account servicenow: wake up, validate and check the developer instance of the ServiceNow examples [#10570](https://github.com/vdesabou/kafka-docker-playground/issues/10570)
+- 🧠☁️ playground account aws: validate the AWS credentials of the AWS examples, assume-role setup, and check [#10568](https://github.com/vdesabou/kafka-docker-playground/issues/10568)
 - 🧠❄️ playground account snowflake: validate and check the login of the Snowflake examples [#10566](https://github.com/vdesabou/kafka-docker-playground/issues/10566)
 - 🧠☁️ playground account azure: service principal for the Azure examples, and check [#10564](https://github.com/vdesabou/kafka-docker-playground/issues/10564)
 - 🧠🌤️ Move playground ccloud setup under playground account [#10562](https://github.com/vdesabou/kafka-docker-playground/issues/10562)

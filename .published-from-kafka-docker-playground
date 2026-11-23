@@ -30,6 +30,8 @@ assets/favicon/favicon.ico
 assets/img/code.svg
 assets/js/.eslintrc.js
 assets/videos/materials/topic-produce/demo.sh
+aws.md
+azure.md
 badges-template.md
 claude-code.md
 content-template.md
@@ -83,6 +85,7 @@ reusables.md
 salesforce.md
 sessions.md
 sidebar.md
+snowflake.md
 toolkit-cleanup.md
 toolkit-data.md
 toolkit-debugging.md

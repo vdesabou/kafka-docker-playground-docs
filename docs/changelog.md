@@ -3,6 +3,7 @@
 ## November 2026
 ##### 🌟 Enhancements
 
+- 🧠☁️ playground account: set up and check the GCP project of the GCP examples (and Salesforce moved under it) [#10560](https://github.com/vdesabou/kafka-docker-playground/issues/10560)
 - 🧠👾 Examples page: the explorer as the entry point of the website, with the badges of the full list [#10540](https://github.com/vdesabou/kafka-docker-playground/issues/10540)
 - 🧠🧭 Examples explorer: every example with its playground run command, on the website and with find-example --browse [#10538](https://github.com/vdesabou/kafka-docker-playground/issues/10538)
 - 🧠🐿️ repro bootstrap --pipeline-step flink, playground flink table-ddl [#10536](https://github.com/vdesabou/kafka-docker-playground/issues/10536)

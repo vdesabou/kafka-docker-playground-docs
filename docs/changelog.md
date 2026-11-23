@@ -3,6 +3,7 @@
 ## November 2026
 ##### 🌟 Enhancements
 
+- 🧠🩺 playground run checks the account of the example before starting it (fail fast) [#10579](https://github.com/vdesabou/kafka-docker-playground/issues/10579)
 - 🧠☁️ playground account for the SaaS examples: Zendesk, Jira, Marketo, ClickHouse, Couchbase, MongoDB Atlas, PagerDuty [#10577](https://github.com/vdesabou/kafka-docker-playground/issues/10577)
 - 🧠☁️ playground account databricks: SQL warehouse, token and staging bucket of the Databricks examples, and check [#10572](https://github.com/vdesabou/kafka-docker-playground/issues/10572)
 - 🧠☁️ playground account servicenow: wake up, validate and check the developer instance of the ServiceNow examples [#10570](https://github.com/vdesabou/kafka-docker-playground/issues/10570)

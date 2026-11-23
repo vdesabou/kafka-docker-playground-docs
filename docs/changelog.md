@@ -115,6 +115,8 @@
 
 ##### 🐛 Bugs
 
+- 🐛🦭 debug resources --cpus has no effect on podman [#10555](https://github.com/vdesabou/kafka-docker-playground/issues/10555)
+- 🐛🧭 find-command lab: debug resources now ranks first for "memory issue with connector" [#10554](https://github.com/vdesabou/kafka-docker-playground/issues/10554)
 - 🐛⏱️ CI kills the cp-ansible examples after 60 min on podman [#10508](https://github.com/vdesabou/kafka-docker-playground/issues/10508)
 - 🐛🧪 deep-dive ansible lab expects the old playbook log line [#10506](https://github.com/vdesabou/kafka-docker-playground/issues/10506)
 - 🐛🦭 Codespaces: podman containers have no internet access (FORWARD DROP of docker-in-docker) [#10464](https://github.com/vdesabou/kafka-docker-playground/issues/10464)

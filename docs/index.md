@@ -27,6 +27,7 @@ playground [OPTIONS] COMMAND
 ### Commands
 
 - [config](playground%20config) - ⚙️ Configure CLI
+  - [account-check-before-run](playground%20config%20account-check-before-run) - when running an example of a provider (gcp, azure, aws, snowflake, salesforce, servicenow, databricks, zendesk, jira, marketo, clickhouse, couchbase, mongodb-atlas, pagerduty), call playground account `<provider>` check first: a login that does not work stops the run in a few seconds instead of failing minutes later. True by default, never done in CI.
   - [check-and-update-repo-version](playground%20config%20check-and-update-repo-version) - when running an example, always check if repo version is older than 3 days, if disabled, it will skip this check.
   - [cleanup-ccloud-resources-after-run](playground%20config%20cleanup-ccloud-resources-after-run) - 🧹 delete the Confluent Cloud resources left by the last ccloud example
   - [clipboard](playground%20config%20clipboard) - copy to clipboard connector config (only working on MacOS)

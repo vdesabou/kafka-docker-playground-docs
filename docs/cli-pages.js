@@ -128,6 +128,7 @@ window.KDP_CLI_PAGES = [
   "/playground%20codespace%20sync-repro-folder%20local-to-codespace",
   "/playground%20codespace%20sync-repro-folder",
   "/playground%20codespace",
+  "/playground%20config%20account-check-before-run",
   "/playground%20config%20check-and-update-repo-version",
   "/playground%20config%20cleanup-ccloud-resources-after-run",
   "/playground%20config%20clipboard",

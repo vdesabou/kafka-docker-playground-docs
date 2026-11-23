@@ -181,6 +181,16 @@ playground [OPTIONS] COMMAND
 - [help](playground%20help) - Show help about a command
 - [status](playground%20status) - 🗺️ Show a status
 
+### Accounts commands
+
+- [account](playground%20account) - ☁️ Set up and check the third-party accounts the examples run against
+  - [gcp](playground%20account%20gcp) - ☁️ Set up a Google Cloud project for the GCP examples, and check it
+    - [check](playground%20account%20gcp%20check) - 🩺 Check that the stored GCP key works for the GCP examples
+    - [setup](playground%20account%20gcp%20setup) - 🛠️ Configure a Google Cloud project for the GCP examples
+  - [salesforce](playground%20account%20salesforce) - ☁️ Set up a Salesforce org for the Salesforce examples, and check it
+    - [check](playground%20account%20salesforce%20check) - 🩺 Check that the stored Salesforce credentials work
+    - [setup](playground%20account%20salesforce%20setup) - 🛠️ Configure a Salesforce org for the Salesforce examples
+
 ### Analyze commands
 
 - [analyze](playground%20analyze) - 🔎 Analyze commands
@@ -519,12 +529,6 @@ playground [OPTIONS] COMMAND
 - [switch-docker](playground%20switch-docker) - 🐳 Switch the container engine back to Docker
 - [switch-podman](playground%20switch-podman) - 🦭 Switch the container engine to Podman
 - [update-version](playground%20update-version) - ✨ Update current confluent platform components (all with `--tag` or only connect with `--connect-tag`) or connector(s) with new version(s)
-
-### Salesforce commands
-
-- [salesforce](playground%20salesforce) - ☁️ Set up a Salesforce org for the Salesforce examples, and check it
-  - [check](playground%20salesforce%20check) - 🩺 Check that the stored Salesforce credentials work
-  - [setup](playground%20salesforce%20setup) - 🛠️ Configure a Salesforce org for the Salesforce examples
 
 ### Schema commands
 

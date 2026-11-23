@@ -1,4 +1,4 @@
-# playground salesforce setup
+# playground account salesforce setup
 
 🛠️ Configure a Salesforce org for the Salesforce examples
 
@@ -37,7 +37,7 @@ salesforce_use_test_creds.
 ## Usage
 
 ```bash
-playground salesforce setup [OPTIONS]
+playground account salesforce setup [OPTIONS]
 ```
 
 ## Options
@@ -115,19 +115,19 @@ The previous one is kept as .bak: the orgs set up with it must be set up again.
 ## Examples
 
 ```bash
-playground salesforce setup
+playground account salesforce setup
 ```
 
 ```bash
-playground salesforce setup --target-org my-dev-org --suffix KDP_CDC
+playground account salesforce setup --target-org my-dev-org --suffix KDP_CDC
 ```
 
 ```bash
-playground salesforce setup --account2
+playground account salesforce setup --account2
 ```
 
 ```bash
-playground salesforce setup --instance-url https://test.salesforce.com --no-store
+playground account salesforce setup --instance-url https://test.salesforce.com --no-store
 ```
 
 

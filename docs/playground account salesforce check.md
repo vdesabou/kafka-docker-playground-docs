@@ -1,4 +1,4 @@
-# playground salesforce check
+# playground account salesforce check
 
 🩺 Check that the stored Salesforce credentials work
 
@@ -14,7 +14,7 @@ Exits with 1 when the login fails.
 ## Usage
 
 ```bash
-playground salesforce check [OPTIONS]
+playground account salesforce check [OPTIONS]
 ```
 
 ## Options
@@ -38,15 +38,15 @@ check: default is your keystore, else connect/connect-salesforce-cdc-source/sale
 ## Examples
 
 ```bash
-playground salesforce check
+playground account salesforce check
 ```
 
 ```bash
-playground salesforce check --suffix KDP_CDC
+playground account salesforce check --suffix KDP_CDC
 ```
 
 ```bash
-playground salesforce check --account2
+playground account salesforce check --account2
 ```
 
 

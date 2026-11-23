@@ -1,4 +1,4 @@
-# playground salesforce
+# playground account salesforce
 
 ☁️ Set up a Salesforce org for the Salesforce examples, and check it
 
@@ -14,12 +14,12 @@ https://kafka-docker-playground.io/#/salesforce
 ## Usage
 
 ```bash
-playground salesforce COMMAND
+playground account salesforce COMMAND
 ```
 
 ## Commands
 
-- [check](playground%20salesforce%20check) - 🩺 Check that the stored Salesforce credentials work
-- [setup](playground%20salesforce%20setup) - 🛠️ Configure a Salesforce org for the Salesforce examples
+- [check](playground%20account%20salesforce%20check) - 🩺 Check that the stored Salesforce credentials work
+- [setup](playground%20account%20salesforce%20setup) - 🛠️ Configure a Salesforce org for the Salesforce examples
 
 

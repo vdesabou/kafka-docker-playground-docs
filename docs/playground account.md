@@ -16,14 +16,8 @@ the variables with `playground secrets set`) and, except ccloud, 'check'
 (a few seconds, read-only: does the stored login still work, and what is  
 missing).
 
-📖 Step by step guides:  
-https://kafka-docker-playground.io/#/salesforce  
-https://kafka-docker-playground.io/#/gcp  
-https://kafka-docker-playground.io/#/azure  
-https://kafka-docker-playground.io/#/snowflake  
-https://kafka-docker-playground.io/#/aws  
-https://kafka-docker-playground.io/#/servicenow  
-https://kafka-docker-playground.io/#/databricks
+📖 All the providers, how they behave, and the guide of each one:  
+https://kafka-docker-playground.io/#/accounts
 
 ## Usage
 

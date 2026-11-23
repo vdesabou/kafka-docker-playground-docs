@@ -3,6 +3,9 @@
 ## November 2026
 ##### 🌟 Enhancements
 
+- 🧠❄️ playground account snowflake: validate and check the login of the Snowflake examples [#10566](https://github.com/vdesabou/kafka-docker-playground/issues/10566)
+- 🧠☁️ playground account azure: service principal for the Azure examples, and check [#10564](https://github.com/vdesabou/kafka-docker-playground/issues/10564)
+- 🧠🌤️ Move playground ccloud setup under playground account [#10562](https://github.com/vdesabou/kafka-docker-playground/issues/10562)
 - 🧠☁️ playground account: set up and check the GCP project of the GCP examples (and Salesforce moved under it) [#10560](https://github.com/vdesabou/kafka-docker-playground/issues/10560)
 - 🧠👾 Examples page: the explorer as the entry point of the website, with the badges of the full list [#10540](https://github.com/vdesabou/kafka-docker-playground/issues/10540)
 - 🧠🧭 Examples explorer: every example with its playground run command, on the website and with find-example --browse [#10538](https://github.com/vdesabou/kafka-docker-playground/issues/10538)

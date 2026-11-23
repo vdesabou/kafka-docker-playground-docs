@@ -405,6 +405,12 @@ They are stored in `~/.config/kafka-docker-playground` (never in the repository)
 > [!TIP]
 > ☁️ The AWS examples need access keys and a region (and an IAM role for the assume-role variants): [AWS examples: set up the credentials](/aws.md) validates and stores them with `playground account aws setup` (and `playground account aws check` when an example fails on its keys, region or a service permission).
 
+> [!TIP]
+> ☁️ The ServiceNow examples need a developer instance that is awake: [ServiceNow examples: set up a developer instance](/servicenow.md) validates it, wakes it up and stores it with `playground account servicenow setup` (and `playground account servicenow check` when an example fails: hibernating, released, 401).
+
+> [!TIP]
+> ☁️ The Databricks examples need a SQL warehouse, a token and an S3 staging bucket: [Databricks examples: set up a workspace](/databricks.md) validates and stores them with `playground account databricks setup` (and `playground account databricks check` when an example fails on its token, warehouse or bucket).
+
 ## 🌤️ Confluent Cloud examples
 
 Simply use [playground run](/playground%20run) command ! Below, the menu shows the Confluent Cloud options of a fully managed connector example (it quits before running it):

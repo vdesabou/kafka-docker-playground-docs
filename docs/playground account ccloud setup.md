@@ -1,4 +1,4 @@
-# playground ccloud setup
+# playground account ccloud setup
 
 🏗️ Create (or complete) your personal environment and clusters, and store them in a secrets profile
 
@@ -37,7 +37,7 @@ secrets profile `<name>`' to switch, and 'confluent login `--organization`
 ## Usage
 
 ```bash
-playground ccloud setup [OPTIONS]
+playground account ccloud setup [OPTIONS]
 ```
 
 ## Dependencies
@@ -105,19 +105,19 @@ keep `AWS_REGION` equal to it.
 ## Examples
 
 ```bash
-playground ccloud setup --dry-run
+playground account ccloud setup --dry-run
 ```
 
 ```bash
-playground ccloud setup --profile emea --cloud aws --cloud azure
+playground account ccloud setup --profile emea --cloud aws --cloud azure
 ```
 
 ```bash
-playground ccloud setup --cloud gcp --gcp-region europe-west1 --default-cloud gcp
+playground account ccloud setup --cloud gcp --gcp-region europe-west1 --default-cloud gcp
 ```
 
 ```bash
-playground ccloud setup --cloud databricks
+playground account ccloud setup --cloud databricks
 ```
 
 

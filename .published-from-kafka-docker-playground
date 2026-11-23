@@ -35,6 +35,7 @@ azure.md
 badges-template.md
 claude-code.md
 content-template.md
+databricks.md
 day-2-operations.md
 deep-dive-analyze-logs.md
 deep-dive-ansible.md
@@ -83,6 +84,7 @@ notes.txt
 reports.md
 reusables.md
 salesforce.md
+servicenow.md
 sessions.md
 sidebar.md
 snowflake.md

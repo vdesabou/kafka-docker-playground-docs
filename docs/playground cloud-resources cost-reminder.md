@@ -9,7 +9,7 @@
 
 The cleanups (nightly-cleanup) delete what the playground knows it  
 created. This reminder covers the rest: what they keep on purpose (your  
-own clusters of `playground ccloud setup`), what was created by hand, or  
+own clusters of `playground account ccloud setup`), what was created by hand, or  
 a cloud you did not schedule for cleanup. For each `--resource` it gives:
 
 - **ccloud**: 💰 the cost of the last `--days` days of your resources, by name (connectors \*_`<user>`, clusters and environments pg-`<user>`-\*), next to the total of the organization; and what still runs for you: connectors (RUNNING ones), clusters, environments (playground cloud-resources ccloud list)

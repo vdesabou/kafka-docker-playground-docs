@@ -15,7 +15,7 @@ their dlq, success and error topics
 no `CLUSTER_NAME` was set), with their clusters  
 📝 on shared clusters, the topics recorded as created by your own runs
 
-It keeps your own clusters and their topics (playground ccloud setup),  
+It keeps your own clusters and their topics (playground account ccloud setup),  
 and never deletes service accounts or API keys: the secrets store may be  
 locked at night, so the keys in use can't be told apart. Run  
 `playground cloud-resources cleanup --resource ccloud` yourself for those.

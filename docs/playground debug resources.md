@@ -27,7 +27,7 @@ own in the docker-compose override of the example, then fill it:
 broker:  
 tmpfs:
 
-- /var/lib/kafka/data:size=2g,uid=1000,gid=1000
+- /var/lib/kafka/data:size=2g,mode=1777
 
 A tmpfs is memory: its content counts in the memory of the container.
 
@@ -138,7 +138,7 @@ $ playground debug resources --container connect --fill-disk 95%
 11:26:07 🔥    🎓 give /tmp a filesystem of its own in the docker-compose override of the example, then run this command again:
   connect:
     tmpfs:
-      - /tmp:size=2g,uid=1000,gid=1000
+      - /tmp:size=2g,mode=1777
 ```
 
 

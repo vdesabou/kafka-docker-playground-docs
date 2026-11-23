@@ -192,12 +192,30 @@ playground [OPTIONS] COMMAND
     - [setup](playground%20account%20azure%20setup) - 🛠️ Configure an Azure subscription for the Azure examples
   - [ccloud](playground%20account%20ccloud) - 🌤️ Set up your own Confluent Cloud clusters for the fully managed examples
     - [setup](playground%20account%20ccloud%20setup) - 🏗️ Create (or complete) your personal environment and clusters, and store them in a secrets profile
+  - [clickhouse](playground%20account%20clickhouse) - 🏠 Set up and check the ClickHouse Cloud account of the ClickHouse examples (connect-clickhouse-sink, fm-clickhouse-sink)
+    - [check](playground%20account%20clickhouse%20check) - 🩺 Check the ClickHouse Cloud account of the ClickHouse examples (connect-clickhouse-sink, fm-clickhouse-sink)
+    - [setup](playground%20account%20clickhouse%20setup) - 🛠️ Validate and store the ClickHouse Cloud account of the ClickHouse examples (connect-clickhouse-sink, fm-clickhouse-sink)
+  - [couchbase](playground%20account%20couchbase) - 🛋️ Set up and check the Couchbase Capella account of the Couchbase examples (fm-couchbase-sink, fm-couchbase-source)
+    - [check](playground%20account%20couchbase%20check) - 🩺 Check the Couchbase Capella account of the Couchbase examples (fm-couchbase-sink, fm-couchbase-source)
+    - [setup](playground%20account%20couchbase%20setup) - 🛠️ Validate and store the Couchbase Capella account of the Couchbase examples (fm-couchbase-sink, fm-couchbase-source)
   - [databricks](playground%20account%20databricks) - ☁️ Set up the Databricks workspace of the Databricks examples, and check it
     - [check](playground%20account%20databricks%20check) - 🩺 Check the Databricks workspace of the Databricks examples
     - [setup](playground%20account%20databricks%20setup) - 🛠️ Validate and store the Databricks workspace of the Databricks examples
   - [gcp](playground%20account%20gcp) - ☁️ Set up a Google Cloud project for the GCP examples, and check it
     - [check](playground%20account%20gcp%20check) - 🩺 Check that the stored GCP key works for the GCP examples
     - [setup](playground%20account%20gcp%20setup) - 🛠️ Configure a Google Cloud project for the GCP examples
+  - [jira](playground%20account%20jira) - 📋 Set up and check the Jira account of the Jira examples (connect-jira-source, fm-jira-source)
+    - [check](playground%20account%20jira%20check) - 🩺 Check the Jira account of the Jira examples (connect-jira-source, fm-jira-source)
+    - [setup](playground%20account%20jira%20setup) - 🛠️ Validate and store the Jira account of the Jira examples (connect-jira-source, fm-jira-source)
+  - [marketo](playground%20account%20marketo) - 📣 Set up and check the Marketo account of the Marketo examples (connect-marketo-source, fm-marketo-sink)
+    - [check](playground%20account%20marketo%20check) - 🩺 Check the Marketo account of the Marketo examples (connect-marketo-source, fm-marketo-sink)
+    - [setup](playground%20account%20marketo%20setup) - 🛠️ Validate and store the Marketo account of the Marketo examples (connect-marketo-source, fm-marketo-sink)
+  - [mongodb-atlas](playground%20account%20mongodb-atlas) - 🍃 Set up and check the MongoDB Atlas account of the MongoDB Atlas examples (fm-mongodb-atlas-sink, fm-mongodb-atlas-source)
+    - [check](playground%20account%20mongodb-atlas%20check) - 🩺 Check the MongoDB Atlas account of the MongoDB Atlas examples (fm-mongodb-atlas-sink, fm-mongodb-atlas-source)
+    - [setup](playground%20account%20mongodb-atlas%20setup) - 🛠️ Validate and store the MongoDB Atlas account of the MongoDB Atlas examples (fm-mongodb-atlas-sink, fm-mongodb-atlas-source)
+  - [pagerduty](playground%20account%20pagerduty) - 🛎️ Set up and check the PagerDuty account of the PagerDuty example (connect-pagerduty-sink)
+    - [check](playground%20account%20pagerduty%20check) - 🩺 Check the PagerDuty account of the PagerDuty example (connect-pagerduty-sink)
+    - [setup](playground%20account%20pagerduty%20setup) - 🛠️ Validate and store the PagerDuty account of the PagerDuty example (connect-pagerduty-sink)
   - [salesforce](playground%20account%20salesforce) - ☁️ Set up a Salesforce org for the Salesforce examples, and check it
     - [check](playground%20account%20salesforce%20check) - 🩺 Check that the stored Salesforce credentials work
     - [setup](playground%20account%20salesforce%20setup) - 🛠️ Configure a Salesforce org for the Salesforce examples
@@ -207,6 +225,9 @@ playground [OPTIONS] COMMAND
   - [snowflake](playground%20account%20snowflake) - ❄️ Set up the Snowflake account of the Snowflake examples, and check it
     - [check](playground%20account%20snowflake%20check) - 🩺 Check that the stored Snowflake login works for the Snowflake examples
     - [setup](playground%20account%20snowflake%20setup) - 🛠️ Validate and store the Snowflake login of the Snowflake examples
+  - [zendesk](playground%20account%20zendesk) - 🎫 Set up and check the Zendesk account of the Zendesk examples (connect-zendesk-source, fm-zendesk-source)
+    - [check](playground%20account%20zendesk%20check) - 🩺 Check the Zendesk account of the Zendesk examples (connect-zendesk-source, fm-zendesk-source)
+    - [setup](playground%20account%20zendesk%20setup) - 🛠️ Validate and store the Zendesk account of the Zendesk examples (connect-zendesk-source, fm-zendesk-source)
 
 ### Analyze commands
 

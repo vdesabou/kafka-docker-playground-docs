@@ -6,6 +6,7 @@ window.KDP_CLI_PAGES = [
   "/playground%20account%20azure%20check",
   "/playground%20account%20azure%20setup",
   "/playground%20account%20azure",
+  "/playground%20account%20ccloud%20check",
   "/playground%20account%20ccloud%20setup",
   "/playground%20account%20ccloud",
   "/playground%20account%20clickhouse%20check",

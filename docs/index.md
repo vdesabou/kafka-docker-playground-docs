@@ -59,7 +59,8 @@ playground [OPTIONS] COMMAND
   - [azure](playground%20account%20azure) - ☁️ Set up an Azure subscription for the Azure examples, and check it
     - [check](playground%20account%20azure%20check) - 🩺 Check that the stored Azure service principal works for the Azure examples
     - [setup](playground%20account%20azure%20setup) - 🛠️ Configure an Azure subscription for the Azure examples
-  - [ccloud](playground%20account%20ccloud) - 🌤️ Set up your own Confluent Cloud clusters for the fully managed examples
+  - [ccloud](playground%20account%20ccloud) - 🌤️ Set up your own Confluent Cloud clusters for the fully managed examples, and check them
+    - [check](playground%20account%20ccloud%20check) - 🩺 Check the environment, clusters and API keys of the fully managed examples
     - [setup](playground%20account%20ccloud%20setup) - 🏗️ Create (or complete) your personal environment and clusters, and store them in a secrets profile
   - [clickhouse](playground%20account%20clickhouse) - 🏠 Set up and check the ClickHouse Cloud account of the ClickHouse examples (connect-clickhouse-sink, fm-clickhouse-sink)
     - [check](playground%20account%20clickhouse%20check) - 🩺 Check the ClickHouse Cloud account of the ClickHouse examples (connect-clickhouse-sink, fm-clickhouse-sink)

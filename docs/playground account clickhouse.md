@@ -8,7 +8,7 @@
 Nothing to configure in ClickHouse Cloud: these examples only need the values,  
 in the right form, still valid (services idle when unused, trials end).
 
-📖 https://kafka-docker-playground.io/#/accounts
+📖 https://kafka-docker-playground.io/#/how-to-use?id=%e2%98%81%ef%b8%8f-accounts-of-the-examples
 
 ## Usage
 

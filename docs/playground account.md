@@ -19,7 +19,7 @@ the variables with `playground secrets set`) and 'check' (a few seconds,
 read-only: does the stored login still work, and what is missing).
 
 📖 All the providers, how they behave, and the guide of each one:  
-https://kafka-docker-playground.io/#/accounts
+https://kafka-docker-playground.io/#/how-to-use?id=%e2%98%81%ef%b8%8f-accounts-of-the-examples
 
 ## Usage
 

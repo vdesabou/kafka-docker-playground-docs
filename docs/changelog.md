@@ -125,6 +125,7 @@
 ##### 🐛 Bugs
 
 - 🐛☁️ ccloud: topic list, cleanup and connector logs use the confluent CLI current cluster, which another session can switch [#10603](https://github.com/vdesabou/kafka-docker-playground/issues/10603)
+- 🐛🦭 debug resources misses OOM kills on podman (no oom event, exited container refused) [#10601](https://github.com/vdesabou/kafka-docker-playground/issues/10601)
 - 🐛❄️ fm-snowflake-sink checks the table before Snowpipe has loaded the rows [#10599](https://github.com/vdesabou/kafka-docker-playground/issues/10599)
 - 🐛🩺 playground run exits silently for the connect/connect-couchbase-\* examples [#10597](https://github.com/vdesabou/kafka-docker-playground/issues/10597)
 - 🐛☁️ The \*-with-assuming-iam-role.sh AWS examples never assume their role [#10574](https://github.com/vdesabou/kafka-docker-playground/issues/10574)

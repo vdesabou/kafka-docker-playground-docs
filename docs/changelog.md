@@ -3,6 +3,7 @@
 ## November 2026
 ##### 🌟 Enhancements
 
+- 🧠📚 secrets deep dive: moving from exported variables in \~/.zshrc to playground secrets [#10607](https://github.com/vdesabou/kafka-docker-playground/issues/10607)
 - 🧠🌤️ account ccloud check: verify the environment, clusters and API keys of the secrets profile [#10605](https://github.com/vdesabou/kafka-docker-playground/issues/10605)
 - 🧠🩺 playground run checks the account of the example before starting it (fail fast) [#10579](https://github.com/vdesabou/kafka-docker-playground/issues/10579)
 - 🧠☁️ playground account for the SaaS examples: Zendesk, Jira, Marketo, ClickHouse, Couchbase, MongoDB Atlas, PagerDuty [#10577](https://github.com/vdesabou/kafka-docker-playground/issues/10577)

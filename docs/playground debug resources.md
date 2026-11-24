@@ -12,8 +12,15 @@ a restart, and fills its disk to a percentage.
 - `--cpus 0.5`: at most half a cpu
 - `--memory 1g`: at most 1g of memory, no swap: above, the kernel kills the process (OOMKilled, exit 137)
 - `--fill-disk 95%`: fills the filesystem of `--path` to 95%
-- `--reset`: back to the original limits, the fill file removed
-- **(no flag)**: the limits, the usage, the JVM max heap, OOM kills and the disk of `--path`
+- `--reset`: back to the original limits, the fill file removed (a container that exited after an OOM kill is started again)
+- **(no flag)**: the limits, the usage, the JVM max heap, OOM kills and the disk of `--path` (also for a container that exited)
+
+OOM kills are the oom events of docker since the container was  
+created. Podman has no oom event: they are its die events with exit  
+code 137 while the container is OOMKilled. Podman 5.x (crun, systemd  
+cgroups) does not even set OOMKilled: an exit code 137 with no kill  
+event, under a memory limit set by this command, is shown as a  
+probable OOM kill.
 
 `--path` defaults to log.dirs for a broker or a controller, /tmp  
 otherwise. The fill file is a single file (.playground-fill-disk) in  

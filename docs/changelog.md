@@ -126,6 +126,7 @@
 
 ##### 🐛 Bugs
 
+- 🐛☁️ Salesforce streaming examples: retry when another job's Bulk API logout kills the task's session [#10611](https://github.com/vdesabou/kafka-docker-playground/issues/10611)
 - 🐛☁️ ccloud: topic list, cleanup and connector logs use the confluent CLI current cluster, which another session can switch [#10603](https://github.com/vdesabou/kafka-docker-playground/issues/10603)
 - 🐛🦭 debug resources misses OOM kills on podman (no oom event, exited container refused) [#10601](https://github.com/vdesabou/kafka-docker-playground/issues/10601)
 - 🐛❄️ fm-snowflake-sink checks the table before Snowpipe has loaded the rows [#10599](https://github.com/vdesabou/kafka-docker-playground/issues/10599)

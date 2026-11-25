@@ -1,5 +1,4 @@
 _404.md
-_coverpage.md
 academy.md
 accounts.md
 area-connect.md
@@ -33,7 +32,6 @@ assets/js/.eslintrc.js
 assets/videos/materials/topic-produce/demo.sh
 aws.md
 azure.md
-badges-template.md
 claude-code.md
 content-template.md
 databricks.md

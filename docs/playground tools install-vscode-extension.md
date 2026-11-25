@@ -20,7 +20,7 @@ After installation, install "playground" command:
 
 🔖 The command spec is downloaded from the master branch: commands added in a local branch are only proposed once merged. Run "Load Command Spec" again to refresh it.
 
-👉 Check documentation https://kafka-docker-playground.io/#/cli?id=%f0%9f%aa%84-setup-shell-script-command-completion-visual-studio-code-extension
+👉 Check documentation https://kafka-docker-playground.io/#/cli?id=%f0%9f%aa%84-vs-code-completion
 
 ## Usage
 

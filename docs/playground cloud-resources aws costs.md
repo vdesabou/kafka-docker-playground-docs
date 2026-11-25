@@ -1,6 +1,6 @@
 # playground cloud-resources aws costs
 
-💰 Show aws costs
+💰 AWS costs
 
 Spend over a range of dates, broken down by AWS service, using the  
 Cost Explorer API. Run it after a week of heavy examples to see which  

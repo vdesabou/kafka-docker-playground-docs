@@ -1,6 +1,6 @@
 # playground config account-check-before-run
 
-when running an example of a provider (gcp, azure, aws, snowflake, salesforce, servicenow, databricks, zendesk, jira, marketo, clickhouse, couchbase, mongodb-atlas, pagerduty), call playground account `<provider>` check first: a login that does not work stops the run in a few seconds instead of failing minutes later. True by default, never done in CI.
+🩺 When running an example of a provider (gcp, azure, aws, snowflake, salesforce, servicenow, databricks, zendesk, jira, marketo, clickhouse, couchbase, mongodb-atlas, pagerduty), call playground account `<provider>` check first: a login that does not work stops the run in a few seconds instead of failing minutes later. True by default, never done in CI.
 
 ## Usage
 

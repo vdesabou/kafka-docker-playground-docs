@@ -1,6 +1,6 @@
 # playground config editor
 
-editor to use to open files
+📝 Editor that every command opens files with
 
 ## Usage
 

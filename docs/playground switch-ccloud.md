@@ -1,6 +1,6 @@
 # playground switch-ccloud
 
-🌩️  Switch to ccloud environment.
+🌩️ Switch to ccloud environment.
 
 It will bootstrap ccloud environment based on your previously ran ccloud example.
 

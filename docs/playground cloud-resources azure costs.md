@@ -1,6 +1,6 @@
 # playground cloud-resources azure costs
 
-💰 Show azure costs
+💰 Azure costs
 
 Spend over a range of dates for your subscription, using the Azure  
 Cost Management API. You need to be logged in with the az CLI.

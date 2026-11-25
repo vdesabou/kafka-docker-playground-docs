@@ -1,6 +1,6 @@
 # playground debug log-level set
 
-Set log level for specific logger
+🧬 Set the log level of a logger
 
 Takes effect immediately and applies to the logger and everything  
 below it in the package hierarchy.

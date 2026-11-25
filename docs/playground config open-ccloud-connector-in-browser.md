@@ -1,6 +1,6 @@
 # playground config open-ccloud-connector-in-browser
 
-when running a fully managed connector example, it opens the connector in browser
+🌐 Open the connector in the browser when running a fully managed connector example
 
 ## Usage
 
@@ -10,7 +10,7 @@ playground config open-ccloud-connector-in-browser COMMAND
 
 ## Commands
 
-- [automatically](playground%20config%20open-ccloud-connector-in-browser%20automatically) - automatically open the connector in browser
-- [browser](playground%20config%20open-ccloud-connector-in-browser%20browser) - browser to use
+- [automatically](playground%20config%20open-ccloud-connector-in-browser%20automatically) - 🌐 Open the connector in the browser automatically
+- [browser](playground%20config%20open-ccloud-connector-in-browser%20browser) - 🧭 Browser to use
 
 

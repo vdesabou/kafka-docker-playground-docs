@@ -17,8 +17,8 @@ playground cloud-resources ccloud COMMAND
 
 ## Commands
 
-- [costs](playground%20cloud-resources%20ccloud%20costs) - 💰  Retrieve ccloud costs for a range of dates
-- [costs-history](playground%20cloud-resources%20ccloud%20costs-history) - 👛  Retrieve ccloud costs for each month since last year
+- [costs](playground%20cloud-resources%20ccloud%20costs) - 💰 Confluent Cloud costs for a range of dates
+- [costs-history](playground%20cloud-resources%20ccloud%20costs-history) - 👛 Confluent Cloud costs for each month since last year
 - [list](playground%20cloud-resources%20ccloud%20list) - 📋 List what the playground left running for you in Confluent Cloud, across the whole organization
 
 

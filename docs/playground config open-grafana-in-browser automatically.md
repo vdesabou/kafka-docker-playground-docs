@@ -1,6 +1,6 @@
 # playground config open-grafana-in-browser automatically
 
-automatically open grafana in browser
+📊 Open Grafana in the browser automatically
 
 ## Usage
 

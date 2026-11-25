@@ -1,6 +1,6 @@
 # playground container resume
 
-⏯️  Resume a container
+⏯️ Resume a container
 
 Unfreezes a container paused with `playground container pause`.
 

@@ -1,6 +1,6 @@
 # playground help
 
-Show help about a command
+❓ Show the help of a command
 
 ## Usage
 

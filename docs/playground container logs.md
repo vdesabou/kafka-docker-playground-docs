@@ -1,6 +1,6 @@
 # playground container logs
 
-🕵️  Tail and follow container logs
+🕵️ Tail and follow container logs
 
 Three ways to use it:
 

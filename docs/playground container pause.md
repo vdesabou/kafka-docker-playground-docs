@@ -1,6 +1,6 @@
 # playground container pause
 
-⏸️  Pause a container
+⏸️ Pause a container
 
 Freezes the processes without stopping the container: it keeps its  
 connections but stops responding. A good way to simulate a hung  

@@ -21,8 +21,8 @@ playground debug log-level COMMAND
 
 ## Commands
 
-- [get](playground%20debug%20log-level%20get) - Get log levels
-- [set](playground%20debug%20log-level%20set) - Set log level for specific logger
+- [get](playground%20debug%20log-level%20get) - 🔎 Get log levels
+- [set](playground%20debug%20log-level%20set) - 🧬 Set the log level of a logger
 
 ## Examples
 

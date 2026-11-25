@@ -1,6 +1,6 @@
 # playground repro bootstrap
 
-🛠  Bootstrap reproduction model, just run `<playground repro bootstrap>` !
+🛠 Bootstrap reproduction model, just run `<playground repro bootstrap>` !
 
 🔥 HIGHLY RECOMMENDED: start in interactive mode by simple running `<playground repro bootstrap>` !
 

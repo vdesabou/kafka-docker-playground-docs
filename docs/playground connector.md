@@ -83,8 +83,8 @@ playground connector COMMAND
   - [discovery](playground%20connector%20connect-migration-utility%20discovery) - 👨‍🔬 Discover connectors in the local connect cluster and export their configurations to files
   - [migrate](playground%20connector%20connect-migration-utility%20migrate) - 🪄 Migrate discovered connectors to fully managed connectors
 - [convert](playground%20connector%20convert) - 🔄 Convert a connector config from the format a customer sent to another one
-- [create-or-update](playground%20connector%20create-or-update) - 🧑‍🎨  Create or update connector
-- [delete](playground%20connector%20delete) - 🗑️  Delete connector
+- [create-or-update](playground%20connector%20create-or-update) - 🧑‍🎨 Create or update connector
+- [delete](playground%20connector%20delete) - 🗑️ Delete connector
 - [diagnose](playground%20connector%20diagnose) - 🩺 Diagnose a connector in one call: status, errors and progress
 - [diff](playground%20connector%20diff) - 🔀 Diff the config of a running connector with another config
 - [disable-remote-debugging](playground%20connector%20disable-remote-debugging) - 🛑 Disable java remote debugging for the connector.
@@ -96,7 +96,7 @@ playground connector COMMAND
 - [flow](playground%20connector%20flow) - 🗺️ Show the flow of the running connectors: source → topic → sinks, with the records, the lag and the DLQ
 - [history](playground%20connector%20history) - 🕰️ Show the history of a connector: state changes, failures, restarts and config changes
 - [log-level](playground%20connector%20log-level) - 🧬 Set connect log level
-- [logs](playground%20connector%20logs) - 🕵️  Tail and follow connect logs
+- [logs](playground%20connector%20logs) - 🕵️ Tail and follow connect logs
 - [metrics](playground%20connector%20metrics) - 📈 Show the metrics of a connector: throughput, time, errors, and the metrics of the connector itself
 - [offsets](playground%20connector%20offsets) - 💈 Handle source and sink connectors offsets
   - [alter](playground%20connector%20offsets%20alter) - ⛏️ Alter offsets for source and sink connectors
@@ -108,11 +108,11 @@ playground connector COMMAND
 - [oracle-cdc-xstream](playground%20connector%20oracle-cdc-xstream) - 🅾️ Specific Oracle CDC Xstream commands
   - [debug](playground%20connector%20oracle-cdc-xstream%20debug) - 🐞 Execute various SQL commands to debug xstream components
   - [generate-report](playground%20connector%20oracle-cdc-xstream%20generate-report) - ⚙️ Generate and open oracle cdc xstream connector diagnostics
-- [pause](playground%20connector%20pause) - ⏸️  Pause connector
+- [pause](playground%20connector%20pause) - ⏸️ Pause connector
 - [plugins](playground%20connector%20plugins) - 🎨 Show all connector plugins installed. You can also display transforms, converters and predicates using `--all` flag
 - [reconcile](playground%20connector%20reconcile) - 🧮 Compare the records of the topic with the rows of the table: lost, duplicated, different?
-- [restart](playground%20connector%20restart) - ♻️  Restart connector
-- [resume](playground%20connector%20resume) - ⏯️  Resume connector
+- [restart](playground%20connector%20restart) - ♻️ Restart connector
+- [resume](playground%20connector%20resume) - ⏯️ Resume connector
 - [select-config](playground%20connector%20select-config) - 🗜️ Easily select config from all possible configuration parameters of connector
 - [show-config](playground%20connector%20show-config) - 🧰 Show current connector config that was applied
 - [show-config-parameters](playground%20connector%20show-config-parameters) - 🔩 Show all possible configuration parameters of connector

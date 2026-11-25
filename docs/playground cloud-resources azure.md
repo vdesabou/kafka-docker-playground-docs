@@ -17,8 +17,8 @@ playground cloud-resources azure COMMAND
 
 ## Commands
 
-- [costs](playground%20cloud-resources%20azure%20costs) - 💰 Show azure costs
-- [costs-history](playground%20cloud-resources%20azure%20costs-history) - 👛  Retrieve azure costs for each month since last year
+- [costs](playground%20cloud-resources%20azure%20costs) - 💰 Azure costs
+- [costs-history](playground%20cloud-resources%20azure%20costs-history) - 👛 Azure costs for each month since last year
 - [list](playground%20cloud-resources%20azure%20list) - 📋 List all active resources
 
 

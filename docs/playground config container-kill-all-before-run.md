@@ -1,6 +1,6 @@
 # playground config container-kill-all-before-run
 
-when running an example, always call playground container kill-all first. If set to false, it will call playground stop instead.
+💀 Kill every container before each run (playground container kill-all). If set to false, only stop the previous example (playground stop).
 
 ## Usage
 

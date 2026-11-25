@@ -43,7 +43,7 @@ Alfred then writes its settings to scripts/alfred-workflow/prefs.plist
 (ignored by git) and may rewrite info.plist when you edit the workflow in  
 Alfred Preferences: check git diff before committing.
 
-👉 Check documentation https://kafka-docker-playground.io/#/cli?id=%f0%9f%8e%a9-alfred-workflow-macos
+👉 Check documentation https://kafka-docker-playground.io/#/alfred
 
 ## Usage
 

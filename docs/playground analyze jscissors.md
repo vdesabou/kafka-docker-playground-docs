@@ -55,7 +55,7 @@ visit https://www.python.org/downloads/ to install
 
 #### `--json`
 
-🗂️  Output JSON (no text report, no HTML report)
+🗂️ Output JSON (no text report, no HTML report)
 
 #### `--top TOP`
 

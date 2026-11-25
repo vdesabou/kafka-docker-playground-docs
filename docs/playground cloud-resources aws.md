@@ -17,8 +17,8 @@ playground cloud-resources aws COMMAND
 
 ## Commands
 
-- [costs](playground%20cloud-resources%20aws%20costs) - 💰 Show aws costs
-- [costs-history](playground%20cloud-resources%20aws%20costs-history) - 👛  Retrieve aws costs for each month since last year
+- [costs](playground%20cloud-resources%20aws%20costs) - 💰 AWS costs
+- [costs-history](playground%20cloud-resources%20aws%20costs-history) - 👛 AWS costs for each month since last year
 - [list](playground%20cloud-resources%20aws%20list) - 📋 List all active resources
 
 

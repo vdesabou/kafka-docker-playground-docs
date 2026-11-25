@@ -1,6 +1,6 @@
 # playground config clipboard
 
-copy to clipboard connector config (only working on MacOS)
+📋 Copy the connector config to the clipboard (macOS only)
 
 ## Usage
 

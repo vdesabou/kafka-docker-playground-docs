@@ -1,6 +1,6 @@
 # playground config open-ccloud-connector-in-browser automatically
 
-automatically open the connector in browser
+🌐 Open the connector in the browser automatically
 
 ## Usage
 

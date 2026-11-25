@@ -1,6 +1,6 @@
 # playground connector create-or-update
 
-🧑‍🎨  Create or update connector
+🧑‍🎨 Create or update connector
 
 The command every example uses to deploy its connector. The json config  
 is read from stdin, usually as a heredoc, so it stays readable in the  

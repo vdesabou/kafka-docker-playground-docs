@@ -1,6 +1,6 @@
 # playground config open-ccloud-connector-in-browser browser
 
-browser to use
+🧭 Browser to use
 
 ## Usage
 

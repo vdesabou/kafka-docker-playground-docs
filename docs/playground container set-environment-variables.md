@@ -1,6 +1,6 @@
 # playground container set-environment-variables
 
-📦  Set environment variable(s) for a container
+📦 Set environment variable(s) for a container
 
 🎓 Tip: you can pass multiple environment variables by specifying `--env` multiple times
 

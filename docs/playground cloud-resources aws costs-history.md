@@ -1,6 +1,6 @@
 # playground cloud-resources aws costs-history
 
-👛  Retrieve aws costs for each month since last year
+👛 AWS costs for each month since last year
 
 One line per month over the past year, drawn as a histogram, which  
 makes a month that went wrong obvious at a glance. Use costs when you  

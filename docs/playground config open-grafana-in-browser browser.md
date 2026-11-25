@@ -1,6 +1,6 @@
 # playground config open-grafana-in-browser browser
 
-browser to use
+🧭 Browser to use
 
 ## Usage
 

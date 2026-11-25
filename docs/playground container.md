@@ -54,15 +54,15 @@ playground container COMMAND
 - [cp](playground%20container%20cp) - 🪄 Copy files between local filesystem and container
 - [display-error-all](playground%20container%20display-error-all) - 🔥 Display all ERROR/FATAL logs in all containers/pods. Useful for quick troubleshooting
 - [exec](playground%20container%20exec) - 🪄 Execute command in a container
-- [get-ip-addresses](playground%20container%20get-ip-addresses) - 🖥️  Get ip address of running containers
+- [get-ip-addresses](playground%20container%20get-ip-addresses) - 🖥️ Get ip address of running containers
 - [kill](playground%20container%20kill) - 🔫 Kill a container
 - [kill-all](playground%20container%20kill-all) - 💀 Kill all containers and prune all volumes
-- [logs](playground%20container%20logs) - 🕵️  Tail and follow container logs
-- [pause](playground%20container%20pause) - ⏸️  Pause a container
+- [logs](playground%20container%20logs) - 🕵️ Tail and follow container logs
+- [pause](playground%20container%20pause) - ⏸️ Pause a container
 - [recreate](playground%20container%20recreate) - 💫 Recreate container(s)
 - [restart](playground%20container%20restart) - 🔁 Restart a container
-- [resume](playground%20container%20resume) - ⏯️  Resume a container
-- [set-environment-variables](playground%20container%20set-environment-variables) - 📦  Set environment variable(s) for a container
+- [resume](playground%20container%20resume) - ⏯️ Resume a container
+- [set-environment-variables](playground%20container%20set-environment-variables) - 📦 Set environment variable(s) for a container
 - [ssh](playground%20container%20ssh) - 🛬 SSH into container
 - [update](playground%20container%20update) - ✍️ Edit and apply runtime container/pod definition
 

@@ -1,6 +1,6 @@
 # playground cloud-resources ccloud costs
 
-💰  Retrieve ccloud costs for a range of dates
+💰 Confluent Cloud costs for a range of dates
 
 All you have to do is to be already logged in with confluent CLI. It is using https://docs.confluent.io/cloud/current/billing/overview.html#retrieve-costs-for-a-range-of-dates
 

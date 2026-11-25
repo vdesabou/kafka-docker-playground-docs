@@ -34,16 +34,16 @@ playground cloud-resources COMMAND
 ## Commands
 
 - [aws](playground%20cloud-resources%20aws) - ☁️ What is still running in AWS, and what it costs
-  - [costs](playground%20cloud-resources%20aws%20costs) - 💰 Show aws costs
-  - [costs-history](playground%20cloud-resources%20aws%20costs-history) - 👛  Retrieve aws costs for each month since last year
+  - [costs](playground%20cloud-resources%20aws%20costs) - 💰 AWS costs
+  - [costs-history](playground%20cloud-resources%20aws%20costs-history) - 👛 AWS costs for each month since last year
   - [list](playground%20cloud-resources%20aws%20list) - 📋 List all active resources
 - [azure](playground%20cloud-resources%20azure) - ☁️ What is still running in Azure, and what it costs
-  - [costs](playground%20cloud-resources%20azure%20costs) - 💰 Show azure costs
-  - [costs-history](playground%20cloud-resources%20azure%20costs-history) - 👛  Retrieve azure costs for each month since last year
+  - [costs](playground%20cloud-resources%20azure%20costs) - 💰 Azure costs
+  - [costs-history](playground%20cloud-resources%20azure%20costs-history) - 👛 Azure costs for each month since last year
   - [list](playground%20cloud-resources%20azure%20list) - 📋 List all active resources
 - [ccloud](playground%20cloud-resources%20ccloud) - ☁️ What is still running in Confluent Cloud, and what it costs
-  - [costs](playground%20cloud-resources%20ccloud%20costs) - 💰  Retrieve ccloud costs for a range of dates
-  - [costs-history](playground%20cloud-resources%20ccloud%20costs-history) - 👛  Retrieve ccloud costs for each month since last year
+  - [costs](playground%20cloud-resources%20ccloud%20costs) - 💰 Confluent Cloud costs for a range of dates
+  - [costs-history](playground%20cloud-resources%20ccloud%20costs-history) - 👛 Confluent Cloud costs for each month since last year
   - [list](playground%20cloud-resources%20ccloud%20list) - 📋 List what the playground left running for you in Confluent Cloud, across the whole organization
 - [cleanup](playground%20cloud-resources%20cleanup) - 🧹 Cleanup cloud resources that were created by running examples from the playground
 - [cost-reminder](playground%20cloud-resources%20cost-reminder) - 💸 Every week, a notification when your cloud spend went above a threshold, or something billed is still running for you. Read-only, it never deletes anything

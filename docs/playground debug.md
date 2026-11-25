@@ -63,8 +63,8 @@ playground debug COMMAND
 - [java-debug](playground%20debug%20java-debug) - 🤎 JVM arguments for SSL, Kerberos or Class Loading
 - [jscissors](playground%20debug%20jscissors) - ✂️ Trace the calls of any method of a running JVM: arguments, return values, durations, exceptions, call tree
 - [log-level](playground%20debug%20log-level) - 🧬 Set log level for any package
-  - [get](playground%20debug%20log-level%20get) - Get log levels
-  - [set](playground%20debug%20log-level%20set) - Set log level for specific logger
+  - [get](playground%20debug%20log-level%20get) - 🔎 Get log levels
+  - [set](playground%20debug%20log-level%20set) - 🧬 Set the log level of a logger
 - [resources](playground%20debug%20resources) - 🏋️ Limit the cpus and memory of a running container, or fill its disk: OOM, GC pressure, disk full
 - [tcp-dump](playground%20debug%20tcp-dump) - 🕵️‍♂️ Take a tcp dump (sniffing network)
 - [testssl](playground%20debug%20testssl) - 🔐 Testing TLS/SSL encryption using https://testssl.sh/

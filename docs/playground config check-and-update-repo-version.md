@@ -1,6 +1,6 @@
 # playground config check-and-update-repo-version
 
-when running an example, always check if repo version is older than 3 days, if disabled, it will skip this check.
+🔄 Warn when your clone of the repository is more than 3 days old, before running an example
 
 ## Usage
 

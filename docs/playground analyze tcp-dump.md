@@ -111,7 +111,7 @@ use `<option+enter>` to use the value you typed manually
 
 #### `--json`
 
-🗂️  Output JSON (no text report, no HTML report)
+🗂️ Output JSON (no text report, no HTML report)
 
 #### `--top TOP`
 

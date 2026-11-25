@@ -1,6 +1,6 @@
 # playground connector logs
 
-🕵️  Tail and follow connect logs
+🕵️ Tail and follow connect logs
 
 The logs of the worker running your connector. Combine it with  
 `playground connector log-level` to get more than the stack trace, and  

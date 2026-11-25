@@ -37,7 +37,7 @@ visit https://www.python.org/downloads/ to install
 
 #### `--file, -f FILE`
 
-🗒️  orclcdc_diag HTML report (repeat `--file` for several reports of the same database)
+🗒️ orclcdc_diag HTML report (repeat `--file` for several reports of the same database)
 
 ❕ Provide only one of `--file`, `--container` and `--sample`
 
@@ -84,7 +84,7 @@ The symptoms (no data, lag, missing data, duplicates, errors, memory) and dates 
 
 #### `--json`
 
-🗂️  Output JSON (findings, prerequisites, summary per component, deltas between reports)
+🗂️ Output JSON (findings, prerequisites, summary per component, deltas between reports)
 
 #### `--top TOP`
 

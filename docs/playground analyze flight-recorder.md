@@ -33,7 +33,7 @@ visit https://www.python.org/downloads/ to install
 
 #### `--file, -f FILE`
 
-🗒️  .jfr file to analyze (repeat `--file` for the recordings of several connect workers over the same period)
+🗒️ .jfr file to analyze (repeat `--file` for the recordings of several connect workers over the same period)
 
 ❕ Provide only one of `--file`, `--container` and `--sample`
 
@@ -98,7 +98,7 @@ use `<option+enter>` to use the value you typed manually
 
 #### `--json`
 
-🗂️  Output JSON (no text report, no HTML report)
+🗂️ Output JSON (no text report, no HTML report)
 
 #### `--top TOP`
 

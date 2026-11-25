@@ -31,6 +31,8 @@ reports=(
   "flight-recorder|flight-recorder --sample jdbc_postgres_sink"
   "oracle-xstream-report|oracle-xstream-report --sample synthetic_failures"
   "tcp-dump|tcp-dump --sample kafka_and_network_errors"
+  "thread-dump-stuck-sink|thread-dump --sample stuck_sink_put"
+  "tcp-dump-http-client-timeout|tcp-dump --sample http_client_timeout"
   "heap-dump|heap-dump --sample leak_growth"
   "jscissors|jscissors --sample filestream_sink_bad_json"
 )

@@ -49,11 +49,12 @@ use `<option+enter>` to use the value you typed manually
 - **deadlock_jdk21**: 3 jstack -l dumps of one JDK 21 JVM, 3 s apart: deadlock, blocked threads, CPU-hot thread, stuck task, leaking pool
 - **deadlock_jdk8**: the same scenario, one dump, JDK 8
 - **healthy_connect**: 3 kill -3 dumps of a healthy CP 8.3.2 Connect worker, from its container logs
+- **stuck_sink_put**: 3 dumps of a CP 8.4.1 worker whose JDBC sink task waits in put() for a locked table (Academy)
 
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Repeatable:     |  ✓ Yes
-| Allowed Values: | `deadlock_jdk21`, `deadlock_jdk8`, `healthy_connect`
+| Allowed Values: | `deadlock_jdk21`, `deadlock_jdk8`, `healthy_connect`, `stuck_sink_put`
 
 #### `--container, -c, --pod, -p CONTAINER`
 

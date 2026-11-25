@@ -51,11 +51,12 @@ use `<option+enter>` to use the value you typed manually
 
 - **kafka_and_network_errors**: a Kafka client producing and consuming, a refused connection, a connection without answer, a TLS handshake rejected (certificate_unknown) and a DNS NXDOMAIN
 - **http_errors**: an HTTP client posting JSON records (like the HTTP sink): 200, 429, 500, 401 and 404 responses with their bodies, a slow endpoint and a request without response
+- **http_client_timeout**: an HTTP sink with a 1 s timeout behind a 1.5 s network: the responses arrive after the client gave up (Academy)
 
 | Attributes      | &nbsp;
 |-----------------|-------------
 | Repeatable:     |  ✓ Yes
-| Allowed Values: | `kafka_and_network_errors`, `http_errors`
+| Allowed Values: | `kafka_and_network_errors`, `http_errors`, `http_client_timeout`
 
 #### `--container, -c, --pod, -p CONTAINER`
 

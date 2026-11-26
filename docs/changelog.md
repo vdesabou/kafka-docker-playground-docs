@@ -126,6 +126,8 @@
 
 ##### 🐛 Bugs
 
+- 🐛⏳ connector wait gives up on a stale FAILED status right after updating a failed connector [#10629](https://github.com/vdesabou/kafka-docker-playground/issues/10629)
+- 🐛☸️ Google Pub/Sub examples can't run on CFK: the connector is not on Confluent Hub [#10628](https://github.com/vdesabou/kafka-docker-playground/issues/10628)
 - 🐛🌐 connect-filepulse-source: a GitHub hiccup makes the example install a broken connector zip [#10618](https://github.com/vdesabou/kafka-docker-playground/issues/10618)
 - 🐛📚 How it works: fix stale CI, image and environment details [#10614](https://github.com/vdesabou/kafka-docker-playground/issues/10614)
 - 🐛☁️ Salesforce streaming examples: retry when another job's Bulk API logout kills the task's session [#10611](https://github.com/vdesabou/kafka-docker-playground/issues/10611)

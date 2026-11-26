@@ -47,7 +47,8 @@ CFK support bundle already analyzed (an archive next to its extracted
 folder). A JSON export of log events (.json, .jsonl, .ndjson, also  
 gzipped: AWS CloudWatch Logs Insights @timestamp/@message, CloudWatch  
 events, Elasticsearch / OpenSearch hits, structured JSON logs with  
-level/logger_name/message/stack_trace) and a CSV export of log events  
+level/logger_name/message/stack_trace, Splunk JSON exports with one  
+{"preview":false,"result":{...}} per line) and a CSV export of log events  
 (.csv, also gzipped: Kibana / OpenSearch Dashboards Discover, Splunk,  
 Datadog, Grafana: one event per row, a cell holding the JSON log line of  
 the container is parsed) are converted back to log lines, oldest first,  

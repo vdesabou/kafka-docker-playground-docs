@@ -6,8 +6,7 @@ The brokers (id, endpoint, rack, fenced, container, and the broker
 containers that are not registered), the KRaft quorum (cluster id,  
 active controller, voters and observers, from kafka-metadata-quorum  
 describe `--status`) and the feature levels (metadata.version... from  
-kafka-features describe). A ⚠️ marks two containers with the same node  
-id, and two brokers that advertise the same endpoint.
+kafka-features describe).
 
 With `--api-versions`, the API versions supported by a broker (wraps  
 kafka-broker-api-versions): useful when an old client fails with  

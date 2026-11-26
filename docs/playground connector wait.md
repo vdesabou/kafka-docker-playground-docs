@@ -10,9 +10,11 @@ RUNNING is only reached when the connector and its tasks are still
 RUNNING one `--interval` later, since a task is RUNNING before it  
 processes its first record and can fail right after.
 
-When waiting for RUNNING, it fails right away if the connector or one of  
-its tasks is FAILED, since a failed task does not recover on its own,  
-and runs `playground connector diagnose` on it: status with the trace,  
+When waiting for RUNNING, it fails if the connector or one of its tasks  
+is FAILED, since a failed task does not recover on its own: FAILED must  
+still be there one check later, because right after an update or a  
+restart the status can still show the task that failed before. It then  
+runs `playground connector diagnose` on it: status with the trace,  
 digest of the connect errors since the wait started, offsets, next  
 steps and HTML report, opened in the browser from an interactive  
 terminal (`playground config open-diagnose-report-on-failure false` to  

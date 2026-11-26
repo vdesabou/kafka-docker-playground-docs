@@ -139,7 +139,7 @@ Package name (with `--level`: the log level of that package instead of the conne
 
 Self-managed connectors are waited for by default: `--wait` also makes the command fail when the script that runs is a reproduction model (by default, it is only a warning there).
 
-Same as running `playground connector wait` right after the command. It fails right away if the connector or one of its tasks is FAILED. An update of a PAUSED or STOPPED connector waits for that state.
+Same as running `playground connector wait` right after the command. It fails if the connector or one of its tasks is FAILED (still FAILED one check later, 5 seconds: right after an update, the status can still show the task that failed before). An update of a PAUSED or STOPPED connector waits for that state.
 
 With fully managed connectors, it waits for the connector to be provisioned and restarts it if it fails while being provisioned (same as wait_for_ccloud_connector_up in example scripts).
 

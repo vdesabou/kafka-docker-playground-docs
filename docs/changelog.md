@@ -129,6 +129,7 @@
 
 ##### 🐛 Bugs
 
+- 🐛🪣 storage cat fails on Linux: the temp files written by the rclone / avro-tools containers belong to root [#10640](https://github.com/vdesabou/kafka-docker-playground/issues/10640)
 - 🐛⏳ connector wait gives up on a stale FAILED status right after updating a failed connector [#10629](https://github.com/vdesabou/kafka-docker-playground/issues/10629)
 - 🐛☸️ Google Pub/Sub examples can't run on CFK: the connector is not on Confluent Hub [#10628](https://github.com/vdesabou/kafka-docker-playground/issues/10628)
 - 🐛🌐 connect-filepulse-source: a GitHub hiccup makes the example install a broken connector zip [#10618](https://github.com/vdesabou/kafka-docker-playground/issues/10618)

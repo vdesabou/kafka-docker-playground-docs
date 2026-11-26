@@ -25,9 +25,17 @@ the MongoDB sink and their fully managed versions:
 - **table**: table.name.format (${topic} replaced), collection, table.whitelist / table.include.list
 - **database**: the host of connection.url / database.hostname when it is a running container, with the user and password of the connector
 
+🪣 Object store sinks (S3, GCS, Azure Blob, ADLS Gen2, HDFS, SFTP,  
+self-managed or fully managed): the records of every object of the  
+topic, read with `playground storage cat`, compared with the topic as  
+multisets of values (no key, no delete: a storage sink appends each  
+record once). Duplicated records are the objects written twice after a  
+task restart; the records after the last object (fewer than  
+flush.size) are still in the task, not lost.
+
 Pass `--topic`, `--table`, `--key-field` and `--container` for anything else,  
 and `--rows-file` to compare with rows exported from any system (a  
-bucket, a warehouse, a customer dump), one json object per line.
+warehouse, a customer dump), one json object per line.
 
 Values are compared by meaning, not by text: 1, 1.0 and "1"; true and  
 1; epoch milliseconds (or days) and a date or timestamp column;  
@@ -169,7 +177,11 @@ playground connector reconcile --connector debezium-postgres-source --table publ
 ```
 
 ```bash
-playground connector reconcile --connector s3-sink --rows-file /tmp/objects.json --key-field id
+playground connector reconcile --connector s3-sink
+```
+
+```bash
+playground connector reconcile --connector bigquery-sink --rows-file /tmp/rows.json --key-field id
 ```
 
 ## Example output

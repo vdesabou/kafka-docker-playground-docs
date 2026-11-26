@@ -94,7 +94,7 @@ printed as '`<masked>`': use `--run` to replay the command with them
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Conflicts With: | `--list`, `--json`, `--run`, `--stats`, `--prune`
+| Conflicts With: | `--list`, `--json`, `--run`, `--stats`, `--prune`, `--session`
 
 #### `--run`
 
@@ -103,7 +103,7 @@ nor the edit prompt
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Conflicts With: | `--list`, `--json`, `--last`, `--stats`, `--prune`
+| Conflicts With: | `--list`, `--json`, `--last`, `--stats`, `--prune`, `--session`
 
 #### `--stats`
 
@@ -113,7 +113,29 @@ ignored)
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Conflicts With: | `--list`, `--json`, `--last`, `--run`, `--prune`
+| Conflicts With: | `--list`, `--json`, `--last`, `--run`, `--prune`, `--session`
+
+#### `--session`
+
+🛠️ Print what was done to the running environment since it started: the  
+playground commands that change it (containers killed or restarted,  
+faults injected with debug, connectors created, updated or deleted,  
+offsets changed, records produced, topics, brokers, quotas, schemas...),  
+with their time, duration and exit code, oldest first. Read-only  
+commands are not recorded.
+
+They are kept in playground-session.log (repository root, secrets  
+masked), reset by `playground run` and `playground start-environment`,  
+kept by `playground stop` until the next start. With `--json`: an object  
+with started, started_by and the actions (time, epoch, duration_seconds,  
+exit_code, command). `playground connector history --with-logs` shows  
+them next to the states of a connector and the errors of the logs.
+
+ℹ️ `PLAYGROUND_SESSION_LOG_DISABLED`=1 turns the recording off
+
+| Attributes      | &nbsp;
+|-----------------|-------------
+| Conflicts With: | `--last`, `--run`, `--stats`, `--prune`
 
 #### `--prune`
 
@@ -123,7 +145,7 @@ file is kept as playground-run-history.bak
 
 | Attributes      | &nbsp;
 |-----------------|-------------
-| Conflicts With: | `--list`, `--json`, `--last`, `--run`, `--stats`
+| Conflicts With: | `--list`, `--json`, `--last`, `--run`, `--stats`, `--session`
 
 ## Examples
 
@@ -157,6 +179,23 @@ playground history --stats
 
 ```bash
 playground history --prune
+```
+
+```bash
+playground history --session
+```
+
+```bash
+playground history --session --json | jq -r '.actions[] | select(.exit_code != 0) | .command'
+```
+
+## Example output
+
+```text
+$ playground history --session
+🛠️  2 action(s) recorded
+13:51:03 UTC  ❌    1s  playground container pause --container pg-session-log-test-nonexistent   (exit code 1)
+13:51:04 UTC  ❌    0s  playground container resume --container pg-session-log-test-nonexistent   (exit code 1)
 ```
 
 

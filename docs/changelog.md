@@ -3,6 +3,7 @@
 ## November 2026
 ##### 🌟 Enhancements
 
+- 🧠📚 Academy: 4 intermediate exercises, playground topic add-partitions, and offsets alter|reset leave a STOPPED connector stopped [#10632](https://github.com/vdesabou/kafka-docker-playground/issues/10632)
 - 🧠📚 secrets deep dive: moving from exported variables in \~/.zshrc to playground secrets [#10607](https://github.com/vdesabou/kafka-docker-playground/issues/10607)
 - 🧠🌤️ account ccloud check: verify the environment, clusters and API keys of the secrets profile [#10605](https://github.com/vdesabou/kafka-docker-playground/issues/10605)
 - 🧠🩺 playground run checks the account of the example before starting it (fail fast) [#10579](https://github.com/vdesabou/kafka-docker-playground/issues/10579)

@@ -6,6 +6,8 @@ You can compare different sourcecode versions by specifying `--connector-tag` tw
 
 🏗️ Compile code and generate zip file(s) by providing `--compile` flag
 
+🌍 Works without a container engine (git and curl only), except `--compile` which runs maven in a container
+
 🍪 Deep dive: https://kafka-docker-playground.io/#/deep-dive-connector-plugin  
 🎬 Bite size session: https://kafka-docker-playground.io/#/sessions?id=%F0%9F%A7%91%F0%9F%92%BB-the-source-code-of-a-connector-at-the-customers-version
 

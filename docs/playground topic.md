@@ -45,6 +45,7 @@ playground topic COMMAND
 
 ## Topic commands
 
+- [add-partitions](playground%20topic%20add-partitions) - ➕ Add partitions to an existing topic
 - [alter](playground%20topic%20alter) - 🪛 Alter topic config
 - [check-format](playground%20topic%20check-format) - 🧬 Check the format of the records of a topic, from their bytes
 - [compare](playground%20topic%20compare) - 🔀 Compare a topic with its replica: is everything replicated?

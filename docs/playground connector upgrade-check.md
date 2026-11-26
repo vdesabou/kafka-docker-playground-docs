@@ -10,7 +10,7 @@ checked against the config:
 
 - **❌ breaking**: a key the config sets is removed, its value is no longer valid (valid values, range), a new required key without default, the target version is below the minimum supported on `--cp-version` (CP 8)
 - **⚠️ review**: a default changed on a key the config does not set (it runs with the old default without knowing it), a set key whose type or value rule changed, release notes that name a set key or say default, behavior, removed, deprecated, breaking..., a major change of a shared library (Jackson, Avro, Protobuf, AWS SDK v1 → v2, Netty, Kafka clients...) that custom classes (credentials providers, SMTs) depend on
-- **ℹ️ info**: versions behind, new keys, CVEs (`--with-cve`)
+- **ℹ️ info**: versions behind, new keys, CVEs (`--with-cve`), keys of the config in neither version (obsolete like type.name of the Elasticsearch sink or database.server.name of Debezium 1.x, a typo, or a pass-through property; framework keys and keys starting with _ are not listed)
 
 A release note line is never breaking: it is printed for a human to  
 judge. Release notes exist only for the Confluent self-managed plugins  

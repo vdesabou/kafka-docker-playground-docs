@@ -3,6 +3,7 @@
 ## November 2026
 ##### 🌟 Enhancements
 
+- 🧠🪣 playground storage ls|cat|wait-for-objects: the objects of the S3 / GCS / Azure / HDFS / SFTP sinks, and connector reconcile on them [#10636](https://github.com/vdesabou/kafka-docker-playground/issues/10636)
 - 🧠🧪 connector lint: best-practice warnings on a connector config (no DLQ, replication factors, overrides, converters, secrets) [#10635](https://github.com/vdesabou/kafka-docker-playground/issues/10635)
 - 🧠📚 Academy: 4 intermediate exercises, playground topic add-partitions, and offsets alter|reset leave a STOPPED connector stopped [#10632](https://github.com/vdesabou/kafka-docker-playground/issues/10632)
 - 🧠📚 secrets deep dive: moving from exported variables in \~/.zshrc to playground secrets [#10607](https://github.com/vdesabou/kafka-docker-playground/issues/10607)

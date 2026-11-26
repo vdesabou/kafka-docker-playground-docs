@@ -95,6 +95,7 @@ playground connector COMMAND
 - [error-recommendations](playground%20connector%20error-recommendations) - 💡 Show error recommendations for fully managed connectors
 - [flow](playground%20connector%20flow) - 🗺️ Show the flow of the running connectors: source → topic → sinks, with the records, the lag and the DLQ
 - [history](playground%20connector%20history) - 🕰️ Show the history of a connector: state changes, failures, restarts and config changes
+- [lint](playground%20connector%20lint) - 🧪 Best-practice warnings on a connector config (no environment needed)
 - [log-level](playground%20connector%20log-level) - 🧬 Set connect log level
 - [logs](playground%20connector%20logs) - 🕵️ Tail and follow connect logs
 - [metrics](playground%20connector%20metrics) - 📈 Show the metrics of a connector: throughput, time, errors, and the metrics of the connector itself

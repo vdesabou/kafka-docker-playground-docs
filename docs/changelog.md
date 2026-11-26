@@ -3,6 +3,7 @@
 ## November 2026
 ##### 🌟 Enhancements
 
+- 🧠📨 playground mq put|get|wait: send, browse and count the messages of IBM MQ, RabbitMQ, MQTT, ActiveMQ and Solace [#10649](https://github.com/vdesabou/kafka-docker-playground/issues/10649)
 - 🧠🚧 debug block-traffic --both-ways, --duration and --isolate: symmetric partitions, a cut that heals by itself, one container cut from all the others [#10647](https://github.com/vdesabou/kafka-docker-playground/issues/10647)
 - 🧠🕰️ connector history --with-logs and a session log of the playground actions: what happened first, in one list [#10645](https://github.com/vdesabou/kafka-docker-playground/issues/10645)
 - 🧠🔼 connector upgrade-check: can this connector config be upgraded to version Y (and to CP 8)? A verdict in one call [#10642](https://github.com/vdesabou/kafka-docker-playground/issues/10642)

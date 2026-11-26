@@ -5,6 +5,19 @@
 One digest of what makes a cluster unhealthy:
 
 - broker containers that are not registered (stopped, starting) or fenced
+- two broker containers with the same node id (only one can register:
+
+`DUPLICATE_BROKER_REGISTRATION` in the log of the other)
+
+- two brokers that advertise the same endpoint (advertised.listeners
+
+copied from another broker: clients and followers go to the wrong one)
+
+- a KRaft quorum without a majority of its controllers running (said at
+
+once: metadata changes such as topic creation time out, produce and  
+consume keep working)
+
 - under-replicated partitions (kafka-topics `--under-replicated-partitions`)
 - partitions under min.insync.replicas (`--under-min-isr-partitions`):
 

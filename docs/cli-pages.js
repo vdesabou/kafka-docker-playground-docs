@@ -199,6 +199,7 @@ window.KDP_CLI_PAGES = [
   "/playground%20connector%20topics",
   "/playground%20connector%20translate",
   "/playground%20connector%20update",
+  "/playground%20connector%20upgrade-check",
   "/playground%20connector%20validate",
   "/playground%20connector%20versions",
   "/playground%20connector%20wait",

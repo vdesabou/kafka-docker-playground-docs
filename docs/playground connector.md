@@ -35,6 +35,8 @@ of each command says whether it does.
 
 - **create-or-update**: create it, or apply a new config, from stdin
 - **validate**: check a config with the plugin, create nothing
+- **lint**: best-practice warnings on a config
+- **upgrade-check**: what changes for a config with a newer plugin
 - **convert**: a customer config (CFK, terraform...) to another format
 - **update**: edit the running config in your editor
 - **pause / resume / stop / restart / delete**
@@ -128,6 +130,7 @@ playground connector COMMAND
 - [topics](playground%20connector%20topics) - 📚 Show the topics a connector is using, or reset that list
 - [translate](playground%20connector%20translate) - 💱 Translate Self Managed Connector Plugin Configurations to Fully Managed Connector Plugin Configuration
 - [update](playground%20connector%20update) - 🛠️ Update connector configuration by opening current connector config in text editor set with playground config editor `<editor>` (default is code). Once file is saved, the new configuration is updated.
+- [upgrade-check](playground%20connector%20upgrade-check) - 🔼 What changes for this connector config when the plugin is upgraded (no environment needed)
 - [validate](playground%20connector%20validate) - ✅ Validate a connector config without creating the connector
 - [versions](playground%20connector%20versions) - 🧞 Get current and latest versions available on Confluent Hub for connector(s) used in example
 - [wait](playground%20connector%20wait) - ⏳ Wait for connectors to reach a state

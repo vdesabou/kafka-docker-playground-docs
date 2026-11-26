@@ -4,6 +4,7 @@
 ##### 🌟 Enhancements
 
 - 🧠🚧 debug block-traffic --both-ways, --duration and --isolate: symmetric partitions, a cut that heals by itself, one container cut from all the others [#10647](https://github.com/vdesabou/kafka-docker-playground/issues/10647)
+- 🧠🕰️ connector history --with-logs and a session log of the playground actions: what happened first, in one list [#10645](https://github.com/vdesabou/kafka-docker-playground/issues/10645)
 - 🧠🔼 connector upgrade-check: can this connector config be upgraded to version Y (and to CP 8)? A verdict in one call [#10642](https://github.com/vdesabou/kafka-docker-playground/issues/10642)
 - 🧠🪣 playground storage ls|cat|wait-for-objects: the objects of the S3 / GCS / Azure / HDFS / SFTP sinks, and connector reconcile on them [#10636](https://github.com/vdesabou/kafka-docker-playground/issues/10636)
 - 🧠🧪 connector lint: best-practice warnings on a connector config (no DLQ, replication factors, overrides, converters, secrets) [#10635](https://github.com/vdesabou/kafka-docker-playground/issues/10635)

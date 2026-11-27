@@ -5,7 +5,11 @@
 The consumer lag of the sink, refreshed every `--interval` seconds, so you  
 see whether it is catching up, standing still or falling behind. A lag  
 that does not move while the connector reports RUNNING means the tasks  
-are stuck rather than slow.
+are stuck rather than slow, with two exceptions said when `--max-wait` is  
+reached: a small lag made only of transaction markers (COMMIT / ABORT  
+control records, never delivered: 🧾, it reaches 0 with the next  
+records), and a group without member nor committed offset (a task  
+kicked out of its group after max.poll.interval.ms).
 
 It will run until all lag becomes 0 (press ctrl-c to exit), or until  
 `--max-wait`. `--once` (or `--json`) takes a single snapshot instead. The  

@@ -7,6 +7,11 @@ re-reads its origin from the beginning, a sink re-consumes its topics
 from the earliest offset. The connector is stopped and resumed around  
 the reset.
 
+A sink without committed offsets starts from its auto.offset.reset:  
+with consumer.override.auto.offset.reset=latest it starts from the END  
+of its topics, and the reset re-reads nothing (a ⚠️ says so: remove  
+the key first, or use alter).
+
 ⚠️ Everything is reprocessed, so expect duplicates downstream unless  
 the target is idempotent. Use alter when you only want to move back  
 to a specific point.

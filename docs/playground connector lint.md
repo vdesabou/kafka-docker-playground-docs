@@ -13,7 +13,8 @@ factors above the number of brokers, tasks.max above the number of
 partitions of a sink, client overrides (consumer.override.\*,  
 producer.override.\*) against connector.client.config.override.policy  
 of the worker, consumer.override.max.poll.records too high for  
-max.poll.interval.ms, auto.offset.reset=latest, producer acks not all,  
+max.poll.interval.ms, a max.poll.interval.ms lowered below 60 s,  
+auto.offset.reset=latest, producer acks not all,  
 an Avro / Protobuf / JSON Schema converter set on the connector without  
 its schema.registry.url (a converter set on the connector does not  
 inherit the converter settings of the worker), JsonConverter with a  

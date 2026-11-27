@@ -1,18 +1,18 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SMT test</title>
+<title>SMT test of jdbc-sink</title>
 <style>
 .root { color-scheme: light; --page: #f1f5f9; --surface: #ffffff; --text: #1e293b; --text2: #475569; --muted: #64748b; --grid: #e2e8f0;
   --border: rgba(15,23,42,0.10); --accent: #2a78d6; --good: #0ca30c; --good-bg: #e7f6e7; --warning: #b77900; --warning-bg: #fdf2dc;
   --critical: #d03b3b; --critical-bg: #fbe9e9; --added: #e3f5e3; --changed: #fdf0d2; --removed: #fbe4e4; }
-@media (prefers-color-scheme: dark) { :root:where(:not([data-theme="light"])) .root { color-scheme: dark; --page: #0f172a; --surface: #1e293b;
-  --text: #e2e8f0; --text2: #cbd5e1; --muted: #94a3b8; --grid: #334155; --border: rgba(255,255,255,0.10); --accent: #3987e5;
+@media (prefers-color-scheme: dark) { :root:where(:not([data-theme="light"])) .root { color-scheme: dark; --page: #0e1418; --surface: #141c21;
+  --text: #dbe5ea; --text2: #d3dee4; --muted: #8a9ba6; --grid: #26343d; --border: rgba(255,255,255,0.10); --accent: #3987e5;
   --good-bg: #12301a; --warning: #fab219; --warning-bg: #3a2f12; --critical-bg: #3a1717; --added: #163a1f; --changed: #3d3216; --removed: #421c1c; } }
-:root[data-theme="dark"] .root { color-scheme: dark; --page: #0f172a; --surface: #1e293b; --text: #e2e8f0; --text2: #cbd5e1; --muted: #94a3b8;
-  --grid: #334155; --border: rgba(255,255,255,0.10); --accent: #3987e5; --good-bg: #12301a; --warning: #fab219; --warning-bg: #3a2f12;
+:root[data-theme="dark"] .root { color-scheme: dark; --page: #0e1418; --surface: #141c21; --text: #dbe5ea; --text2: #d3dee4; --muted: #8a9ba6;
+  --grid: #26343d; --border: rgba(255,255,255,0.10); --accent: #3987e5; --good-bg: #12301a; --warning: #fab219; --warning-bg: #3a2f12;
   --critical-bg: #3a1717; --added: #163a1f; --changed: #3d3216; --removed: #421c1c; }
 * { box-sizing: border-box; } body { margin: 0; }
-.root { background: var(--page); color: var(--text); min-height: 100vh; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; padding: 28px 32px 48px; }
+.root { background: var(--page); color: var(--text); min-height: 100vh; font-family: Inter Variable,Inter,system-ui, -apple-system, "Segoe UI", sans-serif; padding: 28px 32px 48px; }
 header { display: flex; justify-content: space-between; gap: 16px; align-items: flex-start; }
 /* the blue header banner of the other playground reports (tools/report-common/report_html.py) */
 header { background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 100%); color: #fff; border-radius: 12px; padding: 22px 28px; }
@@ -22,7 +22,8 @@ header .theme-toggle { color: #fff; background: rgba(255,255,255,.12); border-co
 
 h1 { font-size: 1.35rem; margin: 0 0 4px; font-weight: 600; } h2 { font-size: 1.05rem; margin: 26px 0 10px; } h3 { font-size: 1rem; margin: 0; font-weight: 600; }
 .sub, .muted { color: var(--text2); font-size: .875rem; } .muted { color: var(--muted); }
-.theme-toggle { white-space: nowrap; font: inherit; font-size: .8rem; color: var(--text2); background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 4px 10px; cursor: pointer; }
+.theme-toggle { flex-shrink: 0; width: 34px; height: 34px; padding: 0; display: inline-grid; place-items: center; font-size: 16px; line-height: 1; color: var(--fg, inherit); background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.35); border-radius: 50%; cursor: pointer; transition: transform .15s; }
+.theme-toggle:hover { transform: scale(1.08); }
 .card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; margin: 12px 0; }
 .chain { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 18px 0 6px; }
 .chain a { text-decoration: none; color: inherit; } .arrow { color: var(--muted); }
@@ -36,9 +37,9 @@ h1 { font-size: 1.35rem; margin: 0 0 4px; font-weight: 600; } h2 { font-size: 1.
 .step.st-error { border-color: var(--critical); border-width: 2px; } .step.st-dropped { border-color: var(--warning); border-width: 2px; }
 table { border-collapse: collapse; } .meta { font-size: .84rem; margin: 4px 0 8px; }
 .meta th { text-align: left; color: var(--text2); font-weight: 500; width: 124px; padding: 3px 12px 3px 0; vertical-align: top; white-space: nowrap; }
-.meta td { padding: 3px 0; } code { font-family: "SFMono-Regular", Consolas, Menlo, monospace; font-size: .8rem; }
+.meta td { padding: 3px 0; } code { font-family: JetBrains Mono Variable,JetBrains Mono,"SFMono-Regular", Consolas, Menlo, monospace; font-size: .8rem; }
 .meta code { background: var(--page); border: 1px solid var(--border); border-radius: 4px; padding: 0 4px; margin-right: 4px; display: inline-block; margin-bottom: 2px; }
-pre { margin: 0; font-family: "SFMono-Regular", Consolas, Menlo, monospace; font-size: .8rem; white-space: pre-wrap; word-break: break-word; }
+pre { margin: 0; font-family: JetBrains Mono Variable,JetBrains Mono,"SFMono-Regular", Consolas, Menlo, monospace; font-size: .8rem; white-space: pre-wrap; word-break: break-word; }
 .json { background: var(--page); border: 1px solid var(--border); border-radius: 6px; padding: 10px 12px; }
 .json .k { color: var(--accent); }
 .added { background: var(--added); border-radius: 3px; } .changed { background: var(--changed); border-radius: 3px; cursor: help; }
@@ -47,14 +48,14 @@ pre { margin: 0; font-family: "SFMono-Regular", Consolas, Menlo, monospace; font
 .part-label { font-weight: 600; white-space: nowrap; padding-top: 1px; } .part-body { min-width: 0; }
 .note { color: var(--muted); font-size: .78rem; margin-bottom: 4px; } .note code { font-size: .76rem; }
 .chip code { background: var(--page); border: 1px solid var(--border); border-radius: 4px; padding: 1px 6px; font-size: .84rem; font-weight: 600; }
-.type { font-size: .72rem; color: var(--text2); background: var(--page); border: 1px solid var(--border); border-radius: 999px; padding: 0 7px; font-family: "SFMono-Regular", Consolas, Menlo, monospace; }
+.type { font-size: .72rem; color: var(--text2); background: var(--page); border: 1px solid var(--border); border-radius: 999px; padding: 0 7px; font-family: JetBrains Mono Variable,JetBrains Mono,"SFMono-Regular", Consolas, Menlo, monospace; }
 .kv { font-size: .82rem; } .kv th { text-align: left; color: var(--muted); font-weight: 500; font-size: .74rem; padding: 0 16px 3px 0; }
 .kv td { padding: 3px 16px 3px 0; border-top: 1px solid var(--grid); } .kv .hk { font-weight: 600; }
 .kv tr.added td, .kv tr.removed td, .kv tr.changed td { background: none; } .kv tr.added { background: var(--added); } .kv tr.changed { background: var(--changed); }
 .kv tr.removed { background: var(--removed); } .kv tr.removed .hk { text-decoration: line-through; }
 .config { font-size: .82rem; border: 1px solid var(--border); border-radius: 6px; background: var(--page); border-collapse: separate; border-spacing: 0; }
 .config td { padding: 3px 10px; vertical-align: top; } .config tr + tr td { border-top: 1px solid var(--grid); }
-.config .ck { color: var(--text2); font-family: "SFMono-Regular", Consolas, Menlo, monospace; font-size: .78rem; white-space: nowrap; }
+.config .ck { color: var(--text2); font-family: JetBrains Mono Variable,JetBrains Mono,"SFMono-Regular", Consolas, Menlo, monospace; font-size: .78rem; white-space: nowrap; }
 .config code, .meta .config code { font-weight: 600; word-break: break-all; background: none; border: 0; padding: 0; margin: 0; }
 .label { font-size: .8rem; color: var(--text2); margin: 6px 0 4px; }
 .schema { margin-top: 6px; font-size: .8rem; }
@@ -75,232 +76,308 @@ details { margin-top: 8px; } summary { cursor: pointer; font-size: .84rem; color
 .tab { font: inherit; font-size: .85rem; padding: 5px 12px; border-radius: 6px; border: 1px solid var(--border); background: var(--surface); color: var(--text); cursor: pointer; }
 .tab[aria-selected="true"] { border-color: var(--accent); box-shadow: inset 0 -2px 0 var(--accent); }
 footer { color: var(--muted); font-size: .78rem; margin-top: 24px; }
-</style></head>
+</style><style>
+header{position:relative;overflow:hidden;border-radius:18px;padding:26px 32px 22px;
+background:radial-gradient(1200px 300px at 0% 0%,rgba(139,216,239,.30),transparent 60%),
+radial-gradient(800px 260px at 100% 100%,rgba(255,196,92,.28),transparent 60%),
+linear-gradient(120deg,#0b1115 0%,#10212b 50%,#173540 100%);box-shadow:0 10px 30px rgba(8,47,73,.35);border:1px solid rgba(215,239,246,.12)}
+/* the verdict tints the header: red with ERROR/FATAL, amber with WARN only, green without error (the progress page keeps the default) */
+header.danger{background:radial-gradient(1200px 300px at 0% 0%,rgba(251,113,133,.30),transparent 60%),
+radial-gradient(800px 260px at 100% 100%,rgba(249,115,22,.40),transparent 60%),
+linear-gradient(120deg,#0b1115 0%,#4c0519 45%,#9f1239 75%,#c2410c 100%);box-shadow:0 10px 30px rgba(159,18,57,.35)}
+header.warn{background:radial-gradient(1200px 300px at 0% 0%,rgba(253,224,71,.22),transparent 60%),
+radial-gradient(800px 260px at 100% 100%,rgba(251,191,36,.35),transparent 60%),
+linear-gradient(120deg,#0b1115 0%,#422006 45%,#92400e 75%,#d97706 100%);box-shadow:0 10px 30px rgba(146,64,14,.35)}
+header.ok{background:radial-gradient(1200px 300px at 0% 0%,rgba(110,231,183,.25),transparent 60%),
+radial-gradient(800px 260px at 100% 100%,rgba(45,212,191,.35),transparent 60%),
+linear-gradient(120deg,#0b1115 0%,#064e3b 45%,#047857 75%,#0d9488 100%);box-shadow:0 10px 30px rgba(4,120,87,.35)}
+header{color:#fff}.lr-brand{grid-column:1 / -1;justify-self:start;display:inline-flex;align-items:center;gap:8px;font-size:1rem;font-weight:700;
+letter-spacing:-.03em;color:#fff;text-decoration:none;white-space:nowrap;transition:opacity .15s}
+.lr-brand:hover{opacity:.85}
+.lr-brand i{font-style:normal;color:rgba(255,255,255,.45)}
+.lr-brand em{font-style:normal;background:linear-gradient(90deg,#d7eff6,#ffc45c);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lr-whale{font-size:1.35rem;line-height:1;display:inline-block;animation:lr-swim 4s ease-in-out infinite}
+@keyframes lr-swim{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-2px) rotate(-6deg)}}
+@media (prefers-reduced-motion:reduce){.lr-whale{animation:none}}
+header .lr-brand{margin-bottom:10px}header a.lr-brand,header a.lr-brand:visited{color:#fff;text-decoration:none}header h1{font-weight:800;letter-spacing:-.01em}</style></head>
 <body><div class="root">
-<header><div><h1>🔀 SMT test</h1><p class="sub">4 transform(s) on a sink record · CP 7.9.0 (Kafka 7.9.0-ce) · CP 8.3.2 (Kafka 8.3.2-ce)</p></div><button class="theme-toggle" id="theme-toggle" type="button">Toggle theme</button></header>
-<div class="banner warning">⚠️ The versions give different records: the record went through the 4 transforms in all of them, but the values differ (see the flagged cells below).</div>
-<h2>🆚 Comparison of the versions</h2>
-<div class="verdict warning">⚠️ the versions give different results: the differing cells are flagged</div><div class="card"><table class="compare"><tr><th>step</th><th>CP 7.9.0<br><span class="muted">Kafka 7.9.0-ce</span></th><th>CP 8.3.2<br><span class="muted">Kafka 8.3.2-ce</span></th></tr><tr><th>0. input</th><td class=""><span class="badge neutral">🧾 input</span><div class="cell">topic <code>filestream</code><br><code>{&quot;address&quot;:&quot;Ben&quot;,&quot;count&quot;:1,&quot;last_name&quot;:&quot;Kenton&quot;,&quot;first_name&quot;:&quot;Jeremy&quot;}</code></div></td><td class=""><span class="badge neutral">🧾 input</span><div class="cell">topic <code>filestream</code><br><code>{&quot;address&quot;:&quot;Ben&quot;,&quot;count&quot;:1,&quot;last_name&quot;:&quot;Kenton&quot;,&quot;first_name&quot;:&quot;Jeremy&quot;}</code></div></td></tr><tr><th>1. InsertField$Value InsertMeta</th><td class=""><span class="badge good">✅ applied</span><div class="cell">topic <code>filestream</code><br><code>{&quot;partition_id&quot;:0,&quot;address&quot;:&quot;Ben&quot;,&quot;count&quot;:1,&quot;topic_name&quot;:&quot;filestream&quot;,&quot;last_name&quot;:&quot;Kenton&quot;,&quot;offset_value&quot;:0,&quot;first_name&quot;</code></div></td><td class=""><span class="badge good">✅ applied</span><div class="cell">topic <code>filestream</code><br><code>{&quot;partition_id&quot;:0,&quot;address&quot;:&quot;Ben&quot;,&quot;count&quot;:1,&quot;topic_name&quot;:&quot;filestream&quot;,&quot;last_name&quot;:&quot;Kenton&quot;,&quot;offset_value&quot;:0,&quot;first_name&quot;</code></div></td></tr><tr><th>2. InsertField$Value AddGroup</th><td class=""><span class="badge good">✅ applied</span><div class="cell">topic <code>filestream</code><br><code>{&quot;partition_id&quot;:0,&quot;address&quot;:&quot;Ben&quot;,&quot;group_name&quot;:&quot;my group&quot;,&quot;count&quot;:1,&quot;topic_name&quot;:&quot;filestream&quot;,&quot;last_name&quot;:&quot;Kenton&quot;,&quot</code></div></td><td class=""><span class="badge good">✅ applied</span><div class="cell">topic <code>filestream</code><br><code>{&quot;partition_id&quot;:0,&quot;address&quot;:&quot;Ben&quot;,&quot;group_name&quot;:&quot;my group&quot;,&quot;count&quot;:1,&quot;topic_name&quot;:&quot;filestream&quot;,&quot;last_name&quot;:&quot;Kenton&quot;,&quot</code></div></td></tr><tr><th>3. InsertField$Value AddLoadTime</th><td class=""><span class="badge good">✅ applied</span><div class="cell">topic <code>filestream</code><br><code>{&quot;partition_id&quot;:0,&quot;address&quot;:&quot;Ben&quot;,&quot;group_name&quot;:&quot;my group&quot;,&quot;count&quot;:1,&quot;topic_name&quot;:&quot;filestream&quot;,&quot;last_name&quot;:&quot;Kenton&quot;,&quot</code></div></td><td class="differs"><span class="badge good">✅ applied</span> <span class="badge warning">⚠️ ≠ first version</span><div class="cell">topic <code>filestream</code><br><code>{&quot;partition_id&quot;:0,&quot;address&quot;:&quot;Ben&quot;,&quot;group_name&quot;:&quot;my group&quot;,&quot;count&quot;:1,&quot;topic_name&quot;:&quot;filestream&quot;,&quot;last_name&quot;:&quot;Kenton&quot;,&quot</code></div></td></tr><tr><th>4. HoistField$Value WrapPayload</th><td class=""><span class="badge good">✅ applied</span><div class="cell">topic <code>filestream</code><br><code>{&quot;payload&quot;:{&quot;partition_id&quot;:0,&quot;address&quot;:&quot;Ben&quot;,&quot;group_name&quot;:&quot;my group&quot;,&quot;count&quot;:1,&quot;topic_name&quot;:&quot;filestream&quot;,&quot;last_name&quot;:&qu</code></div></td><td class="differs"><span class="badge good">✅ applied</span> <span class="badge warning">⚠️ ≠ first version</span><div class="cell">topic <code>filestream</code><br><code>{&quot;payload&quot;:{&quot;partition_id&quot;:0,&quot;address&quot;:&quot;Ben&quot;,&quot;group_name&quot;:&quot;my group&quot;,&quot;count&quot;:1,&quot;topic_name&quot;:&quot;filestream&quot;,&quot;last_name&quot;:&qu</code></div></td></tr></table></div>
-<h2>🔀 Steps per version</h2><div class="tabs"><button class="tab" type="button" data-run="run0" aria-selected="true">CP 7.9.0</button><button class="tab" type="button" data-run="run1" aria-selected="false">CP 8.3.2</button></div>
+<header><div><div><a class='lr-brand' href='https://kafka-docker-playground.io/' title='kafka-docker-playground: the playground CLI that generated this report'><span class='lr-whale'>🐳</span><span>kafka<i>-</i>docker<i>-</i><em>playground</em></span></a></div><h1>🔀 SMT test of jdbc-sink</h1><p class="sub">4 transform(s) on a sink record · CP 8.1.0 (Kafka 4.1.0-ccs)</p></div><button class="theme-toggle" id="theme-toggle" type="button" aria-label="switch between the light and the dark theme (remembered)"></button></header>
+<div class="banner good">✅ The record went through the 4 transforms (1 skipped by predicate).</div>
 <div class="run" id="run0">
-<div class="chain"><a href="#r0-s0"><span class="badge neutral" title="input">🧾 input</span></a><span class="arrow">→</span><a href="#r0-s1"><span class="badge good" title="applied">✅ InsertField$Value InsertMeta</span></a><span class="arrow">→</span><a href="#r0-s2"><span class="badge good" title="applied">✅ InsertField$Value AddGroup</span></a><span class="arrow">→</span><a href="#r0-s3"><span class="badge good" title="applied">✅ InsertField$Value AddLoadTime</span></a><span class="arrow">→</span><a href="#r0-s4"><span class="badge good" title="applied">✅ HoistField$Value WrapPayload</span></a><span class="arrow">→</span><a href="#r0-final"><span class="badge neutral" title="the record after the whole chain">🏁 final record</span></a></div>
-<div class="verdict good result">✅ topic filestream · key null · value {&quot;payload&quot;:{&quot;partition_id&quot;:0,&quot;address&quot;:&quot;Ben&quot;,&quot;group_name&quot;:&quot;my group&quot;,&quot;count&quot;:1,&quot;topic_name&quot;:&quot;filestream&quot;,&quot;last_name&quot;:&quot;Kenton&quot;,&quot;offset_value&quot;:0,&quot;first_name&quot;:&quot;Jeremy&quot;,&quot;kafka_datetime&quot;:1792140421218}}</div>
+<div class="chain"><a href="#r0-s0"><span class="badge neutral" title="input">🧾 input</span></a><span class="arrow">→</span><a href="#r0-s1"><span class="badge good" title="applied">✅ ReplaceField$Value dropNote</span></a><span class="arrow">→</span><a href="#r0-s2"><span class="badge neutral" title="skipped by predicate">⏭️ InsertField$Value addRegion</span></a><span class="arrow">→</span><a href="#r0-s3"><span class="badge good" title="applied">✅ TimestampConverter$Value createdAt</span></a><span class="arrow">→</span><a href="#r0-s4"><span class="badge good" title="applied">✅ RegexRouter routeByTopic</span></a><span class="arrow">→</span><a href="#r0-final"><span class="badge neutral" title="the record after the whole chain">🏁 final record</span></a></div>
+<div class="verdict good result">✅ topic orders_v2 · key &quot;42&quot; · value {&quot;id&quot;:42,&quot;item&quot;:&quot;pen&quot;,&quot;quantity&quot;:3,&quot;price&quot;:1.5,&quot;created_at&quot;:&quot;2026-11-20 12:55:00&quot;}</div>
 <section class="card step st-input" id="r0-s0">
 <div class="step-head"><span class="num">0</span><h3>🧾 Input record</h3><span class="badge neutral">🧾 input</span></div>
-<div class="part"><div class="part-label">📍 topic</div><div class="part-body"><span class="chip"><code>filestream</code></span> partition 0 · offset 0 · 🕒 2026-10-16T08:47:01.218Z</div></div>
-<div class="part"><div class="part-label">🔑 key</div><div class="part-body"><span class="chip"><code>null</code></span> <span class="type">schemaless</span></div></div>
-<div class="part"><div class="part-label">🏷️ headers</div><div class="part-body"><span class="muted">none</span></div></div>
-<div class="part"><div class="part-label">📄 value</div><div class="part-body"><div class="note">schema: schemaless</div><pre class="json">{
-  <span class=""><span class="k">"address"</span>: <span class="v">&quot;Ben&quot;</span></span>,
-  <span class=""><span class="k">"count"</span>: <span class="v">1</span></span>,
-  <span class=""><span class="k">"last_name"</span>: <span class="v">&quot;Kenton&quot;</span></span>,
-  <span class=""><span class="k">"first_name"</span>: <span class="v">&quot;Jeremy&quot;</span></span>
+<div class="part"><div class="part-label">📍 topic</div><div class="part-body"><span class="chip"><code>orders</code></span> partition 0 · offset 1234 · 🕒 2026-11-20T13:05:00Z</div></div>
+<div class="part"><div class="part-label">🔑 key</div><div class="part-body"><span class="chip"><code>&quot;42&quot;</code></span> <span class="type">string</span></div></div>
+<div class="part"><div class="part-label">🏷️ headers</div><div class="part-body"><div class="note">(1)</div><table class="kv"><tr><th>key</th><th>value</th><th>type</th></tr><tr><td><code class="hk">source</code></td><td><code>&quot;web&quot;</code></td><td><span class="type">string</span></td></tr></table></div></div>
+<div class="part"><div class="part-label">📄 value</div><div class="part-body"><div class="note">schema: orders.Value v1: id INT32, product STRING, quantity INT32, price FLOAT64, internal_note STRING?, created_at INT64</div><pre class="json">{
+  <span class=""><span class="k">"id"</span>: <span class="v">42</span></span>,
+  <span class=""><span class="k">"product"</span>: <span class="v">&quot;pen&quot;</span></span>,
+  <span class=""><span class="k">"quantity"</span>: <span class="v">3</span></span>,
+  <span class=""><span class="k">"price"</span>: <span class="v">1.5</span></span>,
+  <span class=""><span class="k">"internal_note"</span>: <span class="v">&quot;test&quot;</span></span>,
+  <span class=""><span class="k">"created_at"</span>: <span class="v">1795186500000</span></span>
 }</pre></div></div>
 </section>
 <section class="card step st-applied" id="r0-s1">
-<div class="step-head"><span class="num">1</span><h3>🔀 InsertField$Value <span class="alias">InsertMeta</span></h3><span class="badge good">✅ applied</span></div>
-<table class="meta"><tr><th>🧩 class</th><td><code>org.apache.kafka.connect.transforms.InsertField$Value</code></td></tr><tr><th>📦 from</th><td>Kafka 7.9.0-ce (worker)</td></tr><tr><th>⚙️ config</th><td><table class="config"><tr><td class="ck">topic.field</td><td><code>topic_name</code></td></tr><tr><td class="ck">partition.field</td><td><code>partition_id</code></td></tr><tr><td class="ck">offset.field</td><td><code>offset_value</code></td></tr></table></td></tr></table>
+<div class="step-head"><span class="num">1</span><h3>🔀 ReplaceField$Value <span class="alias">dropNote</span></h3><span class="badge good">✅ applied</span></div>
+<table class="meta"><tr><th>🧩 class</th><td><code>org.apache.kafka.connect.transforms.ReplaceField$Value</code></td></tr><tr><th>📦 from</th><td>/usr/share/java/kafka/connect-transforms-8.1.0-ccs.jar</td></tr><tr><th>⚙️ config</th><td><table class="config"><tr><td class="ck">exclude</td><td><code>internal_note</code></td></tr><tr><td class="ck">renames</td><td><code>product:item</code></td></tr></table></td></tr></table>
 <div class="part"><div class="part-label">📄 value</div><div class="part-body"><div class="note">(after this step; <span class="added">added</span>, <span class="changed">changed</span>, <span class="removed">removed</span>)</div><pre class="json">{
-  <span class="added"><span class="k">"partition_id"</span>: <span class="v">0</span></span>,
-  <span class=""><span class="k">"address"</span>: <span class="v">&quot;Ben&quot;</span></span>,
-  <span class=""><span class="k">"count"</span>: <span class="v">1</span></span>,
-  <span class="added"><span class="k">"topic_name"</span>: <span class="v">&quot;filestream&quot;</span></span>,
-  <span class=""><span class="k">"last_name"</span>: <span class="v">&quot;Kenton&quot;</span></span>,
-  <span class="added"><span class="k">"offset_value"</span>: <span class="v">0</span></span>,
-  <span class=""><span class="k">"first_name"</span>: <span class="v">&quot;Jeremy&quot;</span></span>
+  <span class=""><span class="k">"id"</span>: <span class="v">42</span></span>,
+  <span class="added"><span class="k">"item"</span>: <span class="v">&quot;pen&quot;</span></span>,
+  <span class=""><span class="k">"quantity"</span>: <span class="v">3</span></span>,
+  <span class=""><span class="k">"price"</span>: <span class="v">1.5</span></span>,
+  <span class=""><span class="k">"created_at"</span>: <span class="v">1795186500000</span></span>,
+  <span class="removed"><span class="k">"product"</span>: <span class="v">&quot;pen&quot;</span></span>,
+  <span class="removed"><span class="k">"internal_note"</span>: <span class="v">&quot;test&quot;</span></span>
 }</pre></div></div>
+<table class="schema-diff"><tr><th></th><th>field</th><th>before</th><th>after</th></tr><tr class="added"><td>+</td><td><code>item</code></td><td></td><td>STRING</td></tr><tr class="removed"><td>−</td><td><code>product</code></td><td>STRING</td><td></td></tr><tr class="removed"><td>−</td><td><code>internal_note</code></td><td>STRING?</td><td></td></tr></table>
 </section>
-<section class="card step st-applied" id="r0-s2">
-<div class="step-head"><span class="num">2</span><h3>🔀 InsertField$Value <span class="alias">AddGroup</span></h3><span class="badge good">✅ applied</span></div>
-<table class="meta"><tr><th>🧩 class</th><td><code>org.apache.kafka.connect.transforms.InsertField$Value</code></td></tr><tr><th>📦 from</th><td>Kafka 7.9.0-ce (worker)</td></tr><tr><th>⚙️ config</th><td><table class="config"><tr><td class="ck">static.field</td><td><code>group_name</code></td></tr><tr><td class="ck">static.value</td><td><code>my group</code></td></tr></table></td></tr></table>
-<div class="part"><div class="part-label">📄 value</div><div class="part-body"><div class="note">(after this step; <span class="added">added</span>, <span class="changed">changed</span>, <span class="removed">removed</span>)</div><pre class="json">{
-  <span class=""><span class="k">"partition_id"</span>: <span class="v">0</span></span>,
-  <span class=""><span class="k">"address"</span>: <span class="v">&quot;Ben&quot;</span></span>,
-  <span class="added"><span class="k">"group_name"</span>: <span class="v">&quot;my group&quot;</span></span>,
-  <span class=""><span class="k">"count"</span>: <span class="v">1</span></span>,
-  <span class=""><span class="k">"topic_name"</span>: <span class="v">&quot;filestream&quot;</span></span>,
-  <span class=""><span class="k">"last_name"</span>: <span class="v">&quot;Kenton&quot;</span></span>,
-  <span class=""><span class="k">"offset_value"</span>: <span class="v">0</span></span>,
-  <span class=""><span class="k">"first_name"</span>: <span class="v">&quot;Jeremy&quot;</span></span>
-}</pre></div></div>
+<section class="card step st-skipped" id="r0-s2">
+<div class="step-head"><span class="num">2</span><h3>🔀 InsertField$Value <span class="alias">addRegion</span></h3><span class="badge neutral">⏭️ skipped by predicate</span></div>
+<table class="meta"><tr><th>🧩 class</th><td><code>org.apache.kafka.connect.transforms.InsertField$Value</code></td></tr><tr><th>📦 from</th><td>/usr/share/java/kafka/connect-transforms-8.1.0-ccs.jar</td></tr><tr><th>⚙️ config</th><td><table class="config"><tr><td class="ck">static.field</td><td><code>region</code></td></tr><tr><td class="ck">static.value</td><td><code>eu</code></td></tr></table></td></tr><tr><th>🎯 predicate</th><td><code>isEuTopic</code> (TopicNameMatches) = <b>False</b></td></tr></table>
+<div class="muted">⏭️ the predicate decided not to apply this transform: the record goes to the next step unchanged</div>
 </section>
 <section class="card step st-applied" id="r0-s3">
-<div class="step-head"><span class="num">3</span><h3>🔀 InsertField$Value <span class="alias">AddLoadTime</span></h3><span class="badge good">✅ applied</span></div>
-<table class="meta"><tr><th>🧩 class</th><td><code>org.apache.kafka.connect.transforms.InsertField$Value</code></td></tr><tr><th>📦 from</th><td>Kafka 7.9.0-ce (worker)</td></tr><tr><th>⚙️ config</th><td><table class="config"><tr><td class="ck">timestamp.field</td><td><code>kafka_datetime</code></td></tr></table></td></tr></table>
+<div class="step-head"><span class="num">3</span><h3>🔀 TimestampConverter$Value <span class="alias">createdAt</span></h3><span class="badge good">✅ applied</span></div>
+<table class="meta"><tr><th>🧩 class</th><td><code>org.apache.kafka.connect.transforms.TimestampConverter$Value</code></td></tr><tr><th>📦 from</th><td>/usr/share/java/kafka/connect-transforms-8.1.0-ccs.jar</td></tr><tr><th>⚙️ config</th><td><table class="config"><tr><td class="ck">field</td><td><code>created_at</code></td></tr><tr><td class="ck">target.type</td><td><code>string</code></td></tr><tr><td class="ck">format</td><td><code>yyyy-MM-dd HH:mm:ss</code></td></tr></table></td></tr></table>
 <div class="part"><div class="part-label">📄 value</div><div class="part-body"><div class="note">(after this step; <span class="added">added</span>, <span class="changed">changed</span>, <span class="removed">removed</span>)</div><pre class="json">{
-  <span class=""><span class="k">"partition_id"</span>: <span class="v">0</span></span>,
-  <span class=""><span class="k">"address"</span>: <span class="v">&quot;Ben&quot;</span></span>,
-  <span class=""><span class="k">"group_name"</span>: <span class="v">&quot;my group&quot;</span></span>,
-  <span class=""><span class="k">"count"</span>: <span class="v">1</span></span>,
-  <span class=""><span class="k">"topic_name"</span>: <span class="v">&quot;filestream&quot;</span></span>,
-  <span class=""><span class="k">"last_name"</span>: <span class="v">&quot;Kenton&quot;</span></span>,
-  <span class=""><span class="k">"offset_value"</span>: <span class="v">0</span></span>,
-  <span class=""><span class="k">"first_name"</span>: <span class="v">&quot;Jeremy&quot;</span></span>,
-  <span class="added"><span class="k">"kafka_datetime"</span>: <span class="v">1792140421218</span></span>
+  <span class=""><span class="k">"id"</span>: <span class="v">42</span></span>,
+  <span class=""><span class="k">"item"</span>: <span class="v">&quot;pen&quot;</span></span>,
+  <span class=""><span class="k">"quantity"</span>: <span class="v">3</span></span>,
+  <span class=""><span class="k">"price"</span>: <span class="v">1.5</span></span>,
+  <span class="changed" title="was: 1795186500000"><span class="k">"created_at"</span>: <span class="v">&quot;2026-11-20 12:55:00&quot;</span></span>
 }</pre></div></div>
+<table class="schema-diff"><tr><th></th><th>field</th><th>before</th><th>after</th></tr><tr class="changed"><td>~</td><td><code>created_at</code></td><td>INT64</td><td>STRING</td></tr></table>
 </section>
 <section class="card step st-applied" id="r0-s4">
-<div class="step-head"><span class="num">4</span><h3>🔀 HoistField$Value <span class="alias">WrapPayload</span></h3><span class="badge good">✅ applied</span></div>
-<table class="meta"><tr><th>🧩 class</th><td><code>org.apache.kafka.connect.transforms.HoistField$Value</code></td></tr><tr><th>📦 from</th><td>Kafka 7.9.0-ce (worker)</td></tr><tr><th>⚙️ config</th><td><table class="config"><tr><td class="ck">field</td><td><code>payload</code></td></tr></table></td></tr></table>
-<div class="part"><div class="part-label">📄 value</div><div class="part-body"><div class="note">(after this step; <span class="added">added</span>, <span class="changed">changed</span>, <span class="removed">removed</span>)</div><pre class="json">{
-  <span class="added"><span class="k">"payload"</span>: {
-    <span class=""><span class="k">"partition_id"</span>: <span class="v">0</span></span>,
-    <span class=""><span class="k">"address"</span>: <span class="v">&quot;Ben&quot;</span></span>,
-    <span class=""><span class="k">"group_name"</span>: <span class="v">&quot;my group&quot;</span></span>,
-    <span class=""><span class="k">"count"</span>: <span class="v">1</span></span>,
-    <span class=""><span class="k">"topic_name"</span>: <span class="v">&quot;filestream&quot;</span></span>,
-    <span class=""><span class="k">"last_name"</span>: <span class="v">&quot;Kenton&quot;</span></span>,
-    <span class=""><span class="k">"offset_value"</span>: <span class="v">0</span></span>,
-    <span class=""><span class="k">"first_name"</span>: <span class="v">&quot;Jeremy&quot;</span></span>,
-    <span class=""><span class="k">"kafka_datetime"</span>: <span class="v">1792140421218</span></span>
-  }</span>,
-  <span class="removed"><span class="k">"partition_id"</span>: <span class="v">0</span></span>,
-  <span class="removed"><span class="k">"address"</span>: <span class="v">&quot;Ben&quot;</span></span>,
-  <span class="removed"><span class="k">"group_name"</span>: <span class="v">&quot;my group&quot;</span></span>,
-  <span class="removed"><span class="k">"count"</span>: <span class="v">1</span></span>,
-  <span class="removed"><span class="k">"topic_name"</span>: <span class="v">&quot;filestream&quot;</span></span>,
-  <span class="removed"><span class="k">"last_name"</span>: <span class="v">&quot;Kenton&quot;</span></span>,
-  <span class="removed"><span class="k">"offset_value"</span>: <span class="v">0</span></span>,
-  <span class="removed"><span class="k">"first_name"</span>: <span class="v">&quot;Jeremy&quot;</span></span>,
-  <span class="removed"><span class="k">"kafka_datetime"</span>: <span class="v">1792140421218</span></span>
-}</pre></div></div>
+<div class="step-head"><span class="num">4</span><h3>🔀 RegexRouter <span class="alias">routeByTopic</span></h3><span class="badge good">✅ applied</span></div>
+<table class="meta"><tr><th>🧩 class</th><td><code>org.apache.kafka.connect.transforms.RegexRouter</code></td></tr><tr><th>📦 from</th><td>/usr/share/java/kafka/connect-transforms-8.1.0-ccs.jar</td></tr><tr><th>⚙️ config</th><td><table class="config"><tr><td class="ck">regex</td><td><code>orders</code></td></tr><tr><td class="ck">replacement</td><td><code>orders_v2</code></td></tr></table></td></tr></table>
+<div class="part"><div class="part-label">📍 topic</div><div class="part-body"><div class="note">(changed)</div><table class="config"><tr><td class="ck">topic</td><td><span class="removed">orders</span> → <span class="added">orders_v2</span></td></tr></table></div></div>
+<div class="part"><div class="part-label">📄 value</div><div class="part-body"><span class="muted">➖ unchanged</span></div></div>
 </section>
 <section class="card final" id="r0-final">
 <div class="step-head"><span class="num">🏁</span><h3>Final record</h3><span class="badge good">✅ after the whole chain</span></div>
 <div class="muted">what the sink connector receives in put()</div>
-<div class="part"><div class="part-label">📍 topic</div><div class="part-body"><span class="chip"><code>filestream</code></span> partition 0 · offset 0 · 🕒 2026-10-16T08:47:01.218Z</div></div>
-<div class="part"><div class="part-label">🔑 key</div><div class="part-body"><span class="chip"><code>null</code></span> <span class="type">schemaless</span></div></div>
-<div class="part"><div class="part-label">🏷️ headers</div><div class="part-body"><span class="muted">none</span></div></div>
-<div class="part"><div class="part-label">📄 value</div><div class="part-body"><div class="note">schema: schemaless</div><pre class="json">{
-  <span class=""><span class="k">"payload"</span>: {
-    <span class=""><span class="k">"partition_id"</span>: <span class="v">0</span></span>,
-    <span class=""><span class="k">"address"</span>: <span class="v">&quot;Ben&quot;</span></span>,
-    <span class=""><span class="k">"group_name"</span>: <span class="v">&quot;my group&quot;</span></span>,
-    <span class=""><span class="k">"count"</span>: <span class="v">1</span></span>,
-    <span class=""><span class="k">"topic_name"</span>: <span class="v">&quot;filestream&quot;</span></span>,
-    <span class=""><span class="k">"last_name"</span>: <span class="v">&quot;Kenton&quot;</span></span>,
-    <span class=""><span class="k">"offset_value"</span>: <span class="v">0</span></span>,
-    <span class=""><span class="k">"first_name"</span>: <span class="v">&quot;Jeremy&quot;</span></span>,
-    <span class=""><span class="k">"kafka_datetime"</span>: <span class="v">1792140421218</span></span>
-  }</span>
-}</pre></div></div>
-</section>
-</div>
-<div class="run" id="run1" hidden>
-<div class="chain"><a href="#r1-s0"><span class="badge neutral" title="input">🧾 input</span></a><span class="arrow">→</span><a href="#r1-s1"><span class="badge good" title="applied">✅ InsertField$Value InsertMeta</span></a><span class="arrow">→</span><a href="#r1-s2"><span class="badge good" title="applied">✅ InsertField$Value AddGroup</span></a><span class="arrow">→</span><a href="#r1-s3"><span class="badge good" title="applied">✅ InsertField$Value AddLoadTime</span></a><span class="arrow">→</span><a href="#r1-s4"><span class="badge good" title="applied">✅ HoistField$Value WrapPayload</span></a><span class="arrow">→</span><a href="#r1-final"><span class="badge neutral" title="the record after the whole chain">🏁 final record</span></a></div>
-<div class="verdict good result">✅ topic filestream · key null · value {&quot;payload&quot;:{&quot;partition_id&quot;:0,&quot;address&quot;:&quot;Ben&quot;,&quot;group_name&quot;:&quot;my group&quot;,&quot;count&quot;:1,&quot;topic_name&quot;:&quot;filestream&quot;,&quot;last_name&quot;:&quot;Kenton&quot;,&quot;offset_value&quot;:0,&quot;first_name&quot;:&quot;Jeremy&quot;,&quot;kafka_datetime&quot;:1792140423045}}</div>
-<section class="card step st-input" id="r1-s0">
-<div class="step-head"><span class="num">0</span><h3>🧾 Input record</h3><span class="badge neutral">🧾 input</span></div>
-<div class="part"><div class="part-label">📍 topic</div><div class="part-body"><span class="chip"><code>filestream</code></span> partition 0 · offset 0 · 🕒 2026-10-16T08:47:03.045Z</div></div>
-<div class="part"><div class="part-label">🔑 key</div><div class="part-body"><span class="chip"><code>null</code></span> <span class="type">schemaless</span></div></div>
-<div class="part"><div class="part-label">🏷️ headers</div><div class="part-body"><span class="muted">none</span></div></div>
-<div class="part"><div class="part-label">📄 value</div><div class="part-body"><div class="note">schema: schemaless</div><pre class="json">{
-  <span class=""><span class="k">"address"</span>: <span class="v">&quot;Ben&quot;</span></span>,
-  <span class=""><span class="k">"count"</span>: <span class="v">1</span></span>,
-  <span class=""><span class="k">"last_name"</span>: <span class="v">&quot;Kenton&quot;</span></span>,
-  <span class=""><span class="k">"first_name"</span>: <span class="v">&quot;Jeremy&quot;</span></span>
-}</pre></div></div>
-</section>
-<section class="card step st-applied" id="r1-s1">
-<div class="step-head"><span class="num">1</span><h3>🔀 InsertField$Value <span class="alias">InsertMeta</span></h3><span class="badge good">✅ applied</span></div>
-<table class="meta"><tr><th>🧩 class</th><td><code>org.apache.kafka.connect.transforms.InsertField$Value</code></td></tr><tr><th>📦 from</th><td>Kafka 8.3.2-ce (worker)</td></tr><tr><th>⚙️ config</th><td><table class="config"><tr><td class="ck">topic.field</td><td><code>topic_name</code></td></tr><tr><td class="ck">partition.field</td><td><code>partition_id</code></td></tr><tr><td class="ck">offset.field</td><td><code>offset_value</code></td></tr></table></td></tr></table>
-<div class="part"><div class="part-label">📄 value</div><div class="part-body"><div class="note">(after this step; <span class="added">added</span>, <span class="changed">changed</span>, <span class="removed">removed</span>)</div><pre class="json">{
-  <span class="added"><span class="k">"partition_id"</span>: <span class="v">0</span></span>,
-  <span class=""><span class="k">"address"</span>: <span class="v">&quot;Ben&quot;</span></span>,
-  <span class=""><span class="k">"count"</span>: <span class="v">1</span></span>,
-  <span class="added"><span class="k">"topic_name"</span>: <span class="v">&quot;filestream&quot;</span></span>,
-  <span class=""><span class="k">"last_name"</span>: <span class="v">&quot;Kenton&quot;</span></span>,
-  <span class="added"><span class="k">"offset_value"</span>: <span class="v">0</span></span>,
-  <span class=""><span class="k">"first_name"</span>: <span class="v">&quot;Jeremy&quot;</span></span>
-}</pre></div></div>
-</section>
-<section class="card step st-applied" id="r1-s2">
-<div class="step-head"><span class="num">2</span><h3>🔀 InsertField$Value <span class="alias">AddGroup</span></h3><span class="badge good">✅ applied</span></div>
-<table class="meta"><tr><th>🧩 class</th><td><code>org.apache.kafka.connect.transforms.InsertField$Value</code></td></tr><tr><th>📦 from</th><td>Kafka 8.3.2-ce (worker)</td></tr><tr><th>⚙️ config</th><td><table class="config"><tr><td class="ck">static.field</td><td><code>group_name</code></td></tr><tr><td class="ck">static.value</td><td><code>my group</code></td></tr></table></td></tr></table>
-<div class="part"><div class="part-label">📄 value</div><div class="part-body"><div class="note">(after this step; <span class="added">added</span>, <span class="changed">changed</span>, <span class="removed">removed</span>)</div><pre class="json">{
-  <span class=""><span class="k">"partition_id"</span>: <span class="v">0</span></span>,
-  <span class=""><span class="k">"address"</span>: <span class="v">&quot;Ben&quot;</span></span>,
-  <span class="added"><span class="k">"group_name"</span>: <span class="v">&quot;my group&quot;</span></span>,
-  <span class=""><span class="k">"count"</span>: <span class="v">1</span></span>,
-  <span class=""><span class="k">"topic_name"</span>: <span class="v">&quot;filestream&quot;</span></span>,
-  <span class=""><span class="k">"last_name"</span>: <span class="v">&quot;Kenton&quot;</span></span>,
-  <span class=""><span class="k">"offset_value"</span>: <span class="v">0</span></span>,
-  <span class=""><span class="k">"first_name"</span>: <span class="v">&quot;Jeremy&quot;</span></span>
-}</pre></div></div>
-</section>
-<section class="card step st-applied" id="r1-s3">
-<div class="step-head"><span class="num">3</span><h3>🔀 InsertField$Value <span class="alias">AddLoadTime</span></h3><span class="badge good">✅ applied</span></div>
-<table class="meta"><tr><th>🧩 class</th><td><code>org.apache.kafka.connect.transforms.InsertField$Value</code></td></tr><tr><th>📦 from</th><td>Kafka 8.3.2-ce (worker)</td></tr><tr><th>⚙️ config</th><td><table class="config"><tr><td class="ck">timestamp.field</td><td><code>kafka_datetime</code></td></tr></table></td></tr></table>
-<div class="part"><div class="part-label">📄 value</div><div class="part-body"><div class="note">(after this step; <span class="added">added</span>, <span class="changed">changed</span>, <span class="removed">removed</span>)</div><pre class="json">{
-  <span class=""><span class="k">"partition_id"</span>: <span class="v">0</span></span>,
-  <span class=""><span class="k">"address"</span>: <span class="v">&quot;Ben&quot;</span></span>,
-  <span class=""><span class="k">"group_name"</span>: <span class="v">&quot;my group&quot;</span></span>,
-  <span class=""><span class="k">"count"</span>: <span class="v">1</span></span>,
-  <span class=""><span class="k">"topic_name"</span>: <span class="v">&quot;filestream&quot;</span></span>,
-  <span class=""><span class="k">"last_name"</span>: <span class="v">&quot;Kenton&quot;</span></span>,
-  <span class=""><span class="k">"offset_value"</span>: <span class="v">0</span></span>,
-  <span class=""><span class="k">"first_name"</span>: <span class="v">&quot;Jeremy&quot;</span></span>,
-  <span class="added"><span class="k">"kafka_datetime"</span>: <span class="v">1792140423045</span></span>
-}</pre></div></div>
-</section>
-<section class="card step st-applied" id="r1-s4">
-<div class="step-head"><span class="num">4</span><h3>🔀 HoistField$Value <span class="alias">WrapPayload</span></h3><span class="badge good">✅ applied</span></div>
-<table class="meta"><tr><th>🧩 class</th><td><code>org.apache.kafka.connect.transforms.HoistField$Value</code></td></tr><tr><th>📦 from</th><td>Kafka 8.3.2-ce (worker)</td></tr><tr><th>⚙️ config</th><td><table class="config"><tr><td class="ck">field</td><td><code>payload</code></td></tr></table></td></tr></table>
-<div class="part"><div class="part-label">📄 value</div><div class="part-body"><div class="note">(after this step; <span class="added">added</span>, <span class="changed">changed</span>, <span class="removed">removed</span>)</div><pre class="json">{
-  <span class="added"><span class="k">"payload"</span>: {
-    <span class=""><span class="k">"partition_id"</span>: <span class="v">0</span></span>,
-    <span class=""><span class="k">"address"</span>: <span class="v">&quot;Ben&quot;</span></span>,
-    <span class=""><span class="k">"group_name"</span>: <span class="v">&quot;my group&quot;</span></span>,
-    <span class=""><span class="k">"count"</span>: <span class="v">1</span></span>,
-    <span class=""><span class="k">"topic_name"</span>: <span class="v">&quot;filestream&quot;</span></span>,
-    <span class=""><span class="k">"last_name"</span>: <span class="v">&quot;Kenton&quot;</span></span>,
-    <span class=""><span class="k">"offset_value"</span>: <span class="v">0</span></span>,
-    <span class=""><span class="k">"first_name"</span>: <span class="v">&quot;Jeremy&quot;</span></span>,
-    <span class=""><span class="k">"kafka_datetime"</span>: <span class="v">1792140423045</span></span>
-  }</span>,
-  <span class="removed"><span class="k">"partition_id"</span>: <span class="v">0</span></span>,
-  <span class="removed"><span class="k">"address"</span>: <span class="v">&quot;Ben&quot;</span></span>,
-  <span class="removed"><span class="k">"group_name"</span>: <span class="v">&quot;my group&quot;</span></span>,
-  <span class="removed"><span class="k">"count"</span>: <span class="v">1</span></span>,
-  <span class="removed"><span class="k">"topic_name"</span>: <span class="v">&quot;filestream&quot;</span></span>,
-  <span class="removed"><span class="k">"last_name"</span>: <span class="v">&quot;Kenton&quot;</span></span>,
-  <span class="removed"><span class="k">"offset_value"</span>: <span class="v">0</span></span>,
-  <span class="removed"><span class="k">"first_name"</span>: <span class="v">&quot;Jeremy&quot;</span></span>,
-  <span class="removed"><span class="k">"kafka_datetime"</span>: <span class="v">1792140423045</span></span>
-}</pre></div></div>
-</section>
-<section class="card final" id="r1-final">
-<div class="step-head"><span class="num">🏁</span><h3>Final record</h3><span class="badge good">✅ after the whole chain</span></div>
-<div class="muted">what the sink connector receives in put()</div>
-<div class="part"><div class="part-label">📍 topic</div><div class="part-body"><span class="chip"><code>filestream</code></span> partition 0 · offset 0 · 🕒 2026-10-16T08:47:03.045Z</div></div>
-<div class="part"><div class="part-label">🔑 key</div><div class="part-body"><span class="chip"><code>null</code></span> <span class="type">schemaless</span></div></div>
-<div class="part"><div class="part-label">🏷️ headers</div><div class="part-body"><span class="muted">none</span></div></div>
-<div class="part"><div class="part-label">📄 value</div><div class="part-body"><div class="note">schema: schemaless</div><pre class="json">{
-  <span class=""><span class="k">"payload"</span>: {
-    <span class=""><span class="k">"partition_id"</span>: <span class="v">0</span></span>,
-    <span class=""><span class="k">"address"</span>: <span class="v">&quot;Ben&quot;</span></span>,
-    <span class=""><span class="k">"group_name"</span>: <span class="v">&quot;my group&quot;</span></span>,
-    <span class=""><span class="k">"count"</span>: <span class="v">1</span></span>,
-    <span class=""><span class="k">"topic_name"</span>: <span class="v">&quot;filestream&quot;</span></span>,
-    <span class=""><span class="k">"last_name"</span>: <span class="v">&quot;Kenton&quot;</span></span>,
-    <span class=""><span class="k">"offset_value"</span>: <span class="v">0</span></span>,
-    <span class=""><span class="k">"first_name"</span>: <span class="v">&quot;Jeremy&quot;</span></span>,
-    <span class=""><span class="k">"kafka_datetime"</span>: <span class="v">1792140423045</span></span>
-  }</span>
+<div class="part"><div class="part-label">📍 topic</div><div class="part-body"><span class="chip"><code>orders_v2</code></span> partition 0 · offset 1234 · 🕒 2026-11-20T13:05:00Z</div></div>
+<div class="part"><div class="part-label">🔑 key</div><div class="part-body"><span class="chip"><code>&quot;42&quot;</code></span> <span class="type">string</span></div></div>
+<div class="part"><div class="part-label">🏷️ headers</div><div class="part-body"><div class="note">(1)</div><table class="kv"><tr><th>key</th><th>value</th><th>type</th></tr><tr><td><code class="hk">source</code></td><td><code>&quot;web&quot;</code></td><td><span class="type">string</span></td></tr></table></div></div>
+<div class="part"><div class="part-label">📄 value</div><div class="part-body"><div class="note">schema: orders.Value v1: id INT32, item STRING, quantity INT32, price FLOAT64, created_at STRING</div><pre class="json">{
+  <span class=""><span class="k">"id"</span>: <span class="v">42</span></span>,
+  <span class=""><span class="k">"item"</span>: <span class="v">&quot;pen&quot;</span></span>,
+  <span class=""><span class="k">"quantity"</span>: <span class="v">3</span></span>,
+  <span class=""><span class="k">"price"</span>: <span class="v">1.5</span></span>,
+  <span class=""><span class="k">"created_at"</span>: <span class="v">&quot;2026-11-20 12:55:00&quot;</span></span>
 }</pre></div></div>
 </section>
 </div>
 <footer>🛠️ Generated by playground connector smt test. Hover a changed field to see its previous value.</footer>
 </div>
 <script>
-document.getElementById("theme-toggle").addEventListener("click", () => {
-  const root = document.documentElement;
-  const dark = root.dataset.theme ? root.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
-  root.dataset.theme = dark ? "light" : "dark";
-});
+// ☀️ / 🌙: the theme picked is remembered for the next reports (same key as the shared ones), else the one of the system
+(function () {
+  const root = document.documentElement, button = document.getElementById("theme-toggle");
+  let saved = null;
+  try { saved = localStorage.getItem("pg-report-theme"); } catch (e) {}
+  if (saved === "dark" || saved === "light") root.dataset.theme = saved;
+  const isDark = () => root.dataset.theme ? root.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+  const icon = () => { button.textContent = isDark() ? "☀️" : "🌙"; button.title = isDark() ? "light theme" : "dark theme"; };
+  icon();
+  button.addEventListener("click", () => {
+    root.dataset.theme = isDark() ? "light" : "dark";
+    try { localStorage.setItem("pg-report-theme", root.dataset.theme); } catch (e) {}
+    icon();
+  });
+})();
 document.querySelectorAll(".tab").forEach(tab => tab.addEventListener("click", () => {
   document.querySelectorAll(".tab").forEach(t => t.setAttribute("aria-selected", t === tab ? "true" : "false"));
   document.querySelectorAll(".run").forEach(r => r.hidden = r.id !== tab.dataset.run);
 }));
 </script>
-</body></html>
+<style>
+.share-open{font:inherit;cursor:pointer}
+.share-hero{font-size:.85rem;font-weight:700;padding:6px 16px;border-radius:999px;border:0;background:linear-gradient(90deg,#d7eff6,#ffe2a8);color:#1e2a33;
+box-shadow:0 4px 14px rgba(15,23,42,.25);transition:transform .1s;white-space:nowrap}.share-hero:hover{transform:translateY(-1px);filter:brightness(1.05)}
+.header-meta .share-hero{margin-left:auto}
+.share-next{margin-left:auto;align-self:flex-start}
+/* below the fixed Toggle theme of the page (top right of the window) */
+.share-corner{position:absolute;top:44px;right:24px;z-index:2}
+.share-float{position:fixed;top:12px;right:16px;z-index:30;font-size:.8rem;font-weight:700;padding:5px 12px;border-radius:999px;border:0;background:linear-gradient(90deg,#d7eff6,#ffe2a8);color:#1e2a33;box-shadow:0 6px 18px -8px rgba(255,196,92,.6)}
+.share-dlg{border:0;border-radius:18px;padding:0;width:min(660px,92vw);max-width:660px;max-height:88vh;overflow:auto;
+box-shadow:0 30px 80px rgba(15,23,42,.45);background:#fff;color:#1e293b;position:fixed;inset:0;margin:auto;height:fit-content;
+font-family:Inter Variable,Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.45}
+.share-dlg[open]{animation:sd-in .22s cubic-bezier(.22,1,.36,1)}
+@keyframes sd-in{from{opacity:0;transform:translateY(14px) scale(.97)}to{opacity:1;transform:none}}
+.share-dlg::backdrop{background:rgba(15,23,42,.6);backdrop-filter:blur(3px)}
+.sd-head{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;color:#fff;
+background:radial-gradient(500px 120px at 0% 0%,rgba(139,216,239,.32),transparent 60%),radial-gradient(420px 140px at 100% 100%,rgba(255,196,92,.26),transparent 60%),linear-gradient(120deg,#0b1115,#10212b 55%,#173540)}
+.sd-head h3{font-size:1.1rem;margin:0;color:#fff!important;border:0;padding:0}
+.sd-x{border:0!important;background:rgba(255,255,255,.16)!important;color:#fff!important;width:30px;height:30px;padding:0!important;border-radius:50%!important;font-size:.9rem}
+.sd-x:hover{background:rgba(255,255,255,.3)!important}
+.sd-body{padding:16px 20px 6px}
+.share-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0 4px}
+.share-card{display:flex;align-items:center;gap:12px;width:100%;text-align:left;font:inherit;color:inherit;text-decoration:none;cursor:pointer;
+padding:12px 14px;border-radius:14px;border:1px solid #e2e8f0;background:#f8fafc;transition:transform .12s,box-shadow .12s,border-color .12s,background .12s}
+.share-card:hover{transform:translateY(-2px);border-color:#a78bfa;box-shadow:0 10px 24px -12px rgba(109,40,217,.5);background:#faf5ff}
+.share-card:focus-visible{outline:2px solid #0891b2;outline-offset:2px}
+.sc-icon{flex:none;display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:12px;font-size:1.25rem;
+background:linear-gradient(135deg,#ede9fe,#e0f2fe)}
+.sc-body{display:flex;flex-direction:column;gap:2px;min-width:0}
+.sc-body b{font-size:.9rem}.sc-body small{font-size:.74rem;color:#64748b;line-height:1.35}
+.sc-go{margin-left:auto;font-size:1.3rem;color:#a78bfa;transition:transform .12s}.share-card:hover .sc-go{transform:translateX(3px)}
+.share-card.sc-primary{border:0;padding:14px 16px;background:linear-gradient(90deg,#d7eff6,#ffe2a8);color:#1e2a33;box-shadow:0 12px 28px -14px rgba(255,196,92,.7)}
+.share-card.sc-primary:hover{filter:brightness(1.05)}
+.share-card.sc-primary .sc-icon{background:rgba(255,255,255,.55)}.share-card.sc-primary small{color:rgba(30,42,51,.72)}
+.share-card.sc-primary .sc-go{color:#1e2a33}
+.share-card.sc-done{border-color:#22c55e!important;background:#f0fdf4!important}
+.share-card.sc-done .sc-icon{background:#bbf7d0}
+.share-done{min-height:1.4em;margin:8px 0 0;font-size:.82rem;font-weight:600;color:#15803d}
+.sd-foot{display:flex;align-items:center;justify-content:space-between;padding:10px 20px 16px}
+.sd-meta{font-size:.75rem;color:#64748b}
+@media (max-width:560px){.share-grid{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.share-dlg[open]{animation:none}.share-card{transition:none}}
+.share-warn{background:#fef3c7;color:#92400e;border-radius:12px;padding:10px 14px;font-size:.82rem;border-left:4px solid #f59e0b;margin:0 0 12px}
+.share-close{font:inherit;font-size:.8rem;padding:3px 12px;border-radius:6px;border:1px solid #cbd5e1;background:transparent;color:inherit;cursor:pointer}
+html[data-theme=dark] .share-hero{background:linear-gradient(90deg,#d7eff6,#ffe2a8);color:#1e2a33}
+html[data-theme=dark] .share-dlg{background:#141c21;color:#dbe5ea}
+html[data-theme=dark] .share-card{background:#0e1418;border-color:#26343d}
+html[data-theme=dark] .share-card:hover{background:#0f2a33;border-color:rgba(139,216,239,.45)}
+html[data-theme=dark] .sc-icon{background:linear-gradient(135deg,#164e63,#0c4a6e)}
+html[data-theme=dark] .sc-body small,html[data-theme=dark] .sd-meta{color:#8a9ba6}
+html[data-theme=dark] .share-card.sc-primary{background:linear-gradient(90deg,#d7eff6,#ffe2a8);color:#1e2a33}
+html[data-theme=dark] .share-card.sc-primary small{color:rgba(30,42,51,.72)}
+html[data-theme=dark] .share-card.sc-done{background:#052e16!important}
+html[data-theme=dark] .share-done{color:#86efac}
+html[data-theme=dark] .share-warn{background:#422006;color:#fcd34d}
+html[data-theme=dark] .share-close{border-color:#26343d}
+</style><script type='text/plain' id='pg-share-summary'>SMT test of jdbc-sink
+Verdict: ✅ topic orders_v2 · key "42" · value {"id":42,"item":"pen","quantity":3,"price":1.5,"created_at":"2026-11-20 12:55:00"}
+</script><script type='text/plain' id='pg-share-ticket'>## SMT test of jdbc-sink
+
+**Verdict:** ✅ topic orders_v2 · key "42" · value {"id":42,"item":"pen","quantity":3,"price":1.5,"created_at":"2026-11-20 12:55:00"}
+
+_Generated by kafka-docker-playground._
+</script><script type='text/plain' id='pg-share-slack'>*SMT test of jdbc-sink*
+
+*Verdict:* ✅ topic orders_v2 · key "42" · value {"id":42,"item":"pen","quantity":3,"price":1.5,"created_at":"2026-11-20 12:55:00"}
+
+_Generated by kafka-docker-playground._
+</script><script type='text/plain' id='pg-share-html'>\u003cdiv style='font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;font-size:14px;line-height:1.45;color:#111827'>\u003ch2 style='font-size:18px;margin:12px 0 6px'>SMT test of jdbc-sink\u003c/h2>\u003cp style='margin:4px 0'>\u003cb>Verdict:\u003c/b> ✅ topic orders_v2 · key &quot;42&quot; · value {&quot;id&quot;:42,&quot;item&quot;:&quot;pen&quot;,&quot;quantity&quot;:3,&quot;price&quot;:1.5,&quot;created_at&quot;:&quot;2026-11-20 12:55:00&quot;}\u003c/p>\u003cp style='margin:4px 0'>\u003ci>Generated by kafka-docker-playground.\u003c/i>\u003c/p>\u003c/div></script><dialog class='share-dlg' aria-labelledby='pg-share-h' data-title='SMT test of jdbc-sink'><div class='sd-head'><h3 id='pg-share-h'>📤 Share this report</h3><button type='button' class='share-close sd-x' aria-label='close'>✕</button></div><div class='sd-body'><p class='share-warn'>⚠️ Internal to Confluent: the report can contain hostnames, IPs and other details of its input. Review it before sending it outside.</p><button type='button' class='share-card sc-primary' data-share='download'><span class='sc-icon'>💾</span><span class='sc-body'><b>Download this report (.html)</b><small>one self-contained file: attach it to a ticket, a mail or a Slack message</small></span><span class='sc-go' aria-hidden='true'>›</span></button><div class='share-grid'><button type='button' class='share-card' data-share='summary'><span class='sc-icon'>💬</span><span class='sc-body'><b>Copy the summary</b><small>the verdict and the findings as plain text, like the terminal</small></span><span class='sc-go' aria-hidden='true'>›</span></button><button type='button' class='share-card' data-share='ticket'><span class='sc-icon'>🎫</span><span class='sc-body'><b>Copy for a ticket</b><small>Markdown with a table of the findings: paste it in Zendesk or Jira</small></span><span class='sc-go' aria-hidden='true'>›</span></button><button type='button' class='share-card' data-share='slack'><span class='sc-icon'>🧵</span><span class='sc-body'><b>Copy for Slack</b><small>the same, in Slack formatting: paste it in a Slack message</small></span><span class='sc-go' aria-hidden='true'>›</span></button><button type='button' class='share-card' data-share='html'><span class='sc-icon'>📝</span><span class='sc-body'><b>Copy as rich text (HTML)</b><small>the same with real tables: paste it in Zendesk, Gmail, Confluence or Google Docs</small></span><span class='sc-go' aria-hidden='true'>›</span></button><button type='button' class='share-card' data-share='path'><span class='sc-icon'>🔗</span><span class='sc-body'><b>Copy the path</b><small>where the report is on this machine</small></span><span class='sc-go' aria-hidden='true'>›</span></button><button type='button' class='share-card' data-share='mail'><span class='sc-icon'>✉️</span><span class='sc-body'><b>Email the summary</b><small>a new mail with the summary: attach the downloaded .html</small></span><span class='sc-go' aria-hidden='true'>›</span></button></div><p class='share-done' aria-live='polite'></p></div><div class='sd-foot'><span class='sd-meta'>S opens this dialog, Esc closes it</span><button type='button' class='share-close'>Close</button></div></dialog><script>
+(function () {
+  const dlg = document.querySelector(".share-dlg");
+  if (!dlg) return;
+  // 💾 the page as it was loaded: taken now (this script runs at the end of the body, before the DOMContentLoaded
+  // handlers of the report fill or change the page), without the open dialog; the copy has its dialog too
+  const snapshot = "<!DOCTYPE html>\n" + document.documentElement.outerHTML;
+  function addOpen(where, cls, before) {
+    if (!where) return null;
+    const b = document.createElement("button");
+    b.type = "button"; b.className = "share-open " + cls; b.textContent = "📤 Share";
+    b.title = "send this report to a colleague: download it, copy the summary for Slack or a ticket, an email (S)";
+    b.setAttribute("aria-haspopup", "dialog");
+    b.addEventListener("click", () => dlg.showModal());
+    if (before) where.insertBefore(b, before); else where.appendChild(b);
+    return b;
+  }
+  function place() {
+    if (document.querySelector(".share-open")) return;
+    // the header of report_html (header_html / page): in its meta pills
+    const meta = document.querySelector(".header .header-meta");
+    if (meta) { addOpen(meta, "share-hero"); return; }
+    // a <header> of its own (benchmark, flight recorder, SMT test, CFK bundle): next to its Toggle theme, else top right
+    const header = document.querySelector("header");
+    if (header) {
+      const toggle = header.querySelector(".theme-toggle");
+      if (toggle && toggle.parentElement === header) { addOpen(header, "share-hero share-next", toggle); return; }
+      if (getComputedStyle(header).position === "static") header.style.position = "relative";
+      addOpen(header, "share-hero share-corner");
+      return;
+    }
+    addOpen(document.body, "share-float");
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", place); else place();
+  document.addEventListener("keydown", function (ev) {
+    if ((ev.key === "s" || ev.key === "S") && !ev.metaKey && !ev.ctrlKey && !ev.altKey
+        && !(ev.target && ev.target.closest && ev.target.closest("input, textarea, select, [contenteditable]")) && !dlg.open) {
+      ev.preventDefault();
+      dlg.showModal();
+    }
+  });
+  const done = dlg.querySelector(".share-done");
+  // embed_text() back: \u003c is <, \u005c is \ (in one pass: a \u003c of the text, written \u005cu003c, stays as it was)
+  function unembed(t) { return t.replace(/\\u00(3c|5c)/g, (m, h) => h === "3c" ? "<" : "\\"); }
+  function embedded(id) { const el = document.getElementById(id); return el ? unembed(el.textContent) : ""; }
+  const summary = embedded("pg-share-summary");
+  const said = what => { done.textContent = "✅ " + what; };
+  function fallback(text, what) {
+    const ta = document.createElement("textarea");
+    ta.value = text; dlg.appendChild(ta); ta.select();
+    // execCommand returns false when the copy is refused (it does not always throw): the text stays there to copy by hand
+    let copied = false;
+    try { copied = document.execCommand("copy"); } catch (e) { copied = false; }
+    if (!copied) { done.textContent = "the copy failed: select the text and copy it"; return; }
+    said(what + " copied to the clipboard");
+    ta.remove();
+  }
+  function copy(text, what) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(() => said(what + " copied to the clipboard"), () => fallback(text, what));
+    } else fallback(text, what);
+  }
+  function fallbackRich(htmlText, what) {
+    const box = document.createElement("div");
+    box.contentEditable = "true";
+    box.style.cssText = "position:fixed;left:-9999px;top:0";
+    box.innerHTML = htmlText;
+    dlg.appendChild(box);
+    const range = document.createRange(), sel = window.getSelection();
+    range.selectNodeContents(box); sel.removeAllRanges(); sel.addRange(range);
+    let copied = false;
+    try { copied = document.execCommand("copy"); } catch (e) { copied = false; }
+    if (copied) said(what + " copied to the clipboard");
+    else done.textContent = "the copy failed: use 🎫 Copy for a ticket";
+    sel.removeAllRanges();
+    box.remove();
+  }
+  // rich text: text/html for the editors that take it (Zendesk, Gmail, Confluence, Docs), the Markdown as text/plain
+  function copyRich(htmlText, plain, what) {
+    if (navigator.clipboard && navigator.clipboard.write && window.ClipboardItem) {
+      navigator.clipboard.write([new ClipboardItem({"text/html": new Blob([htmlText], {type: "text/html"}),
+                                                    "text/plain": new Blob([plain], {type: "text/plain"})})])
+        .then(() => said(what + " copied to the clipboard"), () => fallbackRich(htmlText, what));
+    } else fallbackRich(htmlText, what);
+  }
+  function fileName() {
+    const page = decodeURIComponent(location.pathname).split("/").pop();
+    if (/\.html?$/i.test(page)) return page;
+    return (dlg.dataset.title || "report").replace(/[^\w.-]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 80) + ".html";
+  }
+  dlg.addEventListener("click", function (ev) {
+    if (ev.target.closest(".share-close") || ev.target === dlg) { dlg.close(); return; }
+    const b = ev.target.closest("[data-share]");
+    if (!b) return;
+    b.classList.add("sc-done"); setTimeout(() => b.classList.remove("sc-done"), 1600);
+    const path = decodeURIComponent(location.pathname);
+    const what = b.dataset.share;
+    if (what === "download") {
+      const url = URL.createObjectURL(new Blob([snapshot], {type: "text/html"}));
+      const a = document.createElement("a");
+      a.href = url; a.download = fileName(); document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 4000);
+      said(fileName() + " downloaded");
+    }
+    else if (what === "summary") copy(summary, "the summary");
+    else if (what === "ticket") copy(embedded("pg-share-ticket"), "the summary for a ticket");
+    else if (what === "slack") copy(embedded("pg-share-slack"), "the summary for Slack");
+    else if (what === "html") copyRich(embedded("pg-share-html"), embedded("pg-share-ticket"), "the summary as rich text");
+    else if (what === "path") copy(path, "the path");
+    else if (what === "mail") {
+      const body = "Report: " + path.split("/").pop() + " (attached)\n\n" + summary;
+      location.href = "mailto:?subject=" + encodeURIComponent("📤 " + (dlg.dataset.title || "playground report"))
+        // cut by code points: a cut in the middle of an emoji (a surrogate pair) makes encodeURIComponent throw
+        + "&body=" + encodeURIComponent(Array.from(body).length > 1800 ? Array.from(body).slice(0, 1800).join("") + "\n…" : body);
+    }
+  });
+})();
+</script></body></html>

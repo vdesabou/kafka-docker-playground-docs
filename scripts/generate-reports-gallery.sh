@@ -5,8 +5,9 @@
 #
 # usage: scripts/generate-reports-gallery.sh [path of the kafka-docker-playground clone]
 #
-# The connector diagnose, diff, dead letter queue, CI failure, benchmark, SMT test and CVE scan reports need a real run, they are
-# not regenerated: pass them with
+# The connector diagnose, diff, dead letter queue, CI failure, benchmark, SMT test and CVE scan reports need a real run: they are
+# built from the synthetic inputs of kafka-docker-playground (tools/report-common/real_run_samples.sh), unless the report of a
+# real run is given with
 #   DIAGNOSE_REPORT=/tmp/playground-diagnose/<run>.html DLQ_REPORT=/tmp/playground-dlq-inspect/<run>.html
 #   DIFF_REPORT=/tmp/playground-connector-diff/<run>.html CI_REPORT=/tmp/playground-ci-result/<run>.html
 #   BENCHMARK_REPORT=/tmp/playground-benchmark/<run>.html SMT_REPORT=/tmp/playground-smt-test/<run>.html
@@ -121,6 +122,18 @@ cp "$(find "$work/kafka-streams" -name "*.html" | head -1)" "$DOCS/reports/kafka
 strip_user_paths() {
   perl -pe 's#"/(?:Users|home|private)/[^"]*/([^"/]+)"#"$1"#g' "$1" > "$2"
 }
+# from the synthetic inputs of kafka-docker-playground, with the generator each command calls (a clone without the script, older
+# than it: the reports of the gallery stay as they are)
+if [ -f "$KDP/tools/report-common/real_run_samples.sh" ]
+then
+  echo "📊 tools/report-common/real_run_samples.sh (connector diagnose, diff, DLQ, CI failure, benchmark, SMT test, CVE scan)"
+  bash "$KDP/tools/report-common/real_run_samples.sh" "$work/real-runs" > "$work/real-runs.log" 2>&1 || { cat "$work/real-runs.log"; exit 1; }
+  for name in connector-diagnose dlq connector-diff ci-result benchmark smt-test cve-scan
+  do
+    strip_user_paths "$work/real-runs/$name.html" "$DOCS/reports/$name.html"
+  done
+fi
+# the report of a real run wins
 [ -n "$DIAGNOSE_REPORT" ] && strip_user_paths "$DIAGNOSE_REPORT" "$DOCS/reports/connector-diagnose.html"
 [ -n "$DLQ_REPORT" ] && strip_user_paths "$DLQ_REPORT" "$DOCS/reports/dlq.html"
 [ -n "$DIFF_REPORT" ] && strip_user_paths "$DIFF_REPORT" "$DOCS/reports/connector-diff.html"

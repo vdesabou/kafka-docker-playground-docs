@@ -263,6 +263,9 @@ Note: CP 7.2+ is required.
 
 ☢️ Value to use for all records.
 
+With a schema on stdin (a heredoc) or in `--value`, the records are sent with that schema; without one, it is  
+the raw payload itself. An open stdin with nothing to read is not waited on.
+
 🎓 Tip: use `--generate-only` first with avro, json-schema or protobuf to get skeleton of messages and then use `--forced-value` to send the message you need.
 
 #### `--generate-only`

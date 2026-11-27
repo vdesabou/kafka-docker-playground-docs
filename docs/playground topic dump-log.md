@@ -12,7 +12,10 @@ RecordTooLargeException limit) and largest record
 producers (id, epochs, offsets), idempotent or transactional, with  
 their COMMIT / ABORT markers  
 open transactions: transactional records with no marker after them,  
-where read_committed consumers stop (the last stable offset)
+where read_committed consumers stop (the last stable offset)  
+on a compacted topic, the active segment (never compacted: its old  
+versions stay until it rolls, after segment.ms) and how to see  
+compaction work
 
 Then the batches: the last 20 (`--last`, `--all`), or the ones around  
 `--offset`, with `--records` for each record (key and value sizes,  

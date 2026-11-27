@@ -30,6 +30,14 @@ warning: it is a config problem, not a broker one)
 
 (kafka-metadata-quorum describe `--replication`)
 
+- a replication throttle set on the cluster (⚠️ warning): the
+
+leader / follower.replication.throttled.rate of the brokers and the  
+topics with throttled replicas, often left by a reassignment or an  
+Auto Data Balancer rebalance never completed (only `--verify`,  
+confluent-rebalancer status or finish remove it): a replica of those  
+topics out of the ISR catches up at that rate
+
 Exits with 1 when the cluster is not healthy. With `--wait-healthy`, waits  
 until it is (for example after `playground broker start` or a  
 'container restart'), up to `--max-wait` seconds.
@@ -58,7 +66,7 @@ playground broker health [OPTIONS]
 
 #### `--json`
 
-📗 Print the result as JSON (healthy, brokers, partitions, kraft_quorum), and nothing else
+📗 Print the result as JSON (healthy, brokers, partitions, replication_throttles, kraft_quorum), and nothing else
 
 #### `--verbose, -v`
 

@@ -2,9 +2,9 @@
 :focus-visible{outline:2px solid #2a78d6;outline-offset:2px}
 .lv-edit{text-decoration:none;margin-left:5px}
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f1f5f9;color:#1e293b;line-height:1.5}
+body{font-family:"Inter Variable",Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f1f5f9;color:#1e293b;line-height:1.5;-webkit-font-smoothing:antialiased}
 .page{max-width:1300px;margin:0 auto;padding:24px}
-h1{font-size:1.55rem;font-weight:700}
+h1{font-size:1.55rem;font-weight:700;letter-spacing:-.02em}
 h2{font-size:1.05rem;font-weight:600;margin-bottom:12px;color:#334155}
 .header{background:linear-gradient(135deg,#1e3a5f 0%,#2563eb 100%);color:#fff;border-radius:12px;padding:22px 28px;margin-bottom:22px}
 .header-meta{font-size:.83rem;opacity:.85;margin-top:6px}
@@ -33,19 +33,19 @@ h2{font-size:1.05rem;font-weight:600;margin-bottom:12px;color:#334155}
 .rec-text{font-size:.88rem;flex:1;color:#334155}
 .sev-filter{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:-4px 0 10px;font-size:.78rem;color:#475569}
 .rec-card[hidden]{display:none}.sev-chip{border:0;cursor:pointer;font-family:inherit}.sev-chip[aria-pressed=false]{opacity:.35;text-decoration:line-through}
-.rec-details{margin:6px 0 0;padding-left:18px}.rec-details li{margin:3px 0;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.8rem;word-break:break-word}
+.rec-details{margin:6px 0 0;padding-left:18px}.rec-details li{margin:3px 0;font-family:"JetBrains Mono Variable","JetBrains Mono",'SFMono-Regular',Consolas,'Liberation Mono',Menlo,monospace;font-size:.8rem;word-break:break-word}
 .table-card{background:#fff;border-radius:10px;padding:18px 20px;box-shadow:0 1px 3px rgba(0,0,0,.07);overflow-x:auto;margin-bottom:22px}
 table{width:100%;border-collapse:collapse;font-size:.84rem}
 th{text-align:left;padding:7px 11px;background:#f8fafc;font-weight:600;border-bottom:2px solid #e2e8f0;color:#475569}
 td{padding:7px 11px;border-bottom:1px solid #f1f5f9;vertical-align:top}
 td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
 tr:hover td{background:#f8fafc}
-.mono{font-family:'SFMono-Regular',Consolas,'Liberation Mono',Menlo,monospace;font-size:.78rem;word-break:break-all}
+.mono{font-family:"JetBrains Mono Variable","JetBrains Mono",'SFMono-Regular',Consolas,'Liberation Mono',Menlo,monospace;font-size:.78rem;word-break:break-all}
 details summary{cursor:pointer;font-weight:600;font-size:.86rem;padding:6px 0}
 .st{display:inline-block;font-size:.68rem;font-weight:700;padding:1px 7px;border-radius:12px;background:#f1f5f9;color:#475569}
 .verdict{background:#fff;border-radius:10px;padding:14px 18px;box-shadow:0 1px 3px rgba(0,0,0,.07);border-left:4px solid #16a34a;font-size:1rem;font-weight:500;margin-bottom:22px}
 .verdict.danger{border-left-color:#dc2626}.verdict.warn{border-left-color:#d97706}.verdict.ok{border-left-color:#16a34a}
-pre{font-family:'SFMono-Regular',Consolas,Menlo,monospace;font-size:.76rem;background:#f8fafc;padding:10px;border-radius:6px;overflow-x:auto;white-space:pre-wrap;word-break:break-all}
+pre{font-family:"JetBrains Mono Variable","JetBrains Mono",'SFMono-Regular',Consolas,'Liberation Mono',Menlo,monospace;font-size:.76rem;background:#f8fafc;padding:10px;border-radius:6px;overflow-x:auto;white-space:pre-wrap;word-break:break-all}
 .footer{text-align:center;font-size:.78rem;color:#94a3b8;padding:14px}
 
 .lh-ts{color:#0f766e}
@@ -61,11 +61,11 @@ html[data-theme="dark"] .lh-ts{color:#5eead4}
 html[data-theme="dark"] .lh-fatal,html[data-theme="dark"] .lh-error{color:#fff;background:#b91c1c}
 html[data-theme="dark"] .lh-warn{color:#451a03;background:#fcd34d}
 html[data-theme="dark"] .lh-info{color:#93c5fd}
-html[data-theme="dark"] .lh-debug,html[data-theme="dark"] .lh-trace{color:#94a3b8}
+html[data-theme="dark"] .lh-debug,html[data-theme="dark"] .lh-trace{color:#8a9ba6}
 html[data-theme="dark"] .lh-exc,html[data-theme="dark"] .lh-cause{color:#fca5a5}
 html[data-theme="dark"] .lh-mdc{color:#c4b5fd}
-html[data-theme="dark"] .lh-logger,html[data-theme="dark"] .lh-frame{color:#94a3b8}
-html[data-theme="dark"] .lh-ph{color:#94a3b8}
+html[data-theme="dark"] .lh-logger,html[data-theme="dark"] .lh-frame{color:#8a9ba6}
+html[data-theme="dark"] .lh-ph{color:#8a9ba6}
 
 .chart-card:has(.zoom-chart.wide){grid-column:1/-1}
 .zoom-bar{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:-4px 0 8px;font-size:.78rem}
@@ -77,46 +77,49 @@ html[data-theme="dark"] .lh-ph{color:#94a3b8}
 .zoom-info{margin-left:auto;color:#64748b}
 .zoom-chart svg{cursor:crosshair;user-select:none;-webkit-user-select:none}
 .zoom-hint{font-size:.72rem;color:#94a3b8;margin-top:2px}
-html[data-theme="dark"] .zoom-bar button,html[data-theme="dark"] .zoom-bar button:disabled:hover{color:#cbd5e1;background:#1e293b;border-color:#334155}
+html[data-theme="dark"] .zoom-bar button,html[data-theme="dark"] .zoom-bar button:disabled:hover{color:#dbe5ea;background:#141c21;border-color:#26343d}
 html[data-theme="dark"] .zoom-bar button.on{background:#2a78d6;border-color:#2a78d6;color:#fff}
-html[data-theme="dark"] .zoom-info{color:#94a3b8}
-html[data-theme="dark"] .zoom-hint{color:#64748b}
+html[data-theme="dark"] .zoom-info{color:#8a9ba6}
+html[data-theme="dark"] .zoom-hint{color:#6b7f8c}
 /* ✨ the section cards: rounder, a hairline border, a soft shadow that lifts on hover, an accent under the title */
 .table-card,.chart-card{border-radius:16px;border:1px solid #e2e8f0;box-shadow:0 1px 2px rgba(15,23,42,.04),0 8px 24px -16px rgba(15,23,42,.18);
 transition:box-shadow .2s,border-color .2s}
-.table-card:hover,.chart-card:hover{box-shadow:0 1px 2px rgba(15,23,42,.05),0 14px 34px -18px rgba(79,70,229,.35);border-color:#c7d2fe}
+.table-card:hover,.chart-card:hover{box-shadow:0 1px 2px rgba(15,23,42,.05),0 14px 34px -18px rgba(8,145,178,.35);border-color:#a5e4f3}
 .table-card>h2,.chart-card>h2{position:relative;padding-bottom:10px;margin-bottom:12px}
 .table-card>h2::after,.chart-card>h2::after{content:"";position:absolute;left:0;bottom:0;width:56px;height:3px;border-radius:3px;
-background:linear-gradient(90deg,#6366f1,#ec4899)}
+background:linear-gradient(90deg,#0891b2,#f59e0b)}
+html[data-theme=dark] .table-card>h2::after,html[data-theme=dark] .chart-card>h2::after{background:linear-gradient(90deg,#d7eff6,#ffc45c)}
 .sec-collapsed>h2::after{width:28px;opacity:.5}
 .kpi-card{border-radius:14px;transition:transform .15s,box-shadow .15s}
-html[data-theme=dark] .table-card,html[data-theme=dark] .chart-card{border-color:#273449;box-shadow:0 8px 24px -16px rgba(0,0,0,.7)}
-html[data-theme=dark] .table-card:hover,html[data-theme=dark] .chart-card:hover{border-color:#3730a3;box-shadow:0 14px 34px -18px rgba(99,102,241,.45)}
+html[data-theme=dark] .table-card,html[data-theme=dark] .chart-card,html[data-theme=dark] .kpi-card,html[data-theme=dark] .verdict,html[data-theme=dark] .rec-card{border-top:1px solid rgba(215,239,246,.09);border-right:1px solid rgba(215,239,246,.09);border-bottom:1px solid rgba(215,239,246,.09);box-shadow:0 8px 24px -16px rgba(0,0,0,.7)}
+html[data-theme=dark] .table-card,html[data-theme=dark] .chart-card{border-left:1px solid rgba(215,239,246,.09)}
+html[data-theme=dark] .table-card:hover,html[data-theme=dark] .chart-card:hover{border-color:rgba(139,216,239,.35);box-shadow:0 14px 34px -18px rgba(139,216,239,.3)}
 /* the counts of the sections in their links */
 .quick-links a[data-count]::after,.side-nav a[data-count]::after{content:attr(data-count);margin-left:6px;font-size:.68rem;font-weight:700;
-padding:0 6px;border-radius:999px;background:#eef2ff;color:#4338ca;font-variant-numeric:tabular-nums}
+padding:0 6px;border-radius:999px;background:#ecfeff;color:#0e7490;font-variant-numeric:tabular-nums}
 .side-nav a[data-count]{display:flex;align-items:center}.side-nav a[data-count]::after{margin-left:auto}
-html[data-theme=dark] .quick-links a[data-count]::after,html[data-theme=dark] .side-nav a[data-count]::after{background:#1e1b4b;color:#c7d2fe}
+html[data-theme=dark] .quick-links a[data-count]::after,html[data-theme=dark] .side-nav a[data-count]::after{background:rgba(139,216,239,.14);color:#d7eff6}
 /* how far down the report: a thin bar at the top of the window */
-.pg-progress{position:fixed;left:0;top:0;height:3px;width:0;z-index:40;background:linear-gradient(90deg,#6366f1,#ec4899,#f59e0b);
-box-shadow:0 0 8px rgba(236,72,153,.6);pointer-events:none}
+.pg-progress{position:fixed;left:0;top:0;height:3px;width:0;z-index:40;background:linear-gradient(90deg,#d7eff6,#8bd8ef,#ffc45c);
+box-shadow:0 0 10px rgba(255,196,92,.5);pointer-events:none}
 .st.established,.st.closed{background:#dcfce7;color:#15803d}.st.refused,.st.no-answer{background:#fee2e2;color:#dc2626}
 .st.reset{background:#ffedd5;color:#c2410c}
 html[data-theme="dark"] .st.established,html[data-theme="dark"] .st.closed{background:#052e16;color:#86efac}
 html[data-theme="dark"] .st.refused,html[data-theme="dark"] .st.no-answer{background:#450a0a;color:#fca5a5}
 html[data-theme="dark"] .st.reset{background:#431407;color:#fdba74}
-html[data-theme="dark"] body{background:#0f172a;color:#e2e8f0}
-html[data-theme="dark"] h2,html[data-theme="dark"] h3,html[data-theme="dark"] .section-title,html[data-theme="dark"] .rec-text,html[data-theme="dark"] .verdict{color:#cbd5e1}
-html[data-theme="dark"] .kpi-card,html[data-theme="dark"] .chart-card,html[data-theme="dark"] .rec-card,html[data-theme="dark"] .table-card,html[data-theme="dark"] .verdict{background:#1e293b;box-shadow:none}
-html[data-theme="dark"] .kpi-label,html[data-theme="dark"] .legend,html[data-theme="dark"] .kpi-unit,html[data-theme="dark"] .footer,html[data-theme="dark"] .muted{color:#94a3b8}
-html[data-theme="dark"] th{background:#273449;border-bottom-color:#334155;color:#cbd5e1}
-html[data-theme="dark"] td{border-bottom-color:#273449}
-html[data-theme="dark"] tr:hover td{background:#273449}
-html[data-theme="dark"] pre,html[data-theme="dark"] code{background:#0b1220;color:#e2e8f0}
-html[data-theme="dark"] details{border-top-color:#334155}
-html[data-theme="dark"] a{color:#93c5fd}
+html[data-theme="dark"] body{background:radial-gradient(70rem 26rem at 85% -8%,rgba(139,216,239,.07),transparent 70%),radial-gradient(46rem 22rem at 20% -6%,rgba(255,196,92,.045),transparent 70%),#0e1418 no-repeat;background-attachment:fixed;color:#dbe5ea}
+html[data-theme="dark"] h2,html[data-theme="dark"] h3,html[data-theme="dark"] .section-title,html[data-theme="dark"] .rec-text,html[data-theme="dark"] .verdict{color:#e6eef2}
+html[data-theme="dark"] .kpi-card,html[data-theme="dark"] .chart-card,html[data-theme="dark"] .rec-card,html[data-theme="dark"] .table-card,html[data-theme="dark"] .verdict{background:#141c21;box-shadow:none}
+html[data-theme="dark"] .kpi-label,html[data-theme="dark"] .legend,html[data-theme="dark"] .kpi-unit,html[data-theme="dark"] .footer,html[data-theme="dark"] .muted{color:#8a9ba6}
+html[data-theme="dark"] th{background:#19242a;border-bottom-color:#26343d;color:#e6eef2}
+html[data-theme="dark"] td{border-bottom-color:#1d282e}
+html[data-theme="dark"] tr:hover td{background:#18232a}
+html[data-theme="dark"] pre,html[data-theme="dark"] code{background:#0a0f12;color:#dbe6ec}
+html[data-theme="dark"] code{color:#bfe9f6;background:rgba(139,216,239,.08)}
+html[data-theme="dark"] details{border-top-color:#22303a}
+html[data-theme="dark"] a{color:#8bd8ef}
 html[data-theme="dark"] .header a{color:#fff}
-html[data-theme="dark"] .st{background:#334155;color:#cbd5e1}
+html[data-theme="dark"] .st{background:#22303a;color:#dbe5ea}
 html[data-theme="dark"] .rec-badge.critical,html[data-theme="dark"] .st.fatal,html[data-theme="dark"] .st.failed{background:#450a0a;color:#fca5a5}
 html[data-theme="dark"] .rec-badge.high,html[data-theme="dark"] .st.error{background:#431407;color:#fdba74}
 html[data-theme="dark"] .rec-badge.medium,html[data-theme="dark"] .st.warn,html[data-theme="dark"] .st.paused,html[data-theme="dark"] .st.unassigned{background:#422006;color:#fcd34d}
@@ -125,18 +128,18 @@ html[data-theme="dark"] .rec-badge.info,html[data-theme="dark"] .st.mine{backgro
 html[data-theme="dark"] .rec-badge.ok{background:#083344;color:#67e8f9}
 html[data-theme="dark"] .diff-a{background:#450a0a}
 html[data-theme="dark"] .diff-b{background:#052e16}
-html[data-theme="dark"] svg [fill="#64748b"],html[data-theme="dark"] svg [fill="#94a3b8"]{fill:#94a3b8}
-html[data-theme="dark"] svg [fill="#1e293b"],html[data-theme="dark"] svg [fill="#334155"],html[data-theme="dark"] svg [fill="#475569"]{fill:#cbd5e1}
-html[data-theme="dark"] svg [stroke="#e2e8f0"],html[data-theme="dark"] svg [stroke="#f1f5f9"]{stroke:#334155}
-html[data-theme="dark"] svg [fill="#e2e8f0"],html[data-theme="dark"] svg [fill="#f1f5f9"]{fill:#334155}
-html[data-theme="dark"] svg text:not([fill]){fill:#cbd5e1}
+html[data-theme="dark"] svg [fill="#64748b"],html[data-theme="dark"] svg [fill="#94a3b8"]{fill:#8a9ba6}
+html[data-theme="dark"] svg [fill="#1e293b"],html[data-theme="dark"] svg [fill="#334155"],html[data-theme="dark"] svg [fill="#475569"]{fill:#d3dee4}
+html[data-theme="dark"] svg [stroke="#e2e8f0"],html[data-theme="dark"] svg [stroke="#f1f5f9"]{stroke:#26343d}
+html[data-theme="dark"] svg [fill="#e2e8f0"],html[data-theme="dark"] svg [fill="#f1f5f9"]{fill:#26343d}
+html[data-theme="dark"] svg text:not([fill]){fill:#d3dee4}
 
 .theme-toggle{position:absolute;top:4px;right:12px;width:32px;height:32px;padding:0;display:grid;place-items:center;font-size:16px;line-height:1;background:#fff;border:1px solid #cbd5e1;border-radius:50%;cursor:pointer;box-shadow:0 1px 3px rgba(15,23,42,.12);transition:transform .15s}
 .theme-toggle:hover{transform:scale(1.08)}
 /* inside the banner of the report, in its top right corner (above the status pill) */
 .header:has(.theme-toggle){position:relative}
 .header .theme-toggle{top:12px;right:14px;z-index:2;color:#fff;background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.35);box-shadow:none;backdrop-filter:blur(4px)}
-html[data-theme="dark"] .theme-toggle{color:#cbd5e1;background:#1e293b;border-color:#334155}
+html[data-theme="dark"] .theme-toggle{color:#dbe5ea;background:#141c21;border-color:#26343d}
 </style><script>
 (function () {
   const root = document.documentElement;
@@ -531,23 +534,23 @@ html[data-theme="dark"] .theme-toggle{color:#cbd5e1;background:#1e293b;border-co
     });
   }, {passive: true});
 })();
-</script></head><body><div class='page'><div class='header'><h1><a class='lr-brand' href='https://kafka-docker-playground.io/' title='kafka-docker-playground: the playground CLI that generated this report'><span class='lr-whale'>🐳</span> kafka-docker-playground</a><span class='lr-title'>🦈 Network Capture Analysis</span><span class='lr-status danger'>🚨 1 high finding, 2 medium</span></h1><div class='header-meta'><span>&#128196; http_client_timeout.pcap</span><span>2026-11-25 14:03:14 → 2026-11-25 14:03:23</span><span>Generated: 2026-11-27 11:55:35</span></div></div><style>
+</script></head><body><div class='page'><div class='header'><h1><a class='lr-brand' href='https://kafka-docker-playground.io/' title='kafka-docker-playground: the playground CLI that generated this report'><span class='lr-whale'>🐳</span><span>kafka<i>-</i>docker<i>-</i><em>playground</em></span></a><span class='lr-title'>🦈 Network Capture Analysis</span><span class='lr-status danger'>🚨 1 high finding, 2 medium</span></h1><div class='header-meta'><span>&#128196; http_client_timeout.pcap</span><span>2026-11-25 14:03:14 → 2026-11-25 14:03:23</span><span>Generated: 2026-11-27 13:34:29</span></div></div><style>
 .header:has(.lr-title){position:relative;overflow:hidden;border-radius:18px;padding:26px 32px 22px;
-background:radial-gradient(1200px 300px at 0% 0%,rgba(56,189,248,.35),transparent 60%),
-radial-gradient(800px 260px at 100% 100%,rgba(236,72,153,.35),transparent 60%),
-linear-gradient(120deg,#0f172a 0%,#312e81 45%,#6d28d9 75%,#a21caf 100%);box-shadow:0 10px 30px rgba(49,46,129,.35)}
+background:radial-gradient(1200px 300px at 0% 0%,rgba(139,216,239,.30),transparent 60%),
+radial-gradient(800px 260px at 100% 100%,rgba(255,196,92,.28),transparent 60%),
+linear-gradient(120deg,#0b1115 0%,#10212b 50%,#173540 100%);box-shadow:0 10px 30px rgba(8,47,73,.35);border:1px solid rgba(215,239,246,.12)}
 /* the verdict tints the header: red with ERROR/FATAL, amber with WARN only, green without error (the progress page keeps the default) */
 .header:has(.lr-status.danger){background:radial-gradient(1200px 300px at 0% 0%,rgba(251,113,133,.30),transparent 60%),
 radial-gradient(800px 260px at 100% 100%,rgba(249,115,22,.40),transparent 60%),
-linear-gradient(120deg,#0f172a 0%,#4c0519 45%,#9f1239 75%,#c2410c 100%);box-shadow:0 10px 30px rgba(159,18,57,.35)}
+linear-gradient(120deg,#0b1115 0%,#4c0519 45%,#9f1239 75%,#c2410c 100%);box-shadow:0 10px 30px rgba(159,18,57,.35)}
 .header:has(.lr-status.warn){background:radial-gradient(1200px 300px at 0% 0%,rgba(253,224,71,.22),transparent 60%),
 radial-gradient(800px 260px at 100% 100%,rgba(251,191,36,.35),transparent 60%),
-linear-gradient(120deg,#0f172a 0%,#422006 45%,#92400e 75%,#d97706 100%);box-shadow:0 10px 30px rgba(146,64,14,.35)}
+linear-gradient(120deg,#0b1115 0%,#422006 45%,#92400e 75%,#d97706 100%);box-shadow:0 10px 30px rgba(146,64,14,.35)}
 .header:has(.lr-status.ok){background:radial-gradient(1200px 300px at 0% 0%,rgba(110,231,183,.25),transparent 60%),
 radial-gradient(800px 260px at 100% 100%,rgba(45,212,191,.35),transparent 60%),
-linear-gradient(120deg,#0f172a 0%,#064e3b 45%,#047857 75%,#0d9488 100%);box-shadow:0 10px 30px rgba(4,120,87,.35)}
+linear-gradient(120deg,#0b1115 0%,#064e3b 45%,#047857 75%,#0d9488 100%);box-shadow:0 10px 30px rgba(4,120,87,.35)}
 .header:has(.lr-title) h1{display:grid;grid-template-columns:1fr auto;align-items:center;gap:6px 18px;margin:0 0 12px}
-.lr-title{font-size:1.75rem;font-weight:800;letter-spacing:-.01em;line-height:1.2}
+.lr-title{font-size:1.75rem;font-weight:800;letter-spacing:-.025em;line-height:1.2}
 .lr-plus{opacity:.55;margin:0 4px}
 .lr-sub{grid-column:1 / -1;font-size:.86rem;font-weight:500;opacity:.82}
 .lr-status{justify-self:end;font-size:.85rem;font-weight:700;padding:6px 14px;border-radius:999px;white-space:nowrap;
@@ -559,32 +562,34 @@ background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);backdrop
 .header:has(.lr-title) .header-meta span{font-size:.78rem;padding:4px 11px;border-radius:999px;background:rgba(255,255,255,.12);
 border:1px solid rgba(255,255,255,.2);margin:0}
 .header:has(.lr-title) .header-meta a{color:#fff}
-.lr-brand{grid-column:1 / -1;justify-self:start;display:inline-flex;align-items:center;gap:7px;font-size:.78rem;font-weight:700;
-letter-spacing:.04em;color:#fff;text-decoration:none;padding:3px 12px 3px 6px;border-radius:999px;background:rgba(255,255,255,.12);
-border:1px solid rgba(255,255,255,.22);transition:background .15s}
-.lr-brand:hover{background:rgba(255,255,255,.22)}
-.lr-whale{font-size:1.25rem;line-height:1;display:inline-block;animation:lr-swim 4s ease-in-out infinite}
+/* the wordmark of the website (its sidebar title): kafka-docker-playground, dimmed dashes, "playground" in its gradient */
+.lr-brand{grid-column:1 / -1;justify-self:start;display:inline-flex;align-items:center;gap:8px;font-size:1rem;font-weight:700;
+letter-spacing:-.03em;color:#fff;text-decoration:none;white-space:nowrap;transition:opacity .15s}
+.lr-brand:hover{opacity:.85}
+.lr-brand i{font-style:normal;color:rgba(255,255,255,.45)}
+.lr-brand em{font-style:normal;background:linear-gradient(90deg,#d7eff6,#ffc45c);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lr-whale{font-size:1.35rem;line-height:1;display:inline-block;animation:lr-swim 4s ease-in-out infinite}
 @keyframes lr-swim{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-2px) rotate(-6deg)}}
 @media (prefers-reduced-motion:reduce){.lr-whale{animation:none}}
 .header:has(.lr-title) .header-meta span:has(.lr-howto){background:rgba(56,189,248,.22);border-color:rgba(125,211,252,.55)}
 .lr-howto{text-decoration:none;font-weight:600}.lr-howto:hover{text-decoration:underline}
 </style><div class='verdict danger'>🚨 1 high finding, 2 medium: start with 3 HTTP response(s) of POST / on httpserver:9006 arrived after the client gave up.</div><div class='kpi-grid'><div class="kpi-card "><div class="kpi-label">📦 Packets</div><div class="kpi-value">42</div><div class="kpi-unit">4.6 kB over 9.363s</div></div><div class="kpi-card "><div class="kpi-label">🔌 TCP conversations</div><div class="kpi-value">6</div><div class="kpi-unit">3 opened in the capture</div></div><div class="kpi-card ok"><div class="kpi-label">🚫 Failed connections</div><div class="kpi-value">0</div><div class="kpi-unit">refused or unanswered</div></div><div class="kpi-card warn"><div class="kpi-label">🛑 Resets</div><div class="kpi-value">6</div><div class="kpi-unit">RST segments</div></div><div class="kpi-card ok"><div class="kpi-label">🔁 Retransmissions</div><div class="kpi-value">0.0%</div><div class="kpi-unit">0 segments</div></div><div class="kpi-card ok"><div class="kpi-label">🔐 TLS fatal alerts</div><div class="kpi-value">0</div><div class="kpi-unit">0 handshakes</div></div><div class="kpi-card ok"><div class="kpi-label">🌐 DNS errors</div><div class="kpi-value">0</div><div class="kpi-unit">0 queries</div></div><div class="kpi-card ok"><div class="kpi-label">📨 Kafka errors</div><div class="kpi-value">0</div><div class="kpi-unit">0 requests decoded</div></div><div class="kpi-card ok"><div class="kpi-label">🌍 HTTP errors</div><div class="kpi-value">0</div><div class="kpi-unit">3 requests decoded</div></div></div><div class='section-title'>🔎 Findings</div><div class='recs-list'><div class="rec-card high"><span class="rec-badge high">🟠 HIGH</span><span class="rec-text">3 HTTP response(s) of POST / on httpserver:9006 arrived after the client gave up: the server answered after 1504.28 ms (median), but the client closed the connection after 1005.64 ms (FIN). The client timeout is shorter than the response time seen on the network (an HTTP client timeout, like http.request.timeout.ms of the HTTP sink): the request may have been processed anyway, and a retry sends it again.</span></div><div class="rec-card medium"><span class="rec-badge medium">🟡 MEDIUM</span><span class="rec-text">6 reset(s) connect → httpserver:9006 on established connection(s): a peer closed the connection abruptly (process stopped, idle timeout of a proxy or load balancer, protocol error).</span></div><div class="rec-card medium"><span class="rec-badge medium">🟡 MEDIUM</span><span class="rec-text">HTTP POST / on httpserver:9006 is slow: p95 1504.35 ms, max 1504.35 ms.</span></div></div><div class='charts-grid'><div class='chart-card'><h2>📈 Packets per second</h2><div class='zoom-chart' data-chart='{&quot;type&quot;:&quot;columns&quot;,&quot;xfmt&quot;:&quot;second&quot;,&quot;fmt&quot;:&quot;int&quot;,&quot;W&quot;:600,&quot;H&quot;:190,&quot;L&quot;:44,&quot;series&quot;:[{&quot;label&quot;:&quot;packets&quot;,&quot;color&quot;:&quot;#2a78d6&quot;}],&quot;x&quot;:[0,1,2,3,4,5,6,7,8,9],&quot;values&quot;:[[1],[4],[5],[4],[5],[8],[6],[4],[3],[2]],&quot;group&quot;:&quot;per-second&quot;}'><div class='zoom-bar' hidden><button type='button' data-zoom='prev' title='Previous window'>◀</button><button type='button' data-zoom='next' title='Next window'>▶</button><button type='button' data-zoom='all'>All</button><span class='zoom-info'></span></div><div class='zoom-svg'><svg viewBox="0 0 600 190" xmlns="http://www.w3.org/2000/svg" role="img"><line x1="44" x2="590" y1="164.0" y2="164.0" stroke="#e2e8f0" stroke-width="1"/><text x="38" y="167.0" font-size="10" fill="#64748b" text-anchor="end">0</text><line x1="44" x2="590" y1="86.0" y2="86.0" stroke="#e2e8f0" stroke-width="1"/><text x="38" y="89.0" font-size="10" fill="#64748b" text-anchor="end">4</text><line x1="44" x2="590" y1="8.0" y2="8.0" stroke="#e2e8f0" stroke-width="1"/><text x="38" y="11.0" font-size="10" fill="#64748b" text-anchor="end">8</text><rect x="45.0" y="144.5" width="52.6" height="19.5" rx="1" fill="#2a78d6"><title>second 0: 1 packets</title></rect><rect x="99.6" y="86.0" width="52.6" height="78.0" rx="1" fill="#2a78d6"><title>second 1: 4 packets</title></rect><rect x="154.2" y="66.5" width="52.6" height="97.5" rx="1" fill="#2a78d6"><title>second 2: 5 packets</title></rect><rect x="208.8" y="86.0" width="52.6" height="78.0" rx="1" fill="#2a78d6"><title>second 3: 4 packets</title></rect><rect x="263.4" y="66.5" width="52.6" height="97.5" rx="1" fill="#2a78d6"><title>second 4: 5 packets</title></rect><rect x="318.0" y="8.0" width="52.6" height="156.0" rx="1" fill="#2a78d6"><title>second 5: 8 packets</title></rect><rect x="372.6" y="47.0" width="52.6" height="117.0" rx="1" fill="#2a78d6"><title>second 6: 6 packets</title></rect><rect x="427.2" y="86.0" width="52.6" height="78.0" rx="1" fill="#2a78d6"><title>second 7: 4 packets</title></rect><rect x="481.8" y="105.5" width="52.6" height="58.5" rx="1" fill="#2a78d6"><title>second 8: 3 packets</title></rect><rect x="536.4" y="125.0" width="52.6" height="39.0" rx="1" fill="#2a78d6"><title>second 9: 2 packets</title></rect><text x="71.3" y="182" font-size="10" fill="#64748b" text-anchor="middle">0s</text><text x="125.9" y="182" font-size="10" fill="#64748b" text-anchor="middle">1s</text><text x="180.5" y="182" font-size="10" fill="#64748b" text-anchor="middle">2s</text><text x="235.1" y="182" font-size="10" fill="#64748b" text-anchor="middle">3s</text><text x="289.7" y="182" font-size="10" fill="#64748b" text-anchor="middle">4s</text><text x="344.3" y="182" font-size="10" fill="#64748b" text-anchor="middle">5s</text><text x="398.9" y="182" font-size="10" fill="#64748b" text-anchor="middle">6s</text><text x="453.5" y="182" font-size="10" fill="#64748b" text-anchor="middle">7s</text><text x="508.1" y="182" font-size="10" fill="#64748b" text-anchor="middle">8s</text><text x="562.7" y="182" font-size="10" fill="#64748b" text-anchor="middle">9s</text></svg></div><div class='zoom-hint' hidden>🔍 Drag over the chart to zoom on a range, double-click to zoom out: the charts next to it follow.</div></div></div><div class='chart-card'><h2>⚠️ Resets and retransmissions per second</h2><div class='zoom-chart' data-chart='{&quot;type&quot;:&quot;columns&quot;,&quot;xfmt&quot;:&quot;second&quot;,&quot;fmt&quot;:&quot;int&quot;,&quot;W&quot;:600,&quot;H&quot;:190,&quot;L&quot;:44,&quot;series&quot;:[{&quot;label&quot;:&quot;resets&quot;,&quot;color&quot;:&quot;#2a78d6&quot;},{&quot;label&quot;:&quot;retransmissions&quot;,&quot;color&quot;:&quot;#eb6834&quot;}],&quot;x&quot;:[0,1,2,3,4,5,6,7,8,9],&quot;values&quot;:[[0,0],[0,0],[0,0],[1,0],[1,0],[1,0],[1,0],[0,0],[1,0],[1,0]],&quot;group&quot;:&quot;per-second&quot;}'><div class='zoom-bar' hidden><button type='button' data-zoom='prev' title='Previous window'>◀</button><button type='button' data-zoom='next' title='Next window'>▶</button><button type='button' data-zoom='all'>All</button><span class='zoom-info'></span></div><div class='zoom-svg'><div class='legend'><i style='background:#2a78d6'></i>resets<i style='background:#eb6834'></i>retransmissions</div><svg viewBox="0 0 600 190" xmlns="http://www.w3.org/2000/svg" role="img"><line x1="44" x2="590" y1="164.0" y2="164.0" stroke="#e2e8f0" stroke-width="1"/><text x="38" y="167.0" font-size="10" fill="#64748b" text-anchor="end">0</text><line x1="44" x2="590" y1="86.0" y2="86.0" stroke="#e2e8f0" stroke-width="1"/><text x="38" y="89.0" font-size="10" fill="#64748b" text-anchor="end">1</text><line x1="44" x2="590" y1="8.0" y2="8.0" stroke="#e2e8f0" stroke-width="1"/><text x="38" y="11.0" font-size="10" fill="#64748b" text-anchor="end">2</text><rect x="208.8" y="86.0" width="26.3" height="78.0" rx="1" fill="#2a78d6"><title>second 3: 1 resets</title></rect><rect x="263.4" y="86.0" width="26.3" height="78.0" rx="1" fill="#2a78d6"><title>second 4: 1 resets</title></rect><rect x="318.0" y="86.0" width="26.3" height="78.0" rx="1" fill="#2a78d6"><title>second 5: 1 resets</title></rect><rect x="372.6" y="86.0" width="26.3" height="78.0" rx="1" fill="#2a78d6"><title>second 6: 1 resets</title></rect><rect x="481.8" y="86.0" width="26.3" height="78.0" rx="1" fill="#2a78d6"><title>second 8: 1 resets</title></rect><rect x="536.4" y="86.0" width="26.3" height="78.0" rx="1" fill="#2a78d6"><title>second 9: 1 resets</title></rect><text x="71.3" y="182" font-size="10" fill="#64748b" text-anchor="middle">0s</text><text x="125.9" y="182" font-size="10" fill="#64748b" text-anchor="middle">1s</text><text x="180.5" y="182" font-size="10" fill="#64748b" text-anchor="middle">2s</text><text x="235.1" y="182" font-size="10" fill="#64748b" text-anchor="middle">3s</text><text x="289.7" y="182" font-size="10" fill="#64748b" text-anchor="middle">4s</text><text x="344.3" y="182" font-size="10" fill="#64748b" text-anchor="middle">5s</text><text x="398.9" y="182" font-size="10" fill="#64748b" text-anchor="middle">6s</text><text x="453.5" y="182" font-size="10" fill="#64748b" text-anchor="middle">7s</text><text x="508.1" y="182" font-size="10" fill="#64748b" text-anchor="middle">8s</text><text x="562.7" y="182" font-size="10" fill="#64748b" text-anchor="middle">9s</text></svg></div><div class='zoom-hint' hidden>🔍 Drag over the chart to zoom on a range, double-click to zoom out: the charts next to it follow.</div></div></div><div class='chart-card'><h2>🔝 Top TCP conversations (bytes)</h2><svg viewBox="0 0 600 142" xmlns="http://www.w3.org/2000/svg" role="img"><text x="294" y="19" font-size="10" fill="#334155" text-anchor="end">connect:57698 → httpserver:9006</text><rect x="300" y="8" width="220.0" height="15" rx="2" fill="#2a78d6"><title>8 frames, 852 bytes, reset</title></rect><text x="525.0" y="19" font-size="10" fill="#475569">852 bytes</text><text x="294" y="41" font-size="10" fill="#334155" text-anchor="end">connect:57706 → httpserver:9006</text><rect x="300" y="30" width="220.0" height="15" rx="2" fill="#2a78d6"><title>8 frames, 852 bytes, reset</title></rect><text x="525.0" y="41" font-size="10" fill="#475569">852 bytes</text><text x="294" y="63" font-size="10" fill="#334155" text-anchor="end">connect:43480 → httpserver:9006</text><rect x="300" y="52" width="220.0" height="15" rx="2" fill="#2a78d6"><title>8 frames, 852 bytes, reset</title></rect><text x="525.0" y="63" font-size="10" fill="#475569">852 bytes</text><text x="294" y="85" font-size="10" fill="#334155" text-anchor="end">connect:57698 → httpserver:9006</text><rect x="300" y="74" width="186.4" height="15" rx="2" fill="#2a78d6"><title>6 frames, 722 bytes, closed</title></rect><text x="491.4" y="85" font-size="10" fill="#475569">722 bytes</text><text x="294" y="107" font-size="10" fill="#334155" text-anchor="end">connect:57706 → httpserver:9006</text><rect x="300" y="96" width="186.4" height="15" rx="2" fill="#2a78d6"><title>6 frames, 722 bytes, closed</title></rect><text x="491.4" y="107" font-size="10" fill="#475569">722 bytes</text><text x="294" y="129" font-size="10" fill="#334155" text-anchor="end">connect:43480 → httpserver:9006</text><rect x="300" y="118" width="186.4" height="15" rx="2" fill="#2a78d6"><title>6 frames, 722 bytes, closed</title></rect><text x="491.4" y="129" font-size="10" fill="#475569">722 bytes</text></svg></div></div><div class='table-card'><h2>🚫 Failed and reset connections</h2><table><tr><th>What</th><th>Where</th><th class='num'>Count</th></tr><tr><td><span class='st reset'>reset</span></td><td class='mono'>connect → httpserver:9006</td><td class='num'>6</td></tr></table></div><div class='table-card'><h2>🌍 HTTP requests</h2><table><tr><th>Server</th><th>Endpoint</th><th class='num'>Requests</th><th>Status codes</th><th class='num'>No response</th><th class='num' title='responses that arrived after the client closed the connection'>After the client gave up</th><th class='num'>p50</th><th class='num'>p95</th><th class='num'>Max</th></tr><tr><td class='mono'>httpserver:9006</td><td class='mono'>POST /</td><td class='num'>3</td><td><span class='st established'>200</span> ×3</td><td class='num'></td><td class='num'>3</td><td class='num'>1504.28 ms</td><td class='num'>1504.35 ms</td><td class='num'>1504.35 ms</td></tr></table><h2 style='margin-top:16px'>🔍 What the client sends</h2><details><summary><span class='st established'>200</span> OK — sample exchange: <span class='mono'>POST /</span> on httpserver:9006</summary><p class='mono' style='margin-top:6px'>/</p><p class='legend' style='margin:8px 0 4px'>Request · application/json</p><pre>[{&quot;name&quot;:&quot;Deron.Sauer&quot;,&quot;id&quot;:1,&quot;email&quot;:&quot;Paul.Rogahn@example.com&quot;}]</pre><p class='legend' style='margin:8px 0 4px'>Response · application/json; charset=utf-8</p><pre>{&quot;message&quot;:&quot;Hello, World!&quot;}</pre></details><p class='legend' style='margin-top:10px'>Bodies are cut to their first 600 characters (1000 bytes captured per message). Open the capture in Wireshark (Follow → HTTP Stream) for the whole exchanges.</p></div><div class='table-card'><h2>🔌 TCP conversations (6 · handshake p50 1501.51 ms, p95 1502.93 ms)</h2><table><tr><th>Client</th><th>Server</th><th>Status</th><th class='num'>Frames</th><th class='num'>Bytes</th><th class='num'>Start</th><th class='num'>Duration</th><th class='num'>Handshake</th><th class='num'>Retrans.</th><th class='num'>SYN retries</th></tr><tr><td class='mono'>connect:57698</td><td class='mono'>httpserver:9006</td><td><span class='st reset'>reset</span></td><td class='num'>8</td><td class='num'>852 bytes</td><td class='num'>2.548s</td><td class='num'>1.458s</td><td class='num'>-</td><td class='num'></td><td class='num'></td></tr><tr><td class='mono'>connect:57706</td><td class='mono'>httpserver:9006</td><td><span class='st reset'>reset</span></td><td class='num'>8</td><td class='num'>852 bytes</td><td class='num'>5.039s</td><td class='num'>1.477s</td><td class='num'>-</td><td class='num'></td><td class='num'></td></tr><tr><td class='mono'>connect:43480</td><td class='mono'>httpserver:9006</td><td><span class='st reset'>reset</span></td><td class='num'>8</td><td class='num'>852 bytes</td><td class='num'>7.854s</td><td class='num'>1.509s</td><td class='num'>-</td><td class='num'></td><td class='num'></td></tr><tr><td class='mono'>connect:57698</td><td class='mono'>httpserver:9006</td><td><span class='st closed'>closed</span></td><td class='num'>6</td><td class='num'>722 bytes</td><td class='num'>0.0s</td><td class='num'>2.506s</td><td class='num'>1501.51 ms</td><td class='num'></td><td class='num'>1</td></tr><tr><td class='mono'>connect:57706</td><td class='mono'>httpserver:9006</td><td><span class='st closed'>closed</span></td><td class='num'>6</td><td class='num'>722 bytes</td><td class='num'>2.507s</td><td class='num'>2.506s</td><td class='num'>1500.16 ms</td><td class='num'></td><td class='num'>1</td></tr><tr><td class='mono'>connect:43480</td><td class='mono'>httpserver:9006</td><td><span class='st closed'>closed</span></td><td class='num'>6</td><td class='num'>722 bytes</td><td class='num'>5.341s</td><td class='num'>2.513s</td><td class='num'>1502.93 ms</td><td class='num'></td><td class='num'>1</td></tr></table></div><div class='table-card'><h2>🧬 Protocols</h2><table><tr><th>Protocol</th><th class='num'>Packets</th></tr><tr><td>TCP</td><td class='num'>36</td></tr><tr><td>HTTP/JSON</td><td class='num'>6</td></tr></table><details style='margin-top:12px'><summary>🏷️ Names used for the ip addresses (5)</summary><table><tr><th>IP</th><th>Name</th></tr><tr><td class='mono'>192.168.112.6</td><td>connect</td></tr><tr><td class='mono'>192.168.112.5</td><td>schema-registry</td></tr><tr><td class='mono'>192.168.112.4</td><td>broker</td></tr><tr><td class='mono'>192.168.112.2</td><td>controller</td></tr><tr><td class='mono'>192.168.112.3</td><td>httpserver</td></tr></table></details></div><div class='footer'>🛠️ Generated by playground analyze tcp-dump (self-contained, no external resource). Open the capture with Wireshark for the packets themselves.</div></div><style>
 .share-open{font:inherit;cursor:pointer}
-.share-hero{font-size:.85rem;font-weight:700;padding:6px 16px;border-radius:999px;border:0;background:#fff;color:#4c1d95;
-box-shadow:0 4px 14px rgba(15,23,42,.25);transition:transform .1s;white-space:nowrap}.share-hero:hover{transform:translateY(-1px);background:#f5f3ff}
+.share-hero{font-size:.85rem;font-weight:700;padding:6px 16px;border-radius:999px;border:0;background:linear-gradient(90deg,#d7eff6,#ffe2a8);color:#1e2a33;
+box-shadow:0 4px 14px rgba(15,23,42,.25);transition:transform .1s;white-space:nowrap}.share-hero:hover{transform:translateY(-1px);filter:brightness(1.05)}
 .header-meta .share-hero{margin-left:auto}
 .share-next{margin-left:auto;align-self:flex-start}
 /* below the fixed Toggle theme of the page (top right of the window) */
 .share-corner{position:absolute;top:44px;right:24px;z-index:2}
-.share-float{position:fixed;top:12px;right:16px;z-index:30;font-size:.8rem;font-weight:700;padding:5px 12px;border-radius:999px;border:0;background:#7c3aed;color:#fff}
+.share-float{position:fixed;top:12px;right:16px;z-index:30;font-size:.8rem;font-weight:700;padding:5px 12px;border-radius:999px;border:0;background:linear-gradient(90deg,#d7eff6,#ffe2a8);color:#1e2a33;box-shadow:0 6px 18px -8px rgba(255,196,92,.6)}
 .share-dlg{border:0;border-radius:18px;padding:0;width:min(660px,92vw);max-width:660px;max-height:88vh;overflow:auto;
 box-shadow:0 30px 80px rgba(15,23,42,.45);background:#fff;color:#1e293b;position:fixed;inset:0;margin:auto;height:fit-content;
-font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.45}
+font-family:Inter Variable,Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.45}
 .share-dlg[open]{animation:sd-in .22s cubic-bezier(.22,1,.36,1)}
 @keyframes sd-in{from{opacity:0;transform:translateY(14px) scale(.97)}to{opacity:1;transform:none}}
 .share-dlg::backdrop{background:rgba(15,23,42,.6);backdrop-filter:blur(3px)}
 .sd-head{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;color:#fff;
-background:radial-gradient(500px 120px at 0% 0%,rgba(56,189,248,.35),transparent 60%),linear-gradient(120deg,#312e81,#6d28d9 60%,#a21caf)}
+background:radial-gradient(500px 120px at 0% 0%,rgba(139,216,239,.32),transparent 60%),radial-gradient(420px 140px at 100% 100%,rgba(255,196,92,.26),transparent 60%),linear-gradient(120deg,#0b1115,#10212b 55%,#173540)}
 .sd-head h3{font-size:1.1rem;margin:0;color:#fff!important;border:0;padding:0}
 .sd-x{border:0!important;background:rgba(255,255,255,.16)!important;color:#fff!important;width:30px;height:30px;padding:0!important;border-radius:50%!important;font-size:.9rem}
 .sd-x:hover{background:rgba(255,255,255,.3)!important}
@@ -593,16 +598,16 @@ background:radial-gradient(500px 120px at 0% 0%,rgba(56,189,248,.35),transparent
 .share-card{display:flex;align-items:center;gap:12px;width:100%;text-align:left;font:inherit;color:inherit;text-decoration:none;cursor:pointer;
 padding:12px 14px;border-radius:14px;border:1px solid #e2e8f0;background:#f8fafc;transition:transform .12s,box-shadow .12s,border-color .12s,background .12s}
 .share-card:hover{transform:translateY(-2px);border-color:#a78bfa;box-shadow:0 10px 24px -12px rgba(109,40,217,.5);background:#faf5ff}
-.share-card:focus-visible{outline:2px solid #7c3aed;outline-offset:2px}
+.share-card:focus-visible{outline:2px solid #0891b2;outline-offset:2px}
 .sc-icon{flex:none;display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:12px;font-size:1.25rem;
 background:linear-gradient(135deg,#ede9fe,#e0f2fe)}
 .sc-body{display:flex;flex-direction:column;gap:2px;min-width:0}
 .sc-body b{font-size:.9rem}.sc-body small{font-size:.74rem;color:#64748b;line-height:1.35}
 .sc-go{margin-left:auto;font-size:1.3rem;color:#a78bfa;transition:transform .12s}.share-card:hover .sc-go{transform:translateX(3px)}
-.share-card.sc-primary{color:#fff;border:0;padding:14px 16px;background:linear-gradient(120deg,#2563eb,#7c3aed);box-shadow:0 12px 28px -14px rgba(37,99,235,.8)}
-.share-card.sc-primary:hover{background:linear-gradient(120deg,#1d4ed8,#6d28d9)}
-.share-card.sc-primary .sc-icon{background:rgba(255,255,255,.18)}.share-card.sc-primary small{color:rgba(255,255,255,.85)}
-.share-card.sc-primary .sc-go{color:#fff}
+.share-card.sc-primary{border:0;padding:14px 16px;background:linear-gradient(90deg,#d7eff6,#ffe2a8);color:#1e2a33;box-shadow:0 12px 28px -14px rgba(255,196,92,.7)}
+.share-card.sc-primary:hover{filter:brightness(1.05)}
+.share-card.sc-primary .sc-icon{background:rgba(255,255,255,.55)}.share-card.sc-primary small{color:rgba(30,42,51,.72)}
+.share-card.sc-primary .sc-go{color:#1e2a33}
 .share-card.sc-done{border-color:#22c55e!important;background:#f0fdf4!important}
 .share-card.sc-done .sc-icon{background:#bbf7d0}
 .share-done{min-height:1.4em;margin:8px 0 0;font-size:.82rem;font-weight:600;color:#15803d}
@@ -612,18 +617,18 @@ background:linear-gradient(135deg,#ede9fe,#e0f2fe)}
 @media (prefers-reduced-motion:reduce){.share-dlg[open]{animation:none}.share-card{transition:none}}
 .share-warn{background:#fef3c7;color:#92400e;border-radius:12px;padding:10px 14px;font-size:.82rem;border-left:4px solid #f59e0b;margin:0 0 12px}
 .share-close{font:inherit;font-size:.8rem;padding:3px 12px;border-radius:6px;border:1px solid #cbd5e1;background:transparent;color:inherit;cursor:pointer}
-html[data-theme=dark] .share-hero{background:#ede9fe;color:#4c1d95}
-html[data-theme=dark] .share-dlg{background:#1e293b;color:#e2e8f0}
-html[data-theme=dark] .share-card{background:#0f172a;border-color:#334155}
-html[data-theme=dark] .share-card:hover{background:#1e1b4b;border-color:#7c3aed}
-html[data-theme=dark] .sc-icon{background:linear-gradient(135deg,#312e81,#0c4a6e)}
-html[data-theme=dark] .sc-body small,html[data-theme=dark] .sd-meta{color:#94a3b8}
-html[data-theme=dark] .share-card.sc-primary{background:linear-gradient(120deg,#2563eb,#7c3aed)}
-html[data-theme=dark] .share-card.sc-primary small{color:rgba(255,255,255,.85)}
+html[data-theme=dark] .share-hero{background:linear-gradient(90deg,#d7eff6,#ffe2a8);color:#1e2a33}
+html[data-theme=dark] .share-dlg{background:#141c21;color:#dbe5ea}
+html[data-theme=dark] .share-card{background:#0e1418;border-color:#26343d}
+html[data-theme=dark] .share-card:hover{background:#0f2a33;border-color:rgba(139,216,239,.45)}
+html[data-theme=dark] .sc-icon{background:linear-gradient(135deg,#164e63,#0c4a6e)}
+html[data-theme=dark] .sc-body small,html[data-theme=dark] .sd-meta{color:#8a9ba6}
+html[data-theme=dark] .share-card.sc-primary{background:linear-gradient(90deg,#d7eff6,#ffe2a8);color:#1e2a33}
+html[data-theme=dark] .share-card.sc-primary small{color:rgba(30,42,51,.72)}
 html[data-theme=dark] .share-card.sc-done{background:#052e16!important}
 html[data-theme=dark] .share-done{color:#86efac}
 html[data-theme=dark] .share-warn{background:#422006;color:#fcd34d}
-html[data-theme=dark] .share-close{border-color:#334155}
+html[data-theme=dark] .share-close{border-color:#26343d}
 </style><script type='text/plain' id='pg-share-summary'>🦈 http_client_timeout.pcap: 42 packets, 4.6 kB over 9.363s (2026-11-25 14:03:14 → 2026-11-25 14:03:23)
 
 🔎 Findings
